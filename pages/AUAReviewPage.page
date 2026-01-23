@@ -1,0 +1,479 @@
+<!--
+/******************************************************************************* 
+Copyright © 2016 DuPont. All rights reserved. 
+Author: Abhinav Bhatnagar
+Email: abhinav.bhatnagar@dupont.com
+Description:  Visualforce page for collating users information into a review page
+********************************************************************************/
+-->
+<apex:page controller="ctrlAUAReviewPage" id="pg" >    
+    <apex:form id="frm">        
+        <apex:stylesheet value="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery.ui.all.css"/>        
+        <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"/>        
+        <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"/>
+        <apex:outputPanel id="scriptpanel">
+            <script>
+            $(function() {
+                //creating a array of all available object of organization
+                var tags= [{!myList}];
+            });
+            $( document ).ready(function() {
+                showfields("User Access Review Details");                
+            });
+            
+            function showRecords1(){
+                var e = document.getElementById('{!$Component.pg.frm.pb.pbs.pbsi.cols}');
+                e.selectedIndex = "-1";
+                var opts = e.options;
+                for (var iLen=0; iLen<opts.length;iLen++) {
+                    opt = opts[iLen];     
+                    //alert(opt.value);
+                    if(opt.value!="Id" && opt.value!="User_Id__c"){
+                        opt.selected = true;
+                    }
+                }               
+                showRecords();
+            }
+            
+            function disablePanel(){
+                document.getElementById('disablingDiv').style.display='block';
+            }
+            
+            function enablePanel(){
+                document.getElementById('disablingDiv').style.display='none';
+            }
+            
+            var Map = {};
+            var srMap={};
+            
+            function cancel(){
+                for(var key in srMap){
+                    var values = srMap[key].split("@@");
+                    var radios = document.getElementsByName(values[3]);
+                    radios.value=values[1];
+                    // loop through list of radio buttons
+                    for (var i=0, len=radios.length; i<len; i++) {
+                        if ( radios[i].value==values[1] ) { // radio checked?
+                            radios[i].checked = true; // if so, hold its value in val
+                            break; // and break out of for loop
+                        }
+                    }
+                    delete srMap[key];
+                }
+            }
+            
+            function srChangedStatus(id,orgValue,obj){
+                if(orgValue!=obj.value){
+                    srMap[id] = id+"@@"+orgValue+"@@"+obj.value+"@@"+obj.name;
+                }else{
+                    if(srMap[id]!=null && srMap[id]!=""){
+                        delete srMap[id];
+                    }
+                }
+                enablePanel();
+            }
+            
+            function getsrvals(){
+                var strMap;
+                strMap = "";
+                for(var key in srMap){
+                    strMap = strMap+";;"+srMap[key];
+                    
+                    var values = srMap[key].split("@@");
+                    var radios = document.getElementsByName(values[3]);
+                    radios.value=values[2];
+                    delete srMap[key];
+                }
+                srMap = {};
+                document.getElementById('{!$Component.pg.frm.tspb.tspbs.asHiddenField}').value=strMap;                
+            }
+            
+            function srChangedHeaderStatus(obj){
+                var changedToHeaderValue = document.getElementById(obj.id).value;
+                var allRadioButtonsContainer = document.getElementById('{!$Component.pg.frm.tspb.tspbs.tspbt}');
+                var trChildNodes = allRadioButtonsContainer.childNodes[3].childNodes;
+                for(var i=0;i<trChildNodes.length;i++){
+                    var inputs = trChildNodes[i].getElementsByTagName("input");
+                    for(var j=0;j<inputs.length;j++){
+                        if(inputs[j].type=="radio"){
+                            var radioBtns = inputs[j];
+                            if(changedToHeaderValue==radioBtns.value){
+                                radioBtns.checked=true;
+                                var event = new Event('change');
+                                
+                                // Dispatch it.
+                                radioBtns.dispatchEvent(event);
+                            }
+                        }
+                    }
+                }
+            }
+            
+            </script>
+            <style type="text/css">
+                #disablingDiv
+                {
+                /* Do not display it on entry */
+                display: none; 
+                /* Display it on the layer with index 1001.
+                Make sure this is the highest z-index value
+                used by layers on that page */
+                z-index:1001;
+                /* make it cover the whole screen */
+                position: absolute; 
+                top: 0%; 
+                left: 0%; 
+                width: 300%; 
+                height: 300%; 
+                /* make it white but fully transparent */
+                background-color: white; 
+                opacity:.40; 
+                filter: alpha(opacity=00); 
+                }
+                .bPageBlock .pbTitle { 
+                width: 0%; 
+                } 
+                
+                .detailList .list table th {
+                border-bottom: 0px solid #e3deb8;
+                }
+                
+                .list table td, .apexp .bPageBlock .detailList .list table th {
+                border-bottom: 0px solid #e3deb8;
+                }
+                
+                body .pbBody table.list tr td {
+                border: 0px solid #ededed;
+                color: #000;
+                }
+                
+                body .pbBody table.list tr.headerRow td, body .pbBody table.list tr.headerRow th{
+                border: 0px solid #ededed;
+                color: #000;
+                }
+                
+                .apexp .detailList .list th, .apexp .editPage .bPageBlock .detailList .list tr td, .apexp .editPage .bPageBlock .detailList .list tr th {
+                border-bottom: 0px solid #e3deb8;
+                }
+                
+                .apexp .bPageBlock .detailList .list table td, .apexp .bPageBlock .detailList .list table th {
+                border-bottom: 0px solid #e3deb8; 
+                }
+                
+                a.disabled {
+                pointer-events: none;
+                cursor: default;
+                }
+                
+                .concise {
+                width: 500px;
+                }
+                
+                .apexp .bPageBlock.apexDefaultPageBlock .pbBody .pbSubheader {
+                border-top: 0;
+                color: Black; 
+                }
+            </style>
+        </apex:outputPanel>
+        <div class="bPageTitle" style="padding-top: 0;">
+            <div class="ptBreadcrumb">
+                <apex:outputLink value="/{!uar.id}"  >&nbsp;«&nbsp;Back to List:&nbsp;{!uar.Name}
+                </apex:outputLink>  
+            </div>
+        </div>
+        <div id="disablingDiv" >
+            <img src="/img/loading.gif" title="Please Wait..." />
+        </div>
+        <apex:pageMessage severity="WARNING" title="This process has been completed and closed for modifications. Please contact process owner for any query." rendered="{!(uar.End_Date__c!=null && Today>uar.End_Date__c)}" ></apex:pageMessage>
+        <apex:pageMessage severity="INFORMATION" title="REMINDER: {! uar.End_Date__c-Today} Days remaining of Total {! uar.End_Date__c-uar.Start_Date__c} Days of review process." rendered="{!(uar.End_Date__c!=null && Today<=uar.End_Date__c)}" ></apex:pageMessage>
+        <apex:pageBlock title="User Access Review Details" id="pb" >
+            <!--page block containing input autocomplete to get all available objects list-->
+            <apex:pageBlockSection >     
+                <table >                  
+                    <tr>                       
+                        <td>    Approval Process Name: 
+                            <apex:outputLink value="/{!uar.id}"  >{!uar.Name} 
+                            </apex:outputLink>  
+                        </td>
+                    </tr>
+                </table>                
+            </apex:pageBlockSection>
+            <apex:pagemessages id="msg"/>
+            <!-- page message block to show error messages -->
+            <apex:actionFunction name="showfields" action="{!showfields}" oncomplete="showRecords1()" reRender="listpanel,tablesection,msg" status="loadingfields" >
+                <!--action function to get all avaiulable fields of selected object -->                
+                <apex:param name="oname" value="User Access Review Details" assignTo="{!oname}"/>                
+            </apex:actionFunction>
+            <apex:actionFunction name="showRecords" action="{!refreshTable}"  reRender="tablesection,msg" status="loadingtable" >   
+                <apex:param value="showRecords" name="callingFrom"/>
+            </apex:actionFunction>
+            
+            <apex:outputPanel id="listpanel" >                
+                <apex:pageBlockSection title="Select Columns" id="pbs" columns="1" collapsible="true" >                    
+                    <apex:pageblockSectionItem >
+                    </apex:pageblockSectionItem>
+                    <apex:pageBlockSectionItem id="pbsi">
+                        <apex:selectList multiselect="true"  id="cols" value="{!finalsFields}" style="width:250px" size="5">
+                            <!--list to show all available fields of selected object -->        
+                            <apex:selectOptions value="{!fields}" />    
+                        </apex:selectList>
+                    </apex:pageBlockSectionItem>
+                    <apex:actionstatus id="loadingfields">
+                        <!--action status to show status of showfields method -->
+                        <apex:facet name="start">        
+                            <div style="top: 74.2px; width: 91px;">                
+                                <img src="/img/loading.gif" title="Please Wait..." />                
+                                <span>Loading...
+                                </span>            
+                            </div>    
+                        </apex:facet>
+                    </apex:actionstatus>
+                    <apex:pageBlockSectionItem >
+                        <apex:commandButton onclick="disablePanel();cancel();" action="{!refreshTable}" oncomplete="enablePanel()"  value="Apply" reRender="tablesection,msg,warning" status="loadingtable" >
+                            <apex:param value="showRecords" name="callingFrom"/>
+                        </apex:commandButton>
+                        <!--button to retrive all available records of selected fields of selected object-->
+                        <apex:actionstatus id="loadingtable">        
+                            <apex:facet name="start">                
+                                <div style="top: 74.2px; width: 91px;">                        
+                                    <img src="/img/loading.gif" title="Please Wait..." />                        
+                                    <span>Loading...
+                                    </span>                    
+                                </div>            
+                            </apex:facet>    
+                        </apex:actionstatus>
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+            </apex:outputPanel>
+        </apex:pageBlock>
+        <apex:outputPanel id="tablesection" >
+            <apex:pageBlock rendered="{!isDisabled}" id="tspb"  >
+                <apex:outputPanel id="tsop" >
+                    <apex:pageBlockSection title="Users to Review" columns="1" collapsible="true" id="tspbs">                        
+                        <apex:pageBlockSectionItem rendered="{!if(total_size!=null,if(total_size>100,true,false),false)}" id="warning">                               
+                            <apex:outputLabel > 
+                                <b>
+                                    Total of {!total_size} users.  Note: Only 50 user records can be reviewed at a time.  Please use filter criteria to reduce the number of  records or continue working with the current set of 50 records.                                    
+                                </b>
+                            </apex:outputLabel>
+                        </apex:pageBlockSectionItem>
+                        
+                        <apex:outputpanel style="overflow:scroll;width:150%;height:100%" layout="block" id="tsop2" > 
+                            <div >
+                                <!-- Hidden field to store a new value of the variable -->
+                                <apex:inputHidden value="{!changedAS}" id="asHiddenField"/>
+                                <apex:commandButton action="{!save}" title="Confirm" onclick="disablePanel();getsrvals();" oncomplete="enablePanel()" immediate="false" reRender="frm,tablesection,msg" value="Confirm" status="loadingtablerecords" disabled="{!objectList.size=0 || (uar.End_Date__c!=null && Today>uar.End_Date__c)}" />
+                                <apex:commandButton title="Cancel" onclick="disablePanel();cancel();" oncomplete="enablePanel()"   value="Cancel" disabled="{!(uar.End_Date__c!=null && Today>uar.End_Date__c)}" />
+                            </div>
+                            <apex:pageBlockTable value="{!objectList}" var="records" id="tspbt" > 
+                                <!--section to display records in pageblocktable -->                
+                                <apex:repeat value="{!columnLabels}" var="Field" id="tsr"  >                        
+                                    <apex:column value="{!records[Field.name]}" rendered="{!If(Field.name!='Approval__c',true,false)}" styleClass=" {!if(Field.name=='Description__c',' concise','')}"   >                                
+                                        <apex:facet name="header" >                                        
+                                            <!--creating link to initiate shorting method -->                                        
+                                            <apex:commandLink styleClass="{!if(Field.name=='User_Name__c'||Field.name=='User_Public_Group__c'||Field.name=='User_Permission_Sets__c'||Field.name=='User_Roles__c'||Field.name=='Description__c','disabled','')} {!if(Field.name=='Description__c',' concise','')}"  value="{!Field.label} {!IF(sortbyField ==Field.name,IF(sortDirection='ASC','▲','▼'),'')}" title="{!if(Field.name=='User_Name__c'||Field.name=='User_Public_Group__c'||Field.name=='User_Permission_Sets__c'||Field.name=='User_Roles__c'||Field.name=='Description__c','Cannot Sort, due to large values','click to sort.')}" onclick="disablePanel()" oncomplete="enablePanel()" immediate="false"   reRender="tablesection" action="{!sortTable}" status="loadingtablerecords" id="Headers">                                                
+                                                <apex:param name="sortfield" value="{!Field.name}" />
+                                            </apex:commandLink>  
+                                            
+                                        </apex:facet>                            
+                                    </apex:column>                        
+                                    <apex:column rendered="{!If(Field.name=='Approval__c',true,false)}" id="tsc" style="border:0px;">  
+                                        <apex:selectRadio value="{!records[Field.name]}"  id="srForAS" disabled="{!(uar.End_Date__c!=null && Today>uar.End_Date__c)}">                    
+                                            <apex:actionSupport event="onchange"   reRender="none" onsubmit="disablePanel();srChangedStatus('{!records['Id']}','{!records[Field.name]}',this);" oncomplete="enablePanel()" immediate="false" disableDefault="false">                             
+                                                <apex:param value="{!records['Id']}" assignTo="{!changedRecId}" name="changedRecId"/>
+                                            </apex:actionSupport>                                        
+                                            <apex:selectOptions value="{!PageASOptionsSL}" >
+                                            </apex:selectOptions>                
+                                        </apex:selectRadio>
+                                        <apex:facet name="header">    
+                                            <apex:outputLabel >Actions</apex:outputLabel>
+                                        </apex:facet>                            
+                                    </apex:column>        
+                                </apex:repeat>                
+                                <apex:facet name="footer" >Displaying Page # {!pageNumber} of {!totalPages}: Total Records: {!noOfRecords}
+                                    <apex:outputLabel rendered="{!noOfRecords=0}" value="There are no records to display, for this filter criteria. Either, Snapshot not taken or you don't have required privileges.">
+                                    </apex:outputLabel>
+                                </apex:facet>                
+                                <!--facet to display page no status -->            
+                            </apex:pageBlockTable>    
+                        </apex:outputpanel>
+                    </apex:pageBlockSection>
+                </apex:outputPanel>
+                <apex:pageBlockButtons location="Top"  style="width:100%;align:center" id="asPBB"  >
+                    <apex:actionstatus id="loadingtablerecords">
+                        <apex:facet name="start">        
+                            <div style="top: 74.2px; width: 91px;">                
+                                <img src="/img/loading.gif" title="Please Wait..." />                
+                                <span>Loading...
+                                </span>            
+                            </div>    
+                        </apex:facet>
+                    </apex:actionstatus>
+                    <apex:outputPanel title="Filters" >
+                        <table>
+                            <col width="100"/>
+                            <col width="10"/>
+                            <col width="120"/>
+                            <col width="10"/>
+                            <col width="120"/>
+                            <tr>
+                                <td>
+                                    <apex:outputLabel > <b>Filter By</b></apex:outputLabel>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <apex:outputlabel >&nbsp;<b>Actions&nbsp;:&nbsp;</b>
+                                    </apex:outputlabel>
+                                </td>
+                                <td>
+                                    <apex:selectList size="1" value="{!showASpage}" id="ASSelectList" >                                
+                                        <apex:actionSupport event="onchange" action="{!refreshTable}" onsubmit="disablePanel()" oncomplete="enablePanel()" immediate="false"  rerender="tablesection,msg" status="loadingtablerecords" >
+                                            <apex:param value="changeASPage" name="callingFrom"/>
+                                        </apex:actionSupport>
+                                        <apex:selectOptions value="{! PageASOptionsFilter}" />    
+                                    </apex:selectList>
+                                </td>
+                                <td>
+                                    
+                                    <!---------------------------------------------------->
+                                    <apex:outputlabel >&nbsp;<b>Access Type&nbsp;:&nbsp;</b>
+                                    </apex:outputlabel>
+                                </td>
+                                <td>
+                                    <apex:selectList size="1" value="{!showUsrpage}" id="UsrSelectList" >                                
+                                        <apex:actionSupport event="onchange" action="{!refreshTable}" onsubmit="disablePanel()" oncomplete="enablePanel()" immediate="false"  rerender="tablesection,msg" status="loadingtablerecords" >
+                                            <apex:param value="changeUsrPage" name="callingFrom"/>
+                                        </apex:actionSupport>
+                                        <apex:selectOptions value="{! PageUsrOptionsFilter}" />
+                                    </apex:selectList>        
+                                </td>
+                                <td>
+                                    <apex:outputlabel >&nbsp;<b>Country&nbsp;:&nbsp;</b>
+                                    </apex:outputlabel>
+                                </td>
+                                <td>
+                                    <apex:selectList size="1" value="{!showCntrypage}" id="CntrySelectList" >                                
+                                        <apex:actionSupport event="onchange" action="{!refreshTable}" onsubmit="disablePanel()" oncomplete="enablePanel()" immediate="false"  rerender="tablesection,msg" status="loadingtablerecords" >
+                                            <apex:param value="changeCntryPage" name="callingFrom"/>
+                                        </apex:actionSupport>
+                                        <apex:selectOptions value="{! PageCntryOptionsFilter}" />    
+                                    </apex:selectList>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <apex:outputlabel >&nbsp;<b>Org&nbsp;:&nbsp;</b>
+                                    </apex:outputlabel>
+                                </td>
+                                <td>
+                                    <apex:selectList size="1" value="{!showSFDCInstpage}" id="SFDCInstSelectList" >                                
+                                        <apex:actionSupport event="onchange" action="{!refreshTable}" onsubmit="disablePanel()" oncomplete="enablePanel()" immediate="false"  rerender="tablesection,msg" status="loadingtablerecords" >
+                                            <apex:param value="changeSFDCInstPage" name="callingFrom"/>
+                                        </apex:actionSupport>
+                                        <apex:selectOptions value="{! PageSFDCInstOptionsFilter}" />
+                                    </apex:selectList>
+                                </td>
+                                <td>
+                                    <apex:outputlabel >&nbsp;<b>Owning Org&nbsp;:&nbsp;</b>
+                                    </apex:outputlabel>
+                                </td>
+                                <td>
+                                    <apex:selectList size="1" value="{!showOwnOrgpage}" id="OwnOrgSelectList" >                                
+                                        <apex:actionSupport event="onchange" action="{!refreshTable}" onsubmit="disablePanel()" oncomplete="enablePanel()" immediate="false"  rerender="tablesection,msg" status="loadingtablerecords" > 
+                                            <apex:param value="changeOwnOrgPage" name="callingFrom"/>
+                                        </apex:actionSupport>
+                                        <apex:selectOptions value="{! PageOwnOrgOptionsFilter}" />
+                                    </apex:selectList>
+                                </td>
+                                <td>
+                                    <apex:outputlabel >&nbsp;<b>Owning SBU Org&nbsp;:&nbsp;</b>
+                                    </apex:outputlabel>
+                                </td>
+                                <td>
+                                    <apex:selectList size="1" value="{!showOwnSBUOrgpage}" id="OwnSBUOrgSelectList" >                                
+                                        <apex:actionSupport event="onchange" action="{!refreshTable}" onsubmit="disablePanel()" oncomplete="enablePanel()" immediate="false"  rerender="tablesection,msg" status="loadingtablerecords" >                               
+                                            <apex:param value="changeOwnSBUOrgPage" name="callingFrom"/>
+                                        </apex:actionSupport>
+                                        <apex:selectOptions value="{! PageOwnSBUOrgOptionsFilter}" />
+                                    </apex:selectList>
+                                </td>
+                                
+                            </tr>
+                            <tr>
+                                
+                                <td>
+                                    <apex:outputlabel >&nbsp;<b>Region&nbsp;:&nbsp;</b>
+                                    </apex:outputlabel>
+                                </td>
+                                <td>
+                                    <apex:selectList size="1" value="{!showRgnpage}" id="RgnSelectList" >                                
+                                        <apex:actionSupport event="onchange" action="{!refreshTable}" onsubmit="disablePanel()" oncomplete="enablePanel()" immediate="false" rerender="tablesection,msg" status="loadingtablerecords" >
+                                            <apex:param value="changeRgnPage" name="callingFrom"/>
+                                        </apex:actionSupport>
+                                        <apex:selectOptions value="{! PageRgnOptionsFilter}" />    
+                                    </apex:selectList>
+                                </td>
+                                <td>
+                                    <apex:outputlabel >&nbsp;<b>User Type&nbsp;:&nbsp;</b>
+                                    </apex:outputlabel>
+                                </td>
+                                <td>
+                                    <apex:selectList size="1" value="{!showUsrTypepage}" id="UsrTypeSelectList" >                                
+                                        <apex:actionSupport event="onchange" action="{!refreshTable}" onsubmit="disablePanel()" oncomplete="enablePanel()" immediate="false" rerender="tablesection,msg" status="loadingtablerecords" >
+                                            <apex:param value="changeUserTypePage" name="callingFrom"/>
+                                        </apex:actionSupport>
+                                        <apex:selectOptions value="{! PageUsrLicenseOptionsFilter}" />    
+                                    </apex:selectList>
+                                </td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>
+                        <!---------------------------------------------------
+<br/>
+<div  align="Center">
+
+<span>Select Page: 
+</span>
+<apex:selectList size="1" value="{!showpage}" >        
+<apex:actionSupport event="onchange" action="{!refreshTable}" onsubmit="disablePanel()" oncomplete="enablePanel()" immediate="false" rerender="tablesection,msg" status="loadingtablerecords" >
+<apex:param value="changePage" name="callingFrom"/>
+</apex:actionSupport>
+<apex:selectOptions value="{! PageOptions}" />    
+</apex:selectList> 
+
+<apex:commandButton action="{!refreshTable}" title="Beginning" value="<<" disabled="{!disablePrevious}" reRender="tablesection" status="loadingtablerecords">
+<apex:param value="Beginning" name="callingFrom"/>
+</apex:commandButton>
+<apex:commandButton action="{!refreshTable}" title="Previous" value="<" disabled="{!disablePrevious}" reRender="tablesection" status="loadingtablerecords">
+<apex:param value="Previous" name="callingFrom"/>
+</apex:commandButton>
+<apex:commandButton action="{!refreshTable}" title="Next" value=">" disabled="{!disableNext}" reRender="tablesection" status="loadingtablerecords">
+<apex:param value="Next" name="callingFrom"/>
+</apex:commandButton>
+<apex:commandButton action="{!refreshTable}" title="End" value=">>" disabled="{!disableNext}" reRender="tablesection" status="loadingtablerecords">
+<apex:param value="End" name="callingFrom"/>
+</apex:commandButton> 
+
+
+<apex:outputLabel style="margin-left:50px">Set List Size : 
+</apex:outputLabel>
+<apex:selectList size="1" value="{!list_size}" >
+<apex:actionSupport event="onchange" action="{!refreshTable}" onsubmit="disablePanel()" oncomplete="enablePanel()" immediate="false" rerender="tablesection" status="loadingtablerecords" >
+<apex:param value="changelist_size" name="callingFrom"/>
+</apex:actionSupport>
+<apex:selectOptions value="{!SizeOptions}" />
+</apex:selectList>
+</div> -->
+                    </apex:outputPanel>
+                    <br/>
+                    
+                </apex:pageBlockButtons>
+            </apex:pageBlock>
+            <div align="Center" id='asDivBottom'>
+                <apex:commandButton action="{!save}" title="Confirm" onclick="disablePanel();getsrvals();" oncomplete="enablePanel()" immediate="false" reRender="frm,tablesection,msg" value="Confirm" status="loadingtablerecords" disabled="{!objectList.size=0 || (uar.End_Date__c!=null && Today>uar.End_Date__c)}"/>   
+                <apex:commandButton title="Cancel" onclick="disablePanel();cancel();" oncomplete="enablePanel()"   value="Cancel" disabled="{!(uar.End_Date__c!=null && Today>uar.End_Date__c)}" />
+            </div>
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

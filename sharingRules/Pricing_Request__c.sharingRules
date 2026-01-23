@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>DPP_Global_Kalrez_historical_records</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>DPP Global Kalrez historical records</label>
+        <sharedTo>
+            <group>DPPGlobalKalrezAndVespel</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>BU__c</field>
+            <operation>equals</operation>
+            <value>DPP Global Kalrez &amp; Vespel</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>B950,B918,B900,B974,B953,B903,B971,B972,B9FD,C350,C37T</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+</SharingRules>

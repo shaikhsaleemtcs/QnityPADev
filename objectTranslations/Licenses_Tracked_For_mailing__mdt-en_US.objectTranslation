@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Licenses Tracked</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Licenses Tracked</value>
+    </caseValues>
+    <fields>
+        <help><!-- Suggested Values : UL/PSL/FL
+UL: User License
+PSL: Permission Set License
+FL: Feature License --></help>
+        <label><!-- License Catagories --></label>
+        <name>License_Catagories__c</name>
+        <picklistValues>
+            <masterLabel>FL</masterLabel>
+            <translation><!-- FL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PSL</masterLabel>
+            <translation><!-- PSL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>UL</masterLabel>
+            <translation><!-- UL --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

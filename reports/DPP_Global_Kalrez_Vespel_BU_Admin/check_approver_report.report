@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Pricing_Request__c.BU__c</field>
+    </columns>
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request__c.Created_By__c</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request__c.On_Behalf_Of__c</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request__c.Sales_Org_Code__c</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request__c.Request_Type__c</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request__c.Request_Name__c</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request__c.End_User_Country__c</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request__c.SoldTo_Code__c</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request__c.Sold_To__c</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request__c.End_User_Code__c</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request__c.End_User__c</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request__c.Pricing_Condition__c</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request__c.Key_Combination__c</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request__c.Request_Valid_From__c</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request__c.Request_Valid_To__c</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request__c.Approver1__c</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request__c.Approver2__c</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request__c.Approver3__c</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request__c.Approver4__c</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request__c.Approver5__c</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request__c.Approver5_Date__c</field>
+    </columns>
+    <currency>USD</currency>
+    <description>check approver report</description>
+    <filter>
+        <booleanFilter>1 OR 2 OR 3 OR 4 OR 5 OR 6 OR 7 OR 8 OR 9 OR 10 OR 11 OR 12</booleanFilter>
+        <criteriaItems>
+            <column>Pricing_Request__c.Approver5__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Elke Mesdagh</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Pricing_Request__c.Current_Approver__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Elke Mesdagh</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Pricing_Request__c.Assigned_To__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Elke Mesdagh</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Pricing_Request__c.Approver1__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Elke Mesdagh</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Pricing_Request__c.Approver2__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Elke Mesdagh</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Pricing_Request__c.Approver3__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Elke Mesdagh</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Pricing_Request__c.Approver4__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Elke Mesdagh</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Pricing_Request__c.Backup_Level_1__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Elke Mesdagh</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Pricing_Request__c.Backup_Level_2__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Elke Mesdagh</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Pricing_Request__c.Backup_Level_3__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Elke Mesdagh</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Pricing_Request__c.Backup_Level_4__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Elke Mesdagh</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Pricing_Request__c.Backup_Level_5__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Elke Mesdagh</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>check approver report</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Pricing_Request__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Pricing_Request__c.Approver5_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

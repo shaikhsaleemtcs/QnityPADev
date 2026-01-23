@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>ERPCustomer_DPP_LA_Kalrez</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>ERPCustomer DPP LA Kalrez</label>
+        <sharedTo>
+            <group>DPPLAKalrez</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Customer - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>B987</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>ERP_Customer_CPM_AP</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>ERP Customer CPM AP</label>
+        <sharedTo>
+            <group>CPMAP</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Customer - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>F418,F4J5,F4I5,F4B9,F4B1,F4F1,F4G1,F41C,F4B0,F471,F4D3,F4B0</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>ERP_Customer_CPM_EMEA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>ERP Customer CPM EMEA</label>
+        <sharedTo>
+            <group>CPMEMEA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Customer - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>F458</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>ERP_Customer_CPM_NA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>ERP Customer CPM NA</label>
+        <sharedTo>
+            <group>CPMNA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Customer - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>F4I5,F46A</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>ERP_Customer_DPP_Kalrez_Global</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>ERP Customer DPP Kalrez Global</label>
+        <sharedTo>
+            <group>DPPGlobalKalrez</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Customer - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>B900,B903,B911,B918,B971,B9B1,B9B9,B9G3,B9I3,B9J9,C311,C3I3</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>ERP_Customer_EKC_Global</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>ERP Customer ACST Global</label>
+        <sharedTo>
+            <group>ACSTGlobal</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Customer - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>F418,F427,F43B,F4B9,F4F1,F4B0,F4B1,F471</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>ERP_Customer_Sharing_Rule_for_ACT</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>ERP Customer Sharing Rule for ACST</label>
+        <sharedTo>
+            <group>ACST</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Customer - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1848,A871,2742,1321,1310,A715,1326,1312,A753,A855,A752,A674,A670,A636</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>ERP_Customer_Sharing_Rule_for_APT_NAR</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>ERP Customer Sharing Rule for APT NAR</label>
+        <sharedTo>
+            <group>APT_NA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Customer - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>A798,1304,A749,A776</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>ERP_Customer_Sharing_Rule_for_Litho_EMEA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>ERP Customer Sharing Rule for Litho EMEA</label>
+        <sharedTo>
+            <group>Litho_EMEA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Customer - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>A715,A752,A674,A670,A753,A636,1304,2730</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>ERP_Customer_Sharing_Rule_with_Litho_AP</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>ERP Customer Sharing Rule with Litho AP</label>
+        <sharedTo>
+            <group>Litho_AP</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Customer - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>2730,2742,A855,A858,A871</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>ERP_Customer_Sharing_Rules_for_APT_AP</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>ERP Customer Sharing Rules for APT AP</label>
+        <sharedTo>
+            <group>APT_AP</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Customer - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>2742,A671,1760,1762,A873,A855,A857,A858,2730,A761,1187,A871</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>ERP_Customer_Sharing_Rules_for_APT_EMEA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>ERP Customer Sharing Rules for APT EMEA</label>
+        <sharedTo>
+            <group>APT_EMEA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Customer - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>A715,A752,A802,A674,A670,A753,A636,A807</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>ERP_Customer_Sharing_Rules_for_CMPT_AMS</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>ERP Customer Sharing Rules for CMPT AMS</label>
+        <sharedTo>
+            <group>CMPT_AMS</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Customer - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1310</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>ERP_Customer_Sharing_Rules_for_CMPT_AP</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>ERP Customer Sharing Rules for CMPT AP</label>
+        <sharedTo>
+            <group>CMPT_AP</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Customer - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1310,1312,1320,1321,1326,1760,2730,2742,A715,9024</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>ERP_Customer_Sharing_Rules_for_CMPT_EMEA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>ERP Customer Sharing Rules for CMPT EMEA</label>
+        <sharedTo>
+            <group>CMPT_EMEA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Customer - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1310,A636,A670,A674,A715,A752,A753,A855</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>ERP_Customer_Sharing_Rules_for_Litho_NA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>ERP Customer Sharing Rules for Litho NA</label>
+        <sharedTo>
+            <group>Litho_NA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Customer - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1304</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>ERP_Customer_Sharing_Rules_for_Semi_Silicones</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>ERP Customer Sharing Rules for Semi Silicones</label>
+        <sharedTo>
+            <group>Semi_Silicones</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Customer - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>A776,A798,A670,A674,A715,A752,A753,A807,A636,1187,1762,A671,A761,A857,A858</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Customer_with_OLED</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share Customer with OLED</label>
+        <sharedTo>
+            <group>OLED</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Customer - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1187,1760,1843,1848,2742,A116</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_ERP_Customer_with_DM_OCR</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share ERP Customer with DM OCR</label>
+        <sharedTo>
+            <group>DM_OCR</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Customer - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>F429,F4B1,F4I5</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_ERP_Customer_with_DM_users</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share ERP Customer with DM users</label>
+        <sharedTo>
+            <group>DM</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Customer - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1843,1848,2742,1760,1187,2730</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_ERP_Customer_with_ICS_AP</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share ERP Customer with ICS AP</label>
+        <sharedTo>
+            <group>ICS_AP</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Customer - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1187,1760,2730,2742,9852,A855,A858,A871</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_ERP_Customer_with_ICS_EMEA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share ERP Customer with ICS EMEA</label>
+        <sharedTo>
+            <group>ICS_EMEA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Customer - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>A636,A670,A674,A715,A752,A753,A808</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_ERP_Customer_with_ICS_LA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share ERP Customer with ICS LA</label>
+        <sharedTo>
+            <group>ICS_LA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Customer - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>A673,A672</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_ERP_Customer_with_ICS_NA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share ERP Customer with ICS NA</label>
+        <sharedTo>
+            <group>ICS_NA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Customer - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1304,A672</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_ERP_Customer_with_LED</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share ERP Customer with LED</label>
+        <sharedTo>
+            <group>LED_Silicones</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Customer - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1187,1762,A671,A715,A752,A753,A761,A776,A807,A857,A858,A873</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+</SharingRules>

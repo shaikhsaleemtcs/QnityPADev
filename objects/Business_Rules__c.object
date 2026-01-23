@@ -1,0 +1,2062 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This is the object which is going to use In COB for Country related business rules.</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ReadWrite</externalSharingModel>
+    <fields>
+        <fullName>CDR_Request_Status__c</fullName>
+        <description>Status of the Customer Onboarding Request.This is Read only field.</description>
+        <label>CDR Request Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Awaiting Credit Approval</fullName>
+                    <default>false</default>
+                    <label>Awaiting Credit Approval</label>
+                </value>
+                <value>
+                    <fullName>Awaiting Data Analyst (DMS Team) Approval</fullName>
+                    <default>false</default>
+                    <label>Awaiting Data Analyst (DMS Team) Approval</label>
+                </value>
+                <value>
+                    <fullName>Awaiting Destination Credit Approval</fullName>
+                    <default>false</default>
+                    <label>Awaiting Destination Credit Approval</label>
+                </value>
+                <value>
+                    <fullName>Closed</fullName>
+                    <default>false</default>
+                    <label>Closed</label>
+                </value>
+                <value>
+                    <fullName>Draft/Data Gathering</fullName>
+                    <default>false</default>
+                    <label>Draft/Data Gathering</label>
+                </value>
+                <value>
+                    <fullName>Rejected</fullName>
+                    <default>false</default>
+                    <label>Rejected</label>
+                </value>
+                <value>
+                    <fullName>Request Completed in SAP</fullName>
+                    <default>false</default>
+                    <label>Request Completed in SAP</label>
+                </value>
+                <value>
+                    <fullName>Request Sent for Re-Work</fullName>
+                    <default>false</default>
+                    <label>Request Sent for Re-Work</label>
+                </value>
+                <value>
+                    <fullName>Awaiting DOA approval</fullName>
+                    <default>false</default>
+                    <label>Awaiting DOA approval</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Credit_Analyst_Notification_Mgr__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The named individual from the country credit queue who receives the request from CSR.</description>
+        <label>Credit Analyst Notification Mgr</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Business_Rules2</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Credit_Limit_Lower__c</fullName>
+        <description>Credit Limit Upper</description>
+        <externalId>false</externalId>
+        <label>Credit Limit Lower</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>4</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Credit_Limit_Upper__c</fullName>
+        <description>doa credit limit upper</description>
+        <externalId>false</externalId>
+        <label>Credit Limit Upper</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>4</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Destination_Queue__c</fullName>
+        <description>Destination Queue for the request</description>
+        <externalId>false</externalId>
+        <label>Destination Queue</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Escalated_Approver__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The approver for DOA process</description>
+        <label>Escalated Approver</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Business_Rules1</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Legacy_Pricing_Util_SFID__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>This field is populated with the legacy One DuPont SF ID and was used during the split to map related records during the split and insert process to maintain the migrated record’s parent-child record relationships.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>This is the pre-split original 18 digit Salesforce ID of this record that came from the original One Dupont Salesforce instance before the business units were separated. Its is case insensitive and unique.</inlineHelpText>
+        <label>Legacy Pricing Util SFID</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Selling_Company_Code__c</fullName>
+        <description>Selling company code of the business</description>
+        <label>Selling Company Code</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>0003 - E.I. DuPont India Private Limited</fullName>
+                    <default>false</default>
+                    <label>0003 - E.I. DuPont India Private Limited</label>
+                </value>
+                <value>
+                    <fullName>0029 - DU PONT CHINA LIMITED</fullName>
+                    <default>false</default>
+                    <label>0029 - DU PONT CHINA LIMITED</label>
+                </value>
+                <value>
+                    <fullName>0078 - ELECT. MATLS DUP DONGGUAN</fullName>
+                    <default>false</default>
+                    <label>0078 - ELECT. MATLS DUP DONGGUAN</label>
+                </value>
+                <value>
+                    <fullName>0218 - DuPont Trading Shanghai</fullName>
+                    <default>false</default>
+                    <label>0218 - DuPont Trading Shanghai</label>
+                </value>
+                <value>
+                    <fullName>0701 - DUP AGRIC CHEM LTD</fullName>
+                    <default>false</default>
+                    <label>0701 - DUP AGRIC CHEM LTD</label>
+                </value>
+                <value>
+                    <fullName>1131 - DuPont (Shanghai) Sourcing Center Company, Ltd.</fullName>
+                    <default>false</default>
+                    <label>1131 - DuPont (Shanghai) Sourcing Center Company, Ltd.</label>
+                </value>
+                <value>
+                    <fullName>1132 - DuPont(China) RD and Mgmt</fullName>
+                    <default>false</default>
+                    <label>1132 - DuPont(China) RD and Mgmt</label>
+                </value>
+                <value>
+                    <fullName>1142 - DUP SURFCE GUANGZHOU</fullName>
+                    <default>false</default>
+                    <label>1142 - DUP SURFCE GUANGZHOU</label>
+                </value>
+                <value>
+                    <fullName>1210 - DUP (SHENZHEN) INDUS</fullName>
+                    <default>false</default>
+                    <label>1210 - DUP (SHENZHEN) INDUS</label>
+                </value>
+                <value>
+                    <fullName>2791 - Du Pont China Holding Co.</fullName>
+                    <default>false</default>
+                    <label>2791 - Du Pont China Holding Co.</label>
+                </value>
+                <value>
+                    <fullName>4860 - DUP (Thailand) Ltd</fullName>
+                    <default>false</default>
+                    <label>4860 - DUP (Thailand) Ltd</label>
+                </value>
+                <value>
+                    <fullName>0078 – Electronic Materials DuPont Dongguan Co., Ltd.</fullName>
+                    <default>false</default>
+                    <label>0078 – Electronic Materials DuPont Dongguan Co., Ltd.</label>
+                </value>
+                <value>
+                    <fullName>1449 - DuPont (Shanghai) Electronic Materials Co. Ltd.</fullName>
+                    <default>false</default>
+                    <label>1449 - DuPont (Shanghai) Electronic Materials Co. Ltd.</label>
+                </value>
+                <value>
+                    <fullName>1309 - DuPont (Hong Kong) Electronic Materials Limited</fullName>
+                    <default>false</default>
+                    <label>1309 - DuPont (Hong Kong) Electronic Materials Limited</label>
+                </value>
+                <value>
+                    <fullName>0443 - DuPont (New Zealand) Ltd.</fullName>
+                    <default>false</default>
+                    <label>0443 - DuPont (New Zealand) Ltd.</label>
+                </value>
+                <value>
+                    <fullName>2380 - Dup Austl Pty Ltd</fullName>
+                    <default>false</default>
+                    <label>2380 - Dup Austl Pty Ltd</label>
+                </value>
+                <value>
+                    <fullName>3874 - Du Pont Co. (Singapore) Pte</fullName>
+                    <default>false</default>
+                    <label>3874 - Du Pont Co. (Singapore) Pte</label>
+                </value>
+                <value>
+                    <fullName>3940 - DUP MALAYSIA</fullName>
+                    <default>false</default>
+                    <label>3940 - DUP MALAYSIA</label>
+                </value>
+                <value>
+                    <fullName>3945 - DUFE Philippines</fullName>
+                    <default>false</default>
+                    <label>3945 - DUFE Philippines</label>
+                </value>
+                <value>
+                    <fullName>0514 - DuPont Vietnam Ltd.</fullName>
+                    <default>false</default>
+                    <label>0514 - DuPont Vietnam Ltd.</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Sold_to_Country__c</fullName>
+        <description>Sold to country</description>
+        <label>Sold-to Country</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>CN - China</fullName>
+                    <default>false</default>
+                    <label>CN - China</label>
+                </value>
+                <value>
+                    <fullName>HK - Hong Kong</fullName>
+                    <default>false</default>
+                    <label>HK - Hong Kong</label>
+                </value>
+                <value>
+                    <fullName>IN - India</fullName>
+                    <default>false</default>
+                    <label>IN - India</label>
+                </value>
+                <value>
+                    <fullName>TH - Thailand</fullName>
+                    <default>false</default>
+                    <label>TH - Thailand</label>
+                </value>
+                <value>
+                    <fullName>Others</fullName>
+                    <default>false</default>
+                    <label>Others</label>
+                </value>
+                <value>
+                    <fullName>AU - Australia</fullName>
+                    <default>false</default>
+                    <label>AU - Australia</label>
+                </value>
+                <value>
+                    <fullName>NZ - New Zealand</fullName>
+                    <default>false</default>
+                    <label>NZ - New Zealand</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Sub_Business__c</fullName>
+        <description>Sub business for DOA implementation</description>
+        <label>Sub – Business</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>ABS</fullName>
+                    <default>false</default>
+                    <label>ABS</label>
+                </value>
+                <value>
+                    <fullName>BI</fullName>
+                    <default>false</default>
+                    <label>BI</label>
+                </value>
+                <value>
+                    <fullName>CPM(HPF)</fullName>
+                    <default>false</default>
+                    <label>CPM(HPF)</label>
+                </value>
+                <value>
+                    <fullName>CPM(HPL)</fullName>
+                    <default>false</default>
+                    <label>CPM(HPL)</label>
+                </value>
+                <value>
+                    <fullName>CPM(PCM)</fullName>
+                    <default>false</default>
+                    <label>CPM(PCM)</label>
+                </value>
+                <value>
+                    <fullName>CROP PROTECTION</fullName>
+                    <default>false</default>
+                    <label>CROP PROTECTION</label>
+                </value>
+                <value>
+                    <fullName>DCP</fullName>
+                    <default>false</default>
+                    <label>DCP</label>
+                </value>
+                <value>
+                    <fullName>DPP</fullName>
+                    <default>false</default>
+                    <label>DPP</label>
+                </value>
+                <value>
+                    <fullName>DPT</fullName>
+                    <default>false</default>
+                    <label>DPT</label>
+                </value>
+                <value>
+                    <fullName>DSS</fullName>
+                    <default>false</default>
+                    <label>DSS</label>
+                </value>
+                <value>
+                    <fullName>E&amp;C(DAS)</fullName>
+                    <default>false</default>
+                    <label>E&amp;C(DAS)</label>
+                </value>
+                <value>
+                    <fullName>E&amp;C(DE)</fullName>
+                    <default>false</default>
+                    <label>E&amp;C(DE)</label>
+                </value>
+                <value>
+                    <fullName>E&amp;C(DP)</fullName>
+                    <default>false</default>
+                    <label>E&amp;C(DP)</label>
+                </value>
+                <value>
+                    <fullName>E&amp;C(GR)</fullName>
+                    <default>false</default>
+                    <label>E&amp;C(GR)</label>
+                </value>
+                <value>
+                    <fullName>E&amp;C(MCM)</fullName>
+                    <default>false</default>
+                    <label>E&amp;C(MCM)</label>
+                </value>
+                <value>
+                    <fullName>E&amp;C(PG)</fullName>
+                    <default>false</default>
+                    <label>E&amp;C(PG)</label>
+                </value>
+                <value>
+                    <fullName>E&amp;C(PVFM)</fullName>
+                    <default>false</default>
+                    <label>E&amp;C(PVFM)</label>
+                </value>
+                <value>
+                    <fullName>E&amp;C(SFM)</fullName>
+                    <default>false</default>
+                    <label>E&amp;C(SFM)</label>
+                </value>
+                <value>
+                    <fullName>N&amp;H(QUALICON)</fullName>
+                    <default>false</default>
+                    <label>N&amp;H(QUALICON)</label>
+                </value>
+                <value>
+                    <fullName>P&amp;IP(AI)</fullName>
+                    <default>false</default>
+                    <label>P&amp;IP(AI)</label>
+                </value>
+                <value>
+                    <fullName>P&amp;IP(ECC)</fullName>
+                    <default>false</default>
+                    <label>P&amp;IP(ECC)</label>
+                </value>
+                <value>
+                    <fullName>P&amp;IP(ECS)</fullName>
+                    <default>false</default>
+                    <label>P&amp;IP(ECS)</label>
+                </value>
+                <value>
+                    <fullName>SUS SOLUTION</fullName>
+                    <default>false</default>
+                    <label>SUS SOLUTION</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <label>Business Rules</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>CDR_Request_Status__c</columns>
+        <columns>Credit_Analyst_Notification_Mgr__c</columns>
+        <columns>Credit_Limit_Lower__c</columns>
+        <columns>Credit_Limit_Upper__c</columns>
+        <columns>Destination_Queue__c</columns>
+        <columns>Escalated_Approver__c</columns>
+        <columns>Selling_Company_Code__c</columns>
+        <columns>Sold_to_Country__c</columns>
+        <columns>Sub_Business__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Country_Based_Rules</fullName>
+        <columns>NAME</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>CDR_Request_Status__c</columns>
+        <columns>Destination_Queue__c</columns>
+        <columns>Selling_Company_Code__c</columns>
+        <columns>Sold_to_Country__c</columns>
+        <columns>Credit_Limit_Upper__c</columns>
+        <columns>Credit_Limit_Lower__c</columns>
+        <columns>Credit_Analyst_Notification_Mgr__c</columns>
+        <columns>Escalated_Approver__c</columns>
+        <columns>Sub_Business__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>NAME</field>
+            <operation>startsWith</operation>
+            <value>CBR</value>
+        </filters>
+        <label>Country Based Rules</label>
+    </listViews>
+    <listViews>
+        <fullName>Country_Selling_Company_Code_Rules</fullName>
+        <columns>NAME</columns>
+        <columns>Selling_Company_Code__c</columns>
+        <columns>Sold_to_Country__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>NAME</field>
+            <operation>startsWith</operation>
+            <value>CSCCR</value>
+        </filters>
+        <label>Country Selling Company Code Rules</label>
+    </listViews>
+    <listViews>
+        <fullName>Credit_Analyst_Notification</fullName>
+        <columns>NAME</columns>
+        <columns>CDR_Request_Status__c</columns>
+        <columns>Credit_Analyst_Notification_Mgr__c</columns>
+        <columns>Selling_Company_Code__c</columns>
+        <columns>Sub_Business__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Credit_Limit_Lower__c</columns>
+        <columns>Escalated_Approver__c</columns>
+        <columns>Destination_Queue__c</columns>
+        <columns>Credit_Limit_Upper__c</columns>
+        <columns>Sold_to_Country__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Business_Rules__c.Country_Credit_Analyst_Notification</value>
+        </filters>
+        <label>Credit Analyst Notification</label>
+    </listViews>
+    <listViews>
+        <fullName>DOA_Rules</fullName>
+        <columns>NAME</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>CDR_Request_Status__c</columns>
+        <columns>Credit_Limit_Lower__c</columns>
+        <columns>Credit_Limit_Upper__c</columns>
+        <columns>Destination_Queue__c</columns>
+        <columns>Escalated_Approver__c</columns>
+        <columns>Selling_Company_Code__c</columns>
+        <columns>Sub_Business__c</columns>
+        <columns>Credit_Analyst_Notification_Mgr__c</columns>
+        <columns>Sold_to_Country__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>NAME</field>
+            <operation>startsWith</operation>
+            <value>DOA</value>
+        </filters>
+        <label>DOA Rules</label>
+    </listViews>
+    <listViews>
+        <fullName>DOA_Rules_CN</fullName>
+        <columns>NAME</columns>
+        <columns>CDR_Request_Status__c</columns>
+        <columns>Credit_Analyst_Notification_Mgr__c</columns>
+        <columns>Credit_Limit_Lower__c</columns>
+        <columns>Credit_Limit_Upper__c</columns>
+        <columns>Destination_Queue__c</columns>
+        <columns>Escalated_Approver__c</columns>
+        <columns>Selling_Company_Code__c</columns>
+        <columns>Sold_to_Country__c</columns>
+        <columns>Sub_Business__c</columns>
+        <columns>RECORDTYPE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>NAME</field>
+            <operation>startsWith</operation>
+            <value>DOACN</value>
+        </filters>
+        <label>DOA Rules - CN</label>
+    </listViews>
+    <listViews>
+        <fullName>DOA_Rules_HK</fullName>
+        <columns>NAME</columns>
+        <columns>CDR_Request_Status__c</columns>
+        <columns>Credit_Analyst_Notification_Mgr__c</columns>
+        <columns>Credit_Limit_Lower__c</columns>
+        <columns>Credit_Limit_Upper__c</columns>
+        <columns>Destination_Queue__c</columns>
+        <columns>Escalated_Approver__c</columns>
+        <columns>Selling_Company_Code__c</columns>
+        <columns>Sold_to_Country__c</columns>
+        <columns>Sub_Business__c</columns>
+        <columns>RECORDTYPE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>NAME</field>
+            <operation>startsWith</operation>
+            <value>DOAHK</value>
+        </filters>
+        <label>DOA Rules - HK</label>
+    </listViews>
+    <listViews>
+        <fullName>DOA_Rules_India</fullName>
+        <columns>NAME</columns>
+        <columns>CDR_Request_Status__c</columns>
+        <columns>Credit_Analyst_Notification_Mgr__c</columns>
+        <columns>Credit_Limit_Lower__c</columns>
+        <columns>Credit_Limit_Upper__c</columns>
+        <columns>Destination_Queue__c</columns>
+        <columns>Escalated_Approver__c</columns>
+        <columns>Selling_Company_Code__c</columns>
+        <columns>Sold_to_Country__c</columns>
+        <columns>Sub_Business__c</columns>
+        <columns>RECORDTYPE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>NAME</field>
+            <operation>startsWith</operation>
+            <value>DOAIN</value>
+        </filters>
+        <label>DOA Rules - India</label>
+    </listViews>
+    <listViews>
+        <fullName>DOA_Rules_Thailand</fullName>
+        <columns>NAME</columns>
+        <columns>CDR_Request_Status__c</columns>
+        <columns>Credit_Limit_Lower__c</columns>
+        <columns>Credit_Limit_Upper__c</columns>
+        <columns>Destination_Queue__c</columns>
+        <columns>Escalated_Approver__c</columns>
+        <columns>Selling_Company_Code__c</columns>
+        <columns>Sub_Business__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Sold_to_Country__c</columns>
+        <columns>Credit_Analyst_Notification_Mgr__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>NAME</field>
+            <operation>startsWith</operation>
+            <value>DOATH</value>
+        </filters>
+        <label>DOA Rules - Thailand</label>
+    </listViews>
+    <listViews>
+        <fullName>Notification_Rules</fullName>
+        <columns>NAME</columns>
+        <columns>CDR_Request_Status__c</columns>
+        <columns>Credit_Analyst_Notification_Mgr__c</columns>
+        <columns>Credit_Limit_Lower__c</columns>
+        <columns>Credit_Limit_Upper__c</columns>
+        <columns>Destination_Queue__c</columns>
+        <columns>Escalated_Approver__c</columns>
+        <columns>Selling_Company_Code__c</columns>
+        <columns>Sold_to_Country__c</columns>
+        <columns>Sub_Business__c</columns>
+        <columns>RECORDTYPE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Business_Rules__c.Notification_Rules</value>
+        </filters>
+        <label>Notification Rules</label>
+    </listViews>
+    <nameField>
+        <label>Business Rule</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Business Rules</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Country_Credit_Analyst_Notification</fullName>
+        <active>true</active>
+        <description>Record type documenting rules to direct the request to a named individual from the country credit queue</description>
+        <label>Country Credit Analyst Notification</label>
+        <picklistValues>
+            <picklist>CDR_Request_Status__c</picklist>
+            <values>
+                <fullName>Awaiting Credit Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Awaiting DOA approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Awaiting Data Analyst %28DMS Team%29 Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Awaiting Destination Credit Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Draft%2FData Gathering</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Request Completed in SAP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Request Sent for Re-Work</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Selling_Company_Code__c</picklist>
+            <values>
+                <fullName>0003 - E%2EI%2E DuPont India Private Limited</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0029 - DU PONT CHINA LIMITED</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0078 %E2%80%93 Electronic Materials DuPont Dongguan Co%2E%2C Ltd%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0078 - ELECT%2E MATLS DUP DONGGUAN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0218 - DuPont Trading Shanghai</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0443 - DuPont %28New Zealand%29 Ltd%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0514 - DuPont Vietnam Ltd%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0701 - DUP AGRIC CHEM LTD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1131 - DuPont %28Shanghai%29 Sourcing Center Company%2C Ltd%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1132 - DuPont%28China%29 RD and Mgmt</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1142 - DUP SURFCE GUANGZHOU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1210 - DUP %28SHENZHEN%29 INDUS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1309 - DuPont %28Hong Kong%29 Electronic Materials Limited</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1449 - DuPont %28Shanghai%29 Electronic Materials Co%2E Ltd%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2380 - Dup Austl Pty Ltd</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2791 - Du Pont China Holding Co%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3874 - Du Pont Co%2E %28Singapore%29 Pte</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3940 - DUP MALAYSIA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3945 - DUFE Philippines</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4860 - DUP %28Thailand%29 Ltd</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sold_to_Country__c</picklist>
+            <values>
+                <fullName>AU - Australia</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CN - China</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HK - Hong Kong</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IN - India</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NZ - New Zealand</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Others</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TH - Thailand</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sub_Business__c</picklist>
+            <values>
+                <fullName>ABS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CPM%28HPF%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CPM%28HPL%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CPM%28PCM%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CROP PROTECTION</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DCP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DPP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DPT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DSS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28DAS%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28DE%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28DP%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28GR%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28MCM%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28PG%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28PVFM%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28SFM%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>N%26H%28QUALICON%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>P%26IP%28AI%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>P%26IP%28ECC%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>P%26IP%28ECS%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SUS SOLUTION</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Country_Rules_Record</fullName>
+        <active>true</active>
+        <description>Record of country rules</description>
+        <label>Country Rules Record</label>
+        <picklistValues>
+            <picklist>CDR_Request_Status__c</picklist>
+            <values>
+                <fullName>Awaiting Credit Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Awaiting DOA approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Awaiting Data Analyst %28DMS Team%29 Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Awaiting Destination Credit Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Draft%2FData Gathering</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Request Completed in SAP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Request Sent for Re-Work</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Selling_Company_Code__c</picklist>
+            <values>
+                <fullName>0003 - E%2EI%2E DuPont India Private Limited</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0029 - DU PONT CHINA LIMITED</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0078 %E2%80%93 Electronic Materials DuPont Dongguan Co%2E%2C Ltd%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0078 - ELECT%2E MATLS DUP DONGGUAN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0218 - DuPont Trading Shanghai</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0443 - DuPont %28New Zealand%29 Ltd%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0514 - DuPont Vietnam Ltd%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0701 - DUP AGRIC CHEM LTD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1131 - DuPont %28Shanghai%29 Sourcing Center Company%2C Ltd%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1132 - DuPont%28China%29 RD and Mgmt</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1142 - DUP SURFCE GUANGZHOU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1210 - DUP %28SHENZHEN%29 INDUS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1309 - DuPont %28Hong Kong%29 Electronic Materials Limited</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1449 - DuPont %28Shanghai%29 Electronic Materials Co%2E Ltd%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2380 - Dup Austl Pty Ltd</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2791 - Du Pont China Holding Co%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3874 - Du Pont Co%2E %28Singapore%29 Pte</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3940 - DUP MALAYSIA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3945 - DUFE Philippines</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4860 - DUP %28Thailand%29 Ltd</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sold_to_Country__c</picklist>
+            <values>
+                <fullName>AU - Australia</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CN - China</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HK - Hong Kong</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IN - India</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NZ - New Zealand</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Others</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TH - Thailand</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sub_Business__c</picklist>
+            <values>
+                <fullName>ABS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CPM%28HPF%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CPM%28HPL%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CPM%28PCM%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CROP PROTECTION</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DCP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DPP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DPT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DSS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28DAS%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28DE%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28DP%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28GR%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28MCM%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28PG%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28PVFM%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28SFM%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>N%26H%28QUALICON%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>P%26IP%28AI%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>P%26IP%28ECC%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>P%26IP%28ECS%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SUS SOLUTION</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Country_Selling_Company_Code_Rules</fullName>
+        <active>true</active>
+        <description>Maps the country with the selling company code</description>
+        <label>Country Selling Company Code Rules</label>
+        <picklistValues>
+            <picklist>CDR_Request_Status__c</picklist>
+            <values>
+                <fullName>Awaiting Credit Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Awaiting DOA approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Awaiting Data Analyst %28DMS Team%29 Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Awaiting Destination Credit Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Draft%2FData Gathering</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Request Completed in SAP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Request Sent for Re-Work</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Selling_Company_Code__c</picklist>
+            <values>
+                <fullName>0003 - E%2EI%2E DuPont India Private Limited</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0029 - DU PONT CHINA LIMITED</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0078 %E2%80%93 Electronic Materials DuPont Dongguan Co%2E%2C Ltd%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0078 - ELECT%2E MATLS DUP DONGGUAN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0218 - DuPont Trading Shanghai</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0443 - DuPont %28New Zealand%29 Ltd%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0514 - DuPont Vietnam Ltd%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0701 - DUP AGRIC CHEM LTD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1131 - DuPont %28Shanghai%29 Sourcing Center Company%2C Ltd%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1132 - DuPont%28China%29 RD and Mgmt</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1142 - DUP SURFCE GUANGZHOU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1210 - DUP %28SHENZHEN%29 INDUS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1309 - DuPont %28Hong Kong%29 Electronic Materials Limited</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1449 - DuPont %28Shanghai%29 Electronic Materials Co%2E Ltd%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2380 - Dup Austl Pty Ltd</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2791 - Du Pont China Holding Co%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3874 - Du Pont Co%2E %28Singapore%29 Pte</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3940 - DUP MALAYSIA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3945 - DUFE Philippines</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4860 - DUP %28Thailand%29 Ltd</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sold_to_Country__c</picklist>
+            <values>
+                <fullName>AU - Australia</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CN - China</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HK - Hong Kong</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IN - India</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NZ - New Zealand</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Others</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TH - Thailand</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sub_Business__c</picklist>
+            <values>
+                <fullName>ABS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CPM%28HPF%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CPM%28HPL%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CPM%28PCM%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CROP PROTECTION</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DCP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DPP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DPT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DSS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28DAS%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28DE%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28DP%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28GR%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28MCM%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28PG%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28PVFM%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28SFM%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>N%26H%28QUALICON%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>P%26IP%28AI%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>P%26IP%28ECC%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>P%26IP%28ECS%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SUS SOLUTION</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>DOA_Rules</fullName>
+        <active>true</active>
+        <description>Rules which have DOA Fields</description>
+        <label>DOA Rules</label>
+        <picklistValues>
+            <picklist>CDR_Request_Status__c</picklist>
+            <values>
+                <fullName>Awaiting Credit Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Awaiting DOA approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Awaiting Data Analyst %28DMS Team%29 Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Awaiting Destination Credit Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Draft%2FData Gathering</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Request Completed in SAP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Request Sent for Re-Work</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Selling_Company_Code__c</picklist>
+            <values>
+                <fullName>0003 - E%2EI%2E DuPont India Private Limited</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0029 - DU PONT CHINA LIMITED</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0078 %E2%80%93 Electronic Materials DuPont Dongguan Co%2E%2C Ltd%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0078 - ELECT%2E MATLS DUP DONGGUAN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0218 - DuPont Trading Shanghai</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0443 - DuPont %28New Zealand%29 Ltd%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0514 - DuPont Vietnam Ltd%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0701 - DUP AGRIC CHEM LTD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1131 - DuPont %28Shanghai%29 Sourcing Center Company%2C Ltd%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1132 - DuPont%28China%29 RD and Mgmt</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1142 - DUP SURFCE GUANGZHOU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1210 - DUP %28SHENZHEN%29 INDUS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1309 - DuPont %28Hong Kong%29 Electronic Materials Limited</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1449 - DuPont %28Shanghai%29 Electronic Materials Co%2E Ltd%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2380 - Dup Austl Pty Ltd</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2791 - Du Pont China Holding Co%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3874 - Du Pont Co%2E %28Singapore%29 Pte</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3940 - DUP MALAYSIA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3945 - DUFE Philippines</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4860 - DUP %28Thailand%29 Ltd</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sold_to_Country__c</picklist>
+            <values>
+                <fullName>AU - Australia</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CN - China</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HK - Hong Kong</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IN - India</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NZ - New Zealand</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Others</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TH - Thailand</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sub_Business__c</picklist>
+            <values>
+                <fullName>ABS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CPM%28HPF%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CPM%28HPL%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CPM%28PCM%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CROP PROTECTION</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DCP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DPP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DPT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DSS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28DAS%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28DE%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28DP%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28GR%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28MCM%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28PG%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28PVFM%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28SFM%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>N%26H%28QUALICON%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>P%26IP%28AI%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>P%26IP%28ECC%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>P%26IP%28ECS%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SUS SOLUTION</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Notification_Rules</fullName>
+        <active>true</active>
+        <description>Rules to send notifications to dupont managers</description>
+        <label>Notification Rules</label>
+        <picklistValues>
+            <picklist>CDR_Request_Status__c</picklist>
+            <values>
+                <fullName>Awaiting Credit Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Awaiting DOA approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Awaiting Data Analyst %28DMS Team%29 Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Awaiting Destination Credit Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Draft%2FData Gathering</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Request Completed in SAP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Request Sent for Re-Work</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Selling_Company_Code__c</picklist>
+            <values>
+                <fullName>0003 - E%2EI%2E DuPont India Private Limited</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0029 - DU PONT CHINA LIMITED</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0078 %E2%80%93 Electronic Materials DuPont Dongguan Co%2E%2C Ltd%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0078 - ELECT%2E MATLS DUP DONGGUAN</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0218 - DuPont Trading Shanghai</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0443 - DuPont %28New Zealand%29 Ltd%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0514 - DuPont Vietnam Ltd%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>0701 - DUP AGRIC CHEM LTD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1131 - DuPont %28Shanghai%29 Sourcing Center Company%2C Ltd%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1132 - DuPont%28China%29 RD and Mgmt</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1142 - DUP SURFCE GUANGZHOU</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1210 - DUP %28SHENZHEN%29 INDUS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1309 - DuPont %28Hong Kong%29 Electronic Materials Limited</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1449 - DuPont %28Shanghai%29 Electronic Materials Co%2E Ltd%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2380 - Dup Austl Pty Ltd</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2791 - Du Pont China Holding Co%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3874 - Du Pont Co%2E %28Singapore%29 Pte</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3940 - DUP MALAYSIA</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3945 - DUFE Philippines</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4860 - DUP %28Thailand%29 Ltd</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sold_to_Country__c</picklist>
+            <values>
+                <fullName>AU - Australia</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CN - China</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>HK - Hong Kong</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>IN - India</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NZ - New Zealand</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Others</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TH - Thailand</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Sub_Business__c</picklist>
+            <values>
+                <fullName>ABS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CPM%28HPF%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CPM%28HPL%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CPM%28PCM%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CROP PROTECTION</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DCP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DPP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DPT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DSS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28DAS%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28DE%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28DP%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28GR%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28MCM%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28PG%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28PVFM%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>E%26C%28SFM%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>N%26H%28QUALICON%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>P%26IP%28AI%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>P%26IP%28ECC%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>P%26IP%28ECS%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SUS SOLUTION</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

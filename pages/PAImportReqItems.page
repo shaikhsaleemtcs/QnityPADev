@@ -1,0 +1,1432 @@
+<apex:page controller="ctrlPAMain" tabstyle="Price_Approval__tab" sidebar="false" showHeader="true" id="currentPage" cache="true" action="{!onLoadCall}">
+<apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.js')}" />
+<apex:stylesheet value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/css/jquery.dataTables.css')}" />
+<apex:pageMessages escape="false" id="errorMessage"/> 
+<c:loadingComponent />
+<!--  Version 1.1 Start -->
+<!-- Added the red line for mandatory fields -->
+<!-- Changed the Button Alignment -->
+<!-- Changed by utkarsh on 26 feb for recall button rendered condition -->
+<!--  version 1.1 END  -->
+<!--    Ver.            Developer               Changes                                                         Dependencies    -->
+<!--    1.2             Priyanka        Changed table component to 'PARequestItemRelatedList'                                   -->
+<!--                                    from PARelatedList                                                      None            -->
+<!--    1.3             Prachi          Changed the  Quit button                                                None            -->
+<!--    1.4             Prachi          red bar                                                                 None            -->
+<!--    1.4             Brundha          UI                                                                     None            -->
+<!--    1.5             Prachi           UI                                                                     None -->
+<!--    1.6             Utkarsh         Changed the Reassign Popup                                  PAUserPopulationComponent  -->
+<!--    1.7             Priyanka        Added attribute in RelatedList for rendering Standarized Rate
+                                        - APAC ROLLOUT                                                  PARequest           -->
+<!-- PP20130716     Priyanka Pillala    16 Jul 2013             Adding Request Class - APAC ROLLOUT2                    None            -->
+<!-- VR20140220     Vinoth Rajapandian  Uncommented the Reassign Code                                                           -->
+<!-- VR20130718     Vinoth Rajapandian  Modified Rendered condition for Flr. and Ref.                       None    -->   
+<!-- TJ20140505     Tarun Jain          Added the landing page link                                         None    -->
+<!-- TJ20140509     Tarun Jain          Added Navigation Flow Text                                          None    -->
+<!-- AV20140515     Abhijeet Vaishnab   Added sales volume button                                           None    -->
+<!-- PA20141224     Pavani Ankireddy    UI,Included the scaleFlag in the import screen                              -->
+<!-- MG20160913     Mansi Gupta         Added message after click on validate button                        None    -->
+<!-- MG20161107     Mansi Gupta     Hide Approve button for BU Admins for BU DPP Polymers in Pending Approval<IS ID-00076073> -->
+<!-- AS20201026     Arrola Sireesha     Updated "Actual Approver" name to "Escalated To"<IS TI-00090859> --> 
+<!-- SL20220614     Satyandra Lodhi     Update Ajax version from 15.0 to 55.0 and page version from 27.0 to 55.0 to support salesforce release <IS TI-00094390> --> 
+    <style>
+        .customerLink{font-size:15px;height:20px;margin-bottom:1px;padding:5px;border:solid 1px;border-color:#6E96B2; background-color:#E5F3FC;font-weight:bold;text-align:left;}
+        .navFlow{font-size:13px;font-style:oblique;margin-bottom:3px;}
+        #import .detailList{padding:0px;border:1px solid #E2E3E4;}
+        #import .detailList .data2Col{padding:0px;} 
+        //#import .detailList .dataCol .requiredBlock{top:0px; height:20px;bottom:0px;}
+        #import .detailList tr th{border-bottom:none;} 
+        #import .detailList tr td{border-bottom:none;} 
+        #import .bPageBlock{float:left;width:100%;}
+        #import .pbSubheader{margin-bottom:0px;} 
+        #import #selectFile a.btn{width:60px;float:left;}
+        #requests .pbBody{margin:0px;}
+        body .pbBody table.list tr td{border-bottom: none;}
+        body .pbBody table.list tr th{color:white;background-color:#63A4C5;}
+        body .pbBody table.list1{border:1px solid #e0e3e5;background-color:#fff;width: 1800px;}
+        body .pbBody table.list1 tr:first-child th{color:white;background-color:#63A4C5;}
+        body .pbBody table.list1 tr:nth-child(2) th{color:black;background-color:#f8f8f8;border:1px solid #E2E3E4;}
+        .bPageBlock .detailList .list tr th{color:white;} 
+         <!-- MG20160913 changed width to 102 px -->
+        .buttons a.btn {
+            width: 102px;
+            float: left;
+        }
+        #buttons #buttonsFlrRefView a.btn{width:200px;float:left;}
+        #buttons #buttonsNPC a.btn{width:100px;float:left;}
+        #multiApprover a.btn{width:70px;float:left;}
+    </style>
+    
+    <!--------------------------------------- Style class for Pop up ------------------------------------->
+
+
+<style type="text/css">
+#szlider{
+    width:100%;
+    height:15px;
+    border:1px solid #000;
+    overflow:hidden; }
+#szliderbar{
+    width:37%;
+    height:15px;
+    border-right: 1px solid #000000;
+    background: #d65946; }
+#szazalek {
+    color: #000000;
+    font-size: 15px;
+    font-style: italic;
+    font-weight: bold;
+    left: 25px;
+    position: relative;
+    top: -16px; }
+</style>
+<script src="/soap/ajax/55.0/connection.js" type="text/javascript"/>
+    <script src="/soap/ajax/55.0/apex.js" type="text/javascript"/>
+
+<script>
+  $j = jQuery.noConflict();
+  // Added a check for a specific custom object
+      $j(document).ready(function() {    
+      $j("input[name='piSubmit']").hide();
+    });
+</script>
+<script>
+
+        var j$ = jQuery.noConflict();
+j$(document).ready(function() {                                             //<TJ20150612> - removed javascript to generate HTML Table with additional functionalities
+     j$("div[id~=appProcess] a.actionLink").css("display","none");
+          j$("div[id~=appProcess] td.actionColumn:contains(|)").text(" ");
+          j$('input[title="Recall Approval Request"]').css("display","none");     
+          j$('input[title="Submit for Approval"]').css("display","none");
+    
+    <!-- SP20140131 START -->
+    j$('input[name="piSubmit"]').css("display","none");
+    j$('input[name="piRemove"]').css("display","none");     
+    <!-- SP20140131 END -->
+              
+          j$("div[id~=appProcess] .pShowMore a:first").css("display","none");
+          var secDisplay = j$("div[id~=appProcess] .pShowMore a:last");
+          j$("div[id~=appProcess] .pShowMore:contains(|)").html(secDisplay);
+          j$("div[id~=appProcess] a").attr('target', '_blank');
+});      
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jsforce/1.3.1/jsforce.min.js"></script>
+<script>
+var fileInput;
+var file ;
+var filetext;
+var finalUploadFile='';
+
+
+window.onload = function() {
+    //console.log('Current request:{!service.paServiceState.currentRequest.pricingrequest.id}');
+    //console.log('Progress bar - '+document.getElementById('progress'));
+    var requestId = '{!service.paServiceState.currentRequest.pricingrequest.id}';
+    fileInput = document.getElementById('fileInput');
+    fileInput.addEventListener('change', function(e) {
+    alert('Reading file, please wait');
+    showReading();
+    file = fileInput.files[0];
+    var reader = new FileReader();  
+    reader.onload = function(e) {
+        filetext = reader.result;
+        //console.log('Before read:'+filetext);
+        var header = 'Pricing_Request__c,'+filetext.split("\n")[0];
+        finalUploadFile +=header+"\n";;
+        for(var i=1;i<filetext.split("\n").length-1;i++)
+        {
+            readNthRecord(i);
+            
+            finalUploadFile += requestId+','+filetext.split("\n")[i]+"\n";
+        }
+        //console.log('final upload file:-'+finalUploadFile);
+        alert('Reading file completed!');
+        hideReading();
+    } 
+    
+    reader.readAsText(file);    
+    
+    });
+}
+
+function readfileMsg()
+{
+
+    alert('Reading file, please wait');
+}
+    
+//START MG20160913 - Message after clicking on import        
+    function showMessage()
+{
+
+    j$('.helptext').css("display","block");;
+}
+//End MG20160913  -  Message after clicking on import   
+    
+function readCompleteMsg()
+{
+    alert('Reading completed!');
+}
+
+function readNthRecord( n)
+{
+    //alert('Reading '+n+' record');
+    increase();
+    //alert('Updating progress bar');
+}
+function loadfile()
+{   
+    //console.log('Current request:{!service.paServiceState.currentRequest.pricingrequest.id}');
+    var conn = new jsforce.Connection({ accessToken: '{!$API.Session_Id}'
+    ,proxyUrl: '/services/proxy'
+     });
+    
+    var job = conn.bulk.createJob("Pricing_Request_Item__c", "insert");  
+    var batch = job.createBatch();
+    showReading();
+    batch.execute(finalUploadFile, function(err, res)
+    {
+         //console.log('Execution status err:'+err);
+         //console.log('Execution status res:'+res);
+         //console.log('File loading completed!');
+         hideReading();
+         massuploadComplete();
+         job.close();
+    } );
+    batch.on("queue", function(batchInfo) { // fired when batch request is queued in server.
+    batchId = batchInfo.id;
+    jobId = batchInfo.jobId;
+    //console.log('batchId:'+batchId);
+    //console.log('jobId:'+jobId);
+    /*batch.on('response', function(res) { 
+    //console.log('after response');
+    resolve(res); });*/
+    batch.poll(5*1000, 300*1000);
+    });
+    
+    batch.poll(5*1000, 300*1000);// poll interval = 5 sec, timeout = 30 sec
+    batch.on("response", function(rets) { 
+    //console.log('Batch execution completed');
+    });
+    
+   
+                   
+}     
+
+var value = 0; 
+
+
+function increase(){ 
+var progress = document.getElementById('progress'); 
+  value = value + 1;
+  if(value>=100) value = 100;    
+  progress.style.width = value + "%";
+} 
+
+function showReading(){ 
+//console.log('Showing reading image');
+document.getElementById('progress').style.visibility='visible';
+} 
+function hideReading(){ 
+//console.log('Hiding reading image');
+document.getElementById('progress').style.visibility='hidden';
+} 
+</script>
+    <apex:form id="myId">
+    
+      <!-- Added for massive import-->
+      <apex:actionFunction name="massuploadComplete" status="stat" rerender="myId" >  
+      <apex:param name="popup" value="details" assignTo="{!service.PAServiceState.currentRequestItem.popUpFlag}"/>
+      <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+      
+    </apex:actionFunction>
+    
+        <!-- <TJ20140505> Added Landing Page Link -->
+        <div align="left" class="navFlow">
+            <apex:commandLink id="link0" value="Landing Page" action="{!businessComponentAction}" target="_self" style="color:blue;">
+            <apex:param name="desiredAction" value="landingpage" assignTo="{!businessaction}" />
+            <apex:param name="newPageLabel" value="PAHome" assignTo="{!newPageLabel}" />
+            </apex:commandLink>
+        <!-- <TJ20140509> Added Navigation Flow Text -->
+            <apex:outputText value="{!if(NOT(ISNULL(navigationText)),'>>',null)} "/>
+            <apex:outputText value="{!navigationText}"/>
+            <apex:outputText value=">>  {!$Label.Import_Req_Items}"/>
+        </div>
+<!--        <TJ20140417>   Changed Page Label-->        
+    <div class="customerLink">
+        {!$Label.Import_Req_Items}
+    </div>
+
+    <apex:actionStatus id="stat">
+        <apex:facet name="start">
+            <div class="spinnerMask" id="spinnerMask">
+            <div class="spinnerCt"><img
+                src="/img/analytics/reportbuilder/icons/spinner32.gif"
+                alt="Loading..." width="32" height="32" align="center"
+                class="spinner" title="Loading..." />
+            <div class="loadingIndicator">Loading...</div>
+            </div>
+            <div class="mask"></div>
+            </div>
+        </apex:facet>
+    </apex:actionStatus> 
+
+<!-- START MG20160913 - Message after clicking on import  -->
+    <style>
+    /* This is for the full screen DIV */
+    .popupBackground {
+        /* Background color */
+        background-color:black;
+        opacity: 0.20;
+        filter: alpha(opacity = 20);
+    
+        /* Dimensions */
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 998;
+        position: absolute;
+        
+        /* Mouse */
+        cursor:wait;
+    }
+ 
+    /* This is for the message DIV */
+    .PopupPanel {
+        /* Background color */
+        border: solid 1px gray;
+        background-color: white;
+ 
+        /* Dimensions */
+        left: 50%;
+        width: 300px;
+        margin-left: -100px;
+        top: 50%;
+        height: 50px;
+        margin-top: -25px;
+        z-index: 999;
+        position: fixed;
+        
+        /* Mouse */
+        cursor:pointer;
+    }
+    .helptext{
+        border-style: solid;
+        border-width: 1px;
+        border-color: #39f;
+        background-color:#ffc;
+        padding:10px 13px 10px 13px;
+        margin: 4px 20px;
+        font-family: Arial,Helvetica,sans-serif;
+        border-radius: 4px;
+        vertical-align: middle;
+    }
+</style>
+        
+        <br></br>
+<!--End MG20160913 - Message after clicking on import -->
+
+
+        <!------------------------------------------------ Import Header Detail ----------------------------------------->
+
+        <apex:outputPanel >
+        <div id="import">
+            <apex:pageBlock >
+                <apex:outputPanel style="text-align:left;">
+                    <apex:pageblockSection title="Import Header Detail">
+                        <apex:pageBlockSectionItem >
+                            <apex:outputtext value="Business" />
+                            <apex:outputtext value="{!service.paServiceState.currentRequestItem.request.selectedBU}" />
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem rendered="{!service.PAServicestate.ogItems.salesAdminPermissionSetFlag}">
+                            <apex:outputText value="On Behalf Of" />
+                            <apex:outputText value="{!service.paServiceState.ogItems.userName}" />
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                            <apex:outputtext value="Sales Area" />
+                            <apex:outputText value="{!service.paServiceState.currentRequestItem.request.customer.salesArea}"
+                                escape="false" />
+                        </apex:pageBlockSectionItem>
+                    </apex:pageblockSection>
+                </apex:outputPanel>
+
+                <!------------------------------------------------- Request Details ------------------------------------------->
+<!--         <TJ20150610> Modified Rendered Condition -->
+                <apex:pageBlockSection title="Request Details" 
+                    rendered="{!service.paServiceState.currentRequestItem.popUpflag!='details' && service.paServiceState.currentRequestItem.popUpflag!='ReImport' && service.paServiceState.currentRequestItem.popUpflag!='validate' && service.paServiceState.currentRequestItem.popUpflag!='attachPopUp'}">
+                    <apex:pageBlockSectionItem dataStyle="height:25px" labelStyle="height:25px">
+                        <apex:outputText value="Request Name" />
+                        <apex:outputPanel style="float:left;">
+                            <div id="requestName" class="requiredInput" style="float:left;">
+                                <div class="requiredBlock" style="float:left;"></div> 
+                                <!--<AV20150705>-Production issue- Request name field extende to 80 characters  -->
+                                <apex:inputText style="float:left;margin: 0px;" value="{!service.paServiceState.currentRequestItem.request.pricingRequest.Request_Name__c}" maxLength="80"/>
+                            </div>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    
+                    <!-- PP20130716 START -->
+                        <apex:pageBlockSectionItem rendered="{!service.paServiceState.ogItems.orgGroupItems.Enable_Request_Class__c}"
+                        dataStyle="height:25px" labelStyle="height:25px">
+                            <apex:outputLabel value="Request Class" />
+                            <apex:outputPanel style="float:left;">
+                                <div class="requiredInput" style="float: left;">
+                                    <div class="requiredBlock" style="float: left;"></div>
+                                    <apex:selectList style="float:left;margin: 0px;"
+                                        value="{!service.paServiceState.currentRequestItem.request.pricingRequest.Request_Class__c}"
+                                        size="1">
+                                        <apex:selectOptions value="{!service.paServiceState.ogItems.requestClassList}" />
+                                    </apex:selectList>
+                                </div>
+                            </apex:outputPanel>
+                        </apex:pageBlockSectionItem>
+                        
+                            
+                        <!-- PP20130716 END -->
+                    <apex:pageBlockSectionItem dataStyle="height:25px"
+                        labelStyle="height:25px">
+                        <apex:outputText value="Request Reason" />
+                        <apex:outputPanel style="float:left;">
+                            <div id="requestReasons" class="requiredInput" style="float:left;">
+                                <div class="requiredBlock" style="float:left;"></div>
+                                <apex:selectList style="float:left;margin: 0px;" value="{!service.paServiceState.currentRequestItem.request.pricingRequest.Request_Reason__c}"
+                                    size="1">
+                                    <apex:selectOptions value="{!service.paServiceState.currentRequestItem.request.listOptions}" />
+                                </apex:selectList>
+                            </div>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+<!--         <TJ20150610> Modified Rendered Condition-->               
+                <apex:outputPanel rendered="{!service.paServiceState.currentRequestItem.popUpFlag!='validate' && service.paServiceState.currentRequestItem.popUpFlag!='details' && service.paServiceState.currentRequestItem.popUpFlag!='ReImport' && service.paServiceState.currentRequestItem.popUpflag!='attachPopUp'}">
+                <div id="selectFile" style="float:left;text-align:center;padding:10px 0px 10px 43%;">                              
+                        <apex:commandLink value="Select File"
+                            action="{!businessComponentAction}" styleClass="btn"
+                            style="text-decoration:none" rendered="{! NOT(service.paServiceState.currentRequest.massiveImport) && service.paServiceState.currentRequestItem.popUpFlag!='validate' && service.paServiceState.currentRequestItem.popUpFlag!='details' && service.paServiceState.currentRequestItem.popUpFlag!='ReImport'}">
+                            <apex:param name="desiredAction" value="selectFile"
+                                assignTo="{!businessaction}" />
+                            <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                            <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                        </apex:commandLink>&nbsp;&nbsp; 
+    
+                        <!--Added for massive import  -->
+                        <apex:commandLink value="Submit Request" styleClass="btn" style="text-decoration:none;width: 100px;"
+                             action="{!businessComponentAction}" 
+                             rendered="{!service.paServiceState.currentRequest.massiveImport}">
+                            <apex:param name="details" value="details" assignTo="{!service.PAServiceState.currentRequestItem.popUpFlag}"/>
+                            <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                             <apex:param name="desiredAction" value="import"
+                                assignTo="{!businessaction}" />
+                                <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>    
+                   
+                        </apex:commandLink>
+
+                        <apex:commandLink value="Cancel"
+                            action="{!businessComponentAction}" styleClass="btn"
+                            style="text-decoration:none" rendered="{!service.paServiceState.currentRequestItem.popUpFlag!='validate' && service.paServiceState.currentRequestItem.popUpFlag!='details' && service.paServiceState.currentRequestItem.popUpFlag!='ReImport'}">
+                            <apex:param name="desiredAction" value="cancel"
+                                assignTo="{!businessaction}" />
+                            <apex:param name="newPageLabel" value="{!IF(service.paservicestate.currentRequestItem.request.requestServicestate.ogitems.value=='Export','PAExportPrices','PAExistingRequest')}"
+                                assignTo="{!newPageLabel}" />
+                        </apex:commandLink>
+                    </div>
+                </apex:outputPanel>      
+
+                <!------------------------------------------------ Pop Up for import ----------------------------------------->
+
+                <apex:outputPanel styleClass="BackScreenImp"
+                    rendered="{!service.paServiceState.currentRequestItem.popUpFlag=='Import' || service.paServiceState.currentRequestItem.popUpFlag=='ReImport'}"
+                    layout="block">
+                </apex:outputPanel>
+                <apex:outputPanel styleClass="FrontScreenImp"
+                    rendered="{!service.paServiceState.currentRequestItem.popUpFlag=='Import' || service.paServiceState.currentRequestItem.popUpFlag=='ReImport'}"
+                    layout="block" style="text-align:left;">
+                    <apex:commandLink rendered="{!service.paServiceState.currentRequestItem.popUpFlag=='Import'}">
+                        <apex:image url="{!$Resource.closeButton}" width="15" height="15"
+                            style="float:right" />
+                        <apex:param value="none"
+                            assignTo="{!service.paServiceState.currentRequestItem.popUpFlag}" />
+                        <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                        <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                    </apex:commandLink>
+                    <apex:commandLink rendered="{!service.paServiceState.currentRequestItem.popUpFlag=='ReImport'}">
+                        <apex:image url="{!$Resource.closeButton}" width="15" height="15"
+                            style="float:right" />
+                        <apex:param value="validate"
+                            assignTo="{!service.paServiceState.currentRequestItem.popUpFlag}" />
+                        <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                        <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                    </apex:commandLink>
+                    <br />
+                    <apex:pagemessages />
+                    <apex:pageBlockSection title="Import" columns="1"
+                        collapsible="false">
+                        <apex:outputText value="Please select a file to Import" />
+                        <apex:outputPanel style="opacity:1" rendered="{!NOT(service.paServiceState.currentRequest.massiveImport)}">
+                            <br></br>
+                        
+                            <apex:inputfile value="{!service.paServiceState.currentRequestItem.contentFile}"
+                                size="40" /><br></br>
+                            <br></br>
+                            <br></br>
+                            
+                        </apex:outputPanel>
+                        
+                        
+                        <apex:outputPanel style="opacity:1" rendered="{!service.paServiceState.currentRequest.massiveImport}">
+                            <br/>
+                                <input type="file" id="fileInput"/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            
+                        </apex:outputPanel>
+                        
+                        <br/>
+                        
+                        
+                    </apex:pageBlockSection>
+                    
+                    <!-- Massive import reading popup -->
+                    <!-- <GT20150122> Added for massive import -->
+                    
+           <!--        <div id='progress' style="visibility: hidden">
+                        
+                        <img src="{!$Resource.loadingImg}"/>
+                    </div> -->   
+                    <div id="selectFile" style="float:left;text-align:center;padding:10px 0px 10px 35%;">
+                        
+                        <apex:commandLink value="Import" rendered="{!NOT(service.paServiceState.currentRequest.massiveImport)}"
+                            action="{!businessComponentAction}" styleClass="btn"
+                            style="text-decoration:none">
+                            <apex:param name="desiredAction" value="import"
+                                assignTo="{!businessaction}" />
+                            <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                            <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                        </apex:commandLink>&nbsp;&nbsp; 
+                        <!-- <GT20150122> Added for massive import -->
+                        <apex:commandLink value="Import" styleClass="btn"  style="text-decoration:none" 
+                         onClick="loadfile()" rendered="{!(service.paServiceState.currentRequest.massiveImport)}"> 
+                        </apex:commandLink>&nbsp;&nbsp;
+                   
+                        
+                        <apex:commandLink value="Cancel" styleClass="btn"
+                            style="text-decoration:none"
+                            rendered="{!service.paServiceState.currentRequestItem.popUpFlag=='Import'}">
+                            <apex:param value="none"
+                                assignTo="{!service.paServiceState.currentRequestItem.popUpFlag}" />
+                            <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                            <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                        </apex:commandLink> <apex:commandLink value="Cancel" styleClass="btn"
+                            style="text-decoration:none"
+                            rendered="{!service.paServiceState.currentRequestItem.popUpFlag=='ReImport'}">
+                            <apex:param value="validate"
+                                assignTo="{!service.paServiceState.currentRequestItem.popUpFlag}" />
+                            <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                            <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                        </apex:commandLink>
+                    </div>
+                </apex:outputPanel>
+
+                <!----------------------------------------------------- Request Details ------------------------------------------------->
+<!--         <TJ20150610> Modified Rendered Condition-->
+                    <apex:pageBlockSection title="Request Header Detail"
+                        rendered="{!service.paServiceState.currentRequestItem.popUpflag=='details' || service.paServiceState.currentRequestItem.popUpflag=='ReImport' || service.paServiceState.currentRequestItem.popUpflag=='validate' || service.paServiceState.currentRequestItem.popUpflag=='attachPopUp'}">
+                           <apex:pageBlockSectionItem >
+                               <apex:outputText value="Request ID" />
+                               <apex:outputText value="{!service.paServiceState.currentRequestItem.request.pricingRequest.Name}" />
+                           </apex:pageBlockSectionItem>
+                           <apex:pageBlockSectionItem >
+                               <apex:outputText value="Request Name" />
+                               <apex:outputText value="{!service.paServiceState.currentRequestItem.request.pricingRequest.Request_Name__c}" />
+                           </apex:pageBlockSectionItem>
+                            <!-- PP20130716 START -->
+                            <apex:pageBlockSectionItem rendered="{!service.paServiceState.ogItems.orgGroupItems.Enable_Request_Class__c}">
+                               <apex:outputText value="Request Class" />
+                               <apex:outputText value="{!service.paServiceState.currentRequestItem.request.pricingRequest.Request_Class__c}" />
+                            </apex:pageBlockSectionItem>
+                            <!-- PP20130716 END -->
+                           <apex:pageBlockSectionItem >
+                               <apex:outputText value="Request Status" />
+                               <apex:outputText value="{!service.paServiceState.currentRequestItem.request.pricingRequest.Request_Approval_Status__c}" />
+                           </apex:pageBlockSectionItem>
+                           <apex:pageBlockSectionItem >
+                               <apex:outputText value="Request Reason" />
+                               <apex:outputText value="{!service.paServiceState.currentRequestItem.request.pricingRequest.Request_Reason__c}" />
+                           </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem rendered="{!AND(service.PAServiceState.currentRequest.pricingRequest.isNPCApplicable__c != null,service.PAServiceState.currentRequest.pricingRequest.isNPCApplicable__c > 0)}">   
+                    <apex:outputText value="Net Pricing Status" />
+                    <apex:outputText value="{!service.PAServicestate.currentrequestitem.request.pricingRequest.f_NPC_Callout_Status__c}" />  
+                </apex:pageBlockSectionItem>
+                    </apex:pageBlockSection>
+
+                <!----------------------------------------------------Price Detail------------------------------------------------------->
+<!--         <TJ20150610> Modified Rendered Condition-->
+                <apex:outputpanel style="text-align:left;">
+                    <apex:pageBlockSection title="Pricing Condition Details"
+                        rendered="{!service.paServiceState.currentRequestItem.popUpflag=='details' && NOT(service.paServiceState.currentRequest.pricingRequest.Request_Type__c!='Mass import') || service.paServiceState.currentRequestItem.popUpflag=='ReImport' || service.paServiceState.currentRequestItem.popUpflag=='validate' || service.paServiceState.currentRequestItem.popUpflag=='attachPopUp'}">
+                        <apex:pageBlockSectionItem >
+                            <apex:outputText value="Pricing Condition" />
+                            <apex:outputText value="{!service.paServiceState.currentRequestItem.request.pricingCondition.pricingCondition.Pricing_Condition_Code__c}-{!service.paServiceState.currentRequestItem.request.pricingCondition.pricingCondition.Pricing_Condition__c}" />
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                            <apex:outputText value="Key Combination" />
+                            {!service.paServiceState.currentRequestItem.request.keyCombination.erpKeyCombination.Key_Combination_Code__c}-{!service.paServiceState.currentRequestItem.request.keyCombination.KeyCombinationName}
+                        </apex:pageBlockSectionItem>
+                    </apex:pageBlockSection>
+                </apex:outputpanel>
+
+                <!----------------------------------------------------Scale Detail------------------------------------------------------->
+<!--         <TJ20150610> Modified Rendered Condition-->
+                <apex:outputpanel style="text-align:left;">
+                    <apex:pageBlockSection title="Scale Detail"
+                        rendered="{!(service.paServiceState.currentRequestItem.popUpflag=='details' || service.paServiceState.currentRequestItem.popUpflag=='ReImport' || service.paServiceState.currentRequestItem.popUpflag=='validate' || service.paServiceState.currentRequestItem.popUpflag=='attachPopUp') && service.paServiceState.currentRequestItem.enableScale=='true'}">
+                        <apex:pageBlockSectionItem >
+                            <apex:outputText value="Scale Type" />
+                            <apex:outputText value="{!service.paServiceState.currentRequestItem.request.pricingCondition.pricingCondition.Scale_Type__c}" />
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                            <apex:outputText value="Check Scale" />
+                            <apex:outputText value="{!service.paServiceState.currentRequestItem.request.pricingCondition.pricingCondition.Check_Scale__c}" />
+                        </apex:pageBlockSectionItem>
+                    </apex:pageBlockSection>
+                </apex:outputpanel>
+                
+                
+                
+                <!-- SHIVA n SANJIB Approver Details START -->
+        
+                 <!-- <BB20140321> START Added Added logic to populate Approvers in case of Auto Approval-->
+        <!-- <MS20140421> Added Output Text fields to display Original approver name in case of Sent to Backup Approver -->
+        <div class="priceReq">
+            <apex:pageBlockSection title="Approver Details" rendered="{!service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c == 'Submitted'}">
+                
+                <apex:pageBlockSectionItem >
+                    Approver 1
+                     <apex:outputPanel >
+                        <apex:outputText value="{!if(MID(service.PAServicestate.currentrequest.pricingRequest.approverText__c,FIND('1',service.PAServicestate.currentrequest.pricingRequest.approverText__c)+1,FIND('2',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-FIND('1',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-1)=='null',if(service.PAServicestate.currentrequest.pricingRequest.Auto_Approver_Level1__c == null,'',service.PAServicestate.currentrequest.pricingRequest.Auto_Approver_Level1__c),
+                        MID(service.PAServicestate.currentrequest.pricingRequest.approverText__c,FIND('1',service.PAServicestate.currentrequest.pricingRequest.approverText__c)+1,FIND('2',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-FIND('1',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-1))}" />
+                    </apex:outputPanel>        
+                </apex:pageBlockSectionItem>
+                 <!--AS20201026 updated 'Actual Approver' name to 'Escalted To'-->
+                <apex:pageBlockSectionItem >
+                    <apex:outputPanel rendered="{!if(service.PAServicestate.currentrequest.pricingRequest.Approver1__r.Name!=MID(service.PAServicestate.currentrequest.pricingRequest.approverText__c,FIND('1',service.PAServicestate.currentrequest.pricingRequest.approverText__c)+1,FIND('2',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-FIND('1',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-1) && service.PAServicestate.currentrequest.pricingRequest.Approver1__r.Name!=null,true,false)}">
+                    <apex:outputText value="Escalated To" style="font-family: Arial,Helvetica,sans-serif;font-size: 91%;font-weight: bold;color: #4a4a56;"/>
+                    &nbsp;
+                    <apex:outputText value="{!if(service.PAServicestate.currentrequest.pricingRequest.Approver1__r.Name==null,'',service.PAServicestate.currentrequest.pricingRequest.Approver1__r.Name)}" />
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+               <!-- <MS20140513> Removed item as per new wireframe --> 
+               <!--   <apex:pageBlockSectionItem >
+                 Sent To Backup Approver
+                <apex:outputField value="{!service.PAServicestate.currentrequest.pricingRequest.Sent_to_Backup_Approver__c}" />
+                </apex:pageBlockSectionItem> -->
+                
+                <apex:pageBlockSectionItem >
+                    Approver 2
+                    <apex:outputPanel >
+                        <apex:outputText value="{!if(MID(service.PAServicestate.currentrequest.pricingRequest.approverText__c,FIND('2',service.PAServicestate.currentrequest.pricingRequest.approverText__c)+1,FIND('3',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-FIND('2',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-1)=='null',if(service.PAServicestate.currentrequest.pricingRequest.Auto_Approver_Level2__c == null,'',service.PAServicestate.currentrequest.pricingRequest.Auto_Approver_Level2__c),MID(service.PAServicestate.currentrequest.pricingRequest.approverText__c,FIND('2',service.PAServicestate.currentrequest.pricingRequest.approverText__c)+1,FIND('3',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-FIND('2',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-1))}" /> 
+                    </apex:outputPanel> 
+                </apex:pageBlockSectionItem>
+                <!--AS20201026 updated 'Actual Approver' name to 'Escalted To'-->
+                <apex:pageBlockSectionItem >
+                    <apex:outputPanel rendered="{!if(service.PAServicestate.currentrequest.pricingRequest.Approver2__r.Name!=MID(service.PAServicestate.currentrequest.pricingRequest.approverText__c,FIND('2',service.PAServicestate.currentrequest.pricingRequest.approverText__c)+1,FIND('3',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-FIND('2',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-1) && service.PAServicestate.currentrequest.pricingRequest.Approver2__r.Name!=null,true,false)}">
+                    <apex:outputText value="Escalated To" style="font-family: Arial,Helvetica,sans-serif;font-size: 91%;font-weight: bold;color: #4a4a56;"/>
+                    &nbsp;
+                    <apex:outputText value="{!if(service.PAServicestate.currentrequest.pricingRequest.Approver2__r.Name==null,'',service.PAServicestate.currentrequest.pricingRequest.Approver2__r.Name)}" />
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    Approver 3
+                    <apex:outputPanel >
+                        <apex:outputText value="{!if(MID(service.PAServicestate.currentrequest.pricingRequest.approverText__c,FIND('3',service.PAServicestate.currentrequest.pricingRequest.approverText__c)+1,FIND('4',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-FIND('3',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-1)=='null',if(service.PAServicestate.currentrequest.pricingRequest.Auto_Approver_Level3__c == null,'',service.PAServicestate.currentrequest.pricingRequest.Auto_Approver_Level3__c),MID(service.PAServicestate.currentrequest.pricingRequest.approverText__c,FIND('3',service.PAServicestate.currentrequest.pricingRequest.approverText__c)+1,FIND('4',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-FIND('3',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-1))}" /> 
+                    </apex:outputPanel> 
+                </apex:pageBlockSectionItem>
+                 <!--AS20201026 updated 'Actual Approver' name to 'Escalted To'-->
+                <apex:pageBlockSectionItem >
+                    <apex:outputPanel rendered="{!if(service.PAServicestate.currentrequest.pricingRequest.Approver3__r.Name!=MID(service.PAServicestate.currentrequest.pricingRequest.approverText__c,FIND('3',service.PAServicestate.currentrequest.pricingRequest.approverText__c)+1,FIND('4',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-FIND('3',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-1) && service.PAServicestate.currentrequest.pricingRequest.Approver3__r.Name!=null,true,false)}">
+                    <apex:outputText value="Escalated To" style="font-family: Arial,Helvetica,sans-serif;font-size: 91%;font-weight: bold;color: #4a4a56;"/>
+                    &nbsp;
+                    <apex:outputText value="{!if(service.PAServicestate.currentrequest.pricingRequest.Approver3__r.Name==null,'',service.PAServicestate.currentrequest.pricingRequest.Approver3__r.Name)}" />
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    Approver 4
+                    <apex:outputPanel >
+                        <apex:outputText value="{!if(MID(service.PAServicestate.currentrequest.pricingRequest.approverText__c,FIND('4',service.PAServicestate.currentrequest.pricingRequest.approverText__c)+1,FIND('5',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-FIND('4',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-1)=='null',if(service.PAServicestate.currentrequest.pricingRequest.Auto_Approver_Level4__c == null,'',service.PAServicestate.currentrequest.pricingRequest.Auto_Approver_Level4__c),MID(service.PAServicestate.currentrequest.pricingRequest.approverText__c,FIND('4',service.PAServicestate.currentrequest.pricingRequest.approverText__c)+1,FIND('5',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-FIND('4',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-1))}" /> 
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                 <!--AS20201026 updated 'Actual Approver' name to 'Escalted To'-->
+                <apex:pageBlockSectionItem >
+                    <apex:outputPanel rendered="{!if(service.PAServicestate.currentrequest.pricingRequest.Approver4__r.Name!=MID(service.PAServicestate.currentrequest.pricingRequest.approverText__c,FIND('4',service.PAServicestate.currentrequest.pricingRequest.approverText__c)+1,FIND('5',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-FIND('4',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-1) && service.PAServicestate.currentrequest.pricingRequest.Approver4__r.Name!=null,true,false)}">
+                    <apex:outputText value="Escalated To" style="font-family: Arial,Helvetica,sans-serif;font-size: 91%;font-weight: bold;color: #4a4a56;"/>
+                    &nbsp;
+                    <apex:outputText value="{!if(service.PAServicestate.currentrequest.pricingRequest.Approver4__r.Name==null,'',service.PAServicestate.currentrequest.pricingRequest.Approver4__r.Name)}" />
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    Approver 5
+                    <apex:outputPanel >
+                        <apex:outputText value="{!if(MID(service.PAServicestate.currentrequest.pricingRequest.approverText__c,FIND('5',service.PAServicestate.currentrequest.pricingRequest.approverText__c)+1,FIND('6',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-FIND('5',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-1)=='null',if(service.PAServicestate.currentrequest.pricingRequest.Auto_Approver_Level5__c == null,'',service.PAServicestate.currentrequest.pricingRequest.Auto_Approver_Level5__c),MID(service.PAServicestate.currentrequest.pricingRequest.approverText__c,FIND('5',service.PAServicestate.currentrequest.pricingRequest.approverText__c)+1,FIND('6',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-FIND('5',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-1))}" /> 
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                 <!--AS20201026 updated 'Actual Approver' name to 'Escalted To'-->
+                <apex:pageBlockSectionItem >
+                    <apex:outputPanel rendered="{!if(service.PAServicestate.currentrequest.pricingRequest.Approver5__r.Name!=MID(service.PAServicestate.currentrequest.pricingRequest.approverText__c,FIND('5',service.PAServicestate.currentrequest.pricingRequest.approverText__c)+1,FIND('6',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-FIND('5',service.PAServicestate.currentrequest.pricingRequest.approverText__c)-1) && service.PAServicestate.currentrequest.pricingRequest.Approver5__r.Name!=null,true,false)}" >
+                    <apex:outputText value="Escalated To" style="font-family: Arial,Helvetica,sans-serif;font-size: 91%;font-weight: bold;color: #4a4a56;"/>
+                    &nbsp;
+                    <apex:outputText value="{!if(service.PAServicestate.currentrequest.pricingRequest.Approver5__r.Name==null,'',service.PAServicestate.currentrequest.pricingRequest.Approver5__r.Name)}" />
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+             </apex:pageBlockSection>
+        </div>
+        
+        
+             <!-- SHIVA n SANJIB Approver Details END -->
+                
+
+                <!---------------------------------------------------- Imported Records -------------------------------------------------->
+<!--         <TJ20150610> Modified Rendered Condition-->
+                <apex:outputpanel style="text-align:left;" id="displayTable">
+                    <div id="requests">
+                    <apex:pageBlockSection title="Imported Records"
+                        rendered="{!(service.paServiceState.currentRequestItem.popUpflag=='details' && service.paServiceState.currentRequest.pricingRequest.Request_Type__c!='Mass Import')  || service.paServiceState.currentRequestItem.popUpflag=='ReImport' || service.paServiceState.currentRequestItem.popUpflag=='validate' || service.paServiceState.currentRequestItem.popUpflag=='attachPopUp'}"
+                        columns="1">
+                        <apex:outputPanel >
+                            <apex:panelGrid columns="4" rendered="NOT(service.paServiceState.currentRequest.pricingRequest.Request_Type__c!='Mass import')">
+                                <apex:commandLink action="{!service.paServiceState.currentRequestItem.first}">First</apex:commandlink>
+                                <apex:commandLink action="{!service.paServiceState.currentRequestItem.previous}" rendered="{!service.paServiceState.currentRequestItem.hasPrevious}">Previous</apex:commandlink>
+                                <apex:commandLink action="{!service.paServiceState.currentRequestItem.next}" rendered="{!service.paServiceState.currentRequestItem.hasNext}">Next</apex:commandlink>
+                                <apex:commandLink action="{!service.paServiceState.currentRequestItem.last}">Last</apex:commandlink>
+                            </apex:panelGrid>
+<!--                         <TJ20150106> Passing reqtype also -->
+                            <apex:repeat value="{!service.PAServicestate.currentRequestItem.relatedWrappersList}"
+                            var="wrapper">
+                            <!-- Ver 1.2,1.7 START -->
+                            <!-- --<PA20141221> enabled the scale flag for imported records -->
+                            <c:PARequestItemRelatedList WrapperRecordsDisp="{!wrapper.wrapperList}"
+                                columnsDisp="{!wrapper.keyCombinationcolumns}"
+                                viewMode="{!currentPageLabel}"
+                                selected="{!service.PAServicestate.currentRequestItem.pricingRequestItemId}"
+                                actionAtr="{!businessaction}" typeOfRequest="{!wrapper.priceType}"
+                                typeOfSObjectList="{!wrapper.sObjectTypeName}" showEditLink="{!(service.paServiceState.currentRequestItem.request.pricingRequest.Request_Approval_Status__c<>'Submitted' && service.paServiceState.currentRequestItem.request.pricingRequest.Request_Approval_Status__c<>'Approved')}"
+                                showDeleteLink="{!(service.paServiceState.currentRequestItem.request.pricingRequest.Request_Approval_Status__c<>'Submitted' && service.paServiceState.currentRequestItem.request.pricingRequest.Request_Approval_Status__c<>'Approved')}" showNewLink="false" showExpireLink="false"
+                                showCheckBox="{!service.paServiceState.currentRequestItem.popUpflag=='validate' && service.paServiceState.currentRequestItem.request.pricingRequest.Request_Approval_Status__c<>'Submitted' && service.paServiceState.currentRequestItem.request.pricingRequest.Request_Approval_Status__c<>'Approved' && service.PAServiceState.currentrequest.pricingRequest.createdById==$User.Id}"
+                                showSelectButtons="false"
+                                showChangesSection="false"
+                                enableScale="true"
+                                pricingRecordColumns="{!wrapper.commonColumns}"
+                                pricingRecordSoldToColumns="{!wrapper.soldToColumns}"
+                                scaledFlagColumns="{!wrapper.scaleColumns}" actionShowFlag="{!(service.paServiceState.currentRequestItem.popUpflag=='validate' && service.PAServiceState.currentrequest.pricingRequest.createdById==$User.Id) || wrapper.hasScaledRecordFlag}"
+                                showSoldToColumns="true" showFlag="{!service.paServiceState.currentRequestItem.popUpflag=='validate'}"
+                                dateFieldColumns="{!wrapper.dateColumns}" reqType="{!service.paServiceState.currentRequestItem.request.pricingRequest.Request_Type__c}"
+                                labelName="{!pageName}" currentHeader="{!$Label.Import_Req_Items}">
+                            </c:PARequestItemRelatedList>
+                            <!-- Ver 1.2 END -->
+                            </apex:repeat>
+                            <!--START  Pagination link -->
+                            <apex:panelGrid columns="4" rendered="NOT(service.paServiceState.currentRequest.pricingRequest.Request_Type__c!='Mass import')">
+                                <apex:commandLink action="{!service.paServiceState.currentRequestItem.first}">First</apex:commandlink>
+                                <apex:commandLink action="{!service.paServiceState.currentRequestItem.previous}" rendered="{!service.paServiceState.currentRequestItem.hasPrevious}">Previous</apex:commandlink>
+                                <apex:commandLink action="{!service.paServiceState.currentRequestItem.next}" rendered="{!service.paServiceState.currentRequestItem.hasNext}">Next</apex:commandlink>
+                                <apex:commandLink action="{!service.paServiceState.currentRequestItem.last}">Last</apex:commandlink>
+                            </apex:panelGrid>               
+                            </apex:outputPanel>     
+                   </apex:pageBlockSection>
+                   
+                   <apex:pageBlockSection > 
+                        <apex:outputPanel >
+                            <!-- 
+                            <apex:panelGrid columns="4" rendered="NOT(service.paServiceState.currentRequest.pricingRequest.Request_Type__c!='Mass import')">
+                                <apex:commandLink action="{!service.paServiceState.currentRequestItem.first}">First</apex:commandlink>
+                                <apex:commandLink action="{!service.paServiceState.currentRequestItem.previous}" rendered="{!service.paServiceState.currentRequestItem.hasPrevious}">Previous</apex:commandlink>
+                                <apex:commandLink action="{!service.paServiceState.currentRequestItem.next}" rendered="{!service.paServiceState.currentRequestItem.hasNext}">Next</apex:commandlink>
+                                <apex:commandLink action="{!service.paServiceState.currentRequestItem.last}">Last</apex:commandlink>
+                            </apex:panelGrid>
+
+                            <apex:repeat value="{!service.PAServicestate.currentRequestItem.relatedWrappersList}"
+                            var="wrapper">
+                       
+                            <c:PARequestItemRelatedList WrapperRecordsDisp="{!wrapper.wrapperList}"
+                                columnsDisp="{!wrapper.keyCombinationcolumns}"
+                                viewMode="{!currentPageLabel}"
+                                selected="{!service.PAServicestate.currentRequestItem.pricingRequestItemId}"
+                                actionAtr="{!businessaction}" typeOfRequest="{!wrapper.priceType}"
+                                typeOfSObjectList="{!wrapper.sObjectTypeName}" showEditLink="{!(service.paServiceState.currentRequestItem.request.pricingRequest.Request_Approval_Status__c<>'Submitted' && service.paServiceState.currentRequestItem.request.pricingRequest.Request_Approval_Status__c<>'Approved')}"
+                                showDeleteLink="{!(service.paServiceState.currentRequestItem.request.pricingRequest.Request_Approval_Status__c<>'Submitted' && service.paServiceState.currentRequestItem.request.pricingRequest.Request_Approval_Status__c<>'Approved')}" showNewLink="false" showExpireLink="false"
+                                showCheckBox="{!service.paServiceState.currentRequestItem.popUpflag=='validate' && service.paServiceState.currentRequestItem.request.pricingRequest.Request_Approval_Status__c<>'Submitted' && service.paServiceState.currentRequestItem.request.pricingRequest.Request_Approval_Status__c<>'Approved' && service.PAServiceState.currentrequest.pricingRequest.createdById==$User.Id}"
+                                showSelectButtons="false"
+                                showChangesSection="false"
+                                enableScale="true"
+                                pricingRecordColumns="{!wrapper.commonColumns}"
+                                pricingRecordSoldToColumns="{!wrapper.soldToColumns}"
+                                scaledFlagColumns="{!wrapper.scaleColumns}" actionShowFlag="{!(service.paServiceState.currentRequestItem.popUpflag=='validate' && service.PAServiceState.currentrequest.pricingRequest.createdById==$User.Id) || wrapper.hasScaledRecordFlag}"
+                                showSoldToColumns="true" showFlag="{!service.paServiceState.currentRequestItem.popUpflag=='validate'}"
+                                dateFieldColumns="{!wrapper.dateColumns}" reqType="{!service.paServiceState.currentRequestItem.request.pricingRequest.Request_Type__c}"
+                                labelName="{!pageName}" currentHeader="{!$Label.Import_Req_Items}">
+                            </c:PARequestItemRelatedList>
+                        
+                            </apex:repeat>
+                                                   
+                            <apex:panelGrid columns="4" rendered="NOT(service.paServiceState.currentRequest.pricingRequest.Request_Type__c!='Mass import')">
+                                <apex:commandLink action="{!service.paServiceState.currentRequestItem.first}">First</apex:commandlink>
+                                <apex:commandLink action="{!service.paServiceState.currentRequestItem.previous}" rendered="{!service.paServiceState.currentRequestItem.hasPrevious}">Previous</apex:commandlink>
+                                <apex:commandLink action="{!service.paServiceState.currentRequestItem.next}" rendered="{!service.paServiceState.currentRequestItem.hasNext}">Next</apex:commandlink>
+                                <apex:commandLink action="{!service.paServiceState.currentRequestItem.last}">Last</apex:commandlink>
+                            </apex:panelGrid>      
+                             -->  
+                            
+                                <!-- Start - MG20160913 - Message after clicking on import  -->  
+                                <Div class="helptext" style="color : red;display:none;position:relative">
+                                Please click on "Run Floor Pricing" button to perform the floor price comparison.
+                                </Div>
+                                <!-- End - MG20160913 - Message after clicking on import  --> 
+                            
+                            <apex:outputPanel >
+                                <!-- <TJ20150610> Modified Rendered Condition-->    
+                                <apex:outputPanel rendered="{!service.paServiceState.currentRequestItem.popUpflag=='details' || service.paServiceState.currentRequestItem.popUpflag=='ReImport' || service.paServiceState.currentRequestItem.popUpflag=='validate' || service.paServiceState.currentRequestItem.popUpflag=='attachPopUp'}">
+                                <!-- Ver 1.5 -->
+                                <div class="buttons" style="float:left;text-align:center;width:100%">
+                                    <apex:outputPanel rendered="{!service.paServiceState.currentRequestItem.popUpflag=='details' && (service.paServiceState.currentRequestItem.recordCount > 0)}">
+                                        <apex:outputText value="{!service.paServiceState.currentRequestItem.recordCount} records could not be imported " style="color : blue;"/><br /><br />    
+                                        <apex:commandLink value="View Log" action="/apex/PARejectedReqItemErrorLog" style="color : red;" status="stat">
+                                            <apex:param name="desiredAction" value="viewLog" assignTo="{!businessaction}" />
+                                            <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                                            <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                                        </apex:commandLink>
+                                    </apex:outputPanel>
+
+                                    <apex:outputPanel rendered="{!(service.paServiceState.currentRequestItem.popUpflag=='validate' || service.paServiceState.currentRequestItem.popUpflag=='ReImport') && (service.paServiceState.currentRequestItem.recordCount > 0)}">
+                                        <apex:outputText value="{!service.paServiceState.currentRequestItem.recordCount} records have failed in validation " style="color : blue;"/><br /><br />
+                                    </apex:outputPanel>
+                                    <apex:commandLink value="View Consolidated Log" action="/apex/PARejectedReqItemErrorLog" style="color : red;" status="stat" rendered="{!(service.paServiceState.currentRequestItem.popUpflag=='validate' || service.paServiceState.currentRequestItem.popUpflag=='ReImport') && (service.paServiceState.currentRequestItem.recordCount > 0)}">
+                                        <apex:param name="desiredAction" value="viewLog" assignTo="{!businessaction}" />
+                                        <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                                        <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                                    <br/>    
+                                    </apex:commandLink>
+                                    
+                                                                    
+                                    <!-- PP20140514 START -->
+                                    <div id="buttonsNPC" style="float:left;text-align:center;">
+                                    <apex:commandLink value="{!$Label.Net_Pricing_Button}" action="{!businessComponentAction}" styleClass="btn"  style="text-decoration:none" 
+                                        rendered="{!AND(NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Abandoned'),
+                                            NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Approved'),
+                                            NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Rejected' && service.PAServiceState.currentrequest.pricingRequest.createdById!=$User.Id),
+                                            NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Submitted'),
+                                            NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Cancelled'),
+                                            NOT(service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c=='Floor'),
+                                            NOT(service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c=='Reference'),                                           
+                                            OR(service.paServiceState.currentRequestItem.popUpflag=='validate',service.paServiceState.currentRequestItem.popUpflag=='ReImport'),
+                                            $Profile.Name != 'Viewer') && (service.PAServiceState.currentRequest.pricingRequest.isNPCApplicable__c != null && service.PAServiceState.currentRequest.pricingRequest.isNPCApplicable__c > 0)}" >
+                                        <apex:param name="newPageLabel" value="PAImportReqItems"  assignTo="{!newPageLabel}" />
+                                        <apex:param name="desiredAction" value="bulkNPCCal" assignTo="{!businessAction}"/>
+                                        
+                                    </apex:commandLink>
+                                    </div>
+                                    <div id="buttonsFlrRefView" style="float:left;text-align:center;">   
+                                    <apex:commandLink value="{!$Label.Floor_Reference_Price_View_Button}" styleClass="btn" style="text-decoration:none;width:110px;"  action="{!businessComponentAction}"
+                                    rendered = "{!(service.PAServiceState.currentRequest.pricingRequest.isFloorApplicable__c != null && service.PAServicestate.currentrequest.pricingRequest.isFloorApplicable__c > 0)
+                                    || (service.PAServiceState.currentRequest.pricingRequest.isNPCApplicable__c != null && service.PAServiceState.currentRequest.pricingRequest.isNPCApplicable__c > 0)}">
+                                    <apex:param name="desiredAction" value="PriceView"
+                                            assignTo="{!businessAction}" />
+                                        <apex:param name="newPageLabel" 
+                                            assignTo="{!newPageLabel}" value="PAPricingRequestView" /> 
+                                        <!-- <TJ20140509> Passing Label to Display Navigation Flow Text-->
+                                            <apex:param name="pageName" value="{!IF(CONTAINS(navigationText,'Price Record Volume'),'Price Record Volume',IF(CONTAINS(navigationText,'Price Request View'),'Price Request View',$Label.Import_Req_Items))}" assignTo="{!pageName}"/>
+                                    </apex:commandLink> 
+                                 </div>
+                                 <!-- AV20140515-added sales volume button -->
+                                 <div id="buttonsVol" style="text-align:center;">   
+                                    <apex:commandLink value="{!$Label.Sales_volume_button}" styleClass="btn" style="text-decoration:none;"  action="{!businessComponentAction}" 
+                                    rendered = "{!service.PAServicestate.currentrequest.pricingRequest.isVolumeApplicable__c != null && service.PAServicestate.currentrequest.pricingRequest.isVolumeApplicable__c > 0}">
+                                    <apex:param name="desiredAction" value="volumeView"
+                                            assignTo="{!businessAction}" />
+                                        <apex:param name="newPageLabel" 
+                                            assignTo="{!newPageLabel}" value="PAPricingRequestView" /> 
+                                        <!-- <TJ20140509> Passing Label to Display Navigation Flow Text-->
+                                        <apex:param name="pageName" value="{!IF(CONTAINS(navigationText,'Price Record Volume'),'Price Record Volume',IF(CONTAINS(navigationText,'Price Request View'),'Price Request View',$Label.Import_Req_Items))}" assignTo="{!pageName}"/> 
+                                    </apex:commandLink> 
+                                 </div>
+                                 <div id="buttonsFlrRefView" style="text-align:center;">   
+                                    <apex:commandLink value="{!$Label.Payment_Terms_Button}" styleClass="btn" style="text-decoration:none;"  action="{!businessComponentAction}" 
+                                    rendered = "{!service.PAServicestate.currentrequest.pricingRequest.isPaymentTermsApplicable__c != null && service.PAServicestate.currentrequest.pricingRequest.isPaymentTermsApplicable__c > 0}">
+                                    <apex:param name="desiredAction" value="PayTermsView"
+                                            assignTo="{!businessAction}" />
+                                        <apex:param name="newPageLabel" 
+                                            assignTo="{!newPageLabel}" value="PAPricingRequestView" /> 
+                                        <!-- <TJ20140509> Passing Label to Display Navigation Flow Text-->
+                                        <apex:param name="pageName" value="{!IF(CONTAINS(navigationText,'Price Record Volume'),'Price Record Volume',IF(CONTAINS(navigationText,'Price Request View'),'Price Request View',$Label.Import_Req_Items))}" assignTo="{!pageName}"/> 
+                                    </apex:commandLink> 
+                                 </div>
+                                    <!-- PP20140514 END -->                                   
+                                    <apex:commandLink value="Delete Selected"
+                                        action="{!businessComponentAction}"
+                                        onclick="return confirm('{!$Label.Delete_Selected_Request_Items_Confirmation}');"
+                                        styleClass="btn" style="text-decoration:none"                                        
+                                        rendered="{!AND(NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Abandoned'),
+                                            NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Approved'),
+                                            NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Rejected' && service.PAServiceState.currentrequest.pricingRequest.createdById!=$User.Id),
+                                            NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Submitted'),
+                                            NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Cancelled'),
+                                            OR(service.paServiceState.currentRequestItem.popUpflag=='validate',service.paServiceState.currentRequestItem.popUpflag=='ReImport'),
+                                            $Profile.Name != 'Viewer')}" >
+                                        <apex:param name="desiredAction"
+                                            value="deleteSelectedImport" assignTo="{!businessaction}" />
+                                        <apex:param name="newPageLabel" value="PAImportReqItems"
+                                            assignTo="{!newPageLabel}" />
+                                    </apex:commandLink>
+                                    <!-- VR20130718 - APAC ROLLOUT2-->
+                                    <!-- MG20160913 Changed name of button from Floor Pricing to Run Floor Pricing -->
+                                    <apex:commandLink value="Run Floor Pricing"
+                                        action="{!businessComponentAction}" styleClass="btn"
+                                        style="text-decoration:none"
+                                        rendered="{!AND(NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Abandoned'),
+                                            NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Approved'),
+                                            NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Rejected' && service.PAServiceState.currentrequest.pricingRequest.createdById!=$User.Id),
+                                            NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Submitted'),
+                                            NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Cancelled'),
+                                            NOT(service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c=='Floor'),
+                                            NOT(service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c=='Reference'),
+                                           
+                                            OR(service.paServiceState.currentRequestItem.popUpflag=='validate',service.paServiceState.currentRequestItem.popUpflag=='ReImport'),
+                                            $Profile.Name != 'Viewer')}" >
+                                        <apex:param name="desiredAction"
+                                            value="flagCheck" assignTo="{!businessaction}" />
+                                        <apex:param name="newPageLabel" value="PAImportReqItems"
+                                            assignTo="{!newPageLabel}" />
+                                    </apex:commandLink>
+                                    <apex:commandLink value="Re-Import"
+                                        action="{!businessComponentAction}"
+                                        onclick="return confirm('{!$Label.ReImport_Confirmation}');"
+                                        styleClass="btn" style="text-decoration:none;"
+                                        rendered="{!AND(NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Abandoned'),
+                                            NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Approved'),
+                                            NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Rejected' && service.PAServiceState.currentrequest.pricingRequest.createdById!=$User.Id),
+                                            NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Submitted'),
+                                            NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Cancelled'),
+                                            OR(service.paServiceState.currentRequestItem.popUpflag=='validate',service.paServiceState.currentRequestItem.popUpflag=='ReImport'),
+                                            $Profile.Name != 'Viewer')}" >
+                                        <apex:param name="desiredAction"
+                                            value="reImport" assignTo="{!businessaction}" />
+                                        <apex:param name="newPageLabel" value="PAImportReqItems"
+                                            assignTo="{!newPageLabel}" />
+                                    </apex:commandLink>                                  
+                                    </div> 
+                                    <br/> 
+                                      <!-- Adding approval buttons here for UI -Prachi 7th feb -->
+                                      <apex:outputPanel rendered="{!service.PAServiceState.currentrequest.pricingRequest.Current_Approver__c==$User.Id && service.PAServiceState.currentrequestItem.request.pricingRequest.Request_Approval_Status__c=='Submitted'}">
+                                            
+                                        <div>
+                                           <apex:pageBlockSection columns="2">
+                                               <apex:pageBlockSectionItem >
+                                                   Comments
+                                                    <apex:inputTextArea rows="5" cols="160"
+                                                        value="{!service.PAServiceState.currentRequestItem.approvalWF.appRejComments}" />
+                                                </apex:pageBlockSectionItem> 
+
+                                            </apex:pageBlockSection>  
+                                        </div>
+                                       
+                                       <br />
+                                       <br />
+                                       </apex:outputPanel>
+                                      
+                                        <div class="buttons" style="float:left;text-align:center;position:static;">                             
+                                         <!-- MG20161107 <IS ID-00076073> Mansi - Hide Approve button for BU admins DPP Polymers EMEA -- added rendered condition -->
+                                            <apex:commandLink value="{!$Label.Approve_Button}"
+                                            rendered="{!service.PAServiceState.currentrequest.pricingRequest.Current_Approver__c==$User.Id && service.PAServiceState.currentrequestItem.request.pricingRequest.Request_Approval_Status__c=='Submitted'  && NOT(service.PAServicestate.currentRequest.pricingRequest.BU__c == $Label.BU_Name && service.PAServicestate.currentRequest.pricingRequest.Current_Approver__r.profile.name == $Label.BU_Admin_Profile_Name)}"
+                                                action="{!businessComponentAction}" styleClass="btn"
+                                                style="text-decoration:none;">
+                                                
+                                                <apex:param name="desiredAction" value="approve"
+                                                    assignTo="{!businessAction}" />
+                                                <apex:param name="newPageLabel" value="PAImportReqItems"
+                                                    assignTo="{!newPageLabel}" />
+                                                
+                                            </apex:commandLink>
+                                            <apex:commandLink value="{!$Label.Reject_Button}" rendered="{!service.PAServiceState.currentrequest.pricingRequest.Current_Approver__c==$User.Id && service.PAServiceState.currentrequestItem.request.pricingRequest.Request_Approval_Status__c=='Submitted'}"
+                                                action="{!businessComponentAction}" styleClass="btn"
+                                                style="text-decoration:none;">
+                                                
+                                                <apex:param name="desiredAction" value="reject"
+                                                    assignTo="{!businessAction}" />
+                                                <apex:param name="newPageLabel" value="PAImportReqItems"
+                                                    assignTo="{!newPageLabel}" />
+                                                
+                                            </apex:commandLink>   
+                                             <!-- HL20141017 added detail to render condition to display quit option in request detail -->                         
+                                     <apex:commandLink value="{!$Label.Quit_Button}"   styleClass="btn" style="text-decoration:none" action="{!businessComponentAction}"
+                                        onclick="return confirm('{!$Label.Quit_Request_Confirmation}');"
+                                        rendered="{!service.paServiceState.currentRequestItem.popUpflag=='validate' || service.paServiceState.currentRequestItem.popUpflag=='ReImport' || service.paServiceState.currentRequestItem.popUpflag=='details'}">
+                                    <apex:param name="newPageLabel" 
+                                        assignTo="{!newPageLabel}" value="{!IF(OR(service.PAServicestate.currentrequest.csvString=='Draft',service.PAServicestate.currentrequest.csvString=='Approved',service.PAServicestate.currentrequest.csvString=='Submitted',service.PAServicestate.currentrequest.csvString=='Rejected',service.PAServicestate.currentrequest.csvString=='Recalled',service.PAServicestate.currentrequest.csvString=='Pending'),'PAStatus','PAExistingRequest')}" /> 
+                                    <apex:param name="desiredAction" value="quitImport"
+                                                    assignTo="{!businessAction}" />
+                                    <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                                    <apex:param name="pageName" value="{!IF(OR(service.PAServicestate.currentrequest.csvString=='Draft',service.PAServicestate.currentrequest.csvString=='Approved',service.PAServicestate.currentrequest.csvString=='Submitted',service.PAServicestate.currentrequest.csvString=='Rejected',service.PAServicestate.currentrequest.csvString=='Recalled',service.PAServicestate.currentrequest.csvString=='Pending'),$Label.Import_Req_Items,'')}" assignTo="{!pageName}"/>
+                                    </apex:commandLink>
+                                    
+                                     <apex:commandLink value="{!$Label.Submit_Button}" action="{!businessComponentAction}" styleClass="btn"
+                                        style="text-decoration:none;" onclick="return confirm('{!$Label.Request_Approval_Confirmation}');"
+                                        rendered="{!AND(NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Abandoned'),
+                                            NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Approved'),
+                                            NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Rejected' && service.PAServiceState.currentrequest.pricingRequest.createdById!=$User.Id),
+                                            NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Submitted'),
+                                            NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Cancelled'),
+                                            OR(OR(service.paServiceState.currentRequestItem.popUpflag=='validate',service.paServiceState.currentRequestItem.popUpflag=='ReImport'),
+                                            AND(service.paServiceState.currentRequestItem.popUpflag=='details',service.paServiceState.currentRequest.PricingRequest.Request_Type__c=='Mass Import')),
+                                            $Profile.Name != 'Viewer')}" >
+                                        
+                                        <apex:param name="desiredAction" value="submitCalculation"
+                                            assignTo="{!businessAction}" />
+                                        <apex:param name="newPageLabel" value="PAImportReqItems"
+                                            assignTo="{!newPageLabel}" />
+                                    </apex:commandLink>
+                                    <apex:commandLink value="Abandon"
+                                            action="{!businessComponentAction}" styleClass="btn"
+                                            style="text-decoration:none"
+                                            onclick="return confirm('{!$Label.Abandon_Request_Confirmation}');"
+                                            rendered="{!AND(NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Abandoned'),
+                                            NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Approved'),
+                                            NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Rejected' && service.PAServiceState.currentrequest.pricingRequest.createdById!=$User.Id),
+                                            NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Submitted'),
+                                            NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c=='Cancelled'),
+                                            OR( OR(service.paServiceState.currentRequestItem.popUpflag=='validate',service.paServiceState.currentRequestItem.popUpflag=='ReImport'),
+                                                OR(service.paServiceState.currentRequestItem.popUpflag=='details',service.paServiceState.currentRequest.PricingRequest.Request_Type__c=='Massive Import')
+                                            ),
+                                            $Profile.Name != 'Viewer')}" >
+                                        <apex:param name="desiredAction"
+                                                value="abandonImport" assignTo="{!businessaction}" />
+                                            <apex:param name="newPageLabel" value="PAHome"
+                                                assignTo="{!newPageLabel}" />
+                                        </apex:commandLink>
+                                        <apex:commandLink value="{!$Label.Recall_Button}" styleClass="btn" action="{!businessComponentAction}"
+                                            style="text-decoration:none;"
+                                            onclick="return confirm('{!$Label.Recall_Request_Confirmation}');"
+                                            rendered="{!AND(service.PAServiceState.currentrequest.pricingRequest.Request_Approval_Status__c=='Submitted',NOT(service.PAServicestate.currentrequest.pricingRequest.NPC_Status__c=='Waiting for Net Price'),NOT(service.PAServiceState.currentrequest.pricingRequest.Request_Approval_Status__c=='Abandoned'),NOT(service.PAServiceState.currentrequest.pricingRequest.Request_Approval_Status__c=='Approved'))&&  (service.PAServiceState.currentrequest.pricingRequest.createdById==$User.Id || service.PAServiceState.currentrequest.pricingRequest.On_Behalf_Of__c==$User.Id)}">
+                                            <apex:param name="desiredAction" value="recall"
+                                                assignTo="{!businessAction}" />
+                                            <apex:param name="newPageLabel" value="PAImportReqItems"
+                                                assignTo="{!newPageLabel}" />
+                                        </apex:commandLink>
+                                        <apex:commandLink value="Validate"
+                                            action="{!businessComponentActionForRerender}" styleClass="btn"
+                                            style="text-decoration:none;position:relative;"
+                                            rendered="{!service.paServiceState.currentRequestItem.popUpflag=='details' && service.paServiceState.currentRequest.pricingRequest.Request_Type__c!='Mass Import'}"
+                                            rerender="displayTable,errorMessage" status="stat" oncomplete="showMessage()">
+                                           <!-- MG20160913  Added oncomplete = "showMessage()" in above command link-->
+                                            
+                                            <apex:param name="desiredAction" value="validateImport"
+                                                assignTo="{!businessaction}" />
+                                            <apex:param name="newPageLabel"
+                                                value="PAImportReqItems" assignTo="{!newPageLabel}" />
+                                        </apex:commandLink>
+                                       
+                                      <!-- VR20140220  Uncommented the Reassign Code -->
+                                        <apex:commandLink value="{!IF(service.PAServiceState.currentrequest.pricingRequest.Current_Approver__c==$User.Id,$Label.Delegate_Button,$Label.Reassign_Button)}"
+                                            action="{!businessComponentAction}" styleClass="btn"   
+                                            style="text-decoration:none;" rendered="{!(service.paServiceState.ogItems.isBUAdmin || service.PAServiceState.currentrequest.pricingRequest.Current_Approver__c==$User.Id) && service.PAServiceState.currentrequest.pricingRequest.Request_Approval_Status__c=='Submitted'}">
+                                            
+                                            <apex:param name="desiredAction" value="popupreassign"
+                                                assignTo="{!businessAction}" />
+                                            <apex:param name="newPageLabel" value="PAPricingRequest"
+                                                assignTo="{!newPageLabel}" />
+                                            <!-- <TJ20140509> Passing Label to Display Navigation Flow Text-->
+                                            <apex:param name="pageName" value="{!IF(CONTAINS(navigationText,$Label.Price_Request),$Label.Price_Request,$Label.Import_Req_Items)}" assignTo="{!pageName}"/>
+                                        </apex:commandLink> 
+<!--                                         <TJ20150511> Start -->
+                                        <apex:commandLink value="Send To xls" action="/apex/PAExportScalePrices" styleClass="btn" style="text-decoration:none; color:#484848;text-align:center;" rendered="{!AND(service.PAServiceState.currentrequest.pricingRequest.Request_Approval_Status__c=='Submitted',service.PAServicestate.currentRequestItem.relatedWrappersList.size>0,IF(service.PAServiceState.currentrequest.pricingRequest.Current_Approver__c==$User.Id,true,false))}">
+                                            <apex:param name="Export Req Item" value="false" assignTo="{!service.PAServiceState.currentRequestItem.prItemExp}"/>
+                                            <apex:param name="Export Imp Req Item" value="true" assignTo="{!service.PAServiceState.currentRequestItem.impExp}"/>
+                                        </apex:commandLink>
+<!--                                         <TJ20150511> END -->                                                                                           
+                              </div>
+                                    
+                                </apex:outputPanel>
+                            </apex:outputPanel>
+                        </apex:outputPanel>
+                    </apex:pageBlockSection>
+                    </div>
+                        <!--  Added for massive import -->
+                    <div>
+                    </div>
+                </apex:outputpanel>
+            </apex:pageBlock>
+            </div>
+        </apex:outputPanel>
+        <!-- Attachment section -->
+            <!--         <TJ20150610> START -->
+            <apex:outputPanel styleClass="BackScreenImp" rendered="{!service.paServiceState.currentRequestItem.popUpflag=='attachPopUp'}" layout="block">
+            </apex:outputPanel>
+                <apex:outputPanel styleClass="FrontScreenImp"
+                    rendered="{!service.paServiceState.currentRequestItem.popUpflag=='attachPopUp'}"
+                    layout="block" style="text-align:left;">
+                    <apex:commandLink rendered="{!service.paServiceState.currentRequestItem.popUpFlag=='attachPopUp'}"   >
+                        <apex:image url="{!$Resource.closeButton}" width="15" height="15" style="float:right" />
+                        <apex:param value="{!service.paServiceState.currentRequestItem.popupvalue}" assignTo="{!service.paServiceState.currentRequestItem.popUpFlag}" />
+                        <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                        <apex:param name="pageName" value="stay" assignTo="{!pageName}"/> 
+                    </apex:commandLink>
+                    <apex:pagemessages />
+                    <div class="priceReq">
+                    <apex:pageBlock >
+                        <apex:pageBlockSection title="Notes And Attachment" columns="1" collapsible="false" >
+                            <apex:pageBlockSectionItem >   
+                                <apex:outputText value="Select a file" />
+                                    <apex:inputFile value="{!service.paServiceState.currentRequestItem.document.body}" filename="{!service.paServiceState.currentRequestItem.document.name}" size="40"></apex:inputFile>
+                            </apex:pageBlockSectionItem> 
+                            <br/>
+                            <apex:pageBlockSectionItem >   
+                                <apex:outputText value="Description"/>
+                                <apex:inputText maxLength="80" style="width:380px;" value="{!service.paServiceState.currentRequestItem.document.Description}"/>
+                            </apex:pageBlockSectionItem>
+                            <br/>
+                       </apex:pageblockSection>
+                      </apex:pageBlock>
+                    </div>   
+                        
+                        <div style="text-align:center;padding:10px 0px 10px 2%;">
+                                 <apex:commandLink action="{!businessComponentAction}" value="Upload" styleClass="btn" style="text-decoration:none;" >
+                                    <apex:param name="desiredAction" value="AddtoAttachment" assignTo="{!businessaction}" />
+<!--                                     <apex:param value="details" assignTo="{!service.paServiceState.currentRequestItem.popUpFlag}" /> -->
+                                    <apex:param name="pageName" value="stay" assignTo="{!pageName}"/> 
+                                 </apex:commandLink>
+                                 <apex:commandLink action="{!businessComponentAction}"    value="Cancel" styleClass="btn" style="text-decoration:none;" >
+                                    <apex:param name="desiredAction" value="CancelAddtoAttachment" assignTo="{!businessaction}" />
+                                    <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                                    <apex:param name="pageName" value="stay" assignTo="{!pageName}"/> 
+                                 </apex:commandLink>
+                        </div>
+                                              
+                        </apex:outputPanel>
+                        <br></br>
+                         <!-- Ver 3.0 BR 2013-04-22 : rendered for APAC ROLL OUT--> 
+                        <!-- <apex:pageBlock rendered="{!service.PAServiceState.currentrequest.pricingRequest.Request_Type__c=='Mass Import'}"> -->
+                           <apex:pageBlock >                           
+                           <div class="priceReq">
+                           <br/>
+                                 <apex:outputPanel rendered="{!OR(service.paServiceState.currentRequestItem.popUpFlag=='details',service.paServiceState.currentRequestItem.popUpFlag=='validate',service.paServiceState.currentRequestItem.popUpFlag=='attachPopUp')}">
+                                    <div style="text-align:center;padding:10px 0px 10px 2%;">  
+                                       <apex:commandLink action="{!businessComponentAction}"    value="Attach Document" styleClass="btn" style="text-decoration:none;" >
+                                            <apex:param name="desiredAction" value="selectAttachment" assignTo="{!businessaction}" />
+                                            <apex:param name="newPageLabel" value="PAImportReqItems" assignTo="{!newPageLabel}"/>
+                                            <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                                            <apex:param name="pageName" value="stay" assignTo="{!pageName}"/> 
+<!--                                             <apex:param value="attachPopUp" assignTo="{!service.paServiceState.currentRequestItem.popUpFlag}" /> -->
+                                       </apex:commandLink>
+                                        <apex:commandLink action="{!businessComponentAction}"    value="Delete Document" styleClass="btn" style="text-decoration:none;" >
+                                            <apex:param name="desiredAction" value="deleteSelectedAttachment" assignTo="{!businessaction}" />
+                                            <apex:param name="newPageLabel" value="PAImportReqItems" assignTo="{!newPageLabel}"/>
+                                            <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                                            <apex:param name="pageName" value="stay" assignTo="{!pageName}"/> 
+                                       </apex:commandLink>
+                                    </div>
+                                 </apex:outputPanel>
+
+                               <apex:outputPanel rendered="{!OR(service.paServiceState.currentRequestItem.popUpFlag=='details',service.paServiceState.currentRequestItem.popUpFlag=='validate',service.paServiceState.currentRequestItem.popUpFlag=='reimport',service.paServiceState.currentRequestItem.popUpFlag=='attachPopUp')}">
+                               <apex:pageBlockSection title="Attachment Section" columns="1" >
+  
+                                   <apex:pageblockTable value="{!service.paServiceState.currentRequestItem.attachPAWrapperList}" var="v" columns="5">
+                                       <apex:column rendered="{!(service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c == 'Draft' || service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c == 'Validated'
+                                                                || service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c == 'Recalled' || service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c == 'Submitted'
+                                                                || (service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c == 'Rejected' && service.PAServiceState.currentrequest.pricingRequest.createdById==$User.Id))}">
+                                           <apex:facet name="header">
+                                                 <apex:inputCheckbox value="{!service.paServiceState.currentRequestItem.selectAllAttachments}" id="selAllPRI">
+                                                    <apex:actionSupport event="onclick" action="{!businessComponentActionForRerender}" reRender="selPRI" status="stat">
+                                                        <apex:param name="desiredAction" value="selectAttachmentToDelete" assignTo="{!businessaction}" />
+                                                        <apex:param name="newPageLabel" value="stay" assignTo="{!newPageLabel}" />
+                                                        <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                                                        <apex:param name="pageName" value="stay" assignTo="{!pageName}"/> 
+                                                    </apex:actionSupport>
+                                                </apex:inputCheckbox>
+                                            </apex:facet>
+                                            <apex:inputCheckbox value="{!v.isSelected}" id="selPRI"/>
+                                       </apex:column>       
+
+                                          <apex:column headerValue="File Name"><a href="/servlet/servlet.FileDownload?file={!v.sobjectRecord['id']}" target="_blank" >{!v.sobjectRecord['Name']}</a></apex:column>
+                                          <apex:column headerValue="Description"><apex:outputText value="{!v.sobjectRecord['Description']}"></apex:outputText></apex:column>
+                                          <apex:column headerValue="Added By"><apex:outputText value="{!v.sobjectRecord['CreatedBy.Name']}"></apex:outputText></apex:column>
+                                           
+                                          <apex:column headerValue="Added On">
+                                          <apex:outputtext value="{0,date,dd'/'MM'/'yyyy}">
+                                            <apex:param name="dat"
+                                            value="{!v.sobjectRecord['CreatedDate']}" />
+                                          </apex:outputtext>
+                                      </apex:column>
+                                      
+                                   </apex:pageblockTable>
+                                </apex:pageBlockSection>
+                               
+                                </apex:outputPanel>
+                            </div>  
+                </apex:pageBlock> 
+<!--         <TJ20150610> END-->
+        
+<!-- ------------------------------------------------------------- Approval -------------------------------------------------------->
+
+        
+        
+
+
+            <!-- Multiple approver pop-up -->
+            
+            <apex:outputPanel id="popUPwindow1"
+                rendered="{!service.PAServiceState.currentRequestItem.approvalWF.displayApproverList}"
+                styleClass="BackPage" />
+            <apex:outputPanel id="popUPwindow"
+                rendered="{!service.PAServiceState.currentRequestItem.approvalWF.displayApproverList}"
+                styleClass="FrontPageSoldTo">
+                <apex:panelGrid style="float:right;">
+                    <apex:commandLink action="{!businessComponentAction}">
+                        
+                        <apex:image url="{!$Resource.closeButton}" width="15" height="15"
+                            id="ima" />
+                        <apex:param name="desiredAction" value="closeApproverpopup"
+                            assignTo="{!businessAction}" />
+                        <apex:param name="newPageLabel" value="PAImportReqItems"
+                            assignTo="{!newPageLabel}" />
+                    </apex:commandLink>
+                </apex:panelGrid>
+
+                <apex:pageBlock >
+                
+                <apex:pageBlockSection title="Approval Submission" columns="1">
+                    <apex:pageBlockTable value="{!service.PAServiceState.currentRequestItem.approvalWF.wrapList}"
+                        var="key" style="width:100%">
+                        <apex:column headerValue="Level" style="border-bottom:none;">
+                            <apex:outputText value="{!key.stringMap['intList']}" />
+                        </apex:column>
+                        <apex:column headerValue="Approver List" style="border-bottom:none;">
+                            <!-- rendered="{!key.stringMap['showSelectListFlag'] == 'true'}" -->
+                                <apex:selectList size="1"
+                                    value="{!key.stringMap['selectedUserId']}"
+                                    disabled="{!key.stringMap['editFlag']}"
+                                    rendered="{!key.stringMap['showAutoUser'] == 'false' && NOT(if((key.stringMap['showSelectListFlag'] == 'true'),false, true) && if(key.stringMap['approvalNotReqFlag'] == 'true', true, false))}">
+<!--                                    <apex:actionSupport event="onchange" />-->
+                                    <apex:selectOptions value="{!key.selectApprover}" />
+                                </apex:selectList>
+                                <!-- rendered="{!if( (key.stringMap['showSelectListFlag'] == 'true'), false, true) && if( key.stringMap['approvalNotReqFlag'] == 'true',  false, true)}" -->
+                           <apex:selectList size="1"
+                                    value="{!key.stringMap['selectedAutoUser']}"
+                                    disabled="{!key.stringMap['editFlag']}"
+                                    rendered="{!(key.stringMap['showAutoUser'] == 'true') && NOT(if((key.stringMap['showSelectListFlag'] == 'true'),false, true) && if(key.stringMap['approvalNotReqFlag'] == 'true', true, false))}">
+<!--                                    <apex:actionSupport event="onchange" />-->
+                                    <apex:selectOptions value="{!key.selectApprover}" />
+                                </apex:selectList>
+                      <!-- <apex:outputText value="Auto Approve"
+                                    rendered="{!if( (key.stringMap['showSelectListFlag'] == 'true'), false, true) && if( key.stringMap['approvalNotReqFlag'] == 'true',  false, true)}" />-->
+                                <apex:outputText value="Approval Not Required"
+                                    rendered="{!if( (key.stringMap['showSelectListFlag'] == 'true'), false, true) && if(key.stringMap['approvalNotReqFlag'] == 'true', true, false)}" />
+                            </apex:column>
+                    </apex:pageBlockTable>
+                    </apex:pageBlockSection>
+                    
+                    <div id="multiApprover" style="float:left;text-align:center;padding:20px 0px 10px 30%;">
+                    <apex:commandLink value="{!$Label.Continue_Button}"
+                        action="{!businessComponentAction}" styleClass="btn"
+                        style="text-decoration:none;">
+                        
+                        <apex:param name="desiredAction" value="submitContinue"
+                            assignTo="{!businessAction}" />
+                        <apex:param name="newPageLabel" value="PAImportReqItems"
+                            assignTo="{!newPageLabel}" />
+                    </apex:commandLink>
+                    <apex:commandLink value="{!$Label.Cancel_Button}"
+                        action="{!businessComponentAction}" styleClass="btn"
+                        style="text-decoration:none;">
+                        
+                        <apex:param name="desiredAction" value="closeApproverPopup"
+                            assignTo="{!businessAction}" />
+                        <apex:param name="newPageLabel" value="PAImportReqItems"
+                            assignTo="{!newPageLabel}" />
+                    </apex:commandLink>
+                    </div>
+                </apex:pageBlock>
+            </apex:outputPanel>
+
+
+            <!-- Reassigning Popup -->
+            
+            <apex:outputPanel id="popUPwindowreAssign"
+                rendered="{!service.PAServiceState.currentRequestItem.approvalWF.displayReassignList}"
+                styleClass="BackPage" />
+            <apex:outputPanel id="popUPwindowreAssign1"
+                rendered="{!service.PAServiceState.currentRequestItem.approvalWF.displayReassignList}"
+                styleClass="FrontPageSoldTo">
+                <apex:panelGrid style="float:right;">
+                    <apex:commandLink action="{!businessComponentAction}">
+                        <apex:image url="{!$Resource.closeButton}" width="15" height="15"
+                            id="ima1" />
+                        <apex:param name="desiredAction" value="closereassignpopup"
+                            assignTo="{!businessAction}" />
+                        <apex:param name="newPageLabel" value="PAImportReqItems"
+                            assignTo="{!newPageLabel}" />
+                    </apex:commandLink>
+                </apex:panelGrid>
+
+                <apex:pageBlock >
+                    <apex:pageBlockTable value="{!service.PAServiceState.currentRequestItem.approvalWF.wrapforReassignObjList}"
+                        var="wrapReassign" style="width:350px">
+                        <apex:column headerValue="Level" style="width:50px">
+                            <apex:outputText value="{!wrapReassign.stringMap['Level']}" />
+                        </apex:column>
+                        <apex:column headerValue="Approver Name">
+                            <apex:outputText value="{!wrapReassign.stringMap['userName']}" />
+                            <apex:commandLink rendered="{!wrapReassign.stringMap['userName'] <> NULL && service.PAServiceState.currentRequestItem.approvalWF.request.pricingRequest.Current_Level__c == wrapReassign.stringMap['Level']}">                       
+                                <c:PAUserPopulation selectedBuAtr="{!service.paServiceState.ogItems.selectedBU}"
+                                        levelAtrFromPage="{!wrapReassign.stringMap['Level']}"
+                                        levelAtrFromComp="{!service.PAServiceState.currentRequestItem.approvalWF.selectedLevel}"
+                                        userIdAtr="{!service.PAServiceState.currentRequestItem.approvalWF.selectedUserId}"
+                                        userNameAtr="{!service.PAServiceState.currentRequestItem.approvalWF.selectedUser}"
+                                        salesOrgCodeAtr="{!service.PAServicestate.currentrequest.pricingRequest.Sales_Org_Code__c}"
+                                        distCodeAtr="{!service.PAServicestate.currentrequest.pricingRequest.Dist_Channel_Code__c}"
+                                        divisionCodeAtr="{!service.PAServicestate.currentrequest.pricingRequest.Division_Code__c}"
+                                        assignedToAtr="{!IF(service.PAServiceState.currentrequest.pricingRequest.Current_Approver__c==$User.Id,'delegate','reassign')}"
+                                        displayFiltersAtr="true" displayAtrComp="true"/>
+                                <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                                <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                            </apex:commandLink>
+                            <apex:outputText value="Approval Not Required"
+                                rendered="{!wrapReassign.stringMap['userName'] == ' '}" />
+                        </apex:column>
+                        <apex:column headerValue="Approver Id">
+                            <apex:outputText value="{!wrapReassign.stringMap['userAccessId']}" />
+                        </apex:column>
+                        
+                    </apex:pageBlockTable>
+                    <apex:commandLink value="{!$Label.Save_Button}" action="{!businessComponentAction}"
+                        styleClass="btn" style="text-decoration:none;">
+                        <apex:param name="desiredAction" value=" ReassignedUser"
+                            assignTo="{!businessAction}" />
+                        <apex:param name="newPageLabel" value="PAImportReqItems"
+                            assignTo="{!newPageLabel}" />
+                    </apex:commandLink>
+                    <apex:commandLink value="{!$Label.Cancel_Button}"
+                        action="{!businessComponentAction}" styleClass="btn"
+                        style="text-decoration:none;">
+                        <apex:param name="desiredAction" value="closereassignpopup"
+                            assignTo="{!businessAction}" />
+                        <apex:param name="newPageLabel" value="PAImportReqItems"
+                            assignTo="{!newPageLabel}" />
+                    </apex:commandLink>
+                </apex:pageBlock>
+            </apex:outputPanel>
+
+    </apex:form>
+    <div id="appProcess" >
+        <apex:relatedList list="ProcessSteps" subject="{!service.PAServicestate.currentrequest.pricingRequest.Id}" rendered="{!service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c<>'Draft' && service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c<>'Validated'}"></apex:relatedList>
+    </div>
+    
+    <style type="text/css">
+        .FrontScreenImp {
+            background-color: white;
+            //border-width: 2px;
+            border: 2px solid #63A4C5;
+            z-index: 9999;
+            left: 50%;
+            padding: 10px;
+            position: absolute;
+            width: 500px;
+            margin-left: -250px;
+            top: 150px;
+        }
+        
+        .BackScreenImp {
+            background-color: #696969;
+            opacity: 0.5;
+            filter: alpha(opacity = 50);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 9998;
+            //z-index: 0;
+        }
+        
+        .BackPage {
+            background-color: #696969;
+            opacity: 0.5;
+            filter: alpha(opacity = 50);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 9998;
+        }
+        
+        .FrontPageSoldTo {
+            background-color: white;
+            //border-width: 2px;
+            //border-style: solid;
+            border: 2px solid #63A4C5;
+            z-index: 9999;
+            left: 35%;
+            right: 3%;
+            padding: 10px;
+            position: absolute;
+            top: 15%; //
+            margin-left: -600px;
+            width: 30%;
+          //width:29%;
+        }
+        
+        
+        .spinnerCt {
+        left: 50%;
+        top: 35%;
+        position: absolute;
+        //z-index: 1;
+        z-index: 50;
+        padding: 20px 40px;
+        box-shadow: 0pt 2px 5px rgb(172, 172, 172);
+        border-radius: 1em 1em 1em 1em;
+        border: 1px solid rgb(206, 236, 255);
+        background-color: rgb(206, 236, 255);
+        background-style: solid;
+    }
+    
+    .spinner {
+        padding: 10px 15px 10px 0pt;
+        vertical-align: middle;
+    }
+    
+    .spinnerCt .loadingIndicator {
+        display: inline;
+        font-size: 135%;
+        font-weight: bold;
+    }
+    
+    .mask {
+        width: 100%;
+        height: 100%;
+        background-color: rgb(0, 0, 0);
+        opacity: 0.45;
+        filter: alpha(opacity =     45);
+        position: absolute;
+        z-index: 45;
+        top: 0pt;
+        left: 0pt;
+    }
+.noTableFooter
+    {
+    margin:0px!important;
+    }   
+    
+#meter {border:1px solid #000;width:100px}
+#progress {background:#333;height:10px;width:0%}
+  
+</style>
+    
+    
+</apex:page>

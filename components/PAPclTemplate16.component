@@ -1,0 +1,191 @@
+<apex:component access="global" controller="PAPCLComponent">  
+<apex:stylesheet value="{!$Resource.PDFDocumentStyle}"/>
+  <apex:attribute name="targetObject" type="String" assignTo="{!listofids}" description="The context of the outer page email templates"/>
+     
+  <apex:outputPanel >
+		 <apex:image value="{!$Resource.dupont_logo}" height="75px" width="100px"/>
+ 		<apex:outputText value="Du Pont de Nemours International Sàrl<br/>DuPont Chemicals & Fluoroproducts<br/>2, chemin du Pavillon<br/>P.O. Box 50<br/>CH-1218 Le Grand-Saconnex<br/>
+		Geneva, Switzerland<br/>Tel. +41 22 717 51 11<br/>Fax +41 22 717 54 11 Fluoropolymer Solutions<br/>Fax +41 22 717 61 69 Fluorochemicals" escape="false" style="font-family: Times New Roman,Georgia,Serif; font-size: small; font-weight: normal; color: #B2B2B2; float:right;"></apex:outputText>
+  </apex:outputPanel>
+
+  <br/>
+  <br/>
+  <hr></hr>
+  <br/>							
+  
+<apex:outputPanel style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;">
+  	<apex:repeat value="{!listrequestdetils[0]}" var="b">
+  	<table>
+  
+  		<tr>
+  		<td><b>{!b.Sold_To__c}</b></td>
+  		</tr>
+  	
+  		<tr>
+  		<td>{!b.Street__c}</td>
+  		</tr>
+  
+  		<tr>
+  		<td>{!b.City__c}</td>
+  		</tr>
+  
+  		<tr>
+  		<td style="text-transform:uppercase;">{!b.Country__c}</td>
+  		</tr>
+  
+  	</table>
+   </apex:repeat>
+ </apex:outputPanel> 
+ <apex:outputPanel style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;">
+   		<u><apex:outputText value="Contact:"/></u>&nbsp;&nbsp;<apex:outputText value="{!listofCustomerContacts[0]}"/>
+  		<br/><br/>
+  		<apex:outputText value="Geneva" style="float:right;font-weight: bold;"/>
+  		<apex:outputText value="{0,date,yyyy-MMM-dd }" style="float:right;font-weight: bold;">
+       			<apex:param value="{!TODAY()}" />
+  		</apex:outputText>
+  </apex:outputPanel>  
+  <br/><br/>
+  <center><u><apex:outputText value="PRICE CONFIRMATION LETTER" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: bold;float:center;"/></u></center>
+  
+ <u><apex:outputText value="1. PRODUCT(S)" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: bold;float:left;"/></u>
+ <br/><apex:outputText value="Please find herewith the current terms and conditions/prices agreed by DuPont de Nemours Luxembourg
+							Sàrl. Thank you for choosing our products and services." style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;"/>
+ <br/>
+ <center>
+  <apex:dataTable value="{!listofwrappertables}" var="mList" border="1" cellpadding="4" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;">
+    
+        <apex:column >
+            <apex:outputText value="{!mList.sobjectRecord['Material__c']}-{!mList.sobjectRecord['Material_Code__c']}"/>
+        </apex:column>
+   </apex:dataTable><br/><br/>
+  </center>
+ <apex:outputText value="DuPont’s most current standard Product specifications shall apply." style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;"/>
+<br/><br/> 
+<u><apex:outputText value="2. PRICE(S) AND DURATION OF VALIDITY OF THE PRICE(S)" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: bold;float:left;"/></u>
+ <br/><apex:outputText value="2.1  The prices of the products are" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;"/>
+ <br/>
+    <center>
+  <apex:dataTable value="{!listofwrappertables}" var="mList" border="1" cellpadding="4" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;">
+    
+        <apex:column headerValue="Pricing Condition Name">
+            <apex:outputText value="{!mList.sobjectRecord['Pricing_Condition__c']}"/>
+        </apex:column>
+        
+        <apex:column headerValue="Key Combination Name">
+        	<apex:outputText value="{!IF(mList.sobjectRecord['Material_Code__c'] != NULL, mList.sobjectRecord['Material_Code__c'],'')} {!IF(mList.sobjectRecord['Material__c'] != NULL, mList.sobjectRecord['Material__c'],'')} {!IF(mList.sobjectRecord['Product_Hierarchy__c']!=NULL,mList.sobjectRecord['Product_Hierarchy__c'],'')}"/>
+        </apex:column>
+        
+        <apex:column headerValue="Rate">
+            <apex:outputText value="{!mList.sobjectRecord['Rate__c']}"/>
+        </apex:column>
+        
+        <apex:column headerValue="Unit">
+            <apex:outputText value="{!mList.sobjectRecord['Unit__c']}"/>
+        </apex:column>
+        
+        <apex:column headerValue="Per">
+            <apex:outputText value="{!mList.sobjectRecord['Per__c']}"/>
+        </apex:column>
+        
+        <apex:column headerValue="UoM">
+            <apex:outputText value="{!mList.sobjectRecord['UoM__c']}"/>
+        </apex:column>
+                
+        <apex:column headerValue="Valid From" width="110px"> 
+            <apex:outputText value="{0,date,MMM dd yyyy}">
+            	<apex:param value="{!mList.sobjectRecord['Valid_From__c']}"/>
+            </apex:outputText>
+        </apex:column>
+        
+        <apex:column headerValue="Valid To" width="110px">
+        	<apex:outputText value="{0,date,MMM dd yyyy}">
+            	<apex:param value="{!mList.sobjectRecord['Valid_To__c']}"/>
+            </apex:outputText> 
+        </apex:column>
+        
+    </apex:dataTable><br/><br/><br/>
+    </center>
+ <apex:outputText value="Prices defined in this clause are VAT excluded and valid for the minimum purchased volume indicated." style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;"/>
+ <br/><br/>
+ <u><apex:outputText value="3. ORDERING PROCESS" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: bold;float:left;"/></u>
+ <br/><apex:outputText value="3.1  An order for the following quarter should be placed before the end of the preceding quarter via the DuPont Customer Service group." style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;"/>
+ <br/><apex:outputText value="3.2  At reception of your formal order, an Order Acknowledgment will be issued to confirm the transaction (and in particular the availability of product and the date of delivery). The agreement between the parties becomes binding upon the issuance of said Order Acknowledgment." style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;"/>
+ <br/><br/> 
+ <u><apex:outputText value="4. DELIVERY AND FREIGHT" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: bold;float:left;"/></u>
+ <br/><apex:outputText value="The Product shall be delivered [TOS] and the shipment should be delivered to or picked-up" escape="false" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;"/>
+ <br/>
+ <apex:outputPanel style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;">
+  	<apex:repeat value="{!listrequestdetils[0]}" var="b1">
+  	<table>
+  
+  		<tr>
+  		<td><b>{!b1.Sold_To__c}</b></td>
+  		</tr>
+  	
+  		<tr>
+  		<td>{!b1.Street__c}</td>
+  		</tr>
+  
+  		<tr>
+  		<td>{!b1.City__c}</td>
+  		</tr>
+  
+  	</table>
+   </apex:repeat>
+ </apex:outputPanel> 
+ <br/><br/>
+ <u><apex:outputText value="5. PAYMENT TERMS" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: bold;float:left;"/></u>
+ <br/>
+   <apex:repeat value="{!listrequestdetils[0]}" var="b2">
+        <table width="500px" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;">
+            <tr>
+			  <td width="200px"><b>Payment terms:</b></td>
+			  <td width="300px" text-align="left">{!b2.Terms_Of_Payment__c}</td>
+		    </tr>
+		</table>
+   </apex:repeat>
+ <br/><br/>
+ <u><apex:outputText value="6.  ENTIRETY" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: bold;float:left;"/></u>
+ <br/><apex:outputText value="This Price Confirmation constitutes the entire understanding between DuPont and your Company regarding the offer referred above and is subject to the Order Acknowledgment for all other terms and conditions including availability of product and date of delivery." style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;"/>
+ <br/><br/>
+ <u><apex:outputText value="7.  GENERAL CONDITIONS OF SALE" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: bold;float:left;"/></u>
+<br/><apex:outputText value="Other conditions than those agreed hereunder shall be those described in the attached General Conditions of Sale of DuPont.<br/>Thank you for your continued interest in DuPont Chemicals and Fluoroproducts." escape="false" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;"></apex:outputText>
+ <br/><br/>
+ <apex:outputText value="Approved by:" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: bold;float:left;"/>
+ <br/>
+<apex:outputText rendered="{!onBehalfOfUser == null}" value="{!$User.FirstName} {!$User.LastName}" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;"/>
+<apex:outputText rendered="{!onBehalfOfUser != null}" value="{!onBehalfOfUser}" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;"/>
+  
+ <br/>
+ <apex:outputText value="DIsàrl" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: bold;float:left; page-break-after:always;"/>
+
+<br/><br/>
+<center><apex:outputText value="TERMS OF CONDITIONS OF SALE" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: bold;float:center;"/></center>
+<br/>
+<center><apex:outputText value="DuPont de Nemours International Sàrl" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: bold;float:center;"/></center>
+<apex:outputPanel style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;">
+1.	These Terms and Conditions of Sale (hereinafter referred to as “Conditions of Sale”) shall apply exclusively; Seller does not accept any conditions of Buyer which conflict with or differ from these Conditions of Sale unless Seller has expressly agreed, in writing, to their applicability. These Conditions of Sale shall also apply exclusively when Seller, knowing that the conditions of Buyer conflict with or differ from these Conditions of Sale, delivers ordered goods to Buyer without expressly repudiating Buyer’s conditions. Any agreement between Buyer and Seller which conflicts with or differs from these Conditions of Sale shall have a binding effect only if agreed upon in writing. These Conditions of Sale shall also apply to all future business between Buyer and Seller. In addition to these Conditions of Sale, the most recent version of the INCOTERMS of the International Chamber of Commerce in Paris shall apply to all cross-border transactions.<br/> 
+2.	Goods which are to be shipped within thirty (30) days from the date of Seller's order acknowledgement shall be invoiced at the price quoted by Seller. The price of any such goods which are to be shipped more than thirty (30) days after the date of the order acknowledgement may be subject to price adjustments as communicated by Seller. Such adjustments shall be applicable to goods shipped after their effective date unless, prior to the said date, Buyer shall cancel its order as to the undelivered balance of goods to which the price adjustment applies. Seller shall not exercise the right detailed above where shipment is delayed through its fault.<br/> 
+3.	Unless specifically agreed otherwise in writing, Seller's terms of payment shall be thirty (30) days from the date of invoice. Non-compliance with Seller's terms of payment shall constitute default without further reminder. Invoices not paid when due are subject to a late payment charge in the amount of eight percent (8%) over the relevant one month Euromarket rate. Seller reserves the right to claim further damages. In the event Buyer fails to comply with the terms of payment, or in case Seller shall have indications that Buyer’s credit standing is deteriorated, Seller may at its sole discretion either demand payment of all outstanding balances whether due or not and/or cancel all outstanding orders and decline to make further deliveries except upon receipt of cash or satisfactory security. Seller expressly reserves the right to rescind the agreement covering the sale of the goods in the case of Buyer’s default with respect to the payment of the price.<br/>
+4.	Seller reserves full title to the goods delivered until the corresponding invoices are paid in full. Title in the goods shall transfer to Buyer only upon full payment of the corresponding invoice. As from delivery, Buyer shall be responsible and answerable for any and all loss or damage to the goods, or caused by the goods. Prior to transfer of title in any goods, Buyer shall act as a trustee, keeping such goods safe on Seller’s behalf and storing them in a manner which makes it evident that Seller owns them. If the retention of title has no legal effect in the country of Buyer, Buyer shall utilize appropriate legal instruments and/or procedures to provide equivalent security, and inform and support Seller accordingly. Buyer may process and/or resell the goods in the course of ordinary business provided that it is prepared and able to correctly meet its obligations towards Seller. This authorization shall be deemed automatically rescinded in relation to goods in possession of Buyer at the time the invoice pertaining to such goods becomes overdue.  In the event Buyer is overdue on payments to Seller, Buyer shall grant access to Seller’s representatives to enable them to determine quantities of goods remaining in storage, and organize the removal of such goods. Prior to transfer of title in the goods, Buyer shall not pledge or encumber the goods or grant any other form of lien on the goods.<br/>
+5.	Unless otherwise agreed in writing, Seller reserves the right to select the mode of transportation and the carriers to the point of delivery. Buyer shall bear the cost of special transportation arrangements requested by it.<br/>  
+6.	Returnable product carriers or containers delivered but not sold hereunder are the property of Seller and Buyer agrees that it will return them undamaged, and at his sole expense,  to the destination designated by Seller within the period specified by Seller. Any deposit made by Buyer on such product carriers or containers shall be forfeited in the event of failure to return them undamaged within the specified period. Where no deposit is required, Buyer agrees to reimburse Seller for the value of any such product carriers or containers damaged or not returned within the specified period. Seller's count and rejection of damaged returnable product carriers and containers shall be accepted as final.<br/> 
+7.	Unless Buyer objects promptly in writing, but not later than fourteen (14) days after Buyer’s receipt of the goods, the weights, numbers of units and/or volumes as determined by Seller shall be deemed correct and shall be relevant for invoicing.<br/>  
+8.	Should Buyer fail to take the goods in accordance with the terms of delivery originally specified by Seller and thereby enter in default of acceptance, Seller may at its option postpone the delivery or cancel the sale of the said goods without prior notice to Buyer; and in either case Seller shall be entitled to receive compensation for any resulting damages suffered. Such postponement or cancellation shall not affect any remaining portion of the relevant order.<br/>
+9.	Seller warrants that the goods sold hereunder shall meet Seller’s specifications in respect of such goods. Buyer assumes all risk and liability for results obtained by the use of the goods whether used singly or in combination with other products; and acknowledges and accepts that Seller offers no warranty as to the merchantability and fitness for any particular purpose of the goods. The warranty stated above is given in respect of goods of first-grade quality only and shall not apply to any waste or goods sold as sub-standard by Seller.<br/> 
+10.	Seller warrants that the goods delivered hereunder will not infringe the claims of any Swiss patent covering the goods. No further patent warranty is made.<br/> 
+11.	No claim of any kind, whether as to goods delivered or for non-delivery of the goods, shall be greater in amount than the purchase price of the goods in respect of which such claim is made. Seller accepts no liability for any indirect or consequential loss, or loss of profit. Buyer shall notify Seller in writing of any apparent defects immediately but latest within eight (8) days of receipt of the goods, specifying the nature and extent of the defect. Hidden defects have to be notified in writing immediately after discovery and within the statutory limitation period for warranty claims. Failure to examine the goods for defects and/or failure to notify Seller of the defects within the aforementioned time limits shall be deemed acceptance of the goods. In the event of a valid claim by Buyer, Seller shall have the option of repairing or replacing the defective goods or of granting Buyer an appropriate price reduction. Goods subject to a claim shall not be returned to Seller or otherwise disposed of without Seller's permission. A claim in relation to non-delivery of goods shall be notified to Seller in writing latest within eight (8) days of the scheduled delivery date.<br/>
+12.	Any technical information furnished by Seller with reference to the use of the goods and/or any of its products is given free of charge and Seller assumes no obligation or liability in respect of any information given or any results obtained. No technical information made available by Seller shall be construed to form part of a specification in terms of Art. 9 hereof, unless explicitly otherwise agreed. Buyer shall use all information received at its own risk.<br/> 
+13.	Any failure by either party to perform or timely perform any obligations hereunder caused by any disruption of operation,  any shortfall of a supplier of Seller, energy-, raw material- or auxiliary product–shortages, acts or directives of authorities, traffic and shipping disturbances, where such events were not foreseeable; as well as any strikes, lockouts, and other force majeure events, shall release the affected party from its obligation to deliver or accept goods affected thereby for the duration of the event. If such release delays delivery or acceptance of goods by more than one (1) month, the quantities thus affected may be eliminated without liability of either party, but the rights and obligations of each party shall otherwise remain unaffected.<br/> 
+14.	If, for any reason, Seller is unable to supply the total demand of goods ordered, Seller may allocate its available supply of the goods among any or all purchasers or users (including Seller and its affiliates) or make partial shipments on such basis as it may deem fair and practical without liability for any failure of performance which may result therefrom.<br/> 
+15.	The agreement covering the sale of the goods may not be assigned or transferred by Buyer, in whole or in part, except with the written consent of Seller.<br/> 
+16.	Seller conducts its business in accordance with the DuPont Code of Conduct. Buyer acknowledges it is familiar with the content thereof and undertakes to comply therewith it in its commercial relationship with Seller and in its dealings in relation to goods supplied by Seller. In particular, Buyer shall comply with all applicable and relevant anti-bribery laws, export control regulations and economic sanctions.<br/>
+17.	As part of the sale of goods hereunder, Seller may collect, use and disclose Personal Information about Buyer including company name, address, banking and credit information as well as name, phone number, email address and other contact details of natural persons within Buyer's organization and Buyer's contractors. Seller may share Personal Information with its affiliates and selected third parties around the world in order to complete the sale of goods, as described in Seller’s privacy statement. http://www2.dupont.com/DuPont_Home/en_US/privacy.html.<br/>
+18.	The contractual relationship between Seller and Buyer, including these Conditions of Sale shall be subject to and construed in accordance with the laws of Switzerland, without reference to its conflict of laws principles. The United Nations Convention on Contracts for the International Sale of Goods (CISG) shall not be applicable to the sale of goods hereunder. THE COURTS OF GENEVA, subject to appeal to the Swiss Federal Tribunal, or, at plaintiff’s option, the courts of the defendant’s principal place of business shall have jurisdiction over any controversy which may arise hereunder unless the parties agree otherwise in writing.<br/> 
+
+
+La VERSION FRANCAISE de ces conditions de vente peut être demandée au Vendeur.
+Die DEUTSCHE FASSUNG dieser allgemeinen Geschaftsbedingungen ist auf Anfrage erhaltlich.
+
+</apex:outputPanel>
+ </apex:component>

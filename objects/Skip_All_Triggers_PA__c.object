@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>Merge &amp; Spin: To skip all trigger logic while data load</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Is_skip_trigger__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>To skip trigger logic value should be true.</description>
+        <label>Is skip trigger</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Skip All Triggers PA</label>
+    <visibility>Public</visibility>
+</CustomObject>

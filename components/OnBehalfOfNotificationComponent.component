@@ -1,0 +1,65 @@
+<apex:component access="global" controller="PARelatedList">
+	<apex:attribute description="PR ID for Email Tempalte" type="String"
+		name="pricingRequest" assignTo="{!templatePricingRequestId}" />
+	
+
+	<apex:repeat value="{!wrapperList1}" var="v">
+	{!v.stringMap['priceType']} <br/>
+	<table border="2">
+        <tr>
+			<apex:repeat value="{!v.fieldSetList}" var="r">
+			   <th><b>{!r.label}</b></th>
+		    </apex:repeat>
+		    
+	        <apex:repeat value="{!commonColumns}" var="r">
+		        <th><b>{!r.label}</b></th>
+	        </apex:repeat>
+	        
+		     
+	        <apex:variable value="Quantity" var="r" rendered="{!v.sObjectList[0].Quantity__c != null}">
+	        	<th><b>
+	        		Quantity
+	        	</b></th>
+	        </apex:variable> 
+		    
+		    <!-- AJ20150727 Added New Rate -->
+		    <apex:variable value="Rate" var="r">
+	        	<th><b>
+	        		New Rate
+	        	</b></th>
+	        </apex:variable> 
+		    
+		    <apex:repeat value="{!dateColumns}" var="r">
+			        <th><b>{!r.label}</b></th>
+		    </apex:repeat>  
+		</tr>
+		
+		<tr>
+		  <apex:repeat value="{!v.fieldSetList}" var="r">
+				<td>{!BLANKVALUE(v.sObjectList[0][r],'--')}</td>
+		  </apex:repeat>
+		  
+		   <apex:repeat value="{!commonColumns}" var="r">
+				<td>{!BLANKVALUE(v.sObjectList[0][r],'--')}</td>
+		  </apex:repeat>
+		  
+		  <apex:variable value="{!v.sObjectList[0].Quantity__c}" var="r" rendered="{!v.sObjectList[0].Quantity__c != null}">
+		  		<td> {!r} </td>
+		  </apex:variable> 
+		  
+		  <!-- AJ20150727 Added functionality to display New Rate -->
+		  <apex:variable value="{!v.sObjectList[0].New_Rate__c}" var="r">
+		  		<td> {!r} </td>
+		  </apex:variable> 
+		  
+		  <apex:repeat value="{!dateColumns}" var="r">
+				<td>{!TEXT(v.sObjectList[0][r])}</td>
+		  </apex:repeat>
+		</tr>
+          
+	</table>
+
+
+	</apex:repeat>
+	
+</apex:component>

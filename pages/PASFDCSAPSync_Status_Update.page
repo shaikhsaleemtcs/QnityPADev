@@ -1,0 +1,38 @@
+<!-- 
+ * Name      :   PASFDCSAPSync_AssignedTo_Update
+ * Description  :   This Page will display the status, description to field for updating multiple records
+ * Author      :   Infosys Limited <GT20150420>
+ * Created Date :   20 April 2015
+ *
+ * Version   Modified Date     Modified By                Modification
+ *
+ * ---------------------------------------------------------------------------------------------------- 
+ *
+ -->
+<apex:page standardController="SFDC_SAP_Price_Sync__c" recordSetVar="SFDC SAP Sync" >
+<apex:pagemessage severity="info"  strength="2" summary="{!$Label.Mass_Update_notification}"></apex:pagemessage>
+ <apex:form >
+     <apex:pageBlock >
+     <apex:pageBlockSection columns="1" title="{!$Label.Mass_Status_Update}">
+     
+          <apex:pageblockSectionItem >
+          
+          <apex:outputText > Status</apex:outputText>
+          <apex:inputField value="{!SFDC_SAP_Price_Sync__c.Status__c}"/>
+         
+         </apex:pageblockSectionItem>
+        
+         <apex:pageblockSectionItem >
+          
+          <apex:outputText > Corrective Action </apex:outputText>
+          <apex:inputField value="{!SFDC_SAP_Price_Sync__c.Corrective_Action__c}"/>
+        </apex:pageblockSectionItem>
+    
+        <apex:pageblockSectionItem >
+            <apex:commandButton action="{!save}" value="Save"/>
+            <apex:commandButton action="{!cancel}" value="Cancel"/>
+        </apex:pageblockSectionItem>
+    </apex:pageBlockSection>
+    </apex:pageBlock>
+  </apex:form>
+</apex:page>

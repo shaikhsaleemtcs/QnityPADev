@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Organizational Group Users</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Organizational Group Users</value>
+    </caseValues>
+    <fields>
+        <label><!-- Access Level --></label>
+        <name>Access_Level__c</name>
+        <picklistValues>
+            <masterLabel>Read</masterLabel>
+            <translation><!-- Read --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Read-Write</masterLabel>
+            <translation><!-- Read-Write --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Business --></label>
+        <name>Business__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <help><!-- This is the pre-split original 18 digit Salesforce ID of this record that came from the original One Dupont Salesforce instance before the business units were separated. Its is case insensitive and unique. --></help>
+        <label><!-- Legacy Pricing Util SFID --></label>
+        <name>Legacy_Pricing_Util_SFID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Novus External Id --></label>
+        <name>Novus_External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Organizational Group --></label>
+        <name>OrgGroup__c</name>
+        <relationshipLabel><!-- Organizational Group Users --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Organizational Group Item --></label>
+        <name>Organizational_Group_Item__c</name>
+        <relationshipLabel><!-- Organizational Group Users --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- PA Notify opt-in --></label>
+        <name>PA_Notify_opt_in__c</name>
+    </fields>
+    <fields>
+        <label><!-- Related Public Group Id --></label>
+        <name>Related_Public_Group_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Related User --></label>
+        <name>Related_User__c</name>
+        <relationshipLabel><!-- Organizational Group Users --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Sales Org Code --></label>
+        <name>Sales_Org_Code__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

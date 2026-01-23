@@ -1,0 +1,268 @@
+<apex:component controller="PAPHSelection">
+	<apex:attribute name="PHAtr" description="selecetd PH" type="string" />
+	<apex:attribute name="BUFromPageAtr" description="selecetd BU"
+		type="string" assignTo="{!selectedBUFromPage}" />
+	<apex:attribute name="KCFromPageAtr" description="selecetd KC"
+		type="string" assignTo="{!KCFromPage}" />
+	<apex:attribute name="NewMaterialAtr" description="New Material/Existing"
+		type="string" />
+	<apex:attribute name="singleSelectAtr" description="PH single selection " type="boolean"/>
+	<apex:attribute name="kcphHelp" description="Help Link Label" type="string"/>
+
+   <style>
+        .headertext{font-size:15px;height:20px;margin-bottom:1px;padding:5px;border:solid 1px;border-color:#6E96B2; background-color:#E5F3FC;font-weight:bold;text-align:left;}
+   </style>
+   
+	<!-- script to pass value from PH component to Material component and To Page -->
+	<script>
+         function passFromPHComponent(source,target,source1,target1,source2,target2)
+         {
+           document.getElementById(target).value = document.getElementById(source).value;
+           document.getElementById(target2).value = document.getElementById(source2).value;
+           document.getElementById(target1).value = document.getElementById(source1).value;
+         }
+     </script>
+     <style type="text/css">
+        .pbTitle {
+            white-space: nowrap;
+        }
+    </style>
+
+	<!--hidden input field to pass the PH value to page using script and id   -->
+	<apex:inputHidden id="getField" rendered="true" value="{!filter_PH}" />
+	<apex:inputHidden id="getPHDesc" rendered="true" value="{!completePH}" />
+	<apex:inputHidden id="getLastPHLevelSelected" rendered="true" value="{!lastPHLevelSelected}" />
+	<!-- 
+    <apex:actionFunction name="populatePHMethod" action="{!populatePHMethod}" reRender="pgBlkComp">
+    <apex:param name="level" value="" assignTo="{!level}"/>
+    </apex:actionFunction>
+     -->
+	<apex:outputPanel >
+		<apex:commandLink action="{!displaypopUpWindow}" status="stat"
+			reRender="myForm">
+			<apex:image id="Image2" url="{!$Resource.LookUpImage}" />
+		</apex:commandLink>
+	</apex:outputPanel>
+
+	<!---PH PopUp--->
+	<apex:outputPanel id="PHpopUP2" rendered="{!displayPH}"
+		styleClass="BackPage"></apex:outputPanel>
+	<apex:outputPanel id="PHpopLoading" rendered="{!displayPH}"
+		styleClass="FrontPagePH">
+
+		<apex:panelGrid style="float:right;">
+			<apex:commandLink action="{!closeWindow}">
+				<apex:image url="{!$Resource.closeButton}" width="15" height="15" />
+			</apex:commandLink>
+		</apex:panelGrid>
+		<apex:pagemessages />
+		
+		<div class="headertext">
+               Product Hierarchy Selection
+        </div>
+        
+<!--	<TJ20140521> Changed Page Label-->		
+		<apex:pageBlock id="pgBlkComp">
+			<apex:commandLink value="Help" action="{!helpLink}" style="float:right;" target="_blank">
+    				<apex:param name="Help" value="Key Combination Selection" assignTo="{!label}"/>
+    		</apex:commandLink>
+    		<br/><br/>
+		<apex:pageBlockSection title="Search Criteria" collapsible="false" columns="2">
+            <apex:pageblockSectionItem >
+                <apex:outputPanel >
+                <apex:outputText value="PH Code "></apex:outputText>
+               
+                <apex:commandLink title="Please use wild card search." style="align:center;">
+                        <apex:image url="{!$Resource.CustomHelpText}"/>
+                        </apex:commandLink>
+                </apex:outputPanel>
+                <apex:inputText id="getPHId" value="{!PHCodeInput}">
+                </apex:inputText> 
+            </apex:pageblockSectionItem>
+            
+            <apex:pageblockSectionItem >
+                <apex:outputPanel >
+                <apex:outputText value="Business Description"></apex:outputText>
+                &nbsp;
+                <apex:commandLink title="Please use wild card search." style="align:center;">
+                        <apex:image url="{!$Resource.CustomHelpText}"/>
+                        </apex:commandLink>
+                </apex:outputPanel>
+                <apex:inputText value="{!PHDescInput}"></apex:inputText> 
+            </apex:pageblockSectionItem>
+            
+            <apex:pageblockSectionItem >
+                <apex:outputText value="PH Level"></apex:outputText>
+                <apex:outputpanel >
+                    <apex:selectList value="{!PHLevelInput}" multiselect="true" size="5">
+                        <apex:selectoption itemlabel="--Select--" itemvalue="--Select--"/> 
+                        <apex:selectoption itemlabel="1" itemvalue="1" rendered="{!IF(requiredPHLength>=2,true,false)}"/>
+                        <apex:selectoption itemlabel="2" itemvalue="2" rendered="{!IF(requiredPHLength>=4,true,false)}"/>
+                        <apex:selectoption itemlabel="3" itemvalue="3" rendered="{!IF(requiredPHLength>=6,true,false)}"/>
+                        <apex:selectoption itemlabel="4" itemvalue="4" rendered="{!IF(requiredPHLength>=8,true,false)}"/>
+                        <apex:selectoption itemlabel="5" itemvalue="5" rendered="{!IF(requiredPHLength>=10,true,false)}"/>
+                        <apex:selectoption itemlabel="6" itemvalue="6" rendered="{!IF(requiredPHLength>=12,true,false)}"/>
+                        <apex:selectoption itemlabel="7" itemvalue="7" rendered="{!IF(requiredPHLength>=14,true,false)}"/>
+                        <apex:selectoption itemlabel="8" itemvalue="8" rendered="{!IF(requiredPHLength>=16,true,false)}"/>
+                        <apex:selectoption itemlabel="9" itemvalue="9" rendered="{!IF(requiredPHLength>=18,true,false)}"/>  
+                    </apex:selectList>
+                </apex:outputpanel>
+                 
+            </apex:pageblockSectionItem>
+        </apex:pageBlockSection>
+			
+			<apex:pageBlockSection >
+				<center>
+					<apex:outputPanel >
+						<apex:commandLink value="{!$Label.Search_Button}" action="{!action}" styleClass="btn" style="text-decoration:none;">
+							<apex:param value="SearchPH" assignTo="{!desiredAction}" />
+						</apex:commandLink>
+						<apex:commandLink value="{!$Label.Cancel_Button}" action="{!closeWindow}"  styleClass="btn" style="text-decoration:none;"/>
+					</apex:outputPanel>
+				</center>
+			</apex:pageBlockSection>
+		
+			<!--<TJ> -->
+			
+			<apex:pageBlockSection title="Search Results" collapsible="false" id="PageBlockSec1" rendered="{!IF(phSearchResult != null && phSearchResult.size > 0, true, false) && displayTableBoolean}">
+			<br/>
+			<apex:outputPanel rendered="{!IF(phSearchResult != null, true, false) && displayTableBoolean && IF(singleSelectAtr == false, true, false)}" style="float:center;margin-left:10%;">
+		    			<apex:commandLink value="{!$Label.Save_and_Close}" action="{!dosearch}"
+							oncomplete="passFromPHComponent('{!$Component.getField}','{!$Component.targetField}','{!$Component.getPHDesc}','{!$Component.targetPHDesc}','{!$Component.getLastPHLevelSelected}','{!$Component.targetLastPHLevelSelected}')"
+							reRender="myForm" status="stat"  styleClass="btn" style="text-decoration:none;">
+								<apex:param value="SaveAndCLose" assignTo="{!desiredAction}" />
+						</apex:commandLink>
+						<apex:commandLink value="{!$Label.Save_and_Continue}" action="{!dosearch}"  styleClass="btn" style="text-decoration:none;">
+								<apex:param value="SaveAndContinue" assignTo="{!desiredAction}" />
+						</apex:commandLink>
+						<apex:commandLink value="{!$Label.Cancel_Button}" action="{!closeWindow}"  styleClass="btn" style="text-decoration:none;">
+						</apex:commandLink>
+						
+					</apex:outputPanel>
+					<br/>
+					
+			<apex:outputPanel style="float:center; margin-right:30%;">
+        	   		<table class="list" border="0" cellSpacing="0" cellPadding="0" style="width: 500px;" id="listPH">
+        			<thead class="rich-table-thead">
+        				<tr>
+							<th class="" colSpan="30" scope="colgroup"></th>
+						</tr>
+	        			<tr>
+       						<th  class="headerRow"  colSpan="1" scope="col">
+								<apex:inputCheckBox value="{!selectAllFlag}" id="selAll" rendered="{!IF(singleSelectAtr = false, true, false)}">
+									<apex:actionSupport event="onclick" reRender="PageBlockSec1" status="stat" action="{!action}">
+										<apex:param value="selectAll" assignTo="{!desiredAction}"/>
+									</apex:actionSupport>
+								</apex:inputCheckbox>
+							</th>
+							<th  class="headerRow"  colSpan="1" scope="col">PH Code</th>
+							<th  class="headerRow"  colSpan="1" scope="col">PH Level</th>
+							<th  class="headerRow"  colSpan="1" scope="col">Business Description</th>
+						</tr>
+        			</thead>
+        			
+        			<apex:repeat value="{!phSearchResult}" var="v">
+
+						<tr class="dataRow even first last"> 
+							<td class="dataCell" colSpan="1">
+								<apex:inputCheckBox value="{!v.isSelected}" id="sel" rendered="{!IF(singleSelectAtr = false, true, false)}"/>
+							</td>
+							<td class="dataCell" colSpan="1">
+								<apex:outputtext value="{!v.phDescBUPH.Product_Hierarchy__r.PH_Code__c}" rendered="{!IF(singleSelectAtr = false, true, false)}"/>
+								<apex:commandlink value="{!v.phDescBUPH.Product_Hierarchy__r.PH_Code__c}" action="{!singleSelectMethod}"
+													oncomplete="passFromPHComponent('{!$Component.getField}','{!$Component.targetField}','{!$Component.getPHDesc}','{!$Component.targetPHDesc}','{!$Component.getLastPHLevelSelected}','{!$Component.targetLastPHLevelSelected}')"
+													reRender="myForm" rendered="{!IF(singleSelectAtr = true, true, false)}"> 
+											<apex:param name="selectedId" value="{!v.phDescBUPH.Id}" assignTo="{!desiredAction}"/>
+								</apex:commandlink>
+							</td>
+							<td class="dataCell" colSpan="1">
+								<apex:outputtext value="{!v.phDescBUPH.Product_Hierarchy__r.PH_Level__c}"/>
+							</td>
+							<td class="dataCell" colSpan="1">
+								<apex:outputtext value="{!v.phDescBUPH.Business_Description__c}"/>
+							</td>
+						</tr>
+						
+					</apex:repeat>
+					
+        		</table>
+        	</apex:outputPanel>
+        	<br/>
+        	<br/>
+        	<br/>
+        	<apex:outputPanel rendered="{!IF(phSearchResult != null, true, false) && displayTableBoolean && IF(singleSelectAtr == false, true, false)}" style="float:center; margin-left:10%;">
+		    			<apex:commandLink value="{!$Label.Save_and_Close}" action="{!dosearch}"
+							oncomplete="passFromPHComponent('{!$Component.getField}','{!$Component.targetField}','{!$Component.getPHDesc}','{!$Component.targetPHDesc}','{!$Component.getLastPHLevelSelected}','{!$Component.targetLastPHLevelSelected}')"
+							reRender="myForm" status="stat"  styleClass="btn" style="text-decoration:none;">
+								<apex:param value="SaveAndCLose" assignTo="{!desiredAction}" />
+						</apex:commandLink>
+						<apex:commandLink value="{!$Label.Save_and_Continue}" action="{!dosearch}"  styleClass="btn" style="text-decoration:none;">
+								<apex:param value="SaveAndContinue" assignTo="{!desiredAction}" />
+						</apex:commandLink>
+						<apex:commandLink value="{!$Label.Cancel_Button}" action="{!closeWindow}"  styleClass="btn" style="text-decoration:none;">
+						</apex:commandLink>
+					</apex:outputPanel>
+        	</apex:pageBlockSection>
+				
+    		<br/><br/>
+    <!-- 		<apex:pageBlockSection rendered="{!IF(phSearchResult != null, true, false) && displayTableBoolean && IF(singleSelectAtr == false, true, false)}">
+    			<center>
+					<apex:outputPanel >
+		    			<apex:commandLink value="{!$Label.Save_and_Close}" action="{!dosearch}"
+							oncomplete="passFromPHComponent('{!$Component.getField}','{!$Component.targetField}','{!$Component.getPHDesc}','{!$Component.targetPHDesc}','{!$Component.getLastPHLevelSelected}','{!$Component.targetLastPHLevelSelected}')"
+							reRender="myForm" status="stat"  styleClass="btn" style="text-decoration:none;">
+								<apex:param value="SaveAndCLose" assignTo="{!desiredAction}" />
+						</apex:commandLink>
+						<apex:commandLink value="{!$Label.Save_and_Continue}" action="{!dosearch}"  styleClass="btn" style="text-decoration:none;">
+								<apex:param value="SaveAndContinue" assignTo="{!desiredAction}" />
+						</apex:commandLink>
+						<apex:commandLink value="{!$Label.Cancel_Button}" action="{!closeWindow}"  styleClass="btn" style="text-decoration:none;">
+						</apex:commandLink>
+					</apex:outputPanel>
+				</center>
+    		</apex:pageBlockSection> -->
+	    		
+
+		</apex:pageBlock>
+	</apex:outputPanel>
+
+	<style type="text/css">
+.FrontPagePH {
+	background-color: white;
+	z-index: 9999;
+	left: 25%;
+	right: ;
+	padding: 10px;
+	position: absolute;
+	border: 2px solid #63A4C5; //
+	top: 50px; //
+	top: 5%; //
+	top: -25%;
+	top: -5px;
+	width: 600px;
+}
+
+.BackPage {
+	background-color: #696969;
+	opacity: 0.5;
+	filter: alpha(opacity =         50);
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: 0;
+}
+
+.dropDownSizePH {
+	width: 400px;
+}
+
+.buttonWidth {
+	width: 50px;
+}
+</style>
+
+
+
+</apex:component>

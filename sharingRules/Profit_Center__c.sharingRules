@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>ProfitCenter_EKC_Global</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>ProfitCenter_ACST Global</label>
+        <sharedTo>
+            <group>ACSTGlobal</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>ERP_Profit_Center_4__c</field>
+            <operation>equals</operation>
+            <value>ELECTRONICS AND COMMUNICATIONS</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Profit_Center_5__c</field>
+            <operation>equals</operation>
+            <value>EKC TECH</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+</SharingRules>

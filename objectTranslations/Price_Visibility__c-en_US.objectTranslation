@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Price Visibility</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Price Visibility</value>
+    </caseValues>
+    <fields>
+        <label><!-- BU --></label>
+        <name>BU__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dist. Channel Code --></label>
+        <name>Dist_Channel_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Division Code --></label>
+        <name>Division_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Price Type --></label>
+        <name>Price_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pricing Request Type --></label>
+        <name>Pricing_Request_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Request Type --></label>
+        <name>Request_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Org Code --></label>
+        <name>Sales_Org_Code__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,424 @@
+<!-- VERSION -->
+<!--    1.1         Prachi          UI change for IE9               None    -->
+<!--    1.2         Priyanka        Change in architecture          None    -->
+<!--    1.3         Prachi          UI changes                      None    -->
+<!--    1.4         Bala            Making onBehalfOf Mandatory     None    -->
+<!--    1.5         Prachi          UI                              None    -->
+<!--    1.6         Brundha         UI                              None    -->
+<!--  VR20131110    Vinoth          DTT Rollout Issue - Modified the rendered conditon of onBehalfOf    None    -->
+<!-- PP20140224     Priyanka Pillala    Customer Prices list views for CSRs - CAPITAL PROJECT           None -->
+<!-- SP20140505     Shiva           Multiple SalesArea Picklist - CAPITAL PROJECT           None -->
+<!-- TJ20140505     Tarun               Added the landing page link None     -->
+<!-- BB20140508     Bisnupriya      Added CustOrderGrpConCatAtr in the component- CAPITAL PROJECT     None-->
+<!-- TJ20140509     Tarun           Added Navigation Flow Text          None    -->
+<!-- SP20140604     Shiva           CAPTIAL PROJECT- For Search criteria collapsible by default         None    -->
+
+<apex:page controller="ctrlPAMain" tabstyle="Price_Approval__tab" sidebar="false" showHeader="true" id="currentPage" cache="true"
+    action="{!onLoadCall}">
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.min.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.js')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/css/jquery.dataTables.css')}" />
+    <c:loadingComponent />
+    <apex:pageMessages escape="false" id="errorMessage"/> 
+    <style>
+    .navFlow{font-size:13px;font-style:oblique;margin-bottom:3px;}
+    #soldDetails #allDetail .detailList{border:1px solid #E2E3E4;}
+    //#soldDetails #allDetail .detailList .labelCol{border-right:1px solid #E2E3E4;color:#000000;}
+    #soldDetails #allDetail .detailList .dataCol{padding-left:5px;} 
+    //#soldDetails #allDetail .detailList .labelCol{vertical-align:middle;} 
+
+    #soldDetails #allDetail .detailList .dataCol .requiredBlock{top:0px; height:20px;bottom:0px;}
+    #soldDetails #allDetail .detailList tr th{border-bottom:none;} 
+    #soldDetails #allDetail .detailList tr td{border-bottom:none;} 
+    #soldDetails #allDetail .detailList .dataCol .requiredInput span  {float:right;}
+    #soldDetails #allDetail .detailList .dataCol .requiredInput span.FrontPage  {float:left;}
+    #soldDetails #allDetail .detailList .dataCol .requiredInput span.FrontPage span  {float:left;}
+    #soldDetails #allDetail .detailList .dataCol .requiredInput span.FrontPageSoldTo span  {float:left;}
+    #soldDetails #allDetail .detailList .dataCol .requiredInput span.FrontPage #searchTable .pbBody span{float:none;}
+    #soldDetails .bPageBlock{float:left;width:100%;}
+    #soldDetails #allDetail .dataCol{padding-left:0px;}
+    #soldDetails #allDetail .pbSubheader{margin-bottom:0px;}   
+    .customerLink{font-size:15px;height:20px;margin-bottom:1px;padding:5px;border:solid 1px;border-color:#6E96B2; background-color:#E5F3FC;font-weight:bold;text-align:left;}
+    #soldDetails #allDetail a.btn{width:60px;float:left;}
+    #searchTable .TableTitle{text-indent: 0px!Important;}
+   // .bPageBlock .requiredInput .requiredBlock{top:0px;bottom:1px;}
+    //.seachSold{text-align:left;}
+    //.bPageBlock .detailList {
+        //width: 90% !Important
+    // }
+    
+   #soldDetails #allDetail .FrontPageChangeSalesArea body .bPageBlock .pbBody .labelCol {text-align:left;}
+   
+   <!-- PP20140416 START -->
+   .customersTable {display:none}
+   .customerLink{font-size:15px;height:20px;margin-bottom:1px;padding:5px;border:solid 1px;border-color:#6E96B2; background-color:#E5F3FC;font-weight:bold;text-align:left;}
+        .replist {border:1px solid #E2E3E4;}
+        .replist .list tr th{border-bottom:none;}
+        .replist  .list tr td{border-bottom:none;}
+        .replist .list tr th{color:black;}
+        body .pbBody table .list tr td{border-bottom: none;}
+        body .pbBody table .list {border:1px solid #e0e3e5;background-color:#fff;}
+        .replist table.list tr:first-child th{color:white;background-color:#63A4C5;}
+        .replist table.list tr:nth-child(2) th{color:black;background-color:#f8f8f8;border:1px solid #E2E3E4;}
+    <!-- PP20140416 END -->
+</style>
+
+    <script type="text/javascript">
+        
+        function setFocusOnLoad() {}
+        var bool = '{!checkErrorFlag}';
+        var j$ = jQuery.noConflict();
+        j$(document).ready(function(){
+        datatableCall();});
+        function datatableCall()
+        {
+          var tab = j$('#customersTable').dataTable({                                                                                                                                                             //<TJ20140401> - added javascript to generate HTML Table with additional functionalities
+                   "bStateSave":true,
+                    "bLengthChange":false,
+                    "iDisplayLength" : 200,
+                    sPaginationType: "full_numbers",
+                    "aoColumns" : [{"bVisible": true},{"bVisible": false},{"bSortable": true,"bSearchable": false,"bVisible": true},{"bSortable": true,"bVisible": true},{"bSortable": true,"bVisible": true},{"bSortable": true,"bVisible": true},{"bSortable": true,"bVisible": true},{"bSortable": true,"bVisible": true},{"bSortable": true,"bVisible": true}],
+                    sPlaceHolder : "foot:before",
+                    
+                    "fnStateSave": function (oSettings, oData) {
+                                    localStorage.setItem( 'DataTables', JSON.stringify(oData) );
+                                    },
+                    "fnStateLoad": function (oSettings) {
+                                    return JSON.parse( localStorage.getItem('DataTables') );
+                                    if(bool==='true'){
+                                        return JSON.parse( localStorage.getItem('DataTables') );
+                                    }
+                                   },
+                   
+                    "fnStateLoadParams": function(oSettings,oData){
+                                            if(bool==='false'){
+                                                //oData.oSearch.sSearch = "";
+                                            }
+                                        }                                                          
+                });
+        j$('#customersTable'+'_filter').after('<br /><br />');
+        j$('#customersTable').after('<br />');
+        
+        }
+        function getHtmlId(cid)
+        {
+            return "#"+cid.replace(/(:)/g,'\\\\$1');
+        }
+    </script>
+    
+    <!-- SP20140605 START -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript">
+    var str = '{!businessAction}';
+        $(document).ready(function ()
+         {
+            if(!(str === 'searchCustomer' || str==='AllCusti'))
+            {
+                collapse();
+            }
+         });
+                    
+         function collapse()
+         {
+               elements = $('.hideListButton');
+                    
+                elements.each(function()
+                 {
+                          twistSection(this);
+                  });
+        }
+    </script>
+    <!-- SP20140605 END -->
+    
+    
+    <apex:actionStatus id="stat">
+        <apex:facet name="start">
+            <div class="spinnerMask" id="spinnerMask">
+            <div class="spinnerCt"><img
+                src="/img/analytics/reportbuilder/icons/spinner32.gif"
+                alt="Loading..." width="32" height="32" align="center"
+                class="spinner" title="Loading..." />
+            <div class="loadingIndicator">Loading...</div>
+            </div>
+            <div class="mask"></div>
+            </div>
+        </apex:facet>
+    </apex:actionStatus>
+    <apex:form id="myId">
+        <!-- <TJ20140505> Added Landing Page Link -->
+        <div align="left" class="navFlow">
+            <apex:commandLink id="link0" value="Landing Page" action="{!businessComponentAction}" target="_self" style="color:blue;">
+            <apex:param name="desiredAction" value="landingpage" assignTo="{!businessaction}" />
+            <apex:param name="newPageLabel" value="PAHome" assignTo="{!newPageLabel}" />
+            </apex:commandLink>
+        <!-- <TJ20140509> Added Navigation Flow Text-->
+            <apex:outputText value="{!if(NOT(ISNULL(navigationText)),'>>','')} "/>
+            <apex:outputText value="{!navigationText}"/>
+            <apex:outputText value=">>  {!IF(service.paServiceState.ogItems.isEndUserRebate,'Sold To List',$Label.Customer_Details)}"/>
+        </div>
+<!--        <TJ20140417>   Changed Page Label-->        
+        <div class="customerLink">
+           <apex:outputText value="{!IF(service.paServiceState.ogItems.isEndUserRebate,'Sold To List',$Label.Customer_Details)}" />
+        </div>
+<!--        <TJ20140513> Help Link-->
+        <apex:commandLink value="Help" action="{!helpLink}" style="float:right;" target="_blank">
+                <apex:param name="Help" value="Customer List" assignTo="{!label}"/>
+        </apex:commandLink>    
+        <!-- Sold To Customer Selection and Detail Section -->
+                                
+            <!-- <TJ20140516> -->
+        <apex:pageBlock >
+            <div id="soldDetails">
+                <apex:pageBlockSection title="Business Information" collapsible="false">
+                    <apex:pageblocksectionitem >
+                        <apex:outputlabel value="Business"/>
+                        <apex:outputText value="{!BUName}"/>
+                    </apex:pageblocksectionitem>
+                    <apex:pageBlockSectionItem rendered="{!AND(OR(service.paServiceState.ogItems.isBUAdmin, service.paServiceState.ogItems.salesAdminPermissionSetFlag,service.paServiceState.currentRequest.pricingRequest.Request_Type__c=='Massive'), NOT(CONTAINS(businessAction,'ViewAllCustomerPrices')))}">
+                        <apex:outputlabel value="On Behalf Of"/>
+                        <apex:outputtext value="{!IF(service.paServiceState.currentRequest.pricingRequest.Request_Type__c=='Massive',service.paServiceState.currentRequest.pricingRequest.On_Behalf_Of__r.name,service.paServiceState.ogItems.userName)}"/>
+                        </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+<!--             </apex:pageBlock> -->
+            <!-- PP20140416 -->
+                        
+                                </div>
+<!--         <apex:pageblock > -->
+        <apex:pageblocksection title="{!IF(service.paServiceState.ogitems.isEndUserRebate,"Select Sold to","Search Criteria")}" collapsible="true" id="section1">
+            <apex:pageblocksectionItem >
+                <apex:outputlabel value="{!IF(service.paServiceState.ogitems.isEndUserRebate,"Sold to Code","Sold to Code")}"/>
+                <apex:inputText value="{!service.PAServicestate.erpCustomer.searchSoldToCode}"/>
+            </apex:pageblocksectionItem>
+            <apex:pageblocksectionItem >
+                <apex:outputlabel value="{!IF(service.paServiceState.ogitems.isEndUserRebate,"Sold to","Sold to")}"/>
+                <apex:inputText value="{!service.PAServicestate.erpCustomer.searchSoldTo}"/>
+            </apex:pageblocksectionItem>
+            <apex:pageblocksectionItem >
+                <apex:outputlabel value="City"/>
+                <apex:inputText value="{!service.PAServicestate.erpCustomer.searchCity}"/>
+            </apex:pageblocksectionItem>
+            <apex:pageblocksectionItem >
+                <apex:outputlabel value="Country"/>
+                <apex:inputText value="{!service.PAServicestate.erpCustomer.searchCountry}"/>
+            </apex:pageblocksectionItem>
+       <apex:commandLink action="{!businessComponentAction}" style="text-decoration:none; color:#484848;margin-left:95%;" styleClass="btn" 
+                value="Search">
+                <apex:param value="PACustomerDetail" name="passMode" assignTo="{!newPageLabel}" />
+                <apex:param value="{!IF(CONTAINS(businessaction,'onBehalfOf'),'searchCustomer','searchCustomerAllCusti')}" name="sendAction1" assignTo="{!businessaction}" />
+                <apex:param value="stay" name="pageName" assignTo="{!pageName}"/>
+        </apex:commandLink>
+        </apex:pageblocksection>
+        <apex:pageblocksection title="Search Results" collapsible="false"></apex:pageblocksection>
+        <br/>
+        <div style="float:left;text-align:center;">
+            <apex:commandLink action="{!businessComponentAction}" style="text-decoration:none; color:#484848" styleClass="btn" 
+                value="Save Frequent Customer">
+                <apex:param value="PAOnBehalfOf" name="passMode" assignTo="{!newPageLabel}" />
+                <apex:param value="markCustomerFreq" name="sendAction1" assignTo="{!businessAction}" />
+            </apex:commandLink>
+        </div>
+            <!-- AV20140408 passing appropriate param value when going back to onbehalf of page on change of soldto for clone req -->
+            <apex:commandLink action="{!businessComponentAction}" style="text-decoration:none; color:#484848;margin-left:36%;" styleClass="btn" 
+                value="Cancel">
+                <apex:param value="{!IF(service.paServiceState.ogItems.userName == null,'PAHome',IF(CONTAINS(service.PAServicestate.currentRequest.pricingRequest.Request_Type__c,'Massive'),IF(CONTAINS(businessAction,'NewPricingReqItem'),'PAPricingRequest','PAEditReqItem'),'PAOnBehalfOf'))}" name="passMode" assignTo="{!newPageLabel}" />
+                <apex:param value="CancelBack{!IF(CONTAINS(businessaction,'soldtoChange')||CONTAINS(businessaction,'PCL'),businessaction,'')}" name="sendAction" assignTo="{!businessaction}" />
+                <!-- <TJ20140605> Passing Page Name for navigation flow -->
+                <apex:param value="{!IF(CONTAINS(navigationText,$Label.On_Behalf_Of),$Label.On_Behalf_Of,IF(CONTAINS(navigationText,'New Record Creation'),'New Record Creation',IF(CONTAINS(navigationText,$Label.Price_Request),$Label.Price_Request,$Label.Customer_Details)))}" assignTo="{!pageName}"/>
+                <apex:param value="true" assignTo="{!backflow}"/>
+            </apex:commandLink>
+                        
+        <br/><br/>
+        <div class="replist">
+        <br/>
+        <table id="customersTable" class="list" border="0" cellSpacing="0" cellPadding="0" style="width:1200px;" align="center">
+            <colgroup span="6" />
+            <thead class="rich-table-thead">
+<!--                <tr role="row"> -->
+<!--                    <th rowSpan="1" colSpan="30" scope="colgroup">Customers List</th> -->
+<!--                </tr> -->
+                <tr>
+                        
+                    <th class="headerRow" colSpan="1" scope="col" width="1%"> Frequent </th>
+                        
+                    <th class="headerRow" colSpan="1" scope="col" >  </th>
+               <!-- IM20150108 show customer as label for rebate requests -->  
+               		<th class="headerRow" colSpan="1" scope="col" > <apex:outputText value="Sold To Code" rendered="{!!service.paServiceState.ogitems.isEndUserRebate}"/><apex:outputText value="Sold To Code" rendered="{!service.paServiceState.ogitems.isEndUserRebate}"/> </th>
+                    <th class="headerRow" colSpan="1" scope="col" > <apex:outputText value="Sold To" rendered="{!!service.paServiceState.ogitems.isEndUserRebate}"/><apex:outputText value="Sold To" rendered="{!service.paServiceState.ogitems.isEndUserRebate}"/> </th>
+                    <th class="headerRow" colSpan="1" scope="col" > Sales Area </th>                       
+                    <th class="headerRow" colSpan="1" scope="col" > Country </th>
+                    <th class="headerRow" colSpan="1" scope="col" > State/Province </th>
+                    <th class="headerRow" colSpan="1" scope="col" > City </th>
+                    <th class="headerRow" colSpan="1" scope="col" > Street </th>
+                </tr>
+            </thead>
+            <apex:repeat value="{!service.paServiceState.erpCustomer.allCustomersWrapList}" var="customer" id="theRepeat">
+                <tr class="dataRow even first last">
+                    
+                    <td class="dataCell" colSpan="1" width="1%">
+                        <apex:inputCheckBox value="{!customer.isSelected}" id="sel" />
+                    </td>
+                        
+                    <td class="dataCell" colSpan="1" width="10%">{!customer.sObjectRecord['Customer_Code__c']}</td>
+                    <td class="dataCell" colSpan="1" width="10%">
+                    <!-- Output panel added by Ibtesam to show End User Rebate Details  -->
+                    <apex:outputPanel rendered="{!!service.paServiceState.ogItems.isEndUserRebate}" >
+                    <!-- AV20140408 prevented concating 'Next' in buisness action when navigating from clone -->
+                    <!-- AV20140408 when cloning on change of soldto buisness action contains soldtochange then navigating to newreq page -->
+                    <!-- <TJ20140925>-->
+                        <apex:commandLink id="link1" value="{!customer.sObjectRecord['Customer_Code__c']}" action="{!businessComponentAction}" > 
+                            <apex:param name="desiredAction" value="{!IF(CONTAINS(businessAction,'soldtoSelect'),businessaction,'customerPrices'+IF(CONTAINS(businessAction,'PCL'),'PCL',businessAction)+IF(CONTAINS(businessAction,'soldtoChange'),'','Next'))}" assignTo="{!businessaction}" />
+                            <apex:param name="newPageLabel" value="{!IF(CONTAINS(businessAction,'soldtoChange'),'PANewRequest',IF(CONTAINS(businessAction,'PCL'),'PAPclTemplateSelectionPCO',IF(CONTAINS(service.PAServicestate.currentRequest.pricingRequest.Request_Type__c,'Massive'),'PAEditReqItem','PACurrentPrices')))}" assignTo="{!newPageLabel}" />
+                            <apex:param name="customerCode" value="{!customer.sObjectRecord['Customer_Code__c']}" assignTo="{!service.PAServicestate.erpCustomer.customerCode}" />
+                            <apex:param name="salesOrgCode" value="{!customer.sObjectRecord['Sales_Org_Code__c']}" assignTo="{!service.PAServicestate.erpCustomer.salesOrgCode}" />
+                            <apex:param name="distChannelCode" value="{!customer.sObjectRecord['Distribution_Channel_Code__c']}" assignTo="{!service.PAServicestate.erpCustomer.distCode}" />
+                            <apex:param name="divisionCode" value="{!customer.sObjectRecord['Division_Code__c']}" assignTo="{!service.PAServicestate.erpCustomer.divCode}" />
+                            <apex:param name="salesArea" value="{!customer.stringMap['salesArea']}" assignTo="{!service.PAServicestate.erpCustomer.salesArea}" />
+                            <apex:param name="SASel" value="{!customer.dummy}" assignTo="{!service.PAServicestate.erpCustomer.salesAreaSelected}" />
+                            
+                            <apex:param name="curPrices" value="viewPricesOnLoad{!IF(CONTAINS(businessAction,'ViewAllCustomerPrices')||CONTAINS(businessAction,'AllCusti'),'ExpOnly','')}" assignTo="{!service.PAServicestate.erpCustomer.currentPrices}" />
+                            <!-- <TJ20140509> Passing Label for Displaying Navigation Flow -->
+                            <apex:param name="pageName" value="{!IF(CONTAINS(businessAction,'soldtoChange'),IF(CONTAINS(navigationText,$Label.New_Request),$Label.New_Request,IF(CONTAINS(navigationText,$Label.Price_request_clone),$Label.Price_request_clone,$Label.Customer_Details)),IF(CONTAINS(businessAction,'PCL'),IF(CONTAINS(navigationText,'Price Confirmation Letter Screen'),'Price Confirmation Letter Screen',$Label.Customer_Details),IF(CONTAINS(navigationText,$Label.Current_Prices),$Label.Current_Prices,IF(CONTAINS(navigationText,'New Record Creation'),'New Record Creation',$Label.Customer_Details))))}" assignTo="{!pageName}"/>
+<!--                            <apex:param name="salesArea" value="{!customer.sObjectRecord['Country__c']}" assignTo="{!service.PAServicestate.erpCustomer.country}" />-->
+<!--                            <apex:param name="street" value="{!URLENCODE(customer.sObjectRecord['Street__c'])}" assignTo="{!service.PAServicestate.erpCustomer.street}" />-->
+                   
+                        </apex:commandLink>
+                        </apex:outputPanel>
+                        <!-- IM20150108 check if rebate requests already exists -->
+                        <apex:outputPanel rendered="{!service.paServiceState.ogItems.isEndUserRebate}" >
+                        <apex:commandLink id="eurlink1" value="{!customer.sObjectRecord['Customer_Code__c']}" action="{!businessComponentAction}" > 
+                            <apex:param name="desiredAction" value="{!IF( CONTAINS(businessAction,'soldtoChange'),'','Next' )+'CheckRequests'}" assignTo="{!businessaction}" />
+                            <apex:param name="newPageLabel" value="PASelectEndUser" assignTo="{!newPageLabel}" />
+                            <apex:param name="customerCode" value="{!customer.sObjectRecord['Customer_Code__c']}" assignTo="{!service.PAServicestate.erpCustomer.customerCode}" />
+                            <apex:param name="salesOrgCode" value="{!customer.sObjectRecord['Sales_Org_Code__c']}" assignTo="{!service.PAServicestate.erpCustomer.salesOrgCode}" />
+                            <apex:param name="distChannelCode" value="{!customer.sObjectRecord['Distribution_Channel_Code__c']}" assignTo="{!service.PAServicestate.erpCustomer.distCode}" />
+                            <apex:param name="divisionCode" value="{!customer.sObjectRecord['Division_Code__c']}" assignTo="{!service.PAServicestate.erpCustomer.divCode}" />
+                            <apex:param name="salesOrg" value="{!customer.sObjectRecord['Sales_Org__c']}" assignTo="{!service.PAServicestate.erpCustomer.salesOrg}" />
+                            <apex:param name="distChannel" value="{!customer.sObjectRecord['Distribution_Channel__c']}" assignTo="{!service.PAServicestate.erpCustomer.dist}" />
+                            <apex:param name="division" value="{!customer.sObjectRecord['Division__c']}" assignTo="{!service.PAServicestate.erpCustomer.div}" />
+                            
+                            <apex:param name="salesArea" value="{!customer.stringMap['salesArea']}" assignTo="{!service.PAServicestate.erpCustomer.salesArea}" />
+                            <apex:param name="SASel" value="{!customer.dummy}" assignTo="{!service.PAServicestate.erpCustomer.salesAreaSelected}" />
+                            
+                            <apex:param name="curPrices" value="viewPricesOnLoad{!IF(CONTAINS(businessAction,'ViewAllCustomerPrices')||CONTAINS(businessAction,'AllCusti'),'ExpOnly','')}" assignTo="{!service.PAServicestate.erpCustomer.currentPrices}" />
+                            <!-- <TJ20140509> Passing Label for Displaying Navigation Flow -->
+                            <apex:param name="pageName" value="{!IF(CONTAINS(businessAction,'soldtoChange'),IF(CONTAINS(navigationText,$Label.New_Request),$Label.New_Request,IF(CONTAINS(navigationText,$Label.Price_request_clone),$Label.Price_request_clone,$Label.Customer_Details)),IF(CONTAINS(businessAction,'PCL'),IF(CONTAINS(navigationText,'Price Confirmation Letter Screen'),'Price Confirmation Letter Screen',$Label.Customer_Details),IF(CONTAINS(navigationText,$Label.Current_Prices),$Label.Current_Prices,IF(CONTAINS(navigationText,'New Record Creation'),'New Record Creation',$Label.Customer_Details))))}" assignTo="{!pageName}"/>
+<!--                            <apex:param name="salesArea" value="{!customer.sObjectRecord['Country__c']}" assignTo="{!service.PAServicestate.erpCustomer.country}" />-->
+<!--                            <apex:param name="street" value="{!URLENCODE(customer.sObjectRecord['Street__c'])}" assignTo="{!service.PAServicestate.erpCustomer.street}" />-->
+                   
+                        </apex:commandLink>
+                    </apex:outputPanel>
+                    </td>
+                    <td class="dataCell" colSpan="1" width="10%"> {!customer.sObjectRecord['Name']} </td>
+                     <!-- SP20140505 START -->
+                    <td class="dataCell" colSpan="1" width="10%" id="dataCell"> 
+                        <apex:outputtext value="{!customer.stringMap['salesArea']}" rendered="{!customer.stringMap['salesArea'] != 'Multiple'}" />  
+                        <apex:selectList size="1" value="{!customer.dummy}" rendered="{!customer.stringMap['salesArea'] == 'Multiple'}">
+                            <apex:selectOptions value="{!customer.stringMapSelectoptions['salesArea']}"></apex:selectOptions>
+                            <apex:actionSupport event="onchange" rerender="myId,errorMessage" oncomplete="datatableCall();" status="stat"/>
+                        </apex:selectList> 
+                    </td>
+                    <!-- SP20140505 END -->
+                    <td class="dataCell" colSpan="1" width="10%"> {!customer.sObjectRecord['Country__c']} </td>
+                    <td class="dataCell" colSpan="1" width="10%"> {!customer.sObjectRecord['State_Province__c']} </td>
+                    <td class="dataCell" colSpan="1" width="10%"> {!customer.sObjectRecord['City__c']} </td>
+                    <td class="dataCell" colSpan="1" width="10%"> {!customer.sObjectRecord['Street__c']} </td>
+                </tr>
+            </apex:repeat>
+        </table>
+        <br/><br/>
+                    </div>
+                    <br/>
+        <div style="float:left;text-align:center;">
+            <apex:commandLink action="{!businessComponentAction}" style="text-decoration:none; color:#484848" styleClass="btn" 
+                value="Save Frequent Customer">
+                <apex:param value="PAOnBehalfOf" name="passMode" assignTo="{!newPageLabel}" />
+                <apex:param value="markCustomerFreq" name="sendAction1" assignTo="{!businessaction}" />
+                    </apex:commandLink> 
+                </div>
+        
+            <!-- AV20140408 passing appropriate param value when going back to onbehalf of page on change of soldto for clone req -->
+            <apex:commandLink action="{!businessComponentAction}" style="text-decoration:none; color:#484848;margin-left:36%;" styleClass="btn" 
+                value="Cancel">
+                <apex:param value="{!IF(service.paServiceState.ogItems.userName == null,'PAHome',IF(CONTAINS(service.PAServicestate.currentRequest.pricingRequest.Request_Type__c,'Massive'),IF(CONTAINS(businessAction,'NewPricingReqItem'),'PAPricingRequest','PAEditReqItem'),'PAOnBehalfOf'))}" name="passMode" assignTo="{!newPageLabel}" />
+                <apex:param value="CancelBack{!IF(CONTAINS(businessaction,'soldtoChange') || CONTAINS(businessaction,'PCL'),businessaction,'')}" name="sendAction" assignTo="{!businessaction}" />
+                <!-- <TJ20140605> Passing Page Name for navigation flow -->
+                <apex:param value="{!IF(CONTAINS(navigationText,$Label.On_Behalf_Of),$Label.On_Behalf_Of,IF(CONTAINS(navigationText,'New Record Creation'),'New Record Creation',IF(CONTAINS(navigationText,$Label.Price_Request),$Label.Price_Request,$Label.Customer_Details)))}" assignTo="{!pageName}"/>
+                <apex:param value="true" assignTo="{!backflow}"/>
+            </apex:commandLink>
+        
+        </apex:pageblock>
+    </apex:form>
+
+<style type="text/css">
+
+.TableTitle {
+    font-weight: normal;
+    color: #0079C1;
+    background-color: white;
+    text-align: left;
+    text-indent: 8px;
+}
+
+.FrontPageProject {
+    background-color: white;
+    border-width: 2px;
+    border-style: solid;
+    z-index: 9999;
+    left: 35%;
+    right: 35%;
+    padding: 10px;
+    position: absolute;
+    top: 15%; //
+    margin-left: -600px;
+    width: 30%;
+}
+
+//.FrontPage {
+   // left: 75%;
+//}
+
+
+  .spinnerCt {
+    left: 50%;
+    top: 35%;
+    position: absolute;
+    //z-index: 1;
+    z-index: 50;
+    padding: 20px 40px;
+    box-shadow: 0pt 2px 5px rgb(172, 172, 172);
+    border-radius: 1em 1em 1em 1em;
+    border: 1px solid rgb(206, 236, 255);
+    background-color: rgb(206, 236, 255);
+    background-style: solid;
+}
+
+.spinner {
+    padding: 10px 15px 10px 0pt;
+    vertical-align: middle;
+}
+
+.spinnerCt .loadingIndicator {
+    display: inline;
+    font-size: 135%;
+    font-weight: bold;
+}
+
+.mask {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    opacity: 0.45;
+    filter: alpha(opacity =     45);
+    position: absolute;
+    //z-index: 0;
+    z-index: 45;
+    top: 0pt;
+    left: 0pt;
+    }
+.noTableFooter
+    {
+    margin:0px!important;
+    }
+</style>
+</apex:page>

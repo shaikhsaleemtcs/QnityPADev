@@ -1,0 +1,248 @@
+<!-- **************************************************************************************************************
+ ***********************************************Modification Log***********************************************
+
+<AK20160226>
+Last Modified By    :   Ankit Khandelwal
+Last Modified Date  :   26 Feb 2016
+Description         :   Changed Logo reference from UTTest3 to Prod in PCL generation document for EKC business 'IS ID-00065249 '                                 
+ ****************************************************************************************************************
+<NS20190808>
+Last Modified By    :   Nadeem Shaik
+Last Modified Date  :   08 Aug 2019
+Description         :   Changed Logo & address' from heritage DuPont to new DuPont Logo 'IS EI-00085848'
+ ****************************************************************************************************************
+<SR20211109>
+Last Modified By    :   Sanket Rahate
+Last Modified Date  :   09 Nov 2021
+Description         :   Changed name from DuPont EKC Technolgies to  DuPont Advanced Cleans Technologies 'IS EI-00092059'                                  
+                               
+****************************************************************************************************************
+ 
+<KS20220111>
+Last Modified By    :   Sanket Rahate
+Last Modified Date  :   09 Nov 2021
+Description         :   Changed name from DuPont Advanced Cleans Technologies to  DuPont EKC Technology, Limited 'IS EI-00092927' 
+
+****************************************************************************************************************
+<SS20230223>
+Last Modified By    :   Shantanu Sharma
+Last Modified Date  :   23 Feb 2023
+Description         :   Changed address from 3-5 Melville Street, Edinburgh, Scotland, EH3 7PE Telephone: +44 131 476 8371 to 5 South Charlotte Street, Edinburgh, Scotland, EH2 4AN Telephone: +44 1438 734000, IS EI-00097588.
+                               
+****************************************************************************************************************-->
+ 
+<apex:component access="global" controller="PAPCLComponent">  
+<apex:stylesheet value="{!$Resource.PDFDocumentStyle}"/>
+  <apex:attribute name="targetObject" type="String" assignTo="{!listofids}" description="The context of the outer page email templates"/>
+     
+
+  <table width="100%">
+ <tr>
+  
+    <td style="width: 50%" colspan="3" align="left"> 
+        <apex:outputText value="<b>EKC Technology, Limited</b><br/>DuPont Electronics and Industrial<br/>c/o DuPont (UK) Limited<br/>4th Floor London Road<br/>Stevenage, Hertfordshire SG1 4QN<br/>U.K.<br/>+44(0) 1438 734000<br/>" 
+        escape="false" style="font-family: Times New Roman,Georgia,Serif; font-size: 10px; font-weight: normal; color: #B2B2B2; float:right;"></apex:outputText>
+   </td>
+    <!-- Modified by Kanchan Solanki 11 Jan 2022 Changed name from DuPont Advanced Cleans Technologies to DuPont EKC Technology, Limited -->
+    
+     <td style="width: 30%"  ></td>
+    <td align="right" valign="top">
+<!-- Modified by Ankit Khandelwal 26 Feb 2016   Changed Logo reference from UTTest3 to Prod in PCL generation document for EKC business 'IS ID-00065249 -->
+          <!--<apex:image id="Logo" value="https://util-dupont--uttest3--c.cs15.content.force.com/servlet/servlet.ImageServer?id=015e00000007uH5&oid=00De0000005PSKC&lastMod=1411812424000" alt="Dupont logo" height="60" width="80" style="float:left;"/>-->
+        <!--<apex:image id="Logo" value="https://specutil--sputqa.sandbox.file.force.com/servlet/servlet.ImageServer?id=0151L00000PZbYk&oid=00D41000000Ueq3" alt="New_DuPont_Logo_2019" height="40" width="138" style="float:right;"/> //MM -->
+        <apex:image id="Logo" value="https://specutil.file.force.com/servlet/servlet.ImageServer?id=0151L00000PZbYk&oid=00D41000000Ueq3" alt="New_DuPont_Logo_2019" height="40" width="138" style="float:right;"/>
+     </td>
+    </tr>
+  </table>  
+    
+  <!--<hr></hr>-->
+  <br/> 
+  <br/> 
+  <br/> 
+  
+   <apex:outputPanel style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;">
+            
+        <apex:outputText value="{0,date,yyyy-MMM-dd }" style="float:right;font-weight: normal;">
+                <apex:param value="{!TODAY()}" />
+        </apex:outputText>
+  </apex:outputPanel>  
+  <br/>                     
+  
+<apex:outputPanel style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;">
+    <apex:repeat value="{!listrequestdetils[0]}" var="b">
+    <table>
+  
+        <tr>
+        <td style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;">{!b.Sold_To__c}</td>
+        </tr>
+    
+        <tr>
+        <td style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;">{!b.Street__c}</td>
+        </tr>
+  
+        <tr>
+        <td style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;">{!b.City__c}</td>
+        </tr>
+  
+        <tr>
+        <td style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;text-transform:uppercase;">{!b.Country__c}</td>
+        </tr>
+  
+    </table>
+   </apex:repeat>
+ </apex:outputPanel> 
+ <br/><br/>
+<apex:outputText value="RE: Price Confirmation Letter for " style="font-family: Arial,Helvetica,sans-serif; font-size:12px; font-weight: normal;"/>
+
+
+
+ <apex:dataTable value="{!listofwrappertables}" var="mList"  style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;">
+    
+        <apex:column >
+            <apex:outputText value="{!mList.sobjectRecord['Material__c']}-{!mList.sobjectRecord['Material_Code__c']}"/>
+        </apex:column>
+   </apex:dataTable>
+  <br/> 
+    <br/> 
+   <apex:outputtext value="Dear Customer:" style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;"/>
+    <br/>
+    <br/>
+    <apex:repeat value="{!listrequestdetils[0]}" var="b">
+  <apex:outputText value="DuPont EKC Technology, Limited is pleased to offer the following pricing to {!b.Sold_To__c} to meet the requirements of your facility:" style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;"/>
+    </apex:repeat>
+    <!-- Modified by Kanchan Solanki 11 Jan 2022 Changed name from DuPont Advanced Cleans Technologies to DuPont EKC Technology, Limited -->
+ <br/>   
+ <br/> 
+
+    
+  <apex:dataTable value="{!listofwrappertables}" var="mList" border="1" cellpadding="4" style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight:bold;">
+    
+        <apex:column headerValue="Material Code">
+            <apex:outputText value="{!mList.sobjectRecord['Material_Code__c']}"/>
+        </apex:column>
+        
+        <apex:column headerValue="Material Description">
+            <apex:outputText value="{!mList.sobjectRecord['Material__c']}"/>
+        </apex:column>
+        
+        <apex:column headerValue="Rate">
+            <apex:outputText value="{!mList.sobjectRecord['Rate__c']}"/>
+        </apex:column>
+        
+        <apex:column headerValue="Unit">
+            <apex:outputText value="{!mList.sobjectRecord['Unit__c']}"/>
+        </apex:column>
+          
+        <apex:column headerValue="UoM">
+            <apex:outputText value="{!mList.sobjectRecord['UoM__c']}"/>
+        </apex:column>
+                
+        <apex:column headerValue="Valid From" width="110px"> 
+            <apex:outputText value="{0,date,MMM dd yyyy}">
+                <apex:param value="{!mList.sobjectRecord['Valid_From__c']}"/>
+            </apex:outputText>
+        </apex:column>
+        
+    
+        
+    </apex:dataTable><br/><br/> 
+    
+   <apex:repeat value="{!listrequestdetils[0]}" var="b2">
+        <table width="500px" style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;">  
+            <tr>
+             <td width="50px;">Effective Date:</td>
+             <!--<td text-align="left">{!b2.Request_Valid_From__c}</td>-->
+             <td text-align="left"><apex:outputText value="{0,date,yyyy-MMM-dd }">
+                <apex:param value="{!b2.Request_Valid_From__c}" />
+        </apex:outputText></td>
+            </tr>
+            <tr>
+              <td width="50px;">Incoterms:</td>
+              <td text-align="left">{!b2.Incoterms_Code__c}-{!b2.Incoterm__c}</td>
+            </tr>
+            <tr>
+              <td width="50px;">Payment terms:</td>
+              <td text-align="left">{!b2.Terms_Of_Payment__c}</td>
+            </tr>
+             
+        </table>
+   </apex:repeat>
+   
+    <br/>
+    <br/>
+    <apex:outputText value="The above listed pricing is based on the average monthly purchase and subject to the attached terms and conditions." style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;"/>
+    <br/>  
+    <br/>
+    <apex:outputText value="This Price Confirmation constitutes the entire understanding between DuPont and your Company regarding the offer referred above and is subject to the Order Acknowledgment for all other terms and conditions including availability of product and date of delivery." style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;"/>
+    <br/>  
+    <br/> 
+       
+    
+    <apex:outputText value="Approved by:" style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;float:left;"/>
+ <br/>
+<apex:outputText rendered="{!onBehalfOfUser == null}" value="{!$User.FirstName} {!$User.LastName}" style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;"/>
+<apex:outputText rendered="{!onBehalfOfUser != null}" value="{!onBehalfOfUser}" style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;"/>
+   
+ 
+<br/><br/><br/><br/><br/><br/><br/><br/>
+<apex:outputText value="STANDARD CONDITIONS OF SALE" style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;text-align:center;"/>
+<br/>
+<apex:outputText value="EKC Technology, Limited" style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;text-align:center;"/>
+<br/>
+ <!-- Modified by Kanchan Solanki 11 Jan 2022 Changed name from DuPont Advanced Cleans Technologies to DuPont EKC Technology, Limited -->
+<apex:outputText value="REGISTERED OFFICE" style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;text-align:center;"/>
+<br/>
+<apex:outputText value="5 South Charlotte Street, Edinburgh, Scotland, EH2 4AN Telephone: +44 1438 734000" style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;text-align:center;"/>
+<br/>
+<br/>
+<apex:outputPanel style="font-family: Arial,Helvetica,sans-serif; font-size: 8px; font-weight: normal;">
+<br/>1. These are the terms and conditions governing the sale of Seller’s goods. Seller's commitment shall become effective only upon dispatch of Seller's written order acknowledgement or invoice, whichever occurs first.No modification of these terms and conditions shall be of any force unless such modification is reduced to writing and signed by the party claimed to be bound thereby, and no modification shall be effected by the acknowledgement or receipt of a purchase order or, other forms containing different conditions. In particular, acceptance of Seller's full or partial deliveries, as the case may be, or payment by Buyer, shall constitute acceptance of Seller's conditions of sale.<br/>
+<br/>2. Goods which are to be delivered within thirty (30) days from the date of Seller's order acknowledgement or, if none, receipt of Buyer's order, shall be invoiced at the price quoted by Seller. Unless otherwise stated overleaf the price of any such goods which are to be delivered more than thirty (30) days after the date of such order acknowledgement may be increased by Seller by written notice to Buyer issued at least ten (10) days prior to the effective date of the increase. Such increase shall be applicable to goods delivered after its effective date unless prior to the said date Buyer shall cancel its order as to the undelivered balance of goods to which the increased price applies. It is understood that Seller shall not exercise the right detailed above where delivery is delayed through its fault.<br/> 
+<br/>3. Seller's terms of payment applicable to any order are twenty (20) days from the end of the month of invoicing or such  other terms as are specifically quoted to Buyer in writing.  Non-compliance with Seller’s terms of payment shall constitute default without reminder. In case of default Seller may charge interest from the date upon which the invoice falls due at a rate of 4% above the Barclay’s Bank Rate in force on the first working day of the month in which the invoice in respect of such interest is raised, or of the month in which payment of the principal sum is made, if earlier. Seller shall be entitled to recover the price notwithstanding that delivery may not have taken place and the property in the goods has not passed to Buyer. Seller’s acceptance of a draft or comparable document shall not constitute payment. In the event that Buyer should fail to fulfill the terms of payment quoted in respect of any invoice, or should Seller have indications that Buyer’s financial responsibility is inadequate, Seller may in its sole discretion either demand payment of all balances whether due or not and/or cancel all outstanding orders and   decline to make further deliveries except upon receipt of cash or satisfactory security.  The setting off or withholding of payments by Buyer in respect of any claim shall not be allowed unless expressly agreed by Seller in  writing. For the purposes of these conditions payment shall mean the receipt of cleared funds by Seller.<br/> 
+<br/>4. Seller reserves the right to make any changes in the specification of the goods which are required to conform with any applicable statutory or EC requirements or, where the goods are to be supplied to Buyer’s specification, which do not materially affect their quality or performance.<br/>
+<br/>5. Delivery of the goods shall be made by Seller delivering the goods to a place agreed by Buyer and Seller. Seller shall be under no obligation under S32(2) of the Sale of Goods Act 1979. The goods may be delivered by Seller in advance of the quoted delivery date upon giving reasonable notice to Buyer.  Where the goods are to be delivered in installments, each delivery shall constitute a separate contract and failure by Seller to deliver any one or more of the installments in accordance with these conditions or any claim by Buyer in respect of any one or more installments shall not enable Buyer to treat the contract as a whole as repudiated.  <br/>
+<br/>6. Risk of loss of the goods hereunder shall pass at the point of delivery specified by Seller, or if Buyer wrongfully fails to take delivery of the goods, the time when Seller has tendered delivery of the goods. Incoterms 1990 shall  apply to export sales.<br/>
+<br/>7. Seller reserves the right to select the mode of transportation and the carriers to the point of delivery. Buyer shall bear the cost of special transportation arrangements requested by him including the cost of any demurrage incurred as a result of Buyer refusing or delaying acceptance of goods in transit beyond the delivery date indicated by Seller.<br/> 
+<br/>8. Seller’s weights taken at delivery points shall govern unless proven in error.<br/> 
+<br/>9. Seller shall use all reasonable Endeavour’s to meet the terms of delivery which it has quoted but Seller accepts no liability for any failure to deliver the goods within the said period. If Buyer fails to take delivery of the goods or fails to give Seller adequate delivery instructions at the time stated for delivery then, without prejudice to any other right or remedy available to Seller, Seller may<br/>
+       <br/>(a) store the goods until actual delivery and charge Buyer for the reasonable costs (including insurance) of storage; or<br/>
+       <br/>(b) sell the goods at the best price readily obtainable and (after deducting all reasonable storage and selling expenses) account to Buyer for the excess over the price under the contract or charge Buyer for any shortfall below the price under the contract.<br/>
+<br/>10. If goods forming any portion of an order are not taken by Buyer in accordance with the terms of delivery originally specified by Seller, the sale thereof may be postponed or cancelled at Seller’s option without tender or notice to Buyer.  Such postponement or cancellation shall not affect any remaining portion of the order.<br/>
+<br/>11. In the event of inability for any reason to supply the total demands for the goods ordered, Seller may allocate its available supply among any or all purchasers or users (including Seller and its affiliates) or make partial deliveries on such basis as it may deem fair or practical without liability for any failure of performance which may result therefrom.<br/>
+<br/>12. No liability shall result from delay in performance or non-performance, directly or indirectly caused by factors such as but not limited to fire, explosion, accident, flood, labour trouble or shortage, war, act of or authorised by any government, inability to obtain suitable material, equipment, fuel, power or transportation, or act of God or arising from contingencies, happenings, or causes beyond the control of the party affected. Quantities so affected by such circumstances may be eliminated or postponed by Seller without liability but the rights and duties of each party shall otherwise remain unaffected.<br/>
+<br/>13. Returnable product carriers or containers delivered but not sold hereunder are the property of Seller and at Seller’s option Buyer will either return them undamaged freight collect to the destination designated by Seller or  make them available at Buyer’s premises for collection by or on behalf of Seller in either case within the period specified by Seller.  Any deposit made by Buyer on such product carriers or containers shall be forfeited in the event of failure to return them undamaged within the specified period.  When no deposit is required Buyer agrees to reimburse Seller for the value as shown on the face of the invoice of any such product carriers or containers damaged or not returned within the specified period. Seller’s count and rejection of damaged returnable product carriers and containers shall be accepted as final.<br/>
+<br/>14. Seller warrants that goods sold hereunder shall be equal to Seller’s specifications and Buyer assumes all risks and liability for results obtained by the use of the goods covered by this order whether used singly or in combination  with other products.  Seller accepts no liability in respect of any defect arising from any drawing, design or specification supplied by Buyer in the goods.  The warranty stated above is given in respect of goods of first grade quality only and shall not apply either to any waste or to goods sold as sub-standard by Seller.<br/>
+<br/>15. Subject as expressly provided in these conditions, and except where the goods are sold to a person dealing as a consumer (within the meaning of the Unfair Contract Terms Act 1977), all warranties, conditions or other terms  implied by statute or common law are excluded to the fullest extent permitted by law.<br/>
+<br/>16. Except in respect of death or personal injury caused by Seller’s negligence, Seller shall not be liable to Buyer by reason of any representation (unless fraudulent), or any implied warranty, condition or other term, or any duty at  common law, or under the express terms of the contract, for any indirect, special or consequential loss or damage (whether for loss of profit or otherwise), costs, expenses or other claims for compensation whatsoever (whether caused by the negligence of Seller, its employees or agents or otherwise) which arise out of or in connection with  the supply of the goods or their use or resale by Buyer, and the entire liability of Seller under or in connection  with the contract shall not exceed the price of the goods, except as expressly provided in these conditions.<br/>
+<br/>17. Where goods have been processed in any manner by Buyer or any third party after they have been sold, the warranties expressed herein shall be limited to the goods in their unprocessed condition.<br/>
+<br/>18. Obvious deficiencies or damages shall be reported promptly by Buyer.  Hidden defects shall be reported to Seller on discovery thereof. Failure to give notice of claim within (30) thirty days from the date of delivery, or the date fixed for delivery or the date of discovery of a hidden defect, as the case may be shall constitute a waiver by Buyer of all claims in respect of the goods. No charges or expenses incidental to any claim shall be allowed unless approved in writing by Seller.  Goods the subject of a claim shall not be returned to Seller or otherwise disposed of without Seller’s permission.  If Seller accepts Buyer’s claim, Seller shall have the option of repairing or replacing the defective goods or of granting Buyer an appropriate price reduction.<br/>
+<br/>19. Seller warrants that the goods delivered do not infringe any patent in the country of origin, the United Kingdom or the Republic of Ireland; no further patent warranty is made.<br/>
+<br/>20. Seller warrants that the goods delivered do not infringe any patent in the country of origin, the United Kingdom or the Republic of Ireland; no further patent warranty is made.<br/>
+<br/>21. Upon request, Seller shall endeavor to furnish such technical advice or assistance as it has available in reference to the use of goods by Buyer; it is expressly understood, however, that all such technical advice or assistance is  given without liability and Seller assumes no obligation or liability for the advice or assistance given or results obtained therefrom, all such advice or assistance being given and accepted at Buyer’s risk.<br/>
+<br/>22. Goods not paid for in full may not be pledged or assigned to third parties.<br/>
+<br/>23. (i)    Until Buyer has paid Seller the full price of the goods and also of any other goods at any time supplied by Seller (together in this clause referred to as “the Goods”) and all other sums due or to become due to or liabilities present, future, or contingent of Buyer to Seller and all sums due in any way by Buyer to any holding company or subsidiary company of Seller (or any subsidiary of such holding company) and any agent or distributor of Seller:-<br/>
+          <br/>(a) The ownership of the Goods shall not pass to Buyer;<br/>
+          <br/>(b) Buyer shall, however, be entitled to sell the Goods in the ordinary course of business on the basis that the proceeds of sale shall be the property of Seller and held on trust for Seller and in a separate bank account and Buyer agrees to account to Seller on demand in respect of such proceeds and, if so required, to execute a formal assignment of all claims against the sub-purchaser;<br/>
+          <br/>(c) Seller reserves the right at any time to terminate Buyer’s power of sale by notice to Buyer if Buyer is in default for longer than 7 days in the payment of any sums whatsoever due to Seller for whatever reason or, if Seller has serious doubts as to the solvency of Buyer;<br/>
+          <br/>(d) Buyer’s power of sale shall automatically terminate if Buyer becomes the subject of liquidation, bankruptcy or other insolvency proceedings or a receiver is appointed over any of the assets of the undertaking of Buyer or if a petition is presented for the appointment of an administrator to Buyer or if Buyer makes any arrangement or composition with creditors or becomes unable to pay its debts within the meaning of Section 123 of the United Kingdom Insolvency Act 1986, or any statutory re-enactment thereof;<br/>
+          <br/>(e) If Buyer’s power of sale is terminated, Buyer shall immediately make the Goods available for collection by Seller and Buyer hereby irrevocably authorises Seller to enter upon any premises belonging to Buyer or under its control for the purpose of recovering Goods.  If Buyer has already sold the Goods to a third party the price payable on such Goods shall become immediately due and payable notwithstanding any previous agreement or arrangement to the contrary.<br/>
+    <br/> (ii) In the event that Seller shall exercise its right hereunder to repossess the Goods:-<br/>
+          <br/>(a) Seller shall have no obligation to account to Buyer for any amount received by it on sale thereof whether in excess of that due by Buyer to Seller or not; <br/>
+          <br/>(b) If the amount received by Seller on sale of such repossessed Goods shall be less than the amount due by Buyer either in respect thereof or on any other ground whatsoever such repossession shall for the avoidance of doubt not extinguish the liability of Buyer either for any deficiency in the amount received by Seller on such sale or for damages in respect of any loss occasioned by Seller as a result of its exercising its rights hereunder; <br/>
+          <br/>(c) Buyer shall be liable to Seller in addition to any other amount for which it may be liable, for all costs, charges and expenses (including legal costs) on a full recovery basis occasioned by such exercise by Seller or its said right to repossess.<br/>
+  <br/>  (iii) Until Buyer has paid Seller for Goods Buyer shall hold Goods as Seller’s fiduciary agent and bailee, and shall keep Goods separate from those of Buyer and third parties, and properly stored, protected and insured and identified as Seller’s property.<br/>
+  <br/>   (iv) Nothing in this clause shall confer any right on Buyer to return the Goods to or to refuse or delay payment thereof unless otherwise agreed and if any such return is so agreed Buyer shall be liable to Seller for any loss suffered by Seller thereby and the return of the Goods shall not extinguish any claim by Seller in respect thereof.<br/>
+<br/>24. If at any time before delivery of the goods any condition shall exist or arise which shall impede or restrict the free exchange of currency or goods between the United Kingdom and/or the Republic of Ireland and the country of origin of the goods, then delivery of any goods so affected may be suspended during the continuance of any such conditions or the contract may be terminated forthwith by either party.<br/>
+<br/>25. Any notice required or permitted to be given by either party to the other under these conditions shall be in writing addressed to that other party at its registered office or principal place of business or such other address as may at the relevant time have been notified in writing pursuant to this provision to the party giving the notice.<br/>
+<br/>26. No waiver by Seller of any breach of the contract by Buyer shall be considered as a waiver of any subsequent breach of the same or any other provision.<br/>
+<br/>27. If any provision of these conditions is held by any competent authority to be invalid or unenforceable in whole or in part the validity of the other provisions of these conditions and the remainder of the provision in question shall not be affected.<br/>
+<br/>28. IThese conditions shall be subject to and shall be construed in accordance with the Laws of England.  The Courts of England shall have exclusive jurisdiction over any dispute which may arise hereunder, unless the parties agree otherwise in writing.<br/>
+
+
+
+
+</apex:outputPanel>  
+
+ 
+
+ </apex:component>

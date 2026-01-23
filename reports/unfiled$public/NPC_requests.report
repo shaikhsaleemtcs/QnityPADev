@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Pricing_Request_Item__c$Name</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request_Item__c.NPC_Request__r$Name</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request_Item__c$Product_Hierarchy__c</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request_Item__c$Product_Hierarchy_Code__c</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request_Item__c$CreatedBy</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request_Item__c$CreatedDate</field>
+    </columns>
+    <currency>USD</currency>
+    <filter>
+        <criteriaItems>
+            <column>Pricing_Request_Item__c$Net_Price_Status__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Waiting for Net Price</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Pricing_Request_Item__c$Product_Hierarchy__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notContain</operator>
+            <value>cyrel,plates</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>NPC requests</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>NPC_Requests_With_PRI__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Pricing_Request_Item__c$CreatedDate</dateColumn>
+        <endDate>2018-12-31</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2018-12-01</startDate>
+    </timeFrameFilter>
+</Report>

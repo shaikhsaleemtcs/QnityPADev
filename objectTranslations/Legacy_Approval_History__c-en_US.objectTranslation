@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Legacy Approval History</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Approval Historys</value>
+    </caseValues>
+    <fields>
+        <label><!-- Actual Approver --></label>
+        <name>Actual_Approver__c</name>
+    </fields>
+    <fields>
+        <label><!-- Assigned To --></label>
+        <name>Assigned_To__c</name>
+    </fields>
+    <fields>
+        <label><!-- Comments --></label>
+        <name>Comments__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date --></label>
+        <name>Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pricing Request --></label>
+        <name>Pricing_Request__c</name>
+        <relationshipLabel><!-- Approval Historys --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Source Record Id --></label>
+        <name>Source_Record_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- Step Name --></label>
+        <name>Step_Name__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

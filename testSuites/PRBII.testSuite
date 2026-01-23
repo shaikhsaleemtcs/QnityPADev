@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexTestSuite xmlns="http://soap.sforce.com/2006/04/metadata">
+    <testClassName>DummyTestPAApprovalWF_UT</testClassName>
+    <testClassName>PAApprovalWF_UT</testClassName>
+    <testClassName>PAApprovalWF_UT1</testClassName>
+    <testClassName>PAService_UT</testClassName>
+    <testClassName>PAServiceState_UT</testClassName>
+    <testClassName>PAWrapper_UT</testClassName>
+    <testClassName>PricingRequestHandler_UT</testClassName>
+</ApexTestSuite>

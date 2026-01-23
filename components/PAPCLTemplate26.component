@@ -1,0 +1,153 @@
+<!-- **************************************************************************************************************
+ ***********************************************Modification Log***********************************************
+
+<VL20160104>
+Last Modified By    :   Vijay LAxmi
+Last Modified Date  :   04 Jan 2016
+Description         :   Adding Per value in PCL for BI EN business 'IS ID-00063255 '                                 
+ **************************************************************************************************************** -->
+
+
+<apex:component access="global" controller="PAPCLComponent">  
+<apex:stylesheet value="{!$Resource.PDFDocumentStyle}"/>
+  <apex:attribute name="targetObject" type="String" assignTo="{!listofids}" description="The context of the outer page email templates"/>
+     
+
+  <table width="100%">
+ <tr>
+  <td>
+        
+         <!--<apex:image id="Logo" value="https://util-dupont--uttest3--c.cs15.content.force.com/servlet/servlet.ImageServer?id=015e00000007uH5&oid=00De0000005PSKC&lastMod=1411812424000" alt="Dupont logo" height="60" width="75" style="float:left;"/>-->
+      <!--<apex:image id="Logo" value="https://specutil--c.documentforce.com/servlet/servlet.ImageServer?id=0151L00000PZbYk&oid=00D41000000Ueq3" alt="New_DuPont_Logo_2019" height="40" width="138" style="float:right;"/> //MM -->
+      <apex:image id="Logo" value="https://specutil.file.force.com/servlet/servlet.ImageServer?id=0151L00000PZbYk&oid=00D41000000Ueq3" alt="New_DuPont_Logo_2019" height="40" width="138" style="float:right;"/>
+         </td>
+            <td style="width: 30%" colspan="3" align="right"> 
+        <apex:outputText value="<b>DuPont de Nemours</b><br/>(Luxembourg) S.à r.l.<br/>Rue General Patton<br/>L-2984 Luxembourg<br/>" 
+        escape="false" style="font-family: Times New Roman,Georgia,Serif; font-size: 10px; font-weight: normal; color: #B2B2B2; float:right;"></apex:outputText>
+   </td>
+    </tr>
+  </table>  
+    
+  <!--<hr></hr>-->
+  <br/> 
+  <br/> 
+  <br/> 
+  
+   <apex:outputPanel style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;">
+            
+        <apex:outputText value="{0,date,yyyy-MMM-dd }" style="float:right;font-weight: normal;">
+                <apex:param value="{!TODAY()}" />
+        </apex:outputText>
+  </apex:outputPanel>  
+  <br/>                     
+  
+<apex:outputPanel style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;">
+    <apex:repeat value="{!listrequestdetils[0]}" var="b">
+    <table>
+  
+        <tr>
+        <td style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;">{!b.Sold_To__c}</td>
+        </tr>
+    
+        <tr>
+        <td style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;">{!b.Street__c}</td>
+        </tr>
+  
+        <tr>
+        <td style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;">{!b.City__c}</td>
+        </tr>
+  
+        <tr>
+        <td style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;text-transform:uppercase;">{!b.Country__c}</td>
+        </tr>
+  
+    </table>
+   </apex:repeat>
+ </apex:outputPanel> 
+ <br/><br/>
+<apex:outputText value="RE: Price Confirmation Letter" style="font-family: Arial,Helvetica,sans-serif; font-size:12px; font-weight: normal;"/>
+<br/>
+ <apex:outputtext value="Dear {!custName}," style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;"/>
+ <br/>
+ <br/>   
+    <apex:repeat value="{!listrequestdetils[0]}" var="b">    
+  <apex:outputText value="Please find hereafter an overview of the terms and conditions applicable to your orders." style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;"/>
+    </apex:repeat>
+ <br/>   
+ <br/> 
+ 
+   <apex:repeat value="{!listrequestdetils[0]}" var="b2">
+        <table width="500px" style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;">  
+            <tr>
+             <td width="50px;">Effective Date:</td>
+             <!--<td text-align="left">{!b2.Request_Valid_From__c}</td>-->
+             <td text-align="left"><apex:outputText value="{0,date,yyyy-MMM-dd }">
+                <apex:param value="{!b2.Request_Valid_From__c}" />
+        </apex:outputText></td>
+            </tr>
+            <tr>
+              <td width="50px;">Incoterms:</td>
+              <td text-align="left">{!b2.Incoterms_Code__c}-{!b2.Incoterm__c}</td>
+            </tr>
+            <tr>
+              <td width="50px;">Payment terms:</td>
+              <td text-align="left">{!b2.Terms_Of_Payment__c}</td>
+            </tr>
+             
+        </table>
+   </apex:repeat>
+   
+    <br/>
+    <apex:dataTable value="{!listofwrappertables}" var="mList" border="1" cellpadding="4" style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight:bold;">
+    
+        <apex:variable value="{!IF(mList.sobjectRecord['Material_Code__c']!=null,'Material Code','Product Hierarchy Code')}" var="h1"/>
+        <apex:variable value="{!IF(mList.sobjectRecord['Material_Code__c']!=null,mList.sobjectRecord['Material_Code__c'],mList.sobjectRecord['F_Product_Hierarchy_Code__c'])}" var="v1"/>
+        <apex:variable value="{!IF(mList.sobjectRecord['Material_Code__c']!=null,'Material Description','Product Hierarchy Description')}" var="h2"/>
+        <apex:variable value="{!IF(mList.sobjectRecord['Material_Code__c']!=null,mList.sobjectRecord['Material__c'],mList.sobjectRecord['Product_hierarchy__c'])}" var="v2"/>
+        <apex:column headerValue="{!h1}" rendered="{!IF(h1=='Material Code',true,false)}">
+            <apex:outputText value="{!mList.sobjectRecord['Material_Code__c']}" rendered="{!IF(h1=='Material Code',true,false)}"/>
+        </apex:column>
+        
+        <apex:column headerValue="{!h2}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['Material_Code__c']!=null,mList.sobjectRecord['Material__c'],mList.sobjectRecord['Product_hierarchy__c'])}"/>
+        </apex:column>
+        
+        <apex:column headerValue="Rate">
+            <apex:outputText value="{!mList.sobjectRecord['Rate__c']}"/>
+        </apex:column>
+        
+        
+     
+        <apex:column headerValue="Unit">
+            <apex:outputText value="{!mList.sobjectRecord['Unit__c']}"/>
+        </apex:column>
+        <!-- <VL20160104> -->
+          <apex:column headerValue="Per">
+            <apex:outputText value="{!mList.sobjectRecord['Per__c']}"/>
+        </apex:column>
+          
+        <apex:column headerValue="UoM">
+            <apex:outputText value="{!mList.sobjectRecord['UoM__c']}"/>
+        </apex:column>
+                
+        <apex:column headerValue="Valid From" width="110px"> 
+            <apex:outputText value="{0,date,MMM dd yyyy}">
+                <apex:param value="{!mList.sobjectRecord['Valid_From__c']}"/>
+            </apex:outputText>
+        </apex:column>
+        <apex:column headerValue="Valid To" width="110px"> 
+            <apex:outputText value="{0,date,MMM dd yyyy}">
+                <apex:param value="{!mList.sobjectRecord['Valid_To__c']}"/>
+            </apex:outputText>
+        </apex:column>
+    
+        
+    </apex:dataTable><br/><br/> 
+    <br/>      
+    
+    <apex:outputText value="Issued by:" style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;float:left;"/>
+ <br/>
+<apex:outputText rendered="{!onBehalfOfUser == null}" value="{!$User.FirstName} {!$User.LastName}" style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;"/>
+<apex:outputText rendered="{!onBehalfOfUser != null}" value="{!onBehalfOfUser}" style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;"/>
+
+ </apex:component>

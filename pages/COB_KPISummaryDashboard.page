@@ -1,0 +1,158 @@
+<apex:page controller="COB_KPISummaryDashboardController" sidebar="false" tabStyle="Dashboard" docType="html-5.0">
+<apex:form >
+<apex:pageBlock title="KPI Summary Dashboard">
+<style>
+    table, th, td 
+    {
+    border: px solid black;
+    border-collapse: collapse;
+    
+    }
+    th, td 
+    {
+     padding: 5px;
+    }
+    th 
+    {
+    text-align:left;
+    }
+</style>
+<apex:pageBlockSection columns="9"  >
+<apex:inputField id="startId" value="{!OnboardingReq.Start_Date__c}" >
+</apex:inputField>
+<apex:inputField value="{!OnboardingReq.End_Date__c}">
+</apex:inputField>
+<apex:outputLabel value="Selling Company Code"/>
+<apex:selectList value="{!companyCodeList}" size="1">
+    <apex:selectOptions value="{!sellingCompanyCode}"/> 
+</apex:selectList><p/> 
+<apex:outputLabel value="SBU"/>
+<apex:selectList value="{!SBU}" size="1">
+    <apex:selectOptions value="{!SBUCode}"/> 
+</apex:selectList><p/> 
+
+<center><apex:commandButton value="Submit" action="{!DateSubmit}" reRender="KPISummary"/></center>
+</apex:pageBlockSection>
+
+<br/><br/>
+<apex:outputPanel id="KPISummary">
+    <table border="2" align="Center"  CellSpacing="3" style="width:70%;">
+        
+        <apex:repeat value="{!totalRequestCreated}" var="var1" rows="1" id="rep1">
+        <tr>
+        <td><b>Total Requests Created</b></td>                       
+        <td>{!totalRequestCreated}</td>
+        </tr>
+        </apex:repeat>
+        
+              
+        <apex:repeat value="{!totalRequestCompleted}" var="var2" rows="1" id="rep2">
+        <tr>
+        <td><b>Total Requests Completed</b></td>                       
+        <td>{!totalRequestCompleted}</td>
+        </tr>
+        </apex:repeat>
+        
+        <apex:repeat value="{!totalRequestRejected}" var="var11" rows="1" id="rep11">
+        <tr>
+        <td><b>Total Requests Rejected</b></td>                       
+        <td>{!totalRequestRejected}</td>
+        </tr>
+        </apex:repeat>
+        
+        <apex:repeat value="{!avgTimeToComplete}" var="var3" rows="1" id="rep3">
+        <tr>
+        <td><b>Average Time to Complete</b></td>                       
+        <td>{!avgTimeToComplete}</td>
+        </tr>
+        </apex:repeat>
+        
+        <apex:repeat value="{!avgDataGatheringTime}" var="var4" rows="1" id="rep4">
+        <tr>
+        <td><b>&nbsp;&nbsp;&nbsp; ==>> Average Time Data Gathering</b></td>                       
+        <td>{!avgDataGatheringTime}</td>
+        </tr>
+        </apex:repeat>
+        
+        <apex:repeat value="{!avgDestinationCreditTime}" var="var5" rows="1" id="rep5">
+        <tr>
+        <td><b>&nbsp;&nbsp;&nbsp; ==>> Average Destination Credit</b></td>                       
+        <td>{!avgDestinationCreditTime}</td>
+        </tr>
+        </apex:repeat>
+        
+        <apex:repeat value="{!avgCountryCreditTime}" var="var6" rows="1" id="rep6">
+        <tr>
+        <td><b>&nbsp;&nbsp;&nbsp; ==>> Average Time Country Credit</b></td>                       
+        <td>{!avgCountryCreditTime}</td>
+        </tr>
+        </apex:repeat>
+        
+        <apex:repeat value="{!avgDOATime}" var="var7" rows="1" id="rep7">
+        <tr>
+        <td><b>&nbsp;&nbsp;&nbsp; ==>> Average Time DOA Credit</b></td>                       
+        <td>{!avgDOATime}</td>
+        </tr>
+        </apex:repeat>
+      
+        <apex:repeat value="{!avgDMSTime}" var="var8" rows="1" id="rep8">
+        <tr>
+        <td><b>&nbsp;&nbsp;&nbsp; ==>> Average Time DMS</b></td>                       
+        <td>{!avgDMSTime}</td>
+        </tr>
+        </apex:repeat>
+        
+        <apex:repeat value="{!InprogressRequest}" var="var9" rows="1" id="rep9">
+        <tr>
+        <td><b>Total Number in Process</b></td>                       
+        <td>{!InprogressRequest}</td>
+        </tr>
+        </apex:repeat>
+        
+        <apex:repeat value="{!AvgInProcess}" var="var10" rows="1" id="rep10">
+        <tr>
+        <td><b>Average Time in Process</b></td>                       
+        <td>{!AvgInProcess}</td>
+        </tr>
+        </apex:repeat>
+        
+        <apex:repeat value="{!longestInProgress}" var="var12" rows="1" id="rep12">
+        <tr>
+        <td><b>Longest in Process</b></td>                       
+        <td>{!longestInProgress}</td>
+        </tr> 
+        </apex:repeat>
+        
+        <apex:repeat value="{!totalComplInThreeDays}" var="var13" rows="1" id="rep13">
+        <tr>
+        <td><b>&nbsp;&nbsp;&nbsp; ==>> Request Completed within 3 days</b></td>                       
+        <td>{!totalComplInThreeDays}</td>
+        </tr>
+        </apex:repeat>
+        
+        <apex:repeat value="{!percentcompInThreeDays}" var="var14" rows="1" id="rep14">
+        <tr>
+        <td><b>&nbsp;&nbsp;&nbsp; ==>> % Completed within 3 days</b></td>                       
+        <td>{!percentcompInThreeDays}</td>
+        </tr>
+        </apex:repeat>
+        
+        <apex:repeat value="{!totalCompInFirstPass}" var="var15" rows="1" id="rep15">
+        <tr>
+        <td><b>&nbsp;&nbsp;&nbsp; ==>> Request Completed First Pass </b></td>                       
+        <td>{!totalCompInFirstPass}</td>
+        </tr>
+        </apex:repeat>
+         
+         <apex:repeat value="{!percentcompInFirstPass}" var="var16" rows="1" id="rep16">
+        <tr>
+        <td><b>&nbsp;&nbsp;&nbsp; ==>> % Completed in First Pass</b></td>                       
+        <td>{!percentcompInFirstPass}</td>
+        </tr>
+        </apex:repeat>
+        
+    </table>
+    </apex:outputPanel>
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>

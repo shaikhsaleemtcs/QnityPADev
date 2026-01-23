@@ -1,0 +1,191 @@
+<!--    Ver.            Developer       Changes                                         Dependencies    -->
+<!--    1.1             Prachi          Added filters 			                        None            -->
+<!-- 	1.2				Bala			Added 3 attributes SA,Dist,Div					None			 -->
+<!-- 	1.3				Bala			Added 1 attribute for AssigntedTo				None			 -->
+
+<apex:component controller="PAUserPopulation" >
+<script>
+
+function reassignPOPUP(userId)
+{
+    {!displayLookUp} = false;
+    
+    openConfirmation(userId);
+}
+</script>
+<apex:attribute description="selected Bu from page" type="string" name="selectedBuAtr" assignTo="{!buSelectedFromPage}"/>
+<apex:attribute description="Selected user from component" type="string" name="userSelectedAtr"/>
+<apex:attribute description="user Name" type="string" name="userNameAtr"/>
+<apex:attribute description="userId" type="string" name="userIdAtr"/>
+<apex:attribute description="salesOrgCode" type="string" name="salesOrgCodeAtr" assignTo="{!salesOrgCodeFromPage}"/>
+<apex:attribute description="divisionCode" type="string" name="divisionCodeAtr" assignTo="{!divisionCodeFromPage}"/>
+<apex:attribute description="distCode" type="string" name="distCodeAtr" assignTo="{!distCodeFromPage}"/>
+<apex:attribute description="For Assigned To" type="string" name="assignedToAtr" assignTo="{!assignedToFromPage}"/>
+<apex:attribute description="Level from Page" type="string" name="levelAtrFromPage"/>
+<apex:attribute description="Level to Page" type="string" name="levelAtrFromComp"/>
+<apex:attribute description="Display Filters" type="boolean" name="displayFiltersAtr"/>
+<!-- MS20140926 -->
+<apex:attribute description="Display Search Filters" type="boolean" name="dispSearchFilters" assignTo="{!displaySearchFilters}"/>
+<!-- PP20140603 -->
+<apex:attribute description="Display PopUpWindow" type="boolean" name="displayAtrComp" assignTo="{!isDispOnLoad}"/>
+<apex:attribute description="user access Id" type="String" name="accessIdAtr"/>
+<apex:attribute description="user Email Id" type="String" name="userEmailID"/>
+<!-- MS20140930
+<apex:attribute description="massReassign Flag" type="boolean" name="massReassignFlag"/> -->
+<apex:attribute description="closeButton" type="boolean" name="closeButton"/>
+
+<apex:attribute description="Display LookUpImage" type="boolean" name="displayLookUp" assignTo="{!displayLookUp}"/>
+    <apex:outputPanel rendered="{!OR((displayLookUp == NULL),(displayLookUp == false))}"> 
+	    <!-- <apex:outputText value="Sold To" />
+	    <apex:inputText value="{!soldToFieldValue}" size="7"></apex:inputText> -->
+	    <apex:commandLink action="{!displayPopUpWindow}" status="stat">
+	    <apex:image id="theImage" url="{!$Resource.LookUpImage}"/></apex:commandLink>
+    </apex:outputPanel>
+ 
+<!----SoldToLookUp PopUp Window---->
+ <apex:outputPanel id="backPage" rendered="{!(OR(display,(displayLookUp != NULL && displayLookUp == true)))}" styleClass="BackPage" ></apex:outputPanel> 
+<apex:outputPanel id="popUPwindow" rendered="{!(OR(display,(displayLookUp != NULL && displayLookUp == true)))}" styleClass="FrontPageSoldToBehalf" >
+<apex:panelGrid style="float:right;">
+   <apex:commandLink action="{!closeWindow}" rendered="{!IF(assignedToFromPage!='massreassign',true,false)}">
+      <apex:image url="{!$Resource.closeButton}" width="15" height="15"/>
+   </apex:commandLink>
+   <apex:commandLink onclick="closeUserPopUp()" action="{!closeWindow}" rendered="{!IF(assignedToFromPage=='massreassign',true,false)}">
+      <apex:image url="{!$Resource.closeButton}" width="15" height="15"/>
+      <apex:param name="close" value="false" assignTo="{!closeButton}"/>
+   </apex:commandLink>
+</apex:panelGrid> 
+
+<div id="CompErrorMessage">
+	<apex:PageMessages ></apex:pageMessages>  
+</div>
+ <apex:pageBlock rendered="{!dispSearchFilters}">
+	 <apex:pageBlockSection title="On-Behalf Of" rendered="{!assignedToFromPage == NULL}" collapsible="false"/>
+	 <apex:pageBlockSection title="Assigned To" rendered="{!assignedToFromPage == 'All'}" collapsible="false"/>
+	 <apex:pageBlockSection title="Reassign Approver" rendered="{!OR((assignedToFromPage == 'reassign'),(assignedToFromPage == 'massreassign'))}" collapsible="false"/>
+	 <apex:pageBlockSection title="Delegate Approver" rendered="{!assignedToFromPage == 'delegate'}" collapsible="false"/>
+	 	<apex:pageBlockSection rendered="{!NOT(displayFiltersAtr)}">
+	 		<apex:pageBlockSectionItem >
+	 			<apex:outputText value="Name"/>
+	 			<apex:inputText value="{!filter_name}" maxLength="80"/>
+	 		</apex:pageBlockSectionItem>
+	 		
+	 		<apex:pageBlockSectionItem >
+	 			<apex:outputText value="Email"/>
+	 			<apex:inputText value="{!filter_email}" maxLength="80"/>
+	 		</apex:pageBlockSectionItem>
+	 		
+	 		<apex:pageBlockSectionItem >
+	 			<apex:outputText value="Country"/>
+	 			<apex:inputText value="{!filter_country}" maxLength="80"/>
+	 		</apex:pageBlockSectionItem>
+	 		
+	 		<apex:pageBlockSectionItem >
+	 			<apex:outputText value="SAP Id"/>
+	 			<apex:inputText value="{!filter_sapId}" maxLength="80"/>
+	 		</apex:pageBlockSectionItem>
+	 		
+	 		<apex:pageBlockSectionItem >
+	 			<apex:outputText value="E-Pass Id"/>
+	 			<apex:inputText value="{!filter_epassId}" maxLength="80"/>
+	 		</apex:pageBlockSectionItem>
+	 		
+	 	</apex:pageBlockSection>
+	
+	 	
+	 	<br/> 
+        <center>       
+          <apex:commandButton value="Search"  status="stat"  action="{!dosearch}" rendered="{!NOT(displayFiltersAtr)}">         
+          </apex:commandButton>      
+        </center> 
+
+	</apex:pageBlock> 	
+	 	
+	 <apex:pageBlock rendered="{!OR(displayTableOnSearch,(displayLookUp != NULL && displayLookUp == true))}">
+	 <!-- MS20141027 Changing id -->
+<table class="list" id="listUser" cellPadding="0" cellSpacing="0" border="0" style="position:'relative';width:100%;">
+	<thead class="headerRow">
+		<tr>
+			
+			<th class="headerRow" scope="col">Name</th>
+			<th class="headerRow" scope="col">Email</th>
+			<th class="headerRow" scope="col">Country</th>
+            <!-- <th class="headerRow" scope="col">E-Pass Id</th> -->
+		</tr>
+	</thead>
+	<apex:repeat value="{!allSalesReps}" var="v">
+		<tr class="dataRow">	    
+		    
+		    <td class="dataCell" colSpan="1">
+            
+              <apex:commandLink value="{!v.Name}" action="{!returnData}" rendered="{!IF(assignedToFromPage!='massreassign',true,false)}">
+                <apex:param name="passUserePass" value="{!v.E_Pass_ID__c}" assignTo="{!userSelectedAtr}"/>
+                <apex:param name="uName" value="{!v.Name}" assignTo="{!userNameAtr}"/>
+                <apex:param name="uId" value="{!v.id}" assignTo="{!userIdAtr}"/>
+                <apex:param name="uEPassId" value="{!v.E_Pass_ID__c}" assignTo="{!accessIdAtr}"/>
+                <apex:param name="uEmailId" value="{!v.email}" assignTo="{!userEmailID}"/>
+                <apex:param name="levelToPass" value="{!levelAtrFromPage}" assignTo="{!levelAtrFromComp}"/>
+              </apex:commandLink>
+              <apex:commandLink value="{!v.Name}" onClick="openConfirmation('{!v.id}')" status="stat" rendered="{!IF(assignedToFromPage=='massreassign',true,false)}"><!-- reRender="{!IF(assignedToFromPage=='reassign','popUPwindow,ReassignPopUp','')}" -->
+		        <apex:param name="passUserePass" value="{!v.E_Pass_ID__c}" assignTo="{!userSelectedAtr}"/>
+		        <apex:param name="uName" value="{!v.Name}" assignTo="{!userNameAtr}"/>
+		        <apex:param name="uId" value="{!v.id}" assignTo="{!userIdAtr}"/>
+		        <apex:param name="uEPassId" value="{!v.E_Pass_ID__c}" assignTo="{!accessIdAtr}"/>
+                <apex:param name="uEmailId" value="{!v.email}" assignTo="{!userEmailID}"/>
+		        <apex:param name="levelToPass" value="{!levelAtrFromPage}" assignTo="{!levelAtrFromComp}"/>
+                <!--<apex:param name="massReassignFlag" value="{!IF(assignedToFromPage=='massreassign',true,false)}" assignTo="{!massReassignFlag}"/>  -->
+		      </apex:commandLink>
+		     </td>
+		    <td class="dataCell" colSpan="1">
+		      <apex:outputText value="{!v.email}">
+		      </apex:outputText>
+		    </td>
+		    <td class="dataCell" colSpan="1">
+		      <apex:outputText value="{!v.User_Country__c}">
+		      </apex:outputText>
+		    </td>
+            <!-- 
+		    <td class="dataCell" colSpan="1">
+		      <apex:outputText value="{!v.E_Pass_ID__c}">
+		      </apex:outputText>
+		    </td>
+             -->
+		  </tr>
+	</apex:repeat>
+</table>
+<br/>
+
+	</apex:pageBlock>
+</apex:outputPanel>
+<!-- Editing the style Bala - Feb 22 -->
+<style type="text/css">
+
+    .FrontPageSoldToBehalf {
+        background-color: white;
+        //border-width: 2px;
+        border: 2px solid #63A4C5;
+        z-index: 9998;
+        left: 20%;
+        padding: 10px;
+        position: absolute;
+        //width: 60%;
+        top:40px;
+        width:750px;
+    }
+    
+    //#CompErrorMessage {
+    	//float:left;
+    //}
+    
+    .BackPage {
+        background-color: #696969;
+        opacity: 0.5;
+        filter: alpha(opacity = 50);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 9997;
+    }
+    </style>
+</apex:component>

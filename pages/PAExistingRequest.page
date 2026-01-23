@@ -1,0 +1,271 @@
+<apex:page controller="ctrlPAMain" tabstyle="Price_Approval__tab" sidebar="false" showHeader="true" id="currentPage" cache="true" action="{!onLoadCall}">
+<apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.js')}" />
+<apex:stylesheet value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/css/jquery.dataTables.css')}" />
+<c:loadingComponent />
+<apex:pageMessages escape="false" id="errorMessage"/> 
+    <!--  Version 1.1 Start -->
+    <!-- Changed the Header -->
+    <!--  version 1.1 END  -->
+    <!--    Ver.            Developer               Changes                                                         Dependencies    -->
+    <!--    1.2             Priyanka        Changed table component to 'PARelatedListComponent'                                     -->
+    <!--                                    from PARelatedList                                                      None            -->
+    <!--    1.3             Prachi          UI change                                                               None            -->
+    <!--    1.4             Bala            Added attributes to PAUserPopulation Component                          None            -->
+    <!--    1.4             Brundha         UI                                                                      None            -->
+    <!--    1.5             Prachi          UI change                                                               None            -->
+    <!--    TJ20140505      Tarun           Added the landing page link                                             None            -->
+    <!--    TJ20140509      Tarun           Added Navigation Flow Text                                              None            -->    
+    <style>
+.customerLink {
+    font-size: 15px;
+    height: 20px;
+    margin-bottom: 1px;
+    padding: 5px;
+    border: solid 1px;
+    border-color: #6E96B2;
+    background-color: #E5F3FC;
+    font-weight: bold;
+    text-align: left;
+}
+
+.navFlow{
+font-size:13px;
+font-style:oblique;
+margin-bottom:3px;
+}
+
+#import .detailList {
+    padding: 0px;
+    border: 1px solid #E2E3E4;
+}
+
+#import .detailList .data2Col {
+    padding: 0px;
+}
+
+//
+#import .detailList .dataCol .requiredBlock {
+    top: 0px;
+    height: 20px;
+    bottom: 0px;
+}
+
+#import .detailList tr th {
+    border-bottom: none;
+}
+
+#import .detailList tr td {
+    border-bottom: none;
+}
+
+#import .bPageBlock {
+    float: left;
+    width: 100%;
+}
+
+#import .pbSubheader {
+    margin-bottom: 0px;
+}
+
+#requests .pbBody {
+    margin: 0px;
+}
+
+body .pbBody table.list tr td {
+    border-bottom: none;
+}
+
+body .pbBody table.list tr th {
+    color: white;
+    background-color: #63A4C5;
+}
+
+.bPageBlock .detailList .list tr th {
+    color: white;
+}
+.noTableFooter
+{
+margin:0px!important;
+}
+
+.bPageBlock .detailList #PARelatedListComponentTable tr:first-child th {color:white;background-color:#63A4C5;}
+.bPageBlock .detailList #PARelatedListComponentTable tr:nth-child(2) th{color:black;background-color:#f8f8f8;border:1px solid #E2E3E4;}
+</style>
+
+
+<script>
+var j$ = jQuery.noConflict();                                   //<TJ20140401> - added javascript to generate HTML Table with additional functionalities
+j$(document).ready(function(){
+    var tab=j$('#PARelatedListComponentTable').dataTable({
+            "bLengthChange":false,
+            "aLengthMenu": [100,200],
+            "iDisplayLength" : 100,
+            "aoColumnDefs" : [{"bSortable": false,"bSearchable": false, "aTargets":[0]}],
+            sPaginationType: "full_numbers",
+            sPlaceHolder : "foot:before",
+    });                     
+    j$('#PARelatedListComponentTable'+'_filter').after('<br /><br />');
+    j$('#PARelatedListComponentTable').after('<br />');
+    
+    
+    //<GT20141028> - Added the following lines to enable search box on user population component
+    var tab1=j$('#listUser').dataTable({
+            "bLengthChange":false,
+            "aLengthMenu": [100,200],
+            "iDisplayLength" : 100,
+        //  "aoColumnDefs" : [{"bSortable": false,"bSearchable": false, "aTargets":[0]}],
+            sPaginationType: "full_numbers",
+            sPlaceHolder : "foot:before",
+            "sDom": 'frt',
+            });                     
+    j$('#listUser'+'_filter').after('<br /><br />');
+    j$('#listUser').after('<br />');
+});
+
+
+</script>
+    <apex:form >
+        <!-- TJ<20140505> Added Landing Page Link -->
+        <div align="left" class="navFlow">
+            <apex:commandLink id="link0" value="Landing Page" action="{!businessComponentAction}" target="_self" style="color:blue;">
+            <apex:param name="desiredAction" value="landingpage" assignTo="{!businessaction}" />
+            <apex:param name="newPageLabel" value="PAHome" assignTo="{!newPageLabel}" />
+            </apex:commandLink>
+        <!-- <TJ20140509> Added Navigation Flow Text -->
+            <apex:outputText value="{!if(NOT(ISNULL(navigationText)),'>>','')} "/>
+            <apex:outputText value="{!navigationText}"/>
+            <apex:outputText value=">>{!$Label.Existing_Request}"/>
+        </div>
+<!--        <TJ20140417>   Changed Page Label-->        
+        <div class="customerLink">{!$Label.Existing_Request}</div>
+
+        <div id="import"><apex:pageBlock >
+            
+            <apex:pageBlockSection title="Sales Area Detail" columns="1">
+                <apex:pageBlockSection >
+                    <apex:pageBlockSectionItem >
+                        <apex:outputText value="Business" />
+                        <apex:outputText value="{!service.paServiceState.currentRequest.selectedBU}" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputtext value="On Behalf Of" />
+                        <apex:outputPanel >
+                            <apex:inputText style="float:left;margin: 0px;" value="{!service.paServiceState.ogItems.userName}" />
+                            <c:PAUserPopulation selectedBuAtr="{!service.paServiceState.ogitems.selectedBU}"
+                                userIdAtr="{!service.paServiceState.ogItems.selectedUser}"
+                                userNameAtr="{!service.paServiceState.ogItems.userName}"
+                                dispSearchFilters="false"
+                                salesOrgCodeAtr="{!service.paServiceState.currentRequest.pricingRequest.Sales_Org_Code__c}"
+                                divisionCodeAtr="{!service.paServiceState.currentRequest.pricingRequest.Division_Code__c}"
+                                distCodeAtr="{!service.paServiceState.currentRequest.pricingRequest.Dist_Channel_Code__c}" />
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputtext value="Sales Org" />
+                        <apex:outputPanel >
+                            <apex:outputText style="float:left;margin: 0px;" value="{!service.paServiceState.currentRequest.pricingRequest.Sales_Org_Code__c}-{!service.paServiceState.currentRequest.pricingRequest.Sales_Org__c}"
+                                rendered="{!service.paServiceState.currentRequest.pricingRequest.Sales_Org_Code__c<>null}"/>
+                                <div class="requiredInput" style="float:left;">
+                                <div class="requiredBlock" style="float:left;"></div>
+                                <apex:inputText style="float:left;margin: 0px;" rendered="{!service.paServiceState.currentRequest.pricingRequest.Sales_Org_Code__c==null}"
+                                    disabled="true" size="30" />
+                                </div>
+                                <!-- MS2014 adding attribute setupPageCheck -->
+                                <c:PASalesAreaSelectionComponent BUIdFromPage="{!service.paServiceState.ogItems.selectedBU}"
+                                    soSAComponenet="{!service.paServiceState.currentRequest.pricingRequest.Sales_Org__c}"
+                                    soCodeSAComponenet="{!service.paServiceState.currentRequest.pricingRequest.Sales_Org_Code__c}"
+                                    dcSAComponenet="{!service.paServiceState.currentRequest.pricingRequest.Dist_Channel__c}"
+                                    dcCodeSAComponenet="{!service.paServiceState.currentRequest.pricingRequest.Dist_Channel_Code__c}"
+                                    divSAComponenet="{!service.paServiceState.currentRequest.pricingRequest.Division__c}"
+                                    divCodeSAComponenet="{!service.paServiceState.currentRequest.pricingRequest.Division_Code__c}" 
+                                    saConcatComponent="{!service.paServiceState.currentRequest.customer.salesArea}"
+                                    userIdFromPage="{!service.paServiceState.ogitems.selectedUser}"
+                                    enablePopUp="{!service.paServiceState.ogItems.showPopup}" setupPageCheck="true" />
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem dataStyle="height:25px"
+                        labelStyle="height:25px">
+                        <apex:outputtext value="Dist. Channel" />
+                        <apex:outputText value="{!service.paServiceState.currentRequest.pricingRequest.Dist_Channel_Code__c}-{!service.paServiceState.currentRequest.pricingRequest.Dist_Channel__c}"
+                            rendered="{!service.paServiceState.currentRequest.pricingRequest.Sales_Org_Code__c<>null}"/>
+                    
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputtext value="Division" />
+                        <apex:outputText value="{!service.paServiceState.currentRequest.pricingRequest.Division_Code__c}-{!service.paServiceState.currentRequest.pricingRequest.Division__c}"
+                            rendered="{!service.paServiceState.currentRequest.pricingRequest.Sales_Org_Code__c<>null}"/>
+                    
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+            </apex:pageBlockSection>
+            <div
+                style="float: left; text-align: center; padding: 10px 0px 10px 43%;">
+            <apex:commandLink value="Create Import Request"
+                action="{!businessComponentAction}" styleClass="btn"
+                style="text-decoration:none;">
+                <apex:param name="desiredAction" value="createImport"
+                    assignTo="{!businessaction}" />
+                <apex:param name="newPageLabel" value="PAImportReqItems"
+                    assignTo="{!newPageLabel}" />
+                <!-- <TJ20140509> Passing Label for Displaying Navigation Flow -->
+                <!--<apex:param name="pageName" value="{!$Label.Existing_Request}" assignTo="{!pageName}"/>-->
+            </apex:commandLink> 
+            <!-- START <GT20150122> Massive import button -->
+            <apex:commandLink value="Create Massive Import Request"
+                action="{!businessComponentAction}" styleClass="btn"
+                style="text-decoration:none;">
+                <apex:param name="desiredAction" value="createMassiveImport"
+                    assignTo="{!businessaction}" />
+                <apex:param name="newPageLabel" value="PAImportReqItems"
+                    assignTo="{!newPageLabel}" />
+            </apex:commandLink> 
+            <!-- END <GT20150122> Massive import button -->
+            
+            <apex:outputLink value="/apex/PAHome" styleClass="btn"
+                style="text-decoration:none;">Cancel</apex:outputLink></div>
+                <br/>
+                <br/>
+
+
+            <apex:pageBlockSection title="Requests List" columns="1" id="request">
+                <!-- <apex:outputPanel >  -->
+                <div id="requests"><apex:pageBlockSection columns="1">
+                    <apex:repeat value="{!service.paServiceState.currentRequest.relatedWrappersList}"
+                        var="wrapper">
+                        <!-- Ver 1.2 START -->
+                        <c:PARelatedListComponent WrapperRecordsDisp="{!wrapper.wrapperList}" actionShowFlag="true"
+                            columnsDisp="{!wrapper.keyCombinationcolumns}"
+                            viewMode="{!currentPageLabel}"
+                            selected="{!service.PAServicestate.currentRequest.pricingRequestId}"
+                            actionAtr="{!businessaction}"
+                            typeOfSObjectList="{!wrapper.sObjectTypeName}"
+                            labelName="{!pageName}" currentHeader="{!$Label.Existing_Request}">
+                        </c:PARelatedListComponent>
+                        <!-- Ver 1.2 END -->
+
+
+                    </apex:repeat>
+                </apex:pageBlockSection></div>
+                
+            </apex:pageBlockSection>
+
+            
+            <div
+                style="float: left; text-align: center; padding: 10px 0px 10px 43%;">
+            <apex:commandLink value="Create Import Request"
+                action="{!businessComponentAction}" styleClass="btn"
+                style="text-decoration:none;">
+                <apex:param name="desiredAction" value="createImport"
+                    assignTo="{!businessaction}" />
+                <apex:param name="newPageLabel" value="PAImportReqItems"
+                    assignTo="{!newPageLabel}" />
+                <!-- <TJ20140509> Passing Label for Displaying Navigation Flow -->
+                <!--<apex:param name="pageName" value="{!$Label.Existing_Request}" assignTo="{!pageName}"/>-->
+            </apex:commandLink> <apex:outputLink value="/apex/PAHome" styleClass="btn"
+                style="text-decoration:none;">Cancel</apex:outputLink></div>
+            
+        </apex:pageBlock></div>
+    </apex:form>
+</apex:page>

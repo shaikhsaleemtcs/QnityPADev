@@ -1,0 +1,11 @@
+<!-- This component is used to get the rejection comments -->
+<!--	Ver.	Developer	  	Date				Changes															Dependencies	-->
+
+<apex:component access="global" controller="PARelatedList">
+  <apex:attribute description="PR ID for Email Tempalte" type="String"
+		name="ProjectPriceIdForProject" assignTo="{!ProjectPriceId}"  />
+		
+<apex:outputtext value="{!ProjectRequestId}"></apex:outputtext>
+
+		
+</apex:component>

@@ -1,0 +1,1093 @@
+<!--    Ver.            Developer               Changes                                                         Dependencies    -->
+<!--    1.1             Priyanka        Changed table component to 'PARelatedListComponent'                                     -->
+<!--                                    from PARelatedList                                                      None            -->
+<!--    1.2             Priyanka            Change in architecture                                              None    -->
+<!--    1.3             Brundha           UI                                                                    None    -->
+<!--    1.4             Prachi            UI                                                                    None    -->
+<!--    1.5             Priyanka        Added 'Configuration Elements' section - APAC ROLLOUT                   None            -->
+<!--    1.6             Bisnupriya                              Added Standardized Currency and Standardized UoM -APAC ROLLOUT2         None            -->
+<!-- PP20130710     Priyanka Pillala    10 Jul 2013             Adding Request Class - APAC ROLLOUT2                                    None            -->
+<!-- BR20130625     Brundha Rajkumar    25 Jun 2013             Adding Pricing Exception - APAC ROLLOUT2                                    None            -->
+<!-- VR20131011     Vinoth Rajapandian  11 Oct 2013             Adding Incoterms - DTT ROLLOUT                                    None            -->
+<!-- PP20131022     Priyanka Pillala    22 Oct 2013             Adding Terms of Payment - ROLLOUT2              None -->
+<!-- JM20140421     Jawahar MuthuAdaikalam  21 April 2014       Adding Default Elements - PA Rollout                None -->
+<!-- TJ20140505     Tarun Jain              05 May 2014         Added Landing Page Link                             None             -->
+<!-- TJ20140509     Tarun Jain              09 May 2014         Added Navigation Flow Text                          None             -->
+<!-- JM20140512     Jawahar MuthuAdaikalam  12 April 2014       Adding Variant,SalesOrderType Pick List in Key Combination Pick Lists Section - PA Rollout      None -->
+<!-- JM20140513     Jawahar MuthuAdaikalam  13 April 2014       Adding Pricing Parameter Pick Lists Section and BUAdminName ,Approval Routing Level field in Business Section - PA Rollout      None -->
+<!-- JM20140613     Jawahar MuthuAdaikalam  13 June 2014        Added Tool tip help text for Configuration Elements,Default Values,Currency & UoM Setup,Pricing Task Type Setup,Request Reason Setup,Date Offset Setup,Key Combination Pick Lists,Pricing Exceptions,Pricing Parameter Pick Lists section - PA Rollout      None -->
+<!-- HL20140904     Hema Latha              04 Sep 2014         Added code for New PH creation        None -->
+<!-- PG20191211     Piyush Gupta            11 Dec 2019         Added code for fetching Customer Group 4 from ERP Cust.Mat.Key in Sales Area Setup        None -->
+<!-- SS20220826     Shantanu Sharma            26 Aug 2022         Added code for fetching Sales Order Item from ERP Cust.Mat.Key in Sales Area Setup and update version to 55     None -->
+<!-- SS20230501     Shantanu Sharma            01 May 2023         Added code for fetching P80 M&M Fields from ERP Cust.Mat.Key in Sales Area Setup and update version to 57    None -->
+<apex:page controller="ctrlPAMain" tabstyle="Price_Approval__tab"
+    sidebar="false" showHeader="true" id="currentPage" cache="true"
+    action="{!onLoadCall}">
+<apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.js')}" />
+<apex:stylesheet value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/css/jquery.dataTables.css')}" />
+
+<c:loadingComponent />
+ <style>
+.customerLink {
+    font-size: 15px;
+    height: 20px;
+    margin-bottom: 1px;
+    padding: 5px;
+    border: solid 1px;
+    border-color: #6E96B2;
+    background-color: #E5F3FC;
+    font-weight: bold;
+    text-align: left;
+}
+
+.navFlow{
+font-size:13px;
+font-style:oblique;
+margin-bottom:3px;
+}
+
+#business .salesArea .pbSubheader {
+    margin-bottom: 0px;
+}
+
+#business .detailList {
+    border: none;
+}
+
+#business .salesArea .detailList {
+    border: 1px solid #E2E3E4;
+}
+
+//
+#business .salesArea .detailList {
+    border: 1px solid #E2E3E4;
+}
+
+//
+.detailList .dataCol {
+    color: #000000;
+}
+
+#business .salesArea .detailList tr th {
+    color: white;
+    background-color: #63A4C5;
+}
+
+#business .salesArea .detailList tr td {
+    border-bottom: none;
+}
+
+//
+.product {
+    border: none;
+}
+
+body .secondaryPalette.bPageBlock {
+    border: none;
+}
+
+//
+#PAGCBlock .pbBody .pbSubsection .detailList .data2col .pbSubsection table.detailList
+    {
+    border: none;
+}
+
+//
+#PAGCBlock .product .detailList .data2Col {
+    border: none;
+    padding-left: 0px;
+}
+
+.bPageBlock .detailList .list tr th {
+    color: white;
+    padding: 0px;
+    border: 0px;
+}
+
+.bPageBlock .detailList .list tr td {
+    border: none;
+}
+
+//
+body .pbBody table.list tr td {
+    border-bottom: none;
+}
+
+//
+body .pbBody table.list tr th {
+    color: white;
+    background-color: #63A4C5;
+}
+
+//
+#multiApprover a.btn {
+    width: 70px;
+    float: left;
+}
+
+.save a.btn {
+    width: 60px;
+    float: left;
+}
+
+.noTableFooter {
+    margin: 0px !important;
+    }
+    
+#phSelect {
+    width:300px;
+}
+    
+#phSelect table.list tr:first-child th{color:white;background-color:#63A4C5;border:none;}
+#phSelect table.list tr:nth-child(2) th{color:black;background-color:#f8f8f8;border:1px solid #E2E3E4;}
+    
+</style>
+
+    <script type="text/javascript">
+        function confirmCancel()
+        {
+            var con = confirm('{!$Label.Cancel_Admin_Configuration_Confirmation}');
+            return con;     
+        } 
+
+        function confirmSave()
+        {
+            var con = confirm('{!$Label.Setup_Details_Modified_Confirmation}');
+            return con;
+        }  
+        
+        function setFocusOnLoad() {}
+        
+        $=jQuery.noConflict();
+        $(document).ready(function(){
+        var tab2 = $('#listPH').dataTable({
+        "aaSorting":[],
+        "bLengthChange":false,
+        "iDisplayLength" : 200,
+        sPaginationType: "full_numbers",        
+        sPlaceHolder : "foot:before",});
+        $('#listPH'+'_filter').after('<br /><br />');
+        $('#listPH').after('<br />');
+        });
+    </script>
+    <apex:actionStatus id="stat">
+        <apex:facet name="start">
+            <div class="spinnerMask" id="spinnerMask">
+            <div class="spinnerCt"><img
+                src="/img/analytics/reportbuilder/icons/spinner32.gif"
+                alt="Loading..." width="32" height="32" align="center"
+                class="spinner" title="Loading..." />
+            <div class="loadingIndicator">Loading...</div>
+            </div>
+            <div class="mask"></div>
+            </div>
+        </apex:facet>
+    </apex:actionStatus>
+
+    <apex:form id="myForm">
+        <!-- <TJ20140505> Added Landing Page Link -->
+        <div align="left" class="navFlow">
+            <apex:commandLink id="link0" value="Landing Page" action="{!businessComponentAction}" target="_self" style="color:blue;">
+            <apex:param name="desiredAction" value="landingpage" assignTo="{!businessaction}" />
+            <apex:param name="newPageLabel" value="PAHome" assignTo="{!newPageLabel}" />
+            </apex:commandLink>
+        <!-- <TJ20140509> Added Navigation Flow Text -->
+            <apex:outputText value="{!if(NOT(ISNULL(navigationText)),'>>','')} "/>
+            <apex:outputText value="{!navigationText}"/>
+            <apex:outputText value=">>{!$Label.Global_Config}"/>
+        </div>
+<!--        <TJ20140417>   Changed Page Label-->        
+        <div class="customerLink">{!$Label.Global_Config}</div>
+
+<!--        <div class="customerLink">Global Configuration</div>-->
+
+        <div id="business"><apex:pageMessages id="errMsg"/>
+        <apex:pageblock id="PAGCBlock">
+            <!-- Business & SalesArea Setup STARTS-->
+            
+            
+            <div class="salesArea"><apex:pageBlockSection columns="1"
+                title="Businesses"
+                rendered="{!(service.PAServicestate.ogItems.selectedRecordId == null || businessAction == 'SASetupCancel' || businessAction == 'CMSetupCMCancel' || businessAction == 'BUSetupPHCancel' || businessaction == 'SASetupSave' || businessaction ==  'CMSetupCMSave'  || businessaction ==  'BUSetupPHSave' || businessaction ==  'BUSetupNamePHSave') && service.PAServicestate.ogItems.errorMessageDisp == null}">
+
+                <apex:repeat value="{!service.PAServicestate.ogItems.listWrappers}"
+                    var="wrapper">
+                    <!-- Ver 1.1 START -->
+                    <c:PARelatedListComponent WrapperRecordsDisp="{!wrapper.wrapperList}"
+                        columnsDisp="{!wrapper.keyCombinationcolumns}"
+                        viewMode="{!currentPageLabel}"
+                        selected="{!service.PAServicestate.ogItems.selectedRecordId}"
+                        actionAtr="{!businessaction}"
+                        typeOfSObjectList="{!wrapper.sObjectTypeName}">
+                    </c:PARelatedListComponent>
+                    <!-- Ver 1.1 END -->
+                </apex:repeat>
+
+                <apex:outputpanel >
+
+                    <div class="save"
+                        style="float: left; text-align: center; padding: 10px 0px 20px 43%;">
+                    <apex:commandLink style="text-decoration:none; color:#484848"
+                        styleClass="btn" value="Back" action="{!businessComponentAction}">
+                        <apex:param name="desiredAction" value="BackToHome"
+                            assignTo="{!businessaction}" />
+                        <apex:param name="newPageLabel" value="PAHome"
+                            assignTo="{!newPageLabel}" />
+                    </apex:commandLink></div>
+                </apex:outputpanel>
+
+            </apex:pageBlockSection></div>
+            <!-- Business & SalesArea Setup ENDS-->
+
+            <!-- SALESAREA SETUP STARTS -->
+
+            <!-- SalesArea Detail Setup STARTS-->
+            <div class="salesArea"><apex:pageBlockSection title="Sales Area Detail"
+                rendered="{!(CONTAINS(businessaction,'SASetupCancelConfigure') || CONTAINS(businessaction,'SASetupSaveConfigure')  ||  CONTAINS(businessaction,'SASetupConfigure') || CONTAINS(businessaction,'CMSetupConfigure') || CONTAINS(businessaction,'CMSetupCMCancelConfigure') || CONTAINS(businessaction,'CMSetupCMSaveConfigure') || service.PAServicestate.ogItems.errorMessageDisp != null) && service.PAServicestate.ogItems.selectedRecordId!=null}">
+                <apex:pageBlockSectionItem rendered="{!service.PAServicestate.ogItems.value == 'BUSetup'}">
+                    <apex:outputtext value="Business" />
+                    <apex:outputtext value="{!service.PAServicestate.ogItems.paOrgGrp.Business__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!service.PAServicestate.ogItems.value != 'BUSetup'}">
+                    <apex:outputtext value="Business" />
+                    <apex:outputtext value="{!service.PAServicestate.ogItems.orgGroupItems.Business__r.Business__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!service.PAServicestate.ogItems.value != 'BUSetup'}">
+                    <apex:outputtext value="Sales Area" />
+                    <apex:outputtext escape="false"
+                        value="{!service.PAServicestate.ogItems.orgGroupItems.OrgGroup__r.ERP_Sales_Org_Code__c}-{!service.PAServicestate.ogItems.orgGroupItems.OrgGroup__r.ERP_Sales_Org__c}
+                        <br> {!service.PAServicestate.ogItems.orgGroupItems.OrgGroup__r.ERP_Distribution_Channel_Code__c} - {!service.PAServicestate.ogItems.orgGroupItems.OrgGroup__r.ERP_Distribution_Channel__c}
+                                          <br> {!service.PAServicestate.ogItems.orgGroupItems.OrgGroup__r.ERP_Division_Code__c} - {!service.PAServicestate.ogItems.orgGroupItems.OrgGroup__r.ERP_Division__c}" />
+                    
+                
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!service.PAServicestate.ogItems.value != 'BUSetup'}">
+                    <apex:outputtext value="Sales Pricing Procedure" />
+                    <apex:outputpanel >
+                        <apex:commandLink style="color:blue"
+                            value="{!service.paServiceState.ogItems.orgGroupItems.ERP_Pricing_Procedure__r.Pricing_Procedure_Description__c}"
+                            action="{!businessComponentAction}">
+                            <apex:param name="desiredAction" value="MDM"
+                                assignTo="{!businessaction}" />
+                            <apex:param name="pageLabel" value="PAPriceMaster"
+                                assignTo="{!newPageLabel}" />
+                            <!-- <TJ20140509> Passing Label to display the navigation text -->
+                            <apex:param name="pageName" value="{!$Label.Global_Config}" assignTo="{!pageName}"/>
+                            <apex:param name="id"
+                                value="{!service.paServiceState.ogItems.orgGroupItems.ERP_Pricing_Procedure__c}"
+                                assignTo="{!service.paServiceState.ogItems.pricingProcedureId}" />
+
+
+                        </apex:commandLink>
+
+                    </apex:outputpanel>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection></div>
+            <!-- SalesArea Detail Setup ENDS-->
+
+
+            <!-- Currency and UoM Setup STARTS-->
+            <div class="salesArea"><apex:pageBlockSection columns="1"
+                rendered="{!(CONTAINS(businessaction,'SASetupCancelConfigure')  || CONTAINS(businessaction,'SASetupSaveConfigure')  ||  CONTAINS(businessaction,'SASetupConfigure') || service.PAServicestate.ogItems.errorMessageDisp != null) && service.PAServicestate.ogItems.selectedRecordId!=null}">
+                <!-- Ver 1.5 START -->
+                <!-- Configuration Elements Section STARTS-->
+                <!-- JM20140513 -->
+                <apex:outputpanel >
+
+                    <div class="save"
+                        style="float: left; text-align: center; padding: 10px 0px 20px 43%;">
+                    <apex:commandLink style="text-decoration:none; color:#484848"
+                        styleClass="btn" value="{!$Label.Save_Button}"
+                        onclick="return confirmSave()" action="{!businessComponentAction}">
+                        <apex:param name="desiredAction" value="SASetupSave"
+                            assignTo="{!businessaction}" />
+                        <apex:param name="newPageLabel" value="PAGlobalConfig"
+                            assignTo="{!newPageLabel}" />
+                    </apex:commandLink> 
+                    <apex:commandLink style="text-decoration:none; color:#484848" styleClass="btn"
+                        value="{!$Label.Cancel_Button}" onclick="return confirmCancel()"
+                        action="{!businessComponentAction}">
+                        <apex:param name="desiredAction" value="SASetupCancel"
+                            assignTo="{!businessaction}" />
+                        <apex:param name="newPageLabel" value="PAGlobalConfig"
+                            assignTo="{!newPageLabel}" />
+                        <apex:param name="value" value="SASetup"
+                                                assignTo="{!service.paServiceState.ogItems.value}" />
+                    </apex:commandLink> 
+                    </div>
+                </apex:outputpanel>
+                
+                <apex:outputtext value="Raise an Issue with the support team to change the values of these fields."  style="font-size:11px;font-weight:bold;color:red"/>
+                
+                <apex:pageBlockSection title="Configuration Elements">
+                    <!-- 
+                    <b>
+                        Please Contact the Support Team to Change the Parameters Listed Below
+                    </b>
+                    <br/>
+                    1. Display Standardized Rates for Approvers
+                    <br/>
+                    2. Enable Variable Configuration Material Pricing
+                    <br/>
+                    3. Enable Attachments on Customer Prices
+                    <apex:pageBlockSectionItem />    
+                     -->             
+                <!-- PP20130710 START -->
+                    
+                     <!-- <BB20130712> --Ver 1.6 START  Added Standardized Currency and Standardized UoM --> 
+                     <!-- <JM20140613> --Ver 1.6 START  Added Tool Tip Help Text for Configuration Elements Section--> 
+                    <apex:pageBlockSectionItem helptext="Checked if prices are converted to standard currency and UOM.">
+                        <apex:outputLabel value="Display Standardized Rates" />
+                        <apex:outputField value="{!service.paServiceState.ogItems.orgGroupItems.Display_Standardized_Rate__c}" />
+                    </apex:pageBlockSectionItem>
+                    &nbsp;
+                    <apex:pageBlockSectionItem helptext="Currency of standardized price.">
+                        <apex:outputtext value="Standardized Currency" />
+                        <apex:inputText value="{!service.PAServicestate.ogItems.orgGroupItems.Standardized_Currency__c}"
+                            disabled="true" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem helptext="Unit of Measure of standardized price.">
+                        <apex:outputtext value="Standardized UoM" />
+                        <apex:inputText value="{!service.PAServicestate.ogItems.orgGroupItems.Standardized_UoM__c}"
+                            disabled="true" />
+                    </apex:pageBlockSectionItem>
+                    <!-- Ver 1.6 ENDS -->
+                    <!-- VR20130819 UTQA issue 18 -->
+                    <apex:pageBlockSectionItem helptext="Checked if business only uses variant config materials.">
+                        <apex:outputLabel value="Variant Config Material" />
+                        <apex:outputField value="{!service.paServiceState.ogItems.orgGroupItems.Enable_Variable_Config_Materials__c}" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem helptext="Checked if business allows attachments on customer price requests.">
+                        <apex:outputLabel value="Attachment on Customer Prices" />
+                        <apex:outputField value="{!service.paServiceState.ogItems.orgGroupItems.Attachments_on_Customer_Prices__c}" />
+                    </apex:pageBlockSectionItem>
+                    <!-- END -->
+                    
+                    <apex:pageBlockSectionItem helptext="Checked if Request Class is used for approval routing.">
+                        <apex:outputLabel value="Request Class" />
+                        <apex:outputField value="{!service.paServiceState.ogItems.orgGroupItems.Enable_Request_Class__c}" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem rendered="{!service.paServiceState.ogItems.orgGroupItems.Enable_Request_Class__c}" helptext="Checked if Request Class is used for approval routing.">
+                        <apex:outputLabel value="Request Class" />
+                            <apex:selectList value="{!service.paServiceState.ogItems.orgGroupItems.Request_Class__c}" disabled="true">
+                                <apex:selectOptions value="{!service.paServiceState.ogItems.requestClassList}"/>
+                            </apex:selectList>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem helptext="Checked if NPC volume is to be taken from the request.">
+                        <apex:outputLabel value="Sales Volume" />
+                        <apex:outputField value="{!service.paServiceState.ogItems.orgGroupItems.isVolumeApplicable__c}" />
+                    </apex:pageBlockSectionItem>
+                    <!-- PP20130710 END -->
+                </apex:pageBlockSection>
+                <!-- Configuration Elements Section ENDS-->
+                <!-- Ver 1.5 END -->
+                
+                <!-- JM20140421 START -->
+                 <!-- Default Values Setup STARTS-->
+                  <!-- <JM20140613> --Ver 1.6 START  Added Tool Tip Help Text for Default Values Section --> 
+                  <apex:outputtext value="Can be changed by BU Admin."  style="font-size:11px;font-weight:bold;color:red"/>
+                <apex:pageBlockSection title="Default Values">
+                    <apex:pageBlockSectionItem helptext="Customer prices to be displayed in the 'Price Record List' screen.">
+                        <apex:outputtext value="Default Prices Selection" style="padding-left: 165px;"/>
+                        <apex:inputfield value="{!service.PAServicestate.ogItems.orgGroupItems.Default_Prices_Selection__c}" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem helptext="Selected value will be defaulted on Request Header.">
+                        <apex:outputtext value="Default Currency" />
+                        <apex:inputfield value="{!service.PAServicestate.ogItems.orgGroupItems.Default_Currency__c}" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem helptext="Selected value will determine default Per & UoM.">
+                        <apex:outputtext value="Default Per & UoM Setup" />
+                        <apex:inputfield value="{!service.PAServicestate.ogItems.orgGroupItems.Default_Per_UoM_Setup__c}" >
+                            <!-- <apex:actionSupport event="onchange"  action="{!service.PAServicestate.ogItems.hideSectionOnChange}" rerender="{!service.PAServicestate.ogItems.isMatch}"/>
+                             -->
+                              <apex:actionSupport event="onchange" rerender="txtField"/>
+                        </apex:inputfield>
+                        
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem helptext="Needed only if Default Per & UoM setup is Sales Area.">
+                        <apex:outputtext value="Default Per Value" />
+                        <apex:outputPanel id="txtField">
+                        <apex:inputField id="txtbox" value="{!service.PAServicestate.ogItems.orgGroupItems.Default_Per_Value__c}" rendered="{!service.PAServicestate.ogItems.orgGroupItems.Default_Per_UoM_Setup__c =='Sales Area Config'}"></apex:inputField>
+                        <apex:outputText rendered="{!NOT(service.PAServicestate.ogItems.orgGroupItems.Default_Per_UoM_Setup__c =='Sales Area Config')}" >
+                       <script>document.getElementById('{!$Component.txtbox}').disabled = {!NOT(service.PAServicestate.ogItems.orgGroupItems.Default_Per_UoM_Setup__c =='Sales Area Config')}; </script>
+                        </apex:outputText>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem helptext="Excluding weekends, applicable for all Request types except Pricing Task.">
+                        <apex:outputtext value="Approval Escalation - Pricing Requests" />
+                        <apex:inputfield value="{!service.PAServicestate.ogItems.orgGroupItems.Approval_Escalation_Price_Requests__c}" ></apex:inputfield>
+                    </apex:pageBlockSectionItem>
+                     <apex:pageBlockSectionItem helptext="Excluding weekends, applicable for Pricing Tasks.">
+                        <apex:outputtext value="Approval Escalation - Pricing Task" />
+                        <apex:inputfield value="{!service.PAServicestate.ogItems.orgGroupItems.Approval_Escalation_Pricing_Task__c}" />
+                    </apex:pageBlockSectionItem>
+                     <apex:pageBlockSectionItem helptext="Indicate whether new prices should default to Scale or Non-Scale.">
+                        <apex:outputtext value="Default Value for Scaled Prices" />
+                        <apex:inputfield value="{!service.PAServicestate.ogItems.orgGroupItems.Default_Value_for_Scaled_Prices__c}" />
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+                <!-- Default Values Setup ENDS-->
+                <!-- JM20140421 END -->
+                <!-- JM20140513 Added Alert message-->
+                <!-- <JM20140613> --Ver 1.6 START  Added Tool Tip Help Text for Currency & UoM Setup Section --> 
+                <apex:outputtext value="First value of the Chosen list will be Sales Area Currency or UoM."  style="font-size:11px;font-weight:bold;color:red"/>
+                <apex:pageBlockSection title="Currency & UoM Setup">
+                    <!-- JM20140421 START -->
+                      <apex:pageBlockSectionItem helptext="Values in Chosen list will be available for pricing."><apex:outputtext value="Sales Area Currency" />
+                      <!-- <apex:inputfield value="{!service.PAServicestate.ogItems.orgGroupItems.ERP_Currency__c}" /> -->
+                        <c:PAMultiselectPicklist leftLabel="Available"
+                            leftOptions="{!service.PAServicestate.ogItems.getAllCurrency}"
+                            rightLabel="Chosen"
+                            rightOptions="{!service.PAServicestate.ogItems.selectedCurrencyValues}"
+                            size="7"
+                            width="150px"/>
+                                
+                
+                    </apex:pageBlockSectionItem>
+                 <!-- JM20140421 END -->
+                    <apex:pageBlockSectionItem helptext="Check to include customer currency in addition to the Sales Area currencies for pricing.">
+                        <apex:outputtext value="Customer Currency" />
+                        <apex:inputfield value="{!service.PAServicestate.ogItems.orgGroupItems.Include_Customer_Currency__c}" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem helptext="Values in Chosen list will be available for pricing.">
+                        <apex:outputtext value="Sales Area UoM" />
+                       <!--  <apex:inputfield value="{!service.PAServicestate.ogItems.orgGroupItems.ERP_UoM__c}" /> -->
+                        <c:PAMultiselectPicklist leftLabel="Available"
+                leftOptions="{!service.PAServicestate.ogItems.getAllUom}"
+                rightLabel="Chosen"
+                rightOptions="{!service.PAServicestate.ogItems.selectedUomValues}"
+                size="7"
+                width="150px"/>
+                    </apex:pageBlockSectionItem>
+                     <!-- MS20150105 Adding Base UOM check -->
+                  <apex:pageBlockSectionItem helptext="Check to enable UoM conversion from Standard conversion table">
+                    <apex:outputtext value="Base Uom"/>
+                    <apex:inputField value="{!service.paServiceState.ogItems.orgGroupItems.Base_UoM__c}"/>
+                   </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+
+                <!-- Currency and UoM Setup ENDS-->
+                
+                 <!-- <KJ20150805> start-  Material group2--> 
+                    <apex:outputtext value="Can be changed by BU Admin."  style="font-size:11px;font-weight:bold;color:red"/>
+                     <apex:pageBlockSection title="Material Group2 Code">
+                    <!-- JM20140421 START -->
+                      <apex:pageBlockSectionItem helptext="Values in Chosen list will be available for Material exclusion."><apex:outputtext value="Material Group2 Code" />
+                         <c:PAMultiselectPicklist leftLabel="Available"
+                            leftOptions="{!service.PAServicestate.ogItems.getAllMG2Values}"
+                            rightLabel="Chosen"
+                            rightOptions="{!service.PAServicestate.ogItems.selectedMG2Values}"
+                            size="7"
+                            width="150px"/>                                
+                
+                    </apex:pageBlockSectionItem>
+                    </apex:pageBlockSection>
+                     <!-- <KJ20150805> end--> 
+                
+
+                <!-- Pricing Task Type Setup STARTS-->
+                <!-- <JM20140613> --Ver 1.6 START  Added Tool Tip Help Text for Pricing Task Type Setup Section -->
+                <apex:outputtext value="Can be changed by BU Admin."  style="font-size:11px;font-weight:bold;color:red"/>
+                <apex:pageBlockSection title="Pricing Task Type Setup" columns="1" 
+                    rendered="{!service.PAServicestate.ogItems.selectedRecordId!=null}">
+                  <apex:pageBlockSectionItem > 
+                    <apex:outputtext value="Please ensure that the approval setup is configured in the system, for the pricing task type you have chosen"  style="font-size:11px;font-weight:bold;color:red;padding:10px"/> <!--SS20230501-->
+                   </apex:pageBlockSectionItem> 
+                    <apex:pageBlockSectionItem helptext="Select applicable Pricing Task Types and corresponding Request Reasons.">
+                        <apex:outputtext value="Pricing Task Type" />
+                        <apex:inputfield value="{!service.PAServicestate.ogItems.orgGroupItems.Pricing_Task_Type__c}">
+                    </apex:inputfield>
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+                <!-- Pricing Task Type Setup ENDS-->
+
+                <!-- Request Reason Setup STARTS-->
+                 <!-- <JM20140613> --Ver 1.6 START  Added Tool Tip Help Text for Request Reason Setup Section -->
+                <apex:outputtext value="Can be changed by BU Admin."  style="font-size:11px;font-weight:bold;color:red"/>
+                <apex:pageBlockSection title="Request Reason Setup" columns="1" 
+                    rendered="{!service.PAServicestate.ogItems.selectedRecordId!=null}">
+                    <apex:pageBlockSectionItem helptext="Values in Chosen list will be available for Customer Price Requests.">
+                        <apex:outputtext value="Customer Specific" />
+                        <apex:inputfield value="{!service.PAServicestate.ogItems.orgGroupItems.Customer_Request_Reasons__c}" />
+                    </apex:pageBlockSectionItem>
+
+                    <apex:pageBlockSectionItem helptext="Values in Chosen list will be available in Pricing Task Requests.">
+                        <apex:outputtext value="Pricing Task" />
+                        <apex:inputfield value="{!service.PAServicestate.ogItems.orgGroupItems.Pricing_Task_Reasons__c}" />
+                    </apex:pageBlockSectionItem>
+
+                    <apex:pageBlockSectionItem helptext="Values in Chosen list will be available in Project Price Requests.">
+                        <apex:outputtext value="Project" />
+                        <apex:inputfield value="{!service.PAServicestate.ogItems.orgGroupItems.Project_Request_Reasons__c}" />
+                    </apex:pageBlockSectionItem>
+
+                    <apex:pageBlockSectionItem helptext="Values in Chosen list will be available in Rebate Agreement Requests.">
+                        <apex:outputtext value="Rebate Agreement" />
+                        <apex:inputfield value="{!service.PAServicestate.ogItems.orgGroupItems.Rebate_Agreement__c}" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem helptext="Values in Chosen list will be available in Price List Requests.">
+                        <apex:outputtext value="Non-Customer Specific" />
+                        <apex:inputfield value="{!service.PAServicestate.ogItems.orgGroupItems.Non_Customer_Permanent_Request_Reasons__c}" />
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+                <!-- Request Reason Setup ENDS-->
+
+                <!-- Date Offset Setup STARTS-->
+                <!-- <JM20140613> --Ver 1.6 START  Added Tool Tip Help Text for Date Offset Setup Section -->
+                <apex:outputtext value="Can be changed by BU Admin."  style="font-size:11px;font-weight:bold;color:red"/>
+                <apex:pageBlockSection title="Date Offset Setup" columns="1"
+                    rendered="{!service.PAServicestate.ogItems.selectedRecordId!=null}">
+                    <apex:pageBlockSection title="Retroactive Duration(in Days)">
+                        <apex:pageBlockSectionItem helptext="Maximum retroactive price limit (up to 30 days).">
+                            <apex:outputtext value="Earliest Valid From Offset" />
+                            <apex:inputfield value="{!service.PAServicestate.ogItems.orgGroupItems.Retroactive_Limit__c}"
+                                style="width:50px"> {!$Label.Days} </apex:inputfield>
+                        </apex:pageBlockSectionItem>
+                    </apex:pageBlockSection>
+                    <apex:pageBlockSection title="Latest Valid From Offsets(in Days)">
+                        <apex:pageBlockSectionItem helptext="Maximum delay before a customer price becomes effective (up to 365 days).">
+                            <apex:outputtext value="Customer Prices" />
+                            <apex:inputfield value="{!service.PAServicestate.ogItems.orgGroupItems.Max_Valid_From_Offset_Cust_Spec__c}"
+                                style="width:50px"> {!$Label.Days} </apex:inputfield>
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem helptext="Maximum delay before a non-customer price becomes effective (up to 180 days).">
+                            <apex:outputtext value="Non-Customer Prices" />
+                            <apex:inputfield value="{!service.PAServicestate.ogItems.orgGroupItems.Latest_Valid_From_Offset_Non_Cust_Spec__c}"
+                                style="width:50px"> {!$Label.Days} </apex:inputfield>
+                        </apex:pageBlockSectionItem>
+                    </apex:pageBlockSection>
+                    <apex:pageBlockSection title="Latest Valid To Offsets(in Months)">
+                        <apex:pageBlockSectionItem helptext="Maximum customer price duration (up to 120 months).">
+                            <apex:outputtext value="Customer Prices" />
+                            <apex:inputfield value="{!service.PAServicestate.ogItems.orgGroupItems.Latest_Valid_To_Offset_Cust_Spec__c}"
+                                style="width:50px"> {!$Label.Months} </apex:inputfield>
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem helptext="Maximum non-customer price duration (up to 600 months)">
+                            <apex:outputtext value="Non-Customer Prices" />
+                            <apex:inputfield value="{!service.PAServicestate.ogItems.orgGroupItems.Latest_Valid_To_Offset_Non_Cust_Spec__c}"
+                                style="width:50px"> {!$Label.Months} </apex:inputfield>
+                        </apex:pageBlockSectionItem>
+                    </apex:pageBlockSection>
+                    <!--  <apex:pageBlockSection title="Approval Setup(in Days)">-->
+<!--                        -->
+<!--                                 <apex:pageBlockSectionItem >-->
+<!--                        <apex:outputtext value="Escalation Time" />-->
+<!--                        <apex:inputfield value="{!service.PAServicestate.ogItems.orgGroupItems.Approval_Escalation_Price_Requests__c}" style="width:50px">{!$Label.Days}</apex:inputfield>-->
+<!--                    -->
+<!--                        </apex:pageBlockSectionItem>-->
+<!--                    </apex:pageBlockSection>-->
+                    <!-- Date Offset Setup ENDS-->
+                </apex:pageBlockSection>
+
+                <!-- ERP Customer Material Setup STARTS-->
+                <!-- JM20140512 STARTS -->
+                <!-- Changed Customer Material Setup title into Key Combination Pick Lists -->
+                <!-- <JM20140613> --Ver 1.6 START  Added Tool Tip Help Text for Key Combination Pick Lists Section -->
+                <apex:outputtext value="Values to be configured if used in Key Combination."  style="font-size:11px;font-weight:bold;color:red"/>
+                <div class="salesArea"><apex:pageBlockSection title="Key Combination Pick Lists" id="selectionBlock" columns="1" 
+                    rendered="{!service.PAServicestate.ogItems.selectedRecordId!=null}">
+                    
+                 <!-- PG20191211 Piyush START for Auto Approval -->
+                    <apex:pageBlockSectionItem rendered="{!contains(service.PAServicestate.ogItems.orgGroupItems.Business__r.Business__c,'DPT')}" helptext="Values in Chosen list will be available for auto approval" >
+                    <apex:outputtext value="Customer Segmentation Auto Approval " />
+                 <!-- <apex:inputfield value="{!service.PAServicestate.ogItems.orgGroupItems.Customer_Group_4_Auto_Approval__c}" /> -->
+                       <c:PAMultiselectPicklist leftLabel="Available"
+                            leftOptions="{!service.PAServicestate.ogItems.getAllCG4}"
+                            rightLabel="Chosen"
+                            rightOptions="{!service.PAServicestate.ogItems.selectedCG4Values}"
+                            size="5"
+                            width="340px"/>
+                      </apex:pageBlockSectionItem>             
+                           
+                  <!-- PG20191211 Added by Piyush -->
+                    <apex:pageBlockSectionItem rendered="{!contains(service.PAServicestate.ogItems.orgGroupItems.Business__r.Business__c,'DPT')}" helptext="Values in Chosen list will be eligible for key field selection in approval flow" >
+                        <apex:outputtext value="Customer Segmentation" />
+                        <c:PASelectOptionsComponent unSelectOptionList="{!service.PAServicestate.ogItems.ListUnselectedCustomerGroup4}"
+                            selectOptionList="{!service.PAServicestate.ogItems.ListSelectedCustomerGroup4}"
+                            selectOptionListFinal="{!service.PAServicestate.ogItems.listSelectedCustomerGroup4Return}" />
+                           </apex:pageBlockSectionItem> 
+                      
+                    <apex:pageBlockSectionItem helptext="Values in Chosen list will be available for pricing key combinations.">
+                        <apex:outputtext value="Customer Price Group" />
+                        <c:PASelectOptionsComponent unSelectOptionList="{!service.PAServicestate.ogItems.ListUnselectedCPG}"
+                            selectOptionList="{!service.PAServicestate.ogItems.ListSelectedCPG}"
+                            selectOptionListFinal="{!service.PAServicestate.ogItems.listSelectedCPGReturn}" />
+                    </apex:pageBlockSectionItem>
+
+                    <apex:pageBlockSectionItem helptext="Values in Chosen list will be available for pricing key combinations.">
+                        <apex:outputtext value="Material Price Group" />
+                        <c:PASelectOptionsComponent unSelectOptionList="{!service.PAServicestate.ogItems.ListUnselectedMPG}"
+                            selectOptionList="{!service.PAServicestate.ogItems.ListSelectedMPG}"
+                            selectOptionListFinal="{!service.PAServicestate.ogItems.listSelectedMPGReturn}" />
+                    </apex:pageBlockSectionItem>
+
+                    <apex:pageBlockSectionItem helptext="Values in Chosen list will be available for pricing key combinations.">
+                        <apex:outputtext value="Price List Type" />
+                        <c:PASelectOptionsComponent unSelectOptionList="{!service.PAServicestate.ogItems.ListUnselectedPLType}"
+                            selectOptionList="{!service.PAServicestate.ogItems.ListSelectedPLType}"
+                            selectOptionListFinal="{!service.PAServicestate.ogItems.listSelectedPLTReturn}" />
+                    </apex:pageBlockSectionItem>
+
+                    <apex:pageBlockSectionItem helptext="Values in Chosen list will be available for pricing key combinations.">
+                        <apex:outputtext value="Sales Office" />
+                        <c:PASelectOptionsComponent unSelectOptionList="{!service.PAServicestate.ogItems.ListUnselectedSO}"
+                            selectOptionList="{!service.PAServicestate.ogItems.ListSelectedSO}"
+                            selectOptionListFinal="{!service.PAServicestate.ogItems.listSelectedSOReturn}" />
+                    </apex:pageBlockSectionItem>
+
+                    <apex:pageBlockSectionItem helptext="Values in Chosen list will be available for pricing key combinations.">
+                        <apex:outputtext value="Sales District" />
+                        <c:PASelectOptionsComponent unSelectOptionList="{!service.PAServicestate.ogItems.ListUnselectedSD}"
+                            selectOptionList="{!service.PAServicestate.ogItems.ListSelectedSD}"
+                            selectOptionListFinal="{!service.PAServicestate.ogItems.listSelectedSDReturn}" />
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem helptext="Values in Chosen list will be available for pricing key combinations.">
+                        <apex:outputtext value="Material Group 1" />
+                        <c:PASelectOptionsComponent unSelectOptionList="{!service.PAServicestate.ogItems.ListUnselectedMG1}"
+                            selectOptionList="{!service.PAServicestate.ogItems.ListSelectedMG1}"
+                            selectOptionListFinal="{!service.PAServicestate.ogItems.listSelectedMG1Return}" />
+                    </apex:pageBlockSectionItem>
+
+                    <apex:pageBlockSectionItem helptext="Values in Chosen list will be available for pricing key combinations.">
+                        <apex:outputtext value="Material Group 3" />
+                        <c:PASelectOptionsComponent unSelectOptionList="{!service.PAServicestate.ogItems.ListUnselectedMG3}"
+                            selectOptionList="{!service.PAServicestate.ogItems.ListSelectedMG3}"
+                            selectOptionListFinal="{!service.PAServicestate.ogItems.listSelectedMG3Return}" />
+                    </apex:pageBlockSectionItem>
+
+                    <apex:pageBlockSectionItem helptext="Values in Chosen list will be available for pricing key combinations.">
+                        <apex:outputtext value="Material Group 4" />
+                        <c:PASelectOptionsComponent unSelectOptionList="{!service.PAServicestate.ogItems.ListUnselectedMG4}"
+                            selectOptionList="{!service.PAServicestate.ogItems.ListSelectedMG4}"
+                            selectOptionListFinal="{!service.PAServicestate.ogItems.listSelectedMG4Return}" />
+                    </apex:pageBlockSectionItem>
+
+                    <apex:pageBlockSectionItem helptext="Values in Chosen list will be available for pricing key combinations.">
+                        <apex:outputtext value="Country" />
+                        <c:PASelectOptionsComponent unSelectOptionList="{!service.PAServicestate.ogItems.ListUnselectedCountry}"
+                            selectOptionList="{!service.PAServicestate.ogItems.ListSelectedCountry}"
+                            selectOptionListFinal="{!service.PAServicestate.ogItems.listSelectedCountryReturn}" />
+                    </apex:pageBlockSectionItem>
+                    <!-- VR20131011 DTT Rollout -->
+                    <apex:pageBlockSectionItem helptext="Values in Chosen list will be available for pricing key combinations.">
+                        <apex:outputtext value="Incoterm" />
+                        <c:PASelectOptionsComponent unSelectOptionList="{!service.PAServicestate.ogItems.ListUnselectedIncoterms}"
+                            selectOptionList="{!service.PAServicestate.ogItems.ListSelectedIncoterms}"
+                            selectOptionListFinal="{!service.PAServicestate.ogItems.listSelectedIncotermReturn}" />
+                  
+                    </apex:pageBlockSectionItem>
+                    
+                    <!-- PP20131023 - ROLLOUT2 START -->
+                    <!-- JM20140512 START Changed "Terms of payment" field into "Payment Terms" and Added "Variant" and "Sales Order Type" fields -->
+                    <apex:pageBlockSectionItem helptext="Values in Chosen list will be available for pricing key combinations.">
+                        <apex:outputtext value="Payment Terms" />
+                        <c:PASelectOptionsComponent unSelectOptionList="{!service.PAServicestate.ogItems.ListUnselectedTOP}"
+                            selectOptionList="{!service.PAServicestate.ogItems.listSelectedTOP}"
+                            selectOptionListFinal="{!service.PAServicestate.ogItems.listSelectedTOPReturn}" />
+                    </apex:pageBlockSectionItem>
+                     <apex:pageBlockSectionItem helptext="Values in Chosen list will be available for pricing key combinations.">
+                        <apex:outputtext value="Variant" />
+                        <c:PASelectOptionsComponent unSelectOptionList="{!service.PAServicestate.ogItems.ListUnselectedVariant}"
+                            selectOptionList="{!service.PAServicestate.ogItems.listSelectedVariant}"
+                            selectOptionListFinal="{!service.PAServicestate.ogItems.listSelectedVariantReturn}" />
+                    </apex:pageBlockSectionItem>
+                     <apex:pageBlockSectionItem helptext="Values in Chosen list will be available for pricing key combinations.">
+                        <apex:outputtext value="Sales Order Type" />
+                        <c:PASelectOptionsComponent unSelectOptionList="{!service.PAServicestate.ogItems.ListUnselectedSalesOrderType}"
+                            selectOptionList="{!service.PAServicestate.ogItems.listSelectedSOT}"
+                            selectOptionListFinal="{!service.PAServicestate.ogItems.listSelectedSOTReturn}" />
+                    </apex:pageBlockSectionItem>
+                    <!-- SS20220826  -->
+                    <apex:pageBlockSectionItem helptext="Values in Chosen list will be available for pricing key combinations.">
+                        <apex:outputtext value="Sales Order Item" />
+                        <c:PASelectOptionsComponent unSelectOptionList="{!service.PAServicestate.ogItems.ListUnselectedSalesOrderItem}"
+                            selectOptionList="{!service.PAServicestate.ogItems.listSelectedItem}"
+                            selectOptionListFinal="{!service.PAServicestate.ogItems.ListSelectedItemReturn}" />
+                    </apex:pageBlockSectionItem>
+
+                    <!-- SS20230501  -->
+                    <apex:pageBlockSectionItem helptext="Values in Chosen list will be available for pricing key combinations.">
+                        <apex:outputtext value="Value Center" />
+                        <c:PASelectOptionsComponent unSelectOptionList="{!service.PAServicestate.ogItems.ListUnselectedVC}"
+                            selectOptionList="{!service.PAServicestate.ogItems.listSelectedVC}"
+                            selectOptionListFinal="{!service.PAServicestate.ogItems.listSelectedVCReturn}" />
+                    </apex:pageBlockSectionItem>  
+                    
+                    <!-- SS20230501  -->
+                    <apex:pageBlockSectionItem helptext="Values in Chosen list will be available for pricing key combinations.">
+                        <apex:outputtext value="Ext Matl Grp" />
+                        <c:PASelectOptionsComponent unSelectOptionList="{!service.PAServicestate.ogItems.ListUnselectedEMG}"
+                            selectOptionList="{!service.PAServicestate.ogItems.listSelectedEMG}"
+                            selectOptionListFinal="{!service.PAServicestate.ogItems.listSelectedEMGReturn}" />
+                    </apex:pageBlockSectionItem>  
+                    
+                    <!-- SS20230501  -->
+                    <apex:pageBlockSectionItem helptext="Values in Chosen list will be available for pricing key combinations.">
+                        <apex:outputtext value="Material Group 2" />
+                        <c:PASelectOptionsComponent unSelectOptionList="{!service.PAServicestate.ogItems.ListUnselectedMG2}"
+                            selectOptionList="{!service.PAServicestate.ogItems.listSelectedMG2}"
+                            selectOptionListFinal="{!service.PAServicestate.ogItems.listSelectedMG2Return}" />
+                    </apex:pageBlockSectionItem>  
+                    
+                    <!-- SS20230501  -->
+                    <apex:pageBlockSectionItem helptext="Values in Chosen list will be available for pricing key combinations.">
+                        <apex:outputtext value="Price Zone" />
+                        <c:PASelectOptionsComponent unSelectOptionList="{!service.PAServicestate.ogItems.ListUnselectedPZ}"
+                            selectOptionList="{!service.PAServicestate.ogItems.listSelectedPZ}"
+                            selectOptionListFinal="{!service.PAServicestate.ogItems.listSelectedPZReturn}" />
+                    </apex:pageBlockSectionItem>                                                                             
+                    <!-- JM20140513  -->
+                    <!-- PP20131023 - ROLLOUT2 END -->
+                    
+                    <apex:pageBlockSectionItem helptext="Values in Chosen list will be available for pricing key combinations.">
+                        <apex:outputtext value="Campaign" />
+                        <c:PASelectOptionsComponent unSelectOptionList="{!service.PAServicestate.ogItems.ListUnselectedCampaign}"
+                            selectOptionList="{!service.PAServicestate.ogItems.ListSelectedCampaign}"
+                            selectOptionListFinal="{!service.PAServicestate.ogItems.listSelectedCampaignReturn}" />
+                    </apex:pageBlockSectionItem>
+
+                    <apex:pageBlockSectionItem helptext="Values in Chosen list will be available for pricing key combinations.">
+                        <apex:outputtext value="Document Currency" />
+                        <c:PASelectOptionsComponent unSelectOptionList="{!service.PAServicestate.ogItems.ListUnselectedDocumentCurrency}"
+                            selectOptionList="{!service.PAServicestate.ogItems.ListSelectedDocumentCurrency}"
+                            selectOptionListFinal="{!service.PAServicestate.ogItems.listSelectedDocumentCurrencyReturn}" />
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem helptext="Values in Chosen list will be available for pricing key combinations.">
+                        <apex:outputtext value="State" />
+                        <c:PASelectOptionsComponent unSelectOptionList="{!service.PAServicestate.ogItems.ListUnselectedState}"
+                            selectOptionList="{!service.PAServicestate.ogItems.ListSelectedState}"
+                            selectOptionListFinal="{!service.PAServicestate.ogItems.listSelectedStateReturn}" />
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection> 
+                </div>
+
+
+                    <!-- Pricing Exception Setup STARTS Brundha Roll Out 2 BR20130625-->
+                    <!-- <JM20140613> --Ver 1.6 START  Added Tool Tip Help Text for Pricing Exceptions Section -->
+                    <apex:outputtext value="Can be changed by BU Admin."  style="font-size:11px;font-weight:bold;color:red"/>
+                    <apex:pageblocksection title="Pricing Exceptions">
+                    <apex:pageBlockSectionItem helptext="Values in Selected list will be available in Price Request.">
+
+                        <apex:outputtext value="Pricing Exceptions" />
+                        <c:PASelectOptionsComponent unSelectOptionList="{!service.PAServicestate.ogItems.ListUnselectedPE}"
+                            selectOptionList="{!service.PAServicestate.ogItems.ListSelectedPE}"
+                            selectOptionListFinal="{!service.PAServicestate.ogItems.listSelectedPEReturn}"
+                            PE="true" />
+                        
+                    </apex:pageBlockSectionItem>
+                    </apex:pageblocksection>
+                    <!-- Pricing Exception Setup BR20130625 ENDS-->
+                    
+                <!-- JM20140513 STARTS -->
+                 <!-- Pricing Parameter Pick Lists  STARTS-->
+                 <!-- <JM20140613> --Ver 1.6 START  Added Tool Tip Help Text for Pricing Parameter Pick Lists Section -->
+                <apex:outputtext value="Can be changed by BU Admin."  style="font-size:11px;font-weight:bold;color:red"/>
+                <apex:pageBlockSection title="Pricing Parameter Pick Lists" columns="1" 
+                    rendered="{!service.PAServicestate.ogItems.selectedRecordId!=null}">
+                    <apex:pageBlockSectionItem helptext="Values in Chosen list will be available for Spot Price Requests.">
+                        <apex:outputtext value="Spot Prices Payment Terms" />
+                        <apex:inputfield value="{!service.PAServicestate.ogItems.orgGroupItems.Non_Standard_Payment_Terms__c}" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem helptext="List of Payment Terms available for inclusion in a price request (posted to SAP).">
+                        <apex:outputtext value="Customer Prices Payment Terms" />
+                        <apex:inputfield value="{!service.PAServicestate.ogItems.orgGroupItems.Customer_Price_Payment_Terms__c}" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem helptext="List of Fixed Date Terms available for inclusion in a price request (posted to SAP).">
+                        <apex:outputtext value="Customer Prices Fixed Date Payment Terms" />
+                        <apex:inputfield value="{!service.PAServicestate.ogItems.orgGroupItems.Customer_Price_Fixed_Date_Payment_Terms__c}" />
+                    </apex:pageBlockSectionItem>             
+                </apex:pageBlockSection>
+                <!-- Pricing Parameter Pick Lists ENDS-->
+                <!-- JM20140513 ENDS -->
+                
+
+                <!-- ERP Customer Material Setup ENDS-->
+
+                <apex:outputpanel >
+
+                    <div class="save"
+                        style="float: left; text-align: center; padding: 10px 0px 20px 43%;">
+                    <apex:commandLink style="text-decoration:none; color:#484848"
+                        styleClass="btn" value="{!$Label.Save_Button}"
+                        onclick="return confirmSave()" action="{!businessComponentAction}">
+                        <apex:param name="desiredAction" value="SASetupSave"
+                            assignTo="{!businessaction}" />
+                        <apex:param name="newPageLabel" value="PAGlobalConfig"
+                            assignTo="{!newPageLabel}" />
+                    </apex:commandLink> 
+                    <apex:commandLink style="text-decoration:none; color:#484848" styleClass="btn"
+                        value="{!$Label.Cancel_Button}" onclick="return confirmCancel()"
+                        action="{!businessComponentAction}">
+                        <apex:param name="desiredAction" value="SASetupCancel"
+                            assignTo="{!businessaction}" />
+                        <apex:param name="newPageLabel" value="PAGlobalConfig"
+                            assignTo="{!newPageLabel}" />
+                        <apex:param name="value" value="SASetup"
+                                                assignTo="{!service.paServiceState.ogItems.value}" />
+                    </apex:commandLink> 
+                    </div>
+                </apex:outputpanel>
+            </apex:pageBlockSection> 
+            <!-- SALESAREA SETUP ENDS --> 
+            
+            <!-- BU SetUp STARTS --> 
+            <apex:pageBlockSection columns="1"
+                rendered="{!(service.PAServicestate.ogItems.value == 'BUSetup' || businessaction='BUSetupPHSaveConfigure' || businessaction='BUSetupNamePHSaveConfigure')&& service.PAServicestate.ogItems.selectedRecordId!=null && (businessaction !='BUSetupPHSave' && businessaction !='BUSetupNamePHSave')}">
+                <!-- Business Section STARTS -->
+                <apex:pageBlockSection title="Business">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputtext value="Business" />
+                        <apex:outputtext value="{!service.PAServicestate.ogItems.paOrgGrp.Business__c}" />
+                    </apex:pageBlockSectionItem>
+                    
+                   <!-- JM20140513 STARTS-->
+                    
+                    <apex:pageBlockSectionItem >
+                        <apex:outputtext value="BU Admin" />
+                        <apex:outputtext value="{!service.PAServicestate.ogItems.BUAdminName}" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputtext value="Sales Org for Regional Floor Pricing" rendered="{!service.PAServicestate.ogItems.paOrgGrp.Regional_Floor_Pricing__c!=null}"/>
+                        <apex:outputtext value="{!service.PAServicestate.ogItems.paOrgGrp.Regional_Floor_Pricing__c}" rendered="{!service.PAServicestate.ogItems.paOrgGrp.Regional_Floor_Pricing__c!=null}"/>
+                    </apex:pageBlockSectionItem>
+                       
+                  <!-- <HL20140926> - Start - Commented since Global config should not have PH or Profit center -->
+                  <!--   <apex:pageBlockSectionItem >
+                         
+                 <!-- <apex:outputLabel value="Approval Routing Level" rendered="{!AND(service.PAServicestate.ogItems.paOrgGrp.Product_Hierarchy_Level__c!=null,service.PAServicestate.ogItems.paOrgGrp.Profit_Center_Level__c!=null)}"/>  -->
+                 <!--    <apex:outputPanel > -->
+                 <!--       <div class="salesArea"> -->
+                 <!--               <apex:outputtext value="Product Hierarchy" style="font-weight:bold;" rendered="{!service.PAServicestate.ogItems.paOrgGrp.Product_Hierarchy_Level__c!=null}"/>&nbsp;&nbsp; -->
+                 <!--               <apex:outputtext value="{!service.PAServicestate.ogItems.paOrgGrp.Product_Hierarchy_Level__c}" rendered="{!service.PAServicestate.ogItems.paOrgGrp.Product_Hierarchy_Level__c!=null}" /> -->
+                 <!--       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+                                
+                    
+                 <!--              <apex:outputtext value="Profit Center" style="font-weight:bold;" rendered="{!service.PAServicestate.ogItems.paOrgGrp.Profit_Center_Level__c!=null}"/>&nbsp;&nbsp; -->
+                 <!--              <apex:outputtext value="{!service.PAServicestate.ogItems.paOrgGrp.Profit_Center_Level__c}" rendered="{!service.PAServicestate.ogItems.paOrgGrp.Profit_Center_Level__c!=null}"/> -->
+                 <!--       </div> -->
+                 <!-- </apex:outputPanel> -->
+                 <!--  </apex:pageBlockSectionItem> -->
+                   <!-- <HL20140926> - END - Commented since Global config should not have PH or Profit center --> 
+                    <!-- JM20140513 ENDS-->
+                    
+                </apex:pageBlockSection>
+                <!-- Business Section ENDS -->
+
+            
+
+                <!-- NamePH Section STARTS -->
+                <apex:pageBlockSection title="Name Product Hierarchy"
+                    rendered="{!(CONTAINS(businessaction,'Configure') && CONTAINS(businessaction,'BUSetup')) || businessaction != 'BUSetupNamePHSave'}">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputText value="Product Hierarchy Code" />
+                        <apex:outputpanel >
+                            <div id="phSelect">
+                            <apex:inputtext value="{!service.PAServicestate.productHierarchy.selectedPHValue}"
+                                    id="targetField" onkeyup="search(this);">
+                                    <c:autoComplete_Generic orgGrp="{!service.paServiceState.ogItems.selectedBU}" KCAtr="PH9"/>
+<!--                                        <c:autoComplete_PH where="{!service.paServicestate.ogItems.phWhereClause}"-->
+<!--                                                fields="{!service.paServicestate.ogItems.phFieldsList}" for="{!$Component.targetField}"-->
+<!--                                                sObjectType="{!service.paServicestate.ogItems.phSObjectType}"/>    -->
+                                </apex:inputtext>
+                            
+                            <apex:actionRegion >
+                                <c:PAPHComponent BUFromPageAtr="{!service.paServiceState.ogItems.selectedRecordId}" singleSelectAtr="true"></c:PAPHComponent>  
+                            </apex:actionRegion>
+                            </div>
+                        </apex:outputpanel>
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+
+                <apex:outputpanel rendered="{!(CONTAINS(businessaction,'Configure') && CONTAINS(businessaction,'BUSetup')) || businessaction != 'BUSetupNamePHSave'}">
+                    
+                    <div
+                        style="float: left; text-align: center; padding: 10px 0px 20px 43%;">
+                    <apex:commandLink style="text-decoration:none; color:#484848"
+                        styleClass="btn" value="Fetch Product Hierarchy"
+                        action="{!businessComponentActionForReRender}"
+                        reRender="PAGCBlock,errorMessage,errMsg">
+                        <apex:param name="desiredAction" value="BUSetupFetchPH"
+                            assignTo="{!businessaction}" />
+                        <apex:param name="newPageLabel" value="PAGlobalConfig"
+                            assignTo="{!newPageLabel}" />
+                    </apex:commandLink>
+                    <apex:commandLink style="text-decoration:none; color:#484848" styleClass="btn"
+                        value="{!$Label.Cancel_Button}" onclick="return confirmCancel()"
+                        action="{!businessComponentAction}" rendered="{!NOT(service.PAServicestate.ogItems.selectedRecordId!=null && service.PAServicestate.productHierarchy.relatedWrappersList!=null && service.PAServicestate.productHierarchy.relatedWrappersList.size!=0 && businessaction != 'BUSetupNamePHSaveConfigure' && service.PAServicestate.productHierarchy.errorDispPH== null && NOT(CONTAINS(businessaction,'Cancel')))}">
+                        <apex:param name="desiredAction" value="BUSetupPHCancel"
+                            assignTo="{!businessaction}" />
+                        <apex:param name="newPageLabel" value="PAGlobalConfig"
+                            assignTo="{!newPageLabel}" />
+                        <apex:param name="value" value="BUSetup"
+                                                assignTo="{!service.paServiceState.ogItems.value}" />
+                    </apex:commandLink> 
+                    
+                    </div>
+                    
+                </apex:outputpanel>
+
+                <apex:pageBlockSection rendered="{! businessaction != 'BUSetupNamePHSave'  && NOT(CONTAINS(businessaction,'Configure')) && service.PAServicestate.productHierarchy.relatedWrappersList!=null&& service.PAServicestate.productHierarchy.errorDispPH== null && service.PAServicestate.productHierarchy.relatedWrappersList.size!=0}">
+                    <apex:repeat value="{!service.PAServicestate.productHierarchy.PHLevelSplit}"
+                        var="ph">
+                        <apex:pageBlockSectionItem >
+                            <apex:outputtext value="{!ph}" />
+                            <apex:outputtext value="{!service.PAServicestate.productHierarchy.PHLevelToDesc[ph]}" />
+                        </apex:pageBlockSectionItem>
+                    </apex:repeat>
+                </apex:pageBlockSection>
+                <apex:pageBlockSection columns="1"
+                    rendered="{!businessaction != 'BUSetupNamePHSave'  && NOT(CONTAINS(businessaction,'Configure')) && service.PAServicestate.productHierarchy.relatedWrappersList!=null && service.PAServicestate.productHierarchy.relatedWrappersList.size!=0 && service.PAServicestate.productHierarchy.relatedWrappersList[0].wrapperList!=null && service.PAServicestate.productHierarchy.relatedWrappersList[0].wrapperList.size!=0 && service.PAServicestate.productHierarchy.errorDispPH== null}">
+                    <apex:repeat value="{!service.PAServicestate.productHierarchy.relatedWrappersList}"
+                        var="wrapper">
+                        <!-- Ver 1.1 START -->
+                        <c:PARelatedListComponent WrapperRecordsDisp="{!wrapper.wrapperList}"
+                            columnsDisp="{!wrapper.keyCombinationcolumns}"
+                            viewMode="{!currentPageLabel}" actionAtr="{!businessaction}"
+                            showCheckBox="false" showPHName="true"
+                            typeOfSObjectList="{!wrapper.sObjectTypeName}">
+                        </c:PARelatedListComponent>
+                        <!-- Ver 1.1 END -->
+                    </apex:repeat>
+                </apex:pageBlockSection>
+
+
+
+
+
+                <!-- NamePH Section ENDS -->
+
+                <apex:outputpanel rendered="{!service.PAServicestate.ogItems.selectedRecordId!=null && service.PAServicestate.productHierarchy.relatedWrappersList!=null && service.PAServicestate.productHierarchy.relatedWrappersList.size!=0 && businessaction != 'BUSetupNamePHSaveConfigure' && service.PAServicestate.productHierarchy.errorDispPH== null && NOT(CONTAINS(businessaction,'Cancel'))}">
+                    
+                    <div class="save"
+                        style="float: left; text-align: center; padding: 10px 0px 20px 43%;">
+                    <apex:commandLink style="text-decoration:none; color:#484848"
+                        styleClass="btn" value="{!$Label.Save_Button}"
+                        onclick="return confirmSave()" action="{!businessComponentAction}">
+                        <apex:param name="desiredAction" value="BUSetupNamePHSave"
+                            assignTo="{!businessaction}" />
+                        <apex:param name="newPageLabel" value="PAGlobalConfig"
+                            assignTo="{!newPageLabel}" />
+                    </apex:commandLink> 
+                    <apex:commandLink style="text-decoration:none; color:#484848" styleClass="btn"
+                        value="{!$Label.Cancel_Button}" onclick="return confirmCancel()"
+                        action="{!businessComponentAction}">
+                        <apex:param name="desiredAction" value="BUSetupPHCancel"
+                            assignTo="{!businessaction}" />
+                        <apex:param name="newPageLabel" value="PAGlobalConfig"
+                            assignTo="{!newPageLabel}" />
+                        <apex:param name="value" value="BUSetup"
+                                                assignTo="{!service.paServiceState.ogItems.value}" />
+                    </apex:commandLink> 
+                     <!-- HL20140904  Start Added for New PH creation -->
+                    <apex:commandLink style="text-decoration:none; color:#484848"
+                    styleClass="btn" value="New"  action="{!businessComponentAction}" >
+                    <apex:param name="desiredAction" value="BUSetupNewPH"
+                            assignTo="{!businessaction}" />
+                        <apex:param name="newPageLabel" value="PAGlobalConfig"
+                            assignTo="{!newPageLabel}" />
+                    </apex:commandLink> 
+                    </div>
+                </apex:outputpanel>
+            </apex:pageBlockSection></div>
+            
+             <!-- HL20140904  Added Code for New PH creation -->
+                <apex:pageBlockSection title="PH Creation" columns="8" 
+                rendered="{!businessaction= 'BUSetupNewPH' && NOT(CONTAINS(businessaction,'Configure'))|| (businessaction='BUSetupAddNewPH' && service.PAServicestate.productHierarchy.errorDispPH == null && service.paServiceState.productHierarchy.shownewPH == True)}"  >  
+                
+                
+              <!--  <div id="phSelect1"> -->
+                 <apex:outputpanel >
+                 <div id="phSelect1">
+                 <apex:outputText Value="PH Code" >
+                  <!--  <apex:param value="{!service.PAServicestate.productHierarchy.selectedPHValue}" /> -->                          
+                    </apex:outputtext> 
+                     <apex:outputpanel >
+                             <div class="requiredInput" style="float: right">
+                             <div class="requiredBlock" style="float: right"></div>
+                             <apex:inputtext style="width:80px" maxLength="2" Label="PHCode" value="{!service.paServiceState.productHierarchy.NewPH}"
+                                    id="targetField" onkeyup="search(this);">
+                                    <c:autoComplete_Generic orgGrp="{!service.paServiceState.ogItems.selectedBU}" KCAtr="PH9"/>
+                             </apex:inputtext>
+                              </div>
+                              </apex:outputpanel>
+                       </div>
+                          </apex:outputpanel>
+                          
+                <apex:outputText style="float:left;margin: 0px;" Label="PHLevel" value="{!service.PAServicestate.productHierarchy.PHlevel}"  />
+              
+               <apex:outputText Value="BusinessDescription" />
+               <apex:outputpanel > 
+                             <div class="requiredInput" style="float: right">
+                             <div class="requiredBlock" style="float: right"></div>
+               <apex:inputtext style="float:left;margin: 0px;" Label=" Business Description" value="{!service.paServiceState.productHierarchy.ph.Description__c}" /> 
+              </div>
+              </apex:outputpanel>
+             <!--    <apex:inputtext style="float:left;margin: 0px;" Label="BusinessDescription" value="{!service.PAServicestate.productHierarchy.buph.Representative_Material_Description__c}"  />--> 
+                <apex:inputfield style="width:50px"  Label="DefaultPer" value="{!service.PAServicestate.productHierarchy.buph.Default_Per__c}"  />
+               <apex:inputtext style="width:50px" Label="DefaultUOM" value="{!service.PAServicestate.productHierarchy.buph.Default_UOM__c}" />
+                </apex:pageBlockSection>
+                      
+                   <div class="save"
+                        style="float: left; text-align: center; padding: 10px 0px 20px 43%;"> 
+                   <apex:commandLink style="text-decoration:none; color:#484848"
+                    styleClass="btn" value="Save" status="stat" action="{!businessComponentAction}" 
+                     rendered="{!businessaction = 'BUSetupNewPH' || (businessaction='BUSetupAddNewPH' && service.PAServicestate.productHierarchy.errorDispPH == null && service.paServiceState.productHierarchy.shownewPH == True)}" > 
+                    <apex:param name="desiredAction" value="BUSetupAddNewPH"
+                            assignTo="{!businessaction}" />
+                        <apex:param name="newPageLabel" value="PAGlobalConfig"
+                            assignTo="{!newPageLabel}" />
+                    </apex:commandLink> 
+                    </div>
+                <!-- HL20140904  End Added for New PH creation -->
+                                                                
+            <!-- BU SetUp ENDS -->
+
+        </apex:pageblock> 
+        </div>
+    </apex:form>
+<style>
+
+    .spinnerCt {
+        left: 50%;
+        top: 35%;
+        position: absolute;
+        //z-index: 1;
+        z-index: 50;
+        padding: 20px 40px;
+        box-shadow: 0pt 2px 5px rgb(172, 172, 172);
+        border-radius: 1em 1em 1em 1em;
+        border: 1px solid rgb(206, 236, 255);
+        background-color: rgb(206, 236, 255);
+        background-style: solid;
+    }
+    
+.spinner {
+        padding: 10px 15px 10px 0pt;
+        vertical-align: middle;
+    }
+    
+    .spinnerCt .loadingIndicator {
+        display: inline;
+        font-size: 135%;
+        font-weight: bold;
+    }
+    
+    .mask {
+        width: 100%;
+        height: 100%;
+        background-color: rgb(0, 0, 0);
+        opacity: 0.45;
+        filter: alpha(opacity =     45);
+        position: absolute;
+        z-index: 45;
+        top: 0pt;
+        left: 0pt;
+    }
+    </style>    
+    
+</apex:page>

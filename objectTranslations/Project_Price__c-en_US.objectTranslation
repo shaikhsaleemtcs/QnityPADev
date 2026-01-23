@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Project Price</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Project Prices</value>
+    </caseValues>
+    <fieldSets>
+        <label><!-- PAProjectPriceColumns --></label>
+        <name>PAProjectPriceColumns</name>
+    </fieldSets>
+    <fields>
+        <label><!-- Approved_Default_Discount --></label>
+        <name>Approved_Default_Discount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approved_Project_Description --></label>
+        <name>Approved_Project_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approved_Project_Volume --></label>
+        <name>Approved_Project_Volume__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approved_Valid_From --></label>
+        <name>Approved_Valid_From__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approved_Valid_To --></label>
+        <name>Approved_Valid_To__c</name>
+    </fields>
+    <fields>
+        <label><!-- Assigned To --></label>
+        <name>Assigned_To__c</name>
+        <relationshipLabel><!-- Project Prices --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Created By --></label>
+        <name>Created_By__c</name>
+    </fields>
+    <fields>
+        <label><!-- Default Discount --></label>
+        <name>Default_Discount__c</name>
+    </fields>
+    <fields>
+        <help><!-- This is the pre-split original 18 digit Salesforce ID of this record that came from the original One Dupont Salesforce instance before the business units were separated. Its is case insensitive and unique. --></help>
+        <label><!-- Legacy Pricing Util SFID --></label>
+        <name>Legacy_Pricing_Util_SFID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Novus External Id --></label>
+        <name>Novus_External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- PricingCondition Id --></label>
+        <name>PricingCondition_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pricing Condition Code --></label>
+        <name>Pricing_Condition_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pricing Condition --></label>
+        <name>Pricing_Condition__c</name>
+    </fields>
+    <fields>
+        <label><!-- Project Description --></label>
+        <name>Project_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Project Id --></label>
+        <name>Project_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Project Status --></label>
+        <name>Project_Status__c</name>
+        <picklistValues>
+            <masterLabel>Abandoned</masterLabel>
+            <translation><!-- Abandoned --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Draft</masterLabel>
+            <translation><!-- Draft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Recalled</masterLabel>
+            <translation><!-- Recalled --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rejected</masterLabel>
+            <translation><!-- Rejected --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Submitted</masterLabel>
+            <translation><!-- Submitted --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Project Volume --></label>
+        <name>Project_Volume__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sold To Code --></label>
+        <name>Sold_To_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Cancelled</masterLabel>
+            <translation><!-- Cancelled --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>InProgress</masterLabel>
+            <translation><!-- InProgress --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Open</masterLabel>
+            <translation><!-- Open --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Valid From --></label>
+        <name>Valid_From__c</name>
+    </fields>
+    <fields>
+        <label><!-- Valid To --></label>
+        <name>Valid_To__c</name>
+    </fields>
+    <fields>
+        <label><!-- isApproved --></label>
+        <name>isApproved__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

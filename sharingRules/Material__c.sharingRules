@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>General_Material_Sharing</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>General Material Sharing</label>
+        <sharedTo>
+            <group>SFDC_Qnity_Only_Users</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Material - General Data</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Material_CPM_AP</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Material CPM AP</label>
+        <sharedTo>
+            <group>CPMAP</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Material - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>F418,F4J5,F4I5,F4B9,F4B1,F4F1,F4G1,F41C,F4B0,F471,F4D3,F4B0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Product_Hierarchy_Level_1_Code__c</field>
+            <operation>equals</operation>
+            <value>F4</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Product_Hierarchy_Level_2_Code__c</field>
+            <operation>equals</operation>
+            <value>24,25</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Material_CPM_EMEA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Material CPM EMEA</label>
+        <sharedTo>
+            <group>CPMEMEA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Material - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>F458</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Product_Hierarchy_Level_1_Code__c</field>
+            <operation>equals</operation>
+            <value>F4</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Product_Hierarchy_Level_2_Code__c</field>
+            <operation>equals</operation>
+            <value>24,25</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Material_CPM_NA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Material CPM NA</label>
+        <sharedTo>
+            <group>CPMNA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Material - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>F4I5,F46A</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Product_Hierarchy_Level_1_Code__c</field>
+            <operation>equals</operation>
+            <value>F4</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Product_Hierarchy_Level_2_Code__c</field>
+            <operation>equals</operation>
+            <value>24,25</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Material_DPP_Kalrez_Global</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Material DPP Kalrez Global</label>
+        <sharedTo>
+            <group>DPPGlobalKalrez</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Material - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>B900,B903,B911,B918,B971,B9B1,B9B9,B9G3,B9I3,B9J9,C311,C3I3</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Product_Hierarchy_Level_1_Code__c</field>
+            <operation>equals</operation>
+            <value>B9</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Product_Hierarchy_Level_2_Code__c</field>
+            <operation>equals</operation>
+            <value>02,04,05</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Material_DPP_LA_Kalrez</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Material DPP LA Kalrez</label>
+        <sharedTo>
+            <group>DPPLAKalrez</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Material - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>B987</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Product_Hierarchy_Level_1_Code__c</field>
+            <operation>equals</operation>
+            <value>B9</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Product_Hierarchy_Level_2_Code__c</field>
+            <operation>equals</operation>
+            <value>02,04,05</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Material_EKC_Global</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Material ACST Global</label>
+        <sharedTo>
+            <group>ACSTGlobal</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Material - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>F418,F427,F43B,F4B9,F4F1,F4B1,F4B0,F471</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Product_Hierarchy_Level_1_Code__c</field>
+            <operation>equals</operation>
+            <value>F4</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Product_Hierarchy_Level_2_Code__c</field>
+            <operation>equals</operation>
+            <value>28</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Material_Sharing_Rule_for_ACT</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Material Sharing Rule for ACST</label>
+        <sharedTo>
+            <group>ACST</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Material - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1848,A871,2742,1321,1310,A715,1326,1312,A753,A855,A752,A674,A670,A636</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Material_Sharing_Rule_for_APT_AP</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Material Sharing Rule for APT AP</label>
+        <sharedTo>
+            <group>APT_AP</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Material - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>2742,A671,1760,1762,A873,A855,A857,A858,2730,A761,1187,A871</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Material_Sharing_Rule_for_APT_EMEA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Material Sharing Rule for APT EMEA</label>
+        <sharedTo>
+            <group>APT_EMEA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Material - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>A715,A752,A802,A674,A670,A753,A636,A807</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Material_Sharing_Rule_for_APT_NA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Material Sharing Rule for APT NA</label>
+        <sharedTo>
+            <group>APT_NA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Material - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>A798,1304,A749,A776</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Material_Sharing_Rule_for_CMPT_AP</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Material Sharing Rule for CMPT AP</label>
+        <sharedTo>
+            <group>CMPT_AP</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Material - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1310,1312,1320,1321,1326,1760,2730,2742,A715,9024</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Material_Sharing_Rule_for_CMPT_EMEA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Material Sharing Rule for CMPT EMEA</label>
+        <sharedTo>
+            <group>CMPT_EMEA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Material - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1310,A636,A670,A674,A715,A752,A753,A855</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Material_Sharing_Rule_for_Litho_AP</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Material Sharing Rule for Litho AP</label>
+        <sharedTo>
+            <group>Litho_AP</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Material - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>2730,2742,A855,A858,A871</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Material_Sharing_Rule_for_Litho_EMEA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Material Sharing Rule for Litho EMEA</label>
+        <sharedTo>
+            <group>Litho_EMEA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Material - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>contains</operation>
+            <value>A715,A752,A674,A670,A753,A636,1304,2730</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Material_Sharing_Rule_for_Litho_NA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Material Sharing Rule for Litho NA</label>
+        <sharedTo>
+            <group>Litho_NA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Material - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1304</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Material_Sharing_Rule_for_Semi_Silicones</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Material Sharing Rule for Semi Silicones</label>
+        <sharedTo>
+            <group>Semi_Silicones</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Material - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>A776,A798,A670,A674,A715,A752,A753,A807,A636,1187,1762,A671,A761,A857,A858</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Material_Sharing_Rules_for_CMPT_AMS</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Material Sharing Rules for CMPT AMS</label>
+        <sharedTo>
+            <group>CMPT_AMS</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Material - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1310</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Material_data_with_DM</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Share material data with DM business</description>
+        <label>Share Material data with DM</label>
+        <sharedTo>
+            <group>DM</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Material - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1187,1843,1848,2742</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Material_data_with_ICS</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>This sharing rule will share material with ICS LA</description>
+        <label>Share Material data with ICS</label>
+        <sharedTo>
+            <group>ICS_LA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Material - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>A673,A672</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Material_data_with_ICS_AP</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Share Material records with ICS AP business users</description>
+        <label>Share Material data with ICS AP</label>
+        <sharedTo>
+            <group>ICS_AP</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Material - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1187,1760,2730,2742,9852,A855,A858,A871</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Material_data_with_ICS_EMEA</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Share material data with ICS EMEA</description>
+        <label>Share Material data with ICS EMEA</label>
+        <sharedTo>
+            <group>ICS_EMEA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Material - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>A636,A670,A674,A715,A752,A753,A808</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Material_data_with_ICS_NA</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>This sharing rule will share material data with ICS NA</description>
+        <label>Share Material data with ICS NA</label>
+        <sharedTo>
+            <group>ICS_NA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Material - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1304,A672</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Material_data_with_LED</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share Material data with LED</label>
+        <sharedTo>
+            <group>LED_Silicones</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Material - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1187,1762,A671,A715,A752,A753,A761,A776,A857,A858,A807</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Material_data_with_OLED</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>This sharing rule is used to share material with OLED business.</description>
+        <label>Share Material data with OLED</label>
+        <sharedTo>
+            <group>OLED</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Material - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1187,1760,1843,1848,2742,A116</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Material_with_DM_OCR</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share Material with DM OCR</label>
+        <sharedTo>
+            <group>DM_OCR</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Material - Extended Data</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>F429,F4B1,F4I5,F4J5</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Product_Hierarchy_Level_1_Code__c</field>
+            <operation>equals</operation>
+            <value>F4</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Product_Hierarchy_Level_2_Code__c</field>
+            <operation>equals</operation>
+            <value>DY</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+</SharingRules>

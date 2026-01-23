@@ -1,0 +1,379 @@
+<!-- 1.1    Bala    Modified the UI     None -->
+<!-- JM20140514     Jawahar MuthuAdaikalam  14 April 2014       Adding NPC,Volume,PaymentsTerms Fields in key Combination Mapping Section - PA Rollout      None -->
+<apex:page controller="ctrlPAMain" tabstyle="Price_Approval__tab" sidebar="false" showHeader="true" id="currentPage" cache="true"
+    action="{!onLoadCall}">
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.js')}" />
+<c:loadingComponent />
+    <apex:pageMessages escape="false" id="errorMessage"/> 
+    <style>
+        .navFlow{font-size:13px;font-style:oblique;margin-bottom:3px;}
+        .customerLink{font-size:15px;height:20px;margin-bottom:1px;padding:5px;border:solid 1px;border-color:#6E96B2; background-color:#E5F3FC;font-weight:bold;text-align:left;}
+        #business .salesArea .pbSubheader{margin-bottom:0px;}
+        //#business .detailList{border:none;}
+        //#business .salesArea1 .detailList{border:1px solid #E2E3E4;}
+        //#business .salesArea1 .subSection{border:none;}
+        
+        //#business .salesArea .detailList{border:1px solid #E2E3E4;}
+        #business .salesArea .detailList tr th{color:white;background-color:#63A4C5;}
+        #business .salesArea .detailList tr td{border-bottom:none;}
+        #business .salesArea2 .detailList tr th{color:white;background-color:#63A4C5;}
+       // #business .salesArea .detailList{border:1px solid #E2E3E4;}
+        //#business .salesArea2 td.dataCol.first.last{width:100%;}
+        body .bPageBlock .pbBody .labelCol{width:35%;}
+        //body .bPageBlock .pbBody .dataCol{width:100%;}
+        body .secondaryPalette.bPageBlock{border:none;}
+
+        .bPageBlock .detailList .list tr th{color: white;padding: 0px;border: 0px;}
+        .bPageBlock .detailList .list tr td{border:none;}
+        body .pbBody table.list tr td{border-bottom: none;}
+        body .pbBody table.list tr th{color:white;background-color:#63A4C5;}
+        .noTableFooter
+        {
+        margin:0px!important;
+        }
+
+</style>
+
+<apex:form id="myForm" >
+<!-- <TJ20140509> Added Navigation Flow Text -->
+<div align="left" class="navFlow">
+            <apex:commandLink id="link0" value="Landing Page" action="{!businessComponentAction}" target="_self" style="color:blue;">
+            <apex:param name="desiredAction" value="landingpage" assignTo="{!businessaction}" />
+            <apex:param name="newPageLabel" value="PAHome" assignTo="{!newPageLabel}" />
+            </apex:commandLink>
+
+            <apex:outputText value="{!if(NOT(ISNULL(navigationText)),'>>','')} "/>
+            <apex:outputText value="{!navigationText}"/>
+            <apex:outputText value=">>  Master Data Management"/>
+        </div>
+<div class="customerLink">
+         Master Data Management
+</div>
+
+
+<div id="business">
+<apex:pageBlock rendered="{!IF(OR(service.paServiceState.ogItems.displaySection=='procedure',service.paServiceState.ogItems.displaySection=='secFour'),true,false)}">
+    
+    <!----------------------------------- Section One-------------------------------------->
+    <div class="salesArea">
+        <apex:pageBlockSection title="Pricing Procedure Header" collapsible="false" columns="1" rendered="{!IF(service.paServiceState.ogItems.displaySection=='procedure',true,false)}">
+        <apex:pageBlockSectionItem >
+            <apex:outputLabel value="Pricing Procedure"></apex:outputLabel>
+            <apex:outputText value="{!service.paServiceState.ogItems.orgGroupItems.ERP_Pricing_Procedure__r.Pricing_Procedure_Description__c}"></apex:outputText>
+        </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+    </div>  
+    <!----------------------------------- Section Two-------------------------------------->
+    
+    <div class="salesArea">
+    
+        <apex:pageBlockSection title="Applicable Sales Area" collapsible="false" rendered="{!IF(service.paServiceState.ogItems.displaySection=='procedure',true,false)}">
+        <apex:pageBlockTable value="{!service.paServiceState.ogItems.OrganizationalGroupItem}" var="v">
+        <apex:column headerValue="Business">
+        <apex:outputText value="{!v.Business__r.Business__c}"></apex:outputText>
+        </apex:column>
+        <apex:column headerValue="Sales Org">
+        <apex:outputText value="{!v.OrgGroup__r.ERP_Sales_Org_Code__c}"></apex:outputText>
+        </apex:column>
+        <apex:column headerValue="Dist Channel">
+        <apex:outputText value="{!v.OrgGroup__r.ERP_Distribution_Channel_Code__c}"></apex:outputText>
+        </apex:column>
+        <apex:column headerValue="Division">
+        <apex:outputText value="{!v.OrgGroup__r.ERP_Division_Code__c}"></apex:outputText>
+        </apex:column>
+        
+        </apex:pageBlockTable>
+        </apex:pageBlockSection>
+    </div>  
+    <!----------------------------------- Section Three-------------------------------------->
+    <div class="salesArea">
+        <apex:pageBlockSection title="Pricing Procedure Detail" collapsible="false" rendered="{!IF(service.paServiceState.ogItems.displaySection=='procedure',true,false)}">
+        <apex:pageBlockTable value="{!service.paServiceState.ogItems.AccessProcedureWrappper}" var="apw" style="width:1220Px;">
+        <apex:column headerValue="Pricing Condition Code">  
+        <apex:commandLink action="{!loadPage}" value="{!apw.sObjectList[0]['pricing_condition__r.Pricing_Condition_Code__c']}">
+            <apex:param name="PricingCondition1" value="{!apw.sObjectList[0]['pricing_condition__c']}" assignTo="{!service.paServiceState.ogItems.pricCond}"/>
+            
+            <apex:param name="pageLabel1" value="PAPriceMaster" assignTo="{!currentPageLabel}"/>
+            <apex:param name="changeDisplay" value="secSix" assignTo="{!service.paServiceState.ogItems.displaySection}"/>
+            <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+           </apex:commandLink>
+        </apex:column>
+        <apex:column headerValue="Pricing Condition">
+        <apex:outputText value="{!apw.sObjectList[0]['pricing_condition__r.Pricing_Condition__c']}"></apex:outputText>
+        </apex:column>
+        
+        <!-- Added UAT Defect #18 -->
+        <apex:column headerValue="Condition Class Code">
+        <apex:outputText value="{!apw.sObjectList[0]['pricing_condition__r.Condition_Class_Code__c']}"></apex:outputText>
+        </apex:column>
+        <apex:column headerValue="Condition Class">
+        <apex:outputText value="{!apw.sObjectList[0]['pricing_condition__r.Condition_Class__c']}"></apex:outputText>
+        </apex:column>
+        <!-- Completed Defect #18 -->
+        <apex:column headerValue="Step">
+        <apex:outputText value="{!apw.sObjectList[0]['Step__c']}"></apex:outputText>
+        </apex:column>
+        <apex:column headerValue="From">
+        <apex:outputText value="{!apw.sObjectList[0]['From__c']}"></apex:outputText>
+        </apex:column>
+        <apex:column headerValue="To">
+        <apex:outputText value="{!apw.sObjectList[0]['To__c']}"></apex:outputText>
+        </apex:column>
+        <apex:column headerValue="Scale Enabled?">
+            
+        <apex:outputPanel rendered="{!IF(CONTAINS(apw.sObjectList[0]['Sales_Pricing_Procedure_Condition_Config__c'],'Enable Scale'),true,false)}">
+         <input type="checkbox" checked="checked" disabled="true"/>
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!IF(NOT(CONTAINS(apw.sObjectList[0]['Sales_Pricing_Procedure_Condition_Config__c'],'Enable Scale')),true,false)}">
+          <input type="checkbox" disabled="true"/>
+        </apex:outputPanel>
+        </apex:column>
+        <apex:column headerValue="Send To SAP?">
+        <apex:inputCheckbox value="{!apw.sObjectList[0]['pricing_condition__r.SAP_Condition_Type__c']}" disabled="true"/>
+        </apex:column>
+        <apex:column headerValue="Floor Price">
+        <apex:outputText rendered="{!apw.stringMap['displayKCLink']}" value="{!apw.sObjectList[1]['Floor_Pricing_Condition__r.Pricing_Condition_Code__c']}"></apex:outputText>
+        </apex:column>
+        <apex:column headerValue="Reference Price">
+        <apex:outputText rendered="{!apw.stringMap['displayKCLink']}" value="{!apw.sObjectList[1]['Reference_Pricing_Condition__r.Pricing_Condition_Code__c']}"></apex:outputText>
+        </apex:column>
+        <apex:column headerValue="Link To Key Combination">
+        <apex:commandLink value="View Key Combinations" action="{!loadPage}" rendered="{!apw.stringMap['displayKCLink']}">
+              <apex:param name="PricingCondition" value="{!apw.sObjectList[0]['Pricing_Condition__c']}" assignTo="{!service.paServiceState.ogItems.pricCond}"/>
+              <apex:param name="secValue" value="secFour" assignTo="{!service.paServiceState.ogItems.displaySection}"/>
+              <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+             </apex:commandLink>        
+        </apex:column>
+        </apex:pageBlockTable>
+        </apex:pageBlockSection>
+    </div>  
+    <!----------------------------------- Section Four-------------------------------------->
+    
+    
+    
+        <apex:pageBlockSection title="Pricing Condition Detail" collapsible="false" id="secFour"
+        columns="2" rendered="{!IF(service.paServiceState.ogItems.displaySection=='secFour',true,false)}">
+            <apex:pageBlockSection columns="1">
+                <apex:pageBlockSectionItem >
+                     <apex:outPutText value="Pricing Procedure"></apex:outPutText>
+                      <apex:outPutText value="{!service.paServiceState.ogItems.acSqList[0].Sales_Pricing_Procedure__r.Pricing_Procedure_Description__c}"></apex:outPutText>  
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                      <apex:outPutText value="Pricing Condition Code"></apex:outPutText>
+                      <apex:outPutText value="{!service.paServiceState.ogItems.acSqList[0].Pricing_Condition__r.Pricing_Condition_code__c}"></apex:outPutText>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                      <apex:outPutText value="Floor Price Code"></apex:outPutText>
+                     <apex:outPutText value="{!service.paServiceState.ogItems.acSqList[0].Floor_Pricing_Condition__r.Pricing_Condition_code__c}"></apex:outPutText>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem > 
+                   <apex:outPutText value="Reference Price Code"></apex:outPutText>
+                   <apex:outPutText value="{!service.paServiceState.ogItems.acSqList[0].Reference_Pricing_Condition__r.Pricing_Condition_code__c}"></apex:outPutText>
+                </apex:pageBlockSectionItem>
+        
+            </apex:pageBlockSection>
+ 
+     
+            <apex:pageBlockSection columns="1">
+
+                <apex:pageBlockSectionItem >
+                    
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value="Pricing Condition"></apex:outputText>
+                    <apex:outPutText value="{!service.paServiceState.ogItems.acSqList[0].Pricing_Condition__r.Pricing_Condition__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value="Floor Price"></apex:outputText>
+                    <apex:outPutText value="{!service.paServiceState.ogItems.acSqList[0].Floor_Pricing_Condition__r.Pricing_Condition__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value="Reference Price"></apex:outputText>
+                    <apex:outPutText value="{!service.paServiceState.ogItems.acSqList[0].Reference_Pricing_Condition__r.Pricing_Condition__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageBlockSection>
+    
+    </apex:pageBlock>
+</div>  
+<!-------------------------------------------- Section Five --------------------------------------->
+
+
+<div id="business">
+    <apex:pageBlock rendered="{!IF(service.paServiceState.ogItems.displaySection=='secFour',true,false)}">
+        <div class="salesArea">
+            <apex:pageBlockSection title="Key Combination Mapping" collapsible="false">
+            <apex:pageBlockTable value="{!service.paServiceState.ogItems.acSqList}" var="ac">
+            <apex:column headerValue="Access Step">
+            <apex:outputText value="{!ac.Sequence_Number__c}"></apex:outputText>
+            </apex:column>
+            <apex:column headerValue="Key Comb. Code">
+            <apex:outputText value="{!ac.Pricing_Key_Combination__r.Key_Combination_Code__c}"></apex:outputText>
+            </apex:column>
+            <apex:column headerValue="Key Combination">
+            <apex:outputText value="{!ac.Key_Combination__c}"></apex:outputText>
+            </apex:column>
+            <apex:column headerValue="Floor Key Comb. Code">
+            <apex:outputText value="{!ac.Floor_Key_Combination__r.Key_Combination_Code__c}"></apex:outputText>
+            </apex:column>
+            <apex:column headerValue="Floor Key Combination">
+            <apex:outputText value="{!ac.Floor_Key_Combination__r.Key_Combination__c}"></apex:outputText>
+            </apex:column>
+            <apex:column headerValue="Reference Key Comb. Code">
+            <apex:outputText value="{!ac.Reference_Key_Combination__r.Key_Combination_Code__c}"></apex:outputText>
+            </apex:column>
+            <apex:column headerValue="Reference Key Combination">
+            <apex:outputText value="{!ac.Reference_Key_Combination__r.Key_Combination__c}"></apex:outputText>
+            </apex:column>
+            <!-- JM20140514 -->
+            <apex:column headerValue="NPC">
+                <apex:inputCheckbox id="npc" value="{!ac.isNPCApplicable__c}" disabled="true"></apex:inputCheckbox>
+            </apex:column>
+            <apex:column headerValue="Volume">
+                <apex:inputCheckbox id="volume" value="{!ac.isVolumeApplicable__c}" disabled="true"></apex:inputCheckbox>
+            </apex:column>
+            <apex:column headerValue="Payment Terms">
+                <apex:inputCheckbox id="paymentTerms" value="{!ac.isPaymentTermsApplicable__c}" disabled="true"></apex:inputCheckbox> 
+            </apex:column>
+            <!-- JM20140514 -->
+            <!-- Commenting as they do not serve any purpose -->
+            <!-- <apex:column headerValue="Net Key Comb. Code">
+            
+            </apex:column>
+            <apex:column headerValue="Net Key Combination">
+            
+            </apex:column>-->
+            </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        </div>  
+    </apex:pageBlock>
+</div>
+
+<!-------------------------------------------- Section Six --------------------------------------->
+<div id="business">
+    <apex:pageBlock id="secSix">
+     <div class="salesArea1">
+        <apex:pageBlockSection collapsible="false" columns="3" title="Pricing Condition Detail" rendered="{!IF(service.paServiceState.ogItems.displaySection=='secSix',true,false)}">
+          
+            <apex:pageBlockSection columns="1">
+                <apex:pageblockSectionItem >
+                    <apex:outputText value="Pricing Condition Code"></apex:outputText>
+                    <apex:outPutText value="{!service.paServiceState.ogItems.pc.Pricing_Condition_Code__c}"/>    
+                </apex:pageblockSectionItem>
+                <apex:pageblockSectionItem >
+                    <apex:outputText value="Condition Class"></apex:outputText>
+                    <apex:outPutText value="{!service.paServiceState.ogItems.pc.Condition_Class__c}" />    
+                </apex:pageblockSectionItem>
+                <apex:pageblockSectionItem > 
+                   <apex:outputText value="Condition Class Code"></apex:outputText>
+                    <apex:outPutText value="{!service.paServiceState.ogItems.pc.Condition_Class_Code__c}"/>
+                </apex:pageblockSectionItem>
+                <apex:pageblockSectionItem >
+                    <apex:outputText value="Price Type"></apex:outputText>
+                    <apex:outPutText value="{!service.paServiceState.ogItems.pc.Price_Types__c}"/>    
+                </apex:pageblockSectionItem>
+         </apex:pageBlockSection>
+         <apex:pageBlockSection columns="1">
+                <apex:pageblockSectionItem >
+                    <apex:outputText value="Pricing Condition (SAP)"></apex:outputText>
+                    <apex:outPutText value="{!service.paServiceState.ogItems.pc.SAP_Condition_Type__c}" />    
+                </apex:pageblockSectionItem>
+                <apex:pageblockSectionItem >
+                    <apex:outputText value="Pricing Condition"></apex:outputText>
+                    <apex:outPutText value="{!service.paServiceState.ogItems.pc.Pricing_Condition__c}"/>    
+                </apex:pageblockSectionItem>
+                <apex:pageblockSectionItem >
+                    <apex:outputText value="Send To SAP"></apex:outputText>
+                    <apex:inputCheckbox value="{!service.paServiceState.ogItems.pc.SAP_Condition_Type__c}" disabled="true"/>    
+                </apex:pageblockSectionItem>
+                <apex:pageblockSectionItem >
+                
+                    <apex:outputText value="Calculation Type"></apex:outputText>
+                    <apex:outputText value="{!service.paServiceState.ogItems.pc.Calculation_Type__c}"/>    
+                </apex:pageblockSectionItem>
+                
+                
+        </apex:pageBlockSection>
+        <apex:pageBlockSection columns="1">
+        </apex:pageBlockSection>
+              
+      </apex:pageBlockSection>
+ </div>
+      
+      <div class="salesArea1">
+          <apex:pageBlockSection columns="3" title="Scale Detail" collapsible="false"
+           rendered="{!IF(AND(CONTAINS(service.paServiceState.ogItems.procons.Sales_Pricing_Procedure_Condition_Config__c,'Enable Scale'),service.paServiceState.ogItems.displaySection=='secSix')
+           ,true,false)}">
+                    <apex:pageBlockSection columns="1">
+                    <apex:pageblockSectionItem >
+                        <apex:outputText value="Scale Base"></apex:outputText>
+                        <apex:outPutText value="{!service.paServiceState.ogItems.pc.Scale_Base__c}"/>    
+                    </apex:pageblockSectionItem>
+                    <apex:pageblockSectionItem >
+                        <apex:outputText value="Scale Order"></apex:outputText>
+                        <apex:outPutText value="{!service.paServiceState.ogItems.pc.Check_Scale__c}"/>  
+                    </apex:pageblockSectionItem>
+                   
+                    </apex:pageBlockSection>
+                    <apex:pageBlockSection columns="1">
+                    <apex:pageblockSectionItem >
+                        <apex:outputText value="Scale Type"></apex:outputText>
+                        <apex:outPutText value="{!service.paServiceState.ogItems.pc.Scale_Type__c}"/>    
+                    </apex:pageblockSectionItem>
+                    </apex:pageBlockSection>
+                    
+                    <apex:pageBlockSection columns="1">     
+                    </apex:pageBlockSection>   
+            </apex:pageBlockSection>
+        </div>
+        
+        <div class="salesArea2" >
+            <apex:pageBlockSection columns="2" title="Key Combinations - {!service.paServiceState.ogItems.pc.Pricing_Condition_Code__c}" collapsible="false" 
+                rendered="{!IF(service.paServiceState.ogItems.displaySection=='secSix' && service.paServiceState.ogItems.AcSqList != null && service.paServiceState.ogItems.AcSqList.size > 0,true,false)}">
+                <apex:pageBlockTable value="{!service.paServiceState.ogItems.AcSqList }" var="ac" style="width:1250px;">
+                    <apex:column headerValue="Access Step">
+                    <apex:outputText value="{!ac.Sequence_Number__c}"></apex:outputText>
+                    </apex:column>
+                    <apex:column headerValue="Key Combination Code">
+                    <apex:outputText value="{!ac.Pricing_Key_Combination__r.Key_Combination_Code__c}"></apex:outputText>
+                    </apex:column>
+                    <apex:column headerValue="Key Combination">
+                    <apex:outputText value="{!ac.Key_Combination__c}"></apex:outputText>
+                    </apex:column>
+                    <apex:column headerValue="Key Combination SAP">
+                    <apex:outputText value="{!ac.Pricing_Key_Combination__r.Key_Combination__c}"></apex:outputText>
+                    </apex:column>
+                   
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        </div>
+    </apex:pageBlock>
+</div>  
+
+<br></br>
+<div >
+<center>
+ <apex:commandLink action="{!businessComponentAction}" rendered="{!IF(service.paServiceState.ogItems.displaySection=='procedure',true,false)}" value="Back" style="text-decoration:none" styleClass="btn">
+    <apex:param value="SASetupConfigure" name="backPM1" assignTo="{!businessAction}"/>
+    <apex:param value="PAGlobalConfig" name="pageName1" assignTo="{!newPageLabel}"/>
+    <apex:param name="pageName" value="Global Configuration" assignTo="{!pageName}"/>
+  </apex:commandLink>
+  </center>
+</div>
+
+<div >
+ 
+  <center>
+  <apex:commandLink action="{!businessComponentActionForRerender}" rendered="{!IF(OR(service.paServiceState.ogItems.displaySection=='secFour',
+  service.paServiceState.ogItems.displaySection=='secSix'),true,false)}" value="Back" style="text-decoration:none" styleClass="btn">
+    <apex:param value="backPriceMaster" name="backPM" assignTo="{!businessAction}"/>
+    <apex:param value="PAPriceMaster" name="pageName" assignTo="{!newPageLabel}"/>
+    <apex:param name="changeDisplayBack" value="procedure" assignTo="{!service.paServiceState.ogItems.displaySection}"/>
+<!--    <TJ20140604> Param for navigation Flow-->
+    <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+  </apex:commandLink>
+  </center>
+</div>
+
+</apex:form>
+</apex:page>

@@ -1,0 +1,788 @@
+<apex:page controller="ctrlPAMain" tabstyle="Price_Approval__tab" sidebar="false" showHeader="true" id="currentPage" cache="true"
+    action="{!onLoadCall}">
+    <apex:pageMessages escape="false" id="errorMessage"/> 
+    <!--  Ver.        Developer           Changes                                                   Dependencies
+-------------------------------------------------------------------------------------------------------------------
+  1.1              Brundha            added showCheckbox in relatedlist                             None
+  1.2               Utkarsh           added popup code for reassignment                             None
+  1.3              Brundha            added PA BU Amin custom settings instead of profilename       None
+  1.4               Prachi              UI changes
+  1.5              Brundha           added rendered in Pending Links                                None
+  1.6              Priyanka         Changed table component to 'PARelatedListComponent'                                     
+                                    from PARelatedList                                              None
+  1.7              Priyanka         Changed architecture                                            None
+  1.8              Utkrash          Changed the rendered condition for Approve/Reassign and component None 
+  1.9              Brundha           UI                              None
+  2.0               Utkarsh         Changed the Reassign Popup                                  PAUserPopulationCOmponent 
+  <MS20140506>     Mohit            Added scripts for data-tables           None
+  <TJ20140509>      Tarun           Added Navigation Flow Text              None
+  <PR20140901>     Priyanka R       Uncommented code for Reassign button
+  <GT20140909>     George Thomas    Added section to show pending approval requests in table 
+  
+  <VL20160222>      Vijay Laxmi    Change the display limit because navigation on view pending, Draft, Submitted , approved request not working
+                                    <IS ID-00063130,IS ID-00064322, IS ID-00061646>
+    
+  <MG20160901>    Mansi Gupta     This prevents the double click of approve button while approving Price Requests<IS ID-00073183>
+  <MG20161107>    Mansi Gupta     Hide Approve button for BU Admins for BU DPP Polymers in Pending Approval<IS ID-00076073>   
+-->
+   <!-- SL20220614     Satyandra Lodhi     Update Ajax version from 15.0 to 55.0 and page version from 21.0 to 55.0 to support salesforce release <IS TI-00094390> -->  
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.min.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.js')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/css/jquery.dataTables.css')}" />
+    <c:loadingComponent />
+    <style>
+#requests .pbBody {
+    margin: 0px;
+}
+ body .pbBody table.list tr:nth-child(2) th{color:black;background-color:#f8f8f8;border:1px solid #E2E3E4; }
+.customerLink {
+    font-size: 15px;
+    height: 20px;
+    margin-bottom: 1px;
+    padding: 5px;
+    border: solid 1px;
+    border-color: #6E96B2;
+    background-color: #E5F3FC;
+    font-weight: bold;
+    text-align: left;
+}
+
+.navFlow{
+font-size:13px;
+font-style:oblique;
+margin-bottom:3px;
+}
+
+body .pbBody table.list tr td {
+    border-bottom: none;
+}
+
+body .pbBody table.list tr th {
+    color: white;
+    background-color: #63A4C5;
+}
+
+//
+#soldTo #details a.btn {
+    width: 60px;
+    float: left;
+}
+
+.bPageBlock {
+    float: left;
+    width: 100%;
+}
+
+#priceReq  .detailList tr td {
+    border-bottom: none;
+}
+
+#buttons a.btn {
+    width: 60px;
+    float: left;
+}
+.spinnerCt {
+    left: 50%;
+    top: 35%;
+    position: absolute;
+    z-index: 10000;
+    padding: 20px 40px;
+    box-shadow: 0pt 2px 5px rgb(172, 172, 172);
+    border-radius: 1em 1em 1em 1em;
+    border: 1px solid rgb(206, 236, 255);
+    background-color: rgb(206, 236, 255);
+    background-style: solid;
+}
+
+.spinner {
+    padding: 10px 15px 10px 0pt;
+    vertical-align: middle;
+}
+
+.spinnerCt .loadingIndicator {
+    display: inline;
+    font-size: 135%;
+    font-weight: bold;
+}
+
+.spinner {
+    padding: 10px 15px 10px 0pt;
+    vertical-align: middle;
+}
+
+.FrontPageApproverList {
+    background-color: white;
+    //border-width: 2px;
+    //border-style: solid;
+    border: 2px solid #63A4C5;
+    z-index: 9999;
+    left: 28%;
+    right: 3%;
+    padding: 10px;
+    position: absolute;
+    top: 5%; //
+    margin-left: -600px;
+    width: 30%;
+  //  width:29%;
+}
+.FrontPageSoldToBehalf {
+    left:2%;
+}
+</style>
+<script src="/soap/ajax/55.0/connection.js" type="text/javascript"></script>
+<script src="/soap/ajax/55.0/apex.js" type="text/javascript"></script>
+<script type="text/javascript">
+        
+        function bulkError()
+        {
+            alert("Hello Approver, \n\n Bulk Approval is currently disabled due to a technical issue with this feature.\n Please click on individual Request Id to Approve the request.\n This function will be restored shortly.");
+            
+        } 
+        <!-- <MG20160901>-- starts --This prevents the double click of approve button while approving Price Requests-->
+        var isApproveClicked=false;        
+        function checkDoubleSubmit(obj){        
+           if(isApproveClicked){
+               return false;
+           }
+           else{
+               isApproveClicked=true;                          
+               return true;
+           }
+        }
+        
+        <!--<MG20160901>-- ends-->   
+        
+     /*   function openConfirmation(id)
+        {
+            if(confirm('Confirm to continue?'))
+            {
+                saveBulkReassignJS('saveBulkReassign','PAStatus',id);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
+        } */
+        function openConfirmation(reassignUsr)
+         {
+            if(confirm('Confirm to continue?'))
+            {
+                //console.log('inside confirm logic');
+                sforce.connection.login("spec.specpa@dupont.com.esu", '{!service.PAServiceState.currentRequest.approvalWF.adminPwd}');
+                
+                confirmMassReassign();          
+               //console.log('New approver after massreassign - '+reassignUsr); 
+               //console.log('Request string - {!service.PAServiceState.currentRequest.ReassignReq}');
+               sforce.apex.execute("PAReassign","reAssign",{requestId:'{!service.PAServiceState.currentRequest.ReassignReq}',currentAssignedUserId:'',reassignUserId:reassignUsr});
+               refreshList();
+               return true;
+            }
+            else
+            {
+                cancelReassign();
+                closeRefresh();
+                return false;
+            }
+            
+        }
+        function closeUserPopUp()
+        {
+            closeRefresh();
+        }
+              
+        var j$ = jQuery.noConflict();
+        j$(document).ready(function datatable(){                                      //<TJ20140401> - added javascript to generate HTML Table with additional functionalities
+        if("{!service.PAServicestate.currentRequest.csvString}"=="Draft"||"{!service.PAServicestate.currentRequest.csvString}"=="Rejected"||"{!service.PAServicestate.currentRequest.csvString}"=="Recalled")
+        {
+            var tab = j$('#PARelatedListComponentTableCustomerPrice').dataTable({
+                        "aaSorting":[],
+                        "bLengthChange":false,
+                        <!--  <VL20160222> Change the display limit because navigation on view pending, Draft, Submitted , approved request not working -->
+                        
+                        "iDisplayLength" : 25,
+                        sPaginationType: "full_numbers",
+                        "aoColumnDefs": [{"bSearchable": false,"aTargets":[0,1]},{"bSortable": false,"aTargets":[0,1]}],
+                        sPlaceHolder : "foot:before",
+                      });
+            j$('#PARelatedListComponentTableCustomerPrice'+'_filter').after('<br /><br />');
+            j$('#PARelatedListComponentTableCustomerPrice').after('<br />');
+        
+            var tab1 = j$('#PARelatedListComponentTablePricingTask').dataTable({
+                        "aaSorting":[],
+                        "bLengthChange":false,
+                        
+                        <!--  <VL20160222> Change the display limit because navigation on view pending, Draft, Submitted , approved request not working -->
+                        
+                        "iDisplayLength" : 25,
+                        sPaginationType: "full_numbers",
+                        "aoColumnDefs": [{"bSearchable": false,"aTargets":[0,1]},{"bSortable": false,"aTargets":[0,1]}],
+                        sPlaceHolder : "foot:before",
+                      });
+            j$('#PARelatedListComponentTablePricingTask'+'_filter').after('<br /><br />');
+            j$('#PARelatedListComponentTablePricingTask').after('<br />');
+                
+            var tab2 = j$('#PARelatedListComponentTableImport').dataTable({
+                        "aaSorting":[],
+                        "bLengthChange":false,
+                        
+                        <!--  <VL20160222> Change the display limit because navigation on view pending, Draft, Submitted , approved request not working -->
+                        
+                        "iDisplayLength" : 25,
+                        sPaginationType: "full_numbers",
+                        "aoColumnDefs": [{"bSearchable": false,"aTargets":[0,1]},{"bSortable": false,"aTargets":[0,1]}],
+                        sPlaceHolder : "foot:before",
+                      });
+            j$('#PARelatedListComponentTableImport'+'_filter').after('<br /><br />');
+            j$('#PARelatedListComponentTableImport').after('<br />');
+                
+            var tab3 = j$('#PARelatedListComponentTableMassiveChange').dataTable({
+                        "aaSorting":[],
+                        "bLengthChange":false,
+                        
+                        <!--  <VL20160222> Change the display limit because navigation on view pending, Draft, Submitted , approved request not working -->
+                        
+                        "iDisplayLength" : 25,
+                        sPaginationType: "full_numbers",
+                        "aoColumnDefs": [{"bSearchable": false,"aTargets":[0,1]},{"bSortable": false,"aTargets":[0,1]}],
+                        sPlaceHolder : "foot:before",
+                      });
+            j$('#PARelatedListComponentTableMassiveChange'+'_filter').after('<br /><br />');
+            j$('#PARelatedListComponentTableMassiveChange').after('<br />');
+                
+            var tab4 = j$('#PARelatedListComponentTableNonCustomerSpecific').dataTable({
+                        "aaSorting":[],
+                        "bLengthChange":false,
+                        <!--  <VL20160222> Change the display limit because navigation on view pending, Draft, Submitted , approved request not working -->
+                        
+                        "iDisplayLength" : 25,
+                        sPaginationType: "full_numbers",
+                        "aoColumnDefs": [{"bSearchable": false,"aTargets":[0,1]},{"bSortable": false,"aTargets":[0,1]}],
+                        sPlaceHolder : "foot:before",
+                      });
+            j$('#PARelatedListComponentTableNonCustomerSpecific'+'_filter').after('<br /><br />');
+            j$('#PARelatedListComponentTableNonCustomerSpecific').after('<br />');
+                
+            var tab5 = j$('#PARelatedListComponentTableFloorPricing').dataTable({
+                        "aaSorting":[],
+                        "bLengthChange":false,
+                        
+                        <!--  <VL20160222> Change the display limit because navigation on view pending, Draft, Submitted , approved request not working -->
+                        
+                        "iDisplayLength" : 25,
+                        sPaginationType: "full_numbers",
+                        "aoColumnDefs": [{"bSearchable": false,"aTargets":[0,1]},{"bSortable": false,"aTargets":[0,1]}],
+                        sPlaceHolder : "foot:before",
+                      });
+            j$('#PARelatedListComponentTableFloorPricing'+'_filter').after('<br /><br />');
+            j$('#PARelatedListComponentTableFloorPricing').after('<br />');
+                
+            var tab6 = j$('#PARelatedListComponentTableReferencePricing').dataTable({
+                        "aaSorting":[],
+                        "bLengthChange":false,
+                        
+                        <!--  <VL20160222> Change the display limit because navigation on view pending, Draft, Submitted , approved request not working -->
+                        
+                        "iDisplayLength" : 25,
+                        sPaginationType: "full_numbers",
+                        "aoColumnDefs": [{"bSearchable": false,"aTargets":[0,1]},{"bSortable": false,"aTargets":[0,1]}],
+                        sPlaceHolder : "foot:before",
+                      });
+            j$('#PARelatedListComponentTableReferencePricing'+'_filter').after('<br /><br />');
+            j$('#PARelatedListComponentTableReferencePricing').after('<br />');
+            
+            var tab7 = j$('#PARelatedListComponentTableProject').dataTable({
+        "aLengthMenu": [100,200],
+        <!--  <VL20160222> Change the display limit because navigation on view pending, Draft, Submitted , approved request not working -->
+        
+        "iDisplayLength" : 25,
+        sPaginationType: "full_numbers",
+        sPlaceHolder : "foot:before",});
+        j$('#PARelatedListComponentTableProject'+'_filter').after('<br /><br />');
+        j$('#PARelatedListComponentTableProject').after('<br />');
+        j$("div[id~=PARelatedListComponentTableProject_length]").css("display","none");
+        }
+        else if("{!service.PAServicestate.currentRequest.csvString}"=="Submitted"||"{!service.PAServicestate.currentRequest.csvString}"=="Approved")
+        {
+            var tab = j$('#PARelatedListComponentTableCustomerPrice').dataTable({
+                        "aaSorting":[],
+                        "bLengthChange":false,
+                        <!--  <VL20160222> Change the display limit because navigation on view pending, Draft, Submitted , approved request not working -->
+                        
+                        "iDisplayLength" : 25,
+                        sPaginationType: "full_numbers",
+                        sPlaceHolder : "foot:before",
+                      });
+            j$('#PARelatedListComponentTableCustomerPrice'+'_filter').after('<br /><br />');
+            j$('#PARelatedListComponentTableCustomerPrice').after('<br />');
+        
+            var tab1 = j$('#PARelatedListComponentTablePricingTask').dataTable({
+                        "aaSorting":[],
+                        "bLengthChange":false,
+                        
+                        "iDisplayLength" : 25,
+                        sPaginationType: "full_numbers",
+                        sPlaceHolder : "foot:before",
+                      });
+            j$('#PARelatedListComponentTablePricingTask'+'_filter').after('<br /><br />');
+            j$('#PARelatedListComponentTablePricingTask').after('<br />');
+                
+            var tab2 = j$('#PARelatedListComponentTableImport').dataTable({
+                        "aaSorting":[],
+                        "bLengthChange":false,
+                        <!--  <VL20160222> Change the display limit because navigation on view pending, Draft, Submitted , approved request not working -->
+                        
+                        "iDisplayLength" : 25,
+                        sPaginationType: "full_numbers",
+                        sPlaceHolder : "foot:before",
+                      });
+            j$('#PARelatedListComponentTableImport'+'_filter').after('<br /><br />');
+            j$('#PARelatedListComponentTableImport').after('<br />');
+                
+            var tab3 = j$('#PARelatedListComponentTableMassiveChange').dataTable({
+                        "aaSorting":[],
+                        "bLengthChange":false,
+                        <!--  <VL20160222> Change the display limit because navigation on view pending, Draft, Submitted , approved request not working -->
+                        
+                        "iDisplayLength" : 25,
+                        sPaginationType: "full_numbers",
+                        sPlaceHolder : "foot:before",
+                      });
+            j$('#PARelatedListComponentTableMassiveChange'+'_filter').after('<br /><br />');
+            j$('#PARelatedListComponentTableMassiveChange').after('<br />');
+                
+            var tab4 = j$('#PARelatedListComponentTableNonCustomerSpecific').dataTable({
+                        "aaSorting":[],
+                        "bLengthChange":false,
+                        
+                        <!--  <VL20160222> Change the display limit because navigation on view pending, Draft, Submitted , approved request not working -->
+                        
+                        "iDisplayLength" : 25,
+                        sPaginationType: "full_numbers",
+                        sPlaceHolder : "foot:before",
+                      });
+            j$('#PARelatedListComponentTableNonCustomerSpecific'+'_filter').after('<br /><br />');
+            j$('#PARelatedListComponentTableNonCustomerSpecific').after('<br />');
+                
+            var tab5 = j$('#PARelatedListComponentTableFloorPricing').dataTable({
+                        "aaSorting":[],
+                        "bLengthChange":false,
+                        <!--  <VL20160222> Change the display limit because navigation on view pending, Draft, Submitted , approved request not working -->
+                        
+                        "iDisplayLength" : 25,
+                        sPaginationType: "full_numbers",
+                        sPlaceHolder : "foot:before",
+                      });
+            j$('#PARelatedListComponentTableFloorPricing'+'_filter').after('<br /><br />');
+            j$('#PARelatedListComponentTableFloorPricing').after('<br />');
+                
+            var tab6 = j$('#PARelatedListComponentTableReferencePricing').dataTable({
+                        "aaSorting":[],
+                        "bLengthChange":false,
+                        <!--  <VL20160222> Change the display limit because navigation on view pending, Draft, Submitted , approved request not working -->
+                        
+                        "iDisplayLength" : 25,
+                        sPaginationType: "full_numbers",
+                        sPlaceHolder : "foot:before",
+                      });
+            j$('#PARelatedListComponentTableReferencePricing'+'_filter').after('<br /><br />');
+            j$('#PARelatedListComponentTableReferencePricing').after('<br />');
+            
+            var tab7 = j$('#PARelatedListComponentTableProject').dataTable({
+        "aLengthMenu": [100,200],
+        
+        <!--  <VL20160222> Change the display limit because navigation on view pending, Draft, Submitted , approved request not working -->
+        
+        "iDisplayLength" : 25,
+        sPaginationType: "full_numbers",
+        sPlaceHolder : "foot:before",});
+        j$('#PARelatedListComponentTableProject'+'_filter').after('<br /><br />');
+        j$('#PARelatedListComponentTableProject').after('<br />');
+        j$("div[id~=PARelatedListComponentTableProject_length]").css("display","none");
+        }
+        else
+        {
+            var tab = j$('#PARelatedListComponentTableCustomerPrice').dataTable({
+                        "aaSorting":[],
+                        "bLengthChange":false,
+                        
+                        <!--  <VL20160222> Change the display limit because navigation on view pending, Draft, Submitted , approved request not working -->
+                        
+                        "iDisplayLength" : 25,
+                        sPaginationType: "full_numbers",
+                        "aoColumnDefs": [{"bSearchable": false,"aTargets":[0]},{"bSortable": false,"aTargets":[0]}],
+                        sPlaceHolder : "foot:before",
+                      });
+            j$('#PARelatedListComponentTableCustomerPrice'+'_filter').after('<br /><br />');
+            j$('#PARelatedListComponentTableCustomerPrice').after('<br />');
+        
+            var tab1 = j$('#PARelatedListComponentTablePricingTask').dataTable({
+                        "aaSorting":[],
+                        "bLengthChange":false,
+                        <!--  <VL20160222> Change the display limit because navigation on view pending, Draft, Submitted , approved request not working -->
+                        
+                        "iDisplayLength" : 25,
+                        sPaginationType: "full_numbers",
+                        "aoColumnDefs": [{"bSearchable": false,"aTargets":[0]},{"bSortable": false,"aTargets":[0]}],
+                        sPlaceHolder : "foot:before",
+                      });
+            j$('#PARelatedListComponentTablePricingTask'+'_filter').after('<br /><br />');
+            j$('#PARelatedListComponentTablePricingTask').after('<br />');
+                
+            var tab2 = j$('#PARelatedListComponentTableImport').dataTable({
+                        "aaSorting":[],
+                        "bLengthChange":false,
+                        
+                        <!--  <VL20160222> Change the display limit because navigation on view pending, Draft, Submitted , approved request not working -->
+                        
+                        "iDisplayLength" : 25,
+                        sPaginationType: "full_numbers",
+                        "aoColumnDefs": [{"bSearchable": false,"aTargets":[0]},{"bSortable": false,"aTargets":[0]}],
+                        sPlaceHolder : "foot:before",
+                      });
+            j$('#PARelatedListComponentTableImport'+'_filter').after('<br /><br />');
+            j$('#PARelatedListComponentTableImport').after('<br />');
+                
+            var tab3 = j$('#PARelatedListComponentTableMassiveChange').dataTable({
+                        "aaSorting":[],
+                        "bLengthChange":false,
+                        
+                        <!--  <VL20160222> Change the display limit because navigation on view pending, Draft, Submitted , approved request not working -->
+                        
+                        "iDisplayLength" : 25,
+                        sPaginationType: "full_numbers",
+                        "aoColumnDefs": [{"bSearchable": false,"aTargets":[0]},{"bSortable": false,"aTargets":[0]}],
+                        sPlaceHolder : "foot:before",
+                      });
+            j$('#PARelatedListComponentTableMassiveChange'+'_filter').after('<br /><br />');
+            j$('#PARelatedListComponentTableMassiveChange').after('<br />');
+                
+            var tab4 = j$('#PARelatedListComponentTableNonCustomerSpecific').dataTable({
+                        "aaSorting":[],
+                        "bLengthChange":false,
+                        
+                        <!--  <VL20160222> Change the display limit because navigation on view pending, Draft, Submitted , approved request not working -->
+                        
+                        "iDisplayLength" : 25,
+                        sPaginationType: "full_numbers",
+                        "aoColumnDefs": [{"bSearchable": false,"aTargets":[0]},{"bSortable": false,"aTargets":[0]}],
+                        sPlaceHolder : "foot:before",
+                      });
+            j$('#PARelatedListComponentTableNonCustomerSpecific'+'_filter').after('<br /><br />');
+            j$('#PARelatedListComponentTableNonCustomerSpecific').after('<br />');
+                
+            var tab5 = j$('#PARelatedListComponentTableFloorPricing').dataTable({
+                        "aaSorting":[],
+                        "bLengthChange":false,
+                        
+                        <!--  <VL20160222> Change the display limit because navigation on view pending, Draft, Submitted , approved request not working -->
+                        
+                        "iDisplayLength" : 25,
+                        sPaginationType: "full_numbers",
+                        "aoColumnDefs": [{"bSearchable": false,"aTargets":[0]},{"bSortable": false,"aTargets":[0]}],
+                        sPlaceHolder : "foot:before",
+                      });
+            j$('#PARelatedListComponentTableFloorPricing'+'_filter').after('<br /><br />');
+            j$('#PARelatedListComponentTableFloorPricing').after('<br />');
+                
+            var tab6 = j$('#PARelatedListComponentTableReferencePricing').dataTable({
+                        "aaSorting":[],
+                        "bLengthChange":false,
+                        <!--  <VL20160222> Change the display limit because navigation on view pending, Draft, Submitted , approved request not working -->
+                        
+                        "iDisplayLength" : 25,
+                        sPaginationType: "full_numbers",
+                        "aoColumnDefs": [{"bSearchable": false,"aTargets":[0]},{"bSortable": false,"aTargets":[0]}],
+                        sPlaceHolder : "foot:before",
+                      });
+            j$('#PARelatedListComponentTableReferencePricing'+'_filter').after('<br /><br />');
+            j$('#PARelatedListComponentTableReferencePricing').after('<br />');
+            
+            var tab7 = j$('#PARelatedListComponentTableProject').dataTable({
+        "aLengthMenu": [100,200],
+        "bLengthChange":false,
+        <!--  <VL20160222> Change the display limit because navigation on view pending, Draft, Submitted , approved request not working -->
+        
+        "iDisplayLength" : 25,
+        sPaginationType: "full_numbers",
+        sPlaceHolder : "foot:before",});
+        j$('#PARelatedListComponentTableProject'+'_filter').after('<br /><br />');
+        j$('#PARelatedListComponentTableProject').after('<br />');
+        j$("div[id~=PARelatedListComponentTableProject_length]").css("display","none");
+        }
+            
+         var tab9 = j$('.listUser').dataTable({
+         
+         <!--  <VL20160222> Change the display limit because navigation on view pending, Draft, Submitted , approved request not working -->
+         
+            "iDisplayLength" : 25,
+            "bLengthChange":false,
+            sPaginationType: "full_numbers",
+            sPlaceHolder : "foot:before",});
+            j$('.listUser'+'_filter').after('<br /><br />');
+            j$('.listUser').after('<br />');
+            //j$("div[id~listUser_length]").css("display","none"); commenting out to remove the js erros
+        });     
+</script>
+<apex:actionStatus id="stat" >
+        <apex:facet name="start">
+            <div class="spinnerMask" id="spinnerMask">
+            <div class="spinnerCt"><img
+                src="/img/analytics/reportbuilder/icons/spinner32.gif"
+                alt="Loading..." width="32" height="32" align="center"
+                class="spinner" title="Loading..." />
+            <div class="loadingIndicator">Loading...</div>
+            </div>
+            <div class="mask"></div>
+            </div>
+        </apex:facet>
+    </apex:actionStatus>
+
+    <apex:form id="myForm">
+  <!--  <apex:actionFunction name="saveBulkReassignJS" action="{!businessComponentAction}" status="stat" rerender="requestSection">
+        <apex:param name="businessaction" value="" assignTo="{!businessaction}" />
+        <apex:param name="newPageLabel" value="" assignTo="{!newPageLabel}" />
+        <apex:param name="id" value="" assignTo="{!service.PAServiceState.currentRequest.approvalWF.reassignedUserId}" />   
+    </apex:actionFunction>   -->
+  <!-- MS20141009 Added action functions for mass reassgn START-->
+    <apex:actionFunction name="confirmMassReassign" status="stat" reRender="requestSection,errorMessage" >
+        <apex:param name="massReassignSet" value="true" assignTo="{!service.PAServiceState.currentRequest.massReassignAttribute}" />   
+    </apex:actionFunction>
+     <apex:actionFunction name="closeRefresh" status="stat" reRender="reassignPanelId">
+     </apex:actionFunction> 
+     <apex:actionFunction name="cancelReassign" status="stat" reRender="myForm">
+        <apex:param name="cancelReassignPopUp" value="false" assignTo="{!service.PAServiceState.currentRequest.approvalWF.displayReassignList}"/>
+     </apex:actionFunction>
+     <apex:actionFunction name="refreshList" action="{!businessComponentAction}" status="stat" reRender="requestSection">
+         <apex:param name="desiredAction" value="saveBulkReassign" assignTo="{!businessaction}" />
+         <apex:param name="newPageLabel" value="PAStatus" assignTo="{!newPageLabel}" />
+     </apex:actionFunction> 
+ <!--  <apex:actionFunction name="confirmMassReassign1" action="{!businessComponentAction}" reRender="myForm" >
+   <!-- <apex:param name="massReassignSet" value="true" assignTo="{!service.PAServiceState.currentRequest.massReassignAttribute}" />
+     <apex:param name="desiredAction" value="Pending" assignTo="{!businessaction}" />
+     <apex:param name="newPageLabel" value="PAStatus" assignTo="{!newPageLabel}" />
+  </apex:actionFunction>
+  
+  <apex:actionSupport event="onchange" oncomplete="openConfirmation()"  reRender="requestSection" >
+    </apex:actionSupport>-->
+   <!-- MS20141009 END-->  
+  
+    <!--<MS20140506>Adding Link for landing page -->
+        <div align="left" class="navFlow">
+            <apex:commandLink id="link0" value="Landing Page" action="{!businessComponentAction}" target="_self" style="color:blue;">
+            <apex:param name="desiredAction" value="landingpage" assignTo="{!businessaction}" />
+            <apex:param name="newPageLabel" value="PAHome" assignTo="{!newPageLabel}" />
+            </apex:commandLink>
+        <!-- <TJ20140509> Added Navigation Flow Text-->
+            <apex:outputText value="{!if(NOT((ISNULL(navigationText))||CONTAINS(navigationText,null)),'>>  ','')} "/>
+            <apex:outputText value="{!navigationText}"/>
+            <apex:outputText value=">>  {!service.PAServicestate.currentRequest.csvString} Requests"/>
+        </div>
+    <!--<MS20140506>Adding Link for landing page -->
+<!--        <apex:messages />-->
+        <apex:pageBlock id="requestSection" >
+            <div class="customerLink"><apex:outputText value="{!service.PAServicestate.currentRequest.csvString} Requests" />
+            </div>
+            <apex:pageBlockSection columns="2" >
+            <!--Start: <GT20140909>  -->
+            <apex:pageBlockSection rendered="{!NOT(CONTAINS(businessaction,'Pending')||CONTAINS(businessaction,'closereassignpopup')||CONTAINS(businessaction,'bulkApproval')||CONTAINS(businessaction,'bulkReassignPopup'))}">
+                <apex:pageblocksectionitem >
+                            <apex:outputlabel value="Business"/>
+                            <apex:outputText value="{!BUName}"/>
+               </apex:pageblocksectionitem>
+            </apex:pageBlockSection>
+                <apex:pageBlockSection rendered="{!CONTAINS(businessaction,'Pending')||CONTAINS(businessaction,'closereassignpopup')||CONTAINS(businessaction,'bulkApproval')||CONTAINS(businessaction,'bulkReassignPopup')}" >
+            
+<!--                <TJ20140522> Added Business Name-->
+                        <!--<apex:pageblocksectionitem >
+                        <apex:outputlabel value="Business"/>
+                        <apex:outputText value="{!BUName}"/>
+                        </apex:pageblocksectionitem>-->
+                        <apex:pageblocksectionitem > 
+                                <apex:outputText value="Business" />
+                                <apex:outputPanel >
+                                    <div class="requiredBlock"></div>
+                                    <apex:selectList size="1" required="true"
+                                        value="{!service.paServiceState.ogItems.selectedBU}">
+                                        <apex:selectOptions value="{!service.paServiceState.ogItems.listOptions}" />
+<!--                                         <TJ20140515> <apex:actionSupport event="onchange" action="{!service.PAServiceState.ogItems.setBUName}"/> -->
+                                    <apex:actionSupport event="onchange" oncomplete="datatable()" 
+                                    status="stat" action="{!service.PAServicestate.currentRequest.changeBU}"/>
+                                    </apex:selectList>
+                                </apex:outputPanel>
+                         </apex:pageblocksectionitem>
+                        
+                </apex:pageBlockSection>
+                <apex:pageBlockSection rendered="{!CONTAINS(businessaction,'Pending')||CONTAINS(businessaction,'Quit')||CONTAINS(businessaction,'closereassignpopup')||CONTAINS(businessaction,'bulkApproval')||CONTAINS(businessaction,'bulkReassignPopup')||CONTAINS(businessaction,'Quit')}" >
+                    <apex:pageblocksectionitem >
+                       <apex:outputPanel >
+                                <table border="1" cellpadding="1" cellspacing="0">
+                                <th>Business</th>
+                                <th>Requests</th>
+                                <apex:repeat value="{!service.PAServicestate.currentRequest.BURequests}" var="key">
+                                           <tr><td><apex:outputtext value="{!key}"/></td>
+                                           <td><apex:outputtext value="{!service.PAServicestate.currentRequest.buRequestCount[key]}"/></td></tr>
+                               </apex:repeat>
+                                </table>
+                       </apex:outputPanel>
+                    </apex:pageblocksectionitem> 
+                </apex:pageBlockSection>
+                <apex:pageBlockSection rendered="{!CONTAINS(businessaction,'Pending')||CONTAINS(businessaction,'Quit')||CONTAINS(businessaction,'closereassignpopup')||CONTAINS(businessaction,'bulkApproval')||CONTAINS(businessaction,'bulkReassignPopup')}">
+                <apex:pageblocksectionitem >
+                            <apex:outputlabel value="Request Type"  />
+                            <apex:selectList value="{!service.PAServicestate.currentRequest.requesttype}" size="1">
+                            <apex:selectOption itemValue="select" itemLabel="--select--"/>
+                            <apex:selectOption itemValue="Customer Specific" itemLabel="Customer Price Requests"/>
+                            <apex:selectOption itemValue="Non Customer Specific" itemLabel="Non- Customer Specific Price Requests"/>
+                            <apex:selectOption itemValue="Project Request" itemLabel="Project Requests"/>
+                            <apex:selectOption itemValue="Pricing Task Request" itemLabel="Pricing Task Requests"/>
+                            <apex:actionSupport event="onchange" oncomplete="datatable()" 
+                                   status="stat"/>
+                            </apex:selectList>
+                    </apex:pageblocksectionitem>
+            </apex:pageBlockSection>
+               <!-- End :<GT20140902> -->
+            </apex:pageBlockSection>
+            <br/>
+            <div id="requests"><apex:repeat value="{!service.PAServicestate.currentRequest.relatedWrappersList}"
+                var="wrapper">
+                <!-- Ver 1.6 START -->
+                <apex:outputPanel rendered="{!wrapper.wrapperList.size <> 0}"><br/></apex:outputPanel>
+                <c:PARelatedListComponent rendered = "{!AND(wrapper.wrapperList.size <> 0,!service.PAServicestate.ogitems.isEndUserRebateEnabled)}" WrapperRecordsDisp="{!wrapper.wrapperList}"
+                    columnsDisp="{!wrapper.keyCombinationcolumns}"
+                    viewMode="{!currentPageLabel}"
+                    selected="{!service.PAServicestate.currentRequest.pricingRequestId}"
+                    actionAtr="{!businessaction}" typeOfRequest="{!wrapper.priceType}"
+                    typeOfSObjectList="{!wrapper.sObjectTypeName}" showcheckbox="true"
+                    showCheckbox="{!IF(OR(service.PAServicestate.currentRequest.csvString=='Approved',service.PAServicestate.currentRequest.csvString=='Submitted'),false,true)}"
+                    actionshowFlag="{!IF(OR(service.PAServicestate.currentRequest.csvString=='Approved',service.PAServicestate.currentRequest.csvString=='Submitted',service.PAServicestate.currentRequest.csvString=='Pending'),false,true)}"
+                    labelName="{!pageName}"
+                    currentHeader="{!service.PAServicestate.currentRequest.csvString} Requests" navtext="{!navigationText}">
+                </c:PARelatedListComponent>
+                
+                <c:PARelatedListComponent rendered = "{!AND(wrapper.wrapperList.size <> 0,service.PAServicestate.ogitems.isEndUserRebateEnabled)}" WrapperRecordsDisp="{!wrapper.wrapperList}"
+                    
+                    viewMode="{!currentPageLabel}"
+                    RPQColumns="{!wrapper.RPQColumns}"
+                    RPQFlag="true"
+                    selected="{!service.PAServicestate.currentRequest.pricingRequestId}"
+                    actionAtr="{!businessaction}" typeOfRequest="{!wrapper.priceType}"
+                    typeOfSObjectList="{!wrapper.sObjectTypeName}" showcheckbox="true"
+                    showCheckbox="{!IF(OR(service.PAServicestate.currentRequest.csvString=='Approved',service.PAServicestate.currentRequest.csvString=='Submitted'),false,true)}"
+                    actionshowFlag="{!IF(OR(service.PAServicestate.currentRequest.csvString=='Approved',service.PAServicestate.currentRequest.csvString=='Submitted',service.PAServicestate.currentRequest.csvString=='Pending'),false,true)}"
+                    labelName="{!pageName}"
+                    currentHeader="{!service.PAServicestate.currentRequest.csvString} Requests" navtext="{!navigationText}">
+                </c:PARelatedListComponent>
+                <!-- Ver 1.6 END -->
+            <apex:outputPanel rendered="{!wrapper.wrapperList.size <> 0}"><br/></apex:outputPanel>
+            </apex:repeat></div>
+
+            <div
+                style="float: left; text-align: center; padding: 10px 0px 10px 0px; width: 100%;">
+            <apex:commandLink value="Back" action="{!businessComponentAction}"
+                styleClass="btn" style="text-decoration:none;">
+                <apex:param name="desiredAction" value="statusCancel"
+                    assignTo="{!businessaction}" />
+                <apex:param value="PAHome" assignTo="{!newPageLabel}" name="newPage" />
+            </apex:commandLink> 
+          <!--  onclick="return bulkError()" -->
+           <!-- MG20160901-- added onclick event to avoid double submit on multiple clicks-->
+           <!-- MG20161107 -Hide Approve button for DPP Polymers BU Admin-- updated rendered condition -->
+            <apex:commandLink value="Approve" action="{!businessComponentAction}" onclick="return checkDoubleSubmit(this);" 
+                styleClass="btn"
+                style="text-decoration:none;"
+                rendered="{!AND(service.PAServicestate.currentRequest.csvString=='Pending',service.paServiceState.ogItems.approverPermissionSetFlag, 
+                            OR(service.PAServicestate.currentRequest.relatedWrappersList[0].wrapperList.size <> 0, service.PAServicestate.currentRequest.relatedWrappersList[1].wrapperList.size <> 0, 
+                            service.PAServicestate.currentRequest.relatedWrappersList[2].wrapperList.size <> 0, service.PAServicestate.currentRequest.relatedWrappersList[3].wrapperList.size <> 0, 
+                            service.PAServicestate.currentRequest.relatedWrappersList[4].wrapperList.size <> 0,service.PAServicestate.currentRequest.relatedWrappersList[5].wrapperList.size <> 0),
+                            NOT(AND(service.paServiceState.ogItems.selectedBU == $label.BU_ID ,$Profile.name == $Label.BU_Admin_Profile_Name)))}">
+                <apex:param name="desiredAction" value="bulkApproval"
+                    assignTo="{!businessaction}" />
+                <apex:param value="PAStatus" assignTo="{!newPageLabel}"
+                    name="newPage" />
+                <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                <apex:param name="pageName" value="stay" assignTo="{!pageName}"/> 
+            </apex:commandLink> 
+            <!-- <PR20140901> Un commented the code for Reassign button -->
+            <apex:commandLink value="Reassign"
+                action="{!businessComponentAction}" styleClass="btn"
+                style="text-decoration:none;"
+                rendered="{!AND(service.PAServicestate.ogItems.isBUAdmin,service.PAServicestate.currentRequest.csvString=='Pending', 
+                            OR(service.PAServicestate.currentRequest.relatedWrappersList[0].wrapperList.size > 0, service.PAServicestate.currentRequest.relatedWrappersList[1].wrapperList.size > 0,
+                            service.PAServicestate.currentRequest.relatedWrappersList[2].wrapperList.size > 0, service.PAServicestate.currentRequest.relatedWrappersList[3].wrapperList.size > 0, 
+                            service.PAServicestate.currentRequest.relatedWrappersList[4].wrapperList.size > 0, service.PAServicestate.currentRequest.relatedWrappersList[5].wrapperList.size > 0))}">
+                <apex:param name="desiredAction" value="bulkReassignPopup"
+                    assignTo="{!businessaction}" />
+                <apex:param value="PAStatus" assignTo="{!newPageLabel}"
+                    name="newPage" />
+
+           
+          </apex:commandLink>
+            </div>
+            <!-- MS20140910 Added attribute for mass reassign -->
+             <!-- Reassigning Popup -->
+             <apex:outputPanel id="reassignPanelId" rendered="{!service.PAServiceState.currentRequest.approvalWF.displayReassignList}">
+                               <c:PAUserPopulation selectedBuAtr="{!service.paServiceState.ogItems.selectedBU}"
+                                        userIdAtr="{!service.PAServiceState.currentRequest.approvalWF.reassignedUserId}"
+                                        userNameAtr="{!service.PAServiceState.currentRequest.approvalWF.reassignedUserName}"
+                   salesOrgCodeAtr="{!service.PAServiceState.currentRequest.approvalWF.allSalesOrg}"
+                   distCodeAtr="{!service.PAServiceState.currentRequest.approvalWF.allDistChannels}"
+                   divisionCodeAtr="{!service.PAServiceState.currentRequest.approvalWF.allDivisonCodes}"
+                   assignedToAtr="massreassign" displayLookUp="true" 
+                   accessIdAtr="{!service.PAServiceState.currentRequest.approvalWF.selectedEpassID}"
+                   closeButton="{!service.PAServiceState.currentRequest.approvalWF.displayReassignList}"
+                                />
+                               
+            </apex:outputPanel>
+
+        </apex:pageBlock>
+    </apex:form>
+
+    <style type="text/css">
+.FrontPageSoldTo {
+    background-color: white; //
+    border-width: 2px; //
+    border-style: solid;
+    border: 2px solid #63A4C5;
+    z-index: 9999;
+    left: 35%;
+    right: 3%;
+    padding: 10px;
+    position: absolute;
+    top: 15%; //
+    margin-left: -600px;
+    width: 35%;
+}
+
+.BackPage {
+    background-color: #696969;
+    opacity: 0.5;
+    filter: alpha(opacity =     50);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.mask {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    opacity: 0.45;
+    filter: alpha(opacity = 45);
+    position: absolute;
+    z-index: 0;
+    top: 0pt;
+    left: 0pt;
+}
+
+.noTableFooter
+{
+margin:0px!important;
+}
+</style>
+</apex:page>

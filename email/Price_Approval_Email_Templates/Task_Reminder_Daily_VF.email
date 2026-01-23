@@ -1,0 +1,16 @@
+<messaging:emailTemplate subject="Overdue Task Reminder" recipientType="User" relatedToType="Task">
+<messaging:plainTextEmailBody >
+Dear {!relatedTo.Owner.name},
+
+You have an overdue task pending related to {!relatedTo.What.Name} with due date {!relatedTo.ActivityDate}, which was a past date.
+Kindly take the necessary action.
+----Task Detail-----
+Task: {!relatedTo.What.Name}
+Status: {!relatedTo.Status}
+Due Date: {!relatedTo.ActivityDate}
+Task Link: https://specutil.my.salesforce.com/{!relatedto.Id}
+
+Kind Regards,
+Task Reminder Auto E-mailer
+</messaging:plainTextEmailBody>
+</messaging:emailTemplate>

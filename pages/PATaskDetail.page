@@ -1,0 +1,274 @@
+<!--    Ver.            Developer       Changes             Dependencies    -->
+<!--    1.1             Neeharika       task view               None        -->
+<!--    1.2             Prachi          styling                 None        -->
+<!--    1.3             Prachi          Converted page as per the new UML   None -->
+<!--    1.4            Brundha                  UI                                        None-->
+<!--    1.5             Prachi            changed the routing,added styling               None-->
+<!--    1.6             prachi              Added comment section                         PARequestItem.cls -->
+<!--    1.7             prachi              Modified comment section                          PARequestItem.cls -->
+<!--    1.8             Brundha              Notes and Attachment section  APAC ROLLOUT                        PARequestItem.cls -->
+<!--    1.9             Prachi             Enhancement - CSR viewing other tasks                        PARequestItem.cls -->
+<!--    2.0             Brundha            on click of task subject in reports attach document and delete -->
+<!--                                       document should not get displayed                 PARequestItem.cls -->
+<!--    2.2            Nadeem Shaik        Task completion comments fix || IS ID-00075071  -->
+
+
+
+ <apex:page controller="ctrlPAMain" tabstyle="Price_Approval__tab" sidebar="false" showHeader="true" action="{!onLoadCall}" cache="true"> 
+ <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.js')}" />
+ <c:loadingComponent />
+<style>
+    //#task .detailList{border:1px solid #E2E3E4;}
+    #task .detailList tr th{border-bottom:none;} 
+    #task .detailList tr td{border-bottom:none;} 
+
+</style>
+ 
+<apex:form >
+<div id="task">
+        <apex:pageBlock title="Task" id="thePageBlock" >
+       
+    
+                <apex:pageBlockSection title="Task Detail" columns="2">
+                        <apex:outputtext value="{!service.paServiceState.currentRequestItem.taskAttachmentParam}"/>     
+                 <apex:outputField value="{!service.PAServicestate.CurrentrequestItem.taskRecord.Status}"/>
+                 <apex:pageBlockSectionItem >    
+                     <apex:outputLabel value="Task Record Type"/>
+                     <apex:outputText value="{!service.PAServicestate.CurrentrequestItem.recordTypeName}"/>
+                </apex:pageBlockSectionItem>
+                
+                 <apex:outputField value="{!service.PAServicestate.CurrentrequestItem.taskRecord.Subject}"/>                
+                     <apex:outputText rendered="{!service.PAServicestate.Currentrequest.pricingRequest.Pricing_Request_Type__c=='Pricing Task'}"/>
+                     <apex:outputField value="{!service.PAServicestate.CurrentrequestItem.taskRecord.ActivityDate}" rendered="{!service.PAServicestate.Currentrequest.pricingRequest.Pricing_Request_Type__c=='Pricing Task'}"/>
+                     <apex:outputField value="{!service.PAServicestate.Currentrequest.projectPrice.Project_Volume__c}" rendered="{!service.PAServicestate.Currentrequest.pricingRequest.Pricing_Request_Type__c!='Pricing Task'}"/>                    
+                     <apex:outputField value="{!service.PAServicestate.CurrentrequestItem.projectPrice.Valid_From__c}" rendered="{!service.PAServicestate.Currentrequest.pricingRequest.Pricing_Request_Type__c!='Pricing Task'}"/>
+                     <apex:outputField value="{!service.PAServicestate.CurrentrequestItem.projectPrice.Valid_To__c}" rendered="{!service.PAServicestate.Currentrequest.pricingRequest.Pricing_Request_Type__c!='Pricing Task'}"/>
+                      <apex:outputField value="{!service.PAServicestate.CurrentrequestItem.taskRecord.WhatId}" rendered="{service.PAServicestate.Currentrequest.pricingRequest.Pricing_Request_Type__c=='Pricing Task'}"/>
+                          
+                    <apex:pageBlockSectionItem rendered="{!service.PAServicestate.Currentrequest.pricingRequest.Pricing_Request_Type__c!='Pricing Task'}"> 
+                         <apex:outputLabel value="Related To"/>
+                         <apex:commandLink value="{!service.PAServicestate.Currentrequest.projectPrice.Project_Id__c}" action="/{!service.PAServicestate.Currentrequest.projectPrice.Id}"/>
+                    </apex:pageBlockSectionItem>
+                        
+                    <apex:pageBlockSectionItem rendered="{!service.PAServicestate.Currentrequest.pricingRequest.Pricing_Request_Type__c=='Pricing Task'}">
+                         <apex:outputLabel value="Related To"/>
+                         
+<!--                          <apex:commandLink value="{!service.PAServicestate.Currentrequest.pricingRequest.name}" action="/{!service.PAServicestate.Currentrequest.pricingRequest.Id}"/> -->
+<!--                          <TJ20141222> -->
+                         <apex:outputlink value="#" onclick="window.open('/{!service.PAServicestate.Currentrequest.pricingRequest.Id}','_blank');return false;">{!service.PAServicestate.Currentrequest.pricingRequest.name}</apex:outputlink> 
+                    </apex:pageBlockSectionItem>    
+                    
+                    <apex:pageBlockSectionItem rendered="{!service.PAServicestate.Currentrequest.pricingRequest.Pricing_Request_Type__c!='Pricing Task'}"> 
+                         <apex:outputLabel value="Description"/>
+                           <apex:outputText escape="false" value="{!service.PAServicestate.Currentrequest.projectPrice.Project_Description__c}"/>
+                    </apex:pageBlockSectionItem>
+<!--                    	<TJ20141112> -->
+                   	<apex:pageBlockSectionItem rendered="{!service.PAServicestate.currentRequestItem.taskReassignCall.taskComments !=NULL}">
+                            <apex:outputText value="Task Completion Comment" />
+                            <apex:outputText value="{!service.PAServicestate.currentRequestItem.taskReassignCall.taskComments}"/> 
+                   <!--V 2.2 Added by <<Nadeem S>> for <<Issue number:IS ID-00075071>> on <<13-10-2016>> START -->  
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem rendered="{!service.PAServicestate.currentRequestItem.taskReassignCall.taskComments ==NULL && service.PAServicestate.currentRequestItem.TaskRecord.Status =='Completed'}">
+                            <apex:outputLabel value="Task Completion Comment" />
+                            <apex:outputText value="{!service.PAServicestate.currentRequestItem.TaskRecord.TaskCompletionComment__c}"/> 
+                             
+                    </apex:pageBlockSectionItem>
+                   <!--V 2.2 Added by <<Nadeem S>> for <<Issue number:IS ID-00075071>> on <<13-10-2016>> END  -->
+                    
+                    
+                    <!-- 					<TJ20141112> -->
+           </apex:pageBlockSection>
+           
+                            
+                    
+                     <apex:pageBlock mode="maindetail" rendered="{!service.PAServicestate.Currentrequest.pricingRequest.Pricing_Request_Type__c=='Pricing Task'}">
+                         <apex:pageBlockSection columns="1" >
+                            <apex:pageBlockSectionItem >
+                                 <apex:outputText value="Description"  style="float:left;padding-left:155px"/> 
+                                 <!-- <GT20150114> -->              
+                                 <apex:outputPanel layout="block" style="overflow:auto;height:200px" > 
+                                 <apex:outputText value="{!service.PAServicestate.Currentrequest.pricingRequest.Description__c}" escape="false"/>
+                                </apex:outputPanel>             
+                            </apex:pageBlockSectionItem>
+                         </apex:pageBlockSection>
+                     </apex:pageBlock>
+    
+                    
+                    <!-- <apex:pageBlock mode="maindetail">
+                    <apex:pageBlockSection > 
+                        <apex:pageBlockSectionItem rendered="{!service.paServiceState.currentRequestItem.popUpFlag=='TaskComment' && service.PAServicestate.CurrentrequestItem.taskRecord.TaskCompletionComment__c ==NULL}">
+                            <apex:outputText value="Task Completion Comment" />
+                            <apex:inputField style="width:400px;height:60px;" value="{!service.PAServicestate.currentRequestItem.taskRecord.TaskCompletionComment__c}"/> 
+                            
+                        </apex:pageBlockSectionItem>
+                    
+                      <apex:pageBlockSectionItem rendered="{!service.paServiceState.currentRequestItem.popUpFlag=='disableOk' && service.PAServicestate.CurrentrequestItem.taskRecord.TaskCompletionComment__c <>NULL}">
+                            <apex:outputText value="Task Completion Comment" />
+                            <apex:inputTextArea disabled="true"  rows="5" cols="100" value="{!service.PAServicestate.currentRequestItem.taskRecord.TaskCompletionComment__c}"/> 
+                        </apex:pageBlockSectionItem> 
+                    </apex:pageBlockSection>
+                    </apex:pageBlock>  -->
+                    
+                    <apex:pageBlock mode="maindetail">
+                    <apex:pageBlockSection > 
+                        <apex:pageBlockSectionItem rendered="{!service.paServiceState.currentRequestItem.popUpFlag=='TaskComment' && service.PAServicestate.currentRequestItem.taskReassignCall.taskComments==NULL}">
+                            <apex:outputText value="Task Completion Comment" />
+                            <apex:inputTextArea disabled="{!service.paServiceState.currentRequestItem.popUpFlag=='disableOk'}" rows="5" cols="100" value="{!service.PAServicestate.currentRequestItem.taskReassignCall.taskComments}"/> 
+                    	</apex:pageBlockSectionItem>  
+                    
+                    </apex:pageBlockSection>
+                    </apex:pageBlock>
+
+   
+                              
+                  
+          <br/>            
+          <center>  
+          <!-- Ver 1.5 starts -->
+          <div style="padding:10px">
+          
+                <apex:commandLink value="OK" action="{!businessComponentAction}" styleClass="btn" 
+                                    style="text-decoration:none;" rendered="{!service.paServiceState.currentRequestItem.popUpFlag=='TaskComment'}">
+                    <apex:param name="desiredAction" value="saveTask"
+                                        assignTo="{!businessAction}"  />
+                    <apex:param name="newPageLabel" value="PATaskDetail"
+                                        assignTo="{!newPageLabel}" />
+                </apex:commandLink>
+          
+                <apex:commandLink value="Mark Completed " action="{!businessComponentAction}" styleClass="btn" 
+                                style="text-decoration:none;" rendered="{!service.paServiceState.currentRequestItem.popUpFlag<>'TaskComment' && service.paServiceState.currentRequestItem.popUpFlag<>'disableOk' && service.PAServicestate.CurrentrequestItem.taskRecord.status <> 'Completed' && service.PAServicestate.CurrentrequestItem.taskRecord.status <> 'Cancelled'}">
+                        <apex:param name="desiredAction" value="markCompleted"
+                                    assignTo="{!businessAction}"  />
+                        <apex:param name="newPageLabel" value="PATaskDetail"
+                                    assignTo="{!newPageLabel}" />
+                </apex:commandLink>
+                 <apex:commandLink value="Back" action="/home/home.jsp" styleClass="btn" 
+                                style="text-decoration:none;"/> 
+          </div>
+           <!-- Ver 1.5 ends -->
+          </center>
+    
+       <!--Ver 1.8 BR 2013-04-17 APAC Rollout  starts-->
+    <apex:outputPanel styleClass="BackScreenImp" rendered="{!service.paServiceState.currentRequestItem.popUpFlag=='Pricingtask'}"  layout="block">
+            </apex:outputPanel>
+                <apex:outputPanel styleClass="FrontScreenImp" layout="block" rendered="{!service.paServiceState.currentRequestItem.popUpFlag=='Pricingtask' }" style="text-align:left;">
+                    <apex:commandLink >
+                        <apex:image url="{!$Resource.closeButton}" width="15" height="15" style="float:right" />
+                        <apex:param value="none" assignTo="{!service.paServiceState.currentRequestItem.popUpFlag}" />
+                    </apex:commandLink>
+                    <apex:pagemessages />
+                    <div class="priceReq">
+                    
+                        <apex:pageBlockSection title="Notes And Attachment" columns="1" collapsible="false" >
+                            <apex:pageBlockSectionItem >   
+                                <apex:outputText value="Select a file" />
+                                    <apex:inputFile value="{!service.paServiceState.currentRequestItem.document.body}" filename="{!service.paServiceState.currentRequestItem.document.name}" size="40"></apex:inputFile>
+                            </apex:pageBlockSectionItem> 
+                            <br/>
+                            <apex:pageBlockSectionItem >   
+                                <apex:outputText value="Description"/>
+                                <apex:inputText maxLength="80" style="width:480px;" value="{!service.paServiceState.currentRequestItem.document.Description}"/>
+                            </apex:pageBlockSectionItem>
+                            <br/>
+                       </apex:pageblockSection>
+                       
+                    </div>   
+                        
+                        <div style="text-align:center;padding:10px 0px 10px 2%;">
+                                 <apex:commandLink action="{!businessComponentAction}" value="Upload" styleClass="btn" style="text-decoration:none;" >
+                                    <apex:param name="desiredAction" value="AddtoAttachment" assignTo="{!businessaction}" />
+                                    <apex:param name="taskattach" value="TaskAttachment" assignTo="{!service.paServiceState.currentRequestItem.taskAttachmentParam}" />
+                                    
+                                 </apex:commandLink>
+                                 <apex:commandLink action="{!businessComponentAction}"    value="Cancel" styleClass="btn" style="text-decoration:none;" >
+                                    <apex:param name="desiredAction" value="CancelAddtoAttachment" assignTo="{!businessaction}" />
+                                 </apex:commandLink>
+                        </div>
+                                               
+                        </apex:outputPanel>
+                        <br></br>
+                         <apex:pageBlock >
+                          <div class="priceReq">
+                           <br/>
+                                <!--  Ver 2.0 added the task record status is completed in the rendered part off Attach Document & Delete Document-->
+                                 <apex:outputPanel >
+                                    <div style="text-align:center;padding:10px 0px 10px 2%;">  
+                                       <apex:commandLink action="{!businessComponentAction}" value="Attach Document" styleClass="btn" style="text-decoration:none;" rendered="{!AND(service.paServiceState.currentRequestItem.popUpFlag<>'disableOk',service.PAServicestate.CurrentrequestItem.taskRecord.Status!='Completed')}">
+                                            <apex:param name="desiredAction" value="selectAttachment" assignTo="{!businessaction}" />
+                                            <apex:param name="newPageLabel" value="PaTaskDetail" assignTo="{!newPageLabel}" />
+                                       </apex:commandLink>
+                                        <apex:commandLink action="{!businessComponentAction}"  value="Delete Document" styleClass="btn" style="text-decoration:none;" rendered="{!AND(service.paServiceState.currentRequestItem.popUpFlag<>'disableOk',service.PAServicestate.CurrentrequestItem.taskRecord.Status!='Completed')}" >
+                                            <apex:param name="desiredAction" value="deleteSelectedAttachment" assignTo="{!businessaction}" />
+                                            <apex:param name="newPageLabel" value="PaTaskDetail" assignTo="{!newPageLabel}" />
+                                       </apex:commandLink>
+                                    </div>
+                                 </apex:outputPanel>
+                                 
+                               <apex:outputPanel >
+                               <apex:pageBlockSection title="Attachment Section" columns="1">
+  
+                                   <apex:pageblockTable value="{!service.paServiceState.currentRequestItem.attachPAWrapperList}" var="v" columns="5">
+                                       <apex:column >
+                                           <apex:facet name="header">
+                                                 <apex:inputCheckbox value="{!service.paServiceState.currentRequestItem.selectAllAttachments}" id="selAllPRI">
+                                                    <apex:actionSupport event="onclick" action="{!businessComponentActionForRerender}" reRender="selPRI" status="stat">
+                                                        <apex:param name="desiredAction" value="selectAttachmentToDelete" assignTo="{!businessaction}" />
+                                                        <apex:param name="newPageLabel" value="PaPricingRequest" assignTo="{!newPageLabel}" />
+                                                    </apex:actionSupport>
+                                                </apex:inputCheckbox>
+                                            </apex:facet>
+                                            <apex:inputCheckbox value="{!v.isSelected}" id="selPRI"/>
+                                       </apex:column>       
+
+                                          <apex:column headerValue="File Name"><a href="/servlet/servlet.FileDownload?file={!v.sobjectRecord['id']}" target="_blank" >{!v.sobjectRecord['Name']}</a></apex:column>
+                                          <apex:column headerValue="Description"><apex:outputText value="{!v.sobjectRecord['Description']}"></apex:outputText></apex:column>
+                                          <apex:column headerValue="Added By"><apex:outputText value="{!v.sobjectRecord['CreatedBy.Name']}"></apex:outputText></apex:column>
+                                           
+                                          <apex:column headerValue="Added On">
+                                          <apex:outputtext value="{0,date,dd'/'MM'/'yyyy}">
+                                            <apex:param name="dat"
+                                            value="{!v.sobjectRecord['CreatedDate']}" />
+                                          </apex:outputtext>
+                                      </apex:column>
+                                      
+                                   </apex:pageblockTable>
+                                </apex:pageBlockSection>
+                                </apex:outputPanel>
+                            </div>  
+                </apex:pageBlock> 
+    <!--Ver 1.8 BR 2013-04-17 APAC Rollout  ends-->      
+        </apex:pageBlock>
+        </div>
+    </apex:form>
+<style>
+.noTableFooter
+{
+margin:0px!important;
+}
+<!--Ver 1.8 starts-->
+ .FrontScreenImp {
+    background-color: white;
+    //border-width: 2px;
+    border: 2px solid #63A4C5;
+    z-index: 9999;
+    left: 40%;
+    padding: 10px;
+    position: absolute;
+    width: 645px;
+    margin-left: -250px;
+    top: 150px;
+}
+.BackScreenImp {
+    background-color: #696969;
+    opacity: 0.5;
+    filter: alpha(opacity = 50);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 9998;
+}
+<!--Ver 1.8 starts-->
+</style>
+</apex:page>

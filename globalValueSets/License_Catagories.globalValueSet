@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>User Licenses</fullName>
+        <default>false</default>
+        <label>User Licenses</label>
+    </customValue>
+    <customValue>
+        <fullName>Permission Set Licenses</fullName>
+        <default>false</default>
+        <label>Permission Set Licenses</label>
+    </customValue>
+    <customValue>
+        <fullName>Feature Licenses</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Feature Licenses</label>
+    </customValue>
+    <description>Categories of License</description>
+    <masterLabel>License Catagories</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

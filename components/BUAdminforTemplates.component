@@ -1,0 +1,4 @@
+<apex:component controller="ctrlBUAdminforTemplates" access="global">
+<apex:attribute name="Bu" type="string" assignTo="{!buName}" required="false" description="Business Unit Name"/>
+<apex:outputText >{!buadminName}</apex:outputText>
+</apex:component>

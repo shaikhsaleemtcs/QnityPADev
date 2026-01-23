@@ -1,0 +1,13 @@
+<messaging:emailTemplate subject="Attention! Open Task Reminder" recipientType="User" relatedToType="Task">
+<messaging:plainTextEmailBody >
+Dear {!relatedTo.Owner.name},
+
+You have a task pending related to {!relatedTo.What.Name} with due date {!relatedTo.ActivityDate}. 
+Kindly take the necessary action.
+
+Task Link: https://specutil.my.salesforce.com/{!relatedto.Id}
+
+Kind Regards,
+Task Reminder Auto E-mailer
+</messaging:plainTextEmailBody>
+</messaging:emailTemplate>

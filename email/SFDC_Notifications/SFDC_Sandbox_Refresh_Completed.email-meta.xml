@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>SFDC Sandbox Refresh Completed</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>SFDC Sandbox Refresh Completed</name>
+    <style>none</style>
+    <subject>** NOTICE ** UTQA Sandbox Refresh Complete - 21 Apr 2013</subject>
+    <textOnly>TO:  SFDC Corporate Org Administrators / Engagement Leaders
+
+DuPont Utilities QA (UTQA) Sandbox refresh is complete, fully activated and ready for use.
+
+What you need to do: You can log into the refreshed sandbox at URL:
+https://test.salesforce.com by appending the .sandbox_name to your production username. For example, if your username in production is user1.util@company.com then your username in sandbox named “UTQA” is user1.util@company.UTQA
+
+Note: Remember to update and verify your email address as soon as you log in since it is also appended with &quot;.utqa &quot;
+
+More Information:
+Sandbox Refresh Schedule featured in CRM Content Library in OneDuPont Org (subscribe to receive notification of updates):
+https://one-dupont.my.salesforce.com/sfc/#version?id=06830000000aAS5</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

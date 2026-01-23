@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>User Access Review Details</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>User Access Review Details</value>
+    </caseValues>
+    <fields>
+        <help><!-- Approval Status --></help>
+        <label><!-- Approval Status --></label>
+        <name>Approval__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>De-Activate</masterLabel>
+            <translation><!-- De-Activate --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Modify</masterLabel>
+            <translation><!-- Modify --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Reviewed</masterLabel>
+            <translation><!-- Not Reviewed --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Approver --></help>
+        <label><!-- Approver --></label>
+        <name>Approver__c</name>
+        <relationshipLabel><!-- User Access Review Details --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Approving Business --></label>
+        <name>Approving_Business__c</name>
+    </fields>
+    <fields>
+        <help><!-- Audit Process --></help>
+        <label><!-- Audit Process --></label>
+        <name>Audit_Process__c</name>
+        <relationshipLabel><!-- User Access Review Details --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- CompanyName --></help>
+        <label><!-- Company Name --></label>
+        <name>CompanyName__c</name>
+    </fields>
+    <fields>
+        <help><!-- Description of Activity --></help>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <help><!-- This is the pre-split original 18 digit Salesforce ID of this record that came from the original One Dupont Salesforce instance before the business units were separated. Its is case insensitive and unique. --></help>
+        <label><!-- Legacy Pricing Util SFID --></label>
+        <name>Legacy_Pricing_Util_SFID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Novus External Id --></label>
+        <name>Novus_External_Id__c</name>
+    </fields>
+    <fields>
+        <help><!-- Org --></help>
+        <label><!-- Org --></label>
+        <name>Org__c</name>
+        <picklistValues>
+            <masterLabel>DuPont Utility</masterLabel>
+            <translation><!-- DuPont Utility --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>One-DuPont</masterLabel>
+            <translation><!-- One-DuPont --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Program --></help>
+        <label><!-- Program --></label>
+        <name>Program__c</name>
+    </fields>
+    <fields>
+        <help><!-- Review Date --></help>
+        <label><!-- Review Date --></label>
+        <name>Review_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- User Access Type --></help>
+        <label><!-- Access Type --></label>
+        <name>User_Access_Type__c</name>
+    </fields>
+    <fields>
+        <help><!-- User Country --></help>
+        <label><!-- Country --></label>
+        <name>User_Country__c</name>
+    </fields>
+    <fields>
+        <help><!-- Email Id --></help>
+        <label><!-- Email Id --></label>
+        <name>User_Email_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Grouping --></label>
+        <name>User_Grouping__c</name>
+    </fields>
+    <fields>
+        <help><!-- User Id in system --></help>
+        <label><!-- User Id --></label>
+        <name>User_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Login --></label>
+        <name>User_Last_Login__c</name>
+    </fields>
+    <fields>
+        <label><!-- User Name --></label>
+        <name>User_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- User Owning Org --></help>
+        <label><!-- Owning Org --></label>
+        <name>User_Owning_Org__c</name>
+    </fields>
+    <fields>
+        <help><!-- User Owning SBU Org --></help>
+        <label><!-- Owning SBU Org --></label>
+        <name>User_Owning_SBU_Org__c</name>
+    </fields>
+    <fields>
+        <help><!-- User Permission Sets --></help>
+        <label><!-- Permission Sets --></label>
+        <name>User_Permission_Sets__c</name>
+    </fields>
+    <fields>
+        <help><!-- User Profile --></help>
+        <label><!-- Profile --></label>
+        <name>User_Profile__c</name>
+    </fields>
+    <fields>
+        <help><!-- User Public Group --></help>
+        <label><!-- Public Group --></label>
+        <name>User_Public_Group__c</name>
+    </fields>
+    <fields>
+        <help><!-- User Geographical Region --></help>
+        <label><!-- Region --></label>
+        <name>User_Region__c</name>
+    </fields>
+    <fields>
+        <help><!-- User Roles --></help>
+        <label><!-- Roles --></label>
+        <name>User_Roles__c</name>
+    </fields>
+    <fields>
+        <help><!-- User Type --></help>
+        <label><!-- Type --></label>
+        <name>User_Type__c</name>
+        <picklistValues>
+            <masterLabel>DuPont Employee</masterLabel>
+            <translation><!-- DuPont Employee --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Non-Employee</masterLabel>
+            <translation><!-- Non-Employee --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- ePass Id --></help>
+        <label><!-- ePass Id --></label>
+        <name>User_ePass_Id__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

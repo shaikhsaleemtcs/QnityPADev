@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Material Localization</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Material Localizations</value>
+    </caseValues>
+    <fields>
+        <label><!-- External ERP ID --></label>
+        <name>External_ERP_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Language --></label>
+        <name>Language__c</name>
+        <picklistValues>
+            <masterLabel>AF</masterLabel>
+            <translation><!-- AF --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>AR</masterLabel>
+            <translation><!-- AR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BG</masterLabel>
+            <translation><!-- BG --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CS</masterLabel>
+            <translation><!-- CS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DA</masterLabel>
+            <translation><!-- DA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DE</masterLabel>
+            <translation><!-- DE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>EL</masterLabel>
+            <translation><!-- EL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>EN</masterLabel>
+            <translation><!-- EN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ES</masterLabel>
+            <translation><!-- ES --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ET</masterLabel>
+            <translation><!-- ET --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>FI</masterLabel>
+            <translation><!-- FI --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>FR</masterLabel>
+            <translation><!-- FR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>HE</masterLabel>
+            <translation><!-- HE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>HR</masterLabel>
+            <translation><!-- HR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>HU</masterLabel>
+            <translation><!-- HU --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ID</masterLabel>
+            <translation><!-- ID --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IT</masterLabel>
+            <translation><!-- IT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>JA</masterLabel>
+            <translation><!-- JA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KO</masterLabel>
+            <translation><!-- KO --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LT</masterLabel>
+            <translation><!-- LT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LV</masterLabel>
+            <translation><!-- LV --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MS</masterLabel>
+            <translation><!-- MS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NL</masterLabel>
+            <translation><!-- NL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NO</masterLabel>
+            <translation><!-- NO --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PL</masterLabel>
+            <translation><!-- PL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT</masterLabel>
+            <translation><!-- PT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>RO</masterLabel>
+            <translation><!-- RO --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>RU</masterLabel>
+            <translation><!-- RU --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SK</masterLabel>
+            <translation><!-- SK --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SL</masterLabel>
+            <translation><!-- SL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SR</masterLabel>
+            <translation><!-- SR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SV</masterLabel>
+            <translation><!-- SV --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TH</masterLabel>
+            <translation><!-- TH --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TR</masterLabel>
+            <translation><!-- TR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>UK</masterLabel>
+            <translation><!-- UK --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Z2</masterLabel>
+            <translation><!-- Z2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ZF</masterLabel>
+            <translation><!-- ZF --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ZH</masterLabel>
+            <translation><!-- ZH --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ZZ - Field Not Used</masterLabel>
+            <translation><!-- ZZ - Field Not Used --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- This is the pre-split original 18 digit Salesforce ID of this record that came from the original One Dupont Salesforce instance before the business units were separated. Its is case insensitive and unique. --></help>
+        <label><!-- Legacy Pricing Util SFID --></label>
+        <name>Legacy_Pricing_Util_SFID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Material Name --></label>
+        <name>Material_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Material --></label>
+        <name>Material__c</name>
+        <relationshipLabel><!-- Material Localizations --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Sales Text --></label>
+        <name>Sales_Text__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sys Id --></label>
+        <name>Sys_Id__c</name>
+    </fields>
+    <recordTypes>
+        <label><!-- Material Localization --></label>
+        <name>Material_Localization</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

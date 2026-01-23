@@ -1,0 +1,147 @@
+<!--    Ver.            Developer           Changes                                                             Dependencies    -->
+<!--    MS20140506      Mohit Sinha         Added Landing Page Link                                                 None         -->
+<!--    TJ20140509      Tarun Jain          Added Navigation Flow Text                                              None         -->
+<!--    PR20140901      Priyanka R          Added Sales Org column                                                  None          -->
+<!--    PR20140911      Priyanka R          Added Public Groups column                                              None          -->
+<!--    SS20220113      Shantanu Sharma     Added New Feild based on SourceCluster                                  None          -->
+<apex:page controller="ctrlPAMain" tabstyle="Price_Approval__tab" sidebar="false" showHeader="true" id="currentPage" cache="true"
+    action="{!onLoadCall}">
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.min.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.js')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/css/jquery.dataTables.css')}" />
+    <c:loadingComponent />
+    <apex:pageMessages escape="false" id="errorMessage"/>
+    <style>
+        .usersTable {display:none}
+        .customerLink{font-size:15px;height:20px;margin-bottom:1px;padding:5px;border:solid 1px;border-color:#6E96B2; background-color:#E5F3FC;font-weight:bold;text-align:left;}
+        .navFlow{font-size:13px;font-style:oblique;margin-bottom:3px;}
+        .replist {border:1px solid #E2E3E4;}
+        .replist .list tr th{border-bottom:none;}
+        .replist  .list tr td{border-bottom:none;}
+        .replist .list tr th{color:black;}
+        body .pbBody table .list tr td{border-bottom: none;}
+        body .pbBody table .list {border:1px solid #e0e3e5;background-color:#fff;}
+        .replist table.list tr:first-child th{color:white;background-color:#63A4C5;}
+        .replist table.list tr:nth-child(2) th{color:black;background-color:#f8f8f8;border:1px solid #E2E3E4;}
+    </style>
+    <script type="text/javascript">
+    var j$ = jQuery.noConflict();
+    j$(document).ready(function(){                                                              //<TJ20140401> - added javascript to generate HTML Table with additional functionalities
+    
+        var tab = j$('#usersTable').dataTable({
+                    "iDisplayLength" : 200,
+                    sPaginationType: "full_numbers",
+                    sPlaceHolder : "foot:before",
+                    "fnDrawCallback":function(){
+                        j$(this).show();
+                    }
+                    });
+
+        j$('#usersTable'+'_filter').after('<br /><br />');
+        j$('#usersTable').after('<br />');
+        j$("div[id~=usersTable_length]").css("display","none");
+    });
+    function getHtmlId(cid){
+        return "#"+cid.replace(/(:)/g,'\\\\$1');
+    }
+    </script>
+    <apex:pageBlock >
+    <apex:form id="formid">
+    <!--<MS20140506>Adding Link for landing page -->
+        <div align="left" class="navFlow">
+            <apex:commandLink id="link0" value="Landing Page" action="{!businessComponentAction}" target="_self" style="color:blue;">
+            <apex:param name="desiredAction" value="landingpage" assignTo="{!businessaction}" />
+            <apex:param name="newPageLabel" value="PAHome" assignTo="{!newPageLabel}" />
+            </apex:commandLink>
+        <!-- <TJ20140509> Added Navigation Flow Text-->
+            <apex:outputText value="{!if(NOT(ISNULL(navigationText)),'>>','  ')} "/>
+            <apex:outputText value="{!navigationText}"/>
+            <apex:outputText value=">>  User Setup"/>
+        </div>
+    <!--<MS20140506>Adding Link for landing page -->
+        <div class="customerLink">
+            User Setup
+        </div>
+        <br/>
+        <div class="replist">
+        <br/>
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+<!--                <TJ20140522> Added Business Name-->
+                <apex:pageblocksectionitem >
+                        <apex:outputlabel value="Business"/>
+                        <apex:outputText value="{!BUName}"/>
+                    </apex:pageblocksectionitem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value="BU Admin"/>
+                    <apex:outputText value="{!service.PAServicestate.ogItems.BUAdminName}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        <div class="buttons" style="float: left; text-align: center; padding: 10px 0px 20px 43%;">
+        <apex:commandLink value="Export" action="/apex/PAExportToExcelUserSetup" style="text-decoration:none; color:#484848" styleClass="btn"/>
+        &nbsp;
+        <apex:commandLink style="text-decoration:none; color:#484848" styleClass="btn" value="Back" action="{!businessComponentAction}">
+        <apex:param name="desiredAction" value="BackToHome" assignTo="{!businessaction}" />
+        <apex:param name="newPageLabel" value="PAHome" assignTo="{!newPageLabel}" />
+        </apex:commandLink>
+        </div>
+           <br/><br/>
+        <table id="usersTable" class="list" border="0" cellSpacing="0" cellPadding="0" style="width:1024px;" align="center">
+            <colgroup span="6" />
+            <thead class="rich-table-thead">
+                <tr role="row">
+                    <th rowSpan="1" colSpan="30" scope="colgroup">User List</th>
+                </tr>
+                <tr>
+                    <th class="headerRow" colSpan="1" scope="col" > Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th class="headerRow" colSpan="1" scope="col" > Email </th>
+                    <th class="headerRow" colSpan="1" scope="col" > E-Pass ID </th>
+                    <th class="headerRow" colSpan="1" scope="col" > SAP User ID </th>
+                    <th class="headerRow" colSpan="1" scope="col" > Country </th>
+                    <th class="headerRow" colSpan="1" scope="col" > Role&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+                    <th class="headerRow" colSpan="1" scope="col" > Profile (BU Admin, Price Requester,<br/> Viewer, IT Admin) </th>
+                    <th class="headerRow" colSpan="1" scope="col" > Permission Set<br/>(Approver, CSR, Sales Admin) </th>
+                    <th class="headerRow" colSpan="1" scope="col" > Sales Org &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th class="headerRow" colSpan="1" scope="col" > Public Groups </th>
+                    <th class="headerRow" colSpan="1" scope="col" > Customer Price Requester /<br/> Price List Requester </th>
+                    <th class="headerRow" colSpan="1" scope="col" > Backup Approver </th>
+                    <th class="headerRow" colSpan="1" scope="col" > Manager </th>
+                </tr>
+            </thead>
+            
+            <apex:repeat value="{!service.paServiceState.ogItems.businessUsersWrapList}" var="user">
+                <tr class="dataRow even first last" style="outline: thin solid;outline-color: #E2E3E4;">
+                    <td class="dataCell" colSpan="1" style="outline: thin solid;outline-color: #E2E3E4;">{!user.sObjectRecord['Name']}</td>
+                    <td class="dataCell" colSpan="1" style="outline: thin solid;outline-color: #E2E3E4;"> {!user.sObjectRecord['Email']} </td>
+                    <td class="headerRow" colSpan="1" scope="col" style="outline: thin solid;outline-color: #E2E3E4;"> {!user.sObjectRecord['E_Pass_ID__c']} </td>
+                    <td class="headerRow" colSpan="1" scope="col" style="outline: thin solid;outline-color: #E2E3E4;"> {!IF(CONTAINS(user.stringMap['SAPCluster'],'True'),user.sObjectRecord['P80_External_ERP_ID__c'],user.sObjectRecord['External_ERP_ID__c'])}</td> <!--    SS20220113--->
+                    <td class="headerRow" colSpan="1" scope="col" style="outline: thin solid;outline-color: #E2E3E4;"> {!user.sObjectRecord['User_Country__c']} </td>
+                    <td class="headerRow" colSpan="1" scope="col" style="outline: thin solid;outline-color: #E2E3E4;"> {!user.sObjectRecord['UserRole.Name']} </td>
+                    <td class="headerRow" colSpan="1" scope="col" style="outline: thin solid;outline-color: #E2E3E4;"> {!user.sObjectRecord['Profile.Name']} </td>
+                    <td class="headerRow" colSpan="1" scope="col" style="outline: thin solid;outline-color: #E2E3E4;"> {!user.stringMap['permissionSet']} </td>
+                    <td class="headerRow" colSpan="1" scope="col" style="outline: thin solid;outline-color: #E2E3E4;"> {!user.stringMap['salesOrg']} </td>
+                    <td class="headerRow" colSpan="1" scope="col" style="outline: thin solid;outline-color: #E2E3E4;"> {!user.stringMap['publicGrp']} </td>
+                    <td class="headerRow" colSpan="1" scope="col" style="outline: thin solid;outline-color: #E2E3E4;"> {!user.stringMap['groupMember']} </td>
+                    <td class="headerRow" colSpan="1" scope="col" style="outline: thin solid;outline-color: #E2E3E4;"> {!user.stringMap['delegatedApp']} </td>
+                    <td class="headerRow" colSpan="1" scope="col" style="outline: thin solid;outline-color: #E2E3E4;"> {!user.sObjectRecord['Manager.Name']} </td>
+                </tr>
+            </apex:repeat>
+        </table>
+        <br/><br/>
+        </div>
+        <apex:outputPanel >
+        <div class="buttons" style="float: left; text-align: center; padding: 10px 0px 20px 43%;">
+        <apex:commandLink value="Export" action="/apex/PAExportToExcelUserSetup" style="text-decoration:none; color:#484848" styleClass="btn"/>
+        &nbsp;
+        <apex:commandLink style="text-decoration:none; color:#484848" styleClass="btn" value="Back" action="{!businessComponentAction}">
+        <apex:param name="desiredAction" value="BackToHome" assignTo="{!businessaction}" />
+        <apex:param name="newPageLabel" value="PAHome" assignTo="{!newPageLabel}" />
+        </apex:commandLink>
+        </div>
+        <br/><br/>
+        </apex:outputPanel>
+     </apex:form>
+    </apex:pageBlock>
+</apex:page>

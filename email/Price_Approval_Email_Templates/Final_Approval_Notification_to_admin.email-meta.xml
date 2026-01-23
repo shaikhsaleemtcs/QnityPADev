@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>53.0</apiVersion>
+    <available>true</available>
+    <description>Notify BU admin when PR is approved</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Final Approval Notification to admin</name>
+    <style>none</style>
+    <subject>SFDC PA Notification –  -    Approved for customer -</subject>
+    <type>visualforce</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

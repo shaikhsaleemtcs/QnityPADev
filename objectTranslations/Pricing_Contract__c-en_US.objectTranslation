@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Pricing Contract</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Pricing Contracts</value>
+    </caseValues>
+    <fields>
+        <label><!-- Business --></label>
+        <name>Business__c</name>
+        <picklistValues>
+            <masterLabel>DPP Global Kalrez &amp; Vespel</masterLabel>
+            <translation><!-- DPP Global Kalrez &amp; Vespel --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DPP LA Kalrez &amp; Vespel</masterLabel>
+            <translation><!-- DPP LA Kalrez &amp; Vespel --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Contract No --></label>
+        <name>Contract_No__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contract --></label>
+        <name>Contract__c</name>
+    </fields>
+    <fields>
+        <label><!-- ERP Customer --></label>
+        <name>Customer__c</name>
+        <relationshipLabel><!-- Pricing Contracts --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- This is the pre-split original 18 digit Salesforce ID of this record that came from the original One Dupont Salesforce instance before the business units were separated. Its is case insensitive and unique. --></help>
+        <label><!-- Legacy Pricing Util SFID --></label>
+        <name>Legacy_Pricing_Util_SFID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Novus External Id --></label>
+        <name>Novus_External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Area --></label>
+        <name>Sales_Area__c</name>
+        <picklistValues>
+            <masterLabel>B90A-10-02</masterLabel>
+            <translation><!-- B90A-10-02 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B91A-10-11</masterLabel>
+            <translation><!-- B91A-10-11 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B91A-10-13</masterLabel>
+            <translation><!-- B91A-10-13 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B94G-10-11</masterLabel>
+            <translation><!-- B94G-10-11 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B94G-10-13</masterLabel>
+            <translation><!-- B94G-10-13 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B950-10-11</masterLabel>
+            <translation><!-- B950-10-11 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B950-10-13</masterLabel>
+            <translation><!-- B950-10-13 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B96C-10-11</masterLabel>
+            <translation><!-- B96C-10-11 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B96C-10-13</masterLabel>
+            <translation><!-- B96C-10-13 --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

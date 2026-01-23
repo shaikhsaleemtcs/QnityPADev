@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>Approval_Process_Header_ACT_Global</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Approval Process Header ACST Global</label>
+        <sharedTo>
+            <group>ACSTGlobal</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>BU__c</field>
+            <operation>equals</operation>
+            <value>ACST Global</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Approval_Process_Header_CPM_AP</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Approval Process Header CPM AP</label>
+        <sharedTo>
+            <group>CPMAP</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>BU__c</field>
+            <operation>equals</operation>
+            <value>CPM AP</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Approval_Process_Header_CPM_EMEA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Approval Process Header CPM EMEA</label>
+        <sharedTo>
+            <group>CPMEMEA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>BU__c</field>
+            <operation>equals</operation>
+            <value>CPM EMEA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Approval_Process_Header_CPM_NA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Approval Process Header CPM NA</label>
+        <sharedTo>
+            <group>CPMNA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>BU__c</field>
+            <operation>equals</operation>
+            <value>CPM NA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Approval_Process_Header_DPP_Kalrez_Global</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Approval_Process Header DPP Kalrez Global</label>
+        <sharedTo>
+            <group>DPPGlobalKalrez</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>BU__c</field>
+            <operation>equals</operation>
+            <value>DPP Global Kalrez</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Approval_Process_Header_Sharing_Rule_for_ACT</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Approval Process Header Sharing Rule for ACST</label>
+        <sharedTo>
+            <group>ACST</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>BU__c</field>
+            <operation>equals</operation>
+            <value>ACST</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Approval_Process_Header_Sharing_Rules_APT_AP</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Approval Process Header Sharing Rules APT AP</label>
+        <sharedTo>
+            <group>APT_AP</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>BU__c</field>
+            <operation>equals</operation>
+            <value>APT AP</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Approval_Process_Header_Sharing_Rules_APT_EMEA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Approval Process Header Sharing Rules APT EMEA</label>
+        <sharedTo>
+            <group>APT_EMEA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>BU__c</field>
+            <operation>equals</operation>
+            <value>APT EMEA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Approval_Process_Header_Sharing_Rules_APT_NA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Approval Process Header Sharing Rules APT NA</label>
+        <sharedTo>
+            <group>APT_NA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>BU__c</field>
+            <operation>equals</operation>
+            <value>APT NA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Approval_Process_Header_Sharing_Rules_Litho_EMEA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Approval Process Header Sharing Rules Litho EMEA</label>
+        <sharedTo>
+            <group>Litho_EMEA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>BU__c</field>
+            <operation>equals</operation>
+            <value>Litho EMEA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Approval_Process_Header_Sharing_Rules_Litho_NA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Approval Process Header Sharing Rules Litho NA</label>
+        <sharedTo>
+            <group>Litho_NA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>BU__c</field>
+            <operation>equals</operation>
+            <value>Litho NA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Approval_Process_Header_Sharing_Rules_Semi_Silicones</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Approval Process Header Sharing Rules Semi Silicones</label>
+        <sharedTo>
+            <group>Semi_Silicones</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>BU__c</field>
+            <operation>equals</operation>
+            <value>Semi Silicones</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Approval_Process_Header_Sharing_Rules_for_CMPT_AP</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Approval Process Header Sharing Rules for CMPT AP</label>
+        <sharedTo>
+            <group>CMPT_AP</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>BU__c</field>
+            <operation>equals</operation>
+            <value>CMPT AP</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Approval_Process_Header_Sharing_Rules_for_CMPT_EMEA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Approval Process Header Sharing Rules for CMPT EMEA</label>
+        <sharedTo>
+            <group>CMPT_EMEA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>BU__c</field>
+            <operation>equals</operation>
+            <value>CMPT EMEA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Approval_Process_Header_Sharing_Rules_for_Litho_AP</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Approval Process Header Sharing Rules for Litho AP</label>
+        <sharedTo>
+            <group>Litho_AP</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>BU__c</field>
+            <operation>equals</operation>
+            <value>Litho AP</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Aproval_Process_Header_share_with_CMPT_AMS_Business</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Aproval Process Header share with CMPT AMS Business</description>
+        <label>Aproval Process Header share with CMPT AMS Business</label>
+        <sharedTo>
+            <group>CMPT_AMS</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>BU__c</field>
+            <operation>equals</operation>
+            <value>CMPT AMS</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>DPP_LA_Kalrez</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>DPP LA Kalrez</label>
+        <sharedTo>
+            <group>DPPLAKalrez</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>BU__c</field>
+            <operation>equals</operation>
+            <value>DPP LA Kalrez</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Approval_Process_Header_with_ICS_EMEA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share Approval Process Header with ICS EMEA</label>
+        <sharedTo>
+            <group>ICS_EMEA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>BU__c</field>
+            <operation>equals</operation>
+            <value>ICS EMEA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Approval_Process_Header_with_ICS_LA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share Approval Process Header with ICS LA</label>
+        <sharedTo>
+            <group>ICS_LA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>BU__c</field>
+            <operation>equals</operation>
+            <value>ICS LA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Approval_Process_Header_with_ICS_NA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share Approval Process Header with ICS NA</label>
+        <sharedTo>
+            <group>ICS_NA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>BU__c</field>
+            <operation>equals</operation>
+            <value>ICS NA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Approval_Process_Header_with_LED</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share Approval Process Header with LED Silicones</label>
+        <sharedTo>
+            <group>LED_Silicones</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>BU__c</field>
+            <operation>equals</operation>
+            <value>LED Silicones</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Approval_Process_Header_with_OLED</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share Approval Process Header with OLED</label>
+        <sharedTo>
+            <group>OLED</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>BU__c</field>
+            <operation>equals</operation>
+            <value>OLED</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Approval_process_Header_with_DM_OCR</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share Approval process Header with DM OCR</label>
+        <sharedTo>
+            <group>DM_OCR</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>BU__c</field>
+            <operation>equals</operation>
+            <value>DM OCR</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Approval_process_Header_with_ICS_AP</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share Approval process Header with ICS AP</label>
+        <sharedTo>
+            <group>ICS_AP</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>BU__c</field>
+            <operation>equals</operation>
+            <value>ICS AP</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Approval_process_header_with_DM_users</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share Approval process header with DM users</label>
+        <sharedTo>
+            <group>DM</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>BU__c</field>
+            <operation>equals</operation>
+            <value>DM</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+</SharingRules>

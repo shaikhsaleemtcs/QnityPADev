@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>S&amp;C Safety</fullName>
+        <default>false</default>
+        <label>S&amp;C Safety</label>
+    </customValue>
+    <customValue>
+        <fullName>S&amp;C Shelter</fullName>
+        <default>false</default>
+        <label>S&amp;C Shelter</label>
+    </customValue>
+    <customValue>
+        <fullName>S&amp;C Water</fullName>
+        <default>false</default>
+        <label>S&amp;C Water</label>
+    </customValue>
+    <customValue>
+        <fullName>E&amp;I</fullName>
+        <default>false</default>
+        <label>E&amp;I</label>
+    </customValue>
+    <customValue>
+        <fullName>T&amp;I</fullName>
+        <default>false</default>
+        <label>T&amp;I</label>
+    </customValue>
+    <customValue>
+        <fullName>Non Core</fullName>
+        <default>false</default>
+        <label>Non Core</label>
+    </customValue>
+    <description>List of all the Businesses</description>
+    <masterLabel>Procuring Business</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

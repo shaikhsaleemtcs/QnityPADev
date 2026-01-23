@@ -1,0 +1,17 @@
+<!-- This component is used to get the rejection comments -->
+<!--	Ver.	Developer	  	Date				Changes															Dependencies	-->
+
+<apex:component access="global" controller="PARelatedList">
+  <apex:attribute description="PR ID for Email Tempalte" type="String"
+		name="rejectcommnts" assignTo="{!rejectionComments}" />
+		 <apex:dataTable border="2" value="{!approvalSteps}" var="step">
+        
+        <apex:column value="{!step.StepStatus}" headerValue="Status"/>
+        <apex:column value="{!step.OriginalActorId}" headerValue="Assigned To"/>
+        <apex:column value="{!step.ActorID}" headerValue="Actual Approver"/>
+        <apex:column value="{!step.Comments}" headerValue="Comments"/>
+    </apex:dataTable>
+
+
+		
+</apex:component>

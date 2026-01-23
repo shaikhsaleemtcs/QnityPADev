@@ -1,0 +1,883 @@
+<apex:page controller="ctrlPAMain" tabstyle="Price_Approval__tab" sidebar="false" showHeader="true" id="currentPage" cache="true" action="{!onLoadCall}">
+<apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.js')}" />
+<apex:stylesheet value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/css/jquery.dataTables.css')}" />
+<c:loadingComponent />
+<apex:pageMessages escape="false" id="errorMessage"/> 
+
+<!--  Version 1.1 Start -->
+<!-- Removed the calendar Image -->
+<!--  version 1.1 END  -->
+<!--  Version 1.2 Start -->
+<!-- Added the Filter Records Count -->
+<!--  version 1.2 END  -->
+<!--    Ver.            Developer               Changes                                                         Dependencies    -->
+<!--    1.3             Priyanka        Changed table component to 'PAERPPricesRelatedList'                                     -->
+<!--                                    from PARelatedList                                                      None            -->
+<!--    1.4             Prachi          UI change for IE9                                                       None            -->
+<!--    1.5             Prachi          UI change ( Sold to look up,UAT Issue 55)                               None            -->
+<!--    1.5             Brundha          UI                                None            -->
+<!--    1.6             Prachi           UI                                                                     None            -->
+<!--    1.7             Vinoth          Adding Customer Hierarchy filter (APAC ROLLOUT1)                        None            -->  
+<!--    1.8             Priyanka        Calling the setter of KeyCombinationId on change of PC always -- APAC ROLLOUT   None    --> 
+<!--    1.9             Utkarsh         Changed the rendered condition at line number 346-357 for UTA Tracker Defect 98         -->
+<!--    BB20130726      Bisnupriya          Adding additional KC fields--Sales Type and Incoterms -- APAC ROLLOUT2      None    -->
+<!--    PP20131028      Priyanka    Adding filter for Ship-To Country -- ROLLOUT2                               None    -->                                             
+<!--    VR20131108      Vinoth          DTT Rollout Issue - changed Of to of                                                    None            -->
+<!--    TJ20140505      Tarun           Added the landing page link                                             None     -->
+<!--    TJ20140509      Tarun           Added Navigation Flow Text                                              None        -->
+<!--    SP20140520      Shiva           New PH Search component                                             None        -->
+<!--    GT20141028      George          Added code to enable javascript search box in user population component  -->
+<!--    SS20220826      Shantanu Sharma         Added code to enable Sales Order Item filter and updated version to 55  None -->
+<!--    SS20230501      Shantanu Sharma     Added M&M p80 filter   -->
+<!--    MF20240115      Mohd Fahad         Added code to enable Sales Order Type filter and updated version to 60  None -->
+<style>
+    .customerLink{font-size:15px;height:20px;margin-bottom:1px;padding:5px;border:solid 1px;border-color:#6E96B2; background-color:#E5F3FC;font-weight:bold;text-align:left;}
+    .navFlow{font-size:13px;font-style:oblique;margin-bottom:3px;}
+    #export .detailList{padding:0px;border:1px solid #E2E3E4;}
+    #export .detailList .data2Col{padding:0px;}
+    //#export .detailList .dataCol{padding:0px;}
+    //#export .detailList .dataCol .requiredBlock{top:0px; height:20px;bottom:0px;}
+    #export .detailList tr th{border-bottom:none;} 
+    #export .detailList tr td{border-bottom:none;} 
+    #export .bPageBlock{float:left;width:100%;}
+    #export .pbSubheader{margin-bottom:0px;} 
+    body .pbBody table.list tr th{color:white;background-color:#63A4C5;}
+    .bPageBlock .detailList .list tr th{color:white;} 
+    #export table #PAERPPricesRelatedListTable tr:first-child th{color:white;background-color:#63A4C5;}
+    #export table #PAERPPricesRelatedListTable tr:nth-child(2) th{color:black;background-color:#f8f8f8;border:1px solid #E2E3E4;}
+    #export table.tab1 tr:first-child th{color:white;background-color:#63A4C5;}
+    #export table.tab1 tr:nth-child(2) th{color:black;background-color:#f8f8f8;border:1px solid #E2E3E4;}
+</style>
+<script>
+var j$ = jQuery.noConflict();                                   //<TJ20140401> - added javascript to generate HTML Table with additional functionalities
+j$(document).ready(function(){
+    datatable();
+    var tab=j$('#PAERPPricesRelatedListTable').dataTable({
+            "bLengthChange":false,
+            "aLengthMenu": [100,200],
+            "iDisplayLength" : 100,
+        //  "aoColumnDefs" : [{"bSortable": false,"bSearchable": false, "aTargets":[0]}],
+            sPaginationType: "full_numbers",
+            sPlaceHolder : "foot:before",
+            "sDom": 'frt',
+            });                     
+    j$('#PAERPPricesRelatedListTable'+'_filter').after('<br /><br />');
+    j$('#PAERPPricesRelatedListTable').after('<br />');
+    
+    //<GT20141028> - Added the following lines to enable search box on user population component
+    var tab1=j$('#listUser').dataTable({
+            "bLengthChange":false,
+            "aLengthMenu": [100,200],
+            "iDisplayLength" : 100,
+        //  "aoColumnDefs" : [{"bSortable": false,"bSearchable": false, "aTargets":[0]}],
+            sPaginationType: "full_numbers",
+            sPlaceHolder : "foot:before",
+            "sDom": 'frt',
+            });                     
+    j$('#listUser'+'_filter').after('<br /><br />');
+    j$('#listUser').after('<br />');
+});
+function datatable(){
+        var tab1=j$('#ShipToTable').dataTable({
+                    "bLengthChange":false,
+                    "bPaginate":false,
+                    "bInfo":false,
+                    "iDisplayLength" : 200,
+                    "aoColumnDefs" : [{"bSortable": false,"bSearchable": false, "aTargets":[0]}],
+                    sPaginationType: "full_numbers",
+                    sPlaceHolder : "foot:before",
+                    
+                    });                     
+          j$('#ShipToTable'+'_filter').after('<br /><br />');
+          j$('#ShipToTable').after('<br />');
+}
+
+</script>
+<!------------------------------------- Style Class for Pop Up ---------------------------------->
+<apex:actionStatus id="stat">
+        <apex:facet name="start">
+            <div class="spinnerMask" id="spinnerMask">
+            <div class="spinnerCt"><img
+                src="/img/analytics/reportbuilder/icons/spinner32.gif"
+                alt="Loading..." width="32" height="32" align="center"
+                class="spinner" title="Loading..." />
+            <div class="loadingIndicator">Loading...</div>
+            </div>
+            <div class="mask"></div>
+            </div>
+        </apex:facet>
+</apex:actionStatus> 
+
+<apex:form id="myForm">
+        <!-- <TJ20140505> Added Landing Page Link -->
+        <div align="left" class="navFlow">
+            <apex:commandLink id="link0" value="Landing Page" action="{!businessComponentAction}" target="_self" style="color:blue;">
+            <apex:param name="desiredAction" value="landingpage" assignTo="{!businessaction}" />
+            <apex:param name="newPageLabel" value="PAHome" assignTo="{!newPageLabel}" />
+            </apex:commandLink>
+        <!-- <TJ20140509> Added Navigation Flow Text -->
+            <apex:outputText value="{!if(NOT(ISNULL(navigationText)),'>>','')} "/>
+            <apex:outputText value="{!navigationText}"/>
+            <apex:outputText value=">>{!$Label.Export_Prices}"/>
+        </div>
+<!--        <TJ20140417>   Changed Page Label-->
+    <div class="customerLink">
+        {!$Label.Export_Prices}
+    </div>
+<script>
+//function getListSeperator(exportId) {
+//var list = ["a", "b"];
+//var listSeparator = list.toLocaleString().substring(1, 2);
+//var number=1.1;
+//var numberSeperator = number.toLocaleString().substring(1,2);
+//document.getElementById(exportId).value=listSeparator+numberSeperator;
+//alert(listSeparator+numberSeperator);
+//}
+function setFocusOnLoad() {
+}
+//function setPCKC(){
+    //  setPCKCConcat();        
+//  }
+</script>
+
+<apex:outputtext id="forrerender"/>
+    <div id="export">
+        <apex:pageBlock id="mypageBlock">
+
+<!---------------------------------------------------- Export Parameter Selection --------------------------------------->
+
+            <apex:pageBlockSection title="Sales Area Information" id="mypageBlockSection">
+                <apex:pageBlockSectionItem >
+                    <apex:outputtext value="Business" />
+                    <apex:outputtext value="{!service.paServiceState.currentRequest.selectedBU}" />                            
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!service.PAServicestate.ogItems.salesAdminPermissionSetFlag}">
+                    <apex:outputtext value="On Behalf Of" />
+                    <apex:outputPanel >
+                        <apex:inputText style="float:left;margin: 0px;" value="{!service.paServiceState.ogItems.userName}" />
+                        <c:PAUserPopulation selectedBuAtr="{!service.paServiceState.ogitems.selectedBU}"
+                                    userIdAtr="{!service.paServiceState.ogItems.selectedUser}"
+                                    userNameAtr="{!service.paServiceState.ogItems.userName}" 
+                                    dispSearchFilters="false"
+                                    salesOrgCodeAtr="{!service.paServiceState.currentRequest.pricingRequest.Sales_Org_Code__c}"
+                                    divisionCodeAtr="{!service.paServiceState.currentRequest.pricingRequest.Division_Code__c}"
+                                    distCodeAtr="{!service.paServiceState.currentRequest.pricingRequest.Dist_Channel_Code__c}" />
+                    </apex:outputPanel>                            
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value="Sales Org" />
+                    <apex:outputPanel >
+                        <apex:outputText style="float:left;margin: 0px;" value="{!service.paServiceState.currentRequest.pricingRequest.Sales_Org_Code__c}-{!service.paServiceState.currentRequest.pricingRequest.Sales_Org__c}" 
+                            rendered="{!service.paServiceState.currentRequest.pricingRequest.Sales_Org_Code__c<>null}" />
+                        <div class="requiredInput" style="float:left;">
+                        <div class="requiredBlock" style="float:left;"></div>    
+                        <apex:inputText style="float:left;margin: 0px;" rendered="{!service.paServiceState.currentRequest.pricingRequest.Sales_Org_Code__c==null}" 
+                            disabled="true"/>
+                        </div>    
+                        <apex:outputPanel >
+                        <!-- <TJ20150107> -->
+                        <c:PASalesAreaSelectionComponent BUIdFromPage="{!service.paServiceState.ogItems.selectedBU}" 
+                            soSAComponenet="{!service.paServiceState.currentRequest.pricingRequest.Sales_Org__c}" 
+                            soCodeSAComponenet="{!service.paServiceState.currentRequest.pricingRequest.Sales_Org_Code__c}" 
+                            dcSAComponenet="{!service.paServiceState.currentRequest.pricingRequest.Dist_Channel__c}" 
+                            dcCodeSAComponenet="{!service.paServiceState.currentRequest.pricingRequest.Dist_Channel_Code__c}" 
+                            divSAComponenet="{!service.paServiceState.currentRequest.pricingRequest.Division__c}" 
+                            divCodeSAComponenet="{!service.paServiceState.currentRequest.pricingRequest.Division_Code__c}"
+                            setupPageCheck="true" getPCKC="{!service.paServiceState.currentRequest.pckcfromKeyComb}"
+                            enablePopUp="{!service.paServiceState.ogItems.showPopup}"/>
+                            <!--  <apex:actionFunction name="setPCKCConcat" action="{!businessComponentActionForRerender}" rerender="myForm" status="stat"/>-->
+                        </apex:outputpanel>
+                    </apex:outputpanel>
+                </apex:pageBlockSectionItem>   
+                <apex:pageBlockSectionItem >                     
+                    <apex:outputtext value="Dist. Channel" />
+                    <apex:outputtext value="{!service.paServiceState.currentRequest.pricingRequest.Dist_Channel_Code__c}-{!service.paServiceState.currentRequest.pricingRequest.Dist_Channel__c}" rendered="{!service.paServiceState.currentRequest.pricingRequest.Sales_Org_Code__c<>null}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value="Division" />
+                    <apex:outputText value="{!service.paServiceState.currentRequest.pricingRequest.Division_Code__c}-{!service.paServiceState.currentRequest.pricingRequest.Division__c}" rendered="{!service.paServiceState.currentRequest.pricingRequest.Sales_Org_Code__c<>null}"/>
+                </apex:pageBlockSectionItem>
+              
+            </apex:pageBlockSection>  
+            <div style="text-align:center;padding:10px 0px 10px 0px;"> 
+                <apex:outputPanel rendered="{!service.paServiceState.currentRequest.pricingRequest.Sales_Org_Code__c==null}">
+                    <apex:outputLink value="/apex/PAHome" styleClass="btn" style="text-decoration:none" >Cancel</apex:outputLink>
+                 </apex:outputPanel>
+            </div>
+    
+<!--------------------------------------------Pricing Condition Details Section ------------------------------->    
+    
+            <apex:pageBlockSection title="Pricing Condition Details" rendered="{!service.paServiceState.currentRequest.pricingRequest.Sales_Org_Code__c<>null}" id="PricingDetail">   
+<!--                 <TJ20150107> Concatinating PCKC -->
+                <apex:pageBlockSectionItem dataStyle="height:25px"
+                        labelStyle="height:25px">                        
+                        <apex:outputText value="Pricing Condition & Key Combination" style="text-decoration:none; color:#484848;font-weight:bold;"/>
+                    <apex:outputPanel style="float:left;">
+                        <apex:selectList size="1" value="{!service.paServicestate.currentRequest.keyCombination.pckcconcat}" >
+                        <apex:actionSupport event="onchange"  action="{!service.paServicestate.currentRequest.keyCombination.setKCFromPCKCConcat}" rerender="mypageBlock,errorMessage,cancelButton" status="stat"/>                         
+                                <apex:selectOptions value="{!service.paServicestate.currentRequest.keyCombination.pcKCOptionsList}"/>
+                                </apex:selectList>
+                    </apex:outputPanel>            
+                </apex:pageBlockSectionItem> 
+<!--                 <apex:pageBlockSectionItem dataStyle="height:25px" labelStyle="height:25px"> -->
+<!--                     <apex:outputText value="Pricing Condition" /> -->
+<!--                     <apex:outputPanel style="float:left;"> -->
+<!--                             <div class="requiredInput" style="float:left;"> -->
+<!--                             <div class="requiredBlock" style="float:left;"></div> -->
+<!--                                 <apex:selectList style="float:left;margin: 0px;" size="1" value="{!service.paServiceState.currentRequest.pricingCondition.selectedPricingCondition}" rendered="{!service.paServiceState.currentRequest.pricingRequest.Sales_Org_Code__c<>null}">    -->
+<!--                                    <apex:actionSupport rerender="mypageBlock,errorMessage,cancelButton" event="onchange" action="{!businessComponentActionForRerender}"  status="stat"> -->
+<!--                                         <apex:param name="desiredAction" value="priCondOnchange" assignTo="{!businessaction}" /> -->
+<!--                                         Ver 1.8 -->
+<!--                                          <apex:param name="KCupdate" value="callKCSetter" -->
+<!--                                         assignTo="{!service.PAServicestate.currentRequest.keyCombination.keyCombinationID}" /> -->
+<!--                                    </apex:actionSupport> -->
+                                                                       
+<!--                                      <apex:selectOptions value="{!service.paServiceState.currentRequest.pricingCondition.ListOptions}" />                                    -->
+<!--                                 </apex:selectList> -->
+<!--                             </div> -->
+<!--                     </apex:outputPanel>             -->
+<!--                 </apex:pageBlockSectionItem>  -->
+<!--                 <apex:pageBlockSectionItem > -->
+<!--                     <apex:outputText value="Key Combination" /> -->
+<!--                     <apex:outputPanel > -->
+<!--                         <apex:selectList size="1" disabled="true" rendered="{!service.paServiceState.currentRequest.pricingCondition.selectedPricingCondition==null || service.paServiceState.currentRequest.pricingCondition.selectedPricingCondition=='--Select--'}"> -->
+<!--                             <apex:selectOption itemValue="--Select--"></apex:selectOption> -->
+<!--                             <apex:selectOption itemValue="--------Select-----------"></apex:selectOption>                                                                              -->
+<!--                         </apex:selectList>   -->
+<!--                         <div class="requiredInput" style="float:left;"> -->
+<!--                             <div class="requiredBlock" style="float:left;"></div>                 -->
+<!--                                 <apex:selectList style="float:left;margin: 0px;" size="1" value="{!service.paServiceState.currentRequest.keyCombination.keyCombinationID}" rendered="{!service.paServiceState.currentRequest.pricingCondition.selectedPricingCondition<>null && service.paServiceState.currentRequest.pricingCondition.selectedPricingCondition<>'--Select--'}">   -->
+<!--                                     <apex:actionSupport event="onchange" action="{!businessComponentActionForRerender}" rerender="mypageBlock,errorMessage,cancelButton" status="stat"> -->
+<!--                                         <apex:param name="desiredActionkey" value="keyCombOnChange" assignTo="{!businessAction}" /> -->
+<!--                                         <apex:param name="newPageLabelkey" value="PAExportPrices" assignTo="{!newPageLabel}" />     -->
+<!--                                     </apex:actionSupport> -->
+<!--                                     <apex:selectOptions value="{!service.paServiceState.currentRequest.keyCombination.ListOptions}"/>                                   -->
+<!--                                 </apex:selectList> -->
+<!--                             </div>     -->
+<!--                      </apex:outputPanel> -->
+<!--                 </apex:pageBlockSectionItem> -->
+         
+            </apex:pageBlockSection>
+         
+            <div style="text-align:center;padding:10px 0px 10px 0px;" id="cancelButton"> 
+                <apex:outputPanel rendered="{!(service.paServiceState.currentRequest.pricingRequest.Sales_Org_Code__c<>null && service.paServiceState.currentRequest.keyCombination.keyCombinationID==null) || (service.paServiceState.currentRequest.keyCombination.keyCombinationID=='--Select--' || service.paServiceState.currentRequest.pricingCondition.selectedPricingCondition=='--Select--')}">
+                        <apex:outputLink value="/apex/PAHome" styleClass="btn" style="text-decoration:none">Cancel</apex:outputLink>
+                </apex:outputPanel>
+            </div>
+        
+<!--------------------------------------------- Scale Detail ------------------------------------------------->
+
+            <apex:pageBlockSection id="scaleDetail" title="Scale Detail" rendered="{!(service.paServiceState.currentRequest.pricingCondition.selectedPricingCondition<>'none' && service.paServiceState.currentRequest.scaleEnable=='true')}">
+                <apex:pageBlockSectionItem dataStyle="height:25px" labelStyle="height:25px">
+                    <apex:outputtext value="Scale"/>
+                    <apex:inputCheckbox selected="true" disabled="true"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputtext value="Scale Base"/>
+                    <apex:outputText value="{!service.paServiceState.currentRequest.pricingCondition.pricingCondition.Scale_Base__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem dataStyle="height:25px" labelStyle="height:25px">
+                    <apex:outputText value="Scale Type"/>               
+                    <apex:outputText value="{!service.paServiceState.currentRequest.pricingCondition.pricingCondition.Scale_Type__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value="Check Scale"/>
+                    <apex:outputText value="{!service.paServiceState.currentRequest.pricingCondition.pricingCondition.Check_Scale__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection> 
+
+<!--------------------------------------------- Filter List ------------------------------------------------->
+        
+        <apex:outputPanel id="filterList" style="text-align:left;" rendered="{!service.paServicestate.currentRequest.keyCombination.pckcconcat<>null && service.paServicestate.currentRequest.keyCombination.pckcconcat<>'--Select--'}">
+            <apex:pageBlockSection title="Filter List" columns="1">
+            <apex:outputPanel >
+            <apex:pageBlockSection >  
+                <apex:pageBlockSectionItem dataStyle="height:25px" labelStyle="height:25px" >
+                    <apex:outputText value="Valid On" style="float:right;"/>
+                    <apex:outputPanel style="float:left;">
+                            <div class="requiredInput" style="float:left;">
+                            <div class="requiredBlock" style="float:left;"></div>                        
+                                <apex:inputField style="float:left;margin: 0px;" value="{!service.paServiceState.currentRequest.pricingRequest.Due_Date__c}" />
+                            </div>
+                    </apex:outputPanel>     
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem dataStyle="height:25px" labelStyle="height:25px" rendered="{!CONTAINS(service.paServiceState.currentRequest.keyCombination.KeyCombinationName,'Sold to')}">                               
+                    <apex:outputText value="Sold To" style="float:right;"/>
+                    <apex:outputPanel >
+                        <apex:inputText value="{!service.paServiceState.currentRequest.soldToFilter}"/>
+                        <c:SoldToSelectionComponent selectedUserAtr="{!service.paServiceState.ogItems.selectedUser}" BUSelectedAtr="{!service.paServiceState.ogItems.selectedBU}" soldToCodeAtr="{!service.paServiceState.currentRequest.soldToFilter}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.paServiceState.currentRequest.keyCombination.KeyCombinationName,'Ship to')}" dataStyle="height:25px" labelStyle="height:25px">
+                    <apex:outputText value="Ship To" style="float:right;"/>
+                    <apex:outputPanel >
+                        <apex:inputText value="{!service.paServiceState.currentRequest.shipToFilter}"/>
+                        <c:PAShipToComponent shipToCodeAtr="{!service.PAServicestate.currentRequest.shipToFilter}"
+                                                soldToCodeAtr="{!service.paServiceState.currentRequest.soldToFilter}"
+                                                shipToAtr="{!service.PAServicestate.currentRequest.shipToNameFilter}"
+                                                componentTypeAtr="shipTo"
+                                                salesOrgCodeAtr="{!service.PAServicestate.currentRequest.pricingRequest.Sales_Org_Code__c}"
+                                                dcCodeAtr="{!service.PAServicestate.currentRequest.pricingRequest.Dist_Channel_Code__c}"
+                                                divisionCodeAtr="{!service.PAServicestate.currentRequest.pricingRequest.Division_Code__c}"
+                                                salesRep="{!service.paServiceState.ogItems.userName}" ></c:PAShipToComponent>
+                    </apex:outputPanel>                           
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.paServiceState.currentRequest.keyCombination.KeyCombinationName,'Material') && (NOT CONTAINS(service.paServiceState.currentRequest.keyCombination.KeyCombinationName,'Material Price Group'))
+                                                      && (NOT CONTAINS(service.PAServicestate.currentProjectPrice.currentRequest.keyCombination.KeyCombinationName,'Matl grp1')) && (NOT CONTAINS(service.PAServicestate.currentProjectPrice.currentRequest.keyCombination.KeyCombinationName,'Matl grp 1'))
+                                                      && (NOT CONTAINS(service.PAServicestate.currentProjectPrice.currentRequest.keyCombination.KeyCombinationName,'MatGrp1')) && (NOT CONTAINS(service.PAServicestate.currentProjectPrice.currentRequest.keyCombination.KeyCombinationName,'Material Group 1'))}" dataStyle="height:25px" labelStyle="height:25px">                                    
+                    <apex:outputText value="Material" style="float:right;"/>
+                    <apex:outputPanel >
+                        <apex:inputText id="targetMaterialField" value="{!service.paServiceState.currentRequest.materialFilter}" onkeyup="search(this);">
+                        <c:autoComplete_Generic salesOrg="{!service.PAServicestate.currentRequest.pricingRequest.Sales_Org_Code__c}"
+                                   erpdcCode="{!service.PAServicestate.currentRequest.pricingRequest.Dist_Channel_Code__c}"
+                                   erpCluster="{!service.PAServicestate.currentRequest.pricingCondition.pricingCondition.SAP_Cluster__c}"
+                                   bu="{!service.paServiceState.ogItems.selectedBU}"
+                                   division="{!service.PAServicestate.currentRequest.pricingRequest.Division_Code__c}"
+                                />
+                        </apex:inputText>
+                           <c:PAMaterialSelectionComponent materialCodeAtr="{!service.paServiceState.currentRequest.materialFilter}" selectedBUAtr="{!service.paServiceState.ogItems.selectedBU}"
+                        salesOrgAtr="{!service.PAServicestate.currentRequest.pricingRequest.Sales_Org_Code__c}"
+                            distiAtr="{!service.PAServicestate.currentRequest.pricingRequest.Dist_Channel_Code__c}"
+                            divAtr="{!service.PAServicestate.currentRequest.pricingRequest.Division_Code__c}"                           
+                            />
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.paServiceState.currentRequest.keyCombination.KeyCombinationName,'PH1')}" dataStyle="height:25px" labelStyle="height:25px">        
+                    <apex:outputText value="Product Hierarchy" style="float:right;"/>
+                    <apex:outputPanel >
+                        <apex:inputText value="{!service.paServiceState.currentRequest.phFilter}" id="targetField" onkeyup="search(this);">
+                        <c:autoComplete_Generic orgGrp="{!service.paServiceState.ogItems.selectedBU}" KCAtr="{!service.PAServicestate.currentRequest.keyCombination.KeyCombinationName}"/>
+                        </apex:inputText>
+                        <!-- SP20140520 START -->
+                        <c:PAPHComponent BUFromPageAtr="{!service.paServiceState.ogItems.selectedBU}"
+                                           singleSelectAtr="true" KCFromPageAtr="{!service.paServiceState.currentRequest.keyCombination.KeyCombinationName}"/>
+                        <!-- SP20140520 END -->
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>                                                
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.paServiceState.currentRequest.keyCombination.KeyCombinationName,'Material Price Group')}" dataStyle="height:25px" labelStyle="height:25px">        
+                    <apex:outputText value="MPG" style="float:right;"/>                    
+                    <apex:selectList value="{!service.paServiceState.currentRequest.mpgFilter}" size="1" >
+                        <apex:selectOption itemLabel="--Select--" itemValue=""/>
+                        <apex:selectOptions value="{!service.paServiceState.currentRequest.salesPriceSAP.mpgList}" />
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!(CONTAINS(service.paServiceState.currentRequest.keyCombination.KeyCombinationName,'Customer Price Group'))}" dataStyle="height:25px" labelStyle="height:25px">        
+                    <apex:outputText value="CPG" style="float:right;"/>                    
+                    <apex:selectList value="{!service.paServiceState.currentRequest.cpgFilter}" size="1" >
+                        <apex:selectOption itemLabel="--Select--" itemValue=""/>
+                        <apex:selectOptions value="{!service.paServiceState.currentRequest.salesPriceSAP.cpgList}" />
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <!--Added by Kamalakiran KK20200819-->
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.PAServicestate.currentRequest.keyCombination.KeyCombinationName,'Distributor')}">
+                    <apex:outputText value="Distributor"></apex:outputText>
+                    <apex:outputPanel >
+                        <apex:selectList style="float:left;margin: 0px;" size="1"
+                            value="{!service.PAServicestate.currentRequest.distFilter}">
+                            <apex:selectOption itemValue="--Select--" itemLabel="--Select--" />
+                            <apex:selectOptions value="{!service.PAServicestate.currentRequest.salesPriceSAP.distributorList}" />
+                        </apex:selectList>
+                    </apex:outputPanel>     
+                </apex:pageBlockSectionItem>
+                
+                <!--MF20240115-->
+                 <apex:pageBlockSectionItem rendered="{!CONTAINS(service.PAServicestate.currentRequest.keyCombination.KeyCombinationName,'Sales Order Type')}">
+                    <apex:outputText value="Sales Order Type"></apex:outputText>
+                    <apex:outputPanel >
+                        <apex:selectList style="float:left;margin: 0px;" size="1"
+                            value="{!service.PAServicestate.currentRequest.salesOrderTypeFilter}">
+                            <apex:selectOption itemValue="--Select--" itemLabel="--Select--" />
+                            <apex:selectOptions value="{!service.PAServicestate.currentRequest.salesPriceSAP.salesOrderTypeList}" />
+                        </apex:selectList>
+                    </apex:outputPanel>     
+                </apex:pageBlockSectionItem>
+
+                <!--MF20240115-->
+                
+                <!--SS20220826-->
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.PAServicestate.currentRequest.keyCombination.KeyCombinationName,'Sales Order Item')}">
+                    <apex:outputText value="Sales Order Item"></apex:outputText>
+                    <apex:outputPanel >
+                        <apex:selectList style="float:left;margin: 0px;" size="1"
+                            value="{!service.PAServicestate.currentRequest.salesOrderItemFilter}">
+                            <apex:selectOption itemValue="--Select--" itemLabel="--Select--" />
+                            <apex:selectOptions value="{!service.PAServicestate.currentRequest.salesPriceSAP.salesOrderItemList}" />
+                        </apex:selectList>
+                    </apex:outputPanel>     
+                </apex:pageBlockSectionItem>
+
+                <!--SS20230501-->
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.PAServicestate.currentRequest.keyCombination.KeyCombinationName,'Value Center')}">
+                    <apex:outputText value="Value Center"></apex:outputText>
+                    <apex:outputPanel >
+                        <apex:selectList style="float:left;margin: 0px;" size="1"
+                            value="{!service.PAServicestate.currentRequest.valueCenterFilter}">
+                            <apex:selectOption itemValue="--Select--" itemLabel="--Select--" />
+                            <apex:selectOptions value="{!service.PAServicestate.currentRequest.salesPriceSAP.valueCenterList}" />
+                        </apex:selectList>
+                    </apex:outputPanel>     
+                </apex:pageBlockSectionItem>
+                <!--SS20230501-->
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.PAServicestate.currentRequest.keyCombination.KeyCombinationName,'Shipping Condition')}">  
+                    <apex:outputText value="Shipping Condition"></apex:outputText>
+                    <apex:outputPanel >
+                        <apex:selectList style="float:left;margin: 0px;" size="1"
+                            value="{!service.PAServicestate.currentRequest.shippingConditionFilter}">
+                            <apex:selectOption itemValue="--Select--" itemLabel="--Select--" />
+                            <apex:selectOptions value="{!service.PAServicestate.currentRequest.salesPriceSAP.ShippingConditionList}" />
+                        </apex:selectList>
+                    </apex:outputPanel>     
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.PAServicestate.currentRequest.keyCombination.KeyCombinationName,'Ext Matl Grp')}">
+                    <apex:outputText value="Ext Matl Grp"></apex:outputText>
+                    <apex:outputPanel >
+                        <apex:selectList style="float:left;margin: 0px;" size="1"
+                            value="{!service.PAServicestate.currentRequest.extMaterialGroupFilter}">
+                            <apex:selectOption itemValue="--Select--" itemLabel="--Select--" />
+                            <apex:selectOptions value="{!service.PAServicestate.currentRequest.salesPriceSAP.extMaterialGroupList}" />
+                        </apex:selectList>
+                    </apex:outputPanel>     
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.PAServicestate.currentRequest.keyCombination.KeyCombinationName,'Material Group 2')}">
+                    <apex:outputText value="Material Group 2"></apex:outputText>
+                    <apex:outputPanel >
+                        <apex:selectList style="float:left;margin: 0px;" size="1"
+                            value="{!service.PAServicestate.currentRequest.materialGroup2Filter}">
+                            <apex:selectOption itemValue="--Select--" itemLabel="--Select--" />
+                            <apex:selectOptions value="{!service.PAServicestate.currentRequest.salesPriceSAP.materialGroup2List}" />
+                        </apex:selectList>
+                    </apex:outputPanel>     
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.PAServicestate.currentRequest.keyCombination.KeyCombinationName,'Price Zone')}">
+                    <apex:outputText value="Price Zone"></apex:outputText>
+                    <apex:outputPanel >
+                        <apex:selectList style="float:left;margin: 0px;" size="1"
+                            value="{!service.PAServicestate.currentRequest.prizeZoneFilter}">
+                            <apex:selectOption itemValue="--Select--" itemLabel="--Select--" />
+                            <apex:selectOptions value="{!service.PAServicestate.currentRequest.salesPriceSAP.priceZoneList}" />
+                        </apex:selectList>
+                    </apex:outputPanel>     
+                </apex:pageBlockSectionItem>
+
+                
+                <!--<BB20130726> Adding additional KC fields--Sales Type and Incoterms  START -->
+                <apex:pageBlockSectionItem rendered="{!(CONTAINS(service.paServiceState.currentRequest.keyCombination.KeyCombinationName,'Incoterms'))}" dataStyle="height:25px" labelStyle="height:25px">        
+                    <apex:outputText value="Incoterms" style="float:right;"/>                    
+                    <apex:selectList value="{!service.paServiceState.currentRequest.incotermsFilter}" size="1" >
+                        <apex:selectOption itemLabel="--Select--" itemValue=""/>
+                        <apex:selectOptions value="{!service.paServiceState.currentRequest.salesPriceSAP.incotermsList}" />
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                 <!--<BB20130726> ENDS -->
+                 
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.paServiceState.currentRequest.keyCombination.KeyCombinationName,'Price List Type')}" dataStyle="height:25px" labelStyle="height:25px">      
+                    <apex:outputText value="Price List Type" style="float:right;"/>
+                    <apex:selectList value="{!service.paServiceState.currentRequest.priceListTypeFilter}" size="1" >
+                        <apex:selectOption itemLabel="--Select--" itemValue=""/>
+                        <apex:selectOptions value="{!service.paServiceState.currentRequest.salesPriceSAP.PriceListTypeList}" />
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                
+                <!-- Added by Madhurima to pupolate Characteristic Value when KC contains "Kcode" - IS ID-00067668 - Start -->
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.paServiceState.currentRequest.keyCombination.keycombinationName, 'Kcode')}" dataStyle="height:25px" labelStyle="height:25px">
+                <apex:outputText value="Characteristic Value"></apex:outputText>
+                <apex:inputtext value="{!service.PAServicestate.currentRequest.kcodeFilter}" maxLength="9" style="text-transform:uppercase;" onkeyup="var u=this.value.toUpperCase();if(this.value!=u){this.value=u;}"/>
+                </apex:pageBlockSectionItem>
+                
+                <!-- Added by Madhurima to pupolate Characteristic Value when KC contains "Kcode" - IS ID-00067668 - End -->
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.paServiceState.currentRequest.keyCombination.KeyCombinationName,'Sales office')}" dataStyle="height:25px" labelStyle="height:25px">       
+                    <apex:outputText value="Sales Office" style="float:right;"/>             
+                    <apex:selectList value="{!service.paServiceState.currentRequest.salesOfficeFilter}" size="1">
+                        <apex:selectOption itemLabel="--Select--" itemValue=""/>
+                        <apex:selectOptions value="{!service.paServiceState.currentRequest.salesPriceSAP.SalesOfficeList}" />
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.paServiceState.currentRequest.keyCombination.KeyCombinationName,'Sales District')}" dataStyle="height:25px" labelStyle="height:25px">       
+                    <apex:outputText value="Sales District" style="float:right;"/>             
+                    <apex:selectList value="{!service.paServiceState.currentRequest.salesDistrictFilter}" size="1">
+                        <apex:selectOption itemLabel="--Select--" itemValue=""/>
+                        <apex:selectOptions value="{!service.paServiceState.currentRequest.salesPriceSAP.SalesDistrictList}" />
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!(CONTAINS(service.paServiceState.currentRequest.keyCombination.KeyCombinationName,'FRB') || CONTAINS(service.paServiceState.currentRequest.keyCombination.KeyCombinationName,'Profit Center'))}" dataStyle="height:25px" labelStyle="height:25px">     
+                    <apex:outputText value="FRB" style="float:right;"/>
+                    <apex:outputPanel >
+                        <apex:inputHidden value="{!service.paServiceState.currentRequest.profitCenterLevel}" id="targetHeighestLevel"/>
+                        <apex:inputText value="{!service.paServiceState.currentRequest.profitCenterFilter}" id="targetFRBField" onkeyup="search(this);">
+                        <c:autoComplete_Generic />
+                        </apex:inputText>
+<!--                             <TJ20140703> Commented because of change in profitcenterselectioncomponent -->
+<!--                        <c:PAProfitCenterSelectionComponent BUAtr="{!service.PAServicestate.ogItems.selectedBU}" singleSelectAtr="false"/>-->
+                        <c:PAProfitCenterSelectionComponent BUAtr="{!service.PAServicestate.ogItems.selectedBU}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <!-- PP20131028 -->
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(SUBSTITUTE(service.PAServicestate.currentRequest.keyCombination.KeyCombinationName,'Ship-To Country',''),'Country')}">
+                    <apex:outputText value="Country"></apex:outputText>
+                    <apex:selectList size="1" value="{!service.PAServicestate.currentRequest.countryFilter}">
+                            <apex:selectOption itemValue="--Select--" itemLabel="--Select--" />
+                            <apex:selectOptions value="{!service.PAServicestate.currentRequest.salesPriceSAP.countryList}" />
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                
+                <!-- PP20131028 START -->
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.PAServicestate.currentRequest.keyCombination.KeyCombinationName,'Ship-To Country')}">
+                    <apex:outputText value="Ship-To Country"></apex:outputText>
+                    <apex:selectList size="1" value="{!service.PAServicestate.currentRequest.shipToCountryFilter}">
+                            <apex:selectOption itemValue="--Select--" itemLabel="--Select--" />
+                            <apex:selectOptions value="{!service.PAServicestate.currentRequest.salesPriceSAP.countryList}" />
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <!-- PP20131028 END -->
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.PAServicestate.currentRequest.keyCombination.KeyCombinationName,'Market Segment')}">
+                    <apex:outputText value="Market Segment"></apex:outputText>
+                    <apex:selectList size="1" value="{!service.PAServicestate.currentRequest.marketSegmentFilter}">
+                            <apex:selectOption itemValue="--Select--" itemLabel="--Select--" />
+                            <apex:selectOptions value="{!service.PAServicestate.currentRequest.salesPriceSAP.marketSegmentList}" />
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.PAServicestate.currentRequest.keyCombination.KeyCombinationName,'Material Group 5 Key')}">
+                    <apex:outputText value="Material Group 5 Key"></apex:outputText>
+                    <apex:selectList size="1" value="{!service.PAServicestate.currentRequest.materialGroup5KeyFilter}">
+                            <apex:selectOption itemValue="--Select--" itemLabel="--Select--" />
+                            <apex:selectOptions value="{!service.PAServicestate.currentRequest.salesPriceSAP.materialGroup5KeyList}" />
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                
+                 <apex:pageBlockSectionItem rendered="{!CONTAINS(SUBSTITUTE(service.PAServicestate.currentRequest.keyCombination.KeyCombinationName,'End User',''),'End Use')}">
+                    <apex:outputText value="End Use"></apex:outputText>
+                    <apex:selectList size="1" value="{!service.PAServicestate.currentRequest.endUseFilter}">
+                            <apex:selectOption itemValue="--Select--" itemLabel="--Select--" />
+                            <apex:selectOptions value="{!service.PAServicestate.currentRequest.salesPriceSAP.endUseList}" />
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.PAServicestate.currentRequest.keyCombination.KeyCombinationName,'End User')}">
+                    <apex:outputText value="End User"></apex:outputText>
+                    <apex:outputPanel >
+                        <apex:inputtext value="{!service.PAServicestate.currentRequest.endUserFilter}"/>
+                        <c:PAShipToComponent shipToCodeAtr="{!service.PAServicestate.currentRequest.endUserFilter}"
+                                             shipToAtr="{!service.PAServicestate.currentRequest.endUserNameFilter}"
+                                             componentTypeAtr="EndUser"
+                                             salesOrgCodeAtr="{!service.PAServicestate.currentRequest.pricingRequest.Sales_Org_Code__c}"
+                                             dcCodeAtr="{!service.PAServicestate.currentRequest.pricingRequest.Dist_Channel_Code__c}"
+                                             divisionCodeAtr="{!service.PAServicestate.currentRequest.pricingRequest.Division_Code__c}"
+                                             salesRep="{!service.paServiceState.ogItems.userName}">
+                       </c:PAShipToComponent>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem> 
+                
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.PAServicestate.currentRequest.keyCombination.KeyCombinationName,'Price Ref. Partner')}">
+                    <apex:outputText value="Price Ref. Partner"></apex:outputText>
+                    <apex:outputPanel >
+                        <apex:inputtext value="{!service.PAServicestate.currentRequest.priceRefPartnerFilter}"/>
+                        <c:PAShipToComponent shipToCodeAtr="{!service.PAServicestate.currentRequest.priceRefPartnerFilter}"
+                                             shipToAtr="{!service.PAServicestate.currentRequest.priceRefPartnerNameFilter}"
+                                             componentTypeAtr="PriceRefPartner"
+                                             salesOrgCodeAtr="{!service.PAServicestate.currentRequest.pricingRequest.Sales_Org_Code__c}"
+                                             dcCodeAtr="{!service.PAServicestate.currentRequest.pricingRequest.Dist_Channel_Code__c}"
+                                             divisionCodeAtr="{!service.PAServicestate.currentRequest.pricingRequest.Division_Code__c}"
+                                             salesRep="{!service.paServiceState.ogItems.userName}">
+                       </c:PAShipToComponent>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.PAServicestate.currentRequest.keyCombination.KeyCombinationName,'ComPartner')}">
+                    <apex:outputText value="ComPartner"></apex:outputText>
+                    <apex:outputPanel >
+                            <apex:inputtext value="{!service.PAServicestate.currentRequest.comPartnerFilter}"
+                                 />
+                        <c:PAShipToComponent shipToCodeAtr="{!service.PAServicestate.currentRequest.comPartnerFilter}"
+                            soldToCodeAtr="{!service.PAServicestate.currentRequest.pricingRequest.SoldTo_Code__c}"
+                            shipToAtr="{!service.PAServicestate.currentRequest.comPartnerNameFilter}"
+                            componentTypeAtr="ComPartner"
+                            salesOrgCodeAtr="{!service.PAServicestate.currentRequest.pricingRequest.Sales_Org_Code__c}"
+                            dcCodeAtr="{!service.PAServicestate.currentRequest.pricingRequest.Dist_Channel_Code__c}"
+                            divisionCodeAtr="{!service.PAServicestate.currentRequest.pricingRequest.Division_Code__c}"
+                            salesRep="{!service.paServiceState.ogItems.userName}"></c:PAShipToComponent>
+                    </apex:outputpanel>
+                </apex:pageBlockSectionItem>
+                
+                <!-- Ver 1.7 VR 2013-05-09 APAC Rollout1-Adding Code for Customer Hierarchy -->
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.PAServicestate.currentRequest.keyCombination.KeyCombinationName,'Customer Hierarchy')}">
+                    <apex:outputText value="Customer"></apex:outputText>
+                    <apex:outputPanel >
+                        <apex:inputtext value="{!service.PAServicestate.currentRequest.customerHierarchyFilter}" maxlength="0"/>
+                        <c:PAShipToComponent customerHierarchyAtr="{!service.PAServicestate.currentRequest.customerHierarchyFilter}"
+                                             shipToAtr="{!service.PAServicestate.currentRequest.customerHierarchyNameFilter}"
+                                             componentTypeAtr="CustomerHierarchy"
+                                             salesOrgCodeAtr="{!service.PAServicestate.currentRequest.pricingRequest.Sales_Org_Code__c}"
+                                             dcCodeAtr="{!service.PAServicestate.currentRequest.pricingRequest.Dist_Channel_Code__c}"
+                                             divisionCodeAtr="{!service.PAServicestate.currentRequest.pricingRequest.Division_Code__c}"
+                                             businessAtr="{!service.PAServicestate.ogItems.selectedBU}"
+                                             salesRep="{!service.paServiceState.ogItems.userName}">
+                       </c:PAShipToComponent>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <!-- VR20131108 DTT Rollout Issue - changed Of to of -->
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.PAServicestate.currentRequest.keyCombination.KeyCombinationName,'Terms of Payment')}">
+                        <apex:outputText value="Payment Terms"></apex:outputText>
+                        <apex:selectList size="1" value="{!service.PAServicestate.currentRequest.paymentTermsFilter}">
+                            <apex:selectOption itemValue="--Select--" itemLabel="--Select--" />
+                            <apex:selectOptions value="{!service.PAServicestate.currentRequest.salesPriceSAP.termsOfPaymentList}" />
+                        </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.PAServicestate.currentRequest.keyCombination.KeyCombinationName,'Project Id')}">
+                    <apex:outputText value="Project Id"></apex:outputText>
+                    <apex:inputtext value="{!service.PAServicestate.currentRequest.discRefFilter}"/>
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.PAServicestate.currentProjectPrice.currentRequest.keyCombination.KeyCombinationName,'Matl grp1') ||
+                                                           CONTAINS(service.PAServicestate.currentProjectPrice.currentRequest.keyCombination.KeyCombinationName,'Matl grp 1') || 
+                                                           CONTAINS(service.PAServicestate.currentProjectPrice.currentRequest.keyCombination.KeyCombinationName,'MatGrp1') || 
+                                                           CONTAINS(service.PAServicestate.currentProjectPrice.currentRequest.keyCombination.KeyCombinationName,'Material Group 1')}">
+                    <apex:outputText value="Material Group 1"></apex:outputText>
+                        <apex:selectList size="1" value="{!service.PAServicestate.currentRequest.materialGroup1Filter}">
+                            <apex:selectOption itemValue="--Select--" itemLabel="--Select--" />
+                            <apex:selectOptions value="{!service.PAServicestate.currentRequest.salesPriceSAP.matlGrp1List}" />
+                        </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.PAServicestate.currentRequest.keyCombination.KeyCombinationName,'Partner ZF')}">
+                    <apex:outputText value="Partner ZF"></apex:outputText>
+                    <apex:outputPanel >
+                            <apex:inputtext value="{!service.PAServicestate.currentRequest.partnerZFFilter}"
+                                 />
+                        <c:PAShipToComponent shipToCodeAtr="{!service.PAServicestate.currentRequest.partnerZFFilter}"
+                            soldToCodeAtr="{!service.PAServicestate.currentRequest.pricingRequest.SoldTo_Code__c}"
+                            shipToAtr="{!service.PAServicestate.currentRequest.partnerZFNameFilter}"
+                            componentTypeAtr="PartnerZF"
+                            salesOrgCodeAtr="{!service.PAServicestate.currentRequest.pricingRequest.Sales_Org_Code__c}"
+                            dcCodeAtr="{!service.PAServicestate.currentRequest.pricingRequest.Dist_Channel_Code__c}"
+                            divisionCodeAtr="{!service.PAServicestate.currentRequest.pricingRequest.Division_Code__c}"
+                            salesRep="{!service.paServiceState.ogItems.userName}"></c:PAShipToComponent>
+                    </apex:outputpanel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.PAServicestate.currentRequest.keyCombination.KeyCombinationName,'Payer')}">
+                    <apex:outputText value="Payer"></apex:outputText>
+                    <apex:outputPanel >
+                            <apex:inputtext value="{!service.PAServicestate.currentRequest.payerFilter}"
+                                 />
+                        <c:PAShipToComponent shipToCodeAtr="{!service.PAServicestate.currentRequest.payerFilter}"
+                            soldToCodeAtr="{!service.PAServicestate.currentRequest.pricingRequest.SoldTo_Code__c}"
+                            shipToAtr="{!service.PAServicestate.currentRequest.payerNameFilter}"
+                            componentTypeAtr="Payer"
+                            salesOrgCodeAtr="{!service.PAServicestate.currentRequest.pricingRequest.Sales_Org_Code__c}"
+                            dcCodeAtr="{!service.PAServicestate.currentRequest.pricingRequest.Dist_Channel_Code__c}"
+                            divisionCodeAtr="{!service.PAServicestate.currentRequest.pricingRequest.Division_Code__c}"
+                            salesRep="{!service.paServiceState.ogItems.userName}"></c:PAShipToComponent>
+                    </apex:outputpanel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.PAServicestate.currentRequest.keyCombination.KeyCombinationName,'FixValDate')}">
+                        <apex:outputText value="Fixed Date"></apex:outputText>
+                         <apex:outputPanel style="float:left;">
+                         <div class="requiredInput" style="float:left;">
+                            <div class="requiredBlock" style="float:left;"></div>
+                            <apex:inputfield style="float:left;margin: 0px;" value="{!service.PAServicestate.currentRequestItem.pricingReqItem.FixValDate__c}" />
+                         </div> 
+                        </apex:outputPanel>                        
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem rendered="{!CONTAINS(service.PAServicestate.currentRequest.keyCombination.KeyCombinationName,'Disc Ref No')}">
+                        <apex:outputText value="Discount Reference Number"></apex:outputText>
+                        <apex:inputtext value="{!service.PAServicestate.currentRequestItem.request.discRefNoFilter}"/>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem rendered="{!CONTAINS(service.paServiceState.currentRequest.keyCombination.KeyCombinationName,'Campaign')}" dataStyle="height:25px" labelStyle="height:25px">       
+                    <apex:outputText value="Campaign" style="float:right;"/>             
+                    <apex:selectList value="{!service.paServiceState.currentRequest.campaignFilter}" size="1">
+                        <apex:selectOption itemLabel="--Select--" itemValue=""/>
+                        <apex:selectOptions value="{!service.paServiceState.currentRequest.salesPriceSAP.campaignList}" />
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.paServiceState.currentRequest.keyCombination.KeyCombinationName,'Document Currency')}" dataStyle="height:25px" labelStyle="height:25px">       
+                    <apex:outputText value="Document Currency" style="float:right;"/>             
+                    <apex:selectList value="{!service.paServiceState.currentRequest.documentCurrencyFilter}" size="1">
+                        <apex:selectOption itemLabel="--Select--" itemValue=""/>
+                        <apex:selectOptions value="{!service.paServiceState.currentRequest.salesPriceSAP.documentCurrencyList}" />
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem rendered="{!CONTAINS(service.paServiceState.currentRequest.keyCombination.KeyCombinationName,'State')}" dataStyle="height:25px" labelStyle="height:25px">       
+                    <apex:outputText value="State" style="float:right;"/>             
+                    <apex:selectList value="{!service.paServiceState.currentRequest.stateFilter}" size="1">
+                        <apex:selectOption itemLabel="--Select--" itemValue=""/>
+                        <apex:selectOptions value="{!service.paServiceState.currentRequest.salesPriceSAP.stateList}" />
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+         </apex:outputPanel>
+      </apex:pageBlockSection>         
+   </apex:outputPanel>
+            
+            <div style="text-align:center;padding:10px 0px 10px 0px;"> 
+            <apex:outputPanel id="buttonsSection">
+                    <apex:commandLink value="Fetch 100 Records" action="{!businessComponentAction}"  status="stat" styleClass="btn" style="text-decoration:none;" rendered="{!service.paServiceState.currentRequest.keyCombination.keyCombinationID<>'--Select--' && service.paServiceState.currentRequest.keyCombination.keyCombinationID<>null && service.paServiceState.currentRequest.pricingCondition.selectedPricingCondition<>null && service.paServiceState.currentRequest.pricingCondition.selectedPricingCondition<>'--Select--'}">
+                        <apex:param name="desiredActionFetch" value="Fetch100Records" assignTo="{!businessaction}" />
+                        <apex:param name="newPageLabelFetch" value="PAExportPrices" assignTo="{!newPageLabel}" />
+                        <!-- <TJ20140509> Passing parameter to display navigation flow text
+                        <apex:param name="pageName" value="stay" assignTo="{!pageName}"/> -->
+                    </apex:commandLink><br/><br/>
+                    <apex:outputPanel rendered="{!service.PAServicestate.currentRequest.salesPriceSAP.relatedWrappersList<>null && service.PAServicestate.currentRequest.salesPriceSAP.relatedWrappersList.SIZE > 0}">
+                        <apex:outputText value="{!service.PAServicestate.currentRequest.salesPriceSAP.countFetchedList.SIZE} records match the filter criteria" style="color : blue;" rendered="{!service.PAServicestate.currentRequest.pclDisplayPopUp=='fetch'}" />
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!service.PAServicestate.currentRequest.salesPriceSAP.relatedWrappersList<>null && service.PAServicestate.currentRequest.salesPriceSAP.relatedWrappersList.SIZE==0}">
+                        <apex:outputText value="0 records match the filter criteria" style="color : blue;" rendered="{!service.PAServicestate.currentRequest.pclDisplayPopUp=='fetch'}" />
+                    </apex:outputPanel>
+            </apex:outputPanel>
+            </div>
+
+
+<!-------------------------------------------- Export Records -------------------------------------------------->
+        <apex:outputPanel id="exportRecords">
+        <apex:pageBlockSection title="Filters for {!service.paServiceState.currentRequest.keyCombination.KeyCombinationName}" rendered="{!service.PAServicestate.currentRequest.pclDisplayPopUp=='fetch'}" columns="1">
+        <apex:outputPanel >
+            <!--<TJ20140904>START  Pagination link -->
+                    <apex:outputPanel >
+                    <div style="float:right;">
+                          <apex:commandLink value=" Previous Page |" action="{!businessComponentActionForRerender}" 
+                                         status="stat" rendered="{!service.PAServicestate.currentRequest.salesPriceSAP.prevPage}" >  
+                    <apex:param name="desiredAction" value="FetchRecordswithOffsetback" assignTo="{!businessAction}"/>
+                    <apex:param name="newpage" value="PAExportPrices" assignTo="{!newPageLabel}"/>
+                    <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                    <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                    </apex:commandLink>  
+                          <apex:commandLink value=" Next Page" action="{!businessComponentActionForRerender}" 
+                                         status="stat"  rendered="{!service.PAServicestate.currentRequest.salesPriceSAP.nextPage}">  
+                    <apex:param name="desiredAction" value="FetchRecordswithOffset" assignTo="{!businessAction}"/>
+                    <apex:param name="newpage" value="PAExportPrices" assignTo="{!newPageLabel}"/>
+                    <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                    <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                    </apex:commandLink>  
+                          </div>
+                    </apex:outputPanel>
+                    <!-- END Pagination link -->
+            <apex:repeat value="{!service.PAServicestate.currentRequest.salesPriceSAP.relatedWrappersList}"
+                            var="wrapper">
+
+                <c:PAERPPricesRelatedList WrapperRecordsDisp="{!wrapper.wrapperList}"
+                    columnsDisp="{!wrapper.keyCombinationcolumns}" viewMode="{!currentPageLabel}"                   
+                    actionAtr="{!businessaction}" typeOfRequest="{!wrapper.priceType}"
+                    typeOfSObjectList="{!wrapper.sObjectTypeName}" showEditLink="false"
+                        showDeleteLink="false" showNewLink="false" showExpireLink="false" showAddToRequest="false" showCheckBox="false"
+                        pricingRecordColumns="{!wrapper.commonColumns}" pricingRecordSoldToColumns="{!wrapper.soldToColumns}"
+                        showSoldToColumns="{!CONTAINS(service.paServiceState.currentRequest.keyCombination.KeyCombinationName,'Sold to')}"
+                        dateFieldColumns="{!wrapper.dateColumns}" 
+                        showTimeline="false"
+                        >
+                </c:PAERPPricesRelatedList>
+
+              </apex:repeat>
+            <!--<TJ20140904>START  Pagination link -->
+                    <apex:outputPanel >
+                    <div style="float:right;">
+                          <apex:commandLink value=" Previous Page |" action="{!businessComponentActionForRerender}" 
+                                         status="stat" rendered="{!service.PAServicestate.currentRequest.salesPriceSAP.prevPage}" >  
+                    <apex:param name="desiredAction" value="FetchRecordswithOffsetback" assignTo="{!businessAction}"/>
+                    <apex:param name="newpage" value="PAExportPrices" assignTo="{!newPageLabel}"/>
+                    <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                    <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                    </apex:commandLink>  
+                          <apex:commandLink value=" Next Page" action="{!businessComponentActionForRerender}" 
+                                         status="stat"  rendered="{!service.PAServicestate.currentRequest.salesPriceSAP.nextPage}">  
+                    <apex:param name="desiredAction" value="FetchRecordswithOffset" assignTo="{!businessAction}"/>
+                    <apex:param name="newpage" value="PAExportPrices" assignTo="{!newPageLabel}"/>
+                    <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                    <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                    </apex:commandLink>  
+                          </div>
+                    </apex:outputPanel>
+                    <!-- END Pagination link -->
+            </apex:outputPanel>
+        </apex:pageBlockSection>
+
+
+                    
+                <div style="text-align:center;padding:10px 0px 10px 0px;">                          
+                    <apex:commandLink value="Export" action="/apex/PAGenerateExportCSV" styleClass="btn" style="text-decoration:none;" rendered="{!service.PAServicestate.currentRequest.pclDisplayPopUp=='fetch'}" >
+                        <apex:param name="export" value="exportCSV" assignTo="{!businessaction}" />
+                        <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                        <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                    </apex:commandLink>
+                    <apex:outputLink value="/apex/PAHome" styleClass="btn" style="text-decoration:none;" rendered="{!service.PAServicestate.currentRequest.pclDisplayPopUp=='fetch'}">Cancel</apex:outputLink>
+                </div>
+        </apex:outputPanel>
+    </apex:pageBlock> 
+   </div>
+</apex:form>     
+
+<style type="text/css">
+
+.FrontPage{
+        background-color: white;
+        z-index: 9999;
+        right: ;
+        padding:10px;
+        position: absolute; 
+        border: 2px solid #63A4C5;
+        //left: 0%;
+        //top:24px;
+        left: 12%;
+        top: 17%;
+        width: 1000px;
+    }
+    
+    .BackScreen {
+        background-color: #696969;
+        opacity: 0.5;
+        filter: alpha(opacity = 50);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+       z-index: 0;
+    }
+    .spinnerCt {
+        left: 50%;
+        top: 35%;
+        position: absolute;
+        //z-index: 1;
+        z-index: 50;
+        padding: 20px 40px;
+        box-shadow: 0pt 2px 5px rgb(172, 172, 172);
+        border-radius: 1em 1em 1em 1em;
+        border: 1px solid rgb(206, 236, 255);
+        background-color: rgb(206, 236, 255);
+        background-style: solid;
+    }
+    
+    .spinner {
+        padding: 10px 15px 10px 0pt;
+        vertical-align: middle;
+    }
+    
+    .spinnerCt .loadingIndicator {
+        display: inline;
+        font-size: 135%;
+        font-weight: bold;
+    }
+    
+    .mask {
+        width: 100%;
+        height: 100%;
+        background-color: rgb(0, 0, 0);
+        opacity: 0.45;
+        filter: alpha(opacity =     45);
+        position: absolute;
+        z-index: 45;
+        top: 0pt;
+        left: 0pt;
+    }
+.noTableFooter
+    {
+    margin:0px!important;
+    }
+</style>
+
+</apex:page>

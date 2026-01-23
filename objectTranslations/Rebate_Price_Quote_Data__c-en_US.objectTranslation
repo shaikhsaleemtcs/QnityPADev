@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Rebate Price Quote Data</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Rebate Price Quote Data</value>
+    </caseValues>
+    <fields>
+        <label><!-- Approval Threshold --></label>
+        <name>Approval_Threshold__c</name>
+    </fields>
+    <fields>
+        <label><!-- BU --></label>
+        <name>BU__c</name>
+    </fields>
+    <fields>
+        <label><!-- Default Currency --></label>
+        <name>Default_Currency__c</name>
+    </fields>
+    <fields>
+        <label><!-- Default Per --></label>
+        <name>Default_Per__c</name>
+    </fields>
+    <fields>
+        <label><!-- Default UoM --></label>
+        <name>Default_UoM__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dist. Channel Code --></label>
+        <name>Dist_Channel_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Division Code --></label>
+        <name>Division_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lookup KeyCombination --></label>
+        <name>Lookup_KeyCombination__c</name>
+    </fields>
+    <fields>
+        <label><!-- Public Group --></label>
+        <name>Public_Group__c</name>
+    </fields>
+    <fields>
+        <label><!-- RPQ Report Public Group --></label>
+        <name>RPQ_Report_Public_Group__c</name>
+    </fields>
+    <fields>
+        <label><!-- Retroactive Days --></label>
+        <name>Retroactive_Days__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Org Code --></label>
+        <name>Sales_Org_Code__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

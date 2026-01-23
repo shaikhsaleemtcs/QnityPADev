@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Send Notification to Requestor</description>
+    <encodingKey>UTF-8</encodingKey>
+    <letterhead>DuPontLetterhead</letterhead>
+    <name>Send Notification to Requestor</name>
+    <style>freeForm</style>
+    <subject>The request {!Customer_Data_Request__c.Name} is approved by DMS Team</subject>
+    <textOnly>Hello,
+
+
+The request {!Customer_Data_Request__c.Name} is approved by DMS Team
+
+Request Number: {!Customer_Data_Request__c.Name}
+Type of Request: {!Customer_Data_Request__c.RecordType}
+Request Status:{!Customer_Data_Request__c.Request_Status__c}
+Request Description:{!Customer_Data_Request__c.Request_Description__c}
+
+Customer Name: {!Customer_Data_Request__c.Customer_Name__c}
+Sold To Country :{!Customer_Data_Request__c.Sold_to_Country__c}
+Selling Company Code : {!Customer_Data_Request__c.Company_Code__c}
+Sales Org :{!Customer_Data_Request__c.Sales_Organization__c}
+Distribution Channel :{!Customer_Data_Request__c.Distribution_Channel__c}
+Division :{!Customer_Data_Request__c.Division__c}
+
+DMS Comments : {!Customer_Data_Request__c.DMS_Approver__c}
+
+To access the Request, use the link below:
+{!Customer_Data_Request__c.Link}</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>
