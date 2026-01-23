@@ -1,0 +1,188 @@
+<!--    Ver.            Developer               Changes                                                         Dependencies    -->
+<!--    PP20131125      Priyanka        Modified action so that Request Item page remains non-editable
+                                        for Submitted and Approved requests                                                    -->
+<!--    TJ20140505      Tarun           Added Landing Page Link                                                                  -->
+<!--    TJ20140509      Tarun           Added Navigation Flow Text                                                               -->
+<apex:page controller="ctrlPAMain" tabstyle="Price_Approval__tab"
+    sidebar="false" showHeader="true" id="currentPage" cache="true"
+    action="{!onLoadCall}">
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.js')}" />
+<c:loadingComponent />
+    <apex:pageMessages escape="false" id="errorMessage" />
+    <style>
+.customerLink {
+    font-size: 15px;
+    height: 20px;
+    margin-bottom: 1px;
+    padding: 5px;
+    border: solid 1px;
+    border-color: #6E96B2;
+    background-color: #E5F3FC;
+    font-weight: bold;
+    text-align: left;
+}
+.navFlow{font-size:13px;font-style:oblique;margin-bottom:3px;}
+ #buttons a.btn{width:80px;float:left;}
+</style>
+    
+   <apex:form id="myform">
+        <!-- <TJ20140505> Added Landing Page Link -->
+        <div align="left" class="navFlow">
+            <apex:commandLink id="link0" value="Landing Page" action="{!businessComponentAction}" target="_self" style="color:blue;">
+            <apex:param name="desiredAction" value="landingpage" assignTo="{!businessaction}" />
+            <apex:param name="newPageLabel" value="PAHome" assignTo="{!newPageLabel}" />
+            </apex:commandLink>
+        <!-- <TJ20140509> Added Navigation Flow Text-->
+            <apex:outputText value="{!if(NOT(ISNULL(navigationText)),'>>','')} "/>
+            <apex:outputText value="{!navigationText}"/>
+            <apex:outputText value=">>View Materials"/>
+        </div>
+        <div class="customerLink">View Materials</div>
+     <apex:pageBlock >
+     <br/>
+     <center>
+       <apex:commandLink action="{!service.paServicestate.currentNPCRequest.setCon.first}" rendered="{!service.paServicestate.currentNPCRequest.hasPrevious}"><font color="blue"> &lt;&lt;First</font>
+            <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+            <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+       </apex:commandLink>
+                &nbsp;&nbsp;&nbsp;
+       <apex:commandLink action="{!service.paServicestate.currentNPCRequest.setCon.previous}" rendered="{!service.paServicestate.currentNPCRequest.hasPrevious}"><font color="blue"> &lt;Previous</font>
+            <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+            <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+       </apex:commandLink>
+                &nbsp;&nbsp;
+         Page # {!service.paServicestate.currentNPCRequest.currentPageNumber} of &nbsp;{!service.paServicestate.currentNPCRequest.totalNoOfPages}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         Records # {!service.paServicestate.currentNPCRequest.noOfRecordsDisplayed} of &nbsp;{!service.paServicestate.currentNPCRequest.resultSize}
+               &nbsp;&nbsp;
+         <apex:commandLink action="{!service.paServicestate.currentNPCRequest.setCon.next}" rendered="{!service.paServicestate.currentNPCRequest.hasNext}"><font color="blue">Next&gt;</font>
+            <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+            <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+         </apex:commandLink>
+               &nbsp;&nbsp;&nbsp;
+         <apex:commandLink action="{!service.paServicestate.currentNPCRequest.setCon.last}" rendered="{!service.paServicestate.currentNPCRequest.hasNext}"><font color="blue">Last&gt;&gt;</font>
+            <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+            <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+         </apex:commandLink>
+     </center>
+     <br/>
+     <br/>
+       <apex:pageBlockTable rows="100" value="{!service.paServicestate.currentNPCRequest.npcRequests}" var="a"> 
+             <apex:column >  
+                  <apex:facet name="header" >
+                      <apex:outputText value=""  ></apex:outputText>
+                 </apex:facet> 
+                 <apex:commandLink value="View"  action="{!businessComponentAction}" >
+                        <apex:param name="desiredAction" value="ViewNetPriceDetailsAsynch"
+                        assignTo="{!businessAction}" /> 
+                        <apex:param name="npcRequestId" value="{!a.Id}"
+                        assignTo="{!service.paServicestate.currentNPCRequest.npcrequestId}" /> 
+                        <apex:param name="newPageLabel" value="PAMaterialNet"
+                        assignTo="{!newPageLabel}" />
+                        <!-- <TJ20140509> Passing Label to Display Navigation Flow Text-->
+                        <apex:param name="pageName" value="{!IF(Contains(navigationText,'Net Price Simulation'),'Net Price Simulation','View Materials')}" assignTo="{!pageName}"/>
+                 </apex:commandLink>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header" >
+                      <apex:outputText value="Material Code"  ></apex:outputText>
+                 </apex:facet>
+                 <apex:outputField value="{!a.Material_Number__c}"></apex:outputField>
+            </apex:column>
+            <apex:column >
+            <apex:facet name="header" >
+                      <apex:outputText value="Material" ></apex:outputText>
+                 </apex:facet>
+                 <apex:outputField value="{!a.Material__c}"  ></apex:outputField>
+            </apex:column>  
+            <apex:column >
+               <apex:facet name="header" >
+                      <apex:outputText value="New Net"  style="float:right"></apex:outputText>
+                 </apex:facet>
+                 <apex:outputText style="float:right" value="{!SUBSTITUTE(a.Stamp_New_Net_Price__c,'.',service.paServicestate.currentNPCRequest.separatorOnPage)}" ></apex:outputText>
+            </apex:column>
+            <apex:column >
+            <apex:facet name="header" >
+                      <apex:outputText value="Net Floor"  style="float:right"></apex:outputText>
+                 </apex:facet>
+                 <apex:outputText style="float:right" value="{!SUBSTITUTE(a.Stamp_Floor_Net_Price__c,'.',service.paServicestate.currentNPCRequest.separatorOnPage)}" rendered="{!service.paServicestate.currentRequest.isNetFloorVisible}"></apex:outputText>
+            </apex:column>
+            <apex:column >
+             <apex:facet name="header" >
+                      <apex:outputText value="Net Reference"  style="float:right"></apex:outputText>
+                 </apex:facet>
+<!--                  <TJ20150703> -->
+                 <apex:outputText style="float:right" value="{!SUBSTITUTE(a.Stamp_Reference_Net_Price__c,'.',service.paServicestate.currentNPCRequest.separatorOnPage)}" rendered="{!service.paServicestate.currentRequest.isNetFloorVisible}"></apex:outputText>
+            </apex:column>
+            <apex:column >
+             <apex:facet name="header" >
+                      <apex:outputText value="Current Net"  style="float:right"></apex:outputText>
+                 </apex:facet>
+                 <apex:outputText style="float:right" value="{!SUBSTITUTE(a.Stamp_Current_Net_Price__c,'.',service.paServicestate.currentNPCRequest.separatorOnPage)}" ></apex:outputText>
+            </apex:column>
+            <apex:column >
+            <apex:facet name="header" >
+                      <apex:outputText value="Unit"  style="float:right"></apex:outputText>
+                 </apex:facet>
+                 <apex:outputText value="{!a.Unit__c}" style="float:right"></apex:outputText>
+            </apex:column>
+            <apex:column >
+            <apex:facet name="header" >
+                      <apex:outputText value="Per"  style="float:right"></apex:outputText>
+                 </apex:facet>
+                 <apex:outputText value="{!a.Per__c}" style="float:right"></apex:outputText>
+            </apex:column>
+            <apex:column >
+            <apex:facet name="header" >
+                      <apex:outputText value="UoM"  style="float:right"></apex:outputText>
+                 </apex:facet>
+                 <apex:outputText value="{!a.UoM__c}" rendered="{!IF(a.Stamp_New_Net_Price__c!=null,true,false)}" style="float:right"></apex:outputText>
+            </apex:column>
+           
+   </apex:pageBlockTable>
+
+ </apex:pageBlock> 
+ 
+     
+     <center>
+       <apex:commandLink action="{!service.paServicestate.currentNPCRequest.setCon.first}" rendered="{!service.paServicestate.currentNPCRequest.hasPrevious}"><font color="blue"> &lt;&lt;First</font>
+            <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+            <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+       </apex:commandLink>
+                &nbsp;&nbsp;&nbsp;
+       <apex:commandLink action="{!service.paServicestate.currentNPCRequest.setCon.previous}" rendered="{!service.paServicestate.currentNPCRequest.hasPrevious}"><font color="blue"> &lt;Previous</font>
+           <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+           <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+       </apex:commandLink>
+                &nbsp;&nbsp;
+        Showing Page # {!service.paServicestate.currentNPCRequest.currentPageNumber} of &nbsp;{!service.paServicestate.currentNPCRequest.totalNoOfPages}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Showing Records # {!service.paServicestate.currentNPCRequest.noOfRecordsDisplayed} of &nbsp;{!service.paServicestate.currentNPCRequest.resultSize}
+                &nbsp;&nbsp;
+         <apex:commandLink action="{!service.paServicestate.currentNPCRequest.setCon.next}" rendered="{!service.paServicestate.currentNPCRequest.hasNext}"><font color="blue">Next&gt;</font>
+            <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+            <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+         </apex:commandLink>
+                &nbsp;&nbsp;&nbsp;
+         <apex:commandLink action="{!service.paServicestate.currentNPCRequest.setCon.last}" rendered="{!service.paServicestate.currentNPCRequest.hasNext}"><font color="blue">Last&gt;&gt;</font>
+            <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+            <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+         </apex:commandLink>
+     </center>
+      <br/>
+     <div id="buttons" style="float:left;text-align:center;padding:0px 0px 10px 46%;">
+       <apex:commandLink value="Back" action="{!businessComponentAction}" styleClass="btn"
+            style="text-decoration:none;">  
+            <!-- PP20131126 -->
+            <!--                       <TJ20150623> -->
+            <apex:param name="desiredAction"  value="{!IF(service.PAServicestate.currentRequestItem.pricingReqItem.New__c==true,IF((service.PAServicestate.currentrequestitem.request.pricingRequest.Request_Approval_Status__c!='Submitted' && service.PAServicestate.currentrequestitem.request.pricingRequest.Request_Approval_Status__c!='Approved' && !Contains(navigationText,'Price Request View')),'NewSkipToEditReqItem','NewViewSkipToEditReqItem'),IF(service.PAServicestate.currentrequestitem.request.pricingRequest.Request_Approval_Status__c!='Submitted' && service.PAServicestate.currentrequestitem.request.pricingRequest.Request_Approval_Status__c!='Approved','EditSkipToEditReqItem','EditViewSkipToEditReqItem'))}" assignTo="{!businessAction}" />
+              
+            <apex:param name="newPageLabel" value="PAEditReqItem" 
+                assignTo="{!newPageLabel}" />
+            <!-- <TJ20140509> Passing Label to Display Navigation Flow Text-->
+            <!--                       <TJ20150623> -->
+            <apex:param name="pageName" value="{!IF(CONTAINS(navigationText,$Label.Edit_Req_Item),$Label.Edit_Req_Item,IF(CONTAINS(navigationText,'Price Record Details'),'Price Record Details','View Materials'))}" assignTo="{!pageName}"/>
+       </apex:commandLink>
+     </div>
+       
+
+   </apex:form>
+</apex:page>

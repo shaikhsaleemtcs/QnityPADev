@@ -1,0 +1,23 @@
+<messaging:emailTemplate subject="PCL Document" recipientType="User" relatedToType="ERP_Sales_Prices_SAP__c">
+
+<messaging:htmlEmailBody >
+<apex:variable value="{!RelatedTo}" var="c"/>
+
+Dear Requester,<br/><br/>
+
+Please find attached the Price Confirmation Letter<br/><br/>
+
+Thank you,<br/>
+Salesforce.com Price Approval<br/><br/>
+
+Confidential
+
+
+
+
+</messaging:htmlEmailBody>
+ <messaging:attachment renderas="application/msword" filename="Customer Specific Confirmation Letter.doc">
+ <c:PAPclTemplate20 targetObject="{!relatedTo.id}"/>
+
+</messaging:attachment>
+</messaging:emailTemplate>

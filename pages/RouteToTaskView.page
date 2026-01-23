@@ -1,0 +1,18 @@
+<!-- Page used to route the Task ID to the custom page  -->
+<!--    1.0     Prachi  overidding the view     None    -->
+
+<apex:page standardController="Task" >
+  <script>
+        var appid;
+        appid = '{!$CurrentPage.parameters.id}';
+        window.location.href='/apex/PATaskDetail?id='+appid;
+        //window.location.href='/apex/PATaskDetail?id='+appid+'&PATASKDETAIL';
+        //window.focus();
+  </script> 
+    <style>
+    .noTableFooter
+      {
+      margin:0px!important;
+      }
+  </style> 
+</apex:page>

@@ -1,0 +1,199 @@
+<!--	Ver.			Developer			Changes									Dependencies	-->
+
+<!-- 	1.1				Prachi				UI change 									None		-->
+
+
+
+<apex:component controller="PAProfitCenterSelection">
+        <apex:attribute name="FRBAtr" description="FRB selected" type="string"></apex:attribute>  
+        <apex:attribute name="BUAtr" description="selected BU From page" type="string" assignTo="{!selectedBUFromPage}"></apex:attribute>
+        <!-- script to pass value from FRB component to Material component -->
+        <script>
+         function passFromFRBComponent(source,target,source1,target1)
+         {
+           document.getElementById(target).value = document.getElementById(source).value;
+           document.getElementById(target1).value = document.getElementById(source1).value;
+         }
+       </script>
+       
+        <apex:outputPanel >
+            <apex:commandLink action="{!displayPopUpWindow}">
+                <apex:image id="Image3" url="{!$Resource.LookUpImage}"/>
+            </apex:commandLink>
+        </apex:outputPanel>
+        
+        <!--Hidden Field To pass the FRB value and Level-->
+        <apex:inputHidden id="getFRBField" rendered="true" value="{!filter_FRB}"/>
+        <apex:inputHidden id="getHeighestLevel" rendered="true" value="{!heighestFRBLevel}"/> 
+    
+    <!--Profit Center PopUp -->
+    <apex:outputPanel rendered="{!displayFRB}" styleClass="BackPage"></apex:outputPanel>
+    <apex:outputPanel rendered="{!displayFRB}" styleClass="FrontPageFRB">
+    
+        <apex:panelGrid style="float:right;">
+            <apex:commandLink action="{!closeWindow}" >
+                <apex:image url="{!$Resource.closeButton}" width="15" height="15"/>
+            </apex:commandLink>
+        </apex:panelGrid>
+        
+        <apex:pagemessages />
+        
+    <apex:pageBlock >
+    <apex:commandLink value="Help" action="{!helpLink}" style="float:right;" target="_blank">
+        <apex:param name="Help" value="Material Selection" assignTo="{!label}"/>
+    </apex:commandLink>
+    <br/><br/>
+     <!--Profit Center Selection Section -->
+        <apex:pageBlockSection title="Profit Center Selection" collapsible="false" columns="1" id="profitReload">
+          
+          <!--FRB4--->
+         <apex:pageblockSectionItem >	
+            <apex:outputText value="Profit Center4"></apex:outputText> 
+            <apex:outputPanel >
+                <apex:inputText size="8" value="{!selectedFRB4}" disabled="true"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                <apex:selectList size="1" value="{!selectedFRB4}" styleClass="dropDownSize">
+                    <apex:actionsupport event="onchange" action="{!action}" reRender="profitReload">
+                    <apex:param value="populateFRB" assignTo="{!desiredAction}"/>
+                    
+                    </apex:actionsupport>
+                    <apex:selectOptions value="{!dropDownFRB4}"></apex:selectOptions>
+                </apex:selectList>
+            </apex:outputPanel>
+        </apex:pageblockSectionItem>
+    
+    
+         <!---- FRB5---->
+        <apex:pageblockSectionItem >
+            <apex:outputText value="Profit Center5"></apex:outputText> 
+            <apex:outputPanel >
+                <apex:inputText size="8" value="{!selectedFRB5}" disabled="true"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                <apex:selectList size="1"  value="{!selectedFRB5}" disabled="{!IF(selectedFRB4=='',true,false)}" styleClass="dropDownSize">
+                   <apex:actionsupport event="onchange" action="{!action}" reRender="profitReload">
+                    <apex:param value="populateFRB" assignTo="{!desiredAction}"/>
+                    
+                    </apex:actionsupport>
+                    <apex:selectOptions value="{!dropDownFRB5}"></apex:selectOptions> 
+                </apex:selectList>
+            </apex:outputPanel>
+        </apex:pageblockSectionItem>
+    
+        <!---- FRB6---->
+        <apex:pageblockSectionItem >
+            <apex:outputText value="Profit Center6"></apex:outputText> 
+            <apex:outputPanel >
+                <apex:inputText size="8" value="{!selectedFRB6}" disabled="true"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                <apex:selectList size="1"  value="{!selectedFRB6}" disabled="{!IF(selectedFRB5=='',true,false)}" styleClass="dropDownSize">
+                   <apex:actionsupport event="onchange" action="{!action}" reRender="profitReload">
+                    <apex:param value="populateFRB" assignTo="{!desiredAction}"/>
+                    
+                    </apex:actionsupport>
+                    <apex:selectOptions value="{!dropDownFRB6}"></apex:selectOptions>
+            </apex:selectList>
+          </apex:outputPanel>
+    </apex:pageblockSectionItem>
+    
+       
+        <!---- FRB7---->
+        <apex:pageblockSectionItem >
+        <apex:outputText value="Profit Center7"></apex:outputText> 
+        <apex:outputPanel >
+            <apex:inputText size="8" value="{!selectedFRB7}" disabled="true"/>&nbsp;&nbsp;&nbsp;&nbsp;
+            <apex:selectList size="1" value="{!selectedFRB7}" disabled="{!IF(selectedFRB6=='',true,false)}" styleClass="dropDownSize">
+                <apex:actionsupport event="onchange" action="{!action}" reRender="profitReload">
+                    <apex:param value="populateFRB" assignTo="{!desiredAction}"/>
+                    
+                    </apex:actionsupport>
+                <apex:selectOptions value="{!dropDownFRB7}"></apex:selectOptions>
+                </apex:selectList>
+            </apex:outputPanel>
+        </apex:pageblockSectionItem>
+    
+        <!---- FRB8---->
+        <apex:pageblockSectionItem >
+            <apex:outputText value="Profit Center8"></apex:outputText> 
+            <apex:outputPanel >
+                <apex:inputText size="8" value="{!selectedFRB8}" disabled="true"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                <apex:selectList size="1" value="{!selectedFRB8}" disabled="{!IF(selectedFRB7=='',true,false)}" styleClass="dropDownSize">
+                   <apex:actionsupport event="onchange" action="{!action}" reRender="profitReload">
+                    <apex:param value="populateFRB" assignTo="{!desiredAction}"/>
+                    
+                    </apex:actionsupport>
+                    <apex:selectOptions value="{!dropDownFRB8}"></apex:selectOptions>
+                </apex:selectList>
+          </apex:outputPanel>
+          </apex:pageblockSectionItem>
+    
+    
+        <!---- FRB9---->
+        <apex:pageblockSectionItem >
+            <apex:outputText value="Profit Center9"></apex:outputText> 
+            <apex:outputPanel >
+                <apex:inputText size="8" value="{!selectedFRB9}" disabled="true"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                <apex:selectList size="1" value="{!selectedFRB9}" disabled="{!IF(selectedFRB8=='',true,false)}" styleClass="dropDownSize">
+                    <apex:actionsupport event="onchange" reRender="profitReload"></apex:actionsupport>
+                    <apex:selectOptions value="{!dropDownFRB9}"></apex:selectOptions>
+                </apex:selectList>
+            </apex:outputPanel>
+       </apex:pageblockSectionItem>
+    
+       
+      </apex:pageBlockSection>
+         
+           <apex:pageBlockSection >
+           <center>
+            <apex:outputPanel >
+            <apex:commandButton value="{!$Label.Choose_Button}" action="{!doSearch}" oncomplete="passFromFRBComponent('{!$Component.getFRBField}','{!$Component.targetFRBField}','{!$Component.getHeighestLevel}','{!$Component.targetHeighestLevel}')" reRender="myForm" styleClass="buttonWidth"> 
+            </apex:commandButton>
+            <apex:commandButton value="{!$Label.Cancel_Button}" action="{!closeWindow}" styleClass="buttonWidth"/>
+            </apex:outputPanel>
+            </center>
+           </apex:pageBlockSection>
+           
+    </apex:pageBlock>
+    </apex:outputPanel>
+    
+    <!-- CSS --> 
+    <style type="text/css">
+       
+      .FrontPageFRB{
+	      background-color: white;
+	      //border-width: 1px;
+	      //border-style: solid;
+	      z-index: 20;
+	      left: 20%;
+	      right: 
+	      padding:10px;
+	      position: absolute;
+	      border: 2px solid #63A4C5; 
+	      //top:10px;
+	      //top: 5%;
+	      top:20%;
+	      width: 600px;
+      }
+      
+      .BackPage {
+		    background-color: #696969;
+		    opacity: 0.5;
+		    filter: alpha(opacity =       50);
+		    position: absolute;
+		    width: 100%;
+		    height: 100%;
+		    top: 0;
+		    left: 0;
+		    z-index: 0;
+		}
+
+  
+      .dropDownSize
+      {
+      	width: 300px;
+      }
+      
+      .buttonWidth
+      {
+      	width:50px;
+      }
+         
+       
+    </style>  
+    </apex:component>

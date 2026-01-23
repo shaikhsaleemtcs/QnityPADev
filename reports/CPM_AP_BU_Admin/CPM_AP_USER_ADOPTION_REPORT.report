@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>OrgGroup__c.Organizational_Group_Users__r$Organizational_Group_Item__c.Business__c.Business__c</field>
+    </columns>
+    <columns>
+        <field>OrgGroup__c.Organizational_Group_Users__r$Organizational_Group_Item__c.OrgGroup__c.ERP_Sales_Org_Code__c</field>
+    </columns>
+    <columns>
+        <field>OrgGroup__c.Organizational_Group_Users__r$Related_User__c.Name</field>
+    </columns>
+    <columns>
+        <field>OrgGroup__c.Organizational_Group_Users__r$Related_User__c.IsActive</field>
+    </columns>
+    <columns>
+        <field>OrgGroup__c.Organizational_Group_Users__r$Related_User__c.Manager</field>
+    </columns>
+    <columns>
+        <field>OrgGroup__c.Organizational_Group_Users__r$Related_User__c.UserRole</field>
+    </columns>
+    <columns>
+        <field>OrgGroup__c.Organizational_Group_Users__r$Related_User__c.LastLoginDate</field>
+    </columns>
+    <columns>
+        <field>OrgGroup__c.Organizational_Group_Users__r$Related_User__c.Profile.Name</field>
+    </columns>
+    <currency>USD</currency>
+    <filter>
+        <criteriaItems>
+            <column>OrgGroup__c.Organizational_Group_Users__r$Organizational_Group_Item__c.Business__c.Business__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>contains</operator>
+            <value>CPM AP</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>CPM AP USER ADOPTION REPORT</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>USER_ADOPTION_REPORT_TYPE_OG__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>OrgGroup__c.Organizational_Group_Users__r$Related_User__c.LastLoginDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

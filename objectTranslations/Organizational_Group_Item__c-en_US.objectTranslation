@@ -1,0 +1,3476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Organizational Group Item</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Organizational Group Items</value>
+    </caseValues>
+    <fieldSets>
+        <label><!-- SASetupFields --></label>
+        <name>SASetupFields</name>
+    </fieldSets>
+    <fields>
+        <label><!-- Approval Escalation Duration --></label>
+        <name>Approval_Escalation_Duration__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approval Escalation - Price Requests --></label>
+        <name>Approval_Escalation_Price_Requests__c</name>
+        <picklistValues>
+            <masterLabel>2 Days</masterLabel>
+            <translation><!-- 2 Days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3 Days</masterLabel>
+            <translation><!-- 3 Days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5 Days</masterLabel>
+            <translation><!-- 5 Days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8 Days</masterLabel>
+            <translation><!-- 8 Days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No Escalation</masterLabel>
+            <translation><!-- No Escalation --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Approval Escalation - Pricing Task --></label>
+        <name>Approval_Escalation_Pricing_Task__c</name>
+        <picklistValues>
+            <masterLabel>1 Day</masterLabel>
+            <translation><!-- 1 Day --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2 Days</masterLabel>
+            <translation><!-- 2 Days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3 Days</masterLabel>
+            <translation><!-- 3 Days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5 Days</masterLabel>
+            <translation><!-- 5 Days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8 Days</masterLabel>
+            <translation><!-- 8 Days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No Escalation</masterLabel>
+            <translation><!-- No Escalation --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Attachments on Customer Prices --></label>
+        <name>Attachments_on_Customer_Prices__c</name>
+    </fields>
+    <fields>
+        <label><!-- Base UoM --></label>
+        <name>Base_UoM__c</name>
+    </fields>
+    <fields>
+        <label><!-- Business --></label>
+        <name>Business__c</name>
+        <relationshipLabel><!-- Organizational Group Items (Business1) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Customer Group 4 Auto-Approval --></label>
+        <name>Customer_Group_4_Auto_Approval__c</name>
+        <picklistValues>
+            <masterLabel>CHI-C HIGH</masterLabel>
+            <translation><!-- CHI-C HIGH --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D06-All Other</masterLabel>
+            <translation><!-- D06-All Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>HI-Strategic Customers</masterLabel>
+            <translation><!-- HI-Strategic Customers --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LOW-ABC LOW</masterLabel>
+            <translation><!-- LOW-ABC LOW --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PB-Price Buyer</masterLabel>
+            <translation><!-- PB-Price Buyer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>UOO-UP-OR-OUT</masterLabel>
+            <translation><!-- UOO-UP-OR-OUT --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Customer Price Fixed Date Payment Terms --></label>
+        <name>Customer_Price_Fixed_Date_Payment_Terms__c</name>
+        <picklistValues>
+            <masterLabel>1103-1%10N30</masterLabel>
+            <translation><!-- 1103-1%10N30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>401M-NET 10 DAYS</masterLabel>
+            <translation><!-- 401M-NET 10 DAYS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8ZGF-NET AS AT:</masterLabel>
+            <translation><!-- 8ZGF-NET AS AT: --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8ZGF-Net 45 days</masterLabel>
+            <translation><!-- 8ZGF-Net 45 days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8ZGP</masterLabel>
+            <translation><!-- 8ZGP --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8ZGX</masterLabel>
+            <translation><!-- 8ZGX --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CIA</masterLabel>
+            <translation><!-- CIA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>N030-Net 30 days from End of Month</masterLabel>
+            <translation><!-- N030-Net 30 days from End of Month --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>N30</masterLabel>
+            <translation><!-- N30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>N45</masterLabel>
+            <translation><!-- N45 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>W020-Due by ______</masterLabel>
+            <translation><!-- W020-Due by ______ --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>W060-Net 60 Days End of Month Invoiced</masterLabel>
+            <translation><!-- W060-Net 60 Days End of Month Invoiced --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>W090-Net 90 Days End of Month Invoiced</masterLabel>
+            <translation><!-- W090-Net 90 Days End of Month Invoiced --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y0145-NET45</masterLabel>
+            <translation><!-- Y0145-NET45 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y015-NET15</masterLabel>
+            <translation><!-- Y015-NET15 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y030-Net 30 days from date of Invoice</masterLabel>
+            <translation><!-- Y030-Net 30 days from date of Invoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y045-Net 45 days from date of Invoice</masterLabel>
+            <translation><!-- Y045-Net 45 days from date of Invoice --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Customer Price Payment Terms --></label>
+        <name>Customer_Price_Payment_Terms__c</name>
+        <picklistValues>
+            <masterLabel>1103-1%10N30</masterLabel>
+            <translation><!-- 1103-1%10N30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8ZGF-NET AS AT:</masterLabel>
+            <translation><!-- 8ZGF-NET AS AT: --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8ZGF-Net 45 days</masterLabel>
+            <translation><!-- 8ZGF-Net 45 days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CIA</masterLabel>
+            <translation><!-- CIA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>N07</masterLabel>
+            <translation><!-- N07 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>N30</masterLabel>
+            <translation><!-- N30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>N45</masterLabel>
+            <translation><!-- N45 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>N60</masterLabel>
+            <translation><!-- N60 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>N90</masterLabel>
+            <translation><!-- N90 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>U000-Payable immediately Due net</masterLabel>
+            <translation><!-- U000-Payable immediately Due net --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>W020-20 Net EOM Invoiced</masterLabel>
+            <translation><!-- W020-20 Net EOM Invoiced --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>W020-Due by ______</masterLabel>
+            <translation><!-- W020-Due by ______ --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y007-Net 7 from Date of Invoice</masterLabel>
+            <translation><!-- Y007-Net 7 from Date of Invoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y0145-NET45</masterLabel>
+            <translation><!-- Y0145-NET45 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y015-NET15</masterLabel>
+            <translation><!-- Y015-NET15 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y030-Net 30 days from date of Invoice</masterLabel>
+            <translation><!-- Y030-Net 30 days from date of Invoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y045-Net 45 days from date of Invoice</masterLabel>
+            <translation><!-- Y045-Net 45 days from date of Invoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y060-Net 60 days from date of Invoice</masterLabel>
+            <translation><!-- Y060-Net 60 days from date of Invoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y090-Net 90 days from date of Invoice</masterLabel>
+            <translation><!-- Y090-Net 90 days from date of Invoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y120-Net 120 days from date of Invoice</masterLabel>
+            <translation><!-- Y120-Net 120 days from date of Invoice --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Customer Request Reasons --></label>
+        <name>Customer_Request_Reasons__c</name>
+        <picklistValues>
+            <masterLabel>CP01-Customer negotiation</masterLabel>
+            <translation><!-- CP01-Customer negotiation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP02-New customer</masterLabel>
+            <translation><!-- CP02-New customer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP03-New materials</masterLabel>
+            <translation><!-- CP03-New materials --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP04-Competitive pricing</masterLabel>
+            <translation><!-- CP04-Competitive pricing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP05-Extending current prices</masterLabel>
+            <translation><!-- CP05-Extending current prices --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP06-Pricing campaign</masterLabel>
+            <translation><!-- CP06-Pricing campaign --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP07-Seasonal price</masterLabel>
+            <translation><!-- CP07-Seasonal price --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP08-Slow moving inventory</masterLabel>
+            <translation><!-- CP08-Slow moving inventory --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP09-Other reason</masterLabel>
+            <translation><!-- CP09-Other reason --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP10-New Application</masterLabel>
+            <translation><!-- CP10-New Application --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP11-New End Use</masterLabel>
+            <translation><!-- CP11-New End Use --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP12-New Converter</masterLabel>
+            <translation><!-- CP12-New Converter --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP13-New Development Project</masterLabel>
+            <translation><!-- CP13-New Development Project --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP14-Price Extension</masterLabel>
+            <translation><!-- CP14-Price Extension --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP15-2nd Quality grade</masterLabel>
+            <translation><!-- CP15-2nd Quality grade --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP16-Distributor Pricing</masterLabel>
+            <translation><!-- CP16-Distributor Pricing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP17-Change of Incoterm</masterLabel>
+            <translation><!-- CP17-Change of Incoterm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP18-Price increase</masterLabel>
+            <translation><!-- CP18-Price increase --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP19-Gap closer</masterLabel>
+            <translation><!-- CP19-Gap closer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP20-Sales Promotion</masterLabel>
+            <translation><!-- CP20-Sales Promotion --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP21-Key accounts prices</masterLabel>
+            <translation><!-- CP21-Key accounts prices --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP22-HuaMei Pricing</masterLabel>
+            <translation><!-- CP22-HuaMei Pricing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP23-Nike OEM Pricing</masterLabel>
+            <translation><!-- CP23-Nike OEM Pricing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP24-LCL Price</masterLabel>
+            <translation><!-- CP24-LCL Price --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP25-Price include airfreight</masterLabel>
+            <translation><!-- CP25-Price include airfreight --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP26-Price aligned with PLM guidline</masterLabel>
+            <translation><!-- CP26-Price aligned with PLM guidline --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP27-Price Decreased</masterLabel>
+            <translation><!-- CP27-Price Decreased --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP28-Expire Price</masterLabel>
+            <translation><!-- CP28-Expire Price --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP29-Implement market price increase</masterLabel>
+            <translation><!-- CP29-Implement market price increase --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP30-Implement market price decrease</masterLabel>
+            <translation><!-- CP30-Implement market price decrease --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP31-New contract/agreement</masterLabel>
+            <translation><!-- CP31-New contract/agreement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP32-Portfolio adjustment</masterLabel>
+            <translation><!-- CP32-Portfolio adjustment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP33-Extend expiration date</masterLabel>
+            <translation><!-- CP33-Extend expiration date --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP34-Change rebate structure</masterLabel>
+            <translation><!-- CP34-Change rebate structure --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP35-Add ship to location</masterLabel>
+            <translation><!-- CP35-Add ship to location --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP36-Add grade</masterLabel>
+            <translation><!-- CP36-Add grade --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP37-Replacement</masterLabel>
+            <translation><!-- CP37-Replacement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP38-Pricing Discrepancy</masterLabel>
+            <translation><!-- CP38-Pricing Discrepancy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP39-Trial Material</masterLabel>
+            <translation><!-- CP39-Trial Material --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP40-Correction</masterLabel>
+            <translation><!-- CP40-Correction --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP41-Price include landing and transport</masterLabel>
+            <translation><!-- CP41-Price include landing and transport --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP42-Sales Projection 30-60 MT/month</masterLabel>
+            <translation><!-- CP42-Sales Projection 30-60 MT/month --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP43-Sales Projection 60-100 MT/month</masterLabel>
+            <translation><!-- CP43-Sales Projection 60-100 MT/month --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP44-Sales Projection 100-150 MT/month</masterLabel>
+            <translation><!-- CP44-Sales Projection 100-150 MT/month --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP45-Sales Projection 150-200 MT/month</masterLabel>
+            <translation><!-- CP45-Sales Projection 150-200 MT/month --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP46-Special for grade/pq/wide spec</masterLabel>
+            <translation><!-- CP46-Special for grade/pq/wide spec --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP47-Sales Projection 10-30 MT/month</masterLabel>
+            <translation><!-- CP47-Sales Projection 10-30 MT/month --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP48-Tender Price</masterLabel>
+            <translation><!-- CP48-Tender Price --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP49-Military Contract Price</masterLabel>
+            <translation><!-- CP49-Military Contract Price --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP50-Garments Price Quote</masterLabel>
+            <translation><!-- CP50-Garments Price Quote --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP51-Naphtha link price</masterLabel>
+            <translation><!-- CP51-Naphtha link price --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP52-Price reduction</masterLabel>
+            <translation><!-- CP52-Price reduction --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP53-Opportunistic sales</masterLabel>
+            <translation><!-- CP53-Opportunistic sales --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP54-Pricing increase</masterLabel>
+            <translation><!-- CP54-Pricing increase --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP55-Exchange rate</masterLabel>
+            <translation><!-- CP55-Exchange rate --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP56-Periodic price review</masterLabel>
+            <translation><!-- CP56-Periodic price review --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP57-Update price to reflect actual exchange rate</masterLabel>
+            <translation><!-- CP57-Update price to reflect actual exchange rate --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP58-Transfer Price</masterLabel>
+            <translation><!-- CP58-Transfer Price --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP59-Price renewal/with changes - Price increase</masterLabel>
+            <translation><!-- CP59-Price renewal/with changes - Price increase --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP60-Special Price Agreement - Shapes</masterLabel>
+            <translation><!-- CP60-Special Price Agreement - Shapes --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP61-Special Price Agreement - Parts</masterLabel>
+            <translation><!-- CP61-Special Price Agreement - Parts --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CP62-Price Lists</masterLabel>
+            <translation><!-- CP62-Price Lists --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Default Currency --></label>
+        <name>Default_Currency__c</name>
+        <picklistValues>
+            <masterLabel>Customer Currency</masterLabel>
+            <translation><!-- Customer Currency --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No Default</masterLabel>
+            <translation><!-- No Default --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sales Area Config Currency</masterLabel>
+            <translation><!-- Sales Area Config Currency --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Default Per &amp; UoM Setup --></label>
+        <name>Default_Per_UoM_Setup__c</name>
+        <picklistValues>
+            <masterLabel>Product Hierarchy Config</masterLabel>
+            <translation><!-- Product Hierarchy Config --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sales Area Config</masterLabel>
+            <translation><!-- Sales Area Config --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Default Per Value --></label>
+        <name>Default_Per_Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- Default Prices Selection --></label>
+        <name>Default_Prices_Selection__c</name>
+        <picklistValues>
+            <masterLabel>Current Prices</masterLabel>
+            <translation><!-- Current Prices --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Expired Prices</masterLabel>
+            <translation><!-- Expired Prices --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Expiring By</masterLabel>
+            <translation><!-- Expiring By --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Expiring within 30 days</masterLabel>
+            <translation><!-- Expiring within 30 days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Expiring within 60 days</masterLabel>
+            <translation><!-- Expiring within 60 days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Expiring within 90 days</masterLabel>
+            <translation><!-- Expiring within 90 days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Last Valid Prices</masterLabel>
+            <translation><!-- Last Valid Prices --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Valid On</masterLabel>
+            <translation><!-- Valid On --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Default SalesArea Currency --></label>
+        <name>Default_SalesArea_Currency__c</name>
+    </fields>
+    <fields>
+        <label><!-- Default SalesArea UoM --></label>
+        <name>Default_SalesArea_UoM__c</name>
+    </fields>
+    <fields>
+        <label><!-- Default Value for Scaled Prices --></label>
+        <name>Default_Value_for_Scaled_Prices__c</name>
+        <picklistValues>
+            <masterLabel>Non-Scale</masterLabel>
+            <translation><!-- Non-Scale --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Scale</masterLabel>
+            <translation><!-- Scale --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Display Standardized Rate --></label>
+        <name>Display_Standardized_Rate__c</name>
+    </fields>
+    <fields>
+        <label><!-- ERP Currency --></label>
+        <name>ERP_Currency__c</name>
+        <picklistValues>
+            <masterLabel>ARS</masterLabel>
+            <translation><!-- ARS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>AUD</masterLabel>
+            <translation><!-- AUD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BRL</masterLabel>
+            <translation><!-- BRL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CAD</masterLabel>
+            <translation><!-- CAD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CHF</masterLabel>
+            <translation><!-- CHF --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CLP</masterLabel>
+            <translation><!-- CLP --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CNY</masterLabel>
+            <translation><!-- CNY --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>COP</masterLabel>
+            <translation><!-- COP --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CZK</masterLabel>
+            <translation><!-- CZK --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DKK</masterLabel>
+            <translation><!-- DKK --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>EUR</masterLabel>
+            <translation><!-- EUR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GBP</masterLabel>
+            <translation><!-- GBP --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>HKD</masterLabel>
+            <translation><!-- HKD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>HUF</masterLabel>
+            <translation><!-- HUF --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IDR</masterLabel>
+            <translation><!-- IDR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>INR</masterLabel>
+            <translation><!-- INR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>JPY</masterLabel>
+            <translation><!-- JPY --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KRW</masterLabel>
+            <translation><!-- KRW --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KZT</masterLabel>
+            <translation><!-- KZT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MXN</masterLabel>
+            <translation><!-- MXN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MYR</masterLabel>
+            <translation><!-- MYR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NOK</masterLabel>
+            <translation><!-- NOK --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NZD</masterLabel>
+            <translation><!-- NZD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PHP</masterLabel>
+            <translation><!-- PHP --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PKR</masterLabel>
+            <translation><!-- PKR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PLN</masterLabel>
+            <translation><!-- PLN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>RON</masterLabel>
+            <translation><!-- RON --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>RUB</masterLabel>
+            <translation><!-- RUB --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SEK</masterLabel>
+            <translation><!-- SEK --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SGD</masterLabel>
+            <translation><!-- SGD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>THB</masterLabel>
+            <translation><!-- THB --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TRL</masterLabel>
+            <translation><!-- TRL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TRY</masterLabel>
+            <translation><!-- TRY --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TWD</masterLabel>
+            <translation><!-- TWD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>UAH</masterLabel>
+            <translation><!-- UAH --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>USD</masterLabel>
+            <translation><!-- USD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>VEF</masterLabel>
+            <translation><!-- VEF --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>VND</masterLabel>
+            <translation><!-- VND --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ZAR</masterLabel>
+            <translation><!-- ZAR --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- ERP Material Group2 Code --></label>
+        <name>ERP_Material_Group2_Code__c</name>
+        <picklistValues>
+            <masterLabel>SP1 - Standared</masterLabel>
+            <translation><!-- SP1 - Standared --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SP2 - Nonstandared</masterLabel>
+            <translation><!-- SP2 - Nonstandared --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SP3 - Custom</masterLabel>
+            <translation><!-- SP3 - Custom --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SP4 - Transition Out</masterLabel>
+            <translation><!-- SP4 - Transition Out --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SP5 - Make to Order</masterLabel>
+            <translation><!-- SP5 - Make to Order --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SP6 - Make to Stock</masterLabel>
+            <translation><!-- SP6 - Make to Stock --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SP7 - Not Portfolio</masterLabel>
+            <translation><!-- SP7 - Not Portfolio --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- ERP Pricing Procedure --></label>
+        <name>ERP_Pricing_Procedure__c</name>
+        <relationshipLabel><!-- Organizational Group Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- ERP UoM --></label>
+        <name>ERP_UoM__c</name>
+        <picklistValues>
+            <masterLabel>&quot;</masterLabel>
+            <translation><!-- &quot; --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>%</masterLabel>
+            <translation><!-- % --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>/KG</masterLabel>
+            <translation><!-- /KG --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>/LB</masterLabel>
+            <translation><!-- /LB --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>AC</masterLabel>
+            <translation><!-- AC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BAG</masterLabel>
+            <translation><!-- BAG --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BG</masterLabel>
+            <translation><!-- BG --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BKT</masterLabel>
+            <translation><!-- BKT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BL</masterLabel>
+            <translation><!-- BL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BO</masterLabel>
+            <translation><!-- BO --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BOX</masterLabel>
+            <translation><!-- BOX --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BT</masterLabel>
+            <translation><!-- BT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BX</masterLabel>
+            <translation><!-- BX --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CA</masterLabel>
+            <translation><!-- CA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CAN</masterLabel>
+            <translation><!-- CAN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CAR</masterLabel>
+            <translation><!-- CAR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CH</masterLabel>
+            <translation><!-- CH --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CM</masterLabel>
+            <translation><!-- CM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CN</masterLabel>
+            <translation><!-- CN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CNS</masterLabel>
+            <translation><!-- CNS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CRT</masterLabel>
+            <translation><!-- CRT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CS</masterLabel>
+            <translation><!-- CS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CSM</masterLabel>
+            <translation><!-- CSM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CT</masterLabel>
+            <translation><!-- CT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CTD</masterLabel>
+            <translation><!-- CTD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CTN</masterLabel>
+            <translation><!-- CTN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DI</masterLabel>
+            <translation><!-- DI --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DR</masterLabel>
+            <translation><!-- DR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DR3</masterLabel>
+            <translation><!-- DR3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>EA</masterLabel>
+            <translation><!-- EA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>FT</masterLabel>
+            <translation><!-- FT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>G</masterLabel>
+            <translation><!-- G --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GA</masterLabel>
+            <translation><!-- GA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GAL</masterLabel>
+            <translation><!-- GAL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GAlBT</masterLabel>
+            <translation><!-- GAlBT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GR</masterLabel>
+            <translation><!-- GR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>HR</masterLabel>
+            <translation><!-- HR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IBC</masterLabel>
+            <translation><!-- IBC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>JER</masterLabel>
+            <translation><!-- JER --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>JR</masterLabel>
+            <translation><!-- JR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>JU</masterLabel>
+            <translation><!-- JU --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KDP</masterLabel>
+            <translation><!-- KDP --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KG</masterLabel>
+            <translation><!-- KG --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KIT</masterLabel>
+            <translation><!-- KIT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>L</masterLabel>
+            <translation><!-- L --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LB</masterLabel>
+            <translation><!-- LB --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LBR</masterLabel>
+            <translation><!-- LBR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LBS</masterLabel>
+            <translation><!-- LBS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LDP</masterLabel>
+            <translation><!-- LDP --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LF</masterLabel>
+            <translation><!-- LF --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LI</masterLabel>
+            <translation><!-- LI --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LM</masterLabel>
+            <translation><!-- LM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LT</masterLabel>
+            <translation><!-- LT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LY</masterLabel>
+            <translation><!-- LY --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>M</masterLabel>
+            <translation><!-- M --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>M2</masterLabel>
+            <translation><!-- M2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MP</masterLabel>
+            <translation><!-- MP --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MR</masterLabel>
+            <translation><!-- MR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MT</masterLabel>
+            <translation><!-- MT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MU</masterLabel>
+            <translation><!-- MU --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NTN</masterLabel>
+            <translation><!-- NTN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>OZ</masterLabel>
+            <translation><!-- OZ --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PA</masterLabel>
+            <translation><!-- PA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PAC</masterLabel>
+            <translation><!-- PAC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PAL</masterLabel>
+            <translation><!-- PAL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PC</masterLabel>
+            <translation><!-- PC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PC3</masterLabel>
+            <translation><!-- PC3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PF</masterLabel>
+            <translation><!-- PF --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PK</masterLabel>
+            <translation><!-- PK --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PL</masterLabel>
+            <translation><!-- PL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PL3</masterLabel>
+            <translation><!-- PL3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PR</masterLabel>
+            <translation><!-- PR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>QT</masterLabel>
+            <translation><!-- QT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>QTL</masterLabel>
+            <translation><!-- QTL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>RBC</masterLabel>
+            <translation><!-- RBC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>RL</masterLabel>
+            <translation><!-- RL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ROL</masterLabel>
+            <translation><!-- ROL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SET</masterLabel>
+            <translation><!-- SET --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SF</masterLabel>
+            <translation><!-- SF --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SGE</masterLabel>
+            <translation><!-- SGE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SH</masterLabel>
+            <translation><!-- SH --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SI</masterLabel>
+            <translation><!-- SI --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SM</masterLabel>
+            <translation><!-- SM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ST</masterLabel>
+            <translation><!-- ST --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SU</masterLabel>
+            <translation><!-- SU --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SY</masterLabel>
+            <translation><!-- SY --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TB</masterLabel>
+            <translation><!-- TB --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TE</masterLabel>
+            <translation><!-- TE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TK</masterLabel>
+            <translation><!-- TK --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TN</masterLabel>
+            <translation><!-- TN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TOZ</masterLabel>
+            <translation><!-- TOZ --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TU</masterLabel>
+            <translation><!-- TU --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>UN</masterLabel>
+            <translation><!-- UN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>UNT</masterLabel>
+            <translation><!-- UNT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>VL</masterLabel>
+            <translation><!-- VL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>YD</masterLabel>
+            <translation><!-- YD --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Enable Material Group 5 --></label>
+        <name>Enable_Material_Group_5__c</name>
+    </fields>
+    <fields>
+        <label><!-- Enable Request Class --></label>
+        <name>Enable_Request_Class__c</name>
+    </fields>
+    <fields>
+        <label><!-- Variable Config Materials --></label>
+        <name>Enable_Variable_Config_Materials__c</name>
+    </fields>
+    <fields>
+        <label><!-- Include Customer Currency --></label>
+        <name>Include_Customer_Currency__c</name>
+    </fields>
+    <fields>
+        <label><!-- Landing Cost --></label>
+        <name>Landing_Cost__c</name>
+    </fields>
+    <fields>
+        <label><!-- Latest Valid From Offset - Non-Cust Spec --></label>
+        <name>Latest_Valid_From_Offset_Non_Cust_Spec__c</name>
+    </fields>
+    <fields>
+        <label><!-- Latest Valid To Offset - Cust Spec --></label>
+        <name>Latest_Valid_To_Offset_Cust_Spec__c</name>
+    </fields>
+    <fields>
+        <label><!-- Latest Valid To Offset - Non-Cust Spec --></label>
+        <name>Latest_Valid_To_Offset_Non_Cust_Spec__c</name>
+    </fields>
+    <fields>
+        <help><!-- This is the pre-split original 18 digit Salesforce ID of this record that came from the original One Dupont Salesforce instance before the business units were separated. Its is case insensitive and unique. --></help>
+        <label><!-- Legacy Pricing Util SFID --></label>
+        <name>Legacy_Pricing_Util_SFID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Latest Valid From Offset - Cust Spec --></label>
+        <name>Max_Valid_From_Offset_Cust_Spec__c</name>
+    </fields>
+    <fields>
+        <label><!-- Non-Customer Permanent Request Reasons --></label>
+        <name>Non_Customer_Permanent_Request_Reasons__c</name>
+        <picklistValues>
+            <masterLabel>NC01-Extending current prices</masterLabel>
+            <translation><!-- NC01-Extending current prices --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NC02-New materials</masterLabel>
+            <translation><!-- NC02-New materials --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NC03-Periodic price review</masterLabel>
+            <translation><!-- NC03-Periodic price review --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NC04-Other reason</masterLabel>
+            <translation><!-- NC04-Other reason --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NC05-Pricing Campaign</masterLabel>
+            <translation><!-- NC05-Pricing Campaign --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NC06-Seasonal Price</masterLabel>
+            <translation><!-- NC06-Seasonal Price --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NC07-Nike OEM Pricing (CFR)</masterLabel>
+            <translation><!-- NC07-Nike OEM Pricing (CFR) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NC08-Nike OEM Pricing (LCL)</masterLabel>
+            <translation><!-- NC08-Nike OEM Pricing (LCL) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NC09-Expire Price</masterLabel>
+            <translation><!-- NC09-Expire Price --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NC10-Increase price</masterLabel>
+            <translation><!-- NC10-Increase price --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NC11-Decrease price</masterLabel>
+            <translation><!-- NC11-Decrease price --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NC12-Correction</masterLabel>
+            <translation><!-- NC12-Correction --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NC13-Second Grade Price</masterLabel>
+            <translation><!-- NC13-Second Grade Price --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NC14-Slow moving inventory</masterLabel>
+            <translation><!-- NC14-Slow moving inventory --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NC15-Competitive pricing</masterLabel>
+            <translation><!-- NC15-Competitive pricing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NC16-Naphtha link price</masterLabel>
+            <translation><!-- NC16-Naphtha link price --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NC17-New price reference partner</masterLabel>
+            <translation><!-- NC17-New price reference partner --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NC18-Price reduction</masterLabel>
+            <translation><!-- NC18-Price reduction --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NC19-Opportunistic sales</masterLabel>
+            <translation><!-- NC19-Opportunistic sales --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NC20-Pricing increase</masterLabel>
+            <translation><!-- NC20-Pricing increase --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NC21-Exchange rate</masterLabel>
+            <translation><!-- NC21-Exchange rate --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NC22-Customer negotiation</masterLabel>
+            <translation><!-- NC22-Customer negotiation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NC23-New customer</masterLabel>
+            <translation><!-- NC23-New customer --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Non Standard Payment Terms --></label>
+        <name>Non_Standard_Payment_Terms__c</name>
+        <picklistValues>
+            <masterLabel>030A-30 DAYS DDDA</masterLabel>
+            <translation><!-- 030A-30 DAYS DDDA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>1103-1% 10 Days, Net 30 Days DOI</masterLabel>
+            <translation><!-- 1103-1% 10 Days, Net 30 Days DOI --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2103-2% 10 Days, Net 30 Days DOI</masterLabel>
+            <translation><!-- 2103-2% 10 Days, Net 30 Days DOI --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2106-2% 10 Days, Net 60 Days DOI</masterLabel>
+            <translation><!-- 2106-2% 10 Days, Net 60 Days DOI --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8A06- NET 30 DAYS EOM</masterLabel>
+            <translation><!-- 8A06- NET 30 DAYS EOM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8A42-NET 60 DAYS EOM</masterLabel>
+            <translation><!-- 8A42-NET 60 DAYS EOM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8A90-NET 20 DAYS EOM</masterLabel>
+            <translation><!-- 8A90-NET 20 DAYS EOM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8A93-NET 45 DAYS EOM</masterLabel>
+            <translation><!-- 8A93-NET 45 DAYS EOM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8AB1-ET 90 DAYS EOM</masterLabel>
+            <translation><!-- 8AB1-ET 90 DAYS EOM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8AB1-NET 90 DAYS EOM</masterLabel>
+            <translation><!-- 8AB1-NET 90 DAYS EOM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8AE2-35 DAYS EOM</masterLabel>
+            <translation><!-- 8AE2-35 DAYS EOM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8AE5-45 DAYS EOM</masterLabel>
+            <translation><!-- 8AE5-45 DAYS EOM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8AE7-60 DAYS EOM</masterLabel>
+            <translation><!-- 8AE7-60 DAYS EOM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8AF2-120 DAYS EOM</masterLabel>
+            <translation><!-- 8AF2-120 DAYS EOM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8AF3-150 DAYS EOM</masterLabel>
+            <translation><!-- 8AF3-150 DAYS EOM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8AF7-210 DAYS EOM</masterLabel>
+            <translation><!-- 8AF7-210 DAYS EOM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8AJ3-NET 10 DAYS</masterLabel>
+            <translation><!-- 8AJ3-NET 10 DAYS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8AK1-2% 10 DAYS, NET 60 DAYS</masterLabel>
+            <translation><!-- 8AK1-2% 10 DAYS, NET 60 DAYS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8AK5-15 PROX</masterLabel>
+            <translation><!-- 8AK5-15 PROX --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8J04-NET 35 DAYS</masterLabel>
+            <translation><!-- 8J04-NET 35 DAYS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8J22-NET 45 DAYS</masterLabel>
+            <translation><!-- 8J22-NET 45 DAYS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8M07-60 DAYS DDDA</masterLabel>
+            <translation><!-- 8M07-60 DAYS DDDA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8M21-NET 75 DAYS</masterLabel>
+            <translation><!-- 8M21-NET 75 DAYS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8U14-NET 150 DAYS</masterLabel>
+            <translation><!-- 8U14-NET 150 DAYS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>A000-Payment in Advance</masterLabel>
+            <translation><!-- A000-Payment in Advance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>A0CC-Credit Card Payment (CC)</masterLabel>
+            <translation><!-- A0CC-Credit Card Payment (CC) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ADVP-Advance Grower Brazil</masterLabel>
+            <translation><!-- ADVP-Advance Grower Brazil --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ADVT-Advance Trading Brazil</masterLabel>
+            <translation><!-- ADVT-Advance Trading Brazil --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>AOCC-Credit Card</masterLabel>
+            <translation><!-- AOCC-Credit Card --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>AY30-50% cash in adv., 50% 30 days DOI</masterLabel>
+            <translation><!-- AY30-50% cash in adv., 50% 30 days DOI --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B30-Within 30 days from B/L date</masterLabel>
+            <translation><!-- B30-Within 30 days from B/L date --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BA1X-1% 15 DAYS NET 30 DAYS</masterLabel>
+            <translation><!-- BA1X-1% 15 DAYS NET 30 DAYS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BBAR-Cotton Fix Date</masterLabel>
+            <translation><!-- BBAR-Cotton Fix Date --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BBRL-Bartering in BRL</masterLabel>
+            <translation><!-- BBRL-Bartering in BRL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BCER-BRL Sales Cerrado Region</masterLabel>
+            <translation><!-- BCER-BRL Sales Cerrado Region --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BCOF-Campaign for coffee sale</masterLabel>
+            <translation><!-- BCOF-Campaign for coffee sale --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BCOP-CAMPANHA DATA FIXA</masterLabel>
+            <translation><!-- BCOP-CAMPANHA DATA FIXA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BCRE-Brasil Only</masterLabel>
+            <translation><!-- BCRE-Brasil Only --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BDOL-BDOL</masterLabel>
+            <translation><!-- BDOL-BDOL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BDOR-TOPs Crop Brasil (fixed date)</masterLabel>
+            <translation><!-- BDOR-TOPs Crop Brasil (fixed date) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BEXT-Net 90 days from date of invoi</masterLabel>
+            <translation><!-- BEXT-Net 90 days from date of invoi --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BF01-Installment 4 (21/28/35/42days)</masterLabel>
+            <translation><!-- BF01-Installment 4 (21/28/35/42days) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BFPR-Barter Financial program BRL</masterLabel>
+            <translation><!-- BFPR-Barter Financial program BRL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BFPU-Barter Financial program USD</masterLabel>
+            <translation><!-- BFPU-Barter Financial program USD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BP3F-Installment 3 (21 / 28 / 35 days)</masterLabel>
+            <translation><!-- BP3F-Installment 3 (21 / 28 / 35 days) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BP3K-Installment 3 (30 / 60 / 90 )</masterLabel>
+            <translation><!-- BP3K-Installment 3 (30 / 60 / 90 ) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BP3Q-Installments 49x63x77 Days</masterLabel>
+            <translation><!-- BP3Q-Installments 49x63x77 Days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BP3S-Installment 3 (28 / 35 / 42 days)</masterLabel>
+            <translation><!-- BP3S-Installment 3 (28 / 35 / 42 days) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BPSV-Installments 35x49x63 Days</masterLabel>
+            <translation><!-- BPSV-Installments 35x49x63 Days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BR12-Desconto de Pontualidade - 120</masterLabel>
+            <translation><!-- BR12-Desconto de Pontualidade - 120 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BR15-Desconto de Pontualidade - 150</masterLabel>
+            <translation><!-- BR15-Desconto de Pontualidade - 150 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BROW-Data Fixa ____________</masterLabel>
+            <translation><!-- BROW-Data Fixa ____________ --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CAFN-BRL Coffe - support the financ</masterLabel>
+            <translation><!-- CAFN-BRL Coffe - support the financ --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CAFS-BRL Coffe - support the fisica</masterLabel>
+            <translation><!-- CAFS-BRL Coffe - support the fisica --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CFN$-USD Coffe - support the finance</masterLabel>
+            <translation><!-- CFN$-USD Coffe - support the finance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CFS$-USD Coffe - support the fisica</masterLabel>
+            <translation><!-- CFS$-USD Coffe - support the fisica --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CIA -Payment in advance</masterLabel>
+            <translation><!-- CIA -Payment in advance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CIA-Pagamento antecipado</masterLabel>
+            <translation><!-- CIA-Pagamento antecipado --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>COD-Cash on delivery</masterLabel>
+            <translation><!-- COD-Cash on delivery --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CRD-Cash on receipt of documents</masterLabel>
+            <translation><!-- CRD-Cash on receipt of documents --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CY60-60 Days Net from Invoice Date</masterLabel>
+            <translation><!-- CY60-60 Days Net from Invoice Date --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D000-CASH AGAINST DOCUMENTS</masterLabel>
+            <translation><!-- D000-CASH AGAINST DOCUMENTS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D002-NET 40 DAYS</masterLabel>
+            <translation><!-- D002-NET 40 DAYS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D060-D/A 60 DAYS AFTER B/L DATE</masterLabel>
+            <translation><!-- D060-D/A 60 DAYS AFTER B/L DATE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D090-90 DAYS NET FROM B/L DATE</masterLabel>
+            <translation><!-- D090-90 DAYS NET FROM B/L DATE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D120-120 DAYS AFTER B/L DATE</masterLabel>
+            <translation><!-- D120-120 DAYS AFTER B/L DATE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D122-2nd Day of Second M.F.</masterLabel>
+            <translation><!-- D122-2nd Day of Second M.F. --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>D141-PROX 28</masterLabel>
+            <translation><!-- D141-PROX 28 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DD21-Net 21 days from Invoice Date</masterLabel>
+            <translation><!-- DD21-Net 21 days from Invoice Date --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DDDD-As per agreement</masterLabel>
+            <translation><!-- DDDD-As per agreement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DF00-CASH ON RECEIPT OF DOCUMENTS</masterLabel>
+            <translation><!-- DF00-CASH ON RECEIPT OF DOCUMENTS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DR23-1% 29 Days Net Due 30 Days</masterLabel>
+            <translation><!-- DR23-1% 29 Days Net Due 30 Days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DR75-75 DAYS FROM B/L DATE</masterLabel>
+            <translation><!-- DR75-75 DAYS FROM B/L DATE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DRT3-Sight Draft</masterLabel>
+            <translation><!-- DRT3-Sight Draft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DRT6-Bank Draft 90 Days from B/L</masterLabel>
+            <translation><!-- DRT6-Bank Draft 90 Days from B/L --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>FC00-Free of Charge - Do Not Pay</masterLabel>
+            <translation><!-- FC00-Free of Charge - Do Not Pay --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IDOB-IDOB</masterLabel>
+            <translation><!-- IDOB-IDOB --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IDOC-USD sales cotton&amp;coffee/vendor</masterLabel>
+            <translation><!-- IDOC-USD sales cotton&amp;coffee/vendor --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IDOL-IDOL</masterLabel>
+            <translation><!-- IDOL-IDOL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>JPKA-Cash in advance (domestic)</masterLabel>
+            <translation><!-- JPKA-Cash in advance (domestic) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>JPZ9-due on 10th of 4/5 mths later</masterLabel>
+            <translation><!-- JPZ9-due on 10th of 4/5 mths later --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>JPZL-due on 5th of 6 mths later</masterLabel>
+            <translation><!-- JPZL-due on 5th of 6 mths later --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>JQ20-C/CLS:20th/ME, 6M aft</masterLabel>
+            <translation><!-- JQ20-C/CLS:20th/ME, 6M aft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KB20-C/CLS:20th/ME this M</masterLabel>
+            <translation><!-- KB20-C/CLS:20th/ME this M --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KG15-C/CLS:15th/10th, nxt M</masterLabel>
+            <translation><!-- KG15-C/CLS:15th/10th, nxt M --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KG20-C/CLS:20th/10th, nxt M</masterLabel>
+            <translation><!-- KG20-C/CLS:20th/10th, nxt M --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KG99-C/CLS:ME this M/10th, nxt M</masterLabel>
+            <translation><!-- KG99-C/CLS:ME this M/10th, nxt M --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KH05-C/CLS:5th/15th, nxt M</masterLabel>
+            <translation><!-- KH05-C/CLS:5th/15th, nxt M --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KH15-C/CLS:15th/15th, nxt M</masterLabel>
+            <translation><!-- KH15-C/CLS:15th/15th, nxt M --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KH20-C/CLS:20th/15th, nxt M</masterLabel>
+            <translation><!-- KH20-C/CLS:20th/15th, nxt M --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KH25-C/CLS:25th/15th, nxt M</masterLabel>
+            <translation><!-- KH25-C/CLS:25th/15th, nxt M --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KI99-C/CLS:ME this M/16th, nxt M</masterLabel>
+            <translation><!-- KI99-C/CLS:ME this M/16th, nxt M --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KJ15-C/CLS:15th/20th, nxt M</masterLabel>
+            <translation><!-- KJ15-C/CLS:15th/20th, nxt M --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KJ20-C/CLS:20th/20th, nxt M</masterLabel>
+            <translation><!-- KJ20-C/CLS:20th/20th, nxt M --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KJ25-C/CLS:25th/20th, nxt M</masterLabel>
+            <translation><!-- KJ25-C/CLS:25th/20th, nxt M --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KJ99-C/CLS:ME this M/20th, nxt M</masterLabel>
+            <translation><!-- KJ99-C/CLS:ME this M/20th, nxt M --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KN20-C/CLS:20th/25th, nxt M</masterLabel>
+            <translation><!-- KN20-C/CLS:20th/25th, nxt M --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KN24-C/CLS:24th/25th, nxt M</masterLabel>
+            <translation><!-- KN24-C/CLS:24th/25th, nxt M --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KN99-C/CLS:ME this M/25th, nxt M</masterLabel>
+            <translation><!-- KN99-C/CLS:ME this M/25th, nxt M --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KR10-C/CLS:10th/nxt ME</masterLabel>
+            <translation><!-- KR10-C/CLS:10th/nxt ME --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KR15-C/CLS:15th/nxt ME</masterLabel>
+            <translation><!-- KR15-C/CLS:15th/nxt ME --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KR20-C/CLS:20th/nxt ME</masterLabel>
+            <translation><!-- KR20-C/CLS:20th/nxt ME --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KR25-C/CLS:25th/nxt ME</masterLabel>
+            <translation><!-- KR25-C/CLS:25th/nxt ME --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KR99-C/CLS:ME this M/nxt ME</masterLabel>
+            <translation><!-- KR99-C/CLS:ME this M/nxt ME --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KU20-C/CLS:20th/10th, 2M aft</masterLabel>
+            <translation><!-- KU20-C/CLS:20th/10th, 2M aft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KU99-C/CLS:ME this M/10th,2M aft</masterLabel>
+            <translation><!-- KU99-C/CLS:ME this M/10th,2M aft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KW20-C/CLS:20th/20th, 2M aft</masterLabel>
+            <translation><!-- KW20-C/CLS:20th/20th, 2M aft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KW99-C/CLS:ME this M/20th, 2M aft</masterLabel>
+            <translation><!-- KW99-C/CLS:ME this M/20th, 2M aft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KX99-C/CLS:ME this M/25th, 2M aft</masterLabel>
+            <translation><!-- KX99-C/CLS:ME this M/25th, 2M aft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KY20-C/CLS:20th/ME, 2M aft</masterLabel>
+            <translation><!-- KY20-C/CLS:20th/ME, 2M aft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KY25-C/CLS:25th/ME, 2M aft</masterLabel>
+            <translation><!-- KY25-C/CLS:25th/ME, 2M aft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KY99-Cash/Close mth end/due End of 2 Mth</masterLabel>
+            <translation><!-- KY99-Cash/Close mth end/due End of 2 Mth --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>L001-Letter of Credit at Sight</masterLabel>
+            <translation><!-- L001-Letter of Credit at Sight --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LA22-C/CLS:22th/20th, 5M aft</masterLabel>
+            <translation><!-- LA22-C/CLS:22th/20th, 5M aft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MJ99-C/CLS:ME this M/10th, 3M after</masterLabel>
+            <translation><!-- MJ99-C/CLS:ME this M/10th, 3M after --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MK20-C/CLS:20th/15th, 3/4M aft</masterLabel>
+            <translation><!-- MK20-C/CLS:20th/15th, 3/4M aft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MK99-C/CLS month end/15,3M, aft</masterLabel>
+            <translation><!-- MK99-C/CLS month end/15,3M, aft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ML20-C/CLS:20th/20th, 3 M after</masterLabel>
+            <translation><!-- ML20-C/CLS:20th/20th, 3 M after --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ML99-C/CLS:ME this M/20th, 3M aft</masterLabel>
+            <translation><!-- ML99-C/CLS:ME this M/20th, 3M aft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MM99-C/CLS:ME this M/25th,3M aft</masterLabel>
+            <translation><!-- MM99-C/CLS:ME this M/25th,3M aft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MN15-C/CLS:15th/ME, 3M aft</masterLabel>
+            <translation><!-- MN15-C/CLS:15th/ME, 3M aft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MN20-C/CLS:20th/ME, 3 M after</masterLabel>
+            <translation><!-- MN20-C/CLS:20th/ME, 3 M after --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MO99-C/CLS:ME this M/20th, 4M after</masterLabel>
+            <translation><!-- MO99-C/CLS:ME this M/20th, 4M after --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MOD6-Sight Draft Doc. against Payment</masterLabel>
+            <translation><!-- MOD6-Sight Draft Doc. against Payment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MODF-L/C 30 DAYS FROM B/L DATE</masterLabel>
+            <translation><!-- MODF-L/C 30 DAYS FROM B/L DATE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MODM-L/C 45 DAYS FROM B/L DATE</masterLabel>
+            <translation><!-- MODM-L/C 45 DAYS FROM B/L DATE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MOHM-L/C 60 DAYS FROM B/L DATE</masterLabel>
+            <translation><!-- MOHM-L/C 60 DAYS FROM B/L DATE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MOHP-L/C 90 days from B/L date</masterLabel>
+            <translation><!-- MOHP-L/C 90 days from B/L date --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MOI6-25 PROX FROM MONTH POSTED ON 25TH</masterLabel>
+            <translation><!-- MOI6-25 PROX FROM MONTH POSTED ON 25TH --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MOI7-25 PROX FROM 2 MONTH POSTED ON 25TH</masterLabel>
+            <translation><!-- MOI7-25 PROX FROM 2 MONTH POSTED ON 25TH --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MOTM-D/A 30 DAYS FROM B/L DATE</masterLabel>
+            <translation><!-- MOTM-D/A 30 DAYS FROM B/L DATE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MOTP-D/A 45 DAYS FROM B/L DATE</masterLabel>
+            <translation><!-- MOTP-D/A 45 DAYS FROM B/L DATE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MOUW-D/A 60 DAYS FROM B/L DATE</masterLabel>
+            <translation><!-- MOUW-D/A 60 DAYS FROM B/L DATE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MOVF-D/A 90 DAYS FROM B/L DATE</masterLabel>
+            <translation><!-- MOVF-D/A 90 DAYS FROM B/L DATE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MQ19-Due in 6 months -- May 15</masterLabel>
+            <translation><!-- MQ19-Due in 6 months - -  May 15 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MX33-30 days from Date of Shipment</masterLabel>
+            <translation><!-- MX33-30 days from Date of Shipment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MX79-150 DAYS FROM DATE OF SHIPMENT</masterLabel>
+            <translation><!-- MX79-150 DAYS FROM DATE OF SHIPMENT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>N120-Net 120 days from date of invoice</masterLabel>
+            <translation><!-- N120-Net 120 days from date of invoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>N15-Payable immediately Due net</masterLabel>
+            <translation><!-- N15-Payable immediately Due net --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>N180-NET 180 DAYS</masterLabel>
+            <translation><!-- N180-NET 180 DAYS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>N240-Net 240 Days</masterLabel>
+            <translation><!-- N240-Net 240 Days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>N270-Net 270 Days</masterLabel>
+            <translation><!-- N270-Net 270 Days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>N30-Dentro de 30 dias s/desconto</masterLabel>
+            <translation><!-- N30-Dentro de 30 dias s/desconto --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>N300-300 DAYS FROM THE INVOICE DATE</masterLabel>
+            <translation><!-- N300-300 DAYS FROM THE INVOICE DATE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>N330-NET 330</masterLabel>
+            <translation><!-- N330-NET 330 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>N45-Net 45 days from date of invoice</masterLabel>
+            <translation><!-- N45-Net 45 days from date of invoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>N60-NET 60 DAYS</masterLabel>
+            <translation><!-- N60-NET 60 DAYS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Q1X4-DIRECT DEBIT 10 DAYS, 4% DISCOUNT</masterLabel>
+            <translation><!-- Q1X4-DIRECT DEBIT 10 DAYS, 4% DISCOUNT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>QJ99-P/CLS:ME this M/20, nxt M/T:60</masterLabel>
+            <translation><!-- QJ99-P/CLS:ME this M/20, nxt M/T:60 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>RR99-C/CLS:ME this M/T:80</masterLabel>
+            <translation><!-- RR99-C/CLS:ME this M/T:80 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>S799-C/CLS:ME this M/25, nxt M/T:90</masterLabel>
+            <translation><!-- S799-C/CLS:ME this M/25, nxt M/T:90 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SJ99-P/CLS:ME this M/25, nxt M/T:90</masterLabel>
+            <translation><!-- SJ99-P/CLS:ME this M/25, nxt M/T:90 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TRR$-BRL sales cotton and coffee</masterLabel>
+            <translation><!-- TRR$-BRL sales cotton and coffee --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TRU$-USD sales cotton and coffee</masterLabel>
+            <translation><!-- TRU$-USD sales cotton and coffee --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>U000-Credit Note</masterLabel>
+            <translation><!-- U000-Credit Note --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>U042-Customer Financing 42 Days</masterLabel>
+            <translation><!-- U042-Customer Financing 42 Days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>U050-Customer Financing 50 Days</masterLabel>
+            <translation><!-- U050-Customer Financing 50 Days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>U056-NET 56 DAYS from Invoice Date</masterLabel>
+            <translation><!-- U056-NET 56 DAYS from Invoice Date --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>U096-Customer Financing 96 Days</masterLabel>
+            <translation><!-- U096-Customer Financing 96 Days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>U110-Customer Financing 110 Days</masterLabel>
+            <translation><!-- U110-Customer Financing 110 Days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>VRCP-NET AS AT:</masterLabel>
+            <translation><!-- VRCP-NET AS AT: --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>W00A-NET 1 DAY from Invoice Date</masterLabel>
+            <translation><!-- W00A-NET 1 DAY from Invoice Date --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>W015-Net 15 Days EOM</masterLabel>
+            <translation><!-- W015-Net 15 Days EOM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>W025-Net 25 Days EOM</masterLabel>
+            <translation><!-- W025-Net 25 Days EOM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>W030-Net 30 Days EOM</masterLabel>
+            <translation><!-- W030-Net 30 Days EOM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>W035-Net 35 Days EOM</masterLabel>
+            <translation><!-- W035-Net 35 Days EOM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>W045-Net 45 Days EOM</masterLabel>
+            <translation><!-- W045-Net 45 Days EOM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>W060-Net 60 Days EOM</masterLabel>
+            <translation><!-- W060-Net 60 Days EOM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>W090-Net 90 Days EOM</masterLabel>
+            <translation><!-- W090-Net 90 Days EOM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>W120-Net 120 Days EOM</masterLabel>
+            <translation><!-- W120-Net 120 Days EOM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>WB30-Net 30 Days EOM payable the 10th</masterLabel>
+            <translation><!-- WB30-Net 30 Days EOM payable the 10th --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>WB60-Net 60 Days EOM payable the 10th</masterLabel>
+            <translation><!-- WB60-Net 60 Days EOM payable the 10th --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>XX15-C/CLS:15th/ME this M</masterLabel>
+            <translation><!-- XX15-C/CLS:15th/ME this M --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y007-Net 7 from Date of Invoice</masterLabel>
+            <translation><!-- Y007-Net 7 from Date of Invoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y008-8 Days Net from Invoice Date</masterLabel>
+            <translation><!-- Y008-8 Days Net from Invoice Date --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y010-Net 10 Days from date of invoice</masterLabel>
+            <translation><!-- Y010-Net 10 Days from date of invoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y014-Net 14 Days from date of invoice</masterLabel>
+            <translation><!-- Y014-Net 14 Days from date of invoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y015-Net 15 Days from date of invoice</masterLabel>
+            <translation><!-- Y015-Net 15 Days from date of invoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y020-Net 20 Days from date of invoice</masterLabel>
+            <translation><!-- Y020-Net 20 Days from date of invoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y021-Net 21 Days Date of Invoice</masterLabel>
+            <translation><!-- Y021-Net 21 Days Date of Invoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y021-Net 21 Days from Invoice Date</masterLabel>
+            <translation><!-- Y021-Net 21 Days from Invoice Date --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y028-28 Days Net from Invoice Date</masterLabel>
+            <translation><!-- Y028-28 Days Net from Invoice Date --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y030-Net 30 Days from date of invoice</masterLabel>
+            <translation><!-- Y030-Net 30 Days from date of invoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y035-35 Days Net from Invoice Date</masterLabel>
+            <translation><!-- Y035-35 Days Net from Invoice Date --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y038-38 Days Net from Invoice Date</masterLabel>
+            <translation><!-- Y038-38 Days Net from Invoice Date --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y043-Net 43 days from Invoice Date</masterLabel>
+            <translation><!-- Y043-Net 43 days from Invoice Date --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y045-Net 45 Days from date of invoice</masterLabel>
+            <translation><!-- Y045-Net 45 Days from date of invoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y049-1% 30 DAYS, NET 45 DAYS</masterLabel>
+            <translation><!-- Y049-1% 30 DAYS, NET 45 DAYS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y060-Net 60 Days from date of invoice</masterLabel>
+            <translation><!-- Y060-Net 60 Days from date of invoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y063-Customer Financing 63Days</masterLabel>
+            <translation><!-- Y063-Customer Financing 63Days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y070-Customer Financing 70 Days</masterLabel>
+            <translation><!-- Y070-Customer Financing 70 Days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y075-Net 75 Days from date of invoice</masterLabel>
+            <translation><!-- Y075-Net 75 Days from date of invoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y080-80 Days Net from Invoice Date</masterLabel>
+            <translation><!-- Y080-80 Days Net from Invoice Date --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y086-86 Days Net from Invoice Date</masterLabel>
+            <translation><!-- Y086-86 Days Net from Invoice Date --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y090-Net 90 Days from date of invoice</masterLabel>
+            <translation><!-- Y090-Net 90 Days from date of invoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y120-Net 120 Days from date of invoice</masterLabel>
+            <translation><!-- Y120-Net 120 Days from date of invoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y150-Net 150 Days from Invoice Date</masterLabel>
+            <translation><!-- Y150-Net 150 Days from Invoice Date --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y150-Net 150 Days from date of invoice</masterLabel>
+            <translation><!-- Y150-Net 150 Days from date of invoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y180-Net 180 Days from date of invoice</masterLabel>
+            <translation><!-- Y180-Net 180 Days from date of invoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y184-Net 184 Days from date of invoice</masterLabel>
+            <translation><!-- Y184-Net 184 Days from date of invoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y210-210 Days Net from Invoice Date</masterLabel>
+            <translation><!-- Y210-210 Days Net from Invoice Date --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y210-Net 210 Days from date of invoice</masterLabel>
+            <translation><!-- Y210-Net 210 Days from date of invoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y240-Net 240 Days from date of invoice</masterLabel>
+            <translation><!-- Y240-Net 240 Days from date of invoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y270-270 Days Net from Invoice Date</masterLabel>
+            <translation><!-- Y270-270 Days Net from Invoice Date --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y300-Net 300 Days from date of invoice</masterLabel>
+            <translation><!-- Y300-Net 300 Days from date of invoice --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y330-330 DAYS NET DATE OF INVOICE</masterLabel>
+            <translation><!-- Y330-330 DAYS NET DATE OF INVOICE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Y360-360 Days Net from Invoice Date</masterLabel>
+            <translation><!-- Y360-360 Days Net from Invoice Date --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>YD38-1% 14 Days, Net 30 Days DOI</masterLabel>
+            <translation><!-- YD38-1% 14 Days, Net 30 Days DOI --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Novus External Id --></label>
+        <name>Novus_External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- OrgGroup --></label>
+        <name>OrgGroup__c</name>
+        <relationshipLabel><!-- Organizational Group Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Pricing Task Reasons --></label>
+        <name>Pricing_Task_Reasons__c</name>
+        <picklistValues>
+            <masterLabel>Customer Compensation - Equipment Related</masterLabel>
+            <translation><!-- Customer Compensation - Equipment Related --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Customer Compensation - Other</masterLabel>
+            <translation><!-- Customer Compensation - Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>F02 Complaint Settle-MFG, PKG</masterLabel>
+            <translation><!-- F02 Complaint Settle-MFG, PKG --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>F03 Complaint Settle-MKTG</masterLabel>
+            <translation><!-- F03 Complaint Settle-MKTG --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>F06 Demonstration to Customer</masterLabel>
+            <translation><!-- F06 Demonstration to Customer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>F07 Development Testing</masterLabel>
+            <translation><!-- F07 Development Testing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>F09 Research &amp; Development</masterLabel>
+            <translation><!-- F09 Research &amp; Development --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>F12 Replacement</masterLabel>
+            <translation><!-- F12 Replacement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>F15 Sales Promotion</masterLabel>
+            <translation><!-- F15 Sales Promotion --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>New Business Gain</masterLabel>
+            <translation><!-- New Business Gain --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT01- 002 - Trade fair sales activity</masterLabel>
+            <translation><!-- PT01- 002 - Trade fair sales activity --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT01-Trade fair sales activity</masterLabel>
+            <translation><!-- PT01-Trade fair sales activity --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT02-Other reason</masterLabel>
+            <translation><!-- PT02-Other reason --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT03- F06 -Demonstration to Customer</masterLabel>
+            <translation><!-- PT03- F06 -Demonstration to Customer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT03-Demonstration to Customer</masterLabel>
+            <translation><!-- PT03-Demonstration to Customer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT04- F09 - Research &amp; Development</masterLabel>
+            <translation><!-- PT04- F09 - Research &amp; Development --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT04-Research &amp; Development</masterLabel>
+            <translation><!-- PT04-Research &amp; Development --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT05- F12 - Replacement</masterLabel>
+            <translation><!-- PT05- F12 - Replacement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT05-Replacement</masterLabel>
+            <translation><!-- PT05-Replacement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT06- F15 - Sales Promotion</masterLabel>
+            <translation><!-- PT06- F15 - Sales Promotion --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT07- M12 - Pricing Discrepancy</masterLabel>
+            <translation><!-- PT07- M12 - Pricing Discrepancy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT08- M13 - Quantity Correction</masterLabel>
+            <translation><!-- PT08- M13 - Quantity Correction --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT09- M31 - Commercial Adjustment</masterLabel>
+            <translation><!-- PT09- M31 - Commercial Adjustment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT10-S01 - Paid Sample sales</masterLabel>
+            <translation><!-- PT10-S01 - Paid Sample sales --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT11-Non-standard product</masterLabel>
+            <translation><!-- PT11-Non-standard product --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT12-Displays</masterLabel>
+            <translation><!-- PT12-Displays --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT13-Showroom</masterLabel>
+            <translation><!-- PT13-Showroom --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT14-Slow moving inventory</masterLabel>
+            <translation><!-- PT14-Slow moving inventory --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT15-Gap closer</masterLabel>
+            <translation><!-- PT15-Gap closer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT16-Sales Promotion</masterLabel>
+            <translation><!-- PT16-Sales Promotion --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT17-Key accounts prices</masterLabel>
+            <translation><!-- PT17-Key accounts prices --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT18-2Q product sales</masterLabel>
+            <translation><!-- PT18-2Q product sales --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT19-Dual sales mode</masterLabel>
+            <translation><!-- PT19-Dual sales mode --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT20-Discounted Sales</masterLabel>
+            <translation><!-- PT20-Discounted Sales --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT21-Surcharge ( LTC Order )</masterLabel>
+            <translation><!-- PT21-Surcharge ( LTC Order ) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT22-Surcharge Waiver</masterLabel>
+            <translation><!-- PT22-Surcharge Waiver --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT23-Dual Currency</masterLabel>
+            <translation><!-- PT23-Dual Currency --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT24-Price Increase</masterLabel>
+            <translation><!-- PT24-Price Increase --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT25-Metal Adjustment</masterLabel>
+            <translation><!-- PT25-Metal Adjustment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT26-Fast As You Need It</masterLabel>
+            <translation><!-- PT26-Fast As You Need It --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT27-New price not on SAP yet</masterLabel>
+            <translation><!-- PT27-New price not on SAP yet --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT28-One time transaction</masterLabel>
+            <translation><!-- PT28-One time transaction --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT29-Second Quality</masterLabel>
+            <translation><!-- PT29-Second Quality --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT30-Order Fulfilled with Alt Product</masterLabel>
+            <translation><!-- PT30-Order Fulfilled with Alt Product --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT31-One off orders</masterLabel>
+            <translation><!-- PT31-One off orders --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT32-Paid Sample sales</masterLabel>
+            <translation><!-- PT32-Paid Sample sales --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT33-Non-standard product</masterLabel>
+            <translation><!-- PT33-Non-standard product --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT34-Below Minimum Order Quantity</masterLabel>
+            <translation><!-- PT34-Below Minimum Order Quantity --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Product Testing</masterLabel>
+            <translation><!-- Product Testing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>S01 Paid Sample sales</masterLabel>
+            <translation><!-- S01 Paid Sample sales --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Pricing Task Type --></label>
+        <name>Pricing_Task_Type__c</name>
+        <picklistValues>
+            <masterLabel>Display</masterLabel>
+            <translation><!-- Display --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Free of Charge</masterLabel>
+            <translation><!-- Free of Charge --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other Pricing Task</masterLabel>
+            <translation><!-- Other Pricing Task --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rebate Agreement</masterLabel>
+            <translation><!-- Rebate Agreement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rebate Payout Product Shipment</masterLabel>
+            <translation><!-- Rebate Payout Product Shipment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rebate adjustment</masterLabel>
+            <translation><!-- Rebate adjustment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rebate payout</masterLabel>
+            <translation><!-- Rebate payout --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spot Price</masterLabel>
+            <translation><!-- Spot Price --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Project Request Reasons --></label>
+        <name>Project_Request_Reasons__c</name>
+        <picklistValues>
+            <masterLabel>PP01-Quantity Change</masterLabel>
+            <translation><!-- PP01-Quantity Change --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PP02-Time Extension</masterLabel>
+            <translation><!-- PP02-Time Extension --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PP03-Quantity and time change</masterLabel>
+            <translation><!-- PP03-Quantity and time change --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PP04-Product change</masterLabel>
+            <translation><!-- PP04-Product change --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PP05-Competitive Pricing</masterLabel>
+            <translation><!-- PP05-Competitive Pricing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PP06-Condominium</masterLabel>
+            <translation><!-- PP06-Condominium --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PP07-Commercial</masterLabel>
+            <translation><!-- PP07-Commercial --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PP08-Residential</masterLabel>
+            <translation><!-- PP08-Residential --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PP09-Exterior cladding</masterLabel>
+            <translation><!-- PP09-Exterior cladding --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PP10-New Project</masterLabel>
+            <translation><!-- PP10-New Project --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PP11-Renegotiation discount</masterLabel>
+            <translation><!-- PP11-Renegotiation discount --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PP12-Qty and product change</masterLabel>
+            <translation><!-- PP12-Qty and product change --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PP13-Qty, product and time change</masterLabel>
+            <translation><!-- PP13-Qty, product and time change --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PP14-Rate Change</masterLabel>
+            <translation><!-- PP14-Rate Change --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Rebate Agreement --></label>
+        <name>Rebate_Agreement__c</name>
+        <picklistValues>
+            <masterLabel>Accrual Adjustment</masterLabel>
+            <translation><!-- Accrual Adjustment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Annual Agreement</masterLabel>
+            <translation><!-- Annual Agreement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Combine Rebate</masterLabel>
+            <translation><!-- Combine Rebate --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Compensated Price</masterLabel>
+            <translation><!-- Compensated Price --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Development Program</masterLabel>
+            <translation><!-- Development Program --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Market Share Gain</masterLabel>
+            <translation><!-- Market Share Gain --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Monthly Agreement</masterLabel>
+            <translation><!-- Monthly Agreement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>New Rebate</masterLabel>
+            <translation><!-- New Rebate --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other reason</masterLabel>
+            <translation><!-- Other reason --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Partner Rebate</masterLabel>
+            <translation><!-- Partner Rebate --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Quarterly Agreement</masterLabel>
+            <translation><!-- Quarterly Agreement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rebate Cancellation</masterLabel>
+            <translation><!-- Rebate Cancellation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rebate Renewal</masterLabel>
+            <translation><!-- Rebate Renewal --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rebate Scheme Change</masterLabel>
+            <translation><!-- Rebate Scheme Change --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sales Promotion</masterLabel>
+            <translation><!-- Sales Promotion --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Standard Rebate Agreement</masterLabel>
+            <translation><!-- Standard Rebate Agreement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Third Party Rebate Agreement</masterLabel>
+            <translation><!-- Third Party Rebate Agreement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Volume Growth</masterLabel>
+            <translation><!-- Volume Growth --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Request Class --></label>
+        <name>Request_Class__c</name>
+        <picklistValues>
+            <masterLabel>2nd Life Material (2LM)</masterLabel>
+            <translation><!-- 2nd Life Material (2LM) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>AM</masterLabel>
+            <translation><!-- AM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>APPROVER ONLY</masterLabel>
+            <translation><!-- APPROVER ONLY --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Accessories and Furniture</masterLabel>
+            <translation><!-- Accessories and Furniture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Aircraft</masterLabel>
+            <translation><!-- Aircraft --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Apexa</masterLabel>
+            <translation><!-- Apexa --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Apollo Pharmacy</masterLabel>
+            <translation><!-- Apollo Pharmacy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Apparel</masterLabel>
+            <translation><!-- Apparel --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Apple (PCo)</masterLabel>
+            <translation><!-- Apple (PCo) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Aramid Intermediates</masterLabel>
+            <translation><!-- Aramid Intermediates --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Aramids Intermediates</masterLabel>
+            <translation><!-- Aramids Intermediates --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Artificial Graphite Sheet</masterLabel>
+            <translation><!-- Artificial Graphite Sheet --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Asia Pacific</masterLabel>
+            <translation><!-- Asia Pacific --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Auto</masterLabel>
+            <translation><!-- Auto --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Auto and Other</masterLabel>
+            <translation><!-- Auto and Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Automotive</masterLabel>
+            <translation><!-- Automotive --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B2B</masterLabel>
+            <translation><!-- B2B --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BU Approval only</masterLabel>
+            <translation><!-- BU Approval only --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BU Approval only (EA)</masterLabel>
+            <translation><!-- BU Approval only (EA) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BU Approval only (MENAF)</masterLabel>
+            <translation><!-- BU Approval only (MENAF) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BU Approval only (WA)</masterLabel>
+            <translation><!-- BU Approval only (WA) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>C&amp;I</masterLabel>
+            <translation><!-- C&amp;I --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CHINA</masterLabel>
+            <translation><!-- CHINA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CI ECEMEA</masterLabel>
+            <translation><!-- CI ECEMEA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CI WE</masterLabel>
+            <translation><!-- CI WE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CO-PRODUCT</masterLabel>
+            <translation><!-- CO-PRODUCT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>COATINGS</masterLabel>
+            <translation><!-- COATINGS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CT HPL</masterLabel>
+            <translation><!-- CT HPL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CT PCM</masterLabel>
+            <translation><!-- CT PCM --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Carpet</masterLabel>
+            <translation><!-- Carpet --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chemical Industrial</masterLabel>
+            <translation><!-- Chemical Industrial --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Circuit Imaging</masterLabel>
+            <translation><!-- Circuit Imaging --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Commercial</masterLabel>
+            <translation><!-- Commercial --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Commercial complex</masterLabel>
+            <translation><!-- Commercial complex --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Commodity</masterLabel>
+            <translation><!-- Commodity --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Composite Structures (Aerospace)</masterLabel>
+            <translation><!-- Composite Structures (Aerospace) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Condominium/ New Construction</masterLabel>
+            <translation><!-- Condominium/ New Construction --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Consumer</masterLabel>
+            <translation><!-- Consumer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Consumer Coverlay</masterLabel>
+            <translation><!-- Consumer Coverlay --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Consumer Films &amp; Clads</masterLabel>
+            <translation><!-- Consumer Films &amp; Clads --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Customer Price Request</masterLabel>
+            <translation><!-- Customer Price Request --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DISTRIBUTOR</masterLabel>
+            <translation><!-- DISTRIBUTOR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DP Textile</masterLabel>
+            <translation><!-- DP Textile --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Defense - Ballistics</masterLabel>
+            <translation><!-- Defense - Ballistics --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Defense - Protective Uniforms</masterLabel>
+            <translation><!-- Defense - Protective Uniforms --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Digital Printing</masterLabel>
+            <translation><!-- Digital Printing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Direct Sales</masterLabel>
+            <translation><!-- Direct Sales --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Direct US Sales</masterLabel>
+            <translation><!-- Direct US Sales --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Diversification</masterLabel>
+            <translation><!-- Diversification --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Domestic Sales</masterLabel>
+            <translation><!-- Domestic Sales --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>EDUCATION</masterLabel>
+            <translation><!-- EDUCATION --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>EMEA</masterLabel>
+            <translation><!-- EMEA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Education-Colleges &amp; Universities</masterLabel>
+            <translation><!-- Education-Colleges &amp; Universities --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Education-Elementary &amp; Secondary</masterLabel>
+            <translation><!-- Education-Elementary &amp; Secondary --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Electrical Vehicle</masterLabel>
+            <translation><!-- Electrical Vehicle --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Emergency Response</masterLabel>
+            <translation><!-- Emergency Response --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Energy Solution WE</masterLabel>
+            <translation><!-- Energy Solution WE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Energy Solutions</masterLabel>
+            <translation><!-- Energy Solutions --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Expire Pricing Only</masterLabel>
+            <translation><!-- Expire Pricing Only --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Export</masterLabel>
+            <translation><!-- Export --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Exterior Cladding</masterLabel>
+            <translation><!-- Exterior Cladding --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Exteriors</masterLabel>
+            <translation><!-- Exteriors --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>FOC</masterLabel>
+            <translation><!-- FOC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>FR Furnishings</masterLabel>
+            <translation><!-- FR Furnishings --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Filaments Direct Sales</masterLabel>
+            <translation><!-- Filaments Direct Sales --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Filaments Indent</masterLabel>
+            <translation><!-- Filaments Indent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Food Industry</masterLabel>
+            <translation><!-- Food Industry --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Food Service</masterLabel>
+            <translation><!-- Food Service --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Full Approval Flow</masterLabel>
+            <translation><!-- Full Approval Flow --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Full Approval Flow (EA)</masterLabel>
+            <translation><!-- Full Approval Flow (EA) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Full Approval Flow (MENAF)</masterLabel>
+            <translation><!-- Full Approval Flow (MENAF) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Full Approval Flow (WA)</masterLabel>
+            <translation><!-- Full Approval Flow (WA) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GPP ECEMEA</masterLabel>
+            <translation><!-- GPP ECEMEA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GPP WE</masterLabel>
+            <translation><!-- GPP WE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GRC</masterLabel>
+            <translation><!-- GRC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Green Town</masterLabel>
+            <translation><!-- Green Town --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Healthcare</masterLabel>
+            <translation><!-- Healthcare --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hospitality</masterLabel>
+            <translation><!-- Hospitality --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>INDUSTRIAL ECEMEA</masterLabel>
+            <translation><!-- INDUSTRIAL ECEMEA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>INDUSTRIAL WE</masterLabel>
+            <translation><!-- INDUSTRIAL WE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IT HPF</masterLabel>
+            <translation><!-- IT HPF --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Indent</masterLabel>
+            <translation><!-- Indent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Indent - Aramids</masterLabel>
+            <translation><!-- Indent - Aramids --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Indent - Tyvek® BE</masterLabel>
+            <translation><!-- Indent - Tyvek® BE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Indent - Tyvek® Garments</masterLabel>
+            <translation><!-- Indent - Tyvek® Garments --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Indent - Tyvek® Roll Goods</masterLabel>
+            <translation><!-- Indent - Tyvek® Roll Goods --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Indent EMEA</masterLabel>
+            <translation><!-- Indent EMEA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Indent Mexico</masterLabel>
+            <translation><!-- Indent Mexico --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Indent Sales</masterLabel>
+            <translation><!-- Indent Sales --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Indent to Asia Pacific</masterLabel>
+            <translation><!-- Indent to Asia Pacific --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Indent to Latin America</masterLabel>
+            <translation><!-- Indent to Latin America --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Industrial</masterLabel>
+            <translation><!-- Industrial --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Industrial Aircraft and Automotive</masterLabel>
+            <translation><!-- Industrial Aircraft and Automotive --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Industrial Sales</masterLabel>
+            <translation><!-- Industrial Sales --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Industrials</masterLabel>
+            <translation><!-- Industrials --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Joint Venture</masterLabel>
+            <translation><!-- Joint Venture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Joint Venture - Kevlar®</masterLabel>
+            <translation><!-- Joint Venture - Kevlar® --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Joint Venture - Nomex®</masterLabel>
+            <translation><!-- Joint Venture - Nomex® --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Joint Venture - Tyvek® Garments</masterLabel>
+            <translation><!-- Joint Venture - Tyvek® Garments --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Joint Venture - Tyvek® Roll Goods</masterLabel>
+            <translation><!-- Joint Venture - Tyvek® Roll Goods --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Joint Venture/Indent</masterLabel>
+            <translation><!-- Joint Venture/Indent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>K002 DPT AUTOMOTIVE</masterLabel>
+            <translation><!-- K002 DPT AUTOMOTIVE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>K103 DPT Military Ba</masterLabel>
+            <translation><!-- K103 DPT Military Ba --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>K203 DPT AUTOMOTIVE</masterLabel>
+            <translation><!-- K203 DPT AUTOMOTIVE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>K204 DPT INDUSTRIAL</masterLabel>
+            <translation><!-- K204 DPT INDUSTRIAL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>K232 DPT COMPOSITE S</masterLabel>
+            <translation><!-- K232 DPT COMPOSITE S --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>K242 DPT OIL AND GAS</masterLabel>
+            <translation><!-- K242 DPT OIL AND GAS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>K322 DPT FIBER OPTIC</masterLabel>
+            <translation><!-- K322 DPT FIBER OPTIC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>K401 DPT MECHANICAL</masterLabel>
+            <translation><!-- K401 DPT MECHANICAL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>K401 MECHANICAL TWW ECEMEA</masterLabel>
+            <translation><!-- K401 MECHANICAL TWW ECEMEA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>K401 MECHANICAL TWW WE</masterLabel>
+            <translation><!-- K401 MECHANICAL TWW WE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>K402 DPT THERMAL IND</masterLabel>
+            <translation><!-- K402 DPT THERMAL IND --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>K403 DPT EMERGENCY R</masterLabel>
+            <translation><!-- K403 DPT EMERGENCY R --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>K406 DPT LAW ENFORCE</masterLabel>
+            <translation><!-- K406 DPT LAW ENFORCE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>K406 Defense - Balli</masterLabel>
+            <translation><!-- K406 Defense - Balli --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>K9AB ENERGY SOLUTION</masterLabel>
+            <translation><!-- K9AB ENERGY SOLUTION --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>K9AD DPT ARAMIDS INT</masterLabel>
+            <translation><!-- K9AD DPT ARAMIDS INT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>K9DV Diversification</masterLabel>
+            <translation><!-- K9DV Diversification --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>K9EV ELECTRICAL VEHICLE</masterLabel>
+            <translation><!-- K9EV ELECTRICAL VEHICLE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KOREA</masterLabel>
+            <translation><!-- KOREA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>KTAF DPT Military Th</masterLabel>
+            <translation><!-- KTAF DPT Military Th --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Kevlar®</masterLabel>
+            <translation><!-- Kevlar® --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Kevlar® - Life Protection only</masterLabel>
+            <translation><!-- Kevlar® - Life Protection only --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LA Kevlar® Automotive Short Fiber</masterLabel>
+            <translation><!-- LA Kevlar® Automotive Short Fiber --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LA Kevlar® Automotive Yarn</masterLabel>
+            <translation><!-- LA Kevlar® Automotive Yarn --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LA Kevlar® Commodity Aramids Intermediates</masterLabel>
+            <translation><!-- LA Kevlar® Commodity Aramids Intermediates --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LA Kevlar® Commodity FOC</masterLabel>
+            <translation><!-- LA Kevlar® Commodity FOC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LA Kevlar® Commodity Hot Gas Filtration</masterLabel>
+            <translation><!-- LA Kevlar® Commodity Hot Gas Filtration --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LA Kevlar® Commodity Industrial</masterLabel>
+            <translation><!-- LA Kevlar® Commodity Industrial --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LA Kevlar® Commodity Oil &amp; Gas</masterLabel>
+            <translation><!-- LA Kevlar® Commodity Oil &amp; Gas --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LA Kevlar® Defense Ballistics</masterLabel>
+            <translation><!-- LA Kevlar® Defense Ballistics --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LA Kevlar® Defense Civilian Armor</masterLabel>
+            <translation><!-- LA Kevlar® Defense Civilian Armor --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LA Kevlar® Diversification</masterLabel>
+            <translation><!-- LA Kevlar® Diversification --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LA Kevlar® Mechanical Protection</masterLabel>
+            <translation><!-- LA Kevlar® Mechanical Protection --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LA Nomex® Defense Protective Uniforms</masterLabel>
+            <translation><!-- LA Nomex® Defense Protective Uniforms --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LA Nomex® Diversification</masterLabel>
+            <translation><!-- LA Nomex® Diversification --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LA Nomex® Emergency Response</masterLabel>
+            <translation><!-- LA Nomex® Emergency Response --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LA Nomex® Energy Solutions</masterLabel>
+            <translation><!-- LA Nomex® Energy Solutions --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LA Nomex® Thermal Industrial</masterLabel>
+            <translation><!-- LA Nomex® Thermal Industrial --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LA Second Life Material (2LM)</masterLabel>
+            <translation><!-- LA Second Life Material (2LM) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LA Typar</masterLabel>
+            <translation><!-- LA Typar --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LA Tyvek® Building Innovations</masterLabel>
+            <translation><!-- LA Tyvek® Building Innovations --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LA Tyvek® Chemical Industrial</masterLabel>
+            <translation><!-- LA Tyvek® Chemical Industrial --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LA Tyvek® Cleanroom Garments</masterLabel>
+            <translation><!-- LA Tyvek® Cleanroom Garments --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LA Tyvek® Consumer &amp; Industrial</masterLabel>
+            <translation><!-- LA Tyvek® Consumer &amp; Industrial --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LA Tyvek® Healthcare</masterLabel>
+            <translation><!-- LA Tyvek® Healthcare --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LED Lighting</masterLabel>
+            <translation><!-- LED Lighting --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LP ECEMEA</masterLabel>
+            <translation><!-- LP ECEMEA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LP WE</masterLabel>
+            <translation><!-- LP WE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MED. PACK. ECEMEA</masterLabel>
+            <translation><!-- MED. PACK. ECEMEA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MED. PACK. WE</masterLabel>
+            <translation><!-- MED. PACK. WE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MINERALS</masterLabel>
+            <translation><!-- MINERALS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MULTI-RESIDENTIAL</masterLabel>
+            <translation><!-- MULTI-RESIDENTIAL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Marine</masterLabel>
+            <translation><!-- Marine --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Maruti Suzuki &amp; Nexa</masterLabel>
+            <translation><!-- Maruti Suzuki &amp; Nexa --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mechanical Industrial</masterLabel>
+            <translation><!-- Mechanical Industrial --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mixed</masterLabel>
+            <translation><!-- Mixed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mixed CT</masterLabel>
+            <translation><!-- Mixed CT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mixed IT</masterLabel>
+            <translation><!-- Mixed IT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Multifamily</masterLabel>
+            <translation><!-- Multifamily --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Nomex®</masterLabel>
+            <translation><!-- Nomex® --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Non GRC</masterLabel>
+            <translation><!-- Non GRC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Non Indent</masterLabel>
+            <translation><!-- Non Indent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Normal Sales</masterLabel>
+            <translation><!-- Normal Sales --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>North America</masterLabel>
+            <translation><!-- North America --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>OTHER REQUESTS</masterLabel>
+            <translation><!-- OTHER REQUESTS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Offices</masterLabel>
+            <translation><!-- Offices --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Oil and Gas</masterLabel>
+            <translation><!-- Oil and Gas --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Others</masterLabel>
+            <translation><!-- Others --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PAPER</masterLabel>
+            <translation><!-- PAPER --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PLASTICS</masterLabel>
+            <translation><!-- PLASTICS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PV</masterLabel>
+            <translation><!-- PV --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Packaging Graphics</masterLabel>
+            <translation><!-- Packaging Graphics --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Permanent Price</masterLabel>
+            <translation><!-- Permanent Price --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Personal Protection</masterLabel>
+            <translation><!-- Personal Protection --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Photovoltaic</masterLabel>
+            <translation><!-- Photovoltaic --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Price Adjustment and Rebate</masterLabel>
+            <translation><!-- Price Adjustment and Rebate --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Price Repositioning</masterLabel>
+            <translation><!-- Price Repositioning --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Public Spaces</masterLabel>
+            <translation><!-- Public Spaces --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>RESIDENTIAL</masterLabel>
+            <translation><!-- RESIDENTIAL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Request Class1</masterLabel>
+            <translation><!-- Request Class1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Request Class2</masterLabel>
+            <translation><!-- Request Class2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Residential-retail</masterLabel>
+            <translation><!-- Residential-retail --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Resins &amp; Elastomers Commission</masterLabel>
+            <translation><!-- Resins &amp; Elastomers Commission --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Resins &amp; Elastomers Direct Sales</masterLabel>
+            <translation><!-- Resins &amp; Elastomers Direct Sales --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Resins &amp; Elastomers Indent</masterLabel>
+            <translation><!-- Resins &amp; Elastomers Indent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Retail</masterLabel>
+            <translation><!-- Retail --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SPC</masterLabel>
+            <translation><!-- SPC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SPECIALITY</masterLabel>
+            <translation><!-- SPECIALITY --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sample</masterLabel>
+            <translation><!-- Sample --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Seasonal Promotion</masterLabel>
+            <translation><!-- Seasonal Promotion --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Second Life Domain</masterLabel>
+            <translation><!-- Second Life Domain --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Second Life Material (2LM)</masterLabel>
+            <translation><!-- Second Life Material (2LM) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Standard</masterLabel>
+            <translation><!-- Standard --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Starbucks (SBX)</masterLabel>
+            <translation><!-- Starbucks (SBX) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Susterra</masterLabel>
+            <translation><!-- Susterra --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TAIWAN</masterLabel>
+            <translation><!-- TAIWAN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>THERMAL APPAREL ECEMEA</masterLabel>
+            <translation><!-- THERMAL APPAREL ECEMEA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>THERMAL APPAREL WE</masterLabel>
+            <translation><!-- THERMAL APPAREL WE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TRANSPORTATION</masterLabel>
+            <translation><!-- TRANSPORTATION --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tensylon™</masterLabel>
+            <translation><!-- Tensylon™ --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Thermal Industrial</masterLabel>
+            <translation><!-- Thermal Industrial --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Typar</masterLabel>
+            <translation><!-- Typar --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Typar®</masterLabel>
+            <translation><!-- Typar® --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tyvek</masterLabel>
+            <translation><!-- Tyvek --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tyvek® BE</masterLabel>
+            <translation><!-- Tyvek® BE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tyvek® BE - Roofing</masterLabel>
+            <translation><!-- Tyvek® BE - Roofing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tyvek® Garments</masterLabel>
+            <translation><!-- Tyvek® Garments --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tyvek® HMT</masterLabel>
+            <translation><!-- Tyvek® HMT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tyvek® Roll Goods</masterLabel>
+            <translation><!-- Tyvek® Roll Goods --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tyvek® Roll Goods-C&amp;I</masterLabel>
+            <translation><!-- Tyvek® Roll Goods-C&amp;I --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tyvek® Roll Goods-CI</masterLabel>
+            <translation><!-- Tyvek® Roll Goods-CI --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tyvek® Roll Goods-Cargo Covers</masterLabel>
+            <translation><!-- Tyvek® Roll Goods-Cargo Covers --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tyvek® Roll Goods-Commodity</masterLabel>
+            <translation><!-- Tyvek® Roll Goods-Commodity --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tyvek® Roll Goods-GPP</masterLabel>
+            <translation><!-- Tyvek® Roll Goods-GPP --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tyvek® Roll Goods-HC</masterLabel>
+            <translation><!-- Tyvek® Roll Goods-HC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tyvek® Roll Goods-MPP</masterLabel>
+            <translation><!-- Tyvek® Roll Goods-MPP --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tyvek® Roll Goods-NBD</masterLabel>
+            <translation><!-- Tyvek® Roll Goods-NBD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wallcovering</masterLabel>
+            <translation><!-- Wallcovering --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Westside</masterLabel>
+            <translation><!-- Westside --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wire &amp; Cable</masterLabel>
+            <translation><!-- Wire &amp; Cable --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wire Insulation</masterLabel>
+            <translation><!-- Wire Insulation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ZYTEL</masterLabel>
+            <translation><!-- ZYTEL --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Earliest Valid From Offset --></label>
+        <name>Retroactive_Limit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Standardized Currency --></label>
+        <name>Standardized_Currency__c</name>
+    </fields>
+    <fields>
+        <label><!-- Standardized UoM --></label>
+        <name>Standardized_UoM__c</name>
+    </fields>
+    <fields>
+        <label><!-- isPaymentTermsApplicable --></label>
+        <name>isPaymentTermsApplicable__c</name>
+    </fields>
+    <fields>
+        <label><!-- isVolumeApplicable --></label>
+        <name>isVolumeApplicable__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

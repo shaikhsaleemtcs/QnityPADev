@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>Used to bypass triggers and workflow rules</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Triggers__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Triggers</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Workflow_Rules__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Workflow Rules</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Global On Off Switch</label>
+    <visibility>Public</visibility>
+</CustomObject>

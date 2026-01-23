@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Businesses added in this custom data won&apos;t be able to view any Floor prices in the system. If want to enable it to the  specific user , assigned them &quot;Price Approval - Enable Floor Section &quot; permission set.</description>
+    <fields>
+        <fullName>Hidecolour__c</fullName>
+        <defaultValue>false</defaultValue>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Hidecolour</label>
+        <type>Checkbox</type>
+    </fields>
+    <label>HideFloorSection</label>
+    <listViews>
+        <fullName>All_Fields</fullName>
+        <columns>MasterLabel</columns>
+        <columns>DeveloperName</columns>
+        <columns>NamespacePrefix</columns>
+        <columns>Hidecolour__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All Fields</label>
+    </listViews>
+    <pluralLabel>HideFloorSections</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

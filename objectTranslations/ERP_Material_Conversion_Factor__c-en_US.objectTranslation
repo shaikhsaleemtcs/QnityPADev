@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>ERP Material Conversion Factor</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>ERP Material Conversion Factors</value>
+    </caseValues>
+    <fields>
+        <label><!-- Alternative UOM Text --></label>
+        <name>Alternative_UOM_Text__c</name>
+    </fields>
+    <fields>
+        <label><!-- Alternative UOM --></label>
+        <name>Alternative_UOM__c</name>
+    </fields>
+    <fields>
+        <label><!-- Base UOM Text --></label>
+        <name>Base_UOM_Text__c</name>
+    </fields>
+    <fields>
+        <label><!-- Base UOM --></label>
+        <name>Base_UOM__c</name>
+    </fields>
+    <fields>
+        <label><!-- Denominator (X) --></label>
+        <name>Denominator_X__c</name>
+    </fields>
+    <fields>
+        <label><!-- External ERP ID --></label>
+        <name>External_ERP_ID__c</name>
+    </fields>
+    <fields>
+        <help><!-- This is the pre-split original 18 digit Salesforce ID of this record that came from the original One Dupont Salesforce instance before the business units were separated. Its is case insensitive and unique. --></help>
+        <label><!-- Legacy Pricing Util SFID --></label>
+        <name>Legacy_Pricing_Util_SFID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Material --></label>
+        <name>Material__c</name>
+        <relationshipLabel><!-- ERP Material Conversion Factors --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Numerator (Y) --></label>
+        <name>Numerator_Y__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sys Id --></label>
+        <name>Sys_Id__c</name>
+    </fields>
+    <recordTypes>
+        <label><!-- Material Conversion Factor --></label>
+        <name>Material_Conversion_Factor</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

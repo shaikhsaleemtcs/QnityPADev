@@ -1,0 +1,407 @@
+<!--    Ver.            Developer               Changes                                                         Dependencies    -->
+<!--    1.1             Priyanka        Changed table component to 'PARelatedListComponent'                                     -->
+<!--                                    from PARelatedList                                                      None            -->
+<!--    1.2             Priyanka            Change in architecture                                              None    -->
+<!--    1.3             Priyanka            Inserted break tag before buttons                                   None    -->
+<!--    1.4             Brundha             UI                                                                  None    -->
+<!-- PP20130712     Priyanka Pillala    10 Jul 2013             Adding Request Class - APAC ROLLOUT2                    None            -->
+<!-- BR20130715     Brundha Rajkumar    15 Jul 2013             Added View Customer Prices Section for APAC ROLLOUT2                    None            -->
+<!-- VR20130827     Vinoth Rajapandian  27 Aug 2013             Added script to avoid default load of date field        None-->
+<!-- PP20140218     Priyanka Pillala    Customer Prices list views for CSRs - CAPITAL PROJECT                   None -->
+<!-- AV20140408     Abhijeet Vaishnab   Added  cloneEnable and cloneShowFlag attributes in PARelatedListComponent-->
+<!-- PP20140502     Priyanka Pillala    Removing 'View Prices' section - CAPITAL PROJECT                    None -->
+<!-- MS20140506     Mohit Sinha         Adjusted CSS to centre button after datatable addition              None -->
+<!-- TJ20140505     Tarun               Added the landing page link                                         None     -->
+<!-- BB20140508     Bisnupriya          08 May 2014             Added Customer Order Block section Pricing Request Header - CAPITAL PROJECT      None-->
+<!-- TJ20140509     Tarun               Added Navigation Flow text                                          None    -->
+<!-- BB20140516     Bisnupriya          16 May 2014             Added Request History Button - CAPITAL PROJECT      None-->
+
+<apex:page controller="ctrlPAMain" tabstyle="Price_Approval__tab"
+    sidebar="false" showHeader="true" id="currentPage" cache="true"
+    action="{!onLoadCall}">
+    <apex:pageMessages escape="false" id="errorMessage"/>
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.min.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.js')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/css/jquery.dataTables.css')}" />
+    <c:loadingComponent />
+    <style>
+        .customerLink{font-size:15px;height:20px;margin-bottom:1px;padding:5px;border:solid 1px;border-color:#6E96B2; background-color:#E5F3FC;font-weight:bold;text-align:left;}
+        .navFlow{font-size:13px;font-style:oblique;margin-bottom:3px;}
+        #CustomerRequest #soldTo .pbSubheader{margin-bottom:0px;}
+        #CustomerRequest #soldTo .detailList{border:1px solid #E2E3E4;}
+        #CustomerRequest #soldTo .detailList .dataCol{color:#000000;}
+        //#CustomerRequest .detailList .headerRow th{text-align:center;}
+        //#CustomerRequest .detailList tr th{border-bottom:none;}
+        #CustomerRequest .detailList tr td{border-bottom:none;}
+        #CustomerRequest .detailList .data2Col {border:none;text-align:center;padding-left:0px;}
+        #CustomerRequest #requests {padding-left:0px;}
+        body .pbBody table.list tr td{border-bottom: none;}
+        body .pbBody table.list tr:first-child th{color:white;background-color:#63A4C5;}
+        body .pbBody table.list tr:nth-child(2) th{color:black;background-color:#f8f8f8;border:1px solid #E2E3E4; }
+        #requests .pbBody{margin:0px;}
+        .noTableFooter
+         {
+         margin:0px!important;
+         }
+
+.pricesSection table.list tr th {
+    color: white;
+    background-color: #63A4C5;
+}
+.bPageBlock .requiredInput .requiredBlock {
+    top: 0px;
+    bottom: 1px;
+}
+
+.FrontScreenImp {
+    background-color: white;
+    //border-width: 2px;
+    border: 2px solid #63A4C5;
+    z-index: 9999;
+    left: 0;
+    padding: 10px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin-left: -250px;
+    top: 0;
+}
+.BackScreenImp {
+    background-color: #696969;
+    opacity: 0.5;
+    filter: alpha(opacity = 50);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 9998;
+}
+    </style>
+    
+    <script type="text/javascript">
+   
+    var j$ = jQuery.noConflict();
+    j$(document).ready(function(){                                          //<TJ20140401> - added javascript to generate HTML Table with additional functionalities
+        
+        var tab = j$('#PARelatedListComponentTableCustomerPrice').dataTable({
+        "aLengthMenu": [100,200],
+        "iDisplayLength" : 100,
+        sPaginationType: "full_numbers",
+        "aoColumns" : [{"bVisible": true,"bSortable": false,"bSearchable": false },{"bSortable": true,"bSearchable": true},{"bSortable": true},{"bSortable": true},{"bSortable": true},{"bSortable": true},{"bSortable": true}],
+        sPlaceHolder : "foot:before",});
+        j$('#PARelatedListComponentTableCustomerPrice'+'_filter').after('<br /><br />');
+        j$('#PARelatedListComponentTableCustomerPrice').after('<br />');
+        j$("div[id~=PARelatedListComponentTableCustomerPrice_length]").css("display","none");
+        
+        var tab1 = j$('#PARelatedListComponentTablePricingTask').dataTable({
+        "aLengthMenu": [100,200],
+        "iDisplayLength" : 100,
+        sPaginationType: "full_numbers",
+        "aoColumns" : [{"bVisible": true,"bSortable": false,"bSearchable": false},{"bSortable": true,"bSearchable": true},{"bSortable": true},{"bSortable": true},{"bSortable": true},{"bSortable": true},{"bSortable": true}],
+        sPlaceHolder : "foot:before",});
+        j$('#PARelatedListComponentTablePricingTask'+'_filter').after('<br /><br />');
+        j$('#PARelatedListComponentTablePricingTask').after('<br />');
+        j$("div[id~=PARelatedListComponentTablePricingTask_length]").css("display","none");
+        
+        var tab2 = j$('#PARelatedListComponentTableProject').dataTable({
+        "aLengthMenu": [100,200],
+        "iDisplayLength" : 100,
+        sPaginationType: "full_numbers",
+        sPlaceHolder : "foot:before",});
+        j$('#PARelatedListComponentTableProject'+'_filter').after('<br /><br />');
+        j$('#PARelatedListComponentTableProject').after('<br />');
+        j$("div[id~=PARelatedListComponentTableProject_length]").css("display","none");
+    });
+         
+                 
+      function confirmDelete(Id)
+      {
+        var con = confirm("Are you sure you want to Delete?");
+        if (con == true) 
+            {
+                deletePricingRequest(Id);
+            }
+        else
+            {}       
+      }
+      
+      function newPermRequest(reqType, custSpecificFlag)
+      {
+          newPermanentReq(reqType,custSpecificFlag);
+      }
+     //<VR20130827> 
+     function setFocusOnLoad() {
+    }
+    </script>
+    <apex:form >
+            <!-- <TJ20140505> Added Landing Page Link -->
+        <div align="left" class="navFlow">
+            <apex:commandLink id="link0" value="Landing Page" action="{!businessComponentAction}" target="_self" style="color:blue;">
+            <apex:param name="desiredAction" value="landingpage" assignTo="{!businessaction}" />
+            <apex:param name="newPageLabel" value="PAHome" assignTo="{!newPageLabel}" />
+            </apex:commandLink>
+            <!-- <TJ20140509> Added Navigation Flow Text -->
+            <apex:outputText value="{!if(NOT(ISNULL(navigationText)),'>>','')} "/>
+            <apex:outputText value="{!navigationText}"/>
+            <apex:outputText value=">>{!$Label.Customer_Requests}"/>
+        </div>
+<!--        <TJ20140417>   Changed Page Label-->        
+        <div class="customerLink">
+               {!$Label.Customer_Requests}
+        </div>
+<!--        <TJ20140513> Help Link-->        
+        <apex:commandLink value="Help" action="{!helpLink}" style="float:right;" target="_blank">
+                <apex:param name="Help" value="Request List" assignTo="{!label}"/>
+        </apex:commandLink>
+        <div id="CustomerRequest">    
+            <apex:pageBlock >
+                <div id="soldTo">
+                    <!-- Sold To Customer Detail Section -->
+                    <apex:pageBlockSection title="{!IF(service.paServiceState.ogitems.isEndUserRebate,'Sold to Information','Customer Information')}">
+                        <!-- <TJ20140515> -->
+                        <apex:pageblocksectionitem >
+                            <apex:outputlabel value="Business"/>
+                            <apex:outputText value="{!BUName}"/>
+                        </apex:pageblocksectionitem>
+                        
+                        <apex:pageBlockSectionItem rendered="{!AND(OR(service.paServiceState.ogItems.isBUAdmin, service.paServiceState.ogItems.salesAdminPermissionSetFlag),NOT(CONTAINS(service.PAServicestate.erpCustomer.currentPrices,'ExpOnly')))}">
+                            <apex:outputlabel value="On Behalf Of"/>
+                            <apex:outputtext value="{!service.paServiceState.ogItems.userName}"/>
+                        </apex:pageBlockSectionItem>
+                        
+                        <apex:pageBlockSectionItem >
+                            <apex:outputText value="{!IF(service.paServiceState.ogitems.isEndUserRebate,"Sold to Code","Sold to Code")}"/>
+                            <apex:outputText value="{!service.PAServicestate.erpCustomer.customerCode}" />
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                            <apex:outputText value="{!IF(service.paServiceState.ogitems.isEndUserRebate,"Sold to","Sold to")}"/>
+                            <apex:outputText value="{!service.PAServicestate.erpCustomer.customerName}" />
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                            <apex:outputText value="Sales Area" />
+                            
+                            <apex:outputText escape="false"
+                                value="{!service.PAServicestate.erpCustomer.SalesArea}" />
+        
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem >
+                            <apex:outputText value="Location" />
+                            <apex:outputText escape="false"
+                                value="{!service.PAServiceState.erpCustomer.street + IF(service.PAServiceState.erpCustomer.street !=null && service.PAServiceState.erpCustomer.street !='','<br/>','')+ service.PAServiceState.erpCustomer.city + IF(service.PAServiceState.erpCustomer.City !=null && service.PAServiceState.erpCustomer.City !='','<br/>','') +
+                                service.PAServiceState.erpCustomer.StateProvince + IF(service.PAServiceState.erpCustomer.StateProvince !=null && service.PAServiceState.erpCustomer.StateProvince !='','<br/>','') +  
+                                 service.PAServiceState.erpCustomer.Country +IF(service.PAServiceState.erpCustomer.Country !=null && service.PAServiceState.erpCustomer.Country !='','<br/>','')+ service.PAServiceState.erpCustomer.ZipPostalCode}" />
+                                
+                        </apex:pageBlockSectionItem>
+
+<!--                        <TJ20140602>-->
+                        <apex:pageBlockSectionItem rendered="{!(service.PAServicestate.currentrequest.pricingRequest.Request_Type__c != 'Non Customer Specific' && !service.paServiceState.ogitems.isEndUserRebate)}">
+                        <apex:outputText value="Payment Terms"/>
+                        <apex:outputText value="{!service.PAServicestate.currentRequest.customer.paERPcustomer.Terms_of_Payment_Code__c} - {!service.PAServicestate.currentRequest.customer.paERPcustomer.Terms_of_Payment__c}"/>
+                        </apex:pageBlockSectionItem>
+<!--                        <TJ20140602>
+                            <MS20140611> Added incoterms place-->
+                        <apex:pageBlockSectionItem rendered="{!(service.PAServicestate.currentrequest.pricingRequest.Request_Type__c != 'Non Customer Specific' && !service.paServiceState.ogitems.isEndUserRebate)}">
+                            <apex:outputText value="Incoterms"/>
+                            <apex:outputText value="{!service.PAServicestate.currentRequest.customer.paERPcustomer.Incoterms_1_Code__c}({!service.PAServicestate.currentRequest.customer.paERPcustomer.Incoterms_1__c})-{!service.PAServicestate.currentRequest.customer.paERPcustomer.Incoterms_2__c}"/>
+                        </apex:pageBlockSectionItem>
+                                                
+                         <!-- BB20140508 Capital Project Added Customer Order Block section  START-->
+                        <apex:pageBlockSectionItem rendered="{!service.PAServicestate.erpCustomer.paERPCustomer.Customer_Order_Block_Code__c != null}">
+                             <apex:outputText value="Customer Order Block" />
+                             <apex:outputText escape="false"  value="{!service.PAServicestate.erpCustomer.paERPCustomer.Customer_Order_Block_Code__c}-{!service.PAServicestate.erpCustomer.paERPCustomer.Customer_Order_Block__c}"/>  
+                        </apex:pageBlockSectionItem>
+                        <!-- BB20140508 END -->
+                    </apex:pageBlockSection>
+                </div>
+                
+                <apex:pageBlockSection title="End User Details" rendered="{!service.paServiceState.ogitems.isEndUserRebate}" >
+                    	 <apex:pageBlockSectionItem >
+                    	 	<apex:outputText value="End User Code" />
+                    	 	<apex:outputText value="{!service.PAServicestate.currentRequest.selectedEndUserCode }" />
+                    	 </apex:pageBlockSectionItem>
+                    	 
+                    	 <apex:pageBlockSectionItem >
+                    	 	<apex:outputText value="End User Name" />
+                    	 	<apex:outputText value="{!service.PAServicestate.currentRequest.selectedEndUser }" />
+                    	 </apex:pageBlockSectionItem>
+                    	 
+                    	 <apex:pageBlockSectionItem >
+                    	 	<apex:outputText value="End User Country" />
+                    	 	<apex:outputText value="{!service.PAServicestate.currentRequest.selectedEndUserCountry }" />
+                    	 </apex:pageBlockSectionItem>
+                    </apex:pageBlockSection>
+                <!-- Ver 1.3-->
+                <br/>
+                <center>
+                <apex:commandLink id="link1" value="Create New Request" action="{!businessComponentAction}" styleClass="btn" rendered="{!AND(service.paServiceState.ogitems.isEndUserRebate,!service.paServiceState.ogitems.rebatesExists) }"> 
+                        <apex:param value="PANewRequest"
+                                                name="passMode" assignTo="{!newPageLabel}" />
+                           
+                            <apex:param name="pageName" value="{!$Label.Current_Prices}" assignTo="{!pageName}"/>
+                        <apex:param value="CustRequestReasons" name="passPriceType"
+                                assignTo="{!service.PAservicestate.currentRequest.customer.ogitems.value}"/>
+                            <apex:param value="currentPricesCustomer PriceNewPricingRequest" name="sendAction" assignTo="{!businessaction}" /> 
+                            
+                        </apex:commandLink>
+                        
+                        
+                    <apex:commandLink action="{!businessComponentAction}" style="text-decoration:none; color:#484848" styleClass="btn" 
+                                value="Cancel" rendered="{!!service.paServiceState.ogitems.isEndUserRebate}">
+                                <apex:param value="PACurrentPrices" name="passMode"
+                                    assignTo="{!newPageLabel}" />
+                                <!-- <TJ20140509> Passing Label to display navigation flow -->
+                                <apex:param value="{!IF(CONTAINS(navigationText,$Label.Current_Prices),$Label.Current_Prices,$Label.Customer_Requests)}" assignTo="{!pageName}"/>
+                                <apex:param value="{!IF(CONTAINS(businessaction,'ViewAllCustomerPrices'),'ViewAllCustomerPricesPrev','customerPricesPrev')}"
+                                    name="sendAction1" assignTo="{!businessaction}" />
+                                    
+                     </apex:commandLink>
+                </center>
+                    <br />
+            <!--BR20130715  Added View Customer Prices Section for APAC ROLLOUT2 starts -->
+            <!-- PP20150502 START -->
+<!--            <div id="soldTo">-->
+<!--            <apex:pageblocksection title="View Customer Prices">-->
+<!--                <apex:pageblocksectionitem helptext="Click on View Prices then use CTRL-P to Print">-->
+<!--                    <apex:outputText value="Valid On"></apex:outputText>-->
+<!--                    <apex:outputPanel style="float:left;margin: 0px;">-->
+<!--                        <div class="requiredInput" style="float: left;">-->
+<!--                        <div class="requiredBlock" style="float: left;"></div>-->
+<!--                -->
+<!--                        <apex:inputfield style="float:left;margin: 0px;"-->
+<!--                            value="{!service.PAServicestate.currentRequest.pricingrequest.Due_Date__c}" />-->
+<!---->
+<!--                        </div>-->
+<!--                    </apex:outputPanel>-->
+<!--                </apex:pageblocksectionitem>-->
+                <!-- onclick="window.open('/apex/PACustomerprices','width=810,height=310,toolbar=0,status=1,scrollbars=1,resizable=yes',!1);" -->
+
+                <!--  <apex:commandlink value=""  onclick="window.open('/apex/PACustomerprices?SoldToCode={!service.PAServicestate.erpCustomer.customerCode}','_target','width=810,height=310,toolbar=0,status=1,scrollbars=1,resizable=yes',!1);"  styleClass="btn"   style="text-decoration:none;" >{!$Label.View_Customer_Prices}-->
+                
+<!--            </apex:pageblocksection>-->
+<!--            </div>-->
+<!--            -->
+<!--            <br />-->
+<!--            <center>-->
+<!--            <apex:commandLink action="{!businessComponentAction}"-->
+<!--                    style="text-decoration:none; color:#484848" styleClass="btn"-->
+<!--                    value="{!$Label.View_Customer_Prices} ">-->
+<!--                    <apex:param value="viewCustomerPrices" name="viewCustomerPrices" />-->
+<!--                    <apex:param value="PACustomerPrices" name="newPageLabel"-->
+<!--                        assignTo="{!newPageLabel}" />-->
+<!---->
+<!--                    <apex:param value="{!businessaction}ViewCustomerPrices" name="desiredAction"-->
+<!--                        assignTo="{!businessaction}" />-->
+<!--                    </apex:commandlink>-->
+<!--                    </center>-->
+<!--                    <br/>-->
+                    <!-- PP20150502 END -->
+            <!--BR20130715  Added View Customer Prices Section for APAC ROLLOUT2 ends -->
+            <!-- PP20140218 - Added rendered condition i.e., hide for View Customer Prices action -->
+            
+
+            <div id="requests">
+            <apex:outputPanel rendered="{!!service.PAServicestate.ogitems.isEndUserRebate}">
+            <apex:repeat value="{!service.PAServicestate.currentRequest.relatedWrappersList}"
+                        var="wrapper" rendered="{!NOT(CONTAINS(businessAction,'ViewAllCustomerPrices'))}">
+                        <!-- Ver 1.1 START -->
+                        <c:PARelatedListComponent WrapperRecordsDisp="{!wrapper.wrapperList}"
+                            cloneEnable="{!service.PAServicestate.currentRequest.cloneFlag}"
+                            columnsDisp="{!wrapper.keyCombinationcolumns}" viewMode="{!currentPageLabel}"
+                            selected="{!service.PAServicestate.currentRequest.pricingRequestId}"
+                            actionAtr="{!businessaction}" typeOfRequest="{!wrapper.priceType}"                       
+                            typeOfSObjectList="{!wrapper.sObjectTypeName}" actionShowFlag="true"
+                            cloneShowFlag="true"
+                            RPQFlag="false"
+                            labelName="{!pageName}" currentHeader="{!$Label.Customer_Requests}">
+                        </c:PARelatedListComponent>
+                        <!-- Ver 1.1 END -->
+                        
+                        <!-- Ver 1.3-->
+                        <br/>
+                <center> 
+            <!-- Added  Rendered Condition for displaying ProjectGroupMember-->
+                <!-- PP20130712 - Added businessComponentAction action="{!loadPage}", Changed current to newPageLabel-->
+                <!-- MS20140606 - Added right margin styling to centre button on adding data tables-->
+                <div style="color:#484848;margin-right:30%;">
+                <apex:commandLink style="text-decoration:none;"
+                styleClass="btn" value="Create {!wrapper.priceType} Request"
+                    rendered="{!IF(wrapper.priceType!='Project' && wrapper.priceType !='Customer Price',true,IF(AND(wrapper.priceType=='Project',
+                                service.PAservicestate.currentRequest.customer.ogitems.isProjectGroupMember==true),true,false))}"
+                    action="{!businessComponentAction}">
+                    <apex:param value="{!IF(wrapper.priceType=='Project','PANewProject','PANewRequest')}"
+                        name="passMode" assignTo="{!newPageLabel}" />
+                    <!-- <TJ20140509> Passing Label for Displaying Navigation Flow -->
+                    <apex:param name="pageName" value="{!$Label.Customer_Requests}" assignTo="{!pageName}"/>
+                                <apex:param value="{!IF(wrapper.priceType=='Pricing Task','PricingTaskReasons',
+                                                        IF(wrapper.priceType=='Project','ProjectReasons',
+                                                            IF(wrapper.priceType=='Massive Change','NonCustReasons','CustRequestReasons')))}"
+                                                     name="passPriceType" 
+                                assignTo="{!service.PAservicestate.currentRequest.customer.ogitems.value}"/>                            
+                                <apex:param value="{!wrapper.priceType}NewPricingRequest"
+                                    name="sendAction" assignTo="{!businessaction}" />
+                                    
+                            </apex:commandLink>
+                           <!-- BB20140516  Added Request History Button -->
+                           <!-- MS20140901 Added history button for Pricing Tasks --> 
+                            <apex:commandLink style="text-decoration:none;"
+                            styleClass="btn" value="Request History"
+                            rendered="{!IF( ((wrapper.priceType =='Customer Price')||(wrapper.priceType =='Pricing Task')) && !service.PAServiceState.ogitems.isEndUserRebate,true,false)}"
+                            action="{!businessComponentAction}">
+                                <apex:param value="requestHistory" name="requestHistory" />
+                                 <apex:param value="PARequestHistory" name="passMode" assignTo="{!newPageLabel}" />
+                                 <apex:param value="{!IF(wrapper.priceType =='Customer Price','viewPermanentRequestHistory','viewTaskRequestHistory')}" name="desiredAction" assignTo="{!businessaction}"  />
+                                 <!-- <TJ20140509 -->
+                                 <apex:param name="pageName" value="{!$Label.Customer_Requests}" assignTo="{!pageName}"/>
+                            </apex:commandLink>
+                           </div>
+                      </center>
+                        
+                        <br />
+                    </apex:repeat>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!service.PAServicestate.ogitems.isEndUserRebate}">
+            <apex:repeat value="{!service.PAServicestate.currentRequest.relatedWrappersList}"
+                        var="wrapper" rendered="{!NOT(CONTAINS(businessAction,'ViewAllCustomerPrices'))}">
+                        <!-- Ver 1.1 START -->
+                        <c:PARelatedListComponent WrapperRecordsDisp="{!wrapper.wrapperList}"
+                            cloneEnable="{!service.PAServicestate.currentRequest.cloneFlag}"
+                            columnsDisp="{!wrapper.keyCombinationcolumns}" viewMode="{!currentPageLabel}"
+                            RPQColumns="{!wrapper.RPQColumns}"
+                            selected="{!service.PAServicestate.currentRequest.pricingRequestId}"
+                            actionAtr="{!businessaction}" typeOfRequest="{!wrapper.priceType}"                       
+                            typeOfSObjectList="{!wrapper.sObjectTypeName}" actionShowFlag="true"
+                            cloneShowFlag="false"
+                            RPQFlag="true"
+                            labelName="{!pageName}" currentHeader="{!$Label.Customer_Requests}">
+                        </c:PARelatedListComponent>
+                        <!-- Ver 1.1 END -->
+                        
+                        <!-- Ver 1.3-->
+                        <br/>
+                <center> 
+           <div style="color:#484848;margin-right:30%;">
+                           <!-- BB20140516  Added Request History Button -->
+                           <!-- MS20140901 Added history button for Pricing Tasks --> 
+                            <apex:commandLink style="text-decoration:none;"
+                            styleClass="btn" value="Request History"
+                            rendered="{!IF((wrapper.priceType =='Customer Price') && !service.PAServiceState.ogitems.isEndUserRebate,true,false)}"
+                            action="{!businessComponentAction}">
+                                <apex:param value="requestHistory" name="requestHistory" />
+                                 <apex:param value="PARequestHistory" name="passMode" assignTo="{!newPageLabel}" />
+                                 <apex:param value="{!IF(wrapper.priceType =='Customer Price','viewPermanentRequestHistory','viewPermanentRequestHistory')}" name="desiredAction" assignTo="{!businessaction}"  />
+                                 <!-- <TJ20140509 -->
+                                 <apex:param name="pageName" value="{!$Label.Customer_Requests}" assignTo="{!pageName}"/>
+                            </apex:commandLink>
+                       </div>    
+                      </center>
+                       
+                        <br />
+                    </apex:repeat>
+                    </apex:outputPanel>
+                </div>
+            </apex:pageBlock>
+        </div>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Rebate Quote Price</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Rebate Quote Prices</value>
+    </caseValues>
+    <fieldSets>
+        <label><!-- RPQExportFields --></label>
+        <name>RPQExportFields</name>
+    </fieldSets>
+    <fields>
+        <label><!-- Approved Date --></label>
+        <name>Approved_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- BU --></label>
+        <name>BU__c</name>
+    </fields>
+    <fields>
+        <label><!-- ComPartner Code --></label>
+        <name>ComPartner_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- ComPartner --></label>
+        <name>ComPartner__c</name>
+    </fields>
+    <fields>
+        <label><!-- Country Code --></label>
+        <name>Country_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Country --></label>
+        <name>Country__c</name>
+    </fields>
+    <fields>
+        <label><!-- Customer Hierarchy Code --></label>
+        <name>Customer_Hierarchy_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Customer Hierarchy --></label>
+        <name>Customer_Hierarchy__c</name>
+    </fields>
+    <fields>
+        <label><!-- Customer Price Group Code --></label>
+        <name>Customer_Price_Group_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Customer Price Group --></label>
+        <name>Customer_Price_Group__c</name>
+    </fields>
+    <fields>
+        <label><!-- Discount --></label>
+        <name>Discount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dist. Channel --></label>
+        <name>Dist_Channel__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dist. Channel Code --></label>
+        <name>Distribution_Channel_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Division Code --></label>
+        <name>Division_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Division --></label>
+        <name>Division__c</name>
+    </fields>
+    <fields>
+        <label><!-- End Use Code --></label>
+        <name>End_Use_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- End Use --></label>
+        <name>End_Use__c</name>
+    </fields>
+    <fields>
+        <label><!-- End User Code --></label>
+        <name>End_User_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- End User --></label>
+        <name>End_User__c</name>
+    </fields>
+    <fields>
+        <label><!-- External ERP ID --></label>
+        <name>External_ERP_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Product Hierarchy Code --></label>
+        <name>F_Product_Hierarchy_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Incoterms --></label>
+        <name>Incoterms1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Incoterms Code --></label>
+        <name>Incoterms_1_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- KC_SAP --></label>
+        <name>KC_SAP__c</name>
+    </fields>
+    <fields>
+        <label><!-- Key Combination Code --></label>
+        <name>Key_Combination_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Key Combination --></label>
+        <name>Key_Combination__c</name>
+    </fields>
+    <fields>
+        <help><!-- This is the pre-split original 18 digit Salesforce ID of this record that came from the original One Dupont Salesforce instance before the business units were separated. Its is case insensitive and unique. --></help>
+        <label><!-- Legacy Pricing Util SFID --></label>
+        <name>Legacy_Pricing_Util_SFID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Market Segment Code --></label>
+        <name>Market_Segment_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Market Segment --></label>
+        <name>Market_Segment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Material Code --></label>
+        <name>Material_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Material Price Group Code --></label>
+        <name>Material_Price_Group_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Material Price Group --></label>
+        <name>Material_Price_Group__c</name>
+    </fields>
+    <fields>
+        <label><!-- Material --></label>
+        <name>Material__c</name>
+    </fields>
+    <fields>
+        <label><!-- PCKC --></label>
+        <name>PCKC__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH1 Code --></label>
+        <name>PH1_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH1 --></label>
+        <name>PH1__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH2 Code --></label>
+        <name>PH2_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH2 --></label>
+        <name>PH2__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH3 Code --></label>
+        <name>PH3_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH3 --></label>
+        <name>PH3__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH4 Code --></label>
+        <name>PH4_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH4 --></label>
+        <name>PH4__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH5 Code --></label>
+        <name>PH5_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH5 --></label>
+        <name>PH5__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH6 Code --></label>
+        <name>PH6_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH6 --></label>
+        <name>PH6__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH7 Code --></label>
+        <name>PH7_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH7 --></label>
+        <name>PH7__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH8 Code --></label>
+        <name>PH8_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH8 --></label>
+        <name>PH8__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH9 Code --></label>
+        <name>PH9_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH9 --></label>
+        <name>PH9__c</name>
+    </fields>
+    <fields>
+        <label><!-- Per --></label>
+        <name>Per__c</name>
+    </fields>
+    <fields>
+        <label><!-- Price Holder --></label>
+        <name>Price_Holder__c</name>
+        <relationshipLabel><!-- Rebate Quote Prices --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Price List Type Code --></label>
+        <name>Price_List_Type_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Price List Type --></label>
+        <name>Price_List_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Price Ref. Partner Code --></label>
+        <name>Price_Ref_Partner_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Price Ref. Partner --></label>
+        <name>Price_Ref_Partner__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pricing Condition Code --></label>
+        <name>Pricing_Condition_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pricing Condition --></label>
+        <name>Pricing_Condition__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pricing Request --></label>
+        <name>Pricing_Request__c</name>
+        <relationshipLabel><!-- Rebate Quote Prices --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Product Hierarchy Code --></label>
+        <name>Product_Hierarchy_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Product Hierarchy --></label>
+        <name>Product_Hierarchy__c</name>
+    </fields>
+    <fields>
+        <label><!-- Profit Center Code --></label>
+        <name>Profit_Center_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Profit Center --></label>
+        <name>Profit_Center__c</name>
+    </fields>
+    <fields>
+        <label><!-- Quantity --></label>
+        <name>Quantity__c</name>
+    </fields>
+    <fields>
+        <label><!-- RPQ Number --></label>
+        <name>RPQ_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rate --></label>
+        <name>Rate__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Application ID --></label>
+        <name>SAP_Application_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Client ID --></label>
+        <name>SAP_Client_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Cluster --></label>
+        <name>SAP_Cluster__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Office Code --></label>
+        <name>Sales_Office_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Office --></label>
+        <name>Sales_Office__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Order Type Code --></label>
+        <name>Sales_Order_Type_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Order Type --></label>
+        <name>Sales_Order_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Org. Code --></label>
+        <name>Sales_Org_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Org. --></label>
+        <name>Sales_Org__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Pricing Procedure --></label>
+        <name>Sales_Pricing_Procedure__c</name>
+        <relationshipLabel><!-- Rebate Quote Prices --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- ShipTo Code --></label>
+        <name>ShipTo_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- ShipTo --></label>
+        <name>ShipTo__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sold To Code --></label>
+        <name>Sold_To_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sold To --></label>
+        <name>Sold_To__c</name>
+    </fields>
+    <fields>
+        <label><!-- Terms of Payment --></label>
+        <name>Terms_of_Payment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Terms of Payment code --></label>
+        <name>Terms_of_Payment_code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unit --></label>
+        <name>Unit__c</name>
+    </fields>
+    <fields>
+        <label><!-- UoM --></label>
+        <name>UoM__c</name>
+    </fields>
+    <fields>
+        <label><!-- Valid From --></label>
+        <name>Valid_From__c</name>
+    </fields>
+    <fields>
+        <label><!-- Valid To --></label>
+        <name>Valid_To__c</name>
+    </fields>
+    <fields>
+        <label><!-- Variant Code --></label>
+        <name>Variant_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Variant --></label>
+        <name>Variant__c</name>
+    </fields>
+    <fields>
+        <label><!-- isPriceHolder --></label>
+        <name>isPriceHolder__c</name>
+    </fields>
+    <fields>
+        <label><!-- markForDeletion --></label>
+        <name>markForDeletion__c</name>
+    </fields>
+    <sharingReasons>
+        <label><!-- Sharing with Public Group --></label>
+        <name>Sharing_with_Public_Group</name>
+    </sharingReasons>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

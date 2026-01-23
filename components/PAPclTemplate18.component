@@ -1,0 +1,186 @@
+<apex:component access="global" controller="PAPCLComponent">  
+<apex:stylesheet value="{!$Resource.PDFDocumentStyle}"/>
+  <apex:attribute name="targetObject" type="String" assignTo="{!listofids}" description="The context of the outer page email templates"/>
+     
+  <apex:outputPanel >
+		 <apex:image value="{!$Resource.dupont_logo}" height="75px" width="100px"/>
+ 		<apex:outputText value="DuPont de Nemours (Belgium) B.V.B.A.<br/>DuPont Chemicals & Fluoroproducts<br/>Antoon Spinoystraat 6<br/>B-2800 Mechelen<br/>Belgium<br/>tel. +32(0)15 44 1180" escape="false" style="font-family: Times New Roman,Georgia,Serif; font-size: small; font-weight: normal; color: #B2B2B2; float:right;"></apex:outputText>
+  </apex:outputPanel>
+
+  <br/>
+  <br/>
+  <hr></hr>
+  <br/>							
+  
+<apex:outputPanel style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;">
+  	<apex:repeat value="{!listrequestdetils[0]}" var="b">
+  	<table>
+  
+  		<tr>
+  		<td><b>{!b.Sold_To__c}</b></td>
+  		</tr>
+  	
+  		<tr>
+  		<td>{!b.Street__c}</td>
+  		</tr>
+  
+  		<tr>
+  		<td>{!b.City__c}</td>
+  		</tr>
+  
+  		<tr>
+  		<td style="text-transform:uppercase;">{!b.Country__c}</td>
+  		</tr>
+  
+  	</table>
+   </apex:repeat>
+ </apex:outputPanel> 
+ <apex:outputPanel style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;">
+   		<u><apex:outputText value="Contact:"/></u>&nbsp;&nbsp;<apex:outputText value="{!listofCustomerContacts[0]}"/>
+  		<br/><br/>
+  		<apex:outputText value="{0,date,yyyy-MMM-dd }" style="float:left;font-weight: bold;">
+       			<apex:param value="{!TODAY()}" />
+  		</apex:outputText>
+  </apex:outputPanel>  
+  <br/><br/>
+  <center><u><apex:outputText value="PRICE CONFIRMATION LETTER" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: bold;float:center;"/></u></center>
+  
+ <u><apex:outputText value="1. PRODUCT(S)" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: bold;float:left;"/></u>
+ <br/><apex:outputText value="Please find herewith the current terms and conditions/prices agreed by DuPont de Nemours Luxembourg
+							Sàrl. Thank you for choosing our products and services." style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;"/>
+ <br/>
+ <center>
+  <apex:dataTable value="{!listofwrappertables}" var="mList" border="1" cellpadding="4" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;">
+    
+        <apex:column >
+            <apex:outputText value="{!mList.sobjectRecord['Material__c']}-{!mList.sobjectRecord['Material_Code__c']}"/>
+        </apex:column>
+   </apex:dataTable><br/><br/>
+  </center>
+ <apex:outputText value="DuPont’s most current standard Product specifications shall apply." style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;"/>
+<br/><br/> 
+<u><apex:outputText value="2. PRICE(S) AND DURATION OF VALIDITY OF THE PRICE(S)" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: bold;float:left;"/></u>
+ <br/><apex:outputText value="2.1  The prices of the products are" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;"/>
+ <br/>
+    <center>
+  <apex:dataTable value="{!listofwrappertables}" var="mList" border="1" cellpadding="4" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;">
+    
+        <apex:column headerValue="Pricing Condition Name">
+            <apex:outputText value="{!mList.sobjectRecord['Pricing_Condition__c']}"/>
+        </apex:column>
+        
+        <apex:column headerValue="Key Combination Name">
+        	<apex:outputText value="{!IF(mList.sobjectRecord['Material_Code__c'] != NULL, mList.sobjectRecord['Material_Code__c'],'')} {!IF(mList.sobjectRecord['Material__c'] != NULL, mList.sobjectRecord['Material__c'],'')} {!IF(mList.sobjectRecord['Product_Hierarchy__c']!=NULL,mList.sobjectRecord['Product_Hierarchy__c'],'')}"/>
+        </apex:column>
+        
+        <apex:column headerValue="Rate">
+            <apex:outputText value="{!mList.sobjectRecord['Rate__c']}"/>
+        </apex:column>
+        
+        <apex:column headerValue="Unit">
+            <apex:outputText value="{!mList.sobjectRecord['Unit__c']}"/>
+        </apex:column>
+        
+        <apex:column headerValue="Per">
+            <apex:outputText value="{!mList.sobjectRecord['Per__c']}"/>
+        </apex:column>
+        
+        <apex:column headerValue="UoM">
+            <apex:outputText value="{!mList.sobjectRecord['UoM__c']}"/>
+        </apex:column>
+                
+        <apex:column headerValue="Valid From" width="110px"> 
+            <apex:outputText value="{0,date,MMM dd yyyy}">
+            	<apex:param value="{!mList.sobjectRecord['Valid_From__c']}"/>
+            </apex:outputText>
+        </apex:column>
+        
+        <apex:column headerValue="Valid To" width="110px">
+        	<apex:outputText value="{0,date,MMM dd yyyy}">
+            	<apex:param value="{!mList.sobjectRecord['Valid_To__c']}"/>
+            </apex:outputText> 
+        </apex:column>
+        
+    </apex:dataTable><br/><br/><br/>
+    </center>
+ <apex:outputText value="Prices defined in this clause are VAT excluded and valid for the minimum purchased volume indicated." style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;"/>
+ <br/><br/>
+ <u><apex:outputText value="3. ORDERING PROCESS" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: bold;float:left;"/></u>
+ <br/><apex:outputText value="3.1  An order for the following quarter should be placed before the end of the preceding quarter via the DuPont Customer Service group." style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;"/>
+ <br/><apex:outputText value="3.2  At reception of your formal order, an Order Acknowledgment will be issued to confirm the transaction (and in particular the availability of product and the date of delivery). The agreement between the parties becomes binding upon the issuance of said Order Acknowledgment." style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;"/>
+ <br/><br/> 
+ <u><apex:outputText value="4. DELIVERY AND FREIGHT" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: bold;float:left;"/></u>
+ <br/><apex:outputText value="The Product shall be delivered [TOS] and the shipment should be delivered to or picked-up" escape="false" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;"/>
+ <br/>
+ <apex:outputPanel style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;">
+  	<apex:repeat value="{!listrequestdetils[0]}" var="b1">
+  	<table>
+  
+  		<tr>
+  		<td><b>{!b1.Sold_To__c}</b></td>
+  		</tr>
+  	
+  		<tr>
+  		<td>{!b1.Street__c}</td>
+  		</tr>
+  
+  		<tr>
+  		<td>{!b1.City__c}</td>
+  		</tr>
+  
+  	</table>
+   </apex:repeat>
+ </apex:outputPanel> 
+ <br/><br/>
+ <u><apex:outputText value="5. PAYMENT TERMS" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: bold;float:left;"/></u>
+ <br/>
+   <apex:repeat value="{!listrequestdetils[0]}" var="b2">
+        <table width="500px" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;">
+            <tr>
+			  <td width="200px"><b>Payment terms:</b></td>
+			  <td width="300px" text-align="left">{!b2.Terms_Of_Payment__c}</td>
+		    </tr>
+		</table>
+   </apex:repeat>
+ <br/><br/>
+ <u><apex:outputText value="6.  ENTIRETY" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: bold;float:left;"/></u>
+ <br/><apex:outputText value="This Price Confirmation constitutes the entire understanding between DuPont and your Company regarding the offer referred above and is subject to the Order Acknowledgment for all other terms and conditions including availability of product and date of delivery." style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;"/>
+ <br/><br/>
+ <u><apex:outputText value="7.  GENERAL CONDITIONS OF SALE" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: bold;float:left;"/></u>
+<br/><apex:outputText value="Other conditions than those agreed hereunder shall be those described in the attached General Conditions of Sale of DuPont.<br/>Thank you for your continued interest in DuPont Chemicals and Fluoroproducts." escape="false" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;"></apex:outputText>
+ <br/><br/>
+ <apex:outputText value="Approved by:" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: bold;float:left;"/>
+ <br/>
+<apex:outputText rendered="{!onBehalfOfUser == null}" value="{!$User.FirstName} {!$User.LastName}" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;"/>
+<apex:outputText rendered="{!onBehalfOfUser != null}" value="{!onBehalfOfUser}" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;"/>
+  
+ <br/>
+ <apex:outputText value="DuPont de Nemours (Belgium) B.V.B.A." style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: bold;float:left; page-break-after:always;"/>
+
+<br/><br/>
+<center><apex:outputText value="CONDITIONS OF SALE" style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: bold;float:center;"/></center>
+<br/>
+<apex:outputPanel style="font-family: Arial,Helvetica,sans-serif; font-size: medium; font-weight: normal;">
+1 - These are the terms and conditions governing the sale of sellers goods. Sellers commitment shall become effective only upon buyers receipt of sellers written order acknowledgement or invoice, whichever occurs first. No modification of these terms and conditions shall be of any force unless such modification is reduced to writing and signed by the party claimed to be bound hereby, and no modification shall be effected by the acknowledgement or acceptance of purchase order forms containing different conditions. In particular, acceptance of sellers full or partial deliveries, as the case may be or payment by buyer, shall constitute acceptance of sellers conditions of sale.<br/>
+2 - Goods which are to be shipped within thirty (30) days from the date of sellers order acknowledgement shall be invoiced at the price quoted by seller. The price of any such goods which are to be shipped more than thirty (30) days after the date of this order acknowledgement may be increased by seller by written notice to buyer issued at least ten (10) days prior to the effective date of the increase. Such increase shall be applicable to goods shipped after its effective date unless, prior to the said date, buyer shall cancel its order as to the undelivered balance of goods to which the increased price applies. Its understood that seller shall not exercise the right detailed above here shipment is delayed through its fault.<br/>
+3 - Sellers terms of payment applicable to any order are net payment within thirty (30) days end of the month from date of invoice or such other terms as are specifically quoted to buyer in writing. Payments will be made at Brussels without discount. Non-compliance with sellers terms of payment shall constitute default without reminder. In case of default, seller will charge interest from the date upon which the invoice falls due at a rate of four (4) percent above the rate of the National Bank of Belgium for advances in current account. If after the mailing of a registered letter the invoice should not be paid within fifteen (15) days the amount of the invoice shall be increased by 10% with a minimum of 12,50 Euro, without prejudice to the interest due on such overdue payment. Sellers acceptance of a draft or comparable document shall not constitute payment. In the event that buyer should fail to fulfill the terms of payment quoted in respect of any invoice, or should seller have indications that buyers financial responsibility is inadequate, seller may in its sole discretion either demand payment or all outstanding balances, whether due or not, and or cancel all outstanding orders and decline to make further deliveries except upon receipt of cash or satisfactory security. The setting off or withholding of payment by buyer in respect of any claim shall not be allowed unless expressly agreed by seller in writing.<br/>
+4 - Seller shall not be bound by the terms of delivery which he has quoted, and seller accepts no liability for any failure to deliver the goods within the said period.<br/>
+5 - Risk of loss of the goods sold hereunder shall pass at the point of delivery specified by seller. Inco terms 2000 shall apply to export sales.<br/>
+6 - Seller reserves the right to select the mode of transportation and the carriers to the point of delivery. Buyer shall bear the cost of special transportation arrangements requested by him.<br/>
+7 - Any portion of an order not taken by buyer in the month originally specified may be postponed or cancelled at sellers option without tender or notice to buyer. Such postponement or cancellation shall not affect any remaining portion of the order.<br/>
+8 - In the event of inability for any reason to supply the total demands for the goods ordered, seller may allocate its available supply among any or all purchasers or make partial shipments on such basis as it may deem fair or practical, without liability for any failure of performance which may result there from.<br/>
+9 - No liability shall result from delay in performance or non-performance, directly or indirectly caused by factors such as a fire, explosion, accident, flood, labor trouble or shortage, war, act of or authorized by any government, inability to obtain suitable material, equipment, fuel, power or transportation, or act of God arising from contingencies, happenings, or causes beyond the control of the party affected. Quantities so affected by any such circumstances may be eliminated or postponed by seller without liability.<br/>
+10 - Returnable product carriers or containers delivered but not sold hereunder are the property of seller and buyer agrees that he will return them undamaged, freight collect, to the destination designated by seller within the period specified by seller. Any deposit made by buyer on such product carriers shall be forfeited in the event of failure to return them undamaged within the specified period. Where no deposit is required, buyer agrees to reimburse seller for the value, as shown on the face of the invoice of any such product carriers or containers damaged or not returned within the specified period. Sellers count and rejection of damaged returnable product carriers and containers shall be accepted as final.<br/>
+11 - Seller makes no warranty of any kind beyond those expressly stated in writing except that the goods sold hereunder shall be equal to sellers standards, and buyer assumes all risk and liability for results obtained by use of the goods covered by this order, whether used singly or in combination with other products.<br/>
+12 - Where goods have been processed in any manner by anyone other than seller, the warranties expressed herein shall be limited to the goods in their unprocessed condition.<br/>
+13 - No claim of any kind whether as to goods delivered or for non-delivery of the goods, shall be greater in amount than the purchase price of the goods in respect of which such damages are claimed. Obvious deficiencies or damages shall be reported promptly. Failure to give notice of claim within ninety (90) days from date fixed for delivery, as the case may be, shall constitute a waiver by buyer of all claims in respect of the goods. No charges or expenses incident to any claim shall be allowed unless approved in writing by seller. Goods shall not be returned to seller without sellers permission. No claim shall be allowed after the goods have been treated or processed in any manner.<br/>
+14 - Seller warrants that the goods delivered do not infringe any patents in Belgium: no further patent warranty is made.<br/>
+15 - Orders are not assignable or transferable by buyer, in whole or in part, except with the written consent of seller.<br/>
+16 - Upon request, seller shall endeavor to furnish such technical advice or assistance as he has available in reference to the use of the goods by buyer; its expressly understood, however, that all such technical advice or assistance is given gratis and seller assumes no obligation or liability for the advice or assistance given or results obtained, all such advice or assistance being given and accepted at buyers risk.<br/>
+17 - If the goods are sold F.D.M. and are damaged during transportation, buyer shall hold the carrier liable by endorsing the delivery receipt, bill of Lading, consignment note or waybill, as the case may be, notify seller by registered letter and keep the goods at sellers disposal until the cause and nature of the damage have been ascertained. No claims for damage to the goods during transportation will be entertained later than seventy-two (72) hours after arrival of the said goods at destination.<br/>
+18 - Products not paid for in full may not be pledged or assigned to third parties.<br/>
+19 - These conditions shall be subject to and shall be construed in accordance with the laws of Belgium. The Courts of Mechelen shall have exclusive jurisdiction over any controversy which may arise hereunder, unless the parties agree otherwise in writing.<br/>
+
+
+</apex:outputPanel>
+ </apex:component>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>ERP Pricing Procedure</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>ERP Pricing Procedures</value>
+    </caseValues>
+    <fields>
+        <label><!-- Doc Type --></label>
+        <name>Doc_Type__c</name>
+    </fields>
+    <fields>
+        <help><!-- This is the pre-split original 18 digit Salesforce ID of this record that came from the original One Dupont Salesforce instance before the business units were separated. Its is case insensitive and unique. --></help>
+        <label><!-- Legacy Pricing Util SFID --></label>
+        <name>Legacy_Pricing_Util_SFID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Novus External Id --></label>
+        <name>Novus_External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pricing Procedure Code --></label>
+        <name>Pricing_Procedure_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pricing Procedure Description --></label>
+        <name>Pricing_Procedure_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pricing Procedure --></label>
+        <name>Pricing_Procedure__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Application Id --></label>
+        <name>SAP_Application_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Client Id --></label>
+        <name>SAP_Client_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Cluster --></label>
+        <name>SAP_Cluster__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Inactive</masterLabel>
+            <translation><!-- Inactive --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

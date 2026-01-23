@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>List of Licenses to be tracked which will later be mailed to functionality admins or record owners</description>
+    <fields>
+        <fullName>License_Catagories__c</fullName>
+        <description>Type of license</description>
+        <fieldManageability>SubscriberControlled</fieldManageability>
+        <inlineHelpText>Suggested Values : UL/PSL/FL
+UL: User License
+PSL: Permission Set License
+FL: Feature License</inlineHelpText>
+        <label>License Catagories</label>
+        <required>true</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>UL</fullName>
+                    <default>true</default>
+                    <label>UL</label>
+                </value>
+                <value>
+                    <fullName>PSL</fullName>
+                    <default>false</default>
+                    <label>PSL</label>
+                </value>
+                <value>
+                    <fullName>FL</fullName>
+                    <default>false</default>
+                    <label>FL</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <label>Licenses Tracked</label>
+    <pluralLabel>Licenses Tracked</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

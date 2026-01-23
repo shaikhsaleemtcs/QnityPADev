@@ -1,0 +1,62 @@
+<messaging:emailTemplate subject="SFDC PA Notification –Pricing Request created on your behalf for customer - {!relatedTo.Sold_To__c}" recipientType="User" relatedToType="Pricing_Request__c">
+    <messaging:htmlEmailBody > 
+    Subject:  SFDC PA Notification –<apex:outputText /> &nbsp; <apex:outputText value="{!relatedTo.Request_Type__c}"/>&nbsp;- &nbsp; <apex:outputText value="{!relatedTo.Pricing_Request_Type__c}"/>&nbsp;
+  <apex:outputText value="created on your behalf"/><br/><br/>
+         Dear &nbsp;<apex:outputText value="{!relatedTo.On_Behalf_Of__r.name}">  </apex:outputText>,
+<br/> <br/>   Confidential 
+  <br/><br/>
+  <apex:outputText value="{!relatedTo.CreatedBy.name}"/>&nbsp;has created a SFDC PA request on your behalf for the customer:<br/>
+  <apex:outputpanel rendered="{!relatedTo.Request_Type__c=='Customer Specific' && (relatedTo.Pricing_Request_Type__c=='Permanent' || relatedTo.Pricing_Request_Type__c=='Project Pricing' || relatedTo.Pricing_Request_Type__c=='Pricing Task')}"
+>
+<apex:outputText value="{!relatedTo.SoldTo_Code__c}"> </apex:outputText> <br/>
+<apex:outputText value="{!relatedTo.Sold_To__c}">  </apex:outputText><br/>
+<apex:outputText value="{!relatedTo.City__c}, {!relatedTo.Country__c} ,{!relatedTo.Zip_PostalCode__c}">  </apex:outputText>
+<apex:outputText value="Customer Order Block:" rendered="{!relatedTo.Customer_Order_Block_Code__c!=null}"/><apex:outputText value="{!relatedTo.Customer_Order_Block_Code__c}">  </apex:outputText>
+<apex:outputText value="{!relatedTo.Customer_Order_Block__c}">  </apex:outputText>
+</apex:outputPanel>
+<br/><br/>
+<apex:outputText value="Business"></apex:outputText>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<apex:outputText value="{!relatedTo.BU__c}"></apex:outputText><br/>
+    <apex:outputText value="Request Id"></apex:outputText>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<apex:outputText value="{!relatedTo.Name}"></apex:outputText><br/>
+<apex:outputText value="Requested On"></apex:outputText>&nbsp;&nbsp;&nbsp;:<apex:outputText value="{0,date,yyyy-MMM-dd }">
+       <apex:param value="{!relatedTo.createddate}" />
+   </apex:outputText><br/>
+    
+
+<apex:outputText value="Request"></apex:outputText>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<apex:outputText value="{!relatedTo.Request_Name__c}"></apex:outputText><br/>
+<apex:outputPanel rendered="{!NOT(ISBLANK(relatedTo.Request_Class__c))}">
+<apex:outputText value="Request Class"></apex:outputText>&nbsp;&nbsp;&nbsp;:<apex:outputText value="{!relatedTo.Request_Class__c}"></apex:outputText><br/>
+</apex:outputPanel>
+<apex:outputText value="Reason"></apex:outputText>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<apex:outputText value="{!relatedTo.Request_Reason__c}"></apex:outputText><br/>
+<apex:outputText value="Description"></apex:outputText>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<apex:outputText escape="false" value="{!relatedTo.Description__c}"></apex:outputText><br/>
+<apex:outputpanel rendered="{!relatedTo.Pricing_Request_Type__c=='Pricing Task'}">
+<apex:outputText value="Task Due Date"></apex:outputText>&nbsp;:<apex:outputText value="{0,date,yyyy-MMM-dd }">
+       <apex:param value="{!relatedTo.Due_Date__c}" /></apex:outputText><br/>
+
+</apex:outputpanel>
+<apex:outputpanel rendered="{!relatedTo.Pricing_Request_Type__c=='Project Pricing'}">
+<apex:outputText value="Project Id"></apex:outputText>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<apex:outputText value="{!relatedTo.Project_Id__c}"></apex:outputText><br/>
+
+
+<apex:outputText value="Project Name"></apex:outputText>&nbsp;&nbsp;&nbsp;:<apex:outputText value="{!relatedTo.Project_Name__c}"></apex:outputText><br/>
+</apex:outputpanel><br/>
+
+
+<c:OnBehalfOfNotificationComponent pricingRequest="{!relatedTo.id}"></c:OnBehalfOfNotificationComponent>
+<p>
+<apex:outputText rendered="{!relatedTo.BU__c != 'DPP Polymers NAFTA'}">
+To view the request details and comments,click this link<br/> 
+
+{!LEFT($Api.Partner_Server_URL_140, FIND(".com/",$Api.Partner_Server_URL_140)+3)}/{!relatedTo.id}
+
+</apex:outputText>
+
+</p>
+<apex:outputtext value="Thank you"/>,<br/>
+           <apex:outputtext value=" Salesforce.com Price Approval"/><br/><br/>
+Confidential 
+
+
+
+
+ </messaging:htmlEmailBody>
+</messaging:emailTemplate>

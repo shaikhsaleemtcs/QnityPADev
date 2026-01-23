@@ -1,0 +1,57 @@
+<!--<messaging:emailTemplate subject="used for project" recipientType="User" relatedToType="Project_Price__c">
+<messaging:plainTextEmailBody >
+Dear 
+Following task status has been updated to ‘Completed’:
+Sold To Customer    : {!relatedTo.Sold_To_Code__c}
+
+Project ID      : {!relatedTo.Project_Id__c}
+Project Name        : {!relatedTo.Name}
+Due Date        : {!relatedTo.Valid_From__c}
+Task Closure Date   : 
+
+Please change the ‘Valid To’ date of the Project to same as Task closure date.
+To view the details, click on the following link: <br/>
+
+{!LEFT($Api.Partner_Server_URL_140, FIND(".com/",$Api.Partner_Server_URL_140)+3)}/{!relatedTo.id}
+
+
+
+Thank you,
+Salesforce.com
+
+</messaging:plainTextEmailBody>
+</messaging:emailTemplate>-->
+<messaging:emailTemplate subject="Notification to Requester on Project Completion :" recipientType="User" relatedToType="Project_Price__c">
+    <messaging:htmlEmailBody > 
+    
+    Subject: SFDC PA Notification -Project Completed <br/><br/>
+    Dear &nbsp;<apex:outputText value="{!relatedTo.CreatedBy.name}">  </apex:outputText>,
+<br/> <br/>   Confidential
+  <br/><br/>
+  The following Project Pricing  has been Completed by &nbsp; <apex:outputtext value="{!relatedTo.Assigned_To__r.name}"/> For the customer:<br/>
+  <c:PAProjectCSRNotification soldToname="{!relatedTo.id}"></c:PAProjectCSRNotification><br/>
+
+<br/><br/>
+<apex:outputText value="Request Id"></apex:outputText>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<c:PaProjectRequestNumber ProjectPriceIdForProject="{!relatedto.id}"></c:PaProjectRequestNumber><br/>
+Project Id &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<apex:outputText value="{!RelatedTo.Project_Id__c}"></apex:outputText><br/>
+Project Name &nbsp;&nbsp;&nbsp;&nbsp;:<apex:outputText value="{!RelatedTo.Name}"></apex:outputText><br/>
+Project Volume &nbsp;:<apex:outputText value="{!RelatedTo.Project_Volume__c}"></apex:outputText><br/>
+<!--Request Id &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<apex:outputText value="{!RelatedTo.Request_Id__c}"></apex:outputText><br/>-->
+
+
+<br/><br/>
+To view the request details and comments, 
+click this link <br/>
+<p>
+{!LEFT($Api.Partner_Server_URL_140, FIND(".com/",$Api.Partner_Server_URL_140)+3)}/{!relatedTo.id}
+
+
+</p>
+<apex:outputtext value="Thank you"/>,<br/>
+           <apex:outputtext value=" Salesforce.com Price Approval"/><br/><br/>
+Confidential 
+
+
+
+ </messaging:htmlEmailBody>
+</messaging:emailTemplate>

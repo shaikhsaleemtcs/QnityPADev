@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>ProductHierarchy_DPP_LA_Kalrez</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>ProductHierarchy_DPP LA Kalrez</label>
+        <sharedTo>
+            <group>DPPLAKalrez</group>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>PH_Code__c</field>
+            <operation>equals</operation>
+            <value>B9</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>PH_Code__c</field>
+            <operation>startsWith</operation>
+            <value>B905,B902</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Product_Hierarchy_CPM_AP</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Product Hierarchy CPM AP</label>
+        <sharedTo>
+            <group>CPMAP</group>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>PH_Code__c</field>
+            <operation>equals</operation>
+            <value>F4</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>PH_Code__c</field>
+            <operation>startsWith</operation>
+            <value>F424,F425</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Product_Hierarchy_CPM_EMEA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Product Hierarchy CPM EMEA</label>
+        <sharedTo>
+            <group>CPMEMEA</group>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>PH_Code__c</field>
+            <operation>equals</operation>
+            <value>F4</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>PH_Code__c</field>
+            <operation>startsWith</operation>
+            <value>F424,F425,F458</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Product_Hierarchy_CPM_NA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Product Hierarchy CPM NA</label>
+        <sharedTo>
+            <group>CPMNA</group>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>PH_Code__c</field>
+            <operation>equals</operation>
+            <value>F4</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>PH_Code__c</field>
+            <operation>startsWith</operation>
+            <value>F424,F425</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Product_Hierarchy_DPP_Kalrez_Global</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Product Hierarchy DPP Kalrez Global</label>
+        <sharedTo>
+            <group>DPPGlobalKalrez</group>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>PH_Code__c</field>
+            <operation>equals</operation>
+            <value>B9</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>PH_Code__c</field>
+            <operation>startsWith</operation>
+            <value>B902,B904,B905</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Product_Hierarchy_EKC_Global</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Product Hierarchy ACST Global</label>
+        <sharedTo>
+            <group>ACSTGlobal</group>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>PH_Code__c</field>
+            <operation>equals</operation>
+            <value>F4</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>PH_Code__c</field>
+            <operation>startsWith</operation>
+            <value>F428</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Product_Hierarchy_Sharing_Rule_for_ACT</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Product Hierarchy Sharing Rule for ACST</label>
+        <sharedTo>
+            <group>ACST</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>ACST</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Product_Hierarchy_Sharing_Rule_for_APT_AP</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Product Hierarchy Sharing Rule for APT AP</label>
+        <sharedTo>
+            <group>APT_AP</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>APT AP</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Product_Hierarchy_Sharing_Rule_for_APT_EMEA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Product Hierarchy Sharing Rule for APT EMEA</label>
+        <sharedTo>
+            <group>APT_EMEA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>APT EMEA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Product_Hierarchy_Sharing_Rule_for_APT_NA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Product Hierarchy Sharing Rule for APT NA</label>
+        <sharedTo>
+            <group>APT_NA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>APT NA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Product_Hierarchy_Sharing_Rule_for_CMPT_AMS</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Product Hierarchy Sharing Rule for CMPT AMS</label>
+        <sharedTo>
+            <group>CMPT_AMS</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>CMPT AMS</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Product_Hierarchy_Sharing_Rule_for_CMPT_AP</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Product Hierarchy Sharing Rule for CMPT AP</label>
+        <sharedTo>
+            <group>CMPT_AP</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>CMPT AP</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Product_Hierarchy_Sharing_Rule_for_CMPT_EMEA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Product Hierarchy Sharing Rule for CMPT EMEA</label>
+        <sharedTo>
+            <group>CMPT_EMEA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>CMPT EMEA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Product_Hierarchy_Sharing_Rule_for_Litho_AP</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Product Hierarchy Sharing Rule for Litho AP</label>
+        <sharedTo>
+            <group>Litho_AP</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>Litho AP</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Product_Hierarchy_Sharing_Rule_for_Litho_EMEA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Product Hierarchy Sharing Rule for Litho EMEA</label>
+        <sharedTo>
+            <group>Litho_EMEA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>Litho EMEA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Product_Hierarchy_Sharing_Rule_for_Litho_NA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Product Hierarchy Sharing Rule for Litho NA</label>
+        <sharedTo>
+            <group>Litho_NA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>Litho NA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Product_Hierarchy_Sharing_Rule_for_Semi_Silicones</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Product Hierarchy Sharing Rule for Semi Silicones</label>
+        <sharedTo>
+            <group>Semi_Silicones</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>Semi Silicones</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Product_Hierarchy_with_DM</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share Product Hierarchy with DM</label>
+        <sharedTo>
+            <group>DM</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>DM</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Product_Hierarchy_with_DM_OCR</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share Product Hierarchy with DM OCR</label>
+        <sharedTo>
+            <group>DM_OCR</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>PH_Code__c</field>
+            <operation>startsWith</operation>
+            <value>F4DY</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Product_Hierarchy_with_ICS_AP</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share Product Hierarchy with ICS AP</label>
+        <sharedTo>
+            <group>ICS_AP</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>ICS AP</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Product_Hierarchy_with_ICS_EMEA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share Product Hierarchy with ICS EMEA</label>
+        <sharedTo>
+            <group>ICS_EMEA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>ICS EMEA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Product_Hierarchy_with_ICS_LA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share Product Hierarchy with ICS LA</label>
+        <sharedTo>
+            <group>ICS_LA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>ICS LA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Product_Hierarchy_with_ICS_NA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share Product Hierarchy with ICS NA</label>
+        <sharedTo>
+            <group>ICS_NA</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>ICS NA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Product_Hierarchy_with_OLED</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share Product Hierarchy with OLED</label>
+        <sharedTo>
+            <group>OLED</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>OLED</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Product_hierarchy_with_LED</fullName>
+        <accessLevel>Read</accessLevel>
+        <description>Share product Hierarchy reocrd with LED</description>
+        <label>Share Product hierarchy with LED Silicones</label>
+        <sharedTo>
+            <group>LED_Silicones</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>LED Silicones</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+</SharingRules>

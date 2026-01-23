@@ -1,0 +1,29 @@
+<!-- 
+ * Name      :   PASFDCSAPSync_AssignedTo_Update
+ * Description  :   This Page will display the assigned to field for multiple assigned to update
+ * Author      :   Infosys Limited <GT20150420>
+ * Created Date :   20 April 2015
+ *
+ * Version   Modified Date     Modified By                Modification
+ *
+ * ---------------------------------------------------------------------------------------------------- 
+ *
+ -->
+<apex:page standardController="SFDC_SAP_Price_Sync__c" recordSetVar="SFDC SAP Sync">
+<apex:pagemessage strength="2" summary="{!$Label.Mass_Update_notification}" severity="info"/>
+ <apex:form >
+     <apex:pageBlock >
+     <apex:pageBlockSection columns="1" title="{!$Label.Mass_AssignedTo_Update}">
+         <apex:pageblockSectionItem >
+          <apex:outputText > Assigned To </apex:outputText>
+          <apex:inputField value="{!SFDC_SAP_Price_Sync__c.Assigned_To__c}"/>
+        </apex:pageblockSectionItem>
+    
+        <apex:pageblockSectionItem >
+            <apex:commandButton action="{!save}" value="Save"/>
+            <apex:commandButton action="{!cancel}" value="Cancel"/>
+        </apex:pageblockSectionItem>
+    </apex:pageBlockSection>
+    </apex:pageBlock>
+  </apex:form>
+</apex:page>

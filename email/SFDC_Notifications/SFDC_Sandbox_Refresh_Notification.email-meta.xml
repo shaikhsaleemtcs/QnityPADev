@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>SFDC Sandbox Refresh Notification</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>SFDC Sandbox Refresh Notification</name>
+    <style>none</style>
+    <subject>** REMINDER ** UTQA Sandbox Refresh October 19, 2012</subject>
+    <textOnly>TO:  SFDC Corporate Org Administrators / Engagement Leaders
+
+To allow for testing &amp; preparation for project deployments, the full copy DuPont Utilities QA (UTQA) Sandbox is being refreshed.
+
+Sandbox Refresh Notice
+Force.com Sandbox: UTQA (full copy – DuPont UtilitiesOrg)
+Start Refresh Copy: After ~5:00 PM ET Friday October 19, 2012
+
+Activating a refreshed sandbox replaces the existing sandbox with the refreshed version. This permanently deletes the existing version and all data.
+The Sandbox may be unavailable for use during the refresh period.
+A notice will be forwarded when the refresh copy is activated.
+
+What you need to do:
+Please work with SFDC Admin Support to insure any configuration or customizations in progress have been saved, or backed up in another Org before the refresh begins.
+
+More Information:
+Sandbox Refresh Schedule featured in CRM Content (subscribe to receive notification of updates):
+https://one-dupont.my.salesforce.com/sfc/#version?id=06830000000aAS5</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,86 @@
+<!--    PR20140901      Priyanka R          Added Sales Org column                                                  None          -->
+<!--    PR20140901      Priyanka R          Added Public Groups column                                                  None          -->
+<apex:page standardStylesheets="false" cache="true" contentType="txt/xml#User_Role_Report.xls" 
+controller="ctrlPAMain" showHeader="false" tabStyle="Price_Approval__tab">
+
+<xml>
+    <Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+              xmlns:o="urn:schemas-microsoft-com:office:office"
+              xmlns:x="urn:schemas-microsoft-com:office:excel"
+              xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+              xmlns:html="http://www.w3.org/TR/REC-html40">
+        <Styles>
+            <Style ss:ID="Default" ss:Name="Normal">
+                <Alignment ss:Vertical="Bottom"/>
+                <Borders/>
+                <Font/>
+                <Interior/>
+                <NumberFormat/>
+                <Protection/>
+            </Style>
+            <Style ss:ID="s23">
+                <Font x:Family="Swiss" ss:Bold="1"/>
+            </Style>
+            <Style ss:ID="s22">
+                <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+            </Style>
+        </Styles>
+        <Worksheet ss:Name="User Role Report">
+            <Table ss:ExpandedColumnCount="13">
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Row ss:StyleID="s23">
+                    <Cell ss:StyleID="s23"><Data ss:Type="String"><apex:outputText escape="false" value="Business"/></Data></Cell>
+                    <Cell ss:StyleID="s22"><Data ss:Type="String"><apex:outputText escape="false" value="{!BUName}"/></Data></Cell>
+                </Row>
+                <Row ss:StyleID="s23">
+                    <Cell ss:StyleID="s23"><Data ss:Type="String"><apex:outputText escape="false" value="BU Admin"/></Data></Cell>
+                    <Cell ss:StyleID="s22"><Data ss:Type="String"><apex:outputText escape="false" value="{!service.PAServicestate.ogItems.BUAdminName}"/></Data></Cell>
+                </Row>
+                <Row ss:StyleID="s23">
+                    <Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="Name"/></Data></Cell>
+                    <Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="Email"/></Data></Cell>
+                    <Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="E-Pass ID"/></Data></Cell>
+                    <Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="SAP User ID"/></Data></Cell>
+                    <Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="Country"/></Data></Cell>
+                    <Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="Role"/></Data></Cell>
+                    <Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="Profile (BU Admin, Price Requester,Viewer, IT Admin)"/></Data></Cell>
+                    <Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="Permission Set (Approver, CSR, Sales Admin)"/></Data></Cell>
+                    <Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="Sales Org"/></Data></Cell>
+                    <Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="Public Groups"/></Data></Cell>
+                    <Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="Customer Specific Requestor"/></Data></Cell>
+                    <Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="Backup Approver"/></Data></Cell>
+                    <Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="Manager"/></Data></Cell>
+                </Row>
+                <apex:repeat value="{!service.paServiceState.ogItems.businessUsersWrapList}" var="user">
+                    <Row>     
+                        <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText escape="false" value="{!user.sObjectRecord['Name']}"/></Data></Cell>
+                        <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText escape="false" value="{!user.sObjectRecord['Email']}"/></Data></Cell>
+                        <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText escape="false" value="{!user.sObjectRecord['E_Pass_ID__c']}"/></Data></Cell>
+                        <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText escape="false" value="{!user.sObjectRecord['External_ERP_ID__c']}"/></Data></Cell>
+                        <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText escape="false" value="{!user.sObjectRecord['User_Country__c']}"/></Data></Cell>
+                        <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText escape="false" value="{!user.sObjectRecord['UserRole.Name']}"/></Data></Cell>
+                        <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText escape="false" value="{!user.sObjectRecord['Profile.Name']}"/></Data></Cell>
+                        <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText escape="false" value="{!user.stringMap['permissionSet']}"/></Data></Cell>
+                        <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText escape="false" value="{!user.stringMap['salesOrg']}"/></Data></Cell>
+                        <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText escape="false" value="{!user.stringMap['publicGrp']}"/></Data></Cell>
+                        <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText escape="false" value="{!user.stringMap['groupMember']}"/></Data></Cell>
+                        <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText escape="false" value="{!user.stringMap['delegatedApp']}"/></Data></Cell>
+                        <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText escape="false" value="{!user.sObjectRecord['Manager.Name']}"/></Data></Cell>
+                    </Row>    
+                </apex:repeat>
+            </Table>
+        </Worksheet>
+    </Workbook>
+</xml>
+</apex:page>

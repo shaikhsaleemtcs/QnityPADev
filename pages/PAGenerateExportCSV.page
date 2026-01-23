@@ -1,0 +1,5 @@
+<apex:page cache="true" contentType="application/vnd.ms-excel#Exported_Prices.xls" controller="ctrlPAMain" action="{!onLoadCall}" showHeader="false" tabStyle="ERP_Access_Sequence__c">
+ 
+    <apex:outputText value="{!service.paServiceState.currentRequest.csvString}"></apex:outputText>
+  
+</apex:page>

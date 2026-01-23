@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Business Rules</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Business Rules</value>
+    </caseValues>
+    <fields>
+        <label><!-- CDR Request Status --></label>
+        <name>CDR_Request_Status__c</name>
+        <picklistValues>
+            <masterLabel>Awaiting Credit Approval</masterLabel>
+            <translation><!-- Awaiting Credit Approval --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Awaiting DOA approval</masterLabel>
+            <translation><!-- Awaiting DOA approval --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Awaiting Data Analyst (DMS Team) Approval</masterLabel>
+            <translation><!-- Awaiting Data Analyst (DMS Team) Approval --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Awaiting Destination Credit Approval</masterLabel>
+            <translation><!-- Awaiting Destination Credit Approval --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Closed</masterLabel>
+            <translation><!-- Closed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Draft/Data Gathering</masterLabel>
+            <translation><!-- Draft/Data Gathering --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rejected</masterLabel>
+            <translation><!-- Rejected --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Request Completed in SAP</masterLabel>
+            <translation><!-- Request Completed in SAP --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Request Sent for Re-Work</masterLabel>
+            <translation><!-- Request Sent for Re-Work --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Credit Analyst Notification Mgr --></label>
+        <name>Credit_Analyst_Notification_Mgr__c</name>
+        <relationshipLabel><!-- Business Rules (Credit Analyst Notification Mgr) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Credit Limit Lower --></label>
+        <name>Credit_Limit_Lower__c</name>
+    </fields>
+    <fields>
+        <label><!-- Credit Limit Upper --></label>
+        <name>Credit_Limit_Upper__c</name>
+    </fields>
+    <fields>
+        <label><!-- Destination Queue --></label>
+        <name>Destination_Queue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Escalated Approver --></label>
+        <name>Escalated_Approver__c</name>
+        <relationshipLabel><!-- Business Rules (Escalated Approver) --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- This is the pre-split original 18 digit Salesforce ID of this record that came from the original One Dupont Salesforce instance before the business units were separated. Its is case insensitive and unique. --></help>
+        <label><!-- Legacy Pricing Util SFID --></label>
+        <name>Legacy_Pricing_Util_SFID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Selling Company Code --></label>
+        <name>Selling_Company_Code__c</name>
+        <picklistValues>
+            <masterLabel>0003 - E.I. DuPont India Private Limited</masterLabel>
+            <translation><!-- 0003 - E.I. DuPont India Private Limited --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>0029 - DU PONT CHINA LIMITED</masterLabel>
+            <translation><!-- 0029 - DU PONT CHINA LIMITED --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>0078 - ELECT. MATLS DUP DONGGUAN</masterLabel>
+            <translation><!-- 0078 - ELECT. MATLS DUP DONGGUAN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>0078 – Electronic Materials DuPont Dongguan Co., Ltd.</masterLabel>
+            <translation><!-- 0078 – Electronic Materials DuPont Dongguan Co., Ltd. --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>0218 - DuPont Trading Shanghai</masterLabel>
+            <translation><!-- 0218 - DuPont Trading Shanghai --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>0443 - DuPont (New Zealand) Ltd.</masterLabel>
+            <translation><!-- 0443 - DuPont (New Zealand) Ltd. --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>0514 - DuPont Vietnam Ltd.</masterLabel>
+            <translation><!-- 0514 - DuPont Vietnam Ltd. --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>0701 - DUP AGRIC CHEM LTD</masterLabel>
+            <translation><!-- 0701 - DUP AGRIC CHEM LTD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>1131 - DuPont (Shanghai) Sourcing Center Company, Ltd.</masterLabel>
+            <translation><!-- 1131 - DuPont (Shanghai) Sourcing Center Company, Ltd. --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>1132 - DuPont(China) RD and Mgmt</masterLabel>
+            <translation><!-- 1132 - DuPont(China) RD and Mgmt --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>1142 - DUP SURFCE GUANGZHOU</masterLabel>
+            <translation><!-- 1142 - DUP SURFCE GUANGZHOU --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>1210 - DUP (SHENZHEN) INDUS</masterLabel>
+            <translation><!-- 1210 - DUP (SHENZHEN) INDUS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>1309 - DuPont (Hong Kong) Electronic Materials Limited</masterLabel>
+            <translation><!-- 1309 - DuPont (Hong Kong) Electronic Materials Limited --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>1449 - DuPont (Shanghai) Electronic Materials Co. Ltd.</masterLabel>
+            <translation><!-- 1449 - DuPont (Shanghai) Electronic Materials Co. Ltd. --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2380 - Dup Austl Pty Ltd</masterLabel>
+            <translation><!-- 2380 - Dup Austl Pty Ltd --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2791 - Du Pont China Holding Co.</masterLabel>
+            <translation><!-- 2791 - Du Pont China Holding Co. --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3874 - Du Pont Co. (Singapore) Pte</masterLabel>
+            <translation><!-- 3874 - Du Pont Co. (Singapore) Pte --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3940 - DUP MALAYSIA</masterLabel>
+            <translation><!-- 3940 - DUP MALAYSIA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3945 - DUFE Philippines</masterLabel>
+            <translation><!-- 3945 - DUFE Philippines --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4860 - DUP (Thailand) Ltd</masterLabel>
+            <translation><!-- 4860 - DUP (Thailand) Ltd --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Sold-to Country --></label>
+        <name>Sold_to_Country__c</name>
+        <picklistValues>
+            <masterLabel>AU - Australia</masterLabel>
+            <translation><!-- AU - Australia --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CN - China</masterLabel>
+            <translation><!-- CN - China --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>HK - Hong Kong</masterLabel>
+            <translation><!-- HK - Hong Kong --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IN - India</masterLabel>
+            <translation><!-- IN - India --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NZ - New Zealand</masterLabel>
+            <translation><!-- NZ - New Zealand --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Others</masterLabel>
+            <translation><!-- Others --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TH - Thailand</masterLabel>
+            <translation><!-- TH - Thailand --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Sub – Business --></label>
+        <name>Sub_Business__c</name>
+        <picklistValues>
+            <masterLabel>ABS</masterLabel>
+            <translation><!-- ABS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BI</masterLabel>
+            <translation><!-- BI --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CPM(HPF)</masterLabel>
+            <translation><!-- CPM(HPF) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CPM(HPL)</masterLabel>
+            <translation><!-- CPM(HPL) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CPM(PCM)</masterLabel>
+            <translation><!-- CPM(PCM) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CROP PROTECTION</masterLabel>
+            <translation><!-- CROP PROTECTION --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DCP</masterLabel>
+            <translation><!-- DCP --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DPP</masterLabel>
+            <translation><!-- DPP --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DPT</masterLabel>
+            <translation><!-- DPT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DSS</masterLabel>
+            <translation><!-- DSS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>E&amp;C(DAS)</masterLabel>
+            <translation><!-- E&amp;C(DAS) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>E&amp;C(DE)</masterLabel>
+            <translation><!-- E&amp;C(DE) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>E&amp;C(DP)</masterLabel>
+            <translation><!-- E&amp;C(DP) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>E&amp;C(GR)</masterLabel>
+            <translation><!-- E&amp;C(GR) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>E&amp;C(MCM)</masterLabel>
+            <translation><!-- E&amp;C(MCM) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>E&amp;C(PG)</masterLabel>
+            <translation><!-- E&amp;C(PG) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>E&amp;C(PVFM)</masterLabel>
+            <translation><!-- E&amp;C(PVFM) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>E&amp;C(SFM)</masterLabel>
+            <translation><!-- E&amp;C(SFM) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>N&amp;H(QUALICON)</masterLabel>
+            <translation><!-- N&amp;H(QUALICON) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>P&amp;IP(AI)</masterLabel>
+            <translation><!-- P&amp;IP(AI) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>P&amp;IP(ECC)</masterLabel>
+            <translation><!-- P&amp;IP(ECC) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>P&amp;IP(ECS)</masterLabel>
+            <translation><!-- P&amp;IP(ECS) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SUS SOLUTION</masterLabel>
+            <translation><!-- SUS SOLUTION --></translation>
+        </picklistValues>
+    </fields>
+    <recordTypes>
+        <description><!-- Record type documenting rules to direct the request to a named individual from the country credit queue --></description>
+        <label><!-- Country Credit Analyst Notification --></label>
+        <name>Country_Credit_Analyst_Notification</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Record of country rules --></description>
+        <label><!-- Country Rules Record --></label>
+        <name>Country_Rules_Record</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Maps the country with the selling company code --></description>
+        <label><!-- Country Selling Company Code Rules --></label>
+        <name>Country_Selling_Company_Code_Rules</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Rules which have DOA Fields --></description>
+        <label><!-- DOA Rules --></label>
+        <name>DOA_Rules</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Rules to send notifications to dupont managers --></description>
+        <label><!-- Notification Rules --></label>
+        <name>Notification_Rules</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

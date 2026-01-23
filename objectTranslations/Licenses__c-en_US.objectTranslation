@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>License</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Licenses</value>
+    </caseValues>
+    <fields>
+        <help><!-- Name of the Licenses Available under License Category --></help>
+        <label><!-- Available Licenses Name --></label>
+        <name>Available_Licenses_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- IsDuplicate --></label>
+        <name>IsDuplicate__c</name>
+    </fields>
+    <fields>
+        <help><!-- Catagories of License Type --></help>
+        <label><!-- License Catagories --></label>
+        <name>License_Catagories__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique Identifier generated for each license with year and month, given when record is created. --></help>
+        <label><!-- License Number --></label>
+        <name>License_Number__c</name>
+    </fields>
+    <fields>
+        <help><!-- Number of Licenses consumed --></help>
+        <label><!-- Licenses Consumed --></label>
+        <name>Licenses_Consumed__c</name>
+    </fields>
+    <fields>
+        <help><!-- rollup summary of all License Procurements related records with status = active and business = Procuring Business. --></help>
+        <label><!-- Number of licenses procured --></label>
+        <name>Number_of_licenses_procured__c</name>
+    </fields>
+    <fields>
+        <help><!-- Business procuring the license. --></help>
+        <label><!-- Procuring Business --></label>
+        <name>Procuring_Business__c</name>
+    </fields>
+    <fields>
+        <help><!-- List of email addresses to send mail, when the threshold limit is reached. --></help>
+        <label><!-- Threshold Email Notification List --></label>
+        <name>Threshold_Email_Notifications__c</name>
+    </fields>
+    <fields>
+        <help><!-- Limit when reached, will send mail to admins. --></help>
+        <label><!-- Threshold Limit --></label>
+        <name>Threshold_Limit__c</name>
+    </fields>
+    <fields>
+        <help><!-- Remaining license(s) available for allotment. --></help>
+        <label><!-- Remaining Licenses --></label>
+        <name>fRemaining_Licenses__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- The Combination of Procuring Business, License Category and Available License Name already exist. Please choose different combination or use the original license record. --></errorMessage>
+        <name>Unique_License</name>
+    </validationRules>
+</CustomObjectTranslation>

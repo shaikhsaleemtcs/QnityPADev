@@ -1,0 +1,294 @@
+<!--    Ver.            Developer           Changes                                                             Dependencies    -->
+<!--    1.1             Priyanka            Added code for Price Ref. Partner                                   None -->
+<!--    1.2             Vinoth              Added code for Customer Hierarchy                                   None -->
+<apex:component controller="PAShipToSelection" allowDML="true">
+
+    <apex:attribute description="shipToCode" type="string" name="shipToCodeAtr" assignTo="{!shipToCode}"/>
+    <apex:attribute description="shipTo" type="string" name="shipToAtr"/>
+    <apex:attribute description="soldToCode" type="string" name="soldToCodeAtr" assignTo="{!shipToCustomerCode}"/>
+    <!-- SP20140619 START -->
+    <apex:attribute description="soldToCodeFilter" type="string" name="soldToCodeFilterAtr" assignTo="{!shipToMassiveCustomerCode}"/>
+    <!-- SP20140619 END -->
+    
+    <!-- Ver 1.1 -->
+    
+    <apex:attribute description="Ship To/Price Ref. Partner" type="String" name="componentTypeAtr" assignTo="{!componentType}"/> 
+    <apex:attribute description="Sales Org Code" type="String" name="salesOrgCodeAtr" assignTo="{!salesOrgCode}"/>
+    <apex:attribute description="Distribution Channel Code" type="String" name="dcCodeAtr" assignTo="{!dcCode}"/>
+    <apex:attribute description="Division Code" type="String" name="divisionCodeAtr" assignTo="{!divisionCode}"/>
+    <!-- Ver 1.2 VR 2013-05-09 APAC Rollout1-Adding Code for Customer Hierarchy -->
+    <apex:attribute description="Business" type="String" name="businessAtr" assignTo="{!business}"/>
+    <apex:attribute description="customerHierarchy" type="String" name="customerHierarchyAtr" />
+    <apex:attribute description="Enable pop up on load" type="Boolean" name="enablePopUp" assignTo="{!enablePopUpBoolean}"/>
+<!--     <TJ20150506> -->
+    <apex:attribute description="Sales Rep Name" type="String" name="salesRep" assignTo="{!salesRepName}"/>
+   <style>
+        .headertext{font-size:15px;height:20px;margin-bottom:1px;padding:5px;border:solid 1px;border-color:#6E96B2; background-color:#E5F3FC;font-weight:bold;text-align:left;}
+   </style>
+   
+    <apex:outputpanel id="shipToId">
+        <apex:outputPanel >
+            <apex:commandLink reRender="shipToId,a" status="stat" action="{!displayPopUpWindow}" oncomplete="datatable();">
+                <apex:image id="theImage" url="{!$Resource.LookUpImage}"/>
+<!--                <apex:param name="soldToLookup" value="showShipTo" assignTo="{!shipToLookUp}"/> -->
+            </apex:commandLink>
+        </apex:outputPanel>
+    
+        <apex:outputPanel id="backPage" rendered="{!shipToLookUp}" styleClass="BackPage" ></apex:outputPanel> 
+        
+        <apex:outputPanel id="popUPwindow" rendered="{!shipToLookUp}" styleClass="FrontPage" >
+
+            <apex:panelGrid style="float:right;">
+                <apex:commandLink action="{!closeWindow}">
+                    <apex:image url="{!$Resource.closeButton}" width="15" height="15"/>
+<!--                    <apex:param name="soldToLookup" value="hideShipTo" assignTo="{!shipToLookUp}"/> -->
+                </apex:commandLink>
+            </apex:panelGrid>
+            
+        <div class="headertext">
+               {!IF(CONTAINS(componentTypeAtr,'PriceRefPartner'),'Price Ref. Partner', IF(CONTAINS(componentTypeAtr,'EndUser'),'End User' , IF(CONTAINS(componentTypeAtr,'CustomerHierarchy'),'Customer', IF(CONTAINS(componentTypeAtr,'ComPartner'),'ComPartner',IF(CONTAINS(componentTypeAtr,'PartnerZF'),'Partner ZF',IF(CONTAINS(componentTypeAtr,'Payer'),'Payer',IF(CONTAINS(componentTypeAtr,'Material Group 5 Key'),'Material Group 5 Key','Ship To')))))))} Selection
+        </div>
+    
+        <apex:pageBlock id="pb">
+<!--        <TJ20140519> -->
+            <apex:commandLink value="Help" action="{!helpLink}" style="float:right;" target="_blank">
+                <apex:param name="Help" value="Key Combination Selection" assignTo="{!label}"/>
+            </apex:commandLink>
+            <br/>
+                    <apex:pageMessages />
+            <apex:pageBlockSection title="Search Criteria" columns="1" collapsible="false" rendered="{!OR(componentTypeAtr== 'PriceRefPartner',componentTypeAtr == 'CustomerHierarchy')}">         
+        
+                <apex:pageBlockSectionItem rendered="{!IF(componentTypeAtr!= 'PriceRefPartner',true,false)}">
+                    <apex:outputText value="Sold To Code" rendered="{!NOT(ISBLANK(shipToCustomerCode))}"/> 
+                    <apex:outputPanel >
+                    <apex:inputText value="{!shipToCustomerCode}" disabled="true" rendered="{!NOT(ISBLANK(shipToCustomerCode))}"/>
+                    <apex:inputText value="{!shipToMassiveCustomerCode}" disabled="true" rendered="{!ISBLANK(shipToCustomerCode)}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+            </apex:pageBlockSection>
+            
+            <!-- Ver 1.2 VR 2013-05-09 APAC Rollout1-Adding Code for Customer Hierarchy -->
+                <!--   <apex:pageBlockSection collapsible="false" rendered="{!OR(componentTypeAtr== 'PriceRefPartner',componentTypeAtr == 'CustomerHierarchy')}"> -->       
+                   <apex:pageBlockSection rendered="{!IF(componentTypeAtr!= 'shipTo' && componentTypeAtr!= 'EndUser' && componentTypeAtr!= 'ComPartner' && componentTypeAtr!= 'PartnerZF' && componentTypeAtr!= 'Payer',true,false)}">
+                <apex:pageBlockSectionItem rendered="{!IF(componentTypeAtr== 'CustomerHierarchy',true,false)}">
+                    <apex:outputText value="Customer Code"/> 
+                    <apex:inputText value="{!customerHierarchyFilterCode}"/>
+                </apex:pageBlockSectionItem>
+            
+<!--                    <apex:pageBlockSectionItem rendered="{!IF(componentTypeAtr== 'PriceRefPartner',true,false)}"> -->
+                               
+                      <apex:pageBlockSectionItem rendered="{!IF(componentTypeAtr!= 'CustomerHierarchy',true,false)}">
+                    <apex:outputText value="Price Ref. Partner Code"/> 
+                    <apex:inputText value="{!customerHierarchyFilterCode}"/>					                   
+                </apex:pageBlockSectionItem>
+               
+            
+                <apex:pageBlockSectionItem rendered="{!IF(componentTypeAtr== 'CustomerHierarchy',true,false)}">
+                    <apex:outputText value="Customer"/>
+                    <apex:inputText value="{!customer}" maxlength="80" />
+                </apex:pageBlockSectionItem>
+                
+<!--                    <apex:pageBlockSectionItem rendered="{!IF(componentTypeAtr== 'PriceRefPartner',true,false)}"> -->
+                <apex:pageBlockSectionItem rendered="{!IF(componentTypeAtr!= 'CustomerHierarchy',true,false)}"> 
+                    <apex:outputText value="Price Ref. Partner"/>
+                    <apex:inputText value="{!customer}" maxlength="80" />
+                </apex:pageBlockSectionItem>                
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value="City"/>
+                    <apex:inputText value="{!city}" maxlength="100"/>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem rendered="{!IF(componentTypeAtr== 'CustomerHierarchy',true,false)}">
+                    <apex:outputText value="Country"/> 
+                    <apex:selectList size="1" value="{!country}" >
+                        <apex:selectOption itemValue="--Select--" itemLabel="--Select--" />
+                        <apex:selectOptions value="{!listOfCountry}"/>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+            
+            </apex:pageBlockSection>              
+             <center>
+             <br/>             
+           <apex:outputPanel rendered="{!IF(componentTypeAtr!= 'shipTo' && componentTypeAtr!= 'EndUser' && componentTypeAtr!= 'ComPartner' && componentTypeAtr!= 'PartnerZF' && componentTypeAtr!= 'Payer',true,false)}"> 
+                        
+                    <apex:commandLink value="Search"  action="{!dosearch}" styleClass="btn" style="text-decoration:none;" >                 
+                   
+                    </apex:commandLink>         
+                
+               </apex:outputPanel>  
+             </center>                   
+            <!-- End 1.2 -->
+<!--             <TJ20150506> -->
+            <apex:outputPanel rendered="{!IF(!shipToCustomersList.empty && shipToCustomersList.size>0,true,false)}">
+            <table class="tab1" id="ShipToTable" cellPadding="0" cellSpacing="0" border="0" style="position:'relative';">
+            	<thead class="headerRow">
+					<tr class="">
+
+                        <th class="" colSpan="30" scope="colgroup">Search Results</th>
+
+                    </tr>			        
+			        <tr>			            
+			            <th class="headerRow" scope="col">{!IF(CONTAINS(componentTypeAtr,'PriceRefPartner'),'Price Ref. Partner Code', IF(CONTAINS(componentTypeAtr,'EndUser'),'End User Code' , IF(CONTAINS(componentTypeAtr,'CustomerHierarchy'),'Customer Code',IF(CONTAINS(componentTypeAtr,'ComPartner'),'ComPartner Code',IF(CONTAINS(componentTypeAtr,'PartnerZF'),'Partner ZF Code',IF(CONTAINS(componentTypeAtr,'Payer'),'Payer Code',IF(CONTAINS(componentTypeAtr,'Material Group 5 Key'),'Material Group 5 Key','Ship To Code')))))))}</th>
+			            <th class="headerRow" scope="col">{!IF(CONTAINS(componentTypeAtr,'PriceRefPartner'),'Price Ref. Partner', IF(CONTAINS(componentTypeAtr,'EndUser'),'End User' , IF(CONTAINS(componentTypeAtr,'CustomerHierarchy'),'Customer', IF(CONTAINS(componentTypeAtr,'ComPartner'),'ComPartner',IF(CONTAINS(componentTypeAtr,'PartnerZF'),'Partner ZF',IF(CONTAINS(componentTypeAtr,'Payer'),'Payer',IF(CONTAINS(componentTypeAtr,'Material Group 5 Key'),'Material Group 5 Key','Ship To')))))))}</th>
+			            <th class="headerRow" scope="col">Country</th>			            
+			            <apex:variable value="a1" var="a1" rendered="{!NOT(componentTypeAtr== 'CustomerHierarchy')}">
+			            <th class="headerRow" scope="col">
+			            State/Province
+			            </th>
+			            </apex:variable>
+			            <th class="headerRow" scope="col">City</th>			            
+			            <apex:variable value="b1" var="b1" rendered="{!NOT(componentTypeAtr== 'CustomerHierarchy')}">
+			            <th class="headerRow" scope="col">
+			            Street
+			            </th></apex:variable>
+			            <apex:variable value="c1" var="c1" rendered="{!NOT(componentTypeAtr== 'CustomerHierarchy')}">
+						<th class="headerRow" scope="col">
+			            Sales Org
+			            </th></apex:variable>
+			            <apex:variable value="d1" var="d1" rendered="{!NOT(componentTypeAtr== 'CustomerHierarchy')}">
+			            <th class="headerRow" scope="col">
+			            Dist. Channel
+			            </th></apex:variable>
+			            <apex:variable value="e1" var="e1" rendered="{!NOT(componentTypeAtr== 'CustomerHierarchy')}">
+						<th class="headerRow" scope="col">
+			            Division
+			            </th></apex:variable>
+			            <apex:variable value="f1" var="f1" rendered="{!NOT(componentTypeAtr== 'CustomerHierarchy')}">
+			            <th class="headerRow" scope="col">
+			            Sales Office
+			            </th></apex:variable>			            
+			        </tr>
+			    </thead>
+			    <apex:repeat value="{!shipToCustomersList}" var="v">
+			    	<tr class="dataRow">
+			    		<td class="dataCell" colSpan="1">
+							<apex:commandLink value="{!v.Customer_Code__c}" reRender="myForm" action="{!returnData}">
+                        		<apex:param name="shipToCode" value="{!v.Customer_Code__c}" assignTo="{!shipToCodeAtr}"/>
+                        		<apex:param name="shipTo" value="{!v.Name}" assignTo="{!shipToAtr}"/>
+                        		<!-- Ver 1.2 VR 2013-05-09 APAC Rollout1-Adding Code for Customer Hierarchy -->
+                        		<apex:param name="customer" value="{!v.Customer_Code__c}" assignTo="{!customerHierarchyAtr}"/>
+	<!--                        <apex:param name="soldToLookup" value="hideShipTo" assignTo="{!shipToLookUp}"/>-->
+    	                	</apex:commandLink>
+        	            </td>
+			            <td class="dataCell" colSpan="1">{!v.Name}</td>
+			            <td class="dataCell" colSpan="1">{!v.Country__c}</td>			            
+			            <apex:variable value="a1" var="a1" rendered="{!NOT(componentTypeAtr== 'CustomerHierarchy')}">
+			            <td class="dataCell" colSpan="1">
+			            {!v.State_Province__c}
+			            </td></apex:variable>           
+			            <td class="dataCell" colSpan="1">{!v.City__c}</td>			            
+			            <apex:variable value="b1" var="b1" rendered="{!NOT(componentTypeAtr== 'CustomerHierarchy')}">
+			            <td class="dataCell" colSpan="1">
+			            {!v.Street__c}
+			            </td></apex:variable>
+			            <apex:variable value="c1" var="c1" rendered="{!NOT(componentTypeAtr== 'CustomerHierarchy')}">
+			            <td class="dataCell" colSpan="1">
+			            {!v.Sales_Org__c}
+			            </td></apex:variable>           
+			            <apex:variable value="d1" var="d1" rendered="{!NOT(componentTypeAtr== 'CustomerHierarchy')}">
+			            <td class="dataCell" colSpan="1">
+			            {!v.Distribution_Channel__c}
+			            </td></apex:variable>			            
+			            <apex:variable value="e1" var="e1" rendered="{!NOT(componentTypeAtr== 'CustomerHierarchy')}">
+			            <td class="dataCell" colSpan="1">
+			            {!v.Division__c}
+			            </td></apex:variable>
+			            <apex:variable value="f1" var="f1" rendered="{!NOT(componentTypeAtr== 'CustomerHierarchy')}">
+			            <td class="dataCell" colSpan="1">
+			            {!v.Sales_Office__c}
+			            </td></apex:variable>                        
+			    	</tr>
+			    </apex:repeat>
+            </table>
+<!--             <apex:pageBlockTable value="{!shipToCustomersList}" var="v" id="tab1" columnsWidth="20%,20%,20%,20%,20%,20%,20%,20%,20%,20%"> -->
+<!--             Ver 1.1 IF(CONTAINS(componentTypeAtr,'EndUser'),'End User Code' , 'Ship To Code' ) -->
+<!--             Ver 1.2 VR 2013-05-09 APAC Rollout1-Adding Code for Customer Hierarchy -->
+<!--                 <apex:column headerValue="{!IF(CONTAINS(componentTypeAtr,'PriceRefPartner'),'Price Ref. Partner Code', IF(CONTAINS(componentTypeAtr,'EndUser'),'End User Code' , IF(CONTAINS(componentTypeAtr,'CustomerHierarchy'),'Customer Code',IF(CONTAINS(componentTypeAtr,'ComPartner'),'ComPartner Code',IF(CONTAINS(componentTypeAtr,'PartnerZF'),'Partner ZF Code',IF(CONTAINS(componentTypeAtr,'Payer'),'Payer Code',IF(CONTAINS(componentTypeAtr,'Material Group 5 Key'),'Material Group 5 Key','Ship To Code')))))))}" style="align">  -->
+<!--                     <apex:commandLink value="{!v.Customer_Code__c}" reRender="myForm" action="{!returnData}"> -->
+<!--                         <apex:param name="shipToCode" value="{!v.Customer_Code__c}" assignTo="{!shipToCodeAtr}"/> -->
+<!--                         <apex:param name="shipTo" value="{!v.Name}" assignTo="{!shipToAtr}"/> -->
+<!--                         Ver 1.2 VR 2013-05-09 APAC Rollout1-Adding Code for Customer Hierarchy -->
+<!--                         <apex:param name="customer" value="{!v.Customer_Code__c}" assignTo="{!customerHierarchyAtr}"/> -->
+<!-- <!--                        <apex:param name="soldToLookup" value="hideShipTo" assignTo="{!shipToLookUp}"/>--> 
+<!--                     </apex:commandLink> -->
+<!--                 </apex:column>                  -->
+<!--                 Ver 1.1 -->
+<!--                 Ver 1.2 VR 2013-05-09 APAC Rollout1-Adding Code for Customer Hierarchy -->
+<!--                 <apex:column headerValue="{!IF(CONTAINS(componentTypeAtr,'PriceRefPartner'),'Price Ref. Partner', IF(CONTAINS(componentTypeAtr,'EndUser'),'End User' , IF(CONTAINS(componentTypeAtr,'CustomerHierarchy'),'Customer', IF(CONTAINS(componentTypeAtr,'ComPartner'),'ComPartner',IF(CONTAINS(componentTypeAtr,'PartnerZF'),'Partner ZF',IF(CONTAINS(componentTypeAtr,'Payer'),'Payer',IF(CONTAINS(componentTypeAtr,'Material Group 5 Key'),'Material Group 5 Key','Ship To')))))))}"> -->
+<!--                     <apex:outputField value="{!v.Name}"/> -->
+<!--                 </apex:column> -->
+<!--                 <apex:column headerValue="Country"> -->
+<!--                     <apex:outputField value="{!v.Country__c}"/> -->
+<!--                 </apex:column> -->
+<!--                 Ver 1.2 VR 2013-05-09 APAC Rollout1-Adding Code for Customer Hierarchy -->
+<!--                 <apex:column headerValue="State/Province" rendered="{!NOT(componentTypeAtr== 'CustomerHierarchy')}"> -->
+<!--                     <apex:outputField value="{!v.State_Province__c}"/> -->
+<!--                 </apex:column> -->
+<!--                 <apex:column headerValue="City"> -->
+<!--                     <apex:outputField value="{!v.City__c}"/>  -->
+<!--                 </apex:column> -->
+<!--                 Ver 1.2 VR 2013-05-09 APAC Rollout1-Adding Code for Customer Hierarchy -->
+<!--                 <apex:column headerValue="Street" rendered="{!NOT(componentTypeAtr== 'CustomerHierarchy')}"> -->
+<!--                     <apex:outputField value="{!v.Street__c}"/> -->
+<!--                 </apex:column> -->
+<!--                 <apex:column headerValue="Sales Org" rendered="{!NOT(componentTypeAtr== 'CustomerHierarchy')}"> -->
+<!--                     <apex:outputField value="{!v.Sales_Org__c}"/> -->
+<!--                 </apex:column> -->
+<!--                 <apex:column headerValue="Dist. Channel" rendered="{!NOT(componentTypeAtr== 'CustomerHierarchy')}"> -->
+<!--                     <apex:outputField value="{!v.Distribution_Channel__c}"/> -->
+<!--                 </apex:column> -->
+<!--                 <apex:column headerValue="Division" rendered="{!NOT(componentTypeAtr== 'CustomerHierarchy')}"> -->
+<!--                     <apex:outputField value="{!v.Division__c}"/> -->
+<!--                 </apex:column> -->
+<!--                 <apex:column headerValue="Sales Office" rendered="{!NOT(componentTypeAtr== 'CustomerHierarchy')}"> -->
+<!--                     <apex:outputField value="{!v.Sales_Office__c}"/> -->
+<!--                 </apex:column> -->
+<!--             </apex:pageBlockTable> -->
+            <apex:panelGrid columns="7">
+                <apex:commandButton status="stat" reRender="pb" value="|<" action="{!first}" disabled="{!!hasPrevious}" title="First Page" oncomplete="datatable();"/>
+                <apex:commandButton status="stat" reRender="pb" value="<" action="{!previous}" disabled="{!!hasPrevious}" title="Previous Page" oncomplete="datatable();"/>
+                <apex:commandButton status="stat" reRender="pb" value=">" action="{!next}" disabled="{!!hasNext}" title="Next Page" oncomplete="datatable();"/>
+                <apex:commandButton status="stat" reRender="pb" value=">|" action="{!last}" disabled="{!!hasNext}" title="Last Page" oncomplete="datatable();"/>
+                <apex:outputText >{!(pageNumber * size)+1-size}-{!IF((pageNumber * size)>noOfRecords, noOfRecords,(pageNumber * size))} of {!noOfRecords}</apex:outputText>                
+            </apex:panelGrid>
+            </apex:outputPanel>
+<!--             </apex:pageBlockSection> -->
+            
+        </apex:pageBlock>
+<!--         <TJ20150506> END   -->
+        </apex:outputPanel>
+    </apex:outputpanel>
+        
+    
+    
+    <style type="text/css">
+        .FrontPage 
+        {
+            background-color: white;
+            border: 2px solid #63A4C5; 
+            z-index: 9999;
+            left: 12%;
+            right: 12%;
+            padding: 10px;
+            position: absolute;
+            top: 15%; //
+            margin-left: -600px;
+            width: 90%;
+        }
+        .BackPage 
+        {
+            background-color: #696969;
+            opacity: 0.5;
+            filter: alpha(opacity =           50);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 9998;
+        }
+        
+    </style>
+</apex:component>

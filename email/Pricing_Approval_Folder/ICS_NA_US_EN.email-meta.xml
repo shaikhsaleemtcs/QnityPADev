@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>27.0</apiVersion>
+    <available>true</available>
+    <description>This template is used for Customer Specific PCL English language</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>ICS NA - US_EN</name>
+    <style>none</style>
+    <type>visualforce</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

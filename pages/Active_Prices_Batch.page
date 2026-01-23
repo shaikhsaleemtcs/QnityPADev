@@ -1,0 +1,47 @@
+<!-- 
+ * Name      :      Active_Prices_Batch
+ * Description  :   This Page will display all the accessible business of a user and when Run button is clicked, the batch to mark active prices is initiated. 
+ * Author      :    Tata Consultancy Services <CC20191007>
+ * Created Date :   07 October 2019
+ *
+ * Version   Modified Date     Modified By                Modification
+ *
+ * ---------------------------------------------------------------------------------------------------- 
+ *
+ -->
+<apex:page controller="activePrices" extensions="ctrlPAMain" tabstyle="Price_Approval__tab" sidebar="false" action="{!onLoadCall}"> 
+    <apex:pageMessages ></apex:pageMessages>
+    <style>
+        .customerLink{font-size:15px;height:20px;margin-bottom:1px;padding:5px;border:solid 1px;border-color:#6E96B2; background-color:#E5F3FC;font-weight:bold;text-align:left;}
+        .navFlow{font-size:13px;font-style:oblique;margin-bottom:3px;}
+    </style>
+    <apex:form >
+        <apex:pageBlock >
+            <div align="left" class="navFlow">
+                <apex:outputPanel >
+                    <apex:commandLink id="link0" value="Landing Page" action="{!businessComponentAction}" target="_self" style="color:blue;">
+                        <apex:param name="desiredAction" value="BackToHome" assignTo="{!businessaction}" />
+                        <apex:param name="newPageLabel" value="PAHome" assignTo="{!newPageLabel}" /> 
+                    </apex:commandLink>
+                    <apex:outputText value=">>  Active Price Reporting"/>
+                </apex:outputPanel>
+            </div>
+            <div class="customerLink">
+                Active Price Reporting
+            </div>
+            <br/>
+         
+            <apex:pageBlock >   
+                <b>Business&nbsp;&nbsp;</b>
+                <apex:selectList size="1" value="{!selectedBusiness}">
+                      <apex:selectOptions value="{!BusinessList}"></apex:selectOptions>
+                </apex:selectList>
+                &nbsp;&nbsp;<apex:commandButton value="Run" action="{!executeButton}"/> 
+                &nbsp;&nbsp;<apex:commandLink styleClass="btn" style="text-decoration:none;padding:4px;" value="Cancel" action="{!businessComponentAction}" immediate="true">
+                                <apex:param name="desiredAction" value="BackToHome" assignTo="{!businessaction}" />
+                                <apex:param name="newPageLabel" value="PAHome" assignTo="{!newPageLabel}" />
+                            </apex:commandLink>
+            </apex:pageBlock>
+        </apex:pageBlock> 
+    </apex:form>   
+</apex:page>

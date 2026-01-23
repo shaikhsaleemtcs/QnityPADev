@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>33.0</apiVersion>
+    <available>true</available>
+    <description>Price Confirmation Letter Template for Canada</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>ACST Global - Price Confirmation Letter Template-USA/ Canada/ Korea/ Taiwan_EN</name>
+    <style>none</style>
+    <type>visualforce</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

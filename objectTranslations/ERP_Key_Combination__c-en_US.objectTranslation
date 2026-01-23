@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>ERP Key Combination</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>ERP Key Combination</value>
+    </caseValues>
+    <fields>
+        <label><!-- Customer Specific --></label>
+        <name>Customer_Specific__c</name>
+    </fields>
+    <fields>
+        <label><!-- Key Combination Code --></label>
+        <name>Key_Combination_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Key Combination Tech --></label>
+        <name>Key_Combination_Tech__c</name>
+    </fields>
+    <fields>
+        <label><!-- Key Combination Type Text --></label>
+        <name>Key_Combination_Type_Text__c</name>
+    </fields>
+    <fields>
+        <label><!-- Key Combination Type --></label>
+        <name>Key_Combination_Type__c</name>
+        <picklistValues>
+            <masterLabel>Floor</masterLabel>
+            <translation><!-- Floor --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Net Floor</masterLabel>
+            <translation><!-- Net Floor --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Net Reference</masterLabel>
+            <translation><!-- Net Reference --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Project</masterLabel>
+            <translation><!-- Project --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Reference</masterLabel>
+            <translation><!-- Reference --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spot</masterLabel>
+            <translation><!-- Spot --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Standard</masterLabel>
+            <translation><!-- Standard --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Key Combination --></label>
+        <name>Key_Combination__c</name>
+    </fields>
+    <fields>
+        <help><!-- This is the pre-split original 18 digit Salesforce ID of this record that came from the original One Dupont Salesforce instance before the business units were separated. Its is case insensitive and unique. --></help>
+        <label><!-- Legacy Pricing Util SFID --></label>
+        <name>Legacy_Pricing_Util_SFID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Novus External Id --></label>
+        <name>Novus_External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Application Id --></label>
+        <name>SAP_Application_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Client Id --></label>
+        <name>SAP_Client_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Cluster --></label>
+        <name>SAP_Cluster__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Key Combination --></label>
+        <name>SAP_Key_Combination__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Inactive</masterLabel>
+            <translation><!-- Inactive --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

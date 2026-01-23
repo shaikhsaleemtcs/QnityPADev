@@ -1,0 +1,908 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>ERP Sales Prices - SAP</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>ERP Sales Prices - SAP</value>
+    </caseValues>
+    <fieldSets>
+        <label><!-- PAPricingRecordCommonColumns --></label>
+        <name>PAPricingRecordCommonColumns</name>
+    </fieldSets>
+    <fieldSets>
+        <label><!-- PAPricingRecordDateColumns --></label>
+        <name>PAPricingRecordDateColumns</name>
+    </fieldSets>
+    <fieldSets>
+        <label><!-- PAPricingRecordsColumns --></label>
+        <name>PAPricingRecordsColumns</name>
+    </fieldSets>
+    <fieldSets>
+        <label><!-- PASoldTo --></label>
+        <name>PASoldTo</name>
+    </fieldSets>
+    <fields>
+        <label><!-- Approved Date --></label>
+        <name>Approved_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- BU --></label>
+        <name>BU__c</name>
+    </fields>
+    <fields>
+        <label><!-- Calculation Type Code --></label>
+        <name>Calculation_Type_Code__c</name>
+        <picklistValues>
+            <masterLabel>A</masterLabel>
+            <translation><!-- A --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B</masterLabel>
+            <translation><!-- B --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>C</masterLabel>
+            <translation><!-- C --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Calculation Type --></label>
+        <name>Calculation_Type__c</name>
+        <picklistValues>
+            <masterLabel>Fixed Amount</masterLabel>
+            <translation><!-- Fixed Amount --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Percentage</masterLabel>
+            <translation><!-- Percentage --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Quantity</masterLabel>
+            <translation><!-- Quantity --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Campaign Code --></label>
+        <name>Campaign_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Campaign --></label>
+        <name>Campaign__c</name>
+    </fields>
+    <fields>
+        <label><!-- Char Name --></label>
+        <name>Char_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Check Scale Code --></label>
+        <name>Check_Scale_Code__c</name>
+        <picklistValues>
+            <masterLabel>A</masterLabel>
+            <translation><!-- A --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Check Scale --></label>
+        <name>Check_Scale__c</name>
+        <picklistValues>
+            <masterLabel>Descending</masterLabel>
+            <translation><!-- Descending --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- ComPartner_Code --></label>
+        <name>ComPartner_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- ComPartner --></label>
+        <name>ComPartner__c</name>
+    </fields>
+    <fields>
+        <label><!-- Comm Ptr Code --></label>
+        <name>Comm_Ptr_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Comm Ptr --></label>
+        <name>Comm_Ptr__c</name>
+    </fields>
+    <fields>
+        <label><!-- Condition Class Code --></label>
+        <name>Condition_Class_Code__c</name>
+        <picklistValues>
+            <masterLabel>A</masterLabel>
+            <translation><!-- A --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B</masterLabel>
+            <translation><!-- B --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Condition Class --></label>
+        <name>Condition_Class__c</name>
+        <picklistValues>
+            <masterLabel>Discount or Surcharge</masterLabel>
+            <translation><!-- Discount or Surcharge --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Prices</masterLabel>
+            <translation><!-- Prices --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Contract No. --></label>
+        <name>Contract_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contract --></label>
+        <name>Contract__c</name>
+    </fields>
+    <fields>
+        <label><!-- Country Code --></label>
+        <name>Country_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Country --></label>
+        <name>Country__c</name>
+    </fields>
+    <fields>
+        <label><!-- Cust-Mkt-Segment Code --></label>
+        <name>Cust_Mkt_Segment_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Cust-Mkt-Segment --></label>
+        <name>Cust_Mkt_Segment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Customer Hierarchy Code --></label>
+        <name>Customer_Hierarchy_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Customer Hierarchy --></label>
+        <name>Customer_Hierarchy__c</name>
+    </fields>
+    <fields>
+        <label><!-- Customer Price Group Code --></label>
+        <name>Customer_Price_Group_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Customer Price Group --></label>
+        <name>Customer_Price_Group__c</name>
+    </fields>
+    <fields>
+        <label><!-- Customer Price Payment Terms --></label>
+        <name>Customer_Price_Payment_Terms__c</name>
+    </fields>
+    <fields>
+        <label><!-- Customer Specific --></label>
+        <name>Customer_Specific__c</name>
+    </fields>
+    <fields>
+        <label><!-- Destination_Country_Code --></label>
+        <name>Destination_Country_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Destination_Country --></label>
+        <name>Destination_Country__c</name>
+    </fields>
+    <fields>
+        <label><!-- Disc Ref No --></label>
+        <name>Disc_Ref_No__c</name>
+    </fields>
+    <fields>
+        <label><!-- Disc Ref. --></label>
+        <name>Disc_Ref__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dist. Channel --></label>
+        <name>Dist_Channel__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dist. Channel Code --></label>
+        <name>Distribution_Channel_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Distributor Code --></label>
+        <name>Distributor_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Distributor Name --></label>
+        <name>Distributor_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Division Code --></label>
+        <name>Division_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Division --></label>
+        <name>Division__c</name>
+    </fields>
+    <fields>
+        <label><!-- Document Currency Code --></label>
+        <name>Document_Currency_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Document Currency --></label>
+        <name>Document_Currency__c</name>
+    </fields>
+    <fields>
+        <label><!-- End Use Code --></label>
+        <name>End_Use_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- End Use --></label>
+        <name>End_Use__c</name>
+    </fields>
+    <fields>
+        <label><!-- End User Code --></label>
+        <name>End_User_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- End User --></label>
+        <name>End_User__c</name>
+    </fields>
+    <fields>
+        <label><!-- Ext Matl Grp Code --></label>
+        <name>Ext_Matl_Grp_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Ext Matl Grp --></label>
+        <name>Ext_Matl_Grp__c</name>
+    </fields>
+    <fields>
+        <label><!-- External ERP ID --></label>
+        <name>External_ERP_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Product Hierarchy Code --></label>
+        <name>F_Product_Hierarchy_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- FixValDate --></label>
+        <name>FixValDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Incoterms --></label>
+        <name>Incoterms1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Incoterms Code --></label>
+        <name>Incoterms_1_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- KC_SAP --></label>
+        <name>KC_SAP__c</name>
+    </fields>
+    <fields>
+        <label><!-- Kcode --></label>
+        <name>Kcode__c</name>
+    </fields>
+    <fields>
+        <label><!-- Key Combination Code --></label>
+        <name>Key_Combination_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Key Combination --></label>
+        <name>Key_Combination__c</name>
+    </fields>
+    <fields>
+        <help><!-- This is the pre-split original 18 digit Salesforce ID of this record that came from the original One Dupont Salesforce instance before the business units were separated. Its is case insensitive and unique. --></help>
+        <label><!-- Legacy Pricing Util SFID --></label>
+        <name>Legacy_Pricing_Util_SFID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Market Segment Code --></label>
+        <name>Market_Segment_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Market Segment --></label>
+        <name>Market_Segment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Material Code --></label>
+        <name>Material_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Material Group 1 Code --></label>
+        <name>Material_Group_1_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Material Group 1 --></label>
+        <name>Material_Group_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Material Group 5 Key Code --></label>
+        <name>Material_Group_5_Key_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Material Group 5 Key --></label>
+        <name>Material_Group_5_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Material Price Group Code --></label>
+        <name>Material_Price_Group_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Material Price Group --></label>
+        <name>Material_Price_Group__c</name>
+    </fields>
+    <fields>
+        <label><!-- Material --></label>
+        <name>Material__c</name>
+    </fields>
+    <fields>
+        <label><!-- Material Group 2 Code --></label>
+        <name>Material_group_2_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Material Group 2 --></label>
+        <name>Material_group_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Novus External Id --></label>
+        <name>Novus_External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Owning Business --></label>
+        <name>Owning_Business__c</name>
+    </fields>
+    <fields>
+        <label><!-- PCKC SAP --></label>
+        <name>PCKC_SAP__c</name>
+    </fields>
+    <fields>
+        <label><!-- PCKC --></label>
+        <name>PCKC__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH1 Code --></label>
+        <name>PH1_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH1 --></label>
+        <name>PH1__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH2 Code --></label>
+        <name>PH2_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH2 --></label>
+        <name>PH2__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH3 Code --></label>
+        <name>PH3_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH3 --></label>
+        <name>PH3__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH4 Code --></label>
+        <name>PH4_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH4 --></label>
+        <name>PH4__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH5 Code --></label>
+        <name>PH5_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH5 --></label>
+        <name>PH5__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH6 Code --></label>
+        <name>PH6_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH6 --></label>
+        <name>PH6__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH7 Code --></label>
+        <name>PH7_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH7 --></label>
+        <name>PH7__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH8 Code --></label>
+        <name>PH8_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH8 --></label>
+        <name>PH8__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH9 Code --></label>
+        <name>PH9_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- PH9 --></label>
+        <name>PH9__c</name>
+    </fields>
+    <fields>
+        <label><!-- Partner ZF Code --></label>
+        <name>Partner_ZF_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Partner ZF --></label>
+        <name>Partner_ZF__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payer Code --></label>
+        <name>Payer_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payer --></label>
+        <name>Payer__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Terms Fixed Date --></label>
+        <name>Payment_Terms_Fixed_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Per --></label>
+        <name>Per__c</name>
+    </fields>
+    <fields>
+        <label><!-- Plant_Code --></label>
+        <name>Plant_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Plant --></label>
+        <name>Plant__c</name>
+    </fields>
+    <fields>
+        <label><!-- Plus/Minus Code --></label>
+        <name>Plus_Minus_Code__c</name>
+        <picklistValues>
+            <masterLabel>A</masterLabel>
+            <translation><!-- A --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>X</masterLabel>
+            <translation><!-- X --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Plus/Minus --></label>
+        <name>Plus_Minus__c</name>
+        <picklistValues>
+            <masterLabel>Negative</masterLabel>
+            <translation><!-- Negative --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Positive</masterLabel>
+            <translation><!-- Positive --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Price Holder --></label>
+        <name>Price_Holder__c</name>
+        <relationshipLabel><!-- ERP Sales Prices - SAP --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Price List Type Code --></label>
+        <name>Price_List_Type_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Price List Type --></label>
+        <name>Price_List_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Price Ref. Partner Code --></label>
+        <name>Price_Ref_Partner_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Price Ref. Partner --></label>
+        <name>Price_Ref_Partner__c</name>
+    </fields>
+    <fields>
+        <label><!-- Price Zone Code --></label>
+        <name>Price_Zone_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Price Zone --></label>
+        <name>Price_Zone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pricing Condition Code --></label>
+        <name>Pricing_Condition_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pricing Condition --></label>
+        <name>Pricing_Condition__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pricing Request Number --></label>
+        <name>Pricing_Request_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pricing Request --></label>
+        <name>Pricing_Request__c</name>
+        <relationshipLabel><!-- ERP Sales Prices - SAP --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Product Hierarchy Code --></label>
+        <name>Product_Hierarchy_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Product Hierarchy --></label>
+        <name>Product_Hierarchy__c</name>
+    </fields>
+    <fields>
+        <label><!-- Profit Center Code --></label>
+        <name>Profit_Center_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Profit Center --></label>
+        <name>Profit_Center__c</name>
+    </fields>
+    <fields>
+        <label><!-- Project Id --></label>
+        <name>Project_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Project --></label>
+        <name>Project__c</name>
+    </fields>
+    <fields>
+        <label><!-- Quantity --></label>
+        <name>Quantity__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rate --></label>
+        <name>Rate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Record_Id --></label>
+        <name>Record_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Release Status --></label>
+        <name>Release_Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Application Id --></label>
+        <name>SAP_Application_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Client ID --></label>
+        <name>SAP_Client_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Cluster --></label>
+        <name>SAP_Cluster__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales District Code --></label>
+        <name>Sales_District_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales District --></label>
+        <name>Sales_District__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Office Code --></label>
+        <name>Sales_Office_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Office --></label>
+        <name>Sales_Office__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Order Item Code --></label>
+        <name>Sales_Order_Item_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Order Item --></label>
+        <name>Sales_Order_Item__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Order Type Code --></label>
+        <name>Sales_Order_Type_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Order Type --></label>
+        <name>Sales_Order_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Org. Code --></label>
+        <name>Sales_Org_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Org. --></label>
+        <name>Sales_Org__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Price Type --></label>
+        <name>Sales_Price_Type__c</name>
+        <picklistValues>
+            <masterLabel>Interim</masterLabel>
+            <translation><!-- Interim --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Permanent</masterLabel>
+            <translation><!-- Permanent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Project</masterLabel>
+            <translation><!-- Project --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Sales Pricing Procedure --></label>
+        <name>Sales_Pricing_Procedure__c</name>
+        <relationshipLabel><!-- ERP Sales Prices - SAP --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- ScaleRate10 --></label>
+        <name>ScaleRate10__c</name>
+    </fields>
+    <fields>
+        <label><!-- ScaleRate1 --></label>
+        <name>ScaleRate1__c</name>
+    </fields>
+    <fields>
+        <label><!-- ScaleRate2 --></label>
+        <name>ScaleRate2__c</name>
+    </fields>
+    <fields>
+        <label><!-- ScaleRate3 --></label>
+        <name>ScaleRate3__c</name>
+    </fields>
+    <fields>
+        <label><!-- ScaleRate4 --></label>
+        <name>ScaleRate4__c</name>
+    </fields>
+    <fields>
+        <label><!-- ScaleRate5 --></label>
+        <name>ScaleRate5__c</name>
+    </fields>
+    <fields>
+        <label><!-- ScaleRate6 --></label>
+        <name>ScaleRate6__c</name>
+    </fields>
+    <fields>
+        <label><!-- ScaleRate7 --></label>
+        <name>ScaleRate7__c</name>
+    </fields>
+    <fields>
+        <label><!-- ScaleRate8 --></label>
+        <name>ScaleRate8__c</name>
+    </fields>
+    <fields>
+        <label><!-- ScaleRate9 --></label>
+        <name>ScaleRate9__c</name>
+    </fields>
+    <fields>
+        <label><!-- Scale Basis Code --></label>
+        <name>Scale_Basis_Code__c</name>
+        <picklistValues>
+            <masterLabel>B</masterLabel>
+            <translation><!-- B --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>C</masterLabel>
+            <translation><!-- C --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Scale Basis --></label>
+        <name>Scale_Basis__c</name>
+        <picklistValues>
+            <masterLabel>Quantity Scale</masterLabel>
+            <translation><!-- Quantity Scale --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value Scale</masterLabel>
+            <translation><!-- Value Scale --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Scale Quantity/ Scale Value10 --></label>
+        <name>Scale_Quantity_Scale_Value10__c</name>
+    </fields>
+    <fields>
+        <label><!-- Scale Quantity/ Scale Value1 --></label>
+        <name>Scale_Quantity_Scale_Value1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Scale Quantity/ Scale Value2 --></label>
+        <name>Scale_Quantity_Scale_Value2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Scale Quantity/ Scale Value3 --></label>
+        <name>Scale_Quantity_Scale_Value3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Scale Quantity/ Scale Value4 --></label>
+        <name>Scale_Quantity_Scale_Value4__c</name>
+    </fields>
+    <fields>
+        <label><!-- Scale Quantity/ Scale Value5 --></label>
+        <name>Scale_Quantity_Scale_Value5__c</name>
+    </fields>
+    <fields>
+        <label><!-- Scale Quantity/ Scale Value6 --></label>
+        <name>Scale_Quantity_Scale_Value6__c</name>
+    </fields>
+    <fields>
+        <label><!-- Scale Quantity/ Scale Value7 --></label>
+        <name>Scale_Quantity_Scale_Value7__c</name>
+    </fields>
+    <fields>
+        <label><!-- Scale Quantity/ Scale Value8 --></label>
+        <name>Scale_Quantity_Scale_Value8__c</name>
+    </fields>
+    <fields>
+        <label><!-- Scale Quantity/ Scale Value9 --></label>
+        <name>Scale_Quantity_Scale_Value9__c</name>
+    </fields>
+    <fields>
+        <label><!-- Scale Type Code --></label>
+        <name>Scale_Type_Code__c</name>
+        <picklistValues>
+            <masterLabel>A</masterLabel>
+            <translation><!-- A --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Scale Type --></label>
+        <name>Scale_Type__c</name>
+        <picklistValues>
+            <masterLabel>Base-Scale</masterLabel>
+            <translation><!-- Base-Scale --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>From</masterLabel>
+            <translation><!-- From --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>To</masterLabel>
+            <translation><!-- To --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Scale UoM/Scale Unit --></label>
+        <name>Scale_UoM_Scale_Unit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Scaled Price Flag --></label>
+        <name>Scaled_Price_Flag__c</name>
+    </fields>
+    <fields>
+        <label><!-- ShipTo Code --></label>
+        <name>ShipTo_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- ShipTo-Country Code  --></label>
+        <name>ShipTo_Country_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- ShipTo-Country  --></label>
+        <name>ShipTo_Country__c</name>
+    </fields>
+    <fields>
+        <label><!-- ShipTo --></label>
+        <name>ShipTo__c</name>
+    </fields>
+    <fields>
+        <label><!-- Ship-To Country Code --></label>
+        <name>Ship_To_Country_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Ship-To Country --></label>
+        <name>Ship_To_Country__c</name>
+    </fields>
+    <fields>
+        <label><!-- Shipping Condition Code --></label>
+        <name>Shipping_Condition_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Shipping Condition --></label>
+        <name>Shipping_Condition__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sold To Code --></label>
+        <name>Sold_To_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sold To-SAP --></label>
+        <name>Sold_To_SAP__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sold To --></label>
+        <name>Sold_To__c</name>
+    </fields>
+    <fields>
+        <label><!-- State Code --></label>
+        <name>State_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- State --></label>
+        <name>State__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sys Id --></label>
+        <name>Sys_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Terms of Payment Code --></label>
+        <name>Terms_of_Payment_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Terms of Payment --></label>
+        <name>Terms_of_Payment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unit --></label>
+        <name>Unit__c</name>
+    </fields>
+    <fields>
+        <label><!-- UoM --></label>
+        <name>UoM__c</name>
+    </fields>
+    <fields>
+        <label><!-- Valid From --></label>
+        <name>Valid_From__c</name>
+    </fields>
+    <fields>
+        <label><!-- Valid To --></label>
+        <name>Valid_To__c</name>
+    </fields>
+    <fields>
+        <label><!-- Value Center Code --></label>
+        <name>Value_Center_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Value Center --></label>
+        <name>Value_Center__c</name>
+    </fields>
+    <fields>
+        <label><!-- Variant Code --></label>
+        <name>Variant_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Variant --></label>
+        <name>Variant__c</name>
+    </fields>
+    <fields>
+        <label><!-- Volume_UoM --></label>
+        <name>Volume_UoM__c</name>
+    </fields>
+    <fields>
+        <label><!-- Volume --></label>
+        <name>Volume__c</name>
+    </fields>
+    <fields>
+        <label><!-- isActive --></label>
+        <name>isActive__c</name>
+    </fields>
+    <fields>
+        <label><!-- isPriceHolder --></label>
+        <name>isPriceHolder__c</name>
+    </fields>
+    <fields>
+        <label><!-- markForDeletion --></label>
+        <name>markForDeletion__c</name>
+    </fields>
+    <sharingReasons>
+        <label><!-- Sharing with Public Group --></label>
+        <name>Sharing_with_Public_Group</name>
+    </sharingReasons>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Price Holder mapped wrong in system --></errorMessage>
+        <name>To_Prevent_Wrong_Mapping_in_Price_Holder</name>
+    </validationRules>
+</CustomObjectTranslation>

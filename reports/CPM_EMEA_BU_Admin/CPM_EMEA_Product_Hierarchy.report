@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>FK_$OrgGroup__c.Business__c</field>
+    </columns>
+    <columns>
+        <field>Product_Hierarchy__c.PH_Code__c</field>
+    </columns>
+    <columns>
+        <field>Product_Hierarchy__c.Description__c</field>
+    </columns>
+    <columns>
+        <field>BU_PH__c.Business_Description__c</field>
+    </columns>
+    <columns>
+        <field>Product_Hierarchy__c.PH_Level__c</field>
+    </columns>
+    <columns>
+        <field>BU_PH__c.Representative_Material_Code__c</field>
+    </columns>
+    <columns>
+        <field>Product_Hierarchy__c.Name__c</field>
+    </columns>
+    <columns>
+        <field>FK_LAST_UPDATE</field>
+    </columns>
+    <columns>
+        <field>FK_$OrgGroup__c.ERP_Sales_Org_Code__c</field>
+    </columns>
+    <currency>USD</currency>
+    <filter>
+        <criteriaItems>
+            <column>FK_$OrgGroup__c.Business__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>CPM EMEA</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>CPM EMEA Product Hierarchy</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntityCustomEntity$Product_Hierarchy__c$BU_PH__c@BU_PH__c.OrgGroup__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CUST_CREATED_DATE</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

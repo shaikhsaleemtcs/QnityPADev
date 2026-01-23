@@ -1,0 +1,171 @@
+<!--  Bala - Added attribute UserId -->
+<!-- Tag            Last Modified By        Last Modified Date              Description                                 -->
+<!-- PP20130710     Priyanka Pillala            10 Jul 2013         Adding Enable Request Class and Request Class
+                                                                    list attribute - APAC ROLLOUT2                      -->
+<apex:component controller="PASalesAreaSelection"> 
+
+    <apex:attribute description="BUIdfromPage" type="string" name="BUIdFromPage" assignTo="{!buIdComponent}"/>
+    <apex:attribute description="sales Org" type="string" name="soSAComponenet" />
+    <apex:attribute description="sales Org Code" type="string" name="soCodeSAComponenet" />
+    <apex:attribute description="sales Org Code" type="string" name="soConcatSAComponenet" />
+    <apex:attribute description="dist. Channel" type="string" name="dcSAComponenet" />
+    <apex:attribute description="dist. Channel Code" type="string" name="dcCodeSAComponenet" />
+    <apex:attribute description="dist. Channel Code" type="string" name="dcConcatSAComponenet" />
+    <apex:attribute description="div" type="string" name="divSAComponenet" />
+    <apex:attribute description="div Code" type="string" name="divCodeSAComponenet" />
+    <apex:attribute description="div Code" type="string" name="divConcatSAComponenet" />
+    <apex:attribute description="SalesArea" type="string" name="salesAreaSAComponenet" />
+    <apex:attribute description="SalesAreaId" type="string" name="idSAComponenet" />
+    <apex:attribute description="SalesAreaConcat" type="string" name="saConcatComponent" />
+    <apex:attribute description="userIdFromPage" type="string" name="userIdFromPage" assignTo="{!userIdComponent}"/>    
+    <!-- SP20140603 START  -->
+    <apex:attribute description="Enable pop up on load" type="Boolean" name="enablePopUp" assignTo="{!enablePopUpBoolean}"/>
+    <!-- SP20140603 END  -->    
+    <!-- PP20130710 START -->
+    <apex:attribute description="Enable Req. Class" type="boolean" name="enableRequestClass"/>
+    <apex:attribute description="Req. Class List" type="string" name="requestClass"/>
+    <!-- PP20130710 END -->  
+    <!-- MS20141011 START-->
+    <apex:attribute description="Setup page" type="boolean" name="setupPageCheck"/>
+    <!-- MS20141011 END-->
+	<!-- <TJ20150107> -->
+    <apex:attribute description="call getlistPCKC in keycombination class" type="String" name="getPCKC"/>
+         <!-- TO set current page label -->
+   <style>
+        .headertext{font-size:15px;height:20px;margin-bottom:1px;padding:5px;border:solid 1px;border-color:#6E96B2; background-color:#E5F3FC;font-weight:bold;text-align:left;}
+   </style>
+     
+    <apex:outputPanel >
+      <apex:commandLink action="{!displayPopUpWindow}" status="stat">
+        <apex:image id="theImage" url="{!$Resource.LookUpImage}" />
+      </apex:commandLink>
+    </apex:outputPanel>
+    <apex:outputPanel rendered="{!dispSAPopup}" styleClass="BackScreen">
+    </apex:outputPanel>
+    <apex:outputPanel rendered="{!dispSAPopup}" styleClass="FrontScreen">
+        <apex:panelGrid style="float:right;">
+            <apex:commandLink action="{!closeWindow}">
+                <apex:image url="{!$Resource.closeButton}" width="15" height="15" />
+            </apex:commandLink>
+        </apex:panelGrid> 
+        
+        <div class="headertext">
+               Sales Area Selection
+        </div>
+        
+        <apex:pageBlock >
+            <apex:commandLink value="Help" action="{!helpLink}" style="float:right;" target="_blank">
+                <apex:param name="Help" value="Key Combination Selection" assignTo="{!label}"/>
+            </apex:commandLink>
+          <br/>
+            <apex:outputPanel id="table" style="text-align:left;" rendered="true">
+                <apex:pageBlockTable value="{!ogUsersSA}" var="sa" >
+                    <apex:column headerValue="Sales Org Code">
+                    <!-- MS20141011 adding setup page check -->
+                        <apex:commandLink action="{!returnData}" value="{!sa.OrgGroup__r.ERP_Sales_Org_Code__c}" oncomplete="setPCKC()" status="stat" rendered="{!IF(setupPageCheck==false,true,false)}">
+                            <apex:param name="Sales Area" value="{!sa.OrgGroup__r.ERP_Sales_Org_Code__c+'-'+sa.OrgGroup__r.ERP_Sales_Org__c+'<br>'+sa.OrgGroup__r.ERP_Distribution_Channel_Code__c+'-'+sa.OrgGroup__r.ERP_Distribution_Channel__c+'<br>'+sa.OrgGroup__r.ERP_Division_Code__c+'-'+sa.OrgGroup__r.ERP_Division__c}" assignTo="{!salesAreaSelected}" />
+                            <apex:param name="Sales Area" value="{!sa.OrgGroup__r.ERP_Sales_Org_Code__c+'-'+sa.OrgGroup__r.ERP_Sales_Org__c+'<br>'+sa.OrgGroup__r.ERP_Distribution_Channel_Code__c+'-'+sa.OrgGroup__r.ERP_Distribution_Channel__c+'<br>'+sa.OrgGroup__r.ERP_Division_Code__c+'-'+sa.OrgGroup__r.ERP_Division__c}" assignTo="{!salesAreaSAComponenet}" />
+                            <apex:param name="Sales Area Concat" value="{!sa.OrgGroup__r.ERP_Sales_Org_Code__c+'-'+sa.OrgGroup__r.ERP_Sales_Org__c+'<br/>'+sa.OrgGroup__r.ERP_Distribution_Channel_Code__c+'-'+sa.OrgGroup__r.ERP_Distribution_Channel__c+'<br/>'+sa.OrgGroup__r.ERP_Division_Code__c+'-'+sa.OrgGroup__r.ERP_Division__c}" assignTo="{!saConcatComponent}" />
+                            <apex:param name="Sales Area Id" value="{!sa.OrgGroup__c}" assignTo="{!idSAComponenet}" />
+                            <apex:param name="Sales Org" value="{!sa.OrgGroup__r.ERP_Sales_Org__c}" assignTo="{!soSAComponenet}" />
+                            <apex:param name="Sales Org Code" value="{!sa.OrgGroup__r.ERP_Sales_Org_Code__c}" assignTo="{!soCodeSAComponenet}" />
+                            <apex:param name="Sales Org Concat" value="{!sa.OrgGroup__r.ERP_Sales_Org_Code__c+'-'+sa.OrgGroup__r.ERP_Sales_Org__c}" assignTo="{!soConcatSAComponenet}" />
+                            
+                            <apex:param name="Dist Channel" value="{!sa.OrgGroup__r.ERP_Distribution_Channel__c}" assignTo="{!dcSAComponenet}" />
+                            <apex:param name="Dist Channel Code" value="{!sa.OrgGroup__r.ERP_Distribution_Channel_Code__c}" assignTo="{!dcCodeSAComponenet}" />
+                            
+                            <apex:param name="Dist Channel Concat" value="{!sa.OrgGroup__r.ERP_Distribution_Channel_Code__c+'-'+sa.OrgGroup__r.ERP_Distribution_Channel__c}" assignTo="{!dcConcatSAComponenet}" />
+                            
+                            <apex:param name="Division" value="{!sa.OrgGroup__r.ERP_Division__c}" assignTo="{!divSAComponenet}" />
+                            <apex:param name="Division Code" value="{!sa.OrgGroup__r.ERP_Division_Code__c}" assignTo="{!divCodeSAComponenet}" />
+                            <apex:param name="Division Concat" value="{!sa.OrgGroup__r.ERP_Division_Code__c+'-'+sa.OrgGroup__r.ERP_Division__c}" assignTo="{!divConcatSAComponenet}" />
+                            <!-- PP20130710 START -->
+                            <apex:param name="Enable Request Class" value="{!sa.Organizational_Group_Item__r.Enable_Request_Class__c}" assignTo="{!enableRequestClass}" />
+                            <apex:param name="Request Class" value="{!sa.Organizational_Group_Item__r.Request_Class__c}" assignTo="{!requestClass}" />
+                            <apex:param name="show popup" value="false" assignTo="{!enablePopUp}" />                            
+                            <!-- PP20130710 END -->
+<!--                             <TJ20150107> -->                            
+                            <apex:param name="pckc for export" value="abc" assignTo="{!getPCKC}"/>
+                        </apex:commandLink>
+                        <apex:commandLink action="{!returnData}" value="{!sa.OrgGroup__r.ERP_Sales_Org_Code__c}" status="stat" rendered="{!IF(setupPageCheck==true,true,false)}">
+                            <apex:param name="Sales Area" value="{!sa.OrgGroup__r.ERP_Sales_Org_Code__c+'-'+sa.OrgGroup__r.ERP_Sales_Org__c+'<br>'+sa.OrgGroup__r.ERP_Distribution_Channel_Code__c+'-'+sa.OrgGroup__r.ERP_Distribution_Channel__c+'<br>'+sa.OrgGroup__r.ERP_Division_Code__c+'-'+sa.OrgGroup__r.ERP_Division__c}" assignTo="{!salesAreaSelected}" />
+                            <apex:param name="Sales Area" value="{!sa.OrgGroup__r.ERP_Sales_Org_Code__c+'-'+sa.OrgGroup__r.ERP_Sales_Org__c+'<br>'+sa.OrgGroup__r.ERP_Distribution_Channel_Code__c+'-'+sa.OrgGroup__r.ERP_Distribution_Channel__c+'<br>'+sa.OrgGroup__r.ERP_Division_Code__c+'-'+sa.OrgGroup__r.ERP_Division__c}" assignTo="{!salesAreaSAComponenet}" />
+                            <apex:param name="Sales Area Concat" value="{!sa.OrgGroup__r.ERP_Sales_Org_Code__c+'-'+sa.OrgGroup__r.ERP_Sales_Org__c+'<br/>'+sa.OrgGroup__r.ERP_Distribution_Channel_Code__c+'-'+sa.OrgGroup__r.ERP_Distribution_Channel__c+'<br/>'+sa.OrgGroup__r.ERP_Division_Code__c+'-'+sa.OrgGroup__r.ERP_Division__c}" assignTo="{!saConcatComponent}" />
+                            <apex:param name="Sales Area Id" value="{!sa.OrgGroup__c}" assignTo="{!idSAComponenet}" />
+                            <apex:param name="Sales Org" value="{!sa.OrgGroup__r.ERP_Sales_Org__c}" assignTo="{!soSAComponenet}" />
+                            <apex:param name="Sales Org Code" value="{!sa.OrgGroup__r.ERP_Sales_Org_Code__c}" assignTo="{!soCodeSAComponenet}" />
+                            <apex:param name="Sales Org Concat" value="{!sa.OrgGroup__r.ERP_Sales_Org_Code__c+'-'+sa.OrgGroup__r.ERP_Sales_Org__c}" assignTo="{!soConcatSAComponenet}" />
+                            
+                            <apex:param name="Dist Channel" value="{!sa.OrgGroup__r.ERP_Distribution_Channel__c}" assignTo="{!dcSAComponenet}" />
+                            <apex:param name="Dist Channel Code" value="{!sa.OrgGroup__r.ERP_Distribution_Channel_Code__c}" assignTo="{!dcCodeSAComponenet}" />
+                            
+                            <apex:param name="Dist Channel Concat" value="{!sa.OrgGroup__r.ERP_Distribution_Channel_Code__c+'-'+sa.OrgGroup__r.ERP_Distribution_Channel__c}" assignTo="{!dcConcatSAComponenet}" />
+                            
+                            <apex:param name="Division" value="{!sa.OrgGroup__r.ERP_Division__c}" assignTo="{!divSAComponenet}" />
+                            <apex:param name="Division Code" value="{!sa.OrgGroup__r.ERP_Division_Code__c}" assignTo="{!divCodeSAComponenet}" />
+                            <apex:param name="Division Concat" value="{!sa.OrgGroup__r.ERP_Division_Code__c+'-'+sa.OrgGroup__r.ERP_Division__c}" assignTo="{!divConcatSAComponenet}" />
+                            <!-- PP20130710 START -->
+                            <apex:param name="Enable Request Class" value="{!sa.Organizational_Group_Item__r.Enable_Request_Class__c}" assignTo="{!enableRequestClass}" />
+                            <apex:param name="Request Class" value="{!sa.Organizational_Group_Item__r.Request_Class__c}" assignTo="{!requestClass}" />
+                            <apex:param name="show popup" value="false" assignTo="{!enablePopUp}" />
+                            <!-- PP20130710 END -->
+<!--                             <TJ20150107> -->
+                            <apex:param name="pckc for export" value="abc" assignTo="{!getPCKC}"/>
+                        </apex:commandLink>
+                    </apex:column>  
+                    <apex:column >
+                        <apex:facet name="header">Sales Org</apex:facet>
+                        <apex:outputText value="{!sa.OrgGroup__r.ERP_Sales_Org__c}" />
+                    </apex:column>  
+                    <apex:column >
+                        <apex:facet name="header">Dist. Channel Code</apex:facet>
+                        <apex:outputText value="{!sa.OrgGroup__r.ERP_Distribution_Channel_Code__c}" />
+                    </apex:column>        
+                    <apex:column >
+                        <apex:facet name="header">Dist. Channel</apex:facet>
+                        <apex:outputText value="{!sa.OrgGroup__r.ERP_Distribution_Channel__c}" />
+                    </apex:column>
+                    <apex:column headerValue="Division Code">
+                        <apex:outputText value="{!sa.OrgGroup__r.ERP_Division_Code__c}" />
+                    </apex:column>
+                    <apex:column headerValue="Division">
+                        <apex:outputText value="{!sa.OrgGroup__r.ERP_Division__c}" />
+                    </apex:column>                   
+                </apex:pageBlockTable>
+            </apex:outputPanel>
+        </apex:pageBlock>
+    </apex:outputPanel>
+    
+    <style type="text/css">
+
+    .FrontScreen {
+        background-color: white;
+        //border-width: 2px;
+        border: 2px solid #63A4C5;
+        z-index: 9999;
+        left: 25%;
+        padding: 10px;
+        position: absolute;
+        width: 700px;
+        //width: 500px; 
+        //top: 100px;
+        //top:80px;//
+        //right: 60%;//
+        top: 15%; 
+        //right: 17.5%;
+    }
+    
+    .BackScreen {
+        background-color: #696969;
+        opacity: 0.5;
+        filter: alpha(opacity = 50);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 9998;
+    }
+    </style>
+
+</apex:component>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingOwnerRules>
+        <fullName>Sharing_the_Pricing_Conditions_to_All_the_Users</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Sharing the Pricing Conditions to All the Users</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>DuPontCorporate797661</roleAndSubordinatesInternal>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinatesInternal>DuPontCorporate797661</roleAndSubordinatesInternal>
+        </sharedFrom>
+    </sharingOwnerRules>
+</SharingRules>

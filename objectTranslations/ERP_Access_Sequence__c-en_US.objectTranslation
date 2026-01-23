@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>ERP Access Sequence</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>ERP Access Sequences</value>
+    </caseValues>
+    <fields>
+        <label><!-- Cost Key Combination --></label>
+        <name>Cost_Key_Combination__c</name>
+        <relationshipLabel><!-- ERP Access Sequences (Cost Key Combination) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Cost Pricing Condition --></label>
+        <name>Cost_Pricing_Condition__c</name>
+        <relationshipLabel><!-- ERP Access Sequences (Cost Pricing Condition) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Floor Key Combination --></label>
+        <name>Floor_Key_Combination__c</name>
+        <relationshipLabel><!-- ERP Access Sequences (ERP Key Combination) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Floor Pricing Condition --></label>
+        <name>Floor_Pricing_Condition__c</name>
+        <relationshipLabel><!-- ERP Access Sequences (Floor Type) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Hide for Price Requester --></label>
+        <name>Hide_for_Price_Requester__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is End User Rebate --></label>
+        <name>Is_End_User_Rebate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Key Combination --></label>
+        <name>Key_Combination__c</name>
+    </fields>
+    <fields>
+        <help><!-- This is the pre-split original 18 digit Salesforce ID of this record that came from the original One Dupont Salesforce instance before the business units were separated. Its is case insensitive and unique. --></help>
+        <label><!-- Legacy Pricing Util SFID --></label>
+        <name>Legacy_Pricing_Util_SFID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Net Floor Key Combination --></label>
+        <name>Net_Floor_Key_Combination__c</name>
+        <relationshipLabel><!-- ERP Access Sequences (Net Floor Key Combination) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Net Reference Key Combination --></label>
+        <name>Net_Reference_Key_Combination__c</name>
+        <relationshipLabel><!-- ERP Access Sequences (Net Reference Key Combination) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Novus External Id --></label>
+        <name>Novus_External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pricing Condition --></label>
+        <name>Pricing_Condition__c</name>
+        <relationshipLabel><!-- ERP Access Sequences --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Pricing Key Combination --></label>
+        <name>Pricing_Key_Combination__c</name>
+        <relationshipLabel><!-- ERP Access Sequences --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Reference Key Combination --></label>
+        <name>Reference_Key_Combination__c</name>
+        <relationshipLabel><!-- ERP Access Sequences (Reference Key Combination) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Reference Pricing Condition --></label>
+        <name>Reference_Pricing_Condition__c</name>
+        <relationshipLabel><!-- ERP Access Sequences (Reference Type) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Sales Pricing Procedure --></label>
+        <name>Sales_Pricing_Procedure__c</name>
+        <relationshipLabel><!-- ERP Access Sequences --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Send to SPVC --></label>
+        <name>Send_To_SPVC__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sequence Number --></label>
+        <name>Sequence_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- isNPCApplicable --></label>
+        <name>isNPCApplicable__c</name>
+    </fields>
+    <fields>
+        <label><!-- isPaymentTermsApplicable --></label>
+        <name>isPaymentTermsApplicable__c</name>
+    </fields>
+    <fields>
+        <label><!-- isVolumeApplicable --></label>
+        <name>isVolumeApplicable__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

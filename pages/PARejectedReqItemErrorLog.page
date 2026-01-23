@@ -1,0 +1,3 @@
+<apex:page cache="true" contentType="application/vnd.ms-excel#Error_Log.xls" controller="ctrlPAMain" action="{!onLoadCall}" showHeader="false" tabStyle="ERP_Access_Sequence__c">
+<apex:outputText value="{!service.paServiceState.currentRequestItem.request.csvString}"></apex:outputText> 
+</apex:page>

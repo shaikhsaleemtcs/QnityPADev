@@ -1,0 +1,148 @@
+<!--
+ * Name      :   PAPricingTimeLine
+ * Description  :   
+ * Author      :   Infosys Limited <GT20150107>
+ * Created Date :   07 Jan 2015
+ *
+ * Version   Modified Date     Modified By                Modification
+ *
+ * ---------------------------------------------------------------------------------------------------- 
+-->
+<apex:component controller="PAPricingTimeLine" >
+<style>
+        .headertext{font-size:15px;height:20px;margin-bottom:1px;padding:5px;border:solid 1px;border-color:#6E96B2; background-color:#E5F3FC;font-weight:bold;text-align:left;}
+</style>
+<script>
+    if({!showWarning})
+    {
+        alert('No price history found!');
+    }
+</script>
+<apex:attribute name="pckc" description="pckc" type="string" assignTo="{!PCKC}"/>
+<apex:attribute name="disableTimeline" type="boolean" description="disable time line"/>
+<apex:outputPanel rendered="{!displayTmLn}">
+    <apex:commandLink action="{!getPriceHistory}" value="Timeline" status="stat" reRender="myForm,myF2"/>
+</apex:outputPanel>
+<apex:outputPanel rendered="{!showHistory}" styleClass="BackPageMaterial" title="Pricing Timeline"></apex:outputPanel> 
+<apex:outputPanel styleClass="FrontPageMaterial" rendered="{!showHistory}" id="priceHistory" >
+    <div style="float:left;">
+        <b>Pricing Timeline</b>
+    </div>
+    <apex:panelGrid style="float:right;">
+        <apex:commandLink action="{!closeWindow}">
+        <apex:image url="{!$Resource.closeButton}" width="15" height="15"/>
+        </apex:commandLink>
+    </apex:panelGrid>
+
+    <table border="1" cellSpacing="0" cellPadding="0"
+                style="width: 100%;" >
+
+    <thead class="rich-table-thead">
+    <tr class="headerRow">
+    <th><apex:outputText value="{!IF(ismaterial, 'Material Code', 'Product Hierarchy Code')}"/></th>
+    <th><apex:outputText value="{!IF(ismaterial, 'Material', 'Product Hierarchy')}"/></th>
+    <th>Valid From</th>
+    <th>Valid To</th>
+    <th>Rate</th>
+    <th>Unit</th>
+    <th>Per</th>
+    <th>UOM</th>
+    <th>Pricing Request</th>
+    <th><apex:outputText value="{!IF(scalePrice, 'Scale', '')}"/></th>
+    </tr>
+    </thead>
+    <apex:repeat value="{!listOfPrices}" var="price" rendered="{!showHistory}">
+        <tr>
+            <td>
+                <apex:outputText value="{!IF(ismaterial, Price.Material_Code__c, Price.F_Product_Hierarchy_Code__c)}"/>
+            </td>
+            <td>
+                <apex:outputText value="{!IF(ismaterial, Price.Material__c, Price.Product_Hierarchy__c)}"/>
+            </td> 
+             
+            <td>
+                <apex:outputtext value="{0,date,MM'/'dd'/'yyyy}">
+                    <apex:param value="{!Price.Valid_From__c}"/>
+                </apex:outputtext>
+            </td>
+            <td>
+                <apex:outputtext value="{0,date,MM'/'dd'/'yyyy}">
+                    <apex:param value="{!Price.Valid_To__c}"/>
+                </apex:outputtext>
+            </td>
+            
+            <td>
+                {!Price.Rate__c}
+            </td>
+            <td>
+                {!Price.Unit__c}
+            </td>
+            <td>
+                <apex:outputfield value="{!Price.Per__c}"/>
+                
+            </td>
+            <td>
+                {!Price.UoM__c}
+            </td>
+            <td>
+                <apex:outputlink value="#" onclick="window.open('/{!Price.Pricing_Request__r.id}','_blank','width=810,height=310,toolbar=0,status=1,scrollbars=1,resizable=yes',!1);">{!Price.Pricing_Request__r.Name}</apex:outputlink>
+            </td>
+            <!-- 
+            <td class="dataCell" colSpan="1"><apex:outputlink rendered="{!scalePrice}" value="#" style="color:blue" onclick="window.open('/{!Price.id}?isdtp=lt','_blank','width=810,height=310,toolbar=0,status=1,scrollbars=1,resizable=yes',!1);">View</apex:outputlink></td>
+             -->
+             <td>
+                <apex:outputPanel rendered="{!scalePrice}">
+                    <c:PAScalePrice exportprice="{!Price}"/>
+                </apex:outputPanel>
+             </td>
+        </tr>
+    </apex:repeat>
+    </table>
+</apex:outputPanel>   
+    
+<style type="text/css">
+   
+    
+    .FrontPageMaterial{            
+        background-color: white;
+        z-index: 9999;
+        
+        left: 1%;
+         
+        padding:10px;
+        position: absolute; 
+        
+        border: 2px solid #63A4C5;
+        top: 20%;
+        width: 800px;
+        margin-left:10%;
+        
+    }
+    
+    .BackPageMaterial{             
+        background-color:#696969;
+        opacity: 0.5;
+        filter: alpha(opacity = 50);
+        position: absolute;
+        float:center;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 8888;
+    
+    }
+    .TableTitle{
+    font-weight:normal;
+    color: #0079C1;
+    background-color:white;
+    text-align:left;
+    text-indent:8px;
+    }
+    
+    .buttonWidth{
+        width:50px;
+    }
+    
+</style>  
+</apex:component>

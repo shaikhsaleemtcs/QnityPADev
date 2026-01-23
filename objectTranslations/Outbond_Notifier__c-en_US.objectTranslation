@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Outbond Notifier</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Outbond Notifiers</value>
+    </caseValues>
+    <fields>
+        <label><!-- Bypass Workflows --></label>
+        <name>Bypass_Workflows__c</name>
+    </fields>
+    <fields>
+        <help><!-- This is the pre-split original 18 digit Salesforce ID of this record that came from the original One Dupont Salesforce instance before the business units were separated. Its is case insensitive and unique. --></help>
+        <label><!-- Legacy Pricing Util SFID --></label>
+        <name>Legacy_Pricing_Util_SFID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mw_Received Timestamp --></label>
+        <name>Mw_Received_Timestamp__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mw_status --></label>
+        <name>Mw_status__c</name>
+        <picklistValues>
+            <masterLabel>Initial</masterLabel>
+            <translation><!-- Initial --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Received</masterLabel>
+            <translation><!-- Received --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sent</masterLabel>
+            <translation><!-- Sent --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Novus External Id --></label>
+        <name>Novus_External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Object ID --></label>
+        <name>Object_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Object Type --></label>
+        <name>Object_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Received Timestamp --></label>
+        <name>SAP_Received_Timestamp__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Status --></label>
+        <name>SAP_Status__c</name>
+        <picklistValues>
+            <masterLabel>Initial</masterLabel>
+            <translation><!-- Initial --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sent</masterLabel>
+            <translation><!-- Sent --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Sent Timestamp --></label>
+        <name>Sent_Timestamp__c</name>
+    </fields>
+    <fields>
+        <label><!-- Transaction Type --></label>
+        <name>Transaction_Type__c</name>
+        <picklistValues>
+            <masterLabel>Insert</masterLabel>
+            <translation><!-- Insert --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Update</masterLabel>
+            <translation><!-- Update --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

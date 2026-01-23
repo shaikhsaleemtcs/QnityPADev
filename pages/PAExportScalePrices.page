@@ -1,0 +1,291 @@
+<apex:page standardStylesheets="false" cache="true" contentType="txt/xml#Scale_Price_Details.xls" 
+controller="ctrlPAMain" showHeader="false" tabStyle="Price_Approval__tab">
+
+<xml>
+    <Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+              xmlns:o="urn:schemas-microsoft-com:office:office"
+              xmlns:x="urn:schemas-microsoft-com:office:excel"
+              xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+              xmlns:html="http://www.w3.org/TR/REC-html40">
+        <Styles>
+            <Style ss:ID="Default" ss:Name="Normal">
+                <Alignment ss:Vertical="Bottom"/>
+                <Font/>
+                <Interior/>
+                <NumberFormat/>
+                <Protection/>
+            </Style>
+            <Style ss:ID="s23">
+              <Font x:Family="Swiss" ss:Bold="1"/>
+                            
+            </Style>
+            <Style ss:ID="s22">
+              <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+                               
+            </Style>
+            <Style ss:ID="s21">
+              <Alignment ss:Horizontal="Center" ss:Vertical="Bottom"/>
+              <Font x:Family="Swiss" ss:Bold="1"/>            
+            </Style>
+            <Style ss:ID="s20">
+                <Interior ss:Color="white" ss:Pattern="Solid"/>
+                </Style>
+        </Styles>
+            <Worksheet ss:Name="Price Record List">
+                <Table>
+                    <Column ss:Width="100"/>
+                    <Column ss:Width="100"/>
+                    <Column ss:Width="100"/>
+                    <Column ss:Width="100"/>
+                    <Column ss:Width="100"/>
+                    <Column ss:Width="100"/>
+                    <Column ss:Width="100"/>
+                    <Column ss:Width="100"/>
+                    <Column ss:Width="100"/>
+                    <Column ss:Width="100"/>                    
+                    <apex:repeat value="{!service.PAServicestate.currentRequestitem.relatedWrappersList}" var="wrapper">
+                    <Row>
+                    <Cell ss:MergeAcross="9" ss:StyleID="s21" ><Data ss:Type="String"><apex:outputText escape="false" value="{!IF(wrapper.wrapperlist.size>0,wrapper.priceType,'')}"/></Data></Cell>
+                    <Cell ss:MergeAcross="9" ss:StyleID="s21" ><Data ss:Type="String"><apex:outputfield rendered="false"/></Data></Cell>
+                    </Row>
+                    <Row ss:StyleID="s23">
+                        <apex:repeat value="{!IF(wrapper.wrapperlist.size>0,wrapper.keyCombinationcolumns,'')}" var="r"> 
+                            <Cell ss:StyleID="s23" ><Data ss:Type="String">
+                            <apex:outputText escape="false" value="{!r.Label}"/>
+                            </Data>
+                            </Cell>                            
+                        </apex:repeat>
+<!--                         <TJ20150511> START                             -->                        
+                        <apex:variable value="A" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.prItemExp==true,true,false)}">
+                        <apex:repeat value="{!wrapper.commonColumns}" var="r">
+                        	<Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="{!r.Label}"/></Data></Cell>
+                        </apex:repeat>
+                        </apex:variable>
+                        <apex:variable value="e" var="e1" rendered="{!IF(service.PAServicestate.currentRequestitem.prItemExp==true,true,false)}">
+                        <apex:repeat value="{!wrapper.dateColumns}" var="r">
+                        	<Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="{!r.Label}"/></Data></Cell>
+                        </apex:repeat>
+                        </apex:variable>
+                        <apex:variable value="d" var="d1" rendered="{!IF(service.PAServicestate.currentRequestitem.prItemExp==true || service.PAServicestate.currentRequestitem.impExp==true,true,false)}">
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">New Rate</Data></Cell>
+                        </apex:variable>
+                        <apex:variable value="c" var="c1" rendered="{!IF(service.PAServicestate.currentRequestitem.prItemExp==true || service.PAServicestate.currentRequestitem.impExp==true,true,false)}">
+                        <apex:repeat value="{!wrapper.newValueColumns}" var="r">
+                        	<Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="{!r.Label}"/></Data></Cell>
+                        </apex:repeat>
+                        </apex:variable>
+                        <apex:variable value="b" var="b1" rendered="{!IF(service.PAServicestate.currentRequestitem.prItemExp==true || service.PAServicestate.currentRequestitem.impExp==true,true,false)}">
+						<apex:repeat value="{!wrapper.newDateColumns}" var="r">
+                        	<Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="{!r.Label}"/></Data></Cell>
+                        </apex:repeat>
+                        </apex:variable>
+<!--                         <TJ20150511> END                             -->                        
+                        <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsold>=1,true,false)}">
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=1,'Old ScaleQuantity/ScaleValue1','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=1,'Old ScaleRate1','')}</Data></Cell>
+                        </apex:variable>
+                        <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsold>=2,true,false)}">
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=2,'Old ScaleQuantity/ScaleValue2','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=2,'Old ScaleRate2','')}</Data></Cell>
+                        </apex:variable>
+                        <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsold>=3,true,false)}">
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=3,'Old ScaleQuantity/ScaleValue3','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=3,'Old ScaleRate3','')}</Data></Cell>
+                        </apex:variable>
+                        <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsold>=4,true,false)}">
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=4,'Old ScaleQuantity/ScaleValue4','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=4,'Old ScaleRate4','')}</Data></Cell>
+                        </apex:variable>
+                        <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsold>=5,true,false)}">
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=5,'Old ScaleQuantity/ScaleValue5','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=5,'Old ScaleRate5','')}</Data></Cell>
+                        </apex:variable>
+                        <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsold>=6,true,false)}">
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=6,'Old ScaleQuantity/ScaleValue6','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=6,'Old ScaleRate6','')}</Data></Cell>
+                        </apex:variable>
+                        <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsold>=7,true,false)}">
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=7,'Old ScaleQuantity/ScaleValue7','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=7,'Old ScaleRate7','')}</Data></Cell>
+                        </apex:variable>
+                        <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsold>=8,true,false)}">
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=8,'Old ScaleQuantity/ScaleValue8','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=8,'Old ScaleRate8','')}</Data></Cell>
+                        </apex:variable>
+                        <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsold>=9,true,false)}">
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=9,'Old ScaleQuantity/ScaleValue9','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=9,'Old ScaleRate9','')}</Data></Cell>
+                        </apex:variable>
+                        <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsold>=10,true,false)}">
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=10,'Old ScaleQuantity/ScaleValue10','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=10,'Old ScaleRate10','')}</Data></Cell>
+                        </apex:variable>                        
+                        <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsnew>=1,true,false)}">
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=1,'New ScaleQuantity/ScaleValue1','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=1,'New ScaleRate1','')}</Data></Cell>
+                        </apex:variable>
+                        <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsnew>=2,true,false)}">
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=2,'New ScaleQuantity/ScaleValue2','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=2,'New ScaleRate2','')}</Data></Cell>
+                        </apex:variable>
+                        <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsnew>=3,true,false)}">
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=3,'New ScaleQuantity/ScaleValue3','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=3,'New ScaleRate3','')}</Data></Cell>
+                        </apex:variable>
+                        <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsnew>=4,true,false)}">
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=4,'New ScaleQuantity/ScaleValue4','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=4,'New ScaleRate4','')}</Data></Cell>
+                        </apex:variable>
+                        <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsnew>=5,true,false)}">
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=5,'New ScaleQuantity/ScaleValue5','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=5,'New ScaleRate5','')}</Data></Cell>
+                        </apex:variable>
+                        <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsnew>=6,true,false)}">
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=6,'New ScaleQuantity/ScaleValue6','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=6,'New ScaleRate6','')}</Data></Cell>
+                        </apex:variable>
+                        <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsnew>=7,true,false)}">
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=7,'New ScaleQuantity/ScaleValue7','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=7,'New ScaleRate7','')}</Data></Cell>
+                        </apex:variable>
+                        <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsnew>=8,true,false)}">
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=8,'New ScaleQuantity/ScaleValue8','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=8,'New ScaleRate8','')}</Data></Cell>
+                        </apex:variable>
+                        <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsnew>=9,true,false)}">
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=9,'New ScaleQuantity/ScaleValue9','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=9,'New ScaleRate9','')}</Data></Cell>
+                        </apex:variable>
+                        <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsnew>=10,true,false)}">
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=10,'New ScaleQuantity/ScaleValue10','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=10,'New ScaleRate10','')}</Data></Cell>
+                        </apex:variable>                                                
+                    </Row>
+                    <apex:repeat value="{!wrapper.wrapperList}" var="v">
+                        <Row ss:StyleID="s22">
+                            <apex:repeat value="{!wrapper.keyCombinationColumns}" var="r">
+                                <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText value="{!v.sObjectRecord[r]}"/></Data></Cell>
+                            </apex:repeat>
+<!--                         <TJ20150511> START                             -->                            
+                            <apex:variable value="A" var="f1" rendered="{!IF(service.PAServicestate.currentRequestitem.prItemExp==true,true,false)}">
+                            <apex:repeat value="{!wrapper.commonColumns}" var="r">
+                        		<Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText value="{!v.sObjectRecord[r]}"/></Data></Cell>
+	                        </apex:repeat>
+	                        </apex:variable>
+	                        <apex:variable value="e" var="g1" rendered="{!IF(service.PAServicestate.currentRequestitem.prItemExp==true,true,false)}">
+	                        <apex:repeat value="{!wrapper.dateColumns}" var="r">
+	                        	<Cell ss:StyleID="s22" ><Data ss:Type="String">
+	                        	<apex:outputText escape="false" value="{0,date,yyyyMMdd}">
+                                    <apex:param value="{!v.sObjectRecord[r]}" />
+                                </apex:outputText></Data></Cell>
+	                        </apex:repeat>
+	                        </apex:variable>
+	                        <apex:variable value="d" var="h1" rendered="{!IF(service.PAServicestate.currentRequestitem.prItemExp==true || service.PAServicestate.currentRequestitem.impExp==true,true,false)}">	                        
+	                        <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText value="{!v.sObjectRecord['New_Rate__c']}"/></Data></Cell>
+	                        </apex:variable>
+	                        <apex:variable value="c" var="i1" rendered="{!IF(service.PAServicestate.currentRequestitem.prItemExp==true || service.PAServicestate.currentRequestitem.impExp==true,true,false)}">
+	                        <apex:repeat value="{!wrapper.newValueColumns}" var="r">
+	                        	<Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText value="{!v.sObjectRecord[r]}"/></Data></Cell>
+	                        </apex:repeat>
+	                        </apex:variable>
+	                        <apex:variable value="b" var="j1" rendered="{!IF(service.PAServicestate.currentRequestitem.prItemExp==true || service.PAServicestate.currentRequestitem.impExp==true,true,false)}">
+							<apex:repeat value="{!wrapper.newDateColumns}" var="r">
+	                        	<Cell ss:StyleID="s22" ><Data ss:Type="String">
+	                        	<apex:outputText escape="false" value="{0,date,yyyyMMdd}">
+                                    <apex:param value="{!v.sObjectRecord[r]}" />
+                                </apex:outputText></Data></Cell>
+                            </apex:repeat>
+                            </apex:variable>
+<!--                         <TJ20150511> END                             -->
+							<apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsold>=1,true,false)}">                            
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=1,v.stringMap['Scale_Quantity1_SAP'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=1,v.stringMap['Scale_Rate1_SAP'],'')}</Data></Cell>
+                            </apex:variable>
+                            <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsold>=2,true,false)}">
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=2,v.stringMap['Scale_Quantity2_SAP'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=2,v.stringMap['Scale_Rate2_SAP'],'')}</Data></Cell>
+                            </apex:variable>
+                            <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsold>=3,true,false)}">
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=3,v.stringMap['Scale_Quantity3_SAP'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=3,v.stringMap['Scale_Rate3_SAP'],'')}</Data></Cell>
+                            </apex:variable>
+                            <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsold>=4,true,false)}">
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=4,v.stringMap['Scale_Quantity4_SAP'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=4,v.stringMap['Scale_Rate4_SAP'],'')}</Data></Cell>
+                            </apex:variable>
+                            <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsold>=5,true,false)}">
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=5,v.stringMap['Scale_Quantity5_SAP'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=5,v.stringMap['Scale_Rate5_SAP'],'')}</Data></Cell>
+                            </apex:variable>
+                            <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsold>=6,true,false)}">
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=6,v.stringMap['Scale_Quantity6_SAP'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=6,v.stringMap['Scale_Rate6_SAP'],'')}</Data></Cell>
+                            </apex:variable>
+                            <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsold>=7,true,false)}">
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=7,v.stringMap['Scale_Quantity7_SAP'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=7,v.stringMap['Scale_Rate7_SAP'],'')}</Data></Cell>
+                            </apex:variable>
+                            <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsold>=8,true,false)}">
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=8,v.stringMap['Scale_Quantity8_SAP'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=8,v.stringMap['Scale_Rate8_SAP'],'')}</Data></Cell>
+                            </apex:variable>
+                            <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsold>=9,true,false)}">
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=9,v.stringMap['Scale_Quantity9_SAP'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=9,v.stringMap['Scale_Rate9_SAP'],'')}</Data></Cell>
+                            </apex:variable>
+                            <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsold>=10,true,false)}">
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=10,v.stringMap['Scale_Quantity10_SAP'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsold>=10,v.stringMap['Scale_Rate10_SAP'],'')}</Data></Cell>
+                            </apex:variable>                            
+                            <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsnew>=1,true,false)}">
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=1,v.sObjectRecord['Scale_Quantity_Scale_Value1__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=1,v.sObjectRecord['ScaleRate1__c'],'')}</Data></Cell>
+                            </apex:variable>
+                            <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsnew>=2,true,false)}">
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=2,v.sObjectRecord['Scale_Quantity_Scale_Value2__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=2,v.sObjectRecord['ScaleRate2__c'],'')}</Data></Cell>
+                            </apex:variable>
+                            <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsnew>=3,true,false)}">
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=3,v.sObjectRecord['Scale_Quantity_Scale_Value3__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=3,v.sObjectRecord['ScaleRate3__c'],'')}</Data></Cell>
+                            </apex:variable>
+                            <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsnew>=4,true,false)}">
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=4,v.sObjectRecord['Scale_Quantity_Scale_Value4__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=4,v.sObjectRecord['ScaleRate4__c'],'')}</Data></Cell>
+                            </apex:variable>
+                            <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsnew>=5,true,false)}">
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=5,v.sObjectRecord['Scale_Quantity_Scale_Value5__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=5,v.sObjectRecord['ScaleRate5__c'],'')}</Data></Cell>
+                            </apex:variable>
+                            <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsnew>=6,true,false)}">
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=6,v.sObjectRecord['Scale_Quantity_Scale_Value6__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=6,v.sObjectRecord['ScaleRate6__c'],'')}</Data></Cell>
+                            </apex:variable>
+                            <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsnew>=7,true,false)}">
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=7,v.sObjectRecord['Scale_Quantity_Scale_Value7__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=7,v.sObjectRecord['ScaleRate7__c'],'')}</Data></Cell>
+                            </apex:variable>
+                            <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsnew>=8,true,false)}">
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=8,v.sObjectRecord['Scale_Quantity_Scale_Value8__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=8,v.sObjectRecord['ScaleRate8__c'],'')}</Data></Cell>
+                            </apex:variable>
+                            <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsnew>=9,true,false)}">
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=9,v.sObjectRecord['Scale_Quantity_Scale_Value9__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=9,v.sObjectRecord['ScaleRate9__c'],'')}</Data></Cell>
+                            </apex:variable>
+                            <apex:variable value="a" var="a1" rendered="{!IF(service.PAServicestate.currentRequestitem.scalevalsnew>=10,true,false)}">
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=10,v.sObjectRecord['Scale_Quantity_Scale_Value10__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag && service.PAServicestate.currentRequestitem.scalevalsnew>=10,v.sObjectRecord['ScaleRate10__c'],'')}</Data></Cell>
+                            </apex:variable>                                                        
+                        </Row>
+                    </apex:repeat>
+                    <Row/>
+                    <Row ss:StyleID="s20"/>
+                    <Row/>
+                </apex:repeat>
+                </Table>
+            </WorkSheet>
+     
+    </Workbook>
+</xml>
+</apex:page>

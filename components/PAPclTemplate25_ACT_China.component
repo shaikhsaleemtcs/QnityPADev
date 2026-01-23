@@ -1,0 +1,206 @@
+<!-- **************************************************************************************************************
+ ***********************************************Modification Log***********************************************
+
+<AK20160226>
+Last Modified By    :   Ankit Khandelwal
+Last Modified Date  :   26 Feb 2016
+Description         :   Changed Logo reference from UTTest3 to Prod in PCL generation document for EKC business 'IS ID-00065249 '                                 
+ ****************************************************************************************************************
+<NS20190808>
+Last Modified By    :   Nadeem Shaik
+Last Modified Date  :   08 Aug 2019
+Description         :   Changed Logo & address' from heritage DuPont to new DuPont Logo 'IS EI-00085848'  
+ ****************************************************************************************************************
+<SR20211109>
+Last Modified By    :   Sanket Rahate
+Last Modified Date  :   09 Nov 2021
+Description         :   Changed name from DuPont EKC Technolgies to  DuPont Advanced Cleans Technologies 'IS EI-00092059'                                
+                              
+ ****************************************************************************************************************-->
+ 
+<apex:component access="global" controller="PAPCLComponent">  
+<apex:stylesheet value="{!$Resource.PDFDocumentStyle}"/>
+  <apex:attribute name="targetObject" type="String" assignTo="{!listofids}" description="The context of the outer page email templates"/>
+     
+
+  <table width="100%">
+ <tr>
+     <td style="width: 50%" colspan="3" align="left"> 
+         <apex:outputText value="<b>Advanced Cleans Technologies</b><br/>18th Floor Shui On Plaza<br/>333 Huai Hai Road (Central)<br/>Shanghai 200021, China<br/>008621 6386 6366 Ext. 3298<br/>" 
+        escape="false" style="font-family: Times New Roman,Georgia,Serif; font-size: 10px; font-weight: normal; color: #B2B2B2; float:left;"></apex:outputText>
+    </td>
+     <td style="width: 30%"  ></td>
+     <td align="right" valign="top">
+ <!-- Modified by Ankit Khandelwal 26 Feb 2016   Changed Logo reference from UTTest3 to Prod in PCL generation document for EKC business 'IS ID-00065249 -->
+          <!--<apex:image id="Logo" value="https://util-dupont--uttest3--c.cs15.content.force.com/servlet/servlet.ImageServer?id=015e00000007uH5&oid=00De0000005PSKC&lastMod=1411812424000" alt="Dupont logo" height="60" width="80" style="float:left;"/>-->
+         <!--<apex:image id="Logo" value="https://specutil--c.documentforce.com/servlet/servlet.ImageServer?id=0151L00000PZbYk&oid=00D41000000Ueq3" alt="New_DuPont_Logo_2019" height="40" width="138" style="float:right;"/> //MM -->
+         <apex:image id="Logo" value="https://specutil.file.force.com/servlet/servlet.ImageServer?id=0151L00000PZbYk&oid=00D41000000Ueq3" alt="New_DuPont_Logo_2019" height="40" width="138" style="float:right;"/>
+      </td>
+            
+    </tr>
+  </table>  
+    
+  <!--<hr></hr>-->
+  <br/> 
+  <br/> 
+  <br/> 
+  
+   <apex:outputPanel style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;">
+            
+        <apex:outputText value="{0,date,yyyy-MMM-dd }" style="float:right;font-weight: normal;">
+                <apex:param value="{!TODAY()}" />
+        </apex:outputText>
+  </apex:outputPanel>  
+  <br/>                     
+  
+<apex:outputPanel style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;">
+    <apex:repeat value="{!listrequestdetils[0]}" var="b">
+    <table>
+  
+        <tr>
+        <td style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;">{!b.Sold_To__c}</td>
+        </tr>
+    
+        <tr>
+        <td style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;">{!b.Street__c}</td>
+        </tr>
+  
+        <tr>
+        <td style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;">{!b.City__c}</td>
+        </tr>
+  
+        <tr>
+        <td style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;text-transform:uppercase;">{!b.Country__c}</td>
+        </tr>
+  
+    </table>
+   </apex:repeat>
+ </apex:outputPanel> 
+ <br/><br/>
+<apex:outputText value="RE: Price Confirmation Letter for " style="font-family: Arial,Helvetica,sans-serif; font-size:12px; font-weight: normal;"/>
+
+
+
+ <apex:dataTable value="{!listofwrappertables}" var="mList"  style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;">
+    
+        <apex:column >
+            <apex:outputText value="{!mList.sobjectRecord['Material__c']}-{!mList.sobjectRecord['Material_Code__c']}"/>
+        </apex:column>
+   </apex:dataTable>
+  <br/> 
+    <br/> 
+   <apex:outputtext value="Dear Customer:" style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;"/>
+    <br/>
+    <br/>
+    <apex:repeat value="{!listrequestdetils[0]}" var="b">
+  <apex:outputText value="DuPont Advanced Cleans Technologies is pleased to offer the following pricing to {!b.Sold_To__c} to meet the requirements of your facility:" style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;"/>
+    </apex:repeat>
+    <!-- Modified by Sanket Rahate 29 Sept 2021 Changed name from DuPont EKC Technolgies to  DuPont Advanced Cleans Technologies -->
+ <br/>   
+ <br/> 
+
+    
+  <apex:dataTable value="{!listofwrappertables}" var="mList" border="1" cellpadding="4" style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight:bold;">
+    
+        <apex:column headerValue="Material Code">
+            <apex:outputText value="{!mList.sobjectRecord['Material_Code__c']}"/>
+        </apex:column>
+        
+        <apex:column headerValue="Material Description">
+            <apex:outputText value="{!mList.sobjectRecord['Material__c']}"/>
+        </apex:column>
+        
+        <apex:column headerValue="Rate">
+            <apex:outputText value="{!mList.sobjectRecord['Rate__c']}"/>
+        </apex:column>
+        
+        <apex:column headerValue="Unit">
+            <apex:outputText value="{!mList.sobjectRecord['Unit__c']}"/>
+        </apex:column>
+          
+        <apex:column headerValue="UoM">
+            <apex:outputText value="{!mList.sobjectRecord['UoM__c']}"/>
+        </apex:column>
+                
+        <apex:column headerValue="Valid From" width="110px"> 
+            <apex:outputText value="{0,date,MMM dd yyyy}">
+                <apex:param value="{!mList.sobjectRecord['Valid_From__c']}"/>
+            </apex:outputText>
+        </apex:column>
+        
+    
+        
+    </apex:dataTable><br/><br/> 
+    
+   <apex:repeat value="{!listrequestdetils[0]}" var="b2">
+        <table width="500px" style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;">  
+            <tr>
+             <td width="50px;">Effective Date:</td>
+             <!--<td text-align="left">{!b2.Request_Valid_From__c}</td>-->
+             <td text-align="left"><apex:outputText value="{0,date,yyyy-MMM-dd }">
+                <apex:param value="{!b2.Request_Valid_From__c}" />
+        </apex:outputText></td>
+            </tr>
+            <tr>
+              <td width="50px;">Incoterms:</td>
+              <td text-align="left">{!b2.Incoterms_Code__c}-{!b2.Incoterm__c}</td>
+            </tr>
+            <tr>
+              <td width="50px;">Payment terms:</td>
+              <td text-align="left">{!b2.Terms_Of_Payment__c}</td>
+            </tr>
+             
+        </table>
+   </apex:repeat>
+   
+    <br/>
+    <br/>
+    <apex:outputText value="The above listed pricing is based on the average monthly purchase and subject to the attached terms and conditions." style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;"/>
+    <br/>  
+    <br/>
+    <apex:outputText value="A line item processing fee of $1000 is applicable to the one gallon package for shipments of less than 108 gallons (i.e., a full pallet of 1 gallon non-returnable containers). " style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;"/>
+    <br/>  
+    <br/> 
+    <apex:outputText value="A line item processing fee of $1000 is applicable for any rush order fulfillment." style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;"/>
+    <br/>  
+    <br/>
+   <apex:outputText value="This Price Confirmation constitutes the entire understanding between DuPont and your Company regarding the offer referred above and is subject to the Order Acknowledgment for all other terms and conditions including availability of product and date of delivery." style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;"/>
+    <br/>
+    <br/>    
+    
+    <apex:outputText value="Approved by:" style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;float:left;"/>
+ <br/>
+<apex:outputText rendered="{!onBehalfOfUser == null}" value="{!$User.FirstName} {!$User.LastName}" style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;"/>
+<apex:outputText rendered="{!onBehalfOfUser != null}" value="{!onBehalfOfUser}" style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: bold;"/>
+   
+ 
+<br/><br/><br/><br/><br/><br/>
+<apex:outputText value="STANDARD CONDITIONS OF SALE" style="font-family: Arial,Helvetica,sans-serif; font-size: 12px; font-weight: normal;float:left;"/>
+<br/>
+<br/>
+<apex:outputPanel style="font-family: Arial,Helvetica,sans-serif; font-size: 8px; font-weight: normal;">
+1. Seller warrants to Buyer that the product (the "Product") delivered hereunder meets Seller's standard specifications for the Product as in effect on the date of shipment or such other specifications as may have been expressly agreed to herein.  Seller warrants that the use or sale of the Product delivered hereunder will not infringe the claims of any validly issued United States patent covering the Product itself, but does not warrant against infringement due to: (a) the use of Products in combination with other products or materials or in the operation of any process, or (b) the compliance by Seller with any specifications provided to Seller by Buyer.  EXCEPT AS EXPRESSLY PROVIDED IN THIS SECTION, SELLER MAKES NO EXPRESS OR IMPLIED WARRANTY (INCLUDING, WITHOUT LIMITATION, THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR FROM ANY COURSE OF DEALING OR TRADE USAGE) REGARDING THE PRODUCT.  Buyer, having the expertise and knowledge in the intended use of the Product and any articles made therefrom, assumes all risk and liability for results obtained by the use of the Product, whether used alone or in combination with other materials.<br/>
+<br/>2. BUYER'S EXCLUSIVE AND SOLE REMEDY FOR ANY CLAIM SHALL BE A REFUND OF THE AMOUNT OF THE PURCHASE PRICE PAID FOR THE PRODUCT IN RESPECT OF WHICH DAMAGES ARE CLAIMED, AND IN NO EVENT SHALL SELLER'S LIABILITY FOR ANY CLAIM BE GREATER THAN THAT AMOUNT.  Failure to give notice of claim within ninety (90) days from date of delivery, or the date fixed for delivery (in case of non-delivery), shall constitute a waiver by Buyer of all claims in respect of the Product so delivered or not delivered, as the case may be.  No Product shall be returned to Seller without Seller's prior written permission, and then only in the manner prescribed by Seller.  No claim shall be allowed for Product that has been processed in any manner.  Claims include without limitation, claims of any kind, whether or not (a) for loss, damage, expense or injury, (b) with respect to the Product delivered or for non-delivery of the Product, or (c) based upon Seller's (i) breach of warranty, contract, statute, or regulation or (ii) negligence, strict liability or any other tort.<br/> 
+<br/>3. NEITHER PARTY SHALL BE LIABLE FOR SPECIAL, INDIRECT, INCIDENTAL, PUNITIVE OR CONSEQUENTIAL DAM-AGES (INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF BUSINESS PROFITS, BUSINESS INTERRUPTION OR ANY OTHER LOSS), UNDER THIS AGREEMENT, WHETHER OR NOT CAUSED BY OR RESULTING FROM THE BREACH OF CONTRACT, NEGLIGENCE, OR OTHER WRONGFUL ACT OR OMISSION OF SUCH PARTY EVEN IF SUCH PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.<br/> 
+<br/>4. Unless otherwise indicated on the face of this Agreement, title, liability for and risk of loss to Product sold hereunder passes to Buyer upon loading for shipment at Seller’s producing location.<br/>
+<br/>5. No liability shall result from delay in performance or non-performance, directly or indirectly caused by Act of God, fire, explosion, flood, war, act of terrorism, act of or authorized by any government, accident, labor trouble or shortage, equipment failure, inability to obtain from its usual sources of supply, fuel, power, material, equipment or transportation, commercial impracticability, failure of computer systems to operate properly or alteration, destruction or loss of electronic records or data, and any other circumstances beyond the control of the Party affected.  Quantities so affected may be eliminated from this Agreement without liability, but this Agreement shall remain otherwise unaffected.  Seller shall have no obligation to purchase supplies of the Products specified herein to enable Seller to perform this Agreement.<br/>
+<br/>6. If this Agreement covers Products that must be manufactured especially for Buyer and is suspended or terminated for any reason, Buyer will take delivery of and make payment for such Products as have been completed and such Products as are in process on the date notice of suspension or termination is received by Seller. If Buyer for any reason cannot accept delivery of such Products, Buyer will make payment therefore as though delivery has been made and Seller will store such Products for Buyer's account and at Buyer's expense.<br/>
+<br/>7. If for any reason, including without limitation, Force Majeure, Seller is unable to supply the total demand for Products, Seller may distribute its available supply among any or all purchasers as well as other businesses of Seller, its business units, affiliates and subsidiaries, on such basis as Seller may deem fair and practical without liability for any failure or performance that may result therefrom.  Seller shall have no obligation to purchase the Product to enable Seller to supply Buyer under this Agreement.<br/> 
+<br/>8. At Buyer's request, Seller may, at its option, furnish such technical information as Seller has available with respect to the use of the Product. Unless otherwise agreed in writing, all such technical assistance and information will be provided gratis, and Buyer assumes sole responsibility for results obtained in reliance thereon.<br/> 
+<br/>9. Buyer acknowledges that it has received and is familiar with Seller's labeling and literature concerning the Product and its properties.  Buyer will forward such information to Buyer's employees and any others, including Buyer's customers, who may handle, process or sell the Product and advise such parties to familiarize themselves with such information.<br/>
+<br/>10. Buyer shall reimburse Seller for all taxes, licenses, or other charges, by whatever name, (other than taxes based upon Seller's income) which Seller may be required to pay to any Government (National, Foreign, State or Local) upon the sale, production, or transportation of the Product sold hereunder.<br/>
+<br/>11. Buyer shall pay all invoices issued under this Agreement within thirty (30) days from the date of invoice.  In the event Buyer fails to fulfill Seller's terms of payment completely, or in case Seller shall have any doubt at any time as to Buyer's financial responsibility, Seller, without advance notice and at Seller's sole option, may decline to make further deliveries, except upon payment of all arrearages and receipt of cash in advance or delivery of security satisfactory to Seller.<br/>
+<br/>12. Seller reserves the right to sell, assign or otherwise transfer its right to receive payment under this Agreement.  This Agreement is not otherwise assignable or transferable by Buyer, in whole or in part, except with the prior written consent of Seller.<br/>
+<br/>13. Failure by either Party, at any time, to require performance by the other Party or to claim a breach of any provision of this Agreement shall not be construed as a waiver of any right arising under this Agreement, including the right to require subsequent performance or contest any subsequent breach.<br/>
+<br/>14. In addition to the Conditions of sale set forth herein, any Special Conditions of Sale set forth in the current price list for the Product or attached hereto shall apply and are incorporated by reference herein.<br/>
+<br/>15. If any term or provision of this Agreement shall be found to be invalid, illegal or unenforceable, this Agreement shall remain in full force and effect and such term or provision shall be deemed stricken.<br/>
+<br/>16. This Agreement is to be construed and the respective rights of Buyer and Seller are to be determined according to the laws of the State of Delaware, U.S.A., without regard to choice of law or conflicts principles of any jurisdiction, including Delaware, and the courts of Delaware shall have exclusive jurisdiction over any disputes or issues arising under this Agreement.  The United Nations Convention on Contracts for the International Sale of Goods shall not govern this Agreement or the performance thereof or any aspect of any dispute arising therefrom.  These commodities, technology or software may be exported or must be exported from the United States in accordance with the Export Administration Regulations.  Export contrary to U.S. law is prohibited.<br/>
+<br/>17. Except as may be contained in a separate trademark license, the sale of Product (even if accompanied by documents using Seller’s trademark or trade name) does not convey a license, express or implied, to use any of Seller’s trademarks or Seller’s trade name. Buyer shall not use any of Seller’s trademark or trade name in connection with Product except with the permission of Seller.<br/>
+<br/>18. This Agreement contains all of the terms and conditions with respect to the purchase and sale of the Products sold hereunder.  These terms and conditions supersede any of previous date and no modification thereof shall be binding on Seller unless separately contracted in writing and agreed to by a duly authorized representative of Seller.  No modification shall be effected by the acknowledgment or acceptance of purchase order forms stipulating different conditions.  Unless Buyer shall notify Seller in writing to the contrary as soon as practicable after receipt of this Agreement by Buyer, acceptance of the terms and conditions hereof by Buyer shall be indicated and, in the absence of such notification, Buyer’s acceptance of the Product shall be equivalent to Buyer’s assent to the terms and conditions hereof.   Seller shall have the right to amend, modify, or change this Agreement in case of legislation, government regulation, or changes in circumstances beyond the control of Seller that might affect materially the relationship between Seller and Buyer.<br/>
+
+
+</apex:outputPanel>  
+
+ 
+
+ </apex:component>

@@ -1,0 +1,290 @@
+<!-- 1.1 added customer contact in component -->
+<!-- HL20140929       Hema Latha      Added Condition to display logo in PCL template and made changes for alignment                                           None -->
+ 
+<apex:component access="global" controller="PAPCLComponent">
+   
+
+  <apex:attribute name="targetObject" type="String" assignTo="{!listofids}" description="The context of the outer page email templates" />
+     
+ <!--HL20140929 added table for allignment, changed the image URL  -->
+ <table>
+ <tr>
+  <td>
+  <!-- <apex:outputPanel > -->
+    <!-- <apex:image value="{!$Resource.dupont_logo}" height="150px" width="200px"/>  -->
+    <!-- <apex:image id="Logo" value="https://util-dupont--uttest3--c.cs15.content.force.com/servlet/servlet.ImageServer?id=015e00000007uH5&oid=00De0000005PSKC&lastMod=1411812424000" alt="Dupont logo" height="150px" width="200px" style="float:left;"/> -->
+    <apex:image id="Logo" value="https://specutil.file.force.com/servlet/servlet.ImageServer?id=0151L00000PZbYk&oid=00D41000000Ueq3" alt="Dupont logo" height="150px" width="200px" style="float:left;"/>
+    </td>
+    <td style="width: 140%" colspan="3" align="right">
+        <apex:outputText value="Du Pont De Nemours International S.A.R.L.<br/>2,chemin du Pavillon<br/>
+        P.O. Box 50<br/>CH-1218 Le Grand-Saconnex<br/>Geneva-Switzerland<br/>Tel. +41 (0)22 717 51 11<br/>
+      Fax +41 (0)22 717 51 09" escape="false" style="float:right;"/>
+     </td>
+    </tr>
+  </table>  
+    
+ <!-- </apex:outputPanel> <br/><br/><br/> HL20140929 commented to remove extra Spaces -->
+  
+ 
+  <hr></hr>
+  <apex:repeat value="{!listrequestdetils[0]}" var="b">
+    <table>
+  
+        <tr>
+        <td>{!b.Sold_To__c}</td>
+        </tr>
+    
+        <tr>
+        <td>{!b.Street__c}</td>
+        </tr>
+  
+        <tr>
+        <td>{!b.City__c}</td>
+        </tr>
+  
+        <tr>
+        <td>{!b.Country__c}</td>
+        </tr>
+  
+    </table>
+   </apex:repeat>
+   
+ <!--HL20140929 added table for allignment-->
+ <table>
+ <tr>
+  <td>
+   <!--  <apex:outputpanel > -->
+    &nbsp;<apex:outputtext value="Contact:"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<apex:outputtext value="{!listofCustomerContacts[0]}"></apex:outputtext>
+   </td>
+   <td style="width: 140%" colspan="3" align="right">
+    <apex:outputText value="{0,date,yyyy-MMM-dd }" style="float:right;">
+       <apex:param value="{!TODAY()}" /></apex:outputText>
+    <!--  </apex:outputpanel>-->
+    </td>
+    </tr>
+  </table>  
+ <br/>
+ 
+    <!--  <br/><br/> HL20140929 commented to remove extra Spaces--> 
+     <apex:outputtext value="Dear Customer,"/><br/><br/>
+     <apex:outputtext value="{!addressMessage}"></apex:outputtext>
+     <br/><br/>
+ 
+   <apex:repeat value="{!listofProjectPrices}" var="b2" rendered="{!typeOfReq=='Project'}">
+     <center>
+        <apex:outputtext value="PROJECT PRICES"/>&nbsp;&nbsp;&nbsp;&nbsp;00<apex:outputtext value="{!b2.Project_Id__c}"/><br/>
+     </center>
+      <br/>
+        <table width="500px" >
+            <tr>
+              <td width="200px">Project id:</td>
+              <td width="300px" text-align="left">00{!b2.Project_Id__c}</td>
+            </tr>
+            <tr>
+              <td>Project Name:</td>
+              <td>{!b2.name}</td>
+            </tr>
+            <tr>
+              <td>Validity Project:</td>
+              <td>{!text(b2.Valid_From__c)} - {!text(b2.Valid_To__c)}</td>
+            </tr>
+            <tr>
+              <td>Maximum volume:</td>
+              <td>{!b2.Project_Volume__c}</td>
+            </tr>
+        </table>
+   </apex:repeat>
+
+    <apex:repeat value="{!listrequestdetils[0]}" var="b1">
+        <table width="500px" >
+            <tr>
+              <td width="200px">Payment terms:</td>
+              <td width="300px" text-align="left">{!b1.Terms_Of_Payment__c}</td>
+            </tr>
+            <tr>
+              <td>Incoterm:</td>
+              <td>{!b1.Incoterm__c}</td>
+            </tr>
+            <tr>
+                <td>General remarks:</td>
+                <td>Sales and Payment conditions as per DuPont Price List</td>
+            </tr>
+        </table>
+   </apex:repeat>
+  
+  <br/>
+ 
+    <apex:dataTable value="{!listofwrappertables}" var="mList" border="1" cellpadding="4" >
+        
+        <!-- Project Coloums -->
+         
+        <apex:column headerValue="Product/PH Code" rendered="{!typeOfReq=='Project'}">
+            <apex:outputText value="{!mList.sobjectRecord['Material_Code__c']}" rendered="{!mList.sobjectRecord['Material_Code__c'] <> NULL}"/>
+            <apex:outputText value="{!mList.sobjectRecord['F_Product_Hierarchy_Code__c']}" rendered="{!mList.sobjectRecord['F_Product_Hierarchy_Code__c'] <> NULL}"/>
+        </apex:column>
+         
+        <apex:column headerValue="Product/PH Name" rendered="{!typeOfReq=='Project'}">
+            <apex:outputText value="{!mList.stringMap['salestext']}"/>
+            <apex:outputText value="{!mList.sobjectRecord['Product_Hierarchy__c']}" rendered="{!mList.sobjectRecord['Product_Hierarchy__c'] <> NULL}"/>
+        </apex:column>
+        
+        <apex:column headerValue="Material Price Group" rendered="{!typeOfReq=='Project'}">
+            <apex:outputtext value="{!mList.sobjectRecord['Material_Price_Group__c']}" rendered="{!mList.sobjectRecord['Material_Price_Group__c'] <> NULL}"></apex:outputText>
+        </apex:column>
+      
+        <apex:column headerValue="Project Discount" rendered="{!typeOfReq=='Project'}">
+            <apex:outputText value="{!mList.sobjectRecord['rate__c']} {!mList.sobjectRecord['Unit__c']}"></apex:outputText>
+        </apex:column>
+        
+        <!-- Customer Specific Coloums -->
+        
+        <apex:column headerValue="Pricing Condition" rendered="{!typeOfReq=='Cust. Specific' && CONTAINS(coloumsDisplay,'PC')}">
+            <apex:outputText value="{!mList.sobjectRecord['Pricing_Condition_Code__c']} - {!mList.sobjectRecord['Pricing_Condition__c']}"/>
+        </apex:column>
+        
+        <apex:column headerValue="Product" rendered="{!typeOfReq=='Cust. Specific' && CONTAINS(coloumsDisplay,'Material')}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['Material_Code__c'] != NULL, mList.sobjectRecord['Material_Code__c'],'')} - {!IF(mList.stringMap['salestext']!=NULL,mList.stringMap['salestext'],'')}" />
+        </apex:column>
+        
+        <apex:column headerValue="PH Name" rendered="{!typeOfReq=='Cust. Specific' && CONTAINS(coloumsDisplay,'PH')}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['F_Product_Hierarchy_Code__c'] != NULL, mList.sobjectRecord['F_Product_Hierarchy_Code__c'],'')} - {!IF(mList.sobjectRecord['Product_Hierarchy__c']!=NULL,mList.sobjectRecord['Product_Hierarchy__c'],'')}" />
+        </apex:column>
+        
+        <apex:column headerValue="MPG" rendered="{!typeOfReq=='Cust. Specific' && CONTAINS(coloumsDisplay,'MPG')}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['Material_Price_Group_Code__c'] != NULL, mList.sobjectRecord['Material_Price_Group_Code__c'],'')} - {!IF(mList.sobjectRecord['Material_Price_Group__c']!=NULL,mList.sobjectRecord['Material_Price_Group__c'],'')}" />
+        </apex:column>
+        
+        <apex:column headerValue="Price List Type" rendered="{!typeOfReq=='Cust. Specific' && CONTAINS(coloumsDisplay,'PLT')}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['Price_List_Type_Code__c'] != NULL, mList.sobjectRecord['Price_List_Type_Code__c'],'')} - {!IF(mList.sobjectRecord['Price_List_Type__c']!=NULL,mList.sobjectRecord['Price_List_Type__c'],'')}" />
+        </apex:column>
+        
+        <apex:column headerValue="CPG" rendered="{!typeOfReq=='Cust. Specific' &&  CONTAINS(coloumsDisplay,'CPG')}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['Customer_Price_Group_Code__c'] != NULL, mList.sobjectRecord['Customer_Price_Group_Code__c'],'')} - {!IF(mList.sobjectRecord['Customer_Price_Group__c']!=NULL,mList.sobjectRecord['Customer_Price_Group__c'],'')}" />
+        </apex:column>
+        
+        <apex:column headerValue="Sales Office" rendered="{!typeOfReq=='Cust. Specific' && CONTAINS(coloumsDisplay,'SO')}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['Sales_Office_Code__c'] != NULL, mList.sobjectRecord['Sales_Office_Code__c'],'')} - {!IF(mList.sobjectRecord['Sales_Office__c']!=NULL,mList.sobjectRecord['Sales_Office__c'],'')}" />
+        </apex:column>
+        
+        <apex:column headerValue="Sales District" rendered="{!typeOfReq=='Cust. Specific' && CONTAINS(coloumsDisplay,'SD')}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['Sales_District_Code__c'] != NULL, mList.sobjectRecord['Sales_District_Code__c'],'')} - {!IF(mList.sobjectRecord['Sales_District__c']!=NULL,mList.sobjectRecord['Sales_District__c'],'')}" />
+        </apex:column>
+        
+        <apex:column headerValue="Ship To" rendered="{!typeOfReq=='Cust. Specific' && CONTAINS(coloumsDisplay,'Ship to')}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['ShipTo_Code__c'] != NULL, mList.sobjectRecord['ShipTo_Code__c'],'')} - {!IF(mList.sobjectRecord['ShipTo__c']!=NULL,mList.sobjectRecord['ShipTo__c'],'')}" />
+        </apex:column>
+        
+        <apex:column headerValue="End Use" rendered="{!typeOfReq=='Cust. Specific' &&  CONTAINS(coloumsDisplay,'End Use')} ">
+            <apex:outputText value="{!IF(mList.sobjectRecord['End_Use_Code__c'] != NULL, mList.sobjectRecord['End_Use_Code__c'],'')} - {!IF(mList.sobjectRecord['End_Use__c']!=NULL,mList.sobjectRecord['End_Use__c'],'')}" />
+        </apex:column>
+        
+        <apex:column headerValue="End User" rendered="{!typeOfReq=='Cust. Specific' && CONTAINS(coloumsDisplay,'End User')}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['End_User_Code__c'] != NULL, mList.sobjectRecord['End_User_Code__c'],'')} - {!IF(mList.sobjectRecord['End_User__c']!=NULL,mList.sobjectRecord['End_User__c'],'')}" />
+        </apex:column>
+        
+        <apex:column headerValue="Terms Of Payment" rendered="{!typeOfReq=='Cust. Specific' && CONTAINS(coloumsDisplay,'ToP')}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['Terms_of_Payment_Code__c'] != NULL, mList.sobjectRecord['Terms_of_Payment_Code__c'],'')} " />
+        </apex:column>
+        
+        <apex:column headerValue="Market Segment" rendered="{!typeOfReq=='Cust. Specific' && CONTAINS(coloumsDisplay,'Market Segment')}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['Market_Segment_Code__c'] != NULL, mList.sobjectRecord['Market_Segment_Code__c'],'')} - {!IF(mList.sobjectRecord['Market_Segment__c']!=NULL,mList.sobjectRecord['Market_Segment__c'],'')}" />
+        </apex:column>
+        
+        <apex:column headerValue="Material Group 1" rendered="{!typeOfReq=='Cust. Specific' && (CONTAINS(coloumsDisplay,'Material Group 1') || CONTAINS(coloumsDisplay,'Matl grp1') || CONTAINS(coloumsDisplay,'Matl grp 1') || CONTAINS(coloumsDisplay,'MatGrp1'))}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['Material_Group_1_Code__c'] != NULL, mList.sobjectRecord['Material_Group_1_Code__c'],'')} - {!IF(mList.sobjectRecord['Material_Group_1__c']!=NULL,mList.sobjectRecord['Material_Group_1__c'],'')}" />
+        </apex:column>
+        
+        <!-- <MS20140516> Adding columns for Variant and Sales Order Type START-->
+        <apex:column headerValue="Variant" rendered="{!typeOfReq=='Cust. Specific' && CONTAINS(coloumsDisplay,'Variant')}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['Variant_Code__c'] != NULL, mList.sobjectRecord['Variant_Code__c'],'')} - {!IF(mList.sobjectRecord['Variant__c']!=NULL,mList.sobjectRecord['Variant__c'],'')}" />
+        </apex:column>
+        <apex:column headerValue="Sales Order Type" rendered="{!typeOfReq=='Cust. Specific' && CONTAINS(coloumsDisplay,'Sales Order Type')}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['Sales_Order_Type_Code__c'] != NULL, mList.sobjectRecord['Sales_Order_Type_Code__c'],'')} - {!IF(mList.sobjectRecord['Sales_Order_Type__c']!=NULL,mList.sobjectRecord['Sales_Order_Type__c'],'')}" />
+        </apex:column>
+         <apex:column headerValue="ComPartner" rendered="{!typeOfReq=='Cust. Specific' && CONTAINS(coloumsDisplay,'ComPartner')}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['ComPartner_Code__c'] != NULL, mList.sobjectRecord['ComPartner_Code__c'],'')} - {!IF(mList.sobjectRecord['ComPartner__c']!=NULL,mList.sobjectRecord['ComPartner__c'],'')}" />
+        </apex:column>
+        <apex:column headerValue="Material Group 5 Key" rendered="{!typeOfReq=='Cust. Specific' && CONTAINS(coloumsDisplay,'Material Group 5 Key')}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['Material_Group_5_Key_Code__c'] != NULL, mList.sobjectRecord['Material_Group_5_Key_Code__c'],'')} - {!IF(mList.sobjectRecord['Material_Group_5_Key__c']!=NULL,mList.sobjectRecord['Material_Group_5_Key__c'],'')}" />
+        </apex:column>
+         <apex:column headerValue="Plant" rendered="{!typeOfReq=='Cust. Specific' && CONTAINS(coloumsDisplay,'Plant')}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['Plant_Code__c'] != NULL, mList.sobjectRecord['Plant_Code__c'],'')} - {!IF(mList.sobjectRecord['Plant__c']!=NULL,mList.sobjectRecord['Plant__c'],'')}" />
+        </apex:column>
+         <apex:column headerValue="Shipping Condition" rendered="{!typeOfReq=='Cust. Specific' && CONTAINS(coloumsDisplay,'Shipping Condition')}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['Shipping_Condition_Code__c'] != NULL, mList.sobjectRecord['Shipping_Condition_Code__c'],'')} - {!IF(mList.sobjectRecord['Shipping_Condition__c']!=NULL,mList.sobjectRecord['Shipping_Condition__c'],'')}" />
+        </apex:column>
+         <apex:column headerValue="Destination Country" rendered="{!typeOfReq=='Cust. Specific' && CONTAINS(coloumsDisplay,'Destination_Country')}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['Destination_Country_Code__c'] != NULL, mList.sobjectRecord['Destination_Country_Code__c'],'')} - {!IF(mList.sobjectRecord['Destination_Country__c']!=NULL,mList.sobjectRecord['Destination_Country__c'],'')}" />
+        </apex:column>
+        <!-- <MS20140516>END-->
+        <apex:column headerValue="Country" rendered="{!typeOfReq=='Cust. Specific' &&  CONTAINS(coloumsDisplay,'Country')}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['Country_Code__c'] != NULL, mList.sobjectRecord['Country_Code__c'],'')} - {!IF(mList.sobjectRecord['Country__c']!=NULL,mList.sobjectRecord['Country__c'],'')}" />
+        </apex:column>
+        
+        <apex:column headerValue="Price Ref. Partner" rendered="{!typeOfReq=='Cust. Specific' && CONTAINS(coloumsDisplay,'PRP')}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['Price_Ref_Partner_Code__c'] != NULL, mList.sobjectRecord['Price_Ref_Partner_Code__c'],'')} - {!IF(mList.sobjectRecord['Price_Ref_Partner__c']!=NULL,mList.sobjectRecord['Price_Ref_Partner__c'],'')}" />
+        </apex:column>
+        
+        <apex:column headerValue="Partner ZF" rendered="{!typeOfReq=='Cust. Specific' && CONTAINS(coloumsDisplay,'Partner ZF')}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['Partner_ZF_Code__c'] != NULL, mList.sobjectRecord['Partner_ZF_Code__c'],'')} - {!IF(mList.sobjectRecord['Partner_ZF__c']!=NULL,mList.sobjectRecord['Partner_ZF__c'],'')}" />
+        </apex:column>
+        
+        <apex:column headerValue="Payer" rendered="{!typeOfReq=='Cust. Specific' && CONTAINS(coloumsDisplay,'Payer')}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['Payer_Code__c'] != NULL, mList.sobjectRecord['Payer_Code__c'],'')} - {!IF(mList.sobjectRecord['Payer__c']!=NULL,mList.sobjectRecord['Payer__c'],'')}" />
+        </apex:column>
+        
+         <apex:column headerValue="Disc Ref No" rendered="{!typeOfReq=='Cust. Specific' && CONTAINS(coloumsDisplay,'Disc Ref No')}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['Disc_Ref_No__c'] != NULL, mList.sobjectRecord['Disc_Ref_No__c'],'')}" />
+        </apex:column>
+        
+        <apex:column headerValue="FixValDate" rendered="{!typeOfReq=='Cust. Specific' && CONTAINS(coloumsDisplay,'FixValDate')}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['FixValDate__c'] != NULL, mList.sobjectRecord['FixValDate__c'],'')}}" />
+        </apex:column>
+        
+        <apex:column headerValue="Campaign" rendered="{!typeOfReq=='Cust. Specific' &&  CONTAINS(coloumsDisplay,'Campaign')}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['Campaign_Code__c'] != NULL, mList.sobjectRecord['Campaign_Code__c'],'')} - {!IF(mList.sobjectRecord['Campaign__c']!=NULL,mList.sobjectRecord['Campaign__c'],'')}" />
+        </apex:column>
+        
+        <apex:column headerValue="Document Currency" rendered="{!typeOfReq=='Cust. Specific' &&  CONTAINS(coloumsDisplay,'Document Currency')}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['Document_Currency_Code__c'] != NULL, mList.sobjectRecord['Document_Currency_Code__c'],'')} - {!IF(mList.sobjectRecord['Document_Currency__c']!=NULL,mList.sobjectRecord['Document_Currency__c'],'')}" />
+        </apex:column>
+        
+        <apex:column headerValue="State" rendered="{!typeOfReq=='Cust. Specific' &&  CONTAINS(coloumsDisplay,'State')}">
+            <apex:outputText value="{!IF(mList.sobjectRecord['State_Code__c'] != NULL, mList.sobjectRecord['State_Code__c'],'')} - {!IF(mList.sobjectRecord['State__c']!=NULL,mList.sobjectRecord['State__c'],'')}" />
+        </apex:column>
+        
+        <apex:column headerValue="Rate" rendered="{!typeOfReq=='Cust. Specific' && CONTAINS(coloumsDisplay,'Rate')}">
+            <apex:outputText value="{!mList.sobjectRecord['Rate__c']}" />
+        </apex:column>
+        
+        <apex:column headerValue="Unit" rendered="{!typeOfReq=='Cust. Specific' && CONTAINS(coloumsDisplay,'Unit')}">
+            <apex:outputText value="{!mList.sobjectRecord['Unit__c']}" />
+        </apex:column>
+        
+        <apex:column headerValue="Per" rendered="{!typeOfReq=='Cust. Specific' && CONTAINS(coloumsDisplay,'Per')}">
+            <apex:outputText value="{!mList.sobjectRecord['Per__c']}" />
+        </apex:column>
+        
+        <apex:column headerValue="UoM" rendered="{!typeOfReq=='Cust. Specific' && CONTAINS(coloumsDisplay,'UoM')}">
+            <apex:outputText value="{!mList.sobjectRecord['UoM__c']}" />
+        </apex:column>
+                
+        <apex:column headerValue="Validity" > 
+            <apex:outputtext value="{!mList.sobjectRecord['Valid_From__c']} - {!mList.sobjectRecord['Valid_To__c']}"></apex:outputText>
+        </apex:column>
+        
+    </apex:dataTable>
+ 
+   
+  <br/>
+ 
+    <apex:outputpanel >
+       <!--   <br/><br/><br/>HL20140929 commented to remove extra Spaces -->
+    <apex:outputtext value="Issued By"/>
+        <br/><br/>
+    <apex:outputText value="{!$User.FirstName} {!$User.LastName}" />
+
+    </apex:outputpanel>
+
+
+</apex:component>

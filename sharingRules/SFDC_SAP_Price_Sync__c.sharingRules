@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>ACT_Global</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>ACST Global</label>
+        <sharedTo>
+            <group>ACST_Global_Admin</group>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>equals</operation>
+            <value>ACST Global</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>contains</operation>
+            <value>ACST Global</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>CPM_AP</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>CPM AP</label>
+        <sharedTo>
+            <group>CPM_AP_Admin</group>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>equals</operation>
+            <value>CPM AP</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>contains</operation>
+            <value>CPM AP</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>CPM_EMEA</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>CPM EMEA</label>
+        <sharedTo>
+            <group>CPM_EMEA_Admin</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>equals</operation>
+            <value>CPM EMEA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>contains</operation>
+            <value>CPM EMEA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>CPM_NA</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>CPM NA</label>
+        <sharedTo>
+            <group>CPM_NA_Admin</group>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>equals</operation>
+            <value>CPM NA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>contains</operation>
+            <value>CPM NA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>SFDC_SAP_Price_Sync_Sharing_Rule_for_ACT</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>SFDC SAP Price Sync Sharing Rule for ACST</label>
+        <sharedTo>
+            <group>ACST</group>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>equals</operation>
+            <value>ACST</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>contains</operation>
+            <value>ACST</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>SFDC_SAP_Price_Sync_Sharing_Rule_for_APT_AP</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>SFDC SAP Price Sync Sharing Rule for APT AP</label>
+        <sharedTo>
+            <group>APT_AP</group>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>equals</operation>
+            <value>APT AP</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>contains</operation>
+            <value>APT AP</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>SFDC_SAP_Price_Sync_Sharing_Rule_for_APT_EMEA</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>SFDC SAP Price Sync Sharing Rule for APT EMEA</label>
+        <sharedTo>
+            <group>APT_EMEA</group>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>equals</operation>
+            <value>APT EMEA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>contains</operation>
+            <value>APT EMEA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>SFDC_SAP_Price_Sync_Sharing_Rule_for_APT_NA</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>SFDC SAP Price Sync Sharing Rule for APT NA</label>
+        <sharedTo>
+            <group>APT_NA</group>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>contains</operation>
+            <value>APT NA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>equals</operation>
+            <value>APT NA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>SFDC_SAP_Price_Sync_Sharing_Rule_for_CMPT_AP</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>SFDC SAP Price Sync Sharing Rule for CMPT AP</label>
+        <sharedTo>
+            <group>CMPT_AP</group>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>equals</operation>
+            <value>CMPT AP</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>contains</operation>
+            <value>CMPT AP</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>SFDC_SAP_Price_Sync_Sharing_Rule_for_CMPT_EMEA</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>SFDC SAP Price Sync Sharing Rule for CMPT EMEA</label>
+        <sharedTo>
+            <group>CMPT_EMEA</group>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>equals</operation>
+            <value>CMPT EMEA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>contains</operation>
+            <value>CMPT EMEA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>SFDC_SAP_Price_Sync_Sharing_Rule_for_Litho_AP</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>SFDC SAP Price Sync Sharing Rule for Litho AP</label>
+        <sharedTo>
+            <group>Litho_AP</group>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>equals</operation>
+            <value>Litho AP</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>contains</operation>
+            <value>Litho AP</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>SFDC_SAP_Price_Sync_Sharing_Rule_for_Litho_EMEA</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>SFDC SAP Price Sync Sharing Rule for Litho EMEA</label>
+        <sharedTo>
+            <group>Litho_EMEA</group>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>equals</operation>
+            <value>Litho EMEA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>contains</operation>
+            <value>Litho EMEA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>SFDC_SAP_Price_Sync_Sharing_Rule_for_Litho_NA</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>SFDC SAP Price Sync Sharing Rule for Litho NA</label>
+        <sharedTo>
+            <group>Litho_NA</group>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>equals</operation>
+            <value>Litho NA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>contains</operation>
+            <value>Litho NA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>SFDC_SAP_Price_Sync_Sharing_Rule_for_Semi_Silicones</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>SFDC SAP Price Sync Sharing Rule for Semi Silicones</label>
+        <sharedTo>
+            <group>Semi_Silicones</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>equals</operation>
+            <value>Semi Silicones</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>contains</operation>
+            <value>Semi Silicones</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_SAPPrice_with_DM</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Share SAPPrice with DM</label>
+        <sharedTo>
+            <group>DM</group>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>equals</operation>
+            <value>DM</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>contains</operation>
+            <value>DM</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_SAP_price_Sync_with_OLED</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Share SAP price Sync with OLED</label>
+        <sharedTo>
+            <group>OLED</group>
+        </sharedTo>
+        <booleanFilter>1 OR  2</booleanFilter>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>equals</operation>
+            <value>OLED</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>contains</operation>
+            <value>OLED</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_SAP_price_sync_with_ICS_EMEA</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Share SAP price sync with ICS EMEA</label>
+        <sharedTo>
+            <group>ICS_EMEA</group>
+        </sharedTo>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>equals</operation>
+            <value>ICS EMEA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>contains</operation>
+            <value>ICS EMEA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_SFDC_Price_sync_with_LED1</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Share SFDC Price sync with LED Silicones1</label>
+        <sharedTo>
+            <group>LED_Silicones</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>equals</operation>
+            <value>LED Silicones</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>contains</operation>
+            <value>LED Silicones</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_SFDC_SAP_Price_Sync_with_DM_OCR</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>This sharing rule is used to share object records with public group DM OCR</description>
+        <label>Share SFDC SAP Price Sync with DM OCR</label>
+        <sharedTo>
+            <group>DM_OCR</group>
+        </sharedTo>
+        <booleanFilter>1 OR  2</booleanFilter>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>equals</operation>
+            <value>DM OCR</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>contains</operation>
+            <value>DM OCR</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_SFDC_SAP_Price_with_ICS_LA</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Share SFDC SAP Price with ICS LA</label>
+        <sharedTo>
+            <group>ICS_LA</group>
+        </sharedTo>
+        <booleanFilter>1 OR  2</booleanFilter>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>equals</operation>
+            <value>ICS LA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>contains</operation>
+            <value>ICS LA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_SFDC_SAP_Price_with_ICS_NA</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Share SFDC SAP Price with ICS NA</label>
+        <sharedTo>
+            <group>ICS_NA</group>
+        </sharedTo>
+        <booleanFilter>1 OR  2</booleanFilter>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>equals</operation>
+            <value>ICS NA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>contains</operation>
+            <value>ICS NA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_SFDC_SAP_Prices_sync_with_ICS_AP</fullName>
+        <accessLevel>Edit</accessLevel>
+        <label>Share SFDC SAP Prices sync with ICS AP</label>
+        <sharedTo>
+            <group>ICS_AP</group>
+        </sharedTo>
+        <booleanFilter>1 OR  2</booleanFilter>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>equals</operation>
+            <value>ICS AP</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>SFDC_PA_BU__c</field>
+            <operation>contains</operation>
+            <value>ICS AP</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+</SharingRules>

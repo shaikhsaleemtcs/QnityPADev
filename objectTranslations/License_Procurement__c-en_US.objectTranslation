@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>License Procurement</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>License Procurements</value>
+    </caseValues>
+    <fields>
+        <help><!-- Type of Available Licenses in selected License Catagory --></help>
+        <label><!-- Available Licenses Name --></label>
+        <name>Available_Licenses_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Categories of Licenses --></help>
+        <label><!-- License Catagories --></label>
+        <name>License_Catagories__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date at which licenses will get expired or to be renewed. --></help>
+        <label><!-- License Expiry Date --></label>
+        <name>License_Expiry_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique Identifier for License Procurement --></help>
+        <label><!-- License Procurement Number --></label>
+        <name>License_Procurement_Number__c</name>
+    </fields>
+    <fields>
+        <help><!-- The license record, procurement is attached to --></help>
+        <label><!-- License --></label>
+        <name>Licenses__c</name>
+        <relationshipLabel><!-- License Procurements --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Total number of licenses procured --></help>
+        <label><!-- Number of licenses procured --></label>
+        <name>Number_of_licenses_procured__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date of License Procurement --></help>
+        <label><!-- Procurement Date --></label>
+        <name>Procurement_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Business procuring the licenses --></help>
+        <label><!-- Procuring Business --></label>
+        <name>Procuring_Business__c</name>
+    </fields>
+    <fields>
+        <help><!-- Status of procured licenses --></help>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Expired</masterLabel>
+            <translation><!-- Expired --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Future</masterLabel>
+            <translation><!-- Future --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Inactive</masterLabel>
+            <translation><!-- Inactive --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>
