@@ -38,9 +38,6 @@
         <field>Pricing_Request_Item__c.Material__c</field>
     </columns>
     <columns>
-        <field>Pricing_Request_Item__c.New_Rate__c</field>
-    </columns>
-    <columns>
         <field>Pricing_Request_Item__c.Per__c</field>
     </columns>
     <columns>
@@ -63,15 +60,6 @@
     </columns>
     <columns>
         <field>Pricing_Request__c.Assigned_To__c</field>
-    </columns>
-    <columns>
-        <field>Pricing_Request_Item__c.Product_Hierarchy_Code__c</field>
-    </columns>
-    <columns>
-        <field>Pricing_Request_Item__c.Product_Hierarchy__c</field>
-    </columns>
-    <columns>
-        <field>Pricing_Request_Item__c.Pricing_Condition_Code__c</field>
     </columns>
     <columns>
         <field>Pricing_Request_Item__c.Key_Combination_Code__c</field>
@@ -101,7 +89,7 @@
             <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
-            <value>APT AP,APT EMEA,APT NA,CMPT AMS,CMPT AP,CMPT EMEA,CPM AP,CPM EMEA,CPM LA,CPM NA,DPP Global Kalrez &amp; Vespel,HLTH AMS,ICS AP,ICS EMEA,ICS LA,ICS NA,PG AP,PG EMEA,PG LA,PG NA,SL AMS,SL AP,HLTH EMEA,SL EMEA</value>
+            <value>CPM EMEA,CPM AP,ACST Global,CPM LA,CPM NA,DM OCR,CMPT AP,DM,OLED,LED Silicones,ICS NA,ICS AP,ICS EMEA,ICS LA,ACST,APT AP,APT EMEA,APT NA,CMPT AMS,CMPT EMEA,Litho AP,Litho EMEA,Litho NA,Semi Silicones,DPP Global Kalrez,DPP LA Kalrez,DPP Global Kalrez &amp; Vespel,DPP LA Kalrez And Vespel</value>
         </criteriaItems>
     </filter>
     <format>Tabular</format>
