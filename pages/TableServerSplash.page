@@ -1,0 +1,13 @@
+<apex:page showheader="false" sidebar="false">
+  <br></br>
+  <br></br>
+  <h1>Notice: Tableau Server</h1>
+  <br></br>
+  <br>You are above to be redirected to the DuPont Tableau Server analytics reporting system.  Please be aware:</br>
+  <br>  - You must be connected to the DuPont network to reach Tableau Server.</br>
+  <br>  - Your CPass must be plugged in and show as connected.</br>
+  <br>  - You must have a Tableau Server login account.</br>
+  <br>For more information contact james.m.manning@dupont.com.</br>
+  <br></br> 
+  <br>Click the button at the far lower, right corner of the screen to proceed to Tableau Server.</br>
+</apex:page>

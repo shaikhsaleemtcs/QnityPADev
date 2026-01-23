@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>To give access to overwrite audit fields for migration</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Audit Field</label>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>CreateAuditFields</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>UpdateWithInactiveOwner</name>
+    </userPermissions>
+</PermissionSet>

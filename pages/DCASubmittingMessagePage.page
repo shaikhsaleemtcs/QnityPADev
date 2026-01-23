@@ -1,0 +1,10 @@
+<apex:page >
+<!-- Begin Default Content REMOVE THIS>
+<h1>Record Saved and Submitted successfully.</h1>
+<!-- End Default Content REMOVE THIS -->
+
+ <apex:form id="SuccessPage" >
+    <b><apex:pageMessage summary="Record Saved and Submitted successfully." severity="Success" strength="1" ></apex:pageMessage></b>
+    </apex:form>
+
+</apex:page>

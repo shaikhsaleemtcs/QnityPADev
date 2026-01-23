@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>RecordType Settings</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>RecordType Settings</value>
+    </caseValues>
+    <fields>
+        <help><!-- RecordType DeveloperName --></help>
+        <label><!-- FullName --></label>
+        <name>FullName__c</name>
+    </fields>
+    <fields>
+        <help><!-- Settings for the OppProductScheduler --></help>
+        <label><!-- OppProductScheduler --></label>
+        <name>OppProductScheduler__c</name>
+    </fields>
+    <fields>
+        <label><!-- ReasonIsRequired --></label>
+        <name>ReasonIsRequired__c</name>
+    </fields>
+    <fields>
+        <help><!-- Unique Name of the Reason Root --></help>
+        <label><!-- Reason Root --></label>
+        <name>ReasonRoot__c</name>
+    </fields>
+    <fields>
+        <help><!-- Is the Primary Segment Required for this recordtype. --></help>
+        <label><!-- SegmentIsRequired --></label>
+        <name>SegmentIsRequired__c</name>
+    </fields>
+    <fields>
+        <help><!-- Developer Name of Segmentation Root --></help>
+        <label><!-- Segmentation Root --></label>
+        <name>SegmentationRoot__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

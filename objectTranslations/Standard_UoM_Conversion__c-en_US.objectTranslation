@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Standard UoM Conversion</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Standard UoM Conversion</value>
+    </caseValues>
+    <fields>
+        <label><!-- Alternative UOM Text --></label>
+        <name>Alternative_UOM_Text__c</name>
+    </fields>
+    <fields>
+        <label><!-- Alternative UOM --></label>
+        <name>Alternative_UOM__c</name>
+    </fields>
+    <fields>
+        <label><!-- Base UOM Text --></label>
+        <name>Base_UOM_Text__c</name>
+    </fields>
+    <fields>
+        <label><!-- Base UOM --></label>
+        <name>Base_UOM__c</name>
+    </fields>
+    <fields>
+        <label><!-- Denominator --></label>
+        <name>Denominator__c</name>
+    </fields>
+    <fields>
+        <label><!-- Numerator --></label>
+        <name>Numerator__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

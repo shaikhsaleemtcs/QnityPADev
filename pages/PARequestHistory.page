@@ -1,0 +1,143 @@
+<!--    Ver.            Developer               Changes                                                         Dependencies    -->
+<!--    BB20140516      Bisnupriya        Created Page to display all customer specific request history.          None         -->
+
+<apex:page controller="ctrlPAMain" tabstyle="Price_Approval__tab"
+    sidebar="false" showHeader="true" id="currentPage" cache="true"
+    action="{!onLoadCall}">
+    <apex:pageMessages escape="false" id="errorMessage"/>
+       <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.min.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.js')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/css/jquery.dataTables.css')}" />
+    <c:loadingComponent />
+    <style>
+        .customerLink{font-size:15px;height:20px;margin-bottom:1px;padding:5px;border:solid 1px;border-color:#6E96B2; background-color:#E5F3FC;font-weight:bold;text-align:left;}
+        .navFlow{font-size:13px;font-style:oblique;margin-bottom:3px;}
+        #CustomerRequest #soldTo .pbSubheader{margin-bottom:0px;}
+        #CustomerRequest #soldTo .detailList{border:1px solid #E2E3E4;}
+        #CustomerRequest #soldTo .detailList .dataCol{color:#000000;}
+        //#CustomerRequest .detailList .headerRow th{text-align:center;}
+        //#CustomerRequest .detailList tr th{border-bottom:none;}
+        #CustomerRequest .detailList tr td{border-bottom:none;}
+        #CustomerRequest .detailList .data2Col {border:none;text-align:center;padding-left:0px;}
+        #CustomerRequest #requests {padding-left:0px;}
+        #buttons a.btn{width:80px;float:left;}
+        #buttons #buttonsAddToRequest a.btn{width:150px;float:left;}
+        #buttons #buttonsOverview a.btn{width:120px;float:left;}
+        .bPageBlock .detailList #PARelatedListComponentTableCustomerPrice tr th{color:black;}
+         body table.list tr td{border-bottom: none;}        
+         body table.list{background-color:#fff;border-bottom:none;}
+         #pricesTable table.list tr:first-child th{color:white;background-color:#63A4C5;}
+         #pricesTable table.list tr:nth-child(2) th{color:black;background-color:#f8f8f8;border:1px solid #E2E3E4;}
+        #requests .pbBody{margin:0px;}
+        .noTableFooter
+         {
+         margin:0px!important;
+         }
+
+.bPageBlock .requiredInput .requiredBlock {
+    top: 0px;
+    bottom: 1px;
+}
+
+.FrontScreenImp {
+    background-color: white;
+    //border-width: 2px;
+    border: 2px solid #63A4C5;
+    z-index: 9999;
+    left: 0;
+    padding: 10px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin-left: -250px;
+    top: 0;
+}
+.BackScreenImp {
+    background-color: #696969;
+    opacity: 0.5;
+    filter: alpha(opacity = 50);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 9998;
+}
+    </style>
+
+<script>
+var j$ = jQuery.noConflict();                                   //<TJ20140401> - added javascript to generate HTML Table with additional functionalities
+j$(document).ready(function(){
+var tab=j$('.list').dataTable({
+        "bLengthChange":false,
+        "aLengthMenu": [100,200],
+        "iDisplayLength" : 100,
+        "aoColumnDefs" : [{"bSortable": false,"bSearchable": false, "aTargets":[0]}],
+        sPaginationType: "full_numbers",
+        sPlaceHolder : "foot:before",
+    });                     
+  j$('.list'+'_filter').after('<br /><br />');
+  j$('.list').after('<br />');
+});
+</script>
+<apex:form > 
+    <div align="left" class="navFlow">
+            <apex:commandLink id="link0" value="Landing Page" action="{!businessComponentAction}" target="_self" style="color:blue;">
+            <apex:param name="desiredAction" value="landingpage" assignTo="{!businessaction}" />
+            <apex:param name="newPageLabel" value="PAHome" assignTo="{!newPageLabel}" />
+            </apex:commandLink>
+            <!-- <TJ20140509> Added Navigation Flow Text -->
+            <apex:outputText value="{!if(NOT(ISNULL(navigationText)),'>>','')} "/>
+            <apex:outputText value="{!navigationText}"/>
+            <apex:outputText value=">>  Customer All Requests"/>
+        </div>
+<!--        <TJ20140417>   Changed Page Label-->    
+     <div class="customerLink">
+        Customer All Requests List
+     </div>
+<!--        <TJ20140513> Help Link-->     
+     <apex:commandLink value="Help" action="{!helpLink}" style="float:right;" target="_blank">
+        <apex:param name="Help" value="All Request List" assignTo="{!label}"/>
+     </apex:commandLink>
+     <br/>
+     <apex:commandLink value="Cancel" action="{!businessComponentAction}" styleClass="btn" 
+                    style="text-decoration:none;margin-left:45%;">
+                    <apex:param name="desiredAction" value="RequestOverview" assignTo="{!businessAction}" />
+                    <apex:param name="newPageLabel" value="PACustomerRequests"
+                         assignTo="{!newPageLabel}" />
+                    <apex:param name="pageName" value="{!$Label.Customer_Requests}" assignTo="{!pageName}"/>                            
+     </apex:commandLink>
+     <br/>
+     <br/> 
+    <div id="pricesTable">        
+        <apex:repeat value="{!service.PAServicestate.currentRequest.relatedWrappersList}"
+                        var="wrapper" >          
+                        <c:PARelatedListComponent WrapperRecordsDisp="{!wrapper.wrapperList}"
+                            cloneEnable="{!service.PAServicestate.currentRequest.cloneFlag}"
+                            columnsDisp="{!wrapper.keyCombinationcolumns}" viewMode="{!currentPageLabel}"
+                            selected="{!service.PAServicestate.currentRequest.pricingRequestId}"
+                            actionAtr="{!businessaction}"     typeOfRequest="{!wrapper.priceType}"                   
+                            typeOfSObjectList="{!wrapper.sObjectTypeName}" actionShowFlag="true"
+                            cloneShowFlag="true"                           
+                            labelName="{!pageName}" currentHeader="{!$Label.Customer_Requests}">
+                        </c:PARelatedListComponent>
+         </apex:repeat>
+         </div>
+         <br/>
+         <!-- AV20140606 Added cancel button on below -->
+        <apex:commandLink value="Cancel" action="{!businessComponentAction}" styleClass="btn" 
+                    style="text-decoration:none;margin-left:19.5%;">
+                    <apex:param name="desiredAction" value="RequestOverview" assignTo="{!businessAction}" />
+                    <apex:param name="newPageLabel" value="PACustomerRequests"
+                         assignTo="{!newPageLabel}" />
+                    <apex:param name="pageName" value="{!$Label.Customer_Requests}" assignTo="{!pageName}"/>                            
+        </apex:commandLink>
+        <br/>
+         
+          
+                        
+                       
+                        
+ </apex:form>            
+</apex:page>

@@ -1,0 +1,43 @@
+<messaging:emailTemplate subject="task notification" recipientType="User" relatedToType="Project_Price__c">
+ <messaging:htmlEmailBody > 
+<apex:outputtext value="Subject: SFDC PA Notification – Task assigned to you for Project Price"/> <br/><br/>
+ <apex:outputtext value="Dear"/>&nbsp;<apex:outputtext value="{!relatedTo.Assigned_To__r.name}"/>,<br/><br/>
+      <apex:outputtext value="Confidential "/>
+<br/><br/>
+A  task has been assigned to you for the customer:<br/>
+
+<c:PAProjectCSRNotification soldToname="{!relatedTo.id}"></c:PAProjectCSRNotification><br/>
+<br/><br/>
+Project Id &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<apex:outputText value="{!RelatedTo.Project_Id__c}"></apex:outputText><br/>
+Project Name &nbsp;&nbsp;&nbsp;&nbsp;:<apex:outputText value="{!RelatedTo.Name}"></apex:outputText><br/>
+Project Volume &nbsp;:<apex:outputText value="{!RelatedTo.Project_Volume__c}"></apex:outputText><br/>
+<!--Request Id &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<apex:outputText value="{!RelatedTo.Request_Id__c}"></apex:outputText><br/>-->
+
+Task Subject &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<apex:outputtext value="{!relatedTo.name}"/><br/>
+
+Due Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 
+<apex:outputText value="{0,date,yyyy-MMM-dd }">
+       <apex:param value="{!relatedTo.Valid_From__c}"/>
+   </apex:outputText>
+
+<br/>
+<p>
+To view the request details and comments, please click on the link
+ </p>
+<p>
+ {!LEFT($Api.Partner_Server_URL_140, FIND(".com/",$Api.Partner_Server_URL_140)+3)}/{!relatedTo.id}</p>
+
+<apex:outputtext value="Thank you"/>,<br/>
+           <apex:outputtext value=" Salesforce.com Price Approval"/><br/><br/>
+Confidential 
+
+ </messaging:htmlEmailBody> 
+</messaging:emailTemplate>
+
+
+
+
+
+
+
+<!--Link to Salesforce.com - {!LEFT($Api.Partner_Server_URL_140, FIND(".com/",$Api.Partner_Server_URL_140)+3)}/{!relatedTo.id}-->

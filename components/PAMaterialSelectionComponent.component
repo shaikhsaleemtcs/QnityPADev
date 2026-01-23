@@ -1,0 +1,351 @@
+<!--    Ver.            Developer       Changes                                         Dependencies    -->
+<!--    1.1             Shiva       modified the value of maxlength attr for
+<!--                                material code & material inputtext                  None            -->
+<!--    1.2             Prachi      UI change width                                     None            -->
+<!--    1.3             Vinoth      Adding Market Segment and End Use filter 
+<!--                                (APAC ROLLOUT1)                                     None            -->
+<!--    1.4             Bisnupriya  changed material header value in Material Lookup    None             -->
+<!--                                    (SIT Issue #141)                                                     -->
+<!-- <MS20140610>       Mohit       Made CSS changes to center-align the material help pop-up   None         -->
+<!-- <TJ20141215>       Tarun       Added fix for issue raised in Spinco                None             -->
+<apex:component controller="PAMaterialSelection">
+    <apex:attribute name="materialAtr" description="selecetd material Desc" type="string"/>
+    <!-- <TJ20141215> -->
+    <apex:attribute name="materialCodeAtr" description="selecetd material" type="string" assignTo="{!materialCode}"/>
+    <apex:attribute name="materialCodeFromPageAtr" description="entered material" type="string" assignTo="{!materialCodeFromPage}"/>
+   <apex:attribute name="selectedBUAtr" description="entered material" type="string" assignTo="{!selectedBUFromPage}"/>
+   <!-- for Pricing Procedure start-->
+     <apex:attribute name="salesOrgAtr" description="sales org" type="string" assignTo="{!salesOrgCode}"/>
+      <apex:attribute name="divAtr" description="division code" type="string" assignTo="{!divCode}"/>
+       <apex:attribute name="distiAtr" description="Distribution code" type="string" assignTo="{!distiCode}"/>
+        <apex:attribute name="autoMatFieldsAtr" description="Material Fields" type="string"/>
+        <apex:attribute name="autoWhereClauseAtr" description="where Clause" type="string"/>
+        <apex:attribute name="autoSTypeAtr" description="sObjectType" type="string"/>
+        <apex:attribute name="showMG5" description="Show Material Group 5" type="boolean" />
+        <!--  <KJ20150705 >-->
+        <apex:attribute name="materialGroup2Code" description="Show Material Group 2" type="boolean" assignTo="{!mg2OnPricingTask}"/>
+   <!-- end -->
+   <!-- script to pass values of material From Material component to page-->
+   
+   <style>
+        .headertext{font-size:15px;height:20px;margin-bottom:1px;padding:5px;border:solid 1px;border-color:#6E96B2; background-color:#E5F3FC;font-weight:bold;text-align:left;}
+   </style>
+   
+    <script>
+     function passMaterialsFromComponent(source,target,source1,target1)
+     {
+       document.getElementById(target).value = document.getElementById(source).value;
+       document.getElementById(target1).value = document.getElementById(source1).value;
+     }
+
+   </script> 
+    <apex:outputPanel >
+        <!-- <apex:outputText value="Material" />  --> 
+        <!--   <apex:inputText value="{!materialValue}" /> -->
+        <apex:commandLink action="{!displayPopUpWindow}" status="stat" reRender="myForm">
+        <apex:image id="Image1" url="{!$Resource.LookUpImage}"/></apex:commandLink>
+    </apex:outputPanel>
+    
+<!--Hidden input field To Pass Materials selected and get FRB Level  -->    
+<apex:inputHidden id="targetHeighestLevel" rendered="true" value="{!heighestFRBLevel}"/>
+<apex:inputHidden id="getMaterialField" rendered="true" value="{!materialsSelected}"/>
+<apex:inputHidden id="getMaterialDescription" rendered="true" value="{!materailDescription}"/>
+ <!-- Material Pop Up Window -->
+<apex:outputPanel rendered="{!displayPopUp}" styleClass="BackPageMaterial"></apex:outputPanel> 
+<apex:outputPanel rendered="{!displayPopUp}" styleClass="FrontPageMaterial" id="MaterialPopUp">
+
+    <apex:panelGrid style="float:right;">
+        <apex:commandLink action="{!closeWindow}">
+        <apex:image url="{!$Resource.closeButton}" width="15" height="15"/>
+        </apex:commandLink>
+    </apex:panelGrid>
+    
+<apex:pageMessages id="errorMsg" ></apex:pageMessages>
+
+        <div class="headertext">
+               Material Selection
+        </div>
+<!--    <TJ20140521> Changed Page Label-->
+    <apex:pageBlock >
+    <apex:commandLink value="Help" action="{!helpLink}" style="float:right;" target="_blank">
+        <apex:param name="Help" value="Material Selection" assignTo="{!label}"/>
+    </apex:commandLink>
+    <br/><br/>
+    <apex:pageBlockSection title="Search Criteria"  collapsible="false" columns="2" >
+
+        <apex:pageBlockSectionItem >
+            <apex:outputPanel >
+                        <apex:outputLabel value="Material Code " />
+                        <apex:commandLink title="Please use wild card search.">
+                        <apex:image url="{!$Resource.CustomHelpText}"/>
+                        </apex:commandLink>
+             </apex:outputPanel>
+            <apex:inputText id="getMats" value="{!filter_materialCode}" maxLength="10">
+<!--                <c:autoComplete_Materials where="{!autoWhereClauseAtr}"-->
+<!--                fields="{!autoMatFieldsAtr}" for="{!$Component.getMats}"-->
+<!--                sObjectType="{!autoSTypeAtr}" fieldName="ERP_Material_Code__c"/>-->
+            </apex:inputText>
+        </apex:pageBlockSectionItem>
+     
+        <apex:pageBlockSectionItem >
+            <apex:outputPanel >
+                        <apex:outputLabel value="Material " />
+                        <apex:commandLink title="Please use wild card search.">
+                        <apex:image url="{!$Resource.CustomHelpText}"/>
+                        </apex:commandLink>
+             </apex:outputPanel>
+            <apex:inputText value="{!filter_material}" maxLength="100" />
+        </apex:pageBlockSectionItem>
+     
+        <apex:pageBlockSectionItem >
+            <apex:outputPanel >
+                        <apex:outputLabel value="Product Hierarchy " />
+                        <apex:commandLink title="Please use autocomplete search.">
+                        <apex:image url="{!$Resource.CustomHelpText}"/>
+                        </apex:commandLink>
+             </apex:outputPanel>
+            <apex:outputPanel >
+                <div id="matSelect">
+                <apex:inputText id="targetField" onkeyup="search(this);" value="{!from_filter_ph}">
+                <c:autoComplete_Generic orgGrp="{!selectedBUAtr}" KCAtr="PH9"/>
+                </apex:inputText>
+                <!--
+                <apex:inputText value="{!from_filter_ph}" id="targetField"/>
+                     <c:PAPHComponent BUFromPageAtr="{!selectedBUFromPage}" singleSelectAtr="true">
+                     </c:PAPHComponent>
+                     
+                 -->
+                </div>
+            </apex:outputPanel>
+        </apex:pageBlockSectionItem>
+    
+        <apex:pageBlockSectionItem >
+            <apex:outputText value="Profit Center"/>
+            <apex:outputPanel >
+                
+                 <apex:inputText value="{!from_filter_frb}" id="targetFRBField"/>
+<!--                     <TJ20140703> Commented because of change in profitcenterselectioncomponent -->
+<!--                     <c:PAProfitCenterSelectionComponent BUAtr="{!selectedBUFromPage}" singleSelectAtr="true">
+                     </c:PAProfitCenterSelectionComponent>-->
+                <c:PAProfitCenterSelectionComponent BUAtr="{!selectedBUFromPage}"/>
+            </apex:outputPanel>
+        </apex:pageBlockSectionItem>
+        
+        <!-- Ver 1.3 VR 2013-05-09 APAC Rollout1-Adding Code for End Use Filter -->
+        <!-- MS20140922 Adding condition for MG5 -->
+        <apex:pageBlockSectionItem rendered="{!if(showMG5==false,true,false)}" >
+            <apex:outputText value="End Use"></apex:outputText>
+            <apex:selectList value="{!filter_endUse}" multiselect="true" Size="4">
+                    <apex:selectOption itemValue="--Select--" itemLabel="--Select--" />
+                    <apex:selectOptions value="{!MaterialGroup3}" />
+            </apex:selectList>
+        </apex:pageBlockSectionItem>
+        <!-- MS20140922 Adding condition for MG5 -->
+        <apex:pageBlockSectionItem rendered="{!if(showMG5==true,true,false)}" >
+            <apex:outputText value="Material Group 5"></apex:outputText>
+            <apex:selectList value="{!filter_MG5}" multiselect="true" Size="4">
+                    <apex:selectOption itemValue="--Select--" itemLabel="--Select--" />
+                    <apex:selectOptions value="{!MaterialGroup5}" />
+            </apex:selectList>
+        </apex:pageBlockSectionItem>
+        <!-- Ver 1.3 VR 2013-05-09 APAC Rollout1-Adding Code for Market Segment Filter -->
+        <apex:pageBlockSectionItem >
+            <apex:outputText value="Market Segment"></apex:outputText>
+            <apex:selectList value="{!filter_marketSegment}" multiselect="true" size="4">
+                    <apex:selectOption itemValue="--Select--" itemLabel="--Select--" />
+                    <apex:selectOptions value="{!MaterialGroup4}" />
+            </apex:selectList>
+        </apex:pageBlockSectionItem>
+        
+<!--</apex:outputPanel>-->
+</apex:pageBlockSection>
+    <center>   <apex:commandButton id="search" value="{!$Label.Search_Button}"  action="{!dosearch}" styleClass="buttonWidth"/>
+    <apex:commandButton value="{!$Label.Cancel_Button}" action="{!closeWindow}"  styleClass="buttonWidth"/>
+</center>
+</apex:pageBlock>
+
+
+<!--------------------------Table Record----------------------------------------->
+
+<apex:pageBlock id="pageBlockSec1" rendered="{!displayTableOnSearch}" >
+<!-- <MS20140611> Added page block section for title and Save and cancel buttons to top of search -->
+<apex:pageBlockSection title="Search Results"  collapsible="false" />
+<br/>
+<apex:outputPanel rendered="{!displayTableOnSearch}" style="float:center;">
+
+        <center>
+<!--     <apex:commandButton value="Choose" rendered="true" action="{!returnData}" oncomplete="passMaterialsFromComponent('{!$Component.getMaterialField}','{!$Component.targetMaterialField}','{!$Component.getMaterialDescription}','{!$Component.targetMaterialDesc}')" reRender="myForm"> -->
+           <!--  <apex:param name="materialValue" assignTo="{!materialCodeAtr}" value="{!materialsSelected}"/>      -->
+<!--     </apex:commandButton> -->
+        <apex:commandLink value="{!$Label.Save_and_Close}" action="{!action}"
+                oncomplete="passMaterialsFromComponent('{!$Component.getMaterialField}','{!$Component.targetMaterialField}','{!$Component.getMaterialDescription}','{!$Component.targetMaterialDesc}')"
+                reRender="myForm" status="stat"  styleClass="btn" style="text-decoration:none;">
+                        <apex:param value="SaveAndCLose" assignTo="{!desiredAction}" />
+        </apex:commandLink>
+        <apex:commandLink value="{!$Label.Save_and_Continue}" action="{!action}"  styleClass="btn" style="text-decoration:none;">
+                        <apex:param value="SaveAndContinue" assignTo="{!desiredAction}" />
+        </apex:commandLink>
+        <apex:commandLink value="{!$Label.Cancel_Button}" action="{!closeWindow}"  styleClass="btn" style="text-decoration:none;">
+        </apex:commandLink>
+        </center>
+        <br/><br/>
+    </apex:outputPanel>
+<div style="float:left;">
+Showing {!fromSet} To {!toSet} Entries
+</div>
+<!--
+         
+         <!--START  Pagination link -->
+        <div style="float:right;">
+        <apex:commandLink value="Previous Page |"  action="{!dosearchwithOffsetBack}" style="" rendered="{!if(fromSet==1,false,true)}"/>
+        <apex:commandLink value="    Next Page"  action="{!dosearchwithOffset}" style="" rendered="{!if(materialWrapperList.size<200 || toSet==2000,false,true)}"/>
+        <br/>  
+        </div>
+              
+        <!-- END Pagination link -->
+<!-- <TJ> -->
+<!-- MS20140922 Adding column for Material Group 5 -->
+<table class="list" cellPadding="0" cellSpacing="0" border="0" style="position:'relative';" id="listMat">
+    <thead class="headerRow">
+        <tr>
+            <th class="" colSpan="30" scope="colgroup"></th>
+        </tr>
+        <tr>
+            <th class="headerRow" scope="col">
+       <apex:inputCheckbox value="{!selectAllFlag}">
+           <apex:actionSupport event="onclick" action="{!action}" oncomplete="loadDatatables();" status="stat" rerender="pageBlockSec1">
+           <apex:param value="selectAll" assignTo="{!desiredAction}"/>
+           </apex:actionSupport>
+          </apex:inputCheckbox>
+            </th>
+            <th class="headerRow" scope="col">Material Code</th>
+            <th class="headerRow" scope="col">Material</th>
+            <th class="headerRow" scope="col">Product Hierarchy Code</th>
+            <th class="headerRow" scope="col">Product Hierarchy</th>
+            <th class="headerRow" scope="col">Profit Center Code</th>
+            <th class="headerRow" scope="col">Profit Center</th>
+            <apex:variable value="a" var="a" rendered="{!if(showMG5==false,true,false)}">
+            <th class="headerRow" scope="col">End Use Code</th>
+            <th class="headerRow" scope="col">End Use</th>
+            </apex:variable>
+            <apex:variable value="b" var="b" rendered="{!if(showMG5==true,true,false)}">
+            <th class="headerRow" scope="col">Material Group 5 Code</th>
+            <th class="headerRow" scope="col">Material Group 5</th>
+            </apex:variable>
+            <th class="headerRow" scope="col">Market Segment Code</th>
+            <th class="headerRow" scope="col">Material Segment</th>
+            <!--<KJ20150705>-->
+            <th class="headerRow" scope="col">Material Group 2 Code</th>
+        </tr>
+    </thead>
+    <apex:repeat value="{!materialWrapperList}" var="v">
+        <tr class="dataRow">
+            <td class="dataCell" colSpan="1"><apex:inputCheckbox selected="{!v.isSelected}"/></td>
+            <td class="dataCell" colSpan="1">{!v.materialObj.ERP_Material_Code__c}</td>
+            <td class="dataCell" colSpan="1">{!v.materialObj.Name}"</td>
+            <td class="dataCell" colSpan="1">{!v.materialObj.ERP_Product_Hierarchy_Code__c}</td>
+            <td class="dataCell" colSpan="1">{!v.phDescBUPH.Business_Description__c}</td>
+            <td class="dataCell" colSpan="1">{!v.materialObj.ERP_Profit_Center_Code__c}</td>
+            <td class="dataCell" colSpan="1">{!v.materialObj.ERP_Profit_Center__c}</td>
+            <apex:variable value="a" var="a" rendered="{!if(showMG5==false,true,false)}">
+            <td class="dataCell" colSpan="1">{!v.materialObj.ERP_Material_Group_3_Code__c}</td>
+            <td class="dataCell" colSpan="1">{!v.materialObj.ERP_Material_Group_3__c}</td>
+            
+            </apex:variable>
+            <apex:variable value="b" var="b" rendered="{!if(showMG5==true,true,false)}">
+            <td class="dataCell" colSpan="1">{!v.materialObj.ERP_Material_Group_5_Code__c}</td>
+            <td class="dataCell" colSpan="1">{!v.materialObj.ERP_Material_Group_5__c}</td>
+            </apex:variable>
+            <td class="dataCell" colSpan="1">{!v.materialObj.ERP_Material_Group_4_Code__c}</td>
+            <td class="dataCell" colSpan="1">{!v.materialObj.ERP_Material_Group_4__c}</td>
+            <!--<KJ20150705>--> 
+            <td class="dataCell" colSpan="1">{!v.materialObj.ERP_Material_Group_2_Code__c} - {!v.materialObj.ERP_Material_Group_2__c}</td> 
+        </tr>
+    </apex:repeat>
+</table>
+<div style="float:left;">
+Showing {!fromSet} To {!toSet} Entries
+</div>
+    <!--START  Pagination link -->
+        <div style="float:right;">
+        <apex:commandLink value="Previous Page |"  action="{!dosearchwithOffsetBack}" style="" rendered="{!if(fromSet==1,false,true)}"/>
+        <apex:commandLink value="    Next Page"  action="{!dosearchwithOffset}" style="" rendered="{!if(materialWrapperList.size<200 || toSet==2000,false,true)}"/>
+        </div>
+                
+        <!-- END Pagination link -->
+    
+    <br/>
+    <br/>
+    <br/>
+    <!-- <MS20140610>Made CSS changes to center-align the buttons -->
+    <apex:outputPanel rendered="{!displayTableOnSearch}" style="float:center;">
+    <center>
+<!--     <apex:commandButton value="Choose" rendered="true" action="{!returnData}" oncomplete="passMaterialsFromComponent('{!$Component.getMaterialField}','{!$Component.targetMaterialField}','{!$Component.getMaterialDescription}','{!$Component.targetMaterialDesc}')" reRender="myForm"> -->
+           <!--  <apex:param name="materialValue" assignTo="{!materialCodeAtr}" value="{!materialsSelected}"/>      -->
+<!--     </apex:commandButton> -->
+        <apex:commandLink value="{!$Label.Save_and_Close}" action="{!action}"
+                oncomplete="passMaterialsFromComponent('{!$Component.getMaterialField}','{!$Component.targetMaterialField}','{!$Component.getMaterialDescription}','{!$Component.targetMaterialDesc}')"
+                reRender="myForm" status="stat"  styleClass="btn" style="text-decoration:none;">
+                        <apex:param value="SaveAndCLose" assignTo="{!desiredAction}" />
+        </apex:commandLink>
+        <apex:commandLink value="{!$Label.Save_and_Continue}" action="{!action}"  styleClass="btn" style="text-decoration:none;">
+                        <apex:param value="SaveAndContinue" assignTo="{!desiredAction}" />
+        </apex:commandLink>
+        <apex:commandLink value="{!$Label.Cancel_Button}" action="{!closeWindow}"  styleClass="btn" style="text-decoration:none;">
+        </apex:commandLink>
+    </center>
+    </apex:outputPanel>
+    <br/> 
+   </apex:pageBlock> 
+
+
+</apex:outputPanel>
+
+    
+<!-- <MS20140610>Made CSS changes to center-align the material help pop-up -->
+ <style type="text/css">
+   
+    
+    .FrontPageMaterial{            
+        background-color: white;
+        z-index: 9999;
+        
+        left: 1%;
+         
+        padding:10px;
+        position: absolute; 
+        float:center;
+        border: 2px solid #63A4C5;
+        top: 30%;
+        width: 1250px;
+        margin-left:1%;
+        
+    }
+    
+    .BackPageMaterial{             
+        background-color:#696969;
+        opacity: 0.5;
+        filter: alpha(opacity = 50);
+        position: absolute;
+        float:center;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 8888;
+    
+    }
+    .TableTitle{
+    font-weight:normal;
+    color: #0079C1;
+    background-color:white;
+    text-align:left;
+    text-indent:8px;
+    }
+    
+    .buttonWidth{
+        width:50px;
+    }
+    
+</style>  
+</apex:component>

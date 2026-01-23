@@ -1,0 +1,566 @@
+<!--    CHANGES      -->
+<!-- TJ20140505     Tarun               05 May 2014             Added the landing page link -->
+<!-- TJ20140509     Tarun               09 May 2014             Added Navigation Flow Text -->
+<!-- AV20140515     Abhijeet Vaishnab   15 May 2014             1.Added isVolumeApplicable attribute to check for volume
+                                                                2.Added salesVolumeColumns attribute to get volume fields
+                                                                3.Added done button in sales volume screen           -->
+<apex:page controller="ctrlPAMain" tabstyle="Price_Approval__tab" sidebar="false" showHeader="true" id="currentPage"  action="{!onLoadCall}" cache="true">
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.min.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.js')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/css/jquery.dataTables.css')}" />
+    <c:loadingComponent />
+    <apex:pageMessages escape="false" id="errorMessage"/>
+    
+    <style>
+        .customerLink{font-size:15px;height:20px;margin-bottom:1px;padding:5px;border:solid 1px;border-color:#6E96B2; background-color:#E5F3FC;font-weight:bold;text-align:left;}
+        .navFlow{font-size:13px;font-style:oblique;margin-bottom:3px;}
+        .priceReq  .pbSubheader{margin-bottom:0px;}
+        .priceReq  .detailList{border:1px solid #E2E3E4;}
+        <!--.priceReq  .detailList .dataCol{color:#000000;}-->
+        .priceReq  .detailList tr th{border-bottom:none;}
+        .priceReq  .detailList tr td{border-bottom:none;}
+        <!--.priceReq  .detailList .data2Col {border:none;padding-left:0px;}-->
+        .bPageBlock .detailList .list tr th{color:black;}
+         body .pbBody table.list tr td{border-bottom: none;}
+        <!-- body .pbBody table.list tr th{color:white;background-color:#63A4C5;}-->
+        .pricesSection table.list tr:first-child th{color:white;background-color:#63A4C5;}
+        .pricesSection table.list tr:nth-child(2) th{color:black;background-color:#f8f8f8;border:1px solid #E2E3E4; }
+         
+         .bPageBlock .detailList .list1 tr th{color:black;}
+         body .pbBody table.list1 tr td{border-bottom: none;}       
+         body .pbBody table.list1{border:1px solid #e0e3e5;background-color:#fff;width:1500px;}
+        .pricesSection table.list1 tr:first-child th{color:white;background-color:#63A4C5;}
+        .pricesSection table.list1 tr:nth-child(2) th{color:black;background-color:#f8f8f8;border:1px solid #E2E3E4;}
+                  
+        .priceReq .priceTask .detailList{border-bottom:none;}
+        .priceReq .csr .detailList{border-top:none;}
+        
+         <!--VR20130830 RollOut2 Issue fix--> 
+        .priceReq .priceReq1 .detailList{border-bottom:none;}
+        .priceReq .pe .detailList{border-top:none;}
+        
+        #multiApprover a.btn{width:70px;float:left;}
+        #reassignApprover a.btn{width:60px;float:left;}
+        #buttons a.btn{width:80px;float:left;}
+        #buttons #buttonsProject a.btn{width:130px;float:left;}
+        #buttons #buttonsFlrRefView a.btn{width:120px;float:left;}
+        
+                     
+        .pricesSection .panner {
+                display: inline-block;
+                position:fixed;
+                width:25px;
+                height:25px;
+                top:60%;
+                opacity:0.5;
+        }
+        .active {
+                color:red;
+        }
+        #panLeft {
+                left:10px;
+        }
+        #panRight {
+                right:10px;
+        }
+        
+    </style>
+    
+    <script>
+     var j$ = jQuery.noConflict();                                  //<TJ20140401> - added javascript to generate HTML Table with additional functionalities
+          j$(document).ready(function(){
+          var tab=j$('.list1').dataTable({
+                    "bLengthChange":false,
+                    "aLengthMenu": [100,200],
+                    "iDisplayLength" : 100,
+                    sPaginationType: "full_numbers",
+                    sPlaceHolder : "foot:before",
+                    });                     
+            
+          j$('.list1'+'_filter').after('<br /><br />');
+          j$('.list1').after('<br />');
+        });
+    </script>
+    
+    <apex:actionStatus id="stat">
+        <apex:facet name="start">
+            <div class="spinnerMask" id="spinnerMask">
+            <div class="spinnerCt"><img
+                src="/img/analytics/reportbuilder/icons/spinner32.gif"
+                alt="Loading..." width="32" height="32" align="center"
+                class="spinner" title="Loading..." />
+            <div class="loadingIndicator">Loading...</div>
+            </div>
+            <div class="mask"></div>
+            </div>
+        </apex:facet>
+    </apex:actionStatus>
+    
+    <apex:form id="formId">
+    <!-- <TJ20140505> Added Landing Page Link -->
+        <div align="left" class="navFlow">
+            <apex:commandLink id="link0" value="Landing Page" action="{!businessComponentAction}" target="_self" style="color:blue;">
+            <apex:param name="desiredAction" value="landingpage" assignTo="{!businessaction}" />
+            <apex:param name="newPageLabel" value="PAHome" assignTo="{!newPageLabel}" />
+            </apex:commandLink>
+        <!-- <TJ20140509> Added Navigation Flow Text-->
+            <apex:outputText value="{!if(NOT(ISNULL(navigationText)),'>>','')} "/>
+            <apex:outputText value="{!navigationText}"/>
+            <apex:outputText value="{!IF(sVolume=='true','>>  Price Record Volume','>>  Price Request View')}"/>
+        </div>
+<!--        <TJ20140417>   Changed Page Label-->        
+    <div class="customerLink">
+           <apex:outPutText value="{!IF(sVolume=='true','Price Record Volume','Price Request View')}"/>
+    </div>
+<!--        <TJ20140513> Help Link-->    
+    <apex:commandLink value="Help" action="{!helpLink}" style="float:right;" rendered="{!IF(sVolume=='true',true,false)}" target="_blank">
+        <apex:param name="Help" value="Sales Volume" assignTo="{!label}"/>
+    </apex:commandLink>
+    
+    <apex:pageBlock >
+            
+            
+            <div class="priceReq">
+                <apex:pageBlockSection title="Customer Information"
+                    rendered="{!service.PAServicestate.currentRequestItem.request.pricingRequest.Request_Type__c == 'Customer Specific'}" />
+                <apex:pageBlockSection title="Sales Area Detail"
+                    rendered="{!service.PAServicestate.currentrequest.pricingRequest.Request_Type__c  == 'Massive' || service.PAServicestate.currentrequest.pricingRequest.Request_Type__c  == 'Non Customer Specific'}" />
+                <apex:pageBlockSection >
+    
+                    <!-- <TJ20140515> -->
+                        <apex:pageblocksectionitem >
+                            <apex:outputlabel value="Business"/>
+                            <apex:outputText value="{!service.PAServicestate.Currentrequest.pricingRequest.BU__c}"/>
+                        </apex:pageblocksectionitem>
+                         <apex:pageBlockSectionItem rendered="{!service.paServiceState.ogitems.isEndUserRebate}" >
+                       <apex:outputText value="On Behalf Of" />
+                       <apex:outputText value="{!IF(OR(service.paServiceState.ogItems.isBUAdmin, service.paServiceState.ogItems.salesAdminPermissionSetFlag),service.paServiceState.ogItems.userName,service.paServiceState.ogItems.loggedInUserName)}" />  
+                       </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem rendered="{!!service.paServiceState.ogitems.isEndUserRebate}">
+                         <apex:outputText value="{!IF(OR(service.PAServicestate.currentrequest.pricingRequest.Request_Type__c == 'Customer Specific',service.PAServicestate.currentrequest.pricingRequest.Request_Type__c == 'Massive',service.PAServicestate.currentrequest.pricingRequest.Request_Type__c == 'Import') && service.PAServicestate.ogItems.salesAdminPermissionSetFlag,'On Behalf Of','')}"/>
+                         <apex:outputText value="{!IF(OR(service.PAServicestate.currentrequest.pricingRequest.Request_Type__c == 'Customer Specific',service.PAServicestate.currentrequest.pricingRequest.Request_Type__c == 'Massive',service.PAServicestate.currentrequest.pricingRequest.Request_Type__c == 'Import') && service.PAServicestate.ogItems.salesAdminPermissionSetFlag,service.PAServicestate.currentrequest.pricingRequest.On_Behalf_Of__r.Name,'')}" />
+                        </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem rendered="{!service.PAServicestate.currentrequest.pricingRequest.Request_Type__c == 'Customer Specific'}" >
+                            Sold To Code 
+                    
+                        <!-- Ver 3.4 VR 2013-05-10 APAC Rollout1-Sold to Link to open Customer details in new window -->
+                        <apex:outputlink value="#" onclick="window.open('/{!service.PAServicestate.currentRequestItem.soldToId}?isdtp=lt','_blank','width=810,height=310,toolbar=0,status=1,scrollbars=1,resizable=yes',!1);">{!service.PAServicestate.Currentrequest.pricingRequest.SoldTo_Code__c}</apex:outputlink>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem rendered="{!service.PAServicestate.currentrequest.pricingRequest.Request_Type__c == 'Customer Specific'}" >
+                        <apex:outputText value="Sold To" />
+                        <apex:outputText value="{!service.PAServicestate.Currentrequest.pricingRequest.Sold_To__c}" />
+                    </apex:pageBlockSectionItem>
+                    
+    
+    
+     
+                    <apex:pageBlockSectionItem >
+                        Sales Area
+                        <apex:outputText escape="false"  value="{!service.PAServicestate.currentrequest.pricingRequest.Sales_Org_code__c}-{!service.PAServicestate.currentrequest.pricingRequest.Sales_Org__c}
+                        <br>{!service.PAServicestate.currentrequest.pricingRequest.Dist_Channel_Code__c} - {!service.PAServicestate.currentrequest.pricingRequest.Dist_Channel__c}<br>{!service.PAServicestate.currentrequest.pricingRequest.Division_code__c} - {!service.PAServicestate.currentrequest.pricingRequest.Division__c}"/>  
+                
+ 
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem rendered="{!service.PAServicestate.currentRequestItem.request.pricingRequest.Request_Type__c == 'Customer Specific'}">
+                       Location
+                        <apex:outputText escape="false"
+                                value="{!service.PAServicestate.currentrequest.pricingRequest.Street__c + IF(service.PAServicestate.currentRequest.pricingRequest.Street__c !=null && service.PAServicestate.currentRequest.pricingRequest.Street__c !='','<br/>','')+ service.PAServicestate.currentRequest.pricingRequest.City__c + IF(service.PAServicestate.currentrequest.pricingRequest.City__c !=null && service.PAServicestate.currentrequest.pricingRequest.City__c !='','<br/>','') +
+                                service.PAServicestate.currentrequest.pricingRequest.State_Province__c + IF(service.PAServicestate.currentrequest.pricingRequest.State_Province__c !=null&&service.PAServicestate.currentrequest.pricingRequest.State_Province__c !='','<br/>','') +  
+                                 service.PAServicestate.currentrequest.pricingRequest.Country__c +IF(service.PAServicestate.currentrequest.pricingRequest.Country__c !=null && service.PAServicestate.currentrequest.pricingRequest.Country__c !='','<br/>','')+ service.PAServicestate.currentrequest.pricingRequest.Zip_PostalCode__c}" />
+                        
+                    
+                     
+                    
+                    
+                    </apex:pageBlockSectionItem>
+                    <!-- VR20131111 DTT Rollout Issue - Changing the render condition to include spot only -->
+                    <apex:pageBlockSectionItem rendered="{!AND(!service.paServiceState.ogItems.isEndUserRebate,OR(AND(service.PAServicestate.currentrequest.pricingRequest.Request_Type__c == 'Customer Specific',service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c == 'Permanent') , AND(service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c == 'Pricing Task',service.PAServicestate.currentrequest.pricingRequest.Spot_Type__c == 'Spot Price')), service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c != 'Project Pricing')}">
+                       Payment Terms
+                        <apex:outputPanel >
+                            <apex:outputText value="{!service.PAServicestate.currentRequest.customer.paERPcustomer.Terms_of_Payment_Code__c} - {!service.PAServicestate.currentRequest.customer.paERPcustomer.Terms_of_Payment__c}"
+                                rendered="{!NOT(service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c == 'Pricing Task')}" />
+                            <apex:outputText value="{!service.PAServicestate.currentrequest.pricingRequest.Terms_Of_Payment_Code__c} - {!service.PAServicestate.currentrequest.pricingRequest.Terms_Of_Payment__c}"
+                                rendered="{!service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c == 'Pricing Task' && service.PAServicestate.currentrequest.pricingRequest.Terms_Of_Payment__c <> 'Other'}"/>
+                            <apex:outputText value="{!service.PAServicestate.currentrequest.pricingRequest.Non_Standard_Terms_Of_Payment__c}"
+                                    rendered="{!service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c == 'Pricing Task' && service.PAServicestate.currentrequest.pricingRequest.Terms_Of_Payment__c == 'Other'}" />
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    <!-- VR20131111 DTT Rollout Issue - Changing the render condition to include spot only
+                        <MS20140611> Added incoterms place -->
+                    <apex:pageBlockSectionItem rendered="{!AND(!service.paServiceState.ogItems.isEndUserRebate,OR(AND(service.PAServicestate.currentrequest.pricingRequest.Request_Type__c == 'Customer Specific',service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c == 'Permanent') , AND(service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c == 'Pricing Task',service.PAServicestate.currentrequest.pricingRequest.Spot_Type__c == 'Spot Price')), service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c != 'Project Pricing')}">
+                       Incoterms
+                        <apex:outputPanel >
+                            <apex:outputText value="{!service.PAServicestate.currentRequest.customer.paERPcustomer.Incoterms_1_Code__c}({!service.PAServicestate.currentRequest.customer.paERPcustomer.Incoterms_1__c})-{!service.PAServicestate.currentRequest.customer.paERPcustomer.Incoterms_2__c}"
+                                rendered="{!NOT(service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c == 'Pricing Task')}" />
+                            <apex:outputText value="{!service.PAServicestate.currentrequest.pricingRequest.Incoterms_Code__c}({!service.PAServicestate.currentrequest.pricingRequest.Incoterm__c})"
+                                rendered="{!service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c == 'Pricing Task' && service.PAServicestate.currentrequest.pricingRequest.Incoterm__c <> 'Other'}"/>
+                            <apex:outputText value="{!service.PAServicestate.currentrequest.pricingRequest.Non_Standard_Incoterm__c}"
+                                    rendered="{!service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c == 'Pricing Task' && service.PAServicestate.currentrequest.pricingRequest.Incoterm__c == 'Other'}" />
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    <!-- BB20140508 Capital Project Added Customer Order Block section  START-->
+                    <apex:pageBlockSectionItem rendered="{!service.PAServicestate.currentrequest.customer.paERPcustomer.Customer_Order_Block_Code__c != null}">
+                        Customer Order Block
+                        <apex:outputText escape="false"  value="{!service.PAServicestate.currentrequest.customer.paERPcustomer.Customer_Order_Block_Code__c}-{!service.PAServicestate.currentrequest.customer.paERPcustomer.Customer_Order_Block__c}"/>  
+                    </apex:pageBlockSectionItem>
+                    <!-- BB20140508 END -->
+            </apex:pageBlockSection>
+        </div>
+ 
+    <br/>
+   
+        <apex:pageBlockSection title="End User Details" rendered="{!service.paServiceState.ogitems.isEndUserRebate}" >
+                         <apex:pageBlockSectionItem >
+                            <apex:outputText value="End User Code" />
+                            <apex:outputText value="{!service.PAServicestate.currentRequest.pricingRequest.End_User_Code__c }" />
+                         </apex:pageBlockSectionItem>
+                         
+                         <apex:pageBlockSectionItem >
+                            <apex:outputText value="End User Name" />
+                            <apex:outputText value="{!service.PAServicestate.currentRequest.pricingRequest.End_User__c }" />
+                         </apex:pageBlockSectionItem>
+                         
+                         <apex:pageBlockSectionItem >
+                            <apex:outputText value="End User Country" />
+                            <apex:outputText value="{!service.PAServicestate.currentRequest.pricingRequest.End_User_Country__c }" />
+                         </apex:pageBlockSectionItem>
+                    </apex:pageBlockSection>
+   
+        <div class="priceReq">
+            <!-- brundha Roll out 2 BR20130626 starts-->
+            <div class="priceReq1">
+            <!-- brundha Roll out 2 BR20130626 ends-->
+            <apex:pageBlockSection title="Request Details"
+                rendered="{!service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c != 'Project Pricing'}">
+                <apex:pageBlockSectionItem rendered="{!service.paServiceState.ogitems.isEndUserRebate}" >
+                       <apex:outputText value="Requested By" />
+                       <apex:outputText value="{!IF(OR(service.paServiceState.ogItems.isBUAdmin, service.paServiceState.ogItems.salesAdminPermissionSetFlag),service.paServiceState.ogItems.userName,service.paServiceState.ogItems.loggedInUserName)}" />  
+                       </apex:pageBlockSectionItem>
+                
+                        <apex:pageBlockSectionItem rendered="{!service.paServiceState.ogitems.isEndUserRebate}" >
+                       <apex:outputText value="Requested Date" />
+                       <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                       <apex:param value="{!IF(NOT(service.PAServicestate.currentRequest.PricingRequest.Id == null),service.PAServicestate.currentRequest.PricingRequest.CreatedDate,Today())}" />  
+                       </apex:outputText>
+                       </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    Request Id
+                    <apex:outputText value="{!service.PAServicestate.currentrequest.pricingRequest.Name}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!service.PAServicestate.currentrequest.pricingRequest.Request_Type__c == 'Customer Specific' && service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c == 'Pricing task'}">
+                    <apex:outputText />
+                    <apex:outputText />
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem >
+                    Request Name
+                    <apex:outputText value="{!service.PAServicestate.currentrequest.pricingRequest.Request_Name__c}" />
+                </apex:pageBlockSectionItem>
+                
+                 <apex:pageBlockSectionItem rendered="{!service.paServiceState.ogitems.isEndUserRebate}">
+                    Status
+                    <apex:outputText value="{!service.PAServicestate.currentrequestitem.request.pricingRequest.Request_Approval_Status__c}" />
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem rendered="{!OR(service.PAServicestate.currentrequest.pricingRequest.Request_Type__c == 'Non Customer Specific',service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c == 'Pricing Task',service.paServiceState.ogitems.isEndUserRebate)}">
+                   Request Reason
+                    <apex:outputText value="{!service.PAServicestate.currentrequest.pricingRequest.Request_Reason__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!OR(service.PAServicestate.currentrequest.pricingRequest.Request_Type__c == 'Non Customer Specific',service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c == 'Pricing Task')}">
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem rendered="{!service.paServiceState.ogitems.isEndUserRebate}">
+                            <apex:outputText value="Reason Detail" />
+                            <apex:outputPanel >
+                                <div id="divDefDisc">
+                                 <apex:outputField value="{!service.PAServicestate.currentRequest.PricingRequest.Reason_Detail__c}" style="width:348px;"/>
+                                </div>
+                            </apex:outputPanel>
+                        </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!service.paServiceState.ogitems.isEndUserRebate}"></apex:pageBlockSectionItem>
+
+                
+                
+                 <apex:pageBlockSectionItem rendered="{!AND(NOT(service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c == 'Pricing Task'),NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Type__c == 'Non Customer Specific'),service.PAServicestate.currentrequest.pricingRequest.Request_Valid_From__c!=null)}">
+                    Default Valid From
+                    <apex:outputField value="{!service.PAServicestate.currentrequest.pricingRequest.Request_Valid_From__c}"/>
+
+                </apex:pageBlockSectionItem>
+
+
+
+                <apex:pageBlockSectionItem rendered="{!AND(NOT(service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c == 'Pricing Task'),NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Type__c == 'Non Customer Specific'),service.PAServicestate.currentrequest.pricingRequest.Request_Valid_To__c!=null)}">
+                   Default Valid To
+                   <apex:outputField value="{!service.PAServicestate.currentrequest.pricingRequest.Request_Valid_To__c}"/>
+
+
+                </apex:pageBlockSectionItem>
+                <!-- PP20130715 START -->
+                <apex:pageBlockSectionItem rendered="{!service.paServiceState.ogItems.orgGroupItems.Enable_Request_Class__c}">
+                    Request Class
+                    <apex:outputText value="{!service.paServiceState.currentRequest.pricingRequest.Request_Class__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!service.paServiceState.ogItems.orgGroupItems.Enable_Request_Class__c}">
+                </apex:pageBlockSectionItem>
+                <!-- VR20130812 Commented 
+                <apex:pageBlockSectionItem rendered="{!NOT(service.paServiceState.ogItems.orgGroupItems.Enable_Request_Class__c)}"/>
+                 -->
+                <!-- PP20130715 END -->
+
+
+                <!-- PP20130715 START - Commenting as it is being moved after Request Reason-->
+                <!-- <apex:pageBlockSectionItem >
+                    Status
+                    <apex:outputText value="{!service.PAServicestate.currentrequestitem.request.pricingRequest.Request_Approval_Status__c}" />
+                </apex:pageBlockSectionItem>-->
+                <!-- PP20130715 END -->
+                
+                <apex:pageBlockSectionItem rendered="{!!service.paServiceState.ogitems.isEndUserRebate}">
+                    Status
+                    <apex:outputText value="{!service.PAServicestate.currentrequestitem.request.pricingRequest.Request_Approval_Status__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!OR(service.PAServicestate.currentrequest.pricingRequest.Request_Type__c == 'Non Customer Specific',service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c == 'Pricing Task')}">
+                   Request Reason
+                    <apex:outputText value="{!service.PAServicestate.currentrequest.pricingRequest.Request_Reason__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!OR(service.PAServicestate.currentrequest.pricingRequest.Request_Type__c == 'Non Customer Specific',service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c == 'Pricing Task')}">
+                </apex:pageBlockSectionItem>
+
+               
+                <!-- PP20130715 START -->
+<!--                <apex:pageBlockSectionItem rendered="{!AND(NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Type__c == 'Non Customer Specific'),NOT(service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c == 'Pricing Task'))}">-->
+<!--                </apex:pageBlockSectionItem>-->
+                <!-- PP20130715 END -->
+
+                <apex:pageBlockSectionItem rendered="{!AND(NOT(service.PAServicestate.currentrequest.pricingRequest.Request_Type__c == 'Non Customer Specific'),NOT(service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c == 'Pricing Task'),NOT(service.paServiceState.ogitems.isEndUserRebate))}">
+                    Request Reason
+                    <apex:outputText value="{!service.PAServicestate.currentrequest.pricingRequest.Request_Reason__c}" />
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem rendered="{!AND(OR(service.paServiceState.ogItems.orgGroupItems.Default_Currency__c != 'No Default',service.paServiceState.ogItems.orgGroupItems.Default_Currency__c != null),service.PAServicestate.currentrequest.pricingRequest.Default_Currency__c!=null)}">
+                    Default Currency
+                    <apex:outputText value="{!service.PAServicestate.currentrequest.pricingRequest.Default_Currency__c}" />
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem rendered="{!service.PAServicestate.currentRequestItem.request.pricingRequest.Request_Type__c == 'Customer Specific' && service.paServiceState.ogitems.isEndUserRebate}">
+                    <apex:outputText value="Default Discount" />
+                    <apex:outputText escape="false" value="{!service.PAServicestate.currentrequest.pricingRequest.Default_Discount__c}"/>
+                    </apex:pageBlockSectionItem>
+                <!-- NS20130821 START -->
+                <apex:pageBlockSectionItem rendered="{!AND(service.PAServicestate.currentRequest.PricingRequest.Request_Type__c=='Customer Specific',OR(service.PAServicestate.currentRequest.PricingRequest.Pricing_Request_Type__c == 'Permanent',service.PAServicestate.currentRequest.PricingRequest.Pricing_Request_Type__c == 'Pricing Task'),service.paServiceState.ogItems.orgGroupItems.Landing_Cost__c)}">
+                   Landing Cost
+                    
+                   <apex:outputField value="{!service.PAServicestate.currentrequestitem.request.pricingRequest.Landing_Cost__c}" />  
+                </apex:pageBlockSectionItem>    
+                <!-- NS20130821 END -->
+                <apex:pageBlockSectionItem rendered="{!AND(service.PAServiceState.currentRequest.pricingRequest.isNPCApplicable__c != null,service.PAServiceState.currentRequest.pricingRequest.isNPCApplicable__c > 0,service.PAServicestate.currentRequest.PricingRequest.Request_Type__c!='Massive')}">   
+                    Net Pricing Status
+                    <apex:outputField value="{!service.PAServicestate.currentrequestitem.request.pricingRequest.f_NPC_Callout_Status__c}" />  
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c == 'Pricing Task'}">
+                 Pricing Task Type
+                    <apex:outputText value="{!service.PAServicestate.currentrequest.pricingRequest.Spot_Type__c}" />
+                </apex:pageBlockSectionItem>
+            <!-- BR20130819 -->
+            <!-- PP20130715 START -->
+                
+                <!-- PP20130715 END -->
+            <!-- BR20130819 -->
+            
+                
+                
+            </apex:pageBlockSection>
+            <!-- brundha Roll out 2 BR20130626 starts-->
+            </div>
+            <div class="pe">
+                <apex:pageBlockSection columns="1" rendered="false">
+                    <!-- <apex:pageblocksectionitem rendered="{!AND(service.PAServicestate.currentRequest.PricingException.size>0,service.PAServicestate.currentRequest.PricingRequest.Request_Type__c=='Customer Specific',service.PAServicestate.currentRequest.PricingRequest.Pricing_Request_Type__c == 'Permanent')}"></apex:pageblocksectionitem> -->
+                    <!-- VR20140107 DTT Rollout Issue - Added null condition check in rendered -->
+                    <apex:pageBlockSectionItem rendered="{!AND(service.PAServicestate.currentRequest.PricingException<>null,service.PAServicestate.currentRequest.PricingException.size>0,service.PAServicestate.currentRequest.PricingRequest.Request_Type__c=='Customer Specific',service.PAServicestate.currentRequest.PricingRequest.Pricing_Request_Type__c == 'Permanent')}">
+                        Pricing Exceptions
+                        <!--  <apex:selectList disabled="true">
+                        <apex:selectOptions value="{!service.PAServicestate.currentrequest.PricingException}" /> 
+                        </apex:selectList>-->
+                        <apex:outputText escape="false" value="{!service.PAServicestate.currentrequestitem.request.pricingRequest.Pricing_Exception__c}" />  
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+            </div>
+                <!-- brundha Roll out 2 BR20130626 ends-->
+        </div>
+        
+        <div class="priceReq">  
+            <apex:pageblockSection title="Project Details" rendered="{!service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c == 'Project Pricing'}">
+                  <apex:pageBlockSectionItem >
+                     Project ID
+                      <apex:outputtext value="{!service.PAServicestate.currentRequest.projectPrice.Project_Id__c}"/>
+                  </apex:pageBlockSectionItem>
+              
+                   <apex:pageBlockSectionItem >
+                      Project Name
+                      <apex:outputText value="{!service.PAServicestate.currentRequest.projectPrice.Name}"/>
+                  </apex:pageBlockSectionItem>
+                  
+                  <apex:pageBlockSectionItem >
+                      Project Volume
+                      <apex:outputText value="{!service.PAServicestate.currentRequest.projectPrice.Project_Volume__c}"/>
+                  </apex:pageBlockSectionItem>
+<!--                   <TJ20150603> -->
+                   <apex:pageBlockSectionItem rendered="{!service.PAServicestate.currentProjectPrice.disabledefdisc!=false}">
+                      Default Discount
+                      <apex:outputText value="{!service.PAServicestate.currentRequest.projectPrice.Default_Discount__c}"/>
+                  </apex:pageBlockSectionItem>
+                  
+                  <apex:pageBlockSectionItem >
+                     Valid From
+                          <apex:outputField value="{!service.PAServicestate.currentRequest.projectPrice.Valid_From__c}"/>
+                  </apex:pageBlockSectionItem>
+                  
+                   <apex:pageBlockSectionItem >
+                      Valid To
+                          <apex:outputField value="{!service.PAServicestate.currentRequest.projectPrice.Valid_To__c}"/>
+                  </apex:pageBlockSectionItem>
+                  
+                  <apex:pageBlockSectionItem >
+                     Project Status
+                     <apex:actionSupport reRender="">
+                     <apex:outputText value="{!service.PAServicestate.currentRequest.projectPrice.Project_Status__c}" />
+                     </apex:actionSupport>
+                  </apex:pageBlockSectionItem>
+                  
+                  
+                  <apex:pageBlockSectionItem >
+                   Pricing Condition
+                      <apex:outputText value="{!service.PAServicestate.currentRequest.projectPrice.Pricing_Condition_Code__c} - {!service.PAServicestate.currentRequest.projectPrice.Pricing_Condition__c}"/>
+                  </apex:pageBlockSectionItem>
+                  
+                  <apex:pageBlockSectionItem >
+                    Task Assigned To
+                       <apex:outputText value="{!service.PAServicestate.currentRequest.projectPrice.Assigned_To__r.Name}"/> 
+                      <!--Ver 3.2 PS 2013-04-22 to display edited assigned to -->
+<!--                  <apex:outputText value="{!service.PAServicestate.currentProjectPrice.currentRequest.userName}"/> -->
+                  </apex:pageBlockSectionItem>
+<!--                   <TJ20150602> -->
+                  <apex:pageBlockSectionItem rendered="{!service.PAServicestate.currentProjectPrice.disabledefdisc!=false}"/>
+                  <apex:pageBlockSectionItem >
+                    <apex:outputText value="Project Description" />
+                   <apex:outputText value="{!service.PAServicestate.currentRequest.ProjectPrice.Project_Description__c}"  />
+               </apex:pageBlockSectionItem>
+               
+            </apex:pageblockSection>
+        </div>   
+         
+        <div class="priceReq"> 
+            <apex:pageblockSection title="Request Details"
+                rendered="{!service.PAServicestate.currentrequest.pricingRequest.Pricing_Request_Type__c == 'Project Pricing'}">
+                <apex:pageBlockSectionItem >
+                   Request ID
+                    <apex:outputtext value="{!service.PAServicestate.currentrequest.pricingRequest.Name}" />
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem >
+                   Request Name
+                    <apex:outputText value="{!service.PAServicestate.currentrequest.pricingRequest.Request_Name__c}" />
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem >
+                    Request Status
+                    <apex:outputText value="{!service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c}" />
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem >
+                     On Behalf Of
+                    <apex:outputText value="{!service.PAServicestate.currentrequest.pricingRequest.On_Behalf_Of__r.Name}" />
+                </apex:pageBlockSectionItem>
+                
+                <!-- PP20130712 START -->
+                <apex:pageBlockSectionItem rendered="{!service.paServiceState.ogItems.orgGroupItems.Enable_Request_Class__c}">
+                    Request Class
+                    <apex:outputText value="{!service.paServiceState.currentRequest.pricingRequest.Request_Class__c}" />
+                </apex:pageBlockSectionItem>
+                <!-- PP20130712 END -->
+                
+            </apex:pageblockSection>
+        </div>  
+        
+        
+        <div class="pricesSection" id="container"> 
+             
+            <apex:pageBlockSection title="{!IF(sVolume=='true','Volume Details','Prices')}" columns="1" rendered="{!service.PAServicestate.currentRequestItem.pclDisplayString<>'PCLDisplay'}">
+                <apex:outputPanel rendered="{!service.PAServicestate.currentrequest.pricingRequest.Spot_Type__c<> 'Rebate Agreement' && service.PAServicestate.currentRequestItem.relatedListProjectTaskRecords == NULL}">
+                <apex:repeat value="{!service.PAServicestate.currentRequestItem.relatedWrappersList}"
+                        var="wrapper">
+                                                             
+                    <!-- scale columns are populated with floor ref price view columns -->
+                    <!-- AV20140515-added isVolumeApplicable attribute to check for volume -->
+                    <!-- AV20140515-added salesVolumeColumns attribute to get volume fields-->
+                    <!-- <TJ20140908> -->
+                    <!-- <TJ20150511> -->
+                    <c:PARequestItemRelatedList BUSalesArea="{!service.PAServicestate.currentRequestItem.request.pricingRequest.BU__c}-{!service.PAServicestate.currentRequestItem.request.pricingRequest.Sales_Org_Code__c}-{!service.PAServicestate.currentRequestItem.request.pricingRequest.Dist_Channel_Code__c}-{!service.PAServicestate.currentRequestItem.request.pricingRequest.Division_Code__c}-{!service.PAServicestate.currentRequestItem.request.pricingRequest.Request_Type__c}"
+                        ShowNetFloor="{!service.PAServicestate.currentrequest.isNetFloorVisible}"
+                        WrapperRecordsDisp="{!wrapper.wrapperList}"
+                        columnsDisp="{!wrapper.keyCombinationcolumns}" 
+                        pricingRecordColumns="{!wrapper.commonColumns}" 
+                        priceViewClicked="{!service.PAServicestate.currentRequestItem.priceViewClicked}"
+                        paytermsClicked="{!service.PAServicestate.currentRequestItem.paytermsClicked}" 
+                        isFixedDateApplicableAttr="{!wrapper.isFixedDateApplicable}"
+                        newFieldColumns="{!wrapper.newValueColumns}" typeOfRequest="{!wrapper.priceType}"
+                        isPaytermsApplicable="{!wrapper.isPayTermsApplicableBoolean}" 
+                        flrRefViewColumns="{!wrapper.scaleColumns}" pricingRequest="{!service.PAServicestate.currentrequest.pricingRequest.Id}"
+                        status="{!service.PAServicestate.currentrequest.pricingRequest.Request_Approval_Status__c}"
+                        showCheckBox="{!IF(service.PAServicestate.currentRequestItem.paytermsClicked,true,false)}"
+                        labelName="{!pageName}" currentHeader="{!IF(sVolume=='true','Price Record Volume','Price Request View')}"
+                        isVolumeApplicable="{!wrapper.isVolumeApplicable}"
+                        salesVolumeColumns="{!wrapper.volumeColumns}" reqtype="{!service.PAServicestate.currentrequest.Pricingrequest.Request_Type__c}"
+                        actionShowFlag="{!IF(wrapper.hasScaledRecordFlag==true,true,false)}" actionAtr="{!businessaction}" selected="{!service.PAServicestate.currentRequestItem.pricingRequestItemId}"
+                        viewMode="{!currentPageLabel}" editlink="{!newlink}"
+                        navigation="{!navigationText}" isScalePrice="{!wrapper.isScalePrice}" scalePr="{!service.PAServicestate.currentrequestitem.scalePrices}" checkScale="{!service.PAServicestate.currentrequest.pricingCondition.pricingCondition.Check_Scale__c}"
+                        CurrencyList="{!service.PAServicestate.currentRequestItem.erpCurrencyList}" ScCurrencyList="{!service.PAServicestate.currentRequestItem.erpScaleCurrencyList}"
+                        scaleBase="{!service.PAServicestate.currentrequest.pricingCondition.pricingCondition.Scale_Base__c}" UoMList="{!service.PAServicestate.currentRequestItem.erpUoMList}"
+                        scaleType="{!service.PAServicestate.currentrequest.pricingCondition.pricingCondition.Scale_Type__c}" plus_minus="{!service.PAServicestate.currentrequest.pricingCondition.pricingCondition.Plus_Minus__c}"
+                        pReqType="{!service.PAServicestate.currentrequest.Pricingrequest.Pricing_Request_Type__c}"
+                        expScale="{!service.PAServicestate.currentRequestItem.prItemExp}"
+                        expImp="{!service.PAServicestate.currentRequestItem.impExp}">
+                    </c:PARequestItemRelatedList>
+                         
+                   </apex:repeat>
+                   </apex:outputPanel>
+            </apex:pageBlockSection>
+            </div>
+            
+            <center>
+                <div id="buttonsFlrRefView" style="float:center;text-align:center;">   
+                        <apex:commandLink value="{!$Label.Done_Button}" styleClass="btn" style="text-decoration:none;"  action="{!businessComponentAction}" rendered="{!NOT(OR(CONTAINS(businessAction,'volume'),CONTAINS(businessAction,'scl')))}" >
+                        <apex:param name="desiredAction" value="PriceViewPayTermsDone"
+                                assignTo="{!businessAction}" />
+                            <apex:param name="newPageLabel" 
+                                assignTo="{!newPageLabel}" value="{!IF(service.paServicestate.currentRequest.pricingRequest.Request_Type__c== 'Import','PAImportReqItems','PAPricingRequest')}" />
+                            <!-- <TJ20140509> Passing Label to Display Navigation Flow Text-->
+                            <apex:param name="pageName" value="{!IF(service.paServicestate.currentRequest.pricingRequest.Request_Type__c== 'Import',$Label.Import_Req_Items,IF(CONTAINS(navigationText,$Label.Price_Request),$Label.Price_Request,'Price Request View'))}" assignTo="{!pageName}"/> 
+                        </apex:commandLink>
+                        <!-- AV20140515-START-added done and cancel button in sales volume screen --> 
+                        <apex:commandLink value="{!$Label.Done_Button}" styleClass="btn" style="text-decoration:none;"  action="{!businessComponentAction}" rendered="{!OR(CONTAINS(businessAction,'volume'),CONTAINS(businessAction,'scl'))}" >
+                        <apex:param name="desiredAction" value="VolumeChangesDone"
+                                assignTo="{!businessAction}" />
+                            <apex:param name="newPageLabel" 
+                                assignTo="{!newPageLabel}" value="PAPricingRequest" />
+                            <!-- <TJ20140509> Passing Label to Display Navigation Flow Text-->
+                            <apex:param name="pageName" value="{!$Label.Price_Request}" assignTo="{!pageName}"/> 
+                            <apex:param name="Disable Scale Columns" value="false" assignTo="{!service.PAServicestate.currentrequestitem.scalePrices}"/>
+                        </apex:commandLink>
+                        <!--  <apex:commandLink value="{!$Label.Cancel_Button}" styleClass="btn" style="text-decoration:none;"  action="{!businessComponentAction}" rendered="{!CONTAINS(businessAction,'volume')}" >
+                        <apex:param name="desiredAction" value="NoVolumeChangesDone"
+                                assignTo="{!businessAction}" />
+                            <apex:param name="newPageLabel" 
+                                assignTo="{!newPageLabel}" value="PAPricingRequest" />
+                            <!-- <TJ20140509> Passing Label to Display Navigation Flow Text-->
+                            <!--  <apex:param name="pageName" value="{!$Label.Price_Request}" assignTo="{!pageName}"/> 
+                        </apex:commandLink> 
+                        <!-- AV20140515-END -->
+                </div>
+            </center>
+        
+        </apex:pageBlock>
+        </apex:form>
+    
+</apex:page>

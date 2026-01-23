@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Notification after successful data gathering</description>
+    <encodingKey>UTF-8</encodingKey>
+    <letterhead>DuPontLetterhead</letterhead>
+    <name>Notification After Data Gathering Completion</name>
+    <style>freeForm</style>
+    <subject>The Request {!Customer_Data_Request__c.Name} has completed Data Gathering Stage for {!Customer_Data_Request__c.RecordType}</subject>
+    <textOnly>Hello,
+
+Below request has been created and passed the Data gathering phase.
+Please find below the overview about the Request:
+
+Request Number: {!Customer_Data_Request__c.Name}
+Type of Request: {!Customer_Data_Request__c.RecordType}
+Request Status: {!Customer_Data_Request__c.Request_Status__c}
+Request Description:{!Customer_Data_Request__c.Request_Description__c}
+
+Sold-To Country : {!Customer_Data_Request__c.Sold_to_Country__c}
+Selling Company Code : {!Customer_Data_Request__c.Company_Code__c}
+Sales Org : {!Customer_Data_Request__c.Sales_Organization__c}
+Distribution Channel :{!Customer_Data_Request__c.Distribution_Channel__c}
+Division : {!Customer_Data_Request__c.Division__c}
+Account Group : {!Customer_Data_Request__c.Account_Group__c}
+
+Customer Name: {!Customer_Data_Request__c.Customer_Name__c}
+Customer Name 2: {!Customer_Data_Request__c.Customer_Name_2__c}
+Customer Name 3: {!Customer_Data_Request__c.Customer_Name_3__c}
+Customer Name 4: {!Customer_Data_Request__c.Customer_Name_4__c}
+
+Proposed Risk Category : {!Customer_Data_Request__c.Proposed_Risk_Category__c}
+Proposed Terms of Payment : {!Customer_Data_Request__c.Proposed_Terms_of_Payment__c}
+Proposed Credit Term type : {!Customer_Data_Request__c.Proposed_Credit_Term_Type__c}
+Proposed Credit Limit : {!Customer_Data_Request__c.Proposed_Credit_Limit__c}
+Proposed Credit Currency :{!Customer_Data_Request__c.Proposed_Credit_Limit_Currency_Code__c}
+
+CSR Comments : {!Customer_Data_Request__c.CSR_Comments__c}
+
+If you have any concerns about this request, please contact
+Requestor Name : {!Customer_Data_Request__c.Requestor_Name__c}
+Requestor Email : {!Customer_Data_Request__c.Requestor_Email__c}
+Requestor Phone Number : {!Customer_Data_Request__c.Requestor_Phone_Number__c}
+
+To access the Request, use the link below :
+{!Customer_Data_Request__c.Link}</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

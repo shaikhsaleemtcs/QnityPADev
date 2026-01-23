@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Partner Function Code Mapping</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Partner Function Code Mapping</value>
+    </caseValues>
+    <fields>
+        <label><!-- P23 Code --></label>
+        <name>P23_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- P23 Partner Function --></label>
+        <name>P23_Partner_Function__c</name>
+    </fields>
+    <fields>
+        <label><!-- P80 Code --></label>
+        <name>P80_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- P80 Partner Function --></label>
+        <name>P80_Partner_Function__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

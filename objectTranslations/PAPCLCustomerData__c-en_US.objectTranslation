@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>PAPCLCustomerData</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>PAPCLCustomerData</value>
+    </caseValues>
+    <fields>
+        <label><!-- Dist. Channel Code --></label>
+        <name>Dist_Channel_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Division Code --></label>
+        <name>Division_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Org Code --></label>
+        <name>Sales_Org_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sold To Code --></label>
+        <name>Sold_To_Code__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

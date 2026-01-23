@@ -1,0 +1,159 @@
+<apex:component access="global" controller="PAPCLComponent">  
+<apex:stylesheet value="{!$Resource.PDFDocumentStyle}"/>
+  <apex:attribute name="targetObject" type="String" assignTo="{!listofids}" description="The context of the outer page email templates"/>
+     
+  <apex:outputPanel >
+    <apex:image value="{!$Resource.dupont_logo}" height="75px" width="100px"/>
+        <apex:outputText value="DuPont Personal Protection<br/>P.O. Box 278<br/>McBee, SC  29101<br/>
+        Ph:  800-931-3456<br/>Fx:   843-335-8599" escape="false" style="font-family: Arial Narrow, Arial, sans-serif; font-size: small; font-weight: normal; color: #B2B2B2; float:right;"/>
+        <br/><br/>
+        <apex:outputText ></apex:outputText>
+        
+        <br/>
+        <center><apex:outputText value="Rebate Price Quotation" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: x-large; font-weight: normal;"></apex:outputText></center>
+        <br/>
+        
+        
+  </apex:outputPanel>
+  <br/><br/>
+  
+  <!--  <apex:repeat value="{!listrequestdetils[0]}" var="b">
+    <table style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: medium; font-weight: normal;">
+  
+        <tr>
+        <td>{!b.Sold_To__c}</td>
+        </tr>
+    
+        <tr>
+        <td>{!b.Street__c}</td>
+        </tr>
+  
+        <tr>
+        <td>{!b.City__c}</td>
+        </tr>
+  
+        <tr>
+        <td style="text-transform:uppercase;">{!b.Country__c}</td>
+        </tr>
+  
+    </table>
+   </apex:repeat> -->
+   
+   <br/>
+   
+   <apex:repeat value="{!listrequestdetils[0]}" var="c">
+   <div id="quoteheader">
+  
+
+  <!--   <div style="width:49.7%; float:right; border:1px solid black;">
+   <apex:outputtext value="Sold To Code:" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: medium; font-weight: normal;"/>&nbsp;&nbsp;
+   <apex:outputtext value="{!c['SoldTo_Code__c']}" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: medium; font-weight: normal;"/>
+   </div>
+      <div style="width:49.7%; float:left;" >
+   </div>
+      <div style="width:49.7%; float:left; border:1px solid black;">
+   <apex:outputtext value="End User Code:" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: medium; font-weight: normal;"/>&nbsp;&nbsp;
+   <apex:outputtext value="{!c['End_User_Code__c']}" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: medium; font-weight: normal;"/>
+   </div>
+-->
+   <div style="width:49.7%; float:right; border:1px solid black;">
+    <apex:outputtext value="End User Code:" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: medium; font-weight: normal;"/>&nbsp;&nbsp;
+   <apex:outputtext value="{!c['End_User_Code__c']}" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: medium; font-weight: normal;"/>
+   <br/>
+   <apex:outputtext value="End User:" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: medium; font-weight: normal;"/>&nbsp;&nbsp;
+   <apex:outputtext value="{!c['End_User__c']}" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: medium; font-weight: normal; word-wrap: break-word;"/>
+   </div>
+   
+   <div style="width:49.7%; float:left;" >
+   </div>
+   <div style="width:49.7%; float:right; border:1px solid black;">
+   <apex:outputtext value="Sold To Code:" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: medium; font-weight: normal;"/>&nbsp;&nbsp;
+   <apex:outputtext value="{!c['SoldTo_Code__c']}" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: medium; font-weight: normal;"/>
+   <br/>
+   <apex:outputtext value="Sold To:" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: medium; font-weight: normal;"/>&nbsp;&nbsp;
+   <apex:outputtext value="{!c['Sold_To__c']}" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: medium; font-weight: normal;"/>
+   </div>
+   </div> 
+   </apex:repeat>
+   
+   <br/><br/><br/><br/>
+   <apex:outputText value="Dear Customer," style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: medium; font-weight: normal;"/>
+   <br/><br/><br/>
+   <apex:outputText value="Please see below the current terms and conditions/Quote prices agreed by DuPont Protection Technologies. Thank you for choosing our products and services. Please contact your Sales Representative if you have questions or concerns."
+      style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: medium; font-weight: normal;"/>
+      
+   <br/><br/>
+   
+   <!-- <apex:repeat value="{!listrequestdetils[0]}" var="b1">
+        <table width="500px" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: medium; font-weight: normal;">
+            <tr>
+              <td width="200px">Payment terms:</td>
+              <td width="300px">{!b1.Terms_Of_Payment__c}</td>
+            </tr>
+            <tr>
+              <td>Incoterm:</td>
+              <td>{!b1.Incoterm__c}</td>
+            </tr>
+            <tr>
+                <td>General remarks:</td>
+                <td>Sales and Payment conditions as per DuPont Price List</td>
+            </tr>
+        </table>
+   </apex:repeat>  -->
+   
+   <br/>
+   <div style="width: 90%">
+   <apex:dataTable value="{!listofwrappertables}" var="mList" border="1" cellpadding="4" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: medium; font-weight: normal; width: 635px;">
+   
+        <apex:column headerValue="Estimated Annual Volume">
+            <apex:outputText value="{!mList.sobjectRecord['Quantity__c']}"/>
+        </apex:column>
+        
+        
+        <apex:column headerValue="Style#">
+            <apex:outputText value="{!mList.sobjectRecord['Material__c']}"/>
+        </apex:column>
+        
+        <apex:column headerValue="Price">
+            <apex:outputText value="{!mList.sobjectRecord['New_Rate__c']}"/>
+        </apex:column>
+        
+        <apex:column headerValue="Unit">
+            <apex:outputText value="{!mList.sobjectRecord['New_Unit__c']}"/>
+        </apex:column>
+        
+        <apex:column headerValue="Per">
+            <apex:outputText value="{!mList.sobjectRecord['New_Per__c']}"/>
+        </apex:column>
+        
+        <apex:column headerValue="UoM">
+            <apex:outputText value="{!mList.sobjectRecord['New_UoM__c']}" />
+        </apex:column>
+        <apex:column headerValue="Effective from">
+            <apex:outputField value="{!mList.sobjectRecord['New_Valid_from__c']}" />
+        </apex:column>
+        <apex:column headerValue="Effective To">
+            <apex:outputField value="{!mList.sobjectRecord['New_Valid_To__c']}" />
+        </apex:column>
+    </apex:dataTable>
+    </div>
+    <div style="width: 90%; border:1px solid black;">
+    <apex:outputText style="font-size: small;" value="ALL QUOTATIONS AND SALES ARE SUBJECT TO SELLER'S STANDARD TERMS AND CONDITIONS. NO OTHER TERMS OR CONDITIONS SHALL APPLY WITHOUT SELLER'S WRITTEN CONSENT." />
+    </div>
+    <br/><br/>
+    
+    <apex:outputpanel style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: medium; font-weight: normal;">
+        <br/><br/><br/>
+        <apex:outputtext value="Issued By"/>
+        <br/><br/>
+        <apex:outputText rendered="{!onBehalfOfUser == null}" value="{!$User.FirstName} {!$User.LastName}"/>
+        <apex:outputText rendered="{!onBehalfOfUser != null}" value="{!onBehalfOfUser}"/>
+    </apex:outputpanel>
+     
+     <apex:outputText value="Date : {0, date, MMMM d','  yyyy}" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: medium; font-weight: normal;float:right;">
+            <apex:param value="{!TODAY()}" />
+        </apex:outputText>
+        
+    <c:PDFHeaderFooter type="footer" position="center"><hr width="90%"></hr></c:PDFHeaderFooter>
+   
+  </apex:component>

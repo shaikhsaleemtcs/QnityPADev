@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RemoteSiteSetting xmlns="http://soap.sforce.com/2006/04/metadata">
+    <disableProtocolSecurity>false</disableProtocolSecurity>
+    <isActive>true</isActive>
+    <url>https://dup-enterprise-is-prod-soc8jbf6.it-cpi013-rt.cfapps.us21.hana.ondemand.com</url>
+</RemoteSiteSetting>

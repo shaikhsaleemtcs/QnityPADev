@@ -1,0 +1,3 @@
+<apex:page standardController="Customer_Data_Request__c" extensions="CtrlCOBUtilCustMDataReqOverrideNewEdit" action="{!redirect}" cache="false">
+<apex:pageMessages />
+</apex:page>

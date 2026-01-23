@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>It will store the BU and sales area combination and their respective retroactive limit</description>
+    <fields>
+        <fullName>Retroactive_Limit__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>Retroactive Limit</label>
+        <precision>18</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>PA Retroactive Details</label>
+    <pluralLabel>PA Retroactive Details</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

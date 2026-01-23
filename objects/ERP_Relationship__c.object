@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Used to manage the types of partner relationships an ERP customer might have (Sold-To, Ship-To, End User, Sales Rep, CSR etc.), as stored in SAP</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>Deletion_Flag__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicates partner record is deleted or not at SAP, and record will be deleted in SFDC through batch jobs. This deletion applies for a specified Customer only.</description>
+        <label>Deletion Flag</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ERP_Customer__c</fullName>
+        <description>Identifies the ERP Customer this record belongs to</description>
+        <label>ERP Customer</label>
+        <referenceTo>ERP_Customer__c</referenceTo>
+        <relationshipLabel>ERP Relationships</relationshipLabel>
+        <relationshipName>ERP_Relationships</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>External_ERP_ID__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>Combines the Source Cluster + Customer Code + Sales Org Code + Distribution Channel Code + Division Code + Partner Counter + Partner Function Code to identify a unique record.</description>
+        <externalId>true</externalId>
+        <label>External ERP ID</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Legacy_Pricing_Util_SFID__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>This field is populated with the legacy One DuPont SF ID and was used during the split to map related records during the split and insert process to maintain the migrated record’s parent-child record relationships.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>This is the pre-split original 18 digit Salesforce ID of this record that came from the original One Dupont Salesforce instance before the business units were separated. Its is case insensitive and unique.</inlineHelpText>
+        <label>Legacy Pricing Util SFID</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Name__c</fullName>
+        <description>Identifies the CSR or Sales Representative as stored in SAP.</description>
+        <externalId>false</externalId>
+        <label>Name</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Partner_Code__c</fullName>
+        <description>Customer Code of the partner (Related ERP Customer) identified in this record</description>
+        <externalId>false</externalId>
+        <label>Partner Code</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Partner_Counter__c</fullName>
+        <description>The SAP partner function counter, which stores a numeric value that identifies the number of partner records connected to this ERP Customer in SAP</description>
+        <externalId>false</externalId>
+        <label>Partner Counter</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Partner_Function_Code__c</fullName>
+        <description>Partner Function of the partner (Related ERP Customer) identified in this record</description>
+        <externalId>false</externalId>
+        <label>Partner Function Code</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Partner_Function__c</fullName>
+        <description>Partner Function of the partner (Related ERP Customer) identified in this record</description>
+        <externalId>false</externalId>
+        <label>Partner Function</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Related_ERP_Customer__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Identifies the ERP Customer partner record (eg the Ship-to)</description>
+        <label>Related ERP Customer</label>
+        <referenceTo>ERP_Customer__c</referenceTo>
+        <relationshipLabel>ERP Relationships (Related ERP Customer)</relationshipLabel>
+        <relationshipName>ERP_Relationships1</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Sys_Id__c</fullName>
+        <externalId>false</externalId>
+        <label>Sys Id</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>User__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Identifies the SFDC user for the SAP CSR or Sales Representative in this record</description>
+        <label>User</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>ERP_Relationships</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>fCity__c</fullName>
+        <description>City of the partner (Related ERP Customer) identified in this record</description>
+        <externalId>false</externalId>
+        <formula>Related_ERP_Customer__r.City__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>City</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>ERP Relationship</label>
+    <nameField>
+        <displayFormat>ERP-R{000000000}</displayFormat>
+        <label>ERP Relationship  Name</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>ERP Relationships</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>ERP_Relationship_Customer</fullName>
+        <active>true</active>
+        <description>ERP Relationship - Customer identifying a partner relationship between ERP Customers</description>
+        <label>ERP Relationship - Customer</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>ERP_Relationship_Person</fullName>
+        <active>true</active>
+        <description>ERP Relationship - Person identifying a partner relationship between people (Sales Rep, CSR) and customers</description>
+        <label>ERP Relationship - Person</label>
+    </recordTypes>
+    <searchLayouts>
+        <searchResultsAdditionalFields>Partner_Code__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Partner_Function__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Partner_Function_Code__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ERP_Customer__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Related_ERP_Customer__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Name__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>User__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>External_ERP_ID__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <visibility>Public</visibility>
+</CustomObject>

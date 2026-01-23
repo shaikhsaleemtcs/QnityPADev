@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>Custom setting to store business Names region wise. It is used to identify business values for Customer Expiry Notification</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Business__c</fullName>
+        <description>Business Names concatenated with &apos;,&apos; belonging to same region</description>
+        <label>Business</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <label>PABusinessForExpiryNotification</label>
+    <visibility>Public</visibility>
+</CustomObject>

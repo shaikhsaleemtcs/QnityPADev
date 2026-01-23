@@ -1,0 +1,373 @@
+<apex:page controller="ctrlPAMain" tabstyle="Price_Approval__tab" sidebar="false" showHeader="true" id="currentPage" cache="true" action="{!onLoadCall}">
+<apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.js')}" />
+<c:loadingComponent />
+    <apex:pageMessages escape="false" id="errorMessage"/> 
+
+    <!-- Version 1.1 START  --> 
+    <!-- Done UI changes - Prachi 15th feb -->
+    <!-- version 1.1 END -->
+    <!-- 1.2 Brundha  UI  None-->
+    <!-- PP20131106     1) Added List to sort Countries - DTT ROLLOUT USAT Issue
+                        2) Decoding of Country from Lookup - DTT ROLLOUT USAT Issue-->
+    <!-- TJ20140505     Added the landing page link  -->
+    <!-- TJ20140509     Added Navigation Flow Text   -->
+    <style>
+        .customerLink{font-size:15px;height:20px;margin-bottom:1px;padding:5px;border:solid 1px;border-color:#6E96B2; background-color:#E5F3FC;font-weight:bold;text-align:left;}
+        .navFlow{font-size:13px;font-style:oblique;margin-bottom:3px;}
+        #manageApprover  .detailList{padding:0px;border:1px solid #E2E3E4;}
+        #manageApprover  .detailList .dataCol{padding:3px;} 
+        #manageApprover  .detailList{padding:10px;} 
+        #manageApprover  .detailList .requiredBlock{top:0px; height:20px;bottom:0px;}
+        #manageApprover  .detailList tr th{border-left:none;border-bottom:none;} 
+        #manageApprover  .detailList tr td{border-bottom:none;} 
+        #manageApprover  .bPageBlock{float:left;width:100%;}
+        #manageApprover  .pbSubheader{margin-bottom:0px;}
+        #manageApprover a.btn{width:60px;float:left;}
+        //#manageApprover keyfieldTable1:valueheader:sortDiv{padding-top:7px;}
+        //#manageApprover #value{padding-top: 7px;}
+        //.bPageBlock .requiredInput .requiredBlock{top:0px; height:20px;bottom:0px;float:left;}
+        
+        #keyField  .detailList{padding:0px;border:1px solid #E2E3E4;}
+        #keyField .detailList {border: none;padding: 2px;}
+        #keyField  .detailList tr th{border-left:none;border-bottom:none;} 
+        #keyField  .detailList tr td{border-bottom:none;} 
+        //#keyField  .bPageBlock{float:left;width:100%;}
+        #keyField  .pbSubheader{margin-bottom:0px;}
+        body .pbBody table.list tr td{border:none;}
+        #standardApprover .pbSubsection table.detailList{width:60%;}
+    </style>
+    
+    <script type = "text/javascript">
+         
+        function confirmCancel()
+        {
+            var con = confirm('{!$Label.Cancel_Admin_Configuration_Confirmation}');
+            return con;     
+        }
+        function confirmSave()
+        {
+            var con = confirm('{!$Label.Approver_Details_Modified_Confirmation}');
+            return con;     
+        }
+        function confirmDelete()
+        {
+            var con = confirm('{!$Label.Delete_Approvers_Confirmation}');
+            return con;
+        }  
+    </script>
+    
+    <apex:form id="form1"> 
+    <!-- TJ<20140505> Added Landing Page Link -->
+        <div align="left" class="navFlow">
+            <apex:commandLink id="link0" value="Landing Page" action="{!businessComponentAction}" target="_self" style="color:blue;">
+            <apex:param name="desiredAction" value="landingpage" assignTo="{!businessaction}" />
+            <apex:param name="newPageLabel" value="PAHome" assignTo="{!newPageLabel}" />
+            </apex:commandLink>
+        <!-- <TJ20140509> Added Navigation Flow Text-->
+            <apex:outputText value="{!if(NOT(ISNULL(navigationText)),'>>','')} "/>
+            <apex:outputText value="{!navigationText}"/>
+            <apex:outputText value=">>{!$Label.Manage_Approver}"/>
+        </div>
+<!--        <TJ20140417>   Changed Page Label-->        
+    <div class="customerLink">
+        {!$Label.Manage_Approver}
+    </div> 
+    
+    <apex:actionFunction name="onClickCancel" action="{!businessComponentActionforRerender}" reRender="form1">
+        <apex:param name="desiredAction" value="onclickcancelButton" assignTo="{!businessAction}" />
+        <apex:param name="newPageLabel" value="PAManageApprover" assignTo="{!newPageLabel}" />
+    </apex:actionFunction>
+    
+    <div id="manageApprover">
+        <apex:pageBlock >                           
+            <apex:pageBlockSection columns="2" title="Sales Area Details">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Business Unit"/> 
+                    <apex:outputText value="{!service.PAServicestate.approvalSetup.selectedBU}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Sales Organisation"/> 
+                    <apex:outputText value="{!service.PAServicestate.approvalSetup.salesorgDisplay}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Distribution Channel"/> 
+                    <apex:outputText value="{!service.PAServicestate.approvalSetup.distChannelDisplay}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Division"/> 
+                    <apex:outputText value="{!service.PAServicestate.approvalSetup.divisionSelectDisplay}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Key Field"/> 
+                    <apex:outputText value="{!service.PAServicestate.approvalSetup.keyField}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Approver Role"/> 
+                    <apex:outputText value="{!service.PAServicestate.approvalSetup.approverRole}"/>
+                </apex:pageBlockSectionItem>
+          </apex:pageBlockSection>
+
+          <apex:pageBlocksection title="Approver List" >                
+            <apex:pageBlockTable style="width:600px;" id="keyfieldTable1" value="{!service.PAServicestate.approvalSetup.setupObjforDisplayList}" var="wrapkfusobj"> 
+                <apex:column >
+                    <apex:commandLink value="Delete" style="color:Blue" onclick="return confirmDelete()" action="{!businessComponentAction}">
+                        <apex:param name="setupObjId" value="{!wrapkfusObj.Id}" assignTo="{!service.PAServicestate.approvalSetup.setupObjId}"/>  
+                        <apex:param name="desiredAction" value="deleteSetupObj" assignTo="{!businessAction}" />
+                        <apex:param name="newPageLabel" value="PAManageApprover" assignTo="{!newPageLabel}" />
+                        <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                        <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>                                            
+                    </apex:commandLink>
+                </apex:column> 
+                <apex:column >
+                    <apex:facet name="header">
+                        <apex:commandLink action="{!businessComponentAction}" style="float:left;">
+                            <apex:param name="lookupColumn" value="KeyField" assignTo="{!service.PAServicestate.approvalSetup.lookupOfvar}"/>
+                            <apex:param name="desiredAction" value="dynamicLookup" assignTo="{!businessAction}" />
+                            <apex:param name="newPageLabel" value="PAManageApprover" assignTo="{!newPageLabel}" />
+                            <apex:image id="theImage1" url="{!$Resource.LookUpImage}" style="float:right;">Key Field Id</apex:image>
+                            <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                            <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                        </apex:commandLink>
+                    </apex:facet>
+                    <apex:outputText value="{!wrapkfusobj.Key_Field_Id__c}"/>                   
+                </apex:column> 
+                    
+                <apex:column headerValue="Key Field Value" >
+                    <apex:outputText value="{!wrapkfusobj.Key_Field_Value__c}"/>                   
+                </apex:column>
+
+                <apex:column >
+                        <apex:facet name="header">
+                            <apex:commandLink action="{!businessComponentAction}" style="float:left;">
+                                <apex:param name="lookupColumn" value="Approver" assignTo="{!service.PAServicestate.approvalSetup.lookupOfvar}"/>
+                                <apex:param name="desiredAction" value="dynamicLookup" assignTo="{!businessAction}" />
+                                <apex:param name="newPageLabel" value="PAManageApprover" assignTo="{!newPageLabel}" />
+                                <apex:param name="allothermixedflag" value=" " assignTo="{!service.PAServicestate.approvalSetup.allotherMixedLookup}" />
+                                <apex:image id="theImage2" url="{!$Resource.LookUpImage}" style="float:right;">Approver Id</apex:image>
+                                <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                                <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                            </apex:commandLink>
+                         </apex:facet>
+                         <apex:outputText value="{!wrapkfusobj.Access_Id__c}" />  
+                    </apex:column>         
+                         
+                    <apex:column headerValue="Approver Name">
+                        <apex:outputText value="{!wrapkfusobj.Approver_Name__c}" />
+                    </apex:column> 
+
+            </apex:pageBlockTable>
+          </apex:pageBlocksection>
+          
+        
+          
+          <div id="standardApprover">
+              <apex:pageBlockSection title="Standard Approvers" columns="4" >
+                    <apex:outputText style="font-weight: bold;font-size: 11px;color:#4A4A56;" value="All Other Values"/>
+                    <apex:inputText style="float: right;" value="{!service.PAServicestate.approvalSetup.selectedAllOtherApprover}" />
+                    <apex:commandLink action="{!businessComponentAction}" style="float:left;">
+                        <apex:param name="lookupColumn" value="Approver" assignTo="{!service.PAServicestate.approvalSetup.lookupOfvar}"/>
+                        <apex:param name="desiredAction" value="dynamicLookup" assignTo="{!businessAction}" />
+                        <apex:param name="allothermixedflag" value="allothervalues" assignTo="{!service.PAServicestate.approvalSetup.allotherMixedLookup}" />
+                        <apex:param name="newPageLabel" value="PAManageApprover" assignTo="{!newPageLabel}" />
+                        <apex:image id="theImage3" url="{!$Resource.LookUpImage}" style="float:right;padding-top: 10%;"></apex:image>
+                        <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                        <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                    </apex:commandLink>                
+                    <apex:outputPanel >
+                    <apex:outputText value="{!service.PAServicestate.approvalSetup.setUpObjforAllMultiUser.All_Other_Values__r.E_Pass_ID__c}" />
+                    </apex:outputPanel>          
+                    <apex:outputText style="font-weight: bold;font-size: 11px;color:#4A4A56;" value="Mixed Values"/>
+                    <apex:inputText style="float: right;" value="{!service.PAServicestate.approvalSetup.selectedMixedApprover}" />
+                    <apex:commandLink action="{!businessComponentAction}" style="float:left;">
+                        <apex:param name="lookupColumn" value="Approver" assignTo="{!service.PAServicestate.approvalSetup.lookupOfvar}"/>
+                        <apex:param name="desiredAction" value="dynamicLookup" assignTo="{!businessAction}" />
+                        <apex:param name="allothermixedflag" value="mixedvalues" assignTo="{!service.PAServicestate.approvalSetup.allotherMixedLookup}" />
+                        <apex:param name="newPageLabel" value="PAManageApprover" assignTo="{!newPageLabel}" />
+                        <apex:image id="theImage4" url="{!$Resource.LookUpImage}" style="float:right;padding-top: 10%;"></apex:image>
+                        <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                        <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                    </apex:commandLink>
+                    <apex:outputPanel >
+                    <apex:outputText value="{!service.PAServicestate.approvalSetup.setUpObjforAllMultiUser.Mixed_Values__r.E_Pass_ID__c}" />
+                    
+                    
+                    </apex:outputPanel>
+              </apex:pageBlockSection>  
+          </div>   
+          
+          <div style="float:left;text-align:center;padding:10px 0px 10px 40%;">       
+              <apex:commandLink value="{!$Label.Save_Button}" onclick="return confirmSave()" action="{!businessComponentAction}" styleClass="btn" style="text-decoration:none;">
+                <apex:param name="desiredAction" value="saveSetObjectMethod" assignTo="{!businessAction}" />
+                <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                <apex:param name="pageName" value="{!IF(CONTAINS(navigationText,$Label.Approval_Set_Up),$Label.Approval_Set_Up,$Label.Manage_Approver)}" assignTo="{!pageName}"/>
+              </apex:commandLink>
+              
+              <apex:commandLink value="{!$Label.Cancel_Button}" onclick="return confirmCancel()" action="{!businessComponentAction}" styleClass="btn" style="text-decoration:none;">
+                <apex:param name="desiredAction" value="cancelManageApprovers" assignTo="{!businessAction}" />
+                    <apex:param name="newPageLabel" value="PAApprovalSetup" assignTo="{!newPageLabel}" />
+                    <!-- <TJ20140509> Passing Label to display navigation flow -->
+                    <apex:param name="pageName" value="{!IF(CONTAINS(navigationText,$Label.Approval_Set_Up),$Label.Approval_Set_Up,$Label.Manage_Approver)}" assignTo="{!pageName}"/>
+              </apex:commandLink>
+          </div>
+              
+       </apex:pageBlock>
+    </div>
+          
+          <apex:outputPanel id="popUPwindow1" rendered="{!service.PAServicestate.approvalSetup.popID}" styleClass="BackPage" />     
+            <apex:outputPanel id="popUPwindow" rendered="{!service.PAServicestate.approvalSetup.popID}" styleClass="FrontPageSoldTo1">
+                <apex:panelGrid style="float:right;">
+                    <apex:commandLink action="{!businessComponentAction}">
+                        <apex:image url="{!$Resource.closeButton}" width="15" height="15"/>
+                        <apex:param name="desiredAction" value="closeDisplay" assignTo="{!businessAction}" />
+                        <apex:param name="newPageLabel" value="PAManageApprover" assignTo="{!newPageLabel}" />
+                        <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                        <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                    </apex:commandLink>
+                </apex:panelGrid>     
+                
+                <div id="keyField">    
+                    <apex:pageBlock >                                                        
+                        <apex:pageBlockSection title="Select Key Field" columns="2">                               
+                               <apex:pageBlockSectionitem >
+                                <apex:outputText value="Key Field ID"/>
+                                <apex:inputText value="{!service.PAServicestate.approvalSetup.keyFieldIDSearch}"/>
+                               </apex:pageBlockSectionitem>
+                               <apex:pageBlockSectionItem >
+                                <apex:outputText value="Key Field Value"/>
+                                <apex:inputText value="{!service.PAServicestate.approvalSetup.keyFieldValueSearch}"/>
+                               </apex:pageBlockSectionItem>
+                        </apex:pageBlockSection>      
+                          <br/>
+                               
+                       <div style="float:left;text-align:center;padding:0px 10% 30px 40%">
+                           <apex:commandLink value="Search" styleClass="btn" style="text-decoration:none;" action="{!businessComponentActionforRerender}" rerender="keyfieldTable">
+                            <apex:param name="desiredAction" value="searchKeyField" assignTo="{!businessAction}" />
+                            <apex:param name="newPageLabel" value="PAManageApprover" assignTo="{!newPageLabel}" />
+                            <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                            <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                           </apex:commandLink>
+                       </div>
+                               
+                             <br/>  
+                               <apex:outputPanel id="keyfieldTable"> 
+                               <div id="keyField">        
+                               <!-- PP20131106 -->
+                                <apex:pageBlockTable value="{!service.PAServicestate.approvalSetup.keyFieldListAll}" var="keyFieldId" style="float:left;width:100%">
+                                    <apex:column headerValue="Key Field Id">
+                                        <apex:commandLink action="{!businessComponentAction}" >
+                                            <apex:outputText value="{!keyFieldId}"></apex:outputText>                                
+                                            <apex:param name="keyFieldId" value="{!keyFieldId}" assignTo="{!service.PAServicestate.approvalSetup.selectedKeyFieldId}"/>
+                                            <!-- PP20131106 -->
+                                            <apex:param name="keyFieldValue" value="{!URLENCODE(service.PAServicestate.approvalSetup.mapKeyField[keyFieldId])}" assignTo="{!service.PAServicestate.approvalSetup.selectedKeyFieldValue}"/>
+                                            <apex:param name="desiredAction" value="closeDisplaySelected" assignTo="{!businessAction}" />
+                                            <apex:param name="newPageLabel" value="PAManageApprover" assignTo="{!newPageLabel}" />
+                                            <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                                            <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                                        </apex:commandLink>
+                                    </apex:column>
+                                    <apex:column headerValue="Key Field Value">
+                                        <apex:outputText value="{!service.PAServicestate.approvalSetup.mapKeyField[keyFieldId]}"></apex:outputText>                                
+                                    </apex:column>                          
+                                </apex:pageBlockTable>
+                                </div>
+                               </apex:outputPanel>
+                             
+                          </apex:pageBlock>
+                    </div>  
+                </apex:outputPanel>
+                
+                 <apex:outputPanel id="popUPwindow3" rendered="{!service.PAServicestate.approvalSetup.popApprover}" styleClass="BackPage" />     
+                    <apex:outputPanel id="popUPwindow4" rendered="{!service.PAServicestate.approvalSetup.popApprover}" styleClass="FrontPageSoldTo" >
+                         <apex:panelGrid style="float:right;">
+
+                             <apex:commandLink action="{!businessComponentAction}">
+                                <apex:image url="{!$Resource.closeButton}" width="15" height="15"/>
+                                <apex:param name="desiredAction" value="closeApproverDisplay" assignTo="{!businessAction}" />
+                                <apex:param name="newPageLabel" value="PAManageApprover" assignTo="{!newPageLabel}" />
+                                <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                                <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                             </apex:commandLink>
+                         </apex:panelGrid>      
+                          
+          				<!-- <PR20140901> Changed Name to FirstName + LastName-->
+                        <apex:pageBlock >                                                       
+                          <apex:pageBlockSection title="Select Approver">  
+                            <apex:pageBlockTable style="width: 460px;" value="{!service.PAServicestate.approvalSetup.userList}" var="approverUser" >
+                                <apex:column headerValue="Approver Name">
+                                    <apex:commandLink action="{!businessComponentAction}" >
+                                        <apex:outputText value="{!(approverUser.FirstName+' '+approverUser.LastName)}"/>
+                                        <apex:param name="appAccessId" value="{!approverUser.id}" assignTo="{!service.PAServicestate.approvalSetup.selectedApproverId}"/>                                       
+                                        <apex:param name="appId" value="{!approverUser.E_Pass_ID__c}" assignTo="{!service.PAServicestate.approvalSetup.selectedAppId}"/>                                                                                                                       
+                                        <apex:param name="appValue" value="{!URLENCODE(approverUser.FirstName+' '+approverUser.LastName)}" assignTo="{!service.PAServicestate.approvalSetup.selectedAppValue}"/>
+                                        <apex:param name="desiredAction" value="closeAddApproverDisplay" assignTo="{!businessAction}" />
+                                        <apex:param name="newPageLabel" value="PAManageApprover" assignTo="{!newPageLabel}" />                                                                         
+                                        <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                                        <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>                                                                         
+                                    </apex:commandLink>
+                                </apex:column>
+                                <apex:column headerValue="Approver Id">
+                                    <apex:outputText value="{!approverUser.E_Pass_ID__c}"/>
+                                </apex:column>                                              
+                              </apex:pageBlockTable>
+                          </apex:pageBlockSection>  
+                        </apex:pageBlock>
+      
+                </apex:outputPanel>
+                
+                
+             
+    </apex:form>
+    
+     <style type="text/css">
+   .FrontPageSoldTo
+    {
+       background-color: white;
+        //border-width: 2px;
+        //border-style: solid;
+        border: 2px solid #63A4C5;
+        z-index: 9999;
+        left:35% ;
+        right:;
+        padding:10px;
+        position: absolute; 
+        top:15%;
+        //margin-left: -600px;
+        width:500px;
+    }
+    
+    .FrontPageSoldTo1
+    {
+       background-color: white;
+        //border-width: 2px;
+        //border-style: solid;
+        border: 2px solid #63A4C5;
+        z-index: 9999;
+        left:35% ;
+        right:;
+        padding:10px;
+        position: absolute; 
+        top:15%;
+        //margin-left: -600px;
+        //width:600px;
+        width:60%;
+    }
+     
+      .BackPage
+    {            
+        background-color:#696969;
+        opacity: 0.5;
+        filter: alpha(opacity = 50);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 9998;
+    
+    }
+    .noTableFooter
+    {
+        margin:0px!important;
+    }
+</style>                      
+</apex:page>

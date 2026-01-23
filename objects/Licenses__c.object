@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>License_Record_Page2</content>
+        <formFactor>Small</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>License_Record_Page2</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>true</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>License custom object to capture business unit and number of licenses procured. Store threshold limit and alert notification email list here.</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>Private</externalSharingModel>
+    <fields>
+        <fullName>Available_Licenses_Name__c</fullName>
+        <description>Name of the Licenses Available under License Category</description>
+        <inlineHelpText>Name of the Licenses Available under License Category</inlineHelpText>
+        <label>Available Licenses Name</label>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <controllingField>License_Catagories__c</controllingField>
+            <restricted>true</restricted>
+            <valueSetName>Available_Licenses_Name</valueSetName>
+            <valueSettings>
+                <controllingFieldValue>User Licenses</controllingFieldValue>
+                <valueName>Service Cloud</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>User Licenses</controllingFieldValue>
+                <valueName>Partner Community</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>User Licenses</controllingFieldValue>
+                <valueName>Customer Community</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>User Licenses</controllingFieldValue>
+                <valueName>Customer Community Plus</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>User Licenses</controllingFieldValue>
+                <valueName>Salesforce Platform</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>User Licenses</controllingFieldValue>
+                <valueName>Chatter External</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>User Licenses</controllingFieldValue>
+                <valueName>Chatter Free</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>User Licenses</controllingFieldValue>
+                <valueName>Guest License</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>User Licenses</controllingFieldValue>
+                <valueName>Cloud Integration User</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>User Licenses</controllingFieldValue>
+                <valueName>Analytics Cloud Integration User</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>User Licenses</controllingFieldValue>
+                <valueName>SalesforceIQ Integration User</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Permission Set Licenses</controllingFieldValue>
+                <valueName>Standard Einstein Activity Capture User</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Permission Set Licenses</controllingFieldValue>
+                <valueName>Sales Console User</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Permission Set Licenses</controllingFieldValue>
+                <valueName>CRM User</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Permission Set Licenses</controllingFieldValue>
+                <valueName>Einstein Agent</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Permission Set Licenses</controllingFieldValue>
+                <valueName>Einstein Search</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Permission Set Licenses</controllingFieldValue>
+                <valueName>Trust Card Manager</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Permission Set Licenses</controllingFieldValue>
+                <valueName>Salesforce Meetings</valueName>
+            </valueSettings>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>IsDuplicate__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>To check if combination of Procuring Business, License Type, License Name already exist. It work in combination with Flow and Validation Rule. This field is not on any page layout.</description>
+        <label>IsDuplicate</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>License_Catagories__c</fullName>
+        <description>Catagories of License Type</description>
+        <inlineHelpText>Catagories of License Type</inlineHelpText>
+        <label>License Catagories</label>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>License_Catagories</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>License_Number__c</fullName>
+        <description>Auto Number Generated which is unique to each license with year and month, record is created</description>
+        <displayFormat>LN#{YYYY}-{MM}-{000000}</displayFormat>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique Identifier generated for each license with year and month, given when record is created.</inlineHelpText>
+        <label>License Number</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>AutoNumber</type>
+    </fields>
+    <fields>
+        <fullName>Licenses_Consumed__c</fullName>
+        <businessStatus>Active</businessStatus>
+        <defaultValue>0</defaultValue>
+        <description>Number of Licenses consumed</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of Licenses consumed</inlineHelpText>
+        <label>Licenses Consumed</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <securityClassification>Internal</securityClassification>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_licenses_procured__c</fullName>
+        <description>rollup summary of all License Procurements related records with status = active and business = Procuring Business.</description>
+        <inlineHelpText>rollup summary of all License Procurements related records with status = active and business = Procuring Business.</inlineHelpText>
+        <label>Number of licenses procured</label>
+        <summarizedField>License_Procurement__c.Number_of_licenses_procured__c</summarizedField>
+        <summaryFilterItems>
+            <field>License_Procurement__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Active</value>
+        </summaryFilterItems>
+        <summaryForeignKey>License_Procurement__c.Licenses__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Procuring_Business__c</fullName>
+        <description>Business procuring the license.</description>
+        <inlineHelpText>Business procuring the license.</inlineHelpText>
+        <label>Procuring Business</label>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>Procuring_Business</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Threshold_Email_Notifications__c</fullName>
+        <description>List of email addresses to send mail, when the threshold limit is reached.</description>
+        <inlineHelpText>List of email addresses to send mail, when the threshold limit is reached.</inlineHelpText>
+        <label>Threshold Email Notification List</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Threshold_Limit__c</fullName>
+        <description>Limit to monitor the licenses</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Limit when reached, will send mail to admins.</inlineHelpText>
+        <label>Threshold Limit</label>
+        <precision>5</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>fRemaining_Licenses__c</fullName>
+        <description>Formula to calculate the remaining license available for allotment.</description>
+        <externalId>false</externalId>
+        <formula>FLOOR(Number_of_licenses_procured__c - Licenses_Consumed__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Remaining license(s) available for allotment.</inlineHelpText>
+        <label>Remaining Licenses</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>License</label>
+    <listViews>
+        <fullName>All_Licenses</fullName>
+        <columns>License_Number__c</columns>
+        <columns>NAME</columns>
+        <columns>Procuring_Business__c</columns>
+        <columns>License_Catagories__c</columns>
+        <columns>Available_Licenses_Name__c</columns>
+        <columns>Number_of_licenses_procured__c</columns>
+        <columns>Licenses_Consumed__c</columns>
+        <columns>fRemaining_Licenses__c</columns>
+        <columns>Threshold_Limit__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All Licenses</label>
+    </listViews>
+    <nameField>
+        <label>Licenses Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Licenses</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>Unique_License</fullName>
+        <active>true</active>
+        <description>The combination of Procuring Business, License Type and License Type Name should be unique. Works with combination of flow</description>
+        <errorConditionFormula>OR(AND(IsDuplicate__c = TRUE, ISNEW()), AND(IsDuplicate__c = TRUE, NOT(ISNEW()) , OR( ISCHANGED( Available_Licenses_Name__c ) , ISCHANGED( License_Catagories__c ) , ISCHANGED( Procuring_Business__c )) ) )</errorConditionFormula>
+        <errorMessage>The Combination of Procuring Business, License Category and Available License Name already exist. Please choose different combination or use the original license record.</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>

@@ -1,0 +1,544 @@
+<!-- This component is used to display the records from objects other than ERP SALES PRICES SAP and PRICING REQUEST ITEM in the table -->
+<!--    Ver.            Developer               Changes                                                         Dependencies    -->
+<!--    1.1             Priyanka        Changed rendering of outputField in MAIN COLUMNS SECTION        None            -->
+<!--    1.2             Bisnupriya      Changed Material Header as per SIT issue #142                   None             -->
+<!--    VR20130717      Vinoth Rajapandian  Modified Rendered condition for Flr. and Ref.                           None    --> 
+<!--                Mohit Sinha         <MS20140324>    Added id for table  None -->
+<!--                Abhijeet Vaishnab   <AV20140408>  Added Clone link visible in the customer request page and only for customer price requests-->
+<!--                Jawahar MuthuAdaikalam   <JM20140428>  Added Rep Material,Default per,Default UoM-->
+<!--    TJ20140513  Tarun Jain          Added attributes to store and pass page label on links. 
+<!-- MS20140901     Mohit Sinha         Added Clone link for pricing tasks                              None            -->
+<!-- HL20140918    Hema Latha          For approval set changed id to PA_BU_Admin_Master__r.Id since the object reference is changed to detail -->
+<apex:component controller="PARelatedList" allowDML="true"
+    access="global">
+    <style>
+#change .bPageBlock {
+    border: 0px;
+}
+</style>
+
+
+    <!-- ATTRIBUTES -->
+    <apex:attribute description="PR ID for Email Tempalte" type="String"
+        name="pricingRequest" assignTo="{!pricingRequestId}" />
+
+
+    <apex:attribute description="sObject Wrapper List" type="PAWrapper[]"
+        name="WrapperRecordsDisp" assignTo="{!wrapperList}" />
+        
+    <apex:attribute description="ViewMode from Component" name="viewMode"
+        type="string" />
+
+    <apex:attribute description="Holds Selected sObject's Id"
+        name="selected" type="String" />
+    <apex:attribute description="Desired Action" name="actionAtr"
+        type="string" />
+        <!-- hema added -->
+    <apex:attribute description="Holds Selected sObject's Id"
+        name="selected1" type="String" />
+        <apex:attribute description="Holds Selected sObject's Id"
+        name="selected2" type="String" />
+    <apex:attribute description="Desired Action" name="actionAtr1"
+        type="string" />
+        <!-- hema end -->
+    <apex:attribute description="To set clone flag" name="cloneEnable"
+        type="boolean" />   
+        <apex:attribute description="To set RPQ flag" name="RPQFlag"
+        type="boolean" />
+    <apex:attribute description="Holds sObject Type"
+        name="typeOfSObjectList" type="String" assignTo="{!sobjectTypeName}" />
+    <apex:attribute description="Holds Pricing Request Type"
+        name="typeOfRequest" type="String" assignTo="{!priceType}" />
+    <apex:attribute description="Columns List" name="columnsDisp"
+        type="Schema.FieldSetMember[]" />
+    <apex:attribute description="To display edit Link" name="showEditLink"
+        type="boolean" />
+    <apex:attribute description="To display Name in PH" name="showPHName"
+        type="boolean" />
+    <apex:attribute description="To display delete Link"
+        name="showDeleteLink" type="boolean" />
+    <apex:attribute description="To display clone Link"
+        name="showCloneLink" type="boolean" />
+    <apex:attribute description="To display new Link" name="showNewLink"
+        type="boolean" />
+    <apex:attribute description="To display expire Link"
+        name="showExpireLink" type="boolean" />
+    <apex:attribute description="To display Changes Section"
+        name="showChangesSection" type="boolean" />
+    <apex:attribute description="To display checkbox" name="showCheckbox"
+        type="boolean" />
+    <apex:attribute description="To display Select Unedited and Delete selected buttons"
+        name="showSelectButtons" type="boolean" />
+    <apex:attribute description="To display checkbox"
+        name="disableCheckbox" type="boolean" />
+    <apex:attribute description="Date columns" name="dateFieldColumns"
+        type="Schema.FieldSetMember[]" />
+        <apex:attribute description="RPQ columns" name="RPQColumns"
+        type="Schema.FieldSetMember[]" />
+    <apex:attribute description="New Date columns"
+        name="newDateFieldColumns" type="Schema.FieldSetMember[]" />
+
+    <apex:attribute description="New columns" name="newFieldColumns"
+        type="Schema.FieldSetMember[]" />
+    <apex:attribute description="for add req item" name="showaddtorequest"
+        type="boolean" />
+    <apex:attribute description="To display Flag" name="showFlag"
+        type="boolean" />
+    <apex:attribute description="To display Action Section"
+        name="actionShowFlag" type="boolean" />
+    <apex:attribute description="Common Columns List"
+        name="pricingRecordColumns" type="Schema.FieldSetMember[]" />
+    <apex:attribute description="Sold To Columns List"
+        name="pricingRecordSoldToColumns" type="Schema.FieldSetMember[]" />
+    <apex:attribute description="Scaled Columns" name="scaledFlagColumns"
+        type="Schema.FieldSetMember[]" />
+
+
+    <apex:attribute description="New columns" name="newFieldColumns"
+        type="Schema.FieldSetMember[]" />
+
+    <apex:attribute description="displaySoldToColumns"
+        name="showSoldToColumns" type="boolean" />
+
+    <apex:attribute description="Business and Sales Area"
+        name="BUSalesArea" type="String" assignTo="{!requestBUSalesArea}" />
+    <apex:attribute description="PH in Project Scenario" name="isProject"
+        type="boolean" />
+
+    <apex:attribute description="To display Clone link"
+        name="cloneShowFlag" type="boolean" />  
+
+    <!-- <TJ20140513> Added attribute to store and pass page label -->
+    <apex:attribute description="To store current page label"
+        name="currentHeader" type="String"/>
+    <apex:attribute description="To pass the page label for navigation flow text"
+        name="labelName" type="String"/>
+    <apex:attribute description="To pass the page label for navigation flow text"
+        name="navtext" type="String"/>
+
+    <div id="change">
+        <apex:outputPanel id="pageBlockTab" >
+            <!-- TABLE TO DISPLAY RESPECTIVE OBJECT'S RECORDS -->
+            <table class="list" border="0" cellSpacing="0" cellPadding="0" style="width: 1280px;" id="PARelatedListComponentTable{!SUBSTITUTE(priceType,' ','')}">
+                <colgroup span="6" />
+
+                <!-- TABLE HEADER -->
+                <thead class="rich-table-thead">
+
+                    <!-- TITLE FOR THE TABLE -->
+                    <tr class="">
+                        <apex:variable var="x1" value="x1" rendered="{!typeOfSObjectList != SOBJECTTYPE_MATERIAL}">
+                            <th class="" colSpan="25" scope="colgroup">{!priceType}{!IF(typeOfSObjectList== SOBJECTTYPE_PRICINGREQUEST,' Requests','')}</th>
+                        </apex:variable>
+                    </tr>
+
+                    <!-- COLUMN HEADERS -->
+                    <tr>
+
+                        <!-- ACTION HEADER -->
+                        <apex:variable value="m1" var="m1" rendered="{!((typeOfSObjectList == SOBJECTTYPE_PRICINGREQUEST && actionShowFlag)||(typeOfSObjectList != SOBJECTTYPE_PRICINGREQUEST  && typeOfSObjectList != SOBJECTTYPE_BUPH && typeOfSObjectList != SOBJECTTYPE_PH && typeOfSObjectList != SOBJECTTYPE_MATERIAL && typeOfSObjectList != SOBJECTTYPE_ADMINMASTER)) && typeOfRequest!='Import'}">
+                            <th class="headerRow" colSpan="1" scope="col">Action</th>
+                            
+                        </apex:variable>
+
+                        <!-- CHECKBOX IN THE HEADER -->
+                        
+                        <apex:variable value="p1" var="p1" rendered="{!(typeOfSObjectList == SOBJECTTYPE_BUPH && showCheckBox)||(typeOfSObjectList == SOBJECTTYPE_PRICINGREQUEST && showCheckBox) || typeOfSObjectList == SOBJECTTYPE_MATERIAL || (typeOfSObjectList == SOBJECTTYPE_PH && showCheckBox)}">
+                            <th class="headerRow" colSpan="1" scope="col">
+                                <apex:inputCheckBox value="{!selectAllFlag}" id="selAll">
+                                    <apex:actionSupport event="onclick" reRender="sel" status="stat" action="{!selectAll}"/>
+                                </apex:inputCheckbox>
+                            </th>
+                        </apex:variable>
+
+                        <!-- OTHER COLUMNS IN THE HEADER -->
+                        <apex:repeat value="{!columnsDisp}" var="r" rendered="{!!RPQFlag}">
+
+                            <!-- MATERIAL COLUMN -->
+                            <apex:variable value="a" var="a" rendered="{!CONTAINS(r.label,'Material') && NOT(CONTAINS(r.label,'Price')) && AND(CONTAINS(SUBSTITUTE(priceType,'Material Price Group',''),'Material'),CONTAINS(SUBSTITUTE(priceType,'Material Group',''),'Material'))}">
+                                <th class="headerRow" colSpan="1" scope="col">{!r.label}</th>
+                            </apex:variable>
+
+                            <!-- MATERIAL PRICE GROUP COLUMN -->
+                            <apex:variable value="b" var="b" rendered="{!CONTAINS(r.label,'Material Price Group') && CONTAINS(priceType,'Material Price Group')}">
+                                <th class="headerRow" colSpan="1" scope="col">{!r.label}</th>
+                            </apex:variable>
+
+                            <!-- COMMON COLUMNS -->
+                             <apex:variable value="c" var="c"
+                                rendered="{!typeOfSObjectList == SOBJECTTYPE_PRICINGREQUEST && IF(wrapperList.size !=0 && wrapperList[0].sObjectRecord['Request_Type__c']=='Non Customer Specific' && CONTAINS(r.label,'Behalf'),false,true) && IF(wrapperList.size !=0 && wrapperList[0].sObjectRecord['Pricing_Request_Type__c']!='Project Pricing' && CONTAINS(r.label,'Project'),false,true) && IF(!CONTAINS(priceType,'Project') && CONTAINS(r.label,'Project'),false,true)  && IF(wrapperList.size !=0 && wrapperList[0].sObjectRecord['Request_Type__c']!='Non Customer Specific' && (CONTAINS(r.label,'Pricing Condition') || CONTAINS(r.label,'Key Combination')),false,true) || typeOfSObjectList == SOBJECTTYPE_ORGGROUPITEM || typeOfSObjectList == SOBJECTTYPE_ADMINMASTER|| typeOfSObjectList == SOBJECTTYPE_BUPH || (typeOfSObjectList == SOBJECTTYPE_MATERIAL && NOT(CONTAINS(r.Label,'Product Hierarchy'))) || typeOfSObjectList == SOBJECTTYPE_PH || typeOfSObjectList == SOBJECTTYPE_PAORGGROUP || (CONTAINS(LOWER(TRIM(priceType)),LOWER(TRIM(r.label)))&& NOT(CONTAINS(r.label,'Material'))) || (CONTAINS(LOWER(TRIM(priceType)),LOWER(TRIM(SUBSTITUTE(r.label,' Code',''))))&& NOT(CONTAINS(r.label,'Material')))}">
+                                <th class="headerRow" colSpan="1" scope="col">{!IF(CONTAINS(r.label,'Material Name'),'Material',r.Label)}</th>
+                            </apex:variable>
+                            
+                            <!-- <MS20140527> Added PC KC columns -->
+                        <!--  <apex:variable value="ncsPC" var="ncsPC"
+                                rendered="{!typeOfSObjectList == SOBJECTTYPE_PRICINGREQUEST && IF(wrapperList.size !=0 && wrapperList[0].sObjectRecord['Request_Type__c']=='Non Customer Specific',true,false)}">
+                                <th  class="headerRow"  colSpan="1" scope="col">{!r.Label}</th>
+                            </apex:variable> -->
+                        
+
+                            <!-- PROJECT PRICE COLUMNS -->
+                            <apex:variable value="d" var="d"
+                                rendered="{!typeOfSObjectList == SOBJECTTYPE_PROJECTPRICE}">
+                                <th colSpan="1" scope="col">{!r.label}</th>
+                            </apex:variable>
+
+                            <!-- PRODUCT HIERARCHY COLUMNS -->
+                            <apex:variable value="e" var="e"
+                                rendered="{!CONTAINS(priceType,'PH') && CONTAINS(r.Label,'Product Hierarchy')}">
+                                <th class="headerRow" colSpan="1" scope="col">{!r.label}</th>
+                            </apex:variable>
+                        </apex:repeat>
+
+                            <!-- IM20150210 ro show only RPQ fields -->
+                        <apex:repeat value="{!RPQColumns}" var="r" rendered="{!RPQFlag}">
+                            <apex:variable value="a" var="a" >
+                                <th class="headerRow" colSpan="1" scope="col">{!r.label}</th>
+                            </apex:variable>
+                        </apex:repeat>
+                        
+                        <!--  -->
+                        <apex:variable value="o11" var="o11" rendered="{!typeOfSObjectList == SOBJECTTYPE_BUPH  && showCheckBox==true}">
+                        <th class="headerRow" colSpan="1" scope="col">PH Description</th>
+                        </apex:variable>
+
+                        <!--  -->                   
+                        <apex:variable value="o12" var="o12" rendered="{!typeOfSObjectList == SOBJECTTYPE_BUPH  && showCheckBox==false}">
+                        <th class="headerRow" colSpan="1" scope="col">Business Description</th>
+                        </apex:variable>
+                        
+                        <!-- <JM20140428> STARTS-->
+                        <apex:variable value="o12" var="o12" rendered="{!typeOfSObjectList == SOBJECTTYPE_BUPH  && showCheckBox==false}">
+                        <th  class="headerRow"  colSpan="1" scope="col">Rep Material Code</th>
+                        </apex:variable>
+                        <apex:variable value="o12" var="o12" rendered="{!typeOfSObjectList == SOBJECTTYPE_BUPH  && showCheckBox==false}">
+                        <th  class="headerRow"  colSpan="1" scope="col">Rep Material</th>
+                        </apex:variable>
+                        <apex:variable value="o12" var="o12" rendered="{!typeOfSObjectList == SOBJECTTYPE_BUPH  && showCheckBox==false}">
+                        <th  class="headerRow"  colSpan="1" scope="col">Default Per</th>
+                        </apex:variable>
+                        <apex:variable value="o12" var="o12" rendered="{!typeOfSObjectList == SOBJECTTYPE_BUPH  && showCheckBox==false}">
+                        <th  class="headerRow"  colSpan="1" scope="col">Default UoM</th>
+                        </apex:variable>
+                        <!-- <JM20140428> ENDS -->
+                        <!-- HEADER FOR PH OBJECT -->
+                        <apex:variable value="w5" var="w5" rendered="{!typeOfSObjectList == SOBJECTTYPE_PH && showPHName == true}">
+                            <th class="headerRow" colSpan="1" scope="col">Name</th>
+                        </apex:variable>
+                        <!-- <HL20140918> ENDS -->
+                        <apex:variable value="w7" var="w7" rendered="{!typeOfSObjectList == SOBJECTTYPE_ADMINMASTER}">
+                        <th class="headerRow" colSpan="1" scope="col">Sales Area</th>
+                        </apex:variable>
+                        <apex:variable value="w6" var="w6" rendered="{!typeOfSObjectList == SOBJECTTYPE_ADMINMASTER}">
+                        <th class="headerRow" colSpan="1" scope="col">Manage Approver</th>
+                        </apex:variable>
+                        
+                                                
+                        
+
+                    </tr>
+                </thead>
+
+                <!-- DATA IN THE TABLE -->
+                <apex:repeat value="{!wrapperList}" var="v">
+
+                    
+                    <tr class="dataRow even first last">
+
+                        <!-- ACTION COLUMN -->
+                        <apex:variable var="p1" value="p1" rendered="{!((typeOfSObjectList == SOBJECTTYPE_PRICINGREQUEST && actionShowFlag)||(typeOfSObjectList != SOBJECTTYPE_PRICINGREQUEST  && typeOfSObjectList != SOBJECTTYPE_BUPH && typeOfSObjectList != SOBJECTTYPE_PH && typeOfSObjectList != SOBJECTTYPE_MATERIAL && typeOfSObjectList != SOBJECTTYPE_ADMINMASTER))&& typeOfRequest!='Import'}">
+                        
+                            <td class="dataCell" colSpan="1" >
+
+                                <!-- PROJECT START-->
+                                    <apex:commandLink action="{!loadPage}" status="stat" style="color:blue" value="Edit" rendered="{!typeOfSObjectList == SOBJECTTYPE_PROJECTPRICE && IF(v.dummy='Edit' || v.dummy='All',true,false)}">
+                                        <apex:param value="PANewProject" name="passMode" assignTo="{!viewMode}" />
+                                        <apex:param value="PANewProject" name="passMode1" assignTo="{!currentPageLabel}" />
+                                        <apex:param value="edit-{!v.sObjectRecord['Id']}" name="passReq" assignTo="{!selected}" />
+                                        <!-- <TJ20140513> Passing page label -->
+                                        <apex:param value="{!IF(CONTAINS(navtext,'Project Selection'),'Project Selection',currentHeader)}" name="pageName" assignTo="{!labelName}"/>
+                                    </apex:commandLink>
+                                    {!IF(typeOfSObjectList == SOBJECTTYPE_PROJECTPRICE && IF(v.dummy='All',true,false),'|','')}
+                                    <apex:commandLink action="{!loadPage}" status="stat" style="color:blue" value="Clone" rendered="{!typeOfSObjectList == SOBJECTTYPE_PROJECTPRICE && IF(v.dummy='Clone' || v.dummy='All',true,false)}"> 
+                                        <apex:param value="PANewProject" name="passMode" assignTo="{!viewMode}" />
+                                        <apex:param value="PANewProject" name="passMode1" assignTo="{!currentPageLabel}" />
+                                        <apex:param value="clone-{!v.sObjectRecord['Id']}" name="passReq" assignTo="{!selected}" />
+                                        <!-- <TJ20140513> Passing page label -->
+                                        <apex:param value="{!IF(CONTAINS(navtext,'Project Selection'),'Project Selection',currentHeader)}" name="pageName" assignTo="{!labelName}"/>
+                                        
+                                    </apex:commandLink>
+                                <!-- PROJECT END-->
+
+                                <!-- GLOBAL CONFIG START-->
+                                    <apex:commandLink action="{!loadPage}" status="stat" style="color:blue" value="Configure" rendered="{!typeOfSObjectList == SOBJECTTYPE_ORGGROUPITEM || typeOfSObjectList == SOBJECTTYPE_PAORGGROUP}">
+                                        <apex:param value="PAGlobalConfig" name="passMode" assignTo="{!viewMode}" />
+                                        <apex:param value="PAGlobalConfig" name="passMode" assignTo="{!currentPageLabel}"/>
+                                        <apex:param value="{!v.sObjectRecord['Id']}" name="passReq" assignTo="{!selected}" />
+                                        <apex:param value="{!actionAtr}Configure" name="sendAction" assignTo="{!actionAtr}" />
+                                        <!-- <TJ20140513> Passing page label -->
+                                        <apex:param value="{!IF(CONTAINS(navtext,$Label.Global_Config),$Label.Global_Config,currentHeader)}" name="pageName" assignTo="{!labelName}"/>
+                                        
+                                    </apex:commandLink>
+                                <!-- GLOBAL CONFIG END-->
+
+                                <!-- REQUEST START-->
+                                    <apex:commandLink action="{!loadPage}" style="color:blue" value="Edit" rendered="{!typeOfSObjectList == SOBJECTTYPE_PRICINGREQUEST && v.stringMap['showEditLink']=='true' && v.sObjectRecord['Request_Type__c']!='Import'}">
+                                        <apex:param value="{!IF(v.sObjectRecord['Pricing_Request_Type__c']=='Project Pricing','PAPricingRequest','PANewRequest')}" name="passMode" assignTo="{!viewMode}" />
+                                        <apex:param value="{!IF(v.sObjectRecord['Pricing_Request_Type__c']=='Project Pricing','PAPricingRequest','PANewRequest')}" name="passMode" assignTo="{!currentPageLabel}" />
+                                        <apex:param value="{!v.sObjectRecord['Id']}" name="passReq" assignTo="{!selected}" />
+                                        <apex:param value="Edit" name="sendAction" assignTo="{!actionAtr}" />
+                                        <!-- <TJ20140513> Passing page label -->
+                                        <apex:param value="{!IF(v.sObjectRecord['Pricing_Request_Type__c']=='Project Pricing',IF(CONTAINS(navtext,$Label.Price_Request),$Label.Price_Request,currentHeader),IF(CONTAINS(navtext,$Label.New_Request),$Label.New_Request,currentHeader))}" name="pageName" assignTo="{!labelName}"/>
+                                        
+                                    </apex:commandLink>
+                                    <!-- Commented as part of Production Issue#110 - Del link not required for Requests -->
+                                    <!-- apex:outputText value=" | " rendered="{!typeOfSObjectList == SOBJECTTYPE_PRICINGREQUEST && v.stringMap['showEditLink']=='true' && v.stringMap['showDelLink']=='true'}" />
+                                    <apex:commandLink status="stat" style="color:blue" value="Del" rendered="{!typeOfSObjectList == SOBJECTTYPE_PRICINGREQUEST && v.stringMap['showDelLink']=='true'}" onclick="return confirm('Are you sure you want to Delete?');" action="{!deleteSelected}" >
+                                        <apex:param value="{!BOOLEAN_TRUE}" name="deleteReqId" assignTo="{!v.isSelected}" />
+                                    </apex:commandLink-->
+                                    
+                                    <!-- <AV20140408>-starts -->
+                                    <!-- <MS20140901> Added Clone for pricing tasks -->
+                                    <apex:outputText value=" | " rendered="{!typeOfSObjectList == SOBJECTTYPE_PRICINGREQUEST && !RPQFlag && cloneShowFlag && v.stringMap['showEditLink']=='true' && (priceType='Customer Price' || priceType='Pricing Task' || priceType='Non Customer Specific')}" />
+                                    <apex:commandLink action="{!loadPage}" style="color:blue" value="Clone" rendered="{!typeOfSObjectList == SOBJECTTYPE_PRICINGREQUEST && cloneShowFlag && (priceType='Customer Price' || priceType='Pricing Task' || priceType='Non Customer Specific')}">
+                                    <apex:param value="PANewRequest" name="passMode" assignTo="{!viewMode}" />
+                                    <apex:param value="PANewRequest" name="passMode" assignTo="{!currentPageLabel}" />
+                                    <apex:param value="Clone-{!v.sObjectRecord['Id']}" name="passReq" assignTo="{!selected}" />
+                                    <apex:param value="Clone" name="sendAction" assignTo="{!actionAtr}" />
+                                    <apex:param value="{!BOOLEAN_TRUE}" name="setFlag" assignTo="{!cloneEnable}" />
+                                    <!-- <TJ20140513> Passing page label -->
+                                    <apex:param value="{!IF(CONTAINS(navtext,$Label.Price_request_clone),$Label.Price_request_clone,currentHeader)}" name="pageName" assignTo="{!labelName}"/>
+                                        
+                                    </apex:commandLink>
+                                    <!-- <AV20140408>-ends -->
+                                    
+                                    
+                                    <apex:outputText value=" | " rendered="{!typeOfSObjectList == SOBJECTTYPE_PRICINGREQUEST && RPQFlag && v.cloneFlag && v.stringMap['showEditLink']=='true' && (priceType='Customer Price' || priceType='Pricing Task' || priceType='Non Customer Specific')}" />
+                                    <apex:commandLink action="{!loadPage}" style="color:blue" value="Clone" rendered="{!typeOfSObjectList == SOBJECTTYPE_PRICINGREQUEST && RPQFlag && v.cloneFlag && (priceType='Customer Price' || priceType='Pricing Task' || priceType='Non Customer Specific')}">
+                                    <apex:param value="PANewRequest" name="passMode" assignTo="{!viewMode}" />
+                                    <apex:param value="PANewRequest" name="passMode" assignTo="{!currentPageLabel}" />
+                                    <apex:param value="Clone-{!v.sObjectRecord['Id']}" name="passReq" assignTo="{!selected}" />
+                                    <apex:param value="Clone" name="sendAction" assignTo="{!actionAtr}" />
+                                    <apex:param value="{!BOOLEAN_TRUE}" name="setFlag" assignTo="{!cloneEnable}" />
+                                    <!-- <TJ20140513> Passing page label -->
+                                    <apex:param value="{!IF(CONTAINS(navtext,$Label.Price_request_clone),$Label.Price_request_clone,currentHeader)}" name="pageName" assignTo="{!labelName}"/>
+                                        
+                                    </apex:commandLink>
+                                    
+                                <!-- REQUEST END-->
+
+                                <!-- ADMIN SETUP START-->
+                                    <apex:commandLink action="{!loadPage}" style="color:blue" value="Edit" rendered="{!typeOfSObjectList == SOBJECTTYPE_ADMINMASTER}" >
+                                        <apex:param value="PAApprovalSetup" name="passMode" assignTo="{!viewMode}" />
+                                        <apex:param value="PAApprovalSetup" name="passMode" assignTo="{!currentPageLabel}" />
+                                        <apex:param value="{!v.sObjectRecord['Id']}" name="passReq" assignTo="{!selected}" />
+                                        <apex:param value="Edit" name="sendAction" assignTo="{!actionAtr}" />
+                                        <!-- <TJ20140513> Passing page label -->
+                                        <apex:param value="{!IF(CONTAINS(navtext,$Label.Approval_Set_Up),$Label.Approval_Set_Up,currentHeader)}" name="pageName" assignTo="{!labelName}"/>
+                                        
+                                    </apex:commandLink>
+                                    <apex:outputText value=" | " rendered="{!typeOfSObjectList == SOBJECTTYPE_ADMINMASTER}" />
+                                    <apex:commandLink status="stat" style="color:blue" value="Del" rendered="{!typeOfSObjectList == SOBJECTTYPE_ADMINMASTER}" onclick="return confirm('Are you sure you want to Delete?');" action="{!deleteSelected}">
+                                        <apex:param value="{!BOOLEAN_TRUE}" name="deleteReqId" assignTo="{!v.isSelected}" />
+                                    </apex:commandLink>
+                                    
+                                                                                                                                 
+                                <!-- ADMIN SETUP END-->
+                            </td>
+                        </apex:variable>
+
+                        <!-- CHECKBOX -->
+                        <apex:variable value="q1" var="q1" rendered="{!(typeOfSObjectList == SOBJECTTYPE_BUPH && showCheckBox)||(typeOfSObjectList == SOBJECTTYPE_PRICINGREQUEST && showCheckBox) || typeOfSObjectList == SOBJECTTYPE_MATERIAL || (typeOfSObjectList == SOBJECTTYPE_PH && showCheckBox)}">
+                            <td class="dataCell" colSpan="1">
+                                <apex:inputCheckBox value="{!v.isSelected}" id="sel"/>
+                            </td>
+                        </apex:variable>
+                        
+                         <apex:repeat value="{!RPQColumns}" var="r" rendered="{!RPQFlag}">
+                         <apex:variable value="a" var="a" rendered="{!AND ( NOT(CONTAINS(r.label,'Behalf')),NOT(CONTAINS(r.label,'Approver')),NOT(CONTAINS(r.label,'Modified')) , NOT(CONTAINS(r.label,'Id')),NOT(CONTAINS(r.label,'Date')) )}">
+                                <td class="dataCell" colSpan="1">{!v.sObjectRecord[r]}</td>
+                            </apex:variable>
+                            <apex:variable value="a" var="a" rendered="{!OR(CONTAINS(r.label,'Modified'), CONTAINS(r.label,'Approver'), CONTAINS(r.label,'Behalf'), CONTAINS(r.label,'Date'))}">
+                                <td class="dataCell" colSpan="1"><apex:outputField value="{!v.sObjectRecord[r]}"/></td>
+                            </apex:variable>
+                             <apex:variable value="a" var="a" rendered="{!CONTAINS(r.label,'Id')}">
+                                <td class="dataCell" colSpan="1">
+                            <apex:commandLink action="{!loadPage}" value="{!v.sObjectRecord[r]}">
+                                        <apex:param value="PAPricingRequest" name="passMode" assignTo="{!viewMode}" />
+                                        <apex:param value="PAPricingRequest" name="passMode" assignTo="{!currentPageLabel}" />
+                                        <apex:param value="{!v.sObjectRecord['Id']}" name="passReq" assignTo="{!selected}" />
+                                        <apex:param value="View" name="sendAction" assignTo="{!actionAtr}" />
+                                        <!-- <TJ20140513> Passing page label -->
+                                        <apex:param value="{!IF(CONTAINS(navtext,$Label.Price_Request),$Label.Price_Request,currentHeader)}" name="pageName" assignTo="{!labelName}"/>
+                                        
+                             </apex:commandLink>
+                             </td>
+                             </apex:variable>
+                        </apex:repeat>
+                       
+                        <!-- OTHER COLUMNS -->
+                        <apex:repeat value="{!columnsDisp}" var="r" rendered="{!!RPQFlag}">
+
+                            <!-- MATERIAL FIELDS -->
+                            <apex:variable value="a3" var="a3" rendered="{!CONTAINS(r.label,'Material') && NOT(CONTAINS(r.label,'Price')) && AND(CONTAINS(SUBSTITUTE(priceType,'Material Price Group',''),'Material'),CONTAINS(SUBSTITUTE(priceType,'Material Group',''),'Material'))}">
+                                <td class="dataCell" colSpan="1">{!v.sObjectRecord[r]}</td>
+                            </apex:variable>
+
+                            <!-- MATERIAL PRICE GROUP FIELDS -->
+                            <apex:variable value="a4" var="a4" rendered="{!CONTAINS(r.label,'Material Price Group') && CONTAINS(priceType,'Material Price Group')}">
+                                <td class="dataCell" colSpan="1">{!v.sObjectRecord[r]}</td>
+                            </apex:variable>
+
+                            <!-- MAIN COLUMNS -->
+                            <apex:variable value="a5" var="a5" rendered="{!typeOfSObjectList == SOBJECTTYPE_PRICINGREQUEST && IF(wrapperList.size !=0 && wrapperList[0].sObjectRecord['Request_Type__c']=='Non Customer Specific' && CONTAINS(r.label,'Behalf'),false,true) && IF(wrapperList.size !=0 && wrapperList[0].sObjectRecord['Pricing_Request_Type__c']!='Project Pricing' && CONTAINS(r.label,'Project'),false,true) && IF(wrapperList.size !=0 && wrapperList[0].sObjectRecord['Request_Type__c']!='Non Customer Specific' && (CONTAINS(r.label,'Pricing Condition') || CONTAINS(r.label,'Key Combination')),false,true) || typeOfSObjectList == SOBJECTTYPE_ORGGROUPITEM || typeOfSObjectList == SOBJECTTYPE_ADMINMASTER|| typeOfSObjectList == SOBJECTTYPE_BUPH || (typeOfSObjectList == SOBJECTTYPE_MATERIAL && NOT(CONTAINS(r.Label,'Product Hierarchy'))) || typeOfSObjectList == SOBJECTTYPE_PH || typeOfSObjectList == SOBJECTTYPE_PAORGGROUP || (CONTAINS(LOWER(TRIM(priceType)),LOWER(TRIM(r.label)))&& NOT(CONTAINS(r.label,'Material'))) || (CONTAINS(LOWER(TRIM(priceType)),LOWER(TRIM(SUBSTITUTE(r.label,' Code',''))))&& NOT(CONTAINS(r.label,'Material')))}">
+                                <td class="dataCell" colSpan="1">
+
+                                    <!-- Ver1.1 START -->
+                                    <apex:variable value="a44" var="a44" rendered="{!typeOfSObjectList == SOBJECTTYPE_ORGGROUPITEM}">
+                                        {!IF(NOT(CONTAINS(r.label,'Id'))&& IF(typeOfSObjectList == SOBJECTTYPE_BUPH && CONTAINS(r.label,'Business'),false,true) && IF(typeOfSObjectList == SOBJECTTYPE_PH && CONTAINS(r.label,'Name'),false,true),v.sObjectRecord[r],'')}
+                                    </apex:variable>
+                                    <apex:variable value="a45" var="a45" rendered="{!typeOfSObjectList != SOBJECTTYPE_ORGGROUPITEM}">
+                                        <apex:outputField value="{!v.sObjectRecord[r]}" rendered="{!NOT(CONTAINS(r.label,'Id'))&& IF(typeOfSObjectList == SOBJECTTYPE_BUPH && CONTAINS(r.label,'Business'),false,true) && IF(typeOfSObjectList == SOBJECTTYPE_PH && CONTAINS(r.label,'Name'),false,true)}"></apex:outputField>
+                                    </apex:variable>
+                                    <apex:variable value="a45" var="a45" rendered="{!typeOfSObjectList == SOBJECTTYPE_PRICINGREQUEST && v.sObjectRecord['Pricing_Request_Type__c']=='Project Pricing' && CONTAINS(r.label,'Project Id')}">
+                                        {!v.sObjectRecord[r]}
+                                    </apex:variable>
+                                    
+                                    
+                                    <!-- Ver1.1 END -->
+                                    
+                                    <!-- ID OF PRICING REQUEST EXCLUDING IMPORT  -->
+                                    <!-- VR20130717 - APAC ROLLOUT2-->
+                                    <apex:commandLink action="{!loadPage}" value="{!v.sObjectRecord[r]}" rendered="{!CONTAINS(r.label,'Id') && NOT(CONTAINS(r.label,'Project')) && NOT(typeOfSObjectList == SOBJECTTYPE_ADMINMASTER) && NOT(typeOfSObjectList == SOBJECTTYPE_PRICINGREQUEST && (v.sObjectRecord['Request_Type__c']=='Import'|| v.sObjectRecord['Request_Type__c']=='Mass Import' ))}">
+                                        <apex:param value="PAPricingRequest" name="passMode" assignTo="{!viewMode}" />
+                                        <apex:param value="PAPricingRequest" name="passMode" assignTo="{!currentPageLabel}" />
+                                        <apex:param value="{!v.sObjectRecord['Id']}" name="passReq" assignTo="{!selected}" />
+                                        <apex:param value="View" name="sendAction" assignTo="{!actionAtr}" />
+                                        <!-- <TJ20140513> Passing page label -->
+                                        <apex:param value="{!IF(CONTAINS(navtext,$Label.Price_Request),$Label.Price_Request,currentHeader)}" name="pageName" assignTo="{!labelName}"/>
+                                        
+                                    </apex:commandLink>
+
+                                    <!-- ID OF IMPORT PRICING REQUEST -->
+                                    <!-- VR20130717 - APAC ROLLOUT2-->
+                                    <apex:commandLink action="{!loadPage}" value="{!v.sObjectRecord[r]}" rendered="{!CONTAINS(r.label,'Id') && typeOfSObjectList == SOBJECTTYPE_PRICINGREQUEST && (v.sObjectRecord['Request_Type__c']=='Import' ||v.sObjectRecord['Request_Type__c']=='Mass Import')}">
+                                        <apex:param value="PAImportReqItems" name="passMode" assignTo="{!viewMode}" />
+                                        <apex:param value="PAImportReqItems" name="passMode" assignTo="{!currentPageLabel}" />
+                                        <apex:param value="{!v.sObjectRecord['Id']}" name="passReq" assignTo="{!selected}" />
+                                        <apex:param value="View" name="sendAction" assignTo="{!actionAtr}" />
+                                        <apex:param value="{!IF(CONTAINS(navtext,$Label.Import_Req_Items),$Label.Import_Req_Items,currentHeader)}" name="pageName" assignTo="{!labelName}"/>
+                                    </apex:commandLink>
+
+                                    <!-- FOR APPROVAL SETUP -->
+                                    <!-- <HL20140918 changed id to PA_BU_Admin_Master__r.Id since the object reference is changed to detail -->
+                                    <apex:commandLink action="{!loadPage}" value="{!v.sObjectRecord[r]}" rendered="{!CONTAINS(r.label,'Id') && typeOfSObjectList == SOBJECTTYPE_ADMINMASTER}">
+                                        <apex:param value="PAApprovalSetup" name="passMode" assignTo="{!viewMode}" />
+                                        <apex:param value="PAApprovalSetup" name="passMode" assignTo="{!currentPageLabel}" />
+                                        <apex:param value="{!v.sObjectRecord['PA_BU_Admin_Master__r.Id']}" name="passReq" assignTo="{!selected}" />
+                                        <apex:param value="true" name="sendAction" assignTo="{!actionAtr}" />
+                                        <!-- <TJ20140513> Passing page label -->
+                                        <apex:param value="{!IF(CONTAINS(navtext,$Label.Approval_Set_Up),$Label.Approval_Set_Up,currentHeader)}" name="pageName" assignTo="{!labelName}"/>
+                                        
+                                    </apex:commandLink>
+                                                            
+                                </td>
+                            </apex:variable>
+
+                            <!-- PROJECT PRICE COLUMNS -->
+                            <apex:variable var="b1" value="b1" rendered="{!typeOfSObjectList == SOBJECTTYPE_PROJECTPRICE}">
+                                <td class="dataCell" colSpan="1">
+                                    <apex:outputField value="{!v.sObjectRecord[r]}" rendered="{!NOT(CONTAINS(r.label,'Id'))}"/>
+                                    <apex:commandLink action="{!loadPage}"  value="{!v.sObjectRecord[r]}" rendered="{!CONTAINS(r.label,'Id')}" >
+                                        <apex:param value="projectId-{!v.sObjectRecord['Id']}" name="passReq" assignTo="{!selected}" />
+                                        <apex:param value="{!if(typeOfSObjectList == SOBJECTTYPE_PROJECTPRICE && v.stringMap['ApprovedProjectNoReq']=='true' && (v.sObjectRecord['Project_status__c']=='Approved' || v.sObjectRecord['Project_status__c']=='Completed') ,'PANewProject','PAPricingRequest')}" name="passMode" assignTo="{!viewMode}" />
+                                        <apex:param value="{!if(typeOfSObjectList == SOBJECTTYPE_PROJECTPRICE && v.stringMap['ApprovedProjectNoReq']=='true' && (v.sObjectRecord['Project_status__c']=='Approved' || v.sObjectRecord['Project_status__c']=='Completed') ,'PANewProject','PAPricingRequest')}" name="passMode" assignTo="{!currentPageLabel}" />
+                                        <!-- <TJ20140513> Passing page label -->
+                                        <apex:param value="{!if(typeOfSObjectList == SOBJECTTYPE_PROJECTPRICE && v.stringMap['ApprovedProjectNoReq']=='true' && (v.sObjectRecord['Project_status__c']=='Approved' || v.sObjectRecord['Project_status__c']=='Completed') ,IF(CONTAINS(navtext,'Project Selection'),'Project Selection',currentHeader),IF(CONTAINS(navtext,$Label.Price_Request),$Label.Price_Request,currentHeader))}" name="pageName" assignTo="{!labelName}"/>
+                                    </apex:commandLink>
+                                </td>
+                            </apex:variable>
+                    
+                            <apex:variable value="b2" var="b2" rendered="{!CONTAINS(priceType,'PH') && CONTAINS(r.Label,'Product Hierarchy')}">
+                                <td class="dataCell" colSpan="1"><apex:outputField value="{!v.sObjectRecord[r]}" rendered="{!(typeOfSObjectList != SOBJECTTYPE_MATERIAL && CONTAINS(r.label,'Product Hierarchy'))||(typeOfSObjectList == SOBJECTTYPE_MATERIAL && CONTAINS(r.label,'Code'))}" />
+                                    <apex:outputText rendered="{!typeOfSObjectList == SOBJECTTYPE_MATERIAL && !CONTAINS(r.label,'Code')}">
+                                        <apex:variable value="{!v.sObjectRecord['ERP_Product_Hierarchy_Code__c']}" var="a" rendered="{!v.sObjectRecord['ERP_Product_Hierarchy_Code__c'] != null && v.sObjectRecord['ERP_Product_Hierarchy_Code__c'] != ''}">
+                                            {!v.stringMap[a]}
+                                        </apex:variable>
+                                    </apex:outputText>
+                                </td>
+                            </apex:variable>
+                                                        
+                        </apex:repeat>
+                        
+                        <!--  -->
+                        <apex:variable value="o13" var="o13" rendered="{!typeOfSObjectList == SOBJECTTYPE_BUPH  && showCheckBox==true}">
+                            <td class="dataCell" colSpan="1">
+                                {!v.sObjectRecord['Business_Description__c']}
+                            </td>
+                        </apex:variable>
+
+<!--                                            -->
+                        <apex:variable value="o14" var="o14" rendered="{!typeOfSObjectList == SOBJECTTYPE_BUPH  && showCheckBox==false}">
+                            <td class="dataCell" colSpan="1">
+                                <apex:inputText value="{!v.sObjectRecord['Business_Description__c']}" size="25" />
+                            </td>
+                        </apex:variable>
+                        <!-- Jawahar -->
+                        <!-- <JM20140428> STARTS-->
+                        <apex:variable value="o14" var="o14" rendered="{!typeOfSObjectList == SOBJECTTYPE_BUPH  && showCheckBox==false}">
+                            <td class="dataCell" colSpan="1">
+                                <apex:outputText value="{!v.sObjectRecord['Representative_Material_Code__c']}" />
+                            </td>
+                        </apex:variable>
+                        <apex:variable value="o14" var="o14" rendered="{!typeOfSObjectList == SOBJECTTYPE_BUPH  && showCheckBox==false}">
+                            <td class="dataCell" colSpan="1">
+                                <apex:outputText value="{!v.sObjectRecord['Representative_Material_Description__c']}" />
+                            </td>
+                        </apex:variable>
+                        <apex:variable value="o14" var="o14" rendered="{!typeOfSObjectList == SOBJECTTYPE_BUPH  && showCheckBox==false}">
+                            <td class="dataCell" colSpan="1">
+                                <apex:inputText value="{!v.sObjectRecord['Default_Per__c']}" size="10" />
+                            </td>
+                        </apex:variable>
+                        <apex:variable value="o14" var="o14" rendered="{!typeOfSObjectList == SOBJECTTYPE_BUPH  && showCheckBox==false}">
+                            <td class="dataCell" colSpan="1">
+                                <apex:inputText value="{!v.sObjectRecord['Default_UoM__c']}" size="10" />
+                            </td>
+                        </apex:variable>
+                        <!-- Jawahar -->
+                        <!-- <JM20140428> ENDS-->
+                        <apex:variable value="w55" var="w55" rendered="{!typeOfSObjectList == SOBJECTTYPE_PH && showPHName == true}">
+                            <td class="dataCell" colSpan="1">
+                                <apex:inputText value="{!v.stringMap['Name']}" rendered="{!typeOfSObjectList == SOBJECTTYPE_PH}" size="50" />
+                            </td>
+                        </apex:variable>
+                        <!-- <HL20140918> Starts-->
+                        <apex:variable value="w77" var="w77" rendered="{!typeOfSObjectList ==  SOBJECTTYPE_ADMINMASTER}">
+                            <td class="dataCell" colSpan="1">
+                                <apex:outputText value="{!v.sObjectRecord['PA_BU_Admin_Master__r.Sales_Organisation__c'] + ' ' + v.sObjectRecord['PA_BU_Admin_Master__r.Distribution_Channel__c'] + ' ' + v.sObjectRecord['PA_BU_Admin_Master__r.Division__c']}" />
+                            </td>
+                        </apex:variable>
+                        <apex:variable value="w66" var="w66" rendered="{!typeOfSObjectList ==  SOBJECTTYPE_ADMINMASTER && v.sObjectRecord['Routing_Parameter__c']!='Not Required' && v.sObjectRecord['Key_Field__c']!='Requester'}">
+                            <td class="dataCell" colSpan="1">
+                                <apex:commandLink action="{!loadPage}" style="color:blue" value="Manage Approver" rendered="{!typeOfSObjectList == SOBJECTTYPE_ADMINMASTER}" >
+                                <apex:param value="PAManageApprover" name="passMode" assignTo="{!viewMode}" />
+                                <apex:param value="PAManageApprover" name="passMode" assignTo="{!currentPageLabel}" />
+                                <apex:param name="passReq" value="{!v.sObjectRecord['PA_BU_Admin_Master__r.Id']}" assignTo="{!selected}"/> 
+                                <apex:param name="passReq1" value="{!v.sObjectRecord['Key_Field__c']}" assignTo="{!selected1}"/> 
+                                <apex:param name="passReq2" value="{!v.sObjectRecord['Approver_Role__c']}" assignTo="{!selected2}"/> 
+                                <apex:param value="ManageApprover" name="sendAction" assignTo="{!actionAtr1}" />
+                                </apex:commandLink> 
+                            </td>
+                        </apex:variable>
+                        
+                        <!-- <HL20140918> Ends-->
+                        
+                    
+          
+                        
+                    </tr>
+                </apex:repeat>
+            </table>
+        </apex:outputPanel>
+    </div>
+</apex:component>

@@ -1,0 +1,320 @@
+<!-- This component is used to display the records from ERP SALES PRICES SAP object in the table -->
+<!--    Ver.            Developer               Changes                                                         Dependencies    -->
+<!--    1.1             Priyanka        Added dateFieldColumns                                                  None            -->
+<!--    1.2             Priyanka        Removed apex:variables                                                  None            -->
+<!--    1.3             Priyanka        Removed apex:repeats                                                    None            -->
+<!--    1.4             Priyanka        Added disabling checkbox for Project                                    None            -->
+<!--    1.5             Priyanka        Customer Price Group to CPG and Material Group Code to MPG---ISSUE# 23 UAT              -->
+<!--    1.6             Prachi          increased the width of the table (20thmarch)                            None            -->
+<!--    1.7             Priyanka        SIT Issue # 72 FIX - Changed header for Customer Hierarchy
+                                        Columns - APAC ROLLOUT                                                  None            -->         
+<!--    1.8             Brundha         added attributes for view prices- APAC ROLLOUT2                                                 None            -->
+<!-- PP20140313         Priyanka        Removed condition for displaying 100 records                            None -->     
+<!-- PP20140614         Priyanka        Added condition for View Link for scaled price records                  None -->
+<!-- PR20140925         Priyanka R      Added Pricing Request Column and boolean to show the flag											None -->
+<!-- 			        Nadeem S        Added check to correct view link to be displayed only for scaled prices.None -->
+<apex:component controller="PARelatedList" allowDML="true"
+    access="global">
+    <style>
+#change .bPageBlock { 
+    border: 0px;
+}
+</style>
+
+
+
+    <!-- ATTRIBUTES -->
+    <apex:attribute description="PR ID for Email Tempalte" type="String"
+        name="pricingRequest" assignTo="{!pricingRequestId}" />
+
+
+    <apex:attribute description="sObject Wrapper List" type="PAWrapper[]"
+        name="WrapperRecordsDisp" assignTo="{!wrapperList}" />
+    <apex:attribute description="ViewMode from Component" name="viewMode"
+        type="string" />
+
+    <apex:attribute description="Holds Selected sObject's Id"
+        name="selected" type="String" />
+    <apex:attribute description="Desired Action" name="actionAtr"
+        type="string" />
+    <apex:attribute description="Holds sObject Type"
+        name="typeOfSObjectList" type="String" />
+    <apex:attribute description="Holds Pricing Request Type"
+        name="typeOfRequest" type="String" assignTo="{!priceType}" />
+    <apex:attribute description="Columns List" name="columnsDisp"
+        type="Schema.FieldSetMember[]" />
+    <apex:attribute description="To display edit Link" name="showEditLink"
+        type="boolean" />
+    <apex:attribute description="To display Name in PH" name="showPHName"
+        type="boolean" />
+    
+    <apex:attribute description="Show/hide time line" name="showTimeline"
+        type="boolean" />
+    
+    <apex:attribute description="To display delete Link"
+        name="showDeleteLink" type="boolean" />
+    <apex:attribute description="To display clone Link"
+        name="showCloneLink" type="boolean" />
+    <apex:attribute description="To display new Link" name="showNewLink"
+        type="boolean" />
+    <apex:attribute description="To display expire Link"
+        name="showExpireLink" type="boolean" />
+    <apex:attribute description="To display Changes Section"
+        name="showChangesSection" type="boolean" />
+    <apex:attribute description="To display checkbox" name="showCheckbox"
+        type="boolean" />
+    <apex:attribute description="To display Select Unedited and Delete selected buttons"
+        name="showSelectButtons" type="boolean" />
+    <apex:attribute description="To display checkbox"
+        name="disableCheckbox" type="boolean" />
+    <apex:attribute description="for add req item" name="showaddtorequest"
+        type="boolean" />
+    <apex:attribute description="To display Flag" name="showFlag"
+        type="boolean" />
+    <apex:attribute description="To display Action Section"
+        name="actionShowFlag" type="boolean" />
+    <apex:attribute description="Common Columns List"
+        name="pricingRecordColumns" type="Schema.FieldSetMember[]" />
+    <apex:attribute description="Sold To Columns List"
+        name="pricingRecordSoldToColumns" type="Schema.FieldSetMember[]" />
+    <apex:attribute description="Scaled Columns" name="scaledFlagColumns"
+        type="Schema.FieldSetMember[]" />
+    <apex:attribute description="Date columns" name="dateFieldColumns"
+        type="Schema.FieldSetMember[]" />
+        
+      <apex:attribute description="New columns" name="newFieldColumns"
+        type="Schema.FieldSetMember[]" />
+
+    <apex:attribute description="displaySoldToColumns"
+        name="showSoldToColumns" type="boolean" />
+
+        <apex:attribute description="is request a RPQ"
+        name="isRPQ" type="boolean" />
+
+    <apex:attribute description="Business and Sales Area"
+        name="BUSalesArea" type="String" assignTo="{!requestBUSalesArea}" />
+        <!-- Ver 1.8 Brundha APAC ROLLOUT 2  -->
+<apex:attribute description="view Customer Prices rendering table"
+        name="ViewCustomerprices" type="boolean" />
+        <!-- PP20140614 -->
+        <apex:attribute description="to Show Scale Columns during view prices" name="showScaleColumn" type="boolean"/>
+		<apex:attribute description="Request Type" name="reqType" type="String"/>
+		<apex:attribute description="Pricing Request Type" name="priReqType" type="String"/>
+		<!-- PR20140925 -->
+		<apex:attribute description="Pricing Request Column" name="showPRColumn" type="boolean"/>
+		<apex:attribute description="Project column" name="showProj" type="boolean"/>
+    <div id="change"><apex:pageBlock >
+
+<!-- Ver 1.8 Brundha APAC ROLLOUT 2  added nt to rendered for view Prices -->
+        <apex:outputPanel id="pageBlockTab">
+            <apex:outputpanel rendered="{!NOT(viewCustomerprices)}" >
+            <table class="list" border="0" cellSpacing="0" cellPadding="0"
+                style="width: 1280px;" id="PAERPPricesRelatedListTable">
+                <colgroup span="6" />
+                <thead class="rich-table-thead">
+                    <tr class="">
+
+                        <th class="" colSpan="25" scope="colgroup">{!priceType}</th>
+
+                    </tr>
+                    <tr class="headerRow">
+
+
+                        <apex:variable value="p1" var="p1" rendered="{!showCheckBox}">
+                            
+                            <th class="headerRow" colSpan="1" scope="col"><apex:inputCheckBox value="{!selectAllFlag}" id="selAll"
+                                disabled="{!wrapperList!=null && wrapperList.size != 0 && wrapperList[0].stringMap['disableCheckBox']=='true'}">
+                                <apex:actionSupport event="onclick" action="{!selectAll}" oncomplete="datatable();" reRender="sel,pcKctables,pageBlockTab" status="stat">
+                                </apex:actionSupport>
+
+                                </apex:inputCheckbox></th>
+                              
+                        </apex:variable>
+                        <apex:variable var="aa" value="aa" rendered="{!showScaleColumn}">
+                        <th class="headerRow" colSpan="1" scope="col">Scale</th>
+                    </apex:variable>
+                    <!-- <PR20140925> START-->
+                    <!--<GT20150106> START-->
+                      <apex:variable var="aa" value="aa" rendered="{!displayTmLn}" >       
+                                <th class="headerRow" colSpan="1" scope="col">History</th>
+                       </apex:variable>
+                          <!--<GT20150106> END-->
+                    <apex:variable var="bb" value="bb" rendered="{!(showPRColumn != NULL && showPRColumn == true)}">
+                    	<th class="headerRow" colSpan="1" scope="col">Pricing Request</th>
+					 </apex:variable>
+					 <!-- <PR20140925> END-->
+
+                        <apex:repeat value="{!columnsDisp}" var="r">
+                            <!-- Ver 1.5, 1.7 -->
+                            <th class="headerRow" colSpan="1" scope="col">
+                                {!IF(CONTAINS(r.label,'Customer Price Group Code'),SUBSTITUTE(r.label,'Customer Price Group','CPG'),IF(CONTAINS(r.label,'Material Price Group Code'),SUBSTITUTE(r.Label,'Material Price Group','MPG'),IF(CONTAINS(r.Label,'Customer Hierarchy'),SUBSTITUTE(r.Label,'Customer Hierarchy','Customer'),r.Label)))}
+                            </th>
+                        </apex:repeat>
+                    <apex:variable var="a" value="aa" rendered="{!showProj}">
+                        <th class="headerRow" colSpan="1" scope="col">Project</th>
+                    </apex:variable>
+
+
+                        <th class="dataCell" colSpan="1">Valid From</th>
+                        <th class="dataCell" colSpan="1">Valid To</th>
+
+
+                    </tr>
+                </thead>
+                
+                <apex:repeat value="{!wrapperList}" var="v" 
+                rows="{!IF(NOT(showCheckBox),500,1000)}">
+                    <tr class="dataRow even first last" >
+
+                        <apex:variable value="q1" var="q1" rendered="{!showCheckBox}">
+                            <td class="dataCell" colSpan="1">
+                            
+                            <apex:inputCheckBox value="{!v.isSelected}" 
+                                disabled="{!v.stringMap['disableCheckBox']=='true'}" id="sel" rendered="{!IF(prireqType!='Non Customer Specific' || prireqType!='Massive',true,false)}">
+                                </apex:inputCheckBox> 
+                            <apex:inputCheckBox value="{!v.isSelected}" 
+                                disabled="{!v.stringMap['disableCheckBox']=='true'}" id="sele" rendered="{!IF(ReqType!='Permanent' && (prireqType=='Non Customer Specific' || prireqType=='Massive'),true,false)}">
+                                </apex:inputCheckBox> 
+                                </td>
+                        </apex:variable>
+                        
+                         <apex:variable var="aa" value="aa" rendered="{!showScaleColumn}">
+<!--                         <td class="dataCell" colSpan="1"><apex:outputlink value="javascript:void(0);" style="color:blue" onclick="window.open('/{!v.sObjectRecord['Id']}?isdtp=lt','_blank','width=810,height=400,top=100,left=250,vertical-align:bottom,toolbar=0,status=1,scrollbars=1,resizable=yes',!1);" rendered="{!v.sObjectRecord['Scaled_Price_Flag__c']}">View</apex:outputlink></td> -->
+					<!--<Nadeem S 20150930> chenged to show view link onlu for scaled prices -->		
+							<td class="headerRow" colSpan="1" scope="col" ><c:PAScalePrice sapRecID="{!v.sObjectRecord['ID']}" rendered="{!v.sObjectRecord['Scaled_Price_Flag__c']}" /></td>
+                    </apex:variable>
+                    <!--<GT20150106> START-->
+                        <apex:variable var="aa" value="aa" rendered="{!displayTmLn}"  > <!-- <rendered="{!displayTmLn}" --> 
+                                <td class="headerRow" colSpan="1" scope="col"><c:PAPricingTimeline pckc="{!v.sObjectRecord['PCKC__c']}" disableTimeline="{!showTimeline}"/></td>
+                        </apex:variable>     
+                            <!--<GT20150106> END-->
+                     <!-- <PR20140925> START-->
+                     <apex:variable var="bb" value="bb" rendered="{!(showPRColumn != NULL && showPRColumn == true)}">
+                    	<td class="dataCell" colSpan="1"><apex:outputlink value="#" onclick="window.open('/{!v.sObjectRecord['Pricing_Request__c']}','_blank','width=810,height=310,toolbar=0,status=1,scrollbars=1,resizable=yes',!1);">{!v.sObjectRecord['Pricing_Request__r.Name']}</apex:outputlink></td>
+						</apex:variable>
+						 <!-- <PR20140925> END-->
+					
+                        <apex:repeat value="{!columnsDisp}" var="r">
+                            <td class="dataCell" colSpan="1">{!IF(CONTAINS(r.Label,'Rate'),v.stringMap['rateLocale'],v.sObjectRecord[r])}</td>
+                        </apex:repeat>
+						<apex:variable var="a" value="aa" rendered="{!showProj}">
+                       		<td class="headerRow" colSpan="1" scope="col">
+                        	{!v.sObjectRecord['Project__c']}
+                        	</td>
+                    	</apex:variable>
+                        <td class="dataCell" colSpan="1"><apex:outputField value="{!v.sObjectRecord['Valid_From__c']}"></apex:outputField>
+                        </td>
+                        <td class="dataCell" colSpan="1"><apex:outputField value="{!v.sObjectRecord['Valid_To__c']}"></apex:outputField>
+                        </td>
+
+                    </tr>
+                </apex:repeat>
+                
+            </table>
+            </apex:outputpanel>
+            <!-- Ver 1.8 Brundha APAC ROLLOUT 2  -->
+            <apex:outputpanel rendered="{!viewCustomerPrices}">
+            <table class="list" border="0" cellSpacing="0" cellPadding="0"
+                style="width: 100%;" >
+            
+                <colgroup span="6" />
+                <thead class="rich-table-thead">
+                    <tr class="">
+
+                        <th class="" colSpan="25" scope="colgroup">{!priceType}</th>
+
+                    </tr>
+                    <tr class="headerRow">
+
+                        <!--VR20130827 Commented as it is not required in View Customer Prices -->
+                        <!-- 
+                        <apex:variable value="p1" var="p1" rendered="{!showCheckBox}">
+                            <th class="headerRow" colSpan="1" scope="col"><apex:inputCheckBox value="{!selectAllFlag}" id="selAll"
+                                disabled="{!wrapperList!=null && wrapperList.size != 0 && wrapperList[0].stringMap['disableCheckBox']=='true'}">
+                                <apex:actionSupport event="onclick" reRender="sel" status="stat"
+                                    action="{!selectAll}">
+                                </apex:actionSupport>
+
+                                </apex:inputCheckbox></th>
+                        </apex:variable>
+                        -->
+                         <!--VR20130827 Added Column to show Scale link in View Customer Prices -->
+                         <th class="headerRow" colSpan="1" scope="col">Scale</th>
+                          <!-- <PR20140925> START-->
+                         <th class="headerRow" colSpan="1" scope="col">Pricing Request</th>
+                          <!-- <PR20140925> END-->
+                          <!--<GT20150106> START-->
+                          <apex:variable value="v" var="v1" rendered="{!!isRPQ}" >
+                                <th class="headerRow" colSpan="1" scope="col">Timeline</th>
+                                </apex:variable>
+                          <!--<GT20150106> END-->
+                          <apex:variable value="v" var="v1" rendered="{!!isRPQ}" >
+                         <th class="headerRow" colSpan="1" scope="col">Pricing Request</th>
+                        <apex:repeat value="{!columnsDisp}" var="r">
+                            <!-- Ver 1.5, 1.7 -->
+                            <th class="headerRow" colSpan="1" scope="col">
+                                {!IF(CONTAINS(r.label,'Customer Price Group Code'),SUBSTITUTE(r.label,'Customer Price Group','CPG'),IF(CONTAINS(r.label,'Material Price Group Code'),SUBSTITUTE(r.Label,'Material Price Group','MPG'),IF(CONTAINS(r.Label,'Customer Hierarchy'),SUBSTITUTE(r.Label,'Customer Hierarchy','Customer'),r.Label)))}
+                            </th>
+                        </apex:repeat>
+                        </apex:variable>
+                        <th class="dataCell" colSpan="1">Unit</th>
+                        <apex:variable value="v" var="v1" rendered="{!AND(wrapperList!=null,wrapperList.size != 0,wrapperList[0].sObjectRecord['Per__c']!=' ',wrapperList[0].sObjectRecord['Per__c']!=null,wrapperList[0].sObjectRecord['Sales_Price_Type__c'] != 'Project')}">
+                        <th class="dataCell" colSpan="1">Per</th>
+                        </apex:variable>
+                        <apex:variable value="v" var="v1" rendered="{!AND(wrapperList!=null,wrapperList.size != 0,wrapperList[0].sObjectRecord['UoM__c']!=' ',wrapperList[0].sObjectRecord['UoM__c']!=null,wrapperList[0].sObjectRecord['Sales_Price_Type__c'] != 'Project')}">
+                        <th class="dataCell" colSpan="1">UoM</th>
+                        </apex:variable>
+                        
+                        <th class="dataCell" colSpan="1">c</th>
+                        <th class="dataCell" colSpan="1">Valid To</th>
+
+
+                    </tr>
+                </thead>
+                <!-- PP20140313 Removed condition for displaying 100 records -->
+                <!-- rows="{!IF(NOT(showCheckBox),100,1000)}" -->
+                <apex:repeat value="{!wrapperList}" var="v"
+                    rows="{!IF(NOT(showCheckBox),500,1000)}">
+                    <tr class="dataRow even first last">
+                        <!--VR20130827 Commented as it is not required in View Customer Prices -->
+                        <!--
+                        <apex:variable value="q1" var="q1" rendered="{!showCheckBox}">
+                            <td class="dataCell" colSpan="1"><apex:inputCheckBox value="{!v.isSelected}" id="sel"
+                                disabled="{!v.stringMap['disableCheckBox']=='true'}" /></td>
+                        </apex:variable>
+                        --><apex:variable value="v" var="v1" rendered="{!!isRPQ}" >
+                        <!--VR20130827 Added Column to show Scale link in View Customer Prices -->
+                        <td class="dataCell" colSpan="1"><apex:outputlink value="#" style="color:blue" onclick="window.open('/{!v.sObjectRecord['Id']}?isdtp=lt','_blank','width=810,height=310,toolbar=0,status=1,scrollbars=1,resizable=yes',!1);" rendered="{!v.sObjectRecord['Scaled_Price_Flag__c']}">View</apex:outputlink></td>
+                        </apex:variable>
+                        <!-- <PR20140925> START-->
+                        <apex:variable value="v" var="v1" rendered="{!!isRPQ}" >
+                        <td class="dataCell" colSpan="1"><apex:outputlink value="#" onclick="window.open('/{!v.sObjectRecord['Pricing_Request__c']}','_blank','width=810,height=310,toolbar=0,status=1,scrollbars=1,resizable=yes',!1);">{!v.sObjectRecord['Pricing_Request__r.Name']}</apex:outputlink></td>
+                        </apex:variable>
+                        <!-- <PR20140925> END-->
+                        <!--<GT20150106> START-->
+                                <th class="headerRow" colSpan="1" scope="col">Timeline</th>
+                        <!--<GT20150106> END-->
+                        <apex:repeat value="{!columnsDisp}" var="r">
+                            <td class="dataCell" colSpan="1">{!IF(CONTAINS(r.Label,'Rate'),v.stringMap['rateLocale'],v.sObjectRecord[r])}</td>
+                            
+                        </apex:repeat>
+                        <td class="dataCell" colSpan="1"><apex:outputField value="{!v.sObjectRecord['Unit__c']}"></apex:outputField></td>
+                        <apex:variable value="v" var="v1" rendered="{!AND(v.sObjectRecord['Per__c']!=' ',v.sObjectRecord['Per__c']!=null,v.sObjectRecord['Unit__c']!='%')}">
+                        <td class="dataCell" colSpan="1"><apex:outputField value="{!v.sObjectRecord['Per__c']}"></apex:outputField></td>
+                        </apex:variable>
+                        <apex:variable value="v" var="v1" rendered="{!AND(v.sObjectRecord['UoM__c']!=' ',v.sObjectRecord['UoM__c']!=null,v.sObjectRecord['Unit__c']!='%')}">
+                        <td class="dataCell" colSpan="1"><apex:outputField value="{!v.sObjectRecord['UoM__c']}"></apex:outputField></td>
+                        </apex:variable>
+                        <td class="dataCell" colSpan="1"><apex:outputField value="{!v.sObjectRecord['Valid_From__c']}"></apex:outputField>
+                        </td>
+                        <td class="dataCell" colSpan="1"><apex:outputField value="{!v.sObjectRecord['Valid_To__c']}"></apex:outputField>
+                        </td>
+
+                    </tr>
+                </apex:repeat>
+            </table>
+            </apex:outputpanel>
+        </apex:outputPanel>
+
+    </apex:pageBlock></div>
+</apex:component>

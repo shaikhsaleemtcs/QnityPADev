@@ -1,0 +1,361 @@
+<!--    Ver.            Developer           Changes                                                             Dependencies    -->
+<!--    1.1             Priyanka            Change in architecture                                              None    -->
+<!--    1.2             Brundha             UI                                                                  None    -->
+<!--    1.3              Utkarsh            21 June 2013: Added rendered condition for Sales Admin to view the import price link -->
+<!--    PP20140218      Priyanka Pillala    Customer Prices list views for CSRs - CAPITAL PROJECT               None -->
+<!--    MS20140421      Mohit Sinha         Added Logo to landing page                                          None    -->
+<!--    AJ20160428      Arpit Jain          Added FAQ Link to landing page                                      None         -->
+<!--    CC20191007      Calment Cleo        Added "View Active Prices" Link under Administration section        None         -->
+<!--    IS EI-00097608  Bharat Dandu        Added "Associate Account manager" under Administration section      None       -->
+
+
+<apex:page controller="ctrlPAMain" tabstyle="Price_Approval__tab" sidebar="false" showHeader="true" id="currentPage" cache="true"
+    action="{!onLoadCall}">
+<apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.js')}" />
+    <c:loadingComponent />
+    <apex:pageMessages escape="false" id="errorMessage"/> 
+      <!-- <apex:stylesheet value="{!URLFOR($Resource.styleDPAS,'styleDPAS.styleDPAS.css')}" />  -->  
+        
+        <!-- Version 1.1 START  --> 
+        <!-- Changed rendered part for pending link - Brundha 15th feb -->
+        <!-- version 1.1 END -->
+        <!-- 1.2 Bala 19 Feb 2013 Changed Rendered Condition for Administrator Section -->
+         <!-- 1.3 Brundha 20 Feb 2013 Changed Rendered Condition for Pending Section -->
+         <!-- 1.4 Brundha 21 Feb 2013  Rendered Condition for status except pending Section -->
+         <!-- 1.5 Prachi               Changed Pending Approval name      -->
+    <style>
+        .pageHeading{font-size:20px;height:30px;padding:10px;margin-bottom:5px;border:solid 1px;border-color:#6E96B2; background-color:#E5F3FC;font-weight:bold;text-align:center;}
+        .pageHeading .logo{float:left;height:34px;vertical-align:middle;}
+        
+        #homePage #homePageSectionOne .pbSubheader{margin-bottom:0px;}
+        //#homePage #homePageSectionTwo .dataCol{padding-left:0px;width:250px;}
+        #homePage #homePageSectionTwo .pbSubheader{margin-bottom:0px;}
+        #homePage #homePageSectionTwo .pbSubsection .detailList .pbSubsection {border:1px solid #E2E3E4;height:180px;}
+        #homePage #homePageSectionTwo a{color:#228DAD;text-decoration:none;}
+        #homePage #homePageSectionTwo .detailList .dataCol{width:25%;}
+        .bPageBlock .requiredInput .requiredBlock{top:0px;bottom:1px;}
+        .bPageBlock .requiredInput select{height:20px;margin: 0px;}
+        .noTableFooter
+        {
+            margin:0px!important;
+        }
+
+    </style>
+    
+    <div class="pageHeading">
+    <div class="logo">
+    <apex:image url="{!$Resource.Logo}" height="99%"/>
+    </div>
+    <div style="float:center;margin-right:8%;">DuPont SFDC Price Approval System
+    </div>
+    </div>
+    
+    <apex:form >
+   
+<!--        <TJ20140513> Help Link-->    
+    
+    <apex:commandLink value="Help" action="{!helpLink}" style="float:right;" target="_blank">
+    <apex:param name="Help" value="Landing Page" assignTo="{!label}"/>
+    </apex:commandLink>
+    <!-- START <AJ20160428> FAQ Link <IS ID-00069488>-->
+    <apex:commandLink value="FAQ" action="{!helpLink}" style="float:right;margin-right: 15px;" target="_blank">
+    <apex:param name="FAQ" value="FAQ" assignTo="{!label}"/>
+    </apex:commandLink> 
+    <!-- END <AJ20160428>  -->
+    
+    </apex:form>
+    <apex:form >
+
+        <!-- Displaying BU Details in accordance with the logged in User -->
+        <div id="homePage">
+            <apex:pageBlock >
+                <div id="homePageSectionOne">
+                    <apex:pageBlockSection title="Business Details" collapsible="false"
+                        columns="1">
+                        <apex:pageBlockSectionItem >
+                            <apex:outputText value="Business" />
+                            <apex:outputPanel >
+                                <div class="requiredInput">
+                                <div class="requiredBlock"></div>
+                                <apex:selectList size="1" required="true"
+                                    value="{!service.paServiceState.ogItems.selectedBU}">
+                                    <apex:selectOptions value="{!service.paServiceState.ogItems.listOptions}" />
+                                    <!-- <TJ20140515> <apex:actionSupport event="onchange" action="{!service.PAServiceState.ogItems.setBUName}"/>-->
+                                </apex:selectList></div>
+        
+                            </apex:outputPanel>
+                        </apex:pageBlockSectionItem>
+                    </apex:pageBlockSection>
+                 </div>
+        
+        
+                    <!-- Command Links which re-direct to Pricing Approval -->
+        
+                    
+                <div id="homePageSectionTwo">
+                    
+                        <apex:pageBlockSection columns="4">
+                            <!-- Manage Customer Prices Section START-->
+                            
+                                
+                                 <apex:pageBlockSection columns="1" title="Manage Customer Prices" >
+                                    <!-- PP20140318 START -->
+                                    <apex:commandLink action="{!businessComponentAction}"
+                                        value="Customer Price Requests" rendered="{!service.paServiceState.ogItems.isVisibleMap['ManageCustomerPrices']}">
+                                        <apex:param name="desiredAction" value="{!IF(service.paServiceState.ogItems.isBUAdmin || service.paServiceState.ogItems.salesAdminPermissionSetFlag,'onBehalfOf','customerList')}"
+                                            assignTo="{!businessaction}" />
+                                        <apex:param name="newPageLabel" value="{!IF(service.paServiceState.ogItems.isBUAdmin || service.paServiceState.ogItems.salesAdminPermissionSetFlag,'PAOnBehalfOf','PACustomerDetail')}"
+                                            assignTo="{!newPageLabel}" />
+            
+                                    </apex:commandLink>
+                                    <!-- PP20140318 END --> 
+            
+<!--                                    <apex:commandLink action="{!businessComponentAction}"-->
+<!--                                        value="Customer Price Requests">-->
+<!---->
+<!--                                        <apex:param name="desiredAction" value="customerPrices"-->
+<!--                                            assignTo="{!businessaction}" />-->
+<!--                                        <apex:param name="newPageLabel" value="PACustomerDetail"-->
+<!--                                            assignTo="{!newPageLabel}" />-->
+<!--            -->
+<!--                                    </apex:commandLink>-->
+                                    <apex:commandLink action="{!businessComponentAction}"
+                                        value="Massive Change Requests" rendered="{!service.paServiceState.ogItems.isVisibleMap['ManageCustomerPrices']}">
+                                        <apex:param name="desiredAction" value="{!IF(service.paServiceState.ogItems.isBUAdmin || service.paServiceState.ogItems.salesAdminPermissionSetFlag,'massiveOnBehalfOf','Massive')}"
+                                            assignTo="{!businessaction}" />
+                                        <apex:param name="newPageLabel" value="{!IF(service.paServiceState.ogItems.isBUAdmin || service.paServiceState.ogItems.salesAdminPermissionSetFlag,'PAOnBehalfOf','PAAddReqItem')}"
+                                            assignTo="{!newPageLabel}" />
+                                    </apex:commandLink>
+                                    
+                                    <apex:commandLink action="{!businessComponentAction}"
+                                        value="Price Confirmation Letters" rendered="{!service.paServiceState.ogItems.isVisibleMap['ManageCustomerPrices']}">
+                                        <apex:param name="desiredAction" value="PCL"
+                                            assignTo="{!businessaction}" />
+                                       <!-- <apex:param name="newPageLabel" value="PACustomerDetail"
+                                            assignTo="{!newPageLabel}" />  -->
+                                        <apex:param name="newPageLabel" value="PAOnBehalfOf"
+                                            assignTo="{!newPageLabel}" />
+                                    </apex:commandLink>
+                                    <!-- PP20140218 START -->
+                                    <apex:commandLink action="{!businessComponentAction}"
+                                        value="View Customer Prices">
+                                        <apex:param name="desiredAction" value="ViewAllCustomerPrices"
+                                            assignTo="{!businessaction}" />
+                                        <apex:param name="newPageLabel" value="PACustomerDetail"
+                                            assignTo="{!newPageLabel}" />
+                                            <apex:param name="viewCustPrices" value="true"
+                                                assignTo="{!service.paServiceState.ogItems.isViewCustomerPrices}" />
+                                    </apex:commandLink>
+                                    <!-- PP20140218 END -->
+                                    
+                                <!-- IM20150105  End User Rebate Link Added By Ibtesam -->
+                                     <apex:commandLink action="{!businessComponentAction}"
+                                        value="Rebate Price Quote Requests" rendered="{!service.paServiceState.ogItems.isVisibleMap['ManageRebateRequests']}">
+                                        <apex:param name="desiredAction" value="{!IF(service.paServiceState.ogItems.isBUAdmin || service.paServiceState.ogItems.salesAdminPermissionSetFlag,'onBehalfOf','customerList')}"
+                                            assignTo="{!businessaction}" />
+                                        <apex:param name="newPageLabel" value="{!IF(service.paServiceState.ogItems.isBUAdmin || service.paServiceState.ogItems.salesAdminPermissionSetFlag,'PAOnBehalfOf','PACustomerDetail')}"
+                                            assignTo="{!newPageLabel}" />
+                                    <apex:param name="EURFlag" value="true"
+                                            assignTo="{!service.paServiceState.ogItems.isEndUserRebate}" />
+                                    </apex:commandLink>
+                                    <!-- IM20150105 End -->
+                                </apex:pageBlockSection>
+                            
+            
+                            
+                                <!-- Manage Customer Prices Section END-->
+            
+                                <!-- Manage Price Lists Section START-->
+                                
+                                      <apex:pageBlockSection columns="1" title="Manage Price Lists"> 
+                                      
+                                        <apex:commandLink action="{!businessComponentAction}"
+                                            value="Price Lists"   rendered="{!service.paServiceState.ogItems.isVisibleMap['ManagePriceLists']}">
+                                            <apex:param name="desiredAction" value="NonCustomerSpecific"
+                                            assignTo="{!businessaction}" />
+                                        <apex:param name="newPageLabel" value="PAAddReqItem"
+                                            assignTo="{!newPageLabel}" />
+                                        </apex:commandLink>
+                                        <apex:commandLink action="{!businessComponentAction}"
+                                            value="Export Prices" >
+                                            <apex:param name="desiredAction" value="ExportPrices"
+                                                assignTo="{!businessaction}" />
+                                            <apex:param name="pageLabel" value="PAExportPrices"
+                                                assignTo="{!newPageLabel}" />
+                                        </apex:commandLink>
+                                        <!-- Version 1.3 Starts: Added rendered Condition -->
+                                        <apex:commandLink action="{!businessComponentAction}"
+                                            value="Import Prices" rendered="{!service.paServiceState.ogItems.isBUAdmin || service.paServiceState.ogItems.salesAdminPermissionSetFlag}" >
+                                            <apex:param name="desiredAction" value="ImportPrices"
+                                                assignTo="{!businessaction}" />
+                                            <apex:param name="newPageLabel" value="PAExistingRequest"
+                                                assignTo="{!newPageLabel}" />
+                                        </apex:commandLink>
+                                        <!-- CC20191007 START -->
+                                        <apex:commandLink action="{!businessComponentAction}"
+                                            value="View Active Prices" >
+                                            <apex:param name="desiredAction" value="ActivePrices"
+                                                assignTo="{!businessaction}" />
+                                            <apex:param name="pageLabel" value="Active_Prices_Batch"
+                                                assignTo="{!newPageLabel}" />
+                                        </apex:commandLink>
+                                        <!-- CC20191007 END -->
+                                        <!-- Version 1.3 Ends -->
+<!--                                         <apex:commandLink action="{!businessComponentAction}" -->
+<!--                                         value="View Price Lists Prices"> -->
+<!--                                         <apex:param name="desiredAction" value="salesOrg" -->
+<!--                                             assignTo="{!businessaction}" /> -->
+<!--                                         <apex:param name="newPageLabel" value="PAOnBehalfOf" -->
+<!--                                             assignTo="{!newPageLabel}" /> -->
+<!--                                             <apex:param name="viewPLPrices" value="true" -->
+<!--                                                 assignTo="{!service.paServiceState.ogItems.isViewPLPrices}" /> -->
+<!--                                        </apex:commandLink> -->
+                                    </apex:pageBlockSection>
+                                
+            
+                                <!-- Manage Price Lists Section END-->
+            
+                                <!-- My Requests Section START-->
+                                
+                                    <apex:pageBlockSection columns="1" title="My Requests">
+                                        <apex:commandLink action="{!businessComponentAction}"
+                                            value="Test UD" rendered="false" >
+                                            <apex:param name="desiredAction" value="Test UD"
+                                                assignTo="{!businessaction}" />
+                                            <apex:param name="pageLabel" value="PAPricingRequest"
+                                                assignTo="{!newPageLabel}" />
+                                        </apex:commandLink>
+                                        
+                                         <!-- 1.4 Brundha  - {!service.paServiceState.ogItems.countOfRequestsToStatusMap['Recalled']} - {!service.paServiceState.ogItems.countOfRequestsToStatusMap['Rejected']}21 Feb 2013  - {!service.paServiceState.ogItems.countOfRequestsToStatusMap['Submitted']} Rendered Condition for status except pending Section  - {!service.paServiceState.ogItems.countOfRequestsToStatusMap['Draft']} -->
+                                         <apex:commandLink action="{!businessComponentAction}"
+                                        value="Draft" rendered="{!OR(service.paServiceState.ogItems.isBUAdmin,service.paServiceState.ogItems.isVisibleMap['ManageCustomerPrices'],service.paServiceState.ogItems.isVisibleMap['ManagePriceLists'])}" >
+                                        <apex:param name="desiredAction" value="Draft" assignTo="{!businessaction}" />
+                                        <apex:param name="newPageLabel" value="PAStatus" assignTo="{!newPageLabel}" />
+                                    </apex:commandLink>
+                                     <apex:commandLink action="{!businessComponentAction}"
+                                        value="Submitted"  rendered="{!OR(service.paServiceState.ogItems.isBUAdmin,service.paServiceState.ogItems.isVisibleMap['ManageCustomerPrices'],service.paServiceState.ogItems.isVisibleMap['ManagePriceLists'])}">
+                                        <apex:param name="desiredAction" value="Submitted" assignTo="{!businessaction}" />
+                                       
+                                        <apex:param name="newPageLabel" value="PAStatus" assignTo="{!newPageLabel}" />
+                                    </apex:commandLink>
+                                     <apex:commandLink action="{!businessComponentAction}"
+                                        value="Approved"  rendered="{!OR(service.paServiceState.ogItems.isBUAdmin,service.paServiceState.ogItems.isVisibleMap['ManageCustomerPrices'],service.paServiceState.ogItems.isVisibleMap['ManagePriceLists'])}">
+                                        <apex:param name="desiredAction" value="Approved" assignTo="{!businessaction}" />
+                                       
+                                        <apex:param name="newPageLabel" value="PAStatus" assignTo="{!newPageLabel}" />
+                                    </apex:commandLink>
+                                       <apex:commandLink action="{!businessComponentAction}"
+                                        value="Rejected"  rendered="{!OR(service.paServiceState.ogItems.isBUAdmin,service.paServiceState.ogItems.isVisibleMap['ManageCustomerPrices'],service.paServiceState.ogItems.isVisibleMap['ManagePriceLists'])}" >
+                                        <apex:param name="desiredAction" value="Rejected" assignTo="{!businessaction}" />
+                                       
+                                        <apex:param name="newPageLabel" value="PAStatus" assignTo="{!newPageLabel}" />
+                                    </apex:commandLink>
+                                        <apex:commandLink action="{!businessComponentAction}"
+                                        value="Recalled"  rendered="{!OR(service.paServiceState.ogItems.isBUAdmin,service.paServiceState.ogItems.isVisibleMap['ManageCustomerPrices'],service.paServiceState.ogItems.isVisibleMap['ManagePriceLists'])}">
+                                        <apex:param name="desiredAction" value="Recalled" assignTo="{!businessaction}" />
+                                        <apex:param name="newPageLabel" value="PAStatus" assignTo="{!newPageLabel}" />
+                                    </apex:commandLink>
+                                    <!--brundha for links--feb 15  version 1.1--> 
+                                     <!--  Edited Rendered Condition - Brundha 20 Feb 2013 version 1.3 start  - {!service.paServiceState.ogItems.countOfRequestsToStatusMap['Pending']}-->                                   
+                                    
+                                        <apex:commandLink action="{!businessComponentAction}" value="Pending Approval"  rendered="{!OR(service.paServiceState.ogItems.isBUAdmin,service.paServiceState.ogItems.approverPermissionSetFlag)}">
+                                            <apex:param name="desiredAction" value="Pending" assignTo="{!businessaction}" />
+                                            <apex:param name="newPageLabel" value="PAStatus" assignTo="{!newPageLabel}" />
+                                        </apex:commandLink>
+                                    <!-- <GT20150520> START -->
+                                        
+                                    <apex:commandLink action="{!businessComponentAction}"  rendered="{!service.paServiceState.ogItems.showPRReport}" value="Report - Requests By Status" target="_blank">
+                                        <apex:param name="desiredAction" value="openReportPRByStatus" assignTo="{!businessaction}"  />
+                                    </apex:commandLink>
+                                       
+                                    <!-- <GT20150520> END -->
+                                    </apex:pageBlockSection>
+                                    
+                                <!-- My Requests Section END-->
+            
+                                <!-- Setup Section START -->
+                                
+                                <!--  Edited Rendered Condition - Bala 19 Feb 2013  -->
+                                
+                                    <apex:pageBlockSection columns="1" title="Administration" rendered="{!service.paServiceState.ogItems.isBUAdmin}">
+                                        <apex:commandLink action="{!businessComponentAction}"
+                                            value="Approval Setup" >
+                                            <apex:param name="desiredAction" value="ApprovalSetup"
+                                                assignTo="{!businessaction}" />
+                                            <apex:param name="pageLabel" value="PABuAdminHome"
+                                                assignTo="{!newPageLabel}" />
+                                        </apex:commandLink>
+                                        <apex:commandLink action="{!businessComponentAction}"
+                                            value="Business Setup" >
+                                            <apex:param name="value" value="BUSetup"
+                                                assignTo="{!service.paServiceState.ogItems.value}" />
+                                            <apex:param name="desiredAction" value="BUSetup"
+                                                assignTo="{!businessaction}" />
+                                            <apex:param name="pageLabel" value="PAGlobalConfig"
+                                                assignTo="{!newPageLabel}" />
+                                        </apex:commandLink>
+                                        <apex:commandLink action="{!businessComponentAction}"
+                                            value="Sales Area Setup" >
+                                            <apex:param name="desiredAction" value="SASetup"
+                                                assignTo="{!businessaction}" />
+                                            <apex:param name="value" value="SASetup"
+                                                assignTo="{!service.paServiceState.ogItems.value}" />
+                                            <apex:param name="pageLabel" value="PAGlobalConfig"
+                                                assignTo="{!newPageLabel}" />
+                                        </apex:commandLink>
+                                        <!-- PP20140418 START -->
+                                        <apex:commandLink action="{!businessComponentAction}"
+                                            value="View User Setup" >
+                                            <apex:param name="desiredAction" value="viewUserRoleReport"
+                                                assignTo="{!businessaction}" />
+                                            <apex:param name="value" value="SASetup"
+                                                assignTo="{!service.paServiceState.ogItems.value}" />
+                                            <apex:param name="pageLabel" value="PAUserRoleReport"
+                                                assignTo="{!newPageLabel}" />
+                                        </apex:commandLink>
+                                        <!-- IS EI-00097608 Bharat    Account manager setup     START -->
+                                         <apex:commandLink rendered="{!service.paServiceState.ogItems.AccountManagerPermissionSetFlag}" action="/flow/Account_manager_setup?BusinessfromVFpage={!service.paServiceState.ogItems.selectedBU}&retURL=apex/PAHome"
+                                            value="Associate Account Manager" >
+                                           
+                                        </apex:commandLink>
+                                        <!-- IS EI-00097608 Bharat    Account manager setup     END -->
+                                        
+                                        
+                                        <apex:commandLink action="{!businessComponentAction}"
+                                            value="RPQ Reports" rendered="{!service.paServiceState.ogItems.isVisibleMap['ViewRebateReports']}">
+                                            <apex:param name="desiredAction" value="RPQReporting"
+                                                assignTo="{!businessaction}" />
+                                            <apex:param name="pageLabel" value="RPQReports"
+                                                assignTo="{!newPageLabel}" />
+                                        </apex:commandLink>
+                                        
+                                       <!-- <apex:commandLink action="{!businessComponentAction}"
+                                            value="Go Live Templates">
+                                            <apex:param name="desiredAction" value="RPQReporting"
+                                                assignTo="{!businessaction}" />
+                                            <apex:param name="pageLabel" value="RPQReports"
+                                                assignTo="{!newPageLabel}" />
+                                        </apex:commandLink>
+                                        -->
+                                        
+                                        <!-- PP20140418 END -->
+                                        <!-- HL20140904 Start -->
+                                   <!--      <apex:commandLink action="{!businessComponentAction}"  -->
+                                   <!--         value="PH Creation Setup" >  -->
+                                   <!--         <apex:param name="desiredAction" value="PHCreation"  -->
+                                   <!--             assignTo="{!businessaction}" />  -->
+                                    <!--        <apex:param name="pageLabel" value="PAPHCreationSetup"  -->
+                                    <!--            assignTo="{!newPageLabel}" />  -->
+                                    <!--    </apex:commandLink>  -->
+                                         <!-- HL20140904 End -->
+                                   </apex:pageBlockSection>
+                                
+                                <!-- Setup Section END -->
+                        </apex:pageBlockSection>
+                    
+                                        
+                </div>
+            </apex:pageBlock>
+         </div>
+    </apex:form>
+</apex:page>

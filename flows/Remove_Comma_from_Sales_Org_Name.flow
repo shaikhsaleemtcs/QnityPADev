@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>53.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <description>As data comes from SAP system, Sales Org might have comma which causes issue while processing the record so removing that extra comma from sales org name before saving the record in salesforce.</description>
+    <formulas>
+        <name>Updated_Sales_Org</name>
+        <dataType>String</dataType>
+        <expression>SUBSTITUTE({!$Record.Sales_Org__c} , &quot;,&quot;, &quot;&quot;)</expression>
+    </formulas>
+    <interviewLabel>Remove Comma from Sales Org Name {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Remove Comma from Sales Org Name</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>Update ERP Customer Sales Org data</description>
+        <name>Update_ERP_Customer_Sales_Org_data</name>
+        <label>Update ERP Customer Sales Org data</label>
+        <locationX>176</locationX>
+        <locationY>311</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Sales_Org__c</field>
+            <value>
+                <elementReference>Updated_Sales_Org</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Update_ERP_Customer_Sales_Org_data</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Sales_Org__c</field>
+            <operator>Contains</operator>
+            <value>
+                <stringValue>,</stringValue>
+            </value>
+        </filters>
+        <object>ERP_Customer__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

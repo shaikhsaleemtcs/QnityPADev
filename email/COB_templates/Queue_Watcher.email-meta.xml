@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Send Reminder if request is in a same Queue from last 3 days.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <letterhead>DuPontLetterhead</letterhead>
+    <name>Queue Watcher</name>
+    <style>freeForm</style>
+    <subject>The request {!Customer_Data_Request__c.Name} is Pending for your Action..</subject>
+    <textOnly>Hello, 
+The request &apos;{!Customer_Data_Request__c.Name}&apos; is Pending for your Action.. 
+
+Request Number:{!Customer_Data_Request__c.Name} 
+Type of Request: {!Customer_Data_Request__c.RecordType} 
+Request Status:{!Customer_Data_Request__c.Request_Status__c} 
+Request Description:{!Customer_Data_Request__c.Request_Description__c}
+
+Sold-To Country : {!Customer_Data_Request__c.Sold_to_Country__c} 
+Selling Company Code :{!Customer_Data_Request__c.Company_Code__c} 
+Sales Org : {!Customer_Data_Request__c.Sales_Organization__c} 
+Distribution Channel :{!Customer_Data_Request__c.Distribution_Channel__c} 
+Division : {!Customer_Data_Request__c.Division__c} 
+Account Group :{!Customer_Data_Request__c.Account_Group__c} 
+
+Customer Name: {!Customer_Data_Request__c.Customer_Name__c} 
+Customer Name 2: {!Customer_Data_Request__c.Customer_Name_2__c} 
+Customer Name 3: {!Customer_Data_Request__c.Customer_Name_3__c} 
+Customer Name 4: {!Customer_Data_Request__c.Customer_Name_4__c} 
+Linked SFDC Account : {!Customer_Data_Request__c.Account__c} 
+
+Country Credit Comments : {!Customer_Data_Request__c.Country_Credit_Comments__c} 
+
+To access the Request, use the link below: 
+{!Customer_Data_Request__c.Link}</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

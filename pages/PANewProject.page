@@ -1,0 +1,903 @@
+<apex:page controller="ctrlPAMain" tabstyle="Price_Approval__tab" sidebar="false" showHeader="true" id="currentPage" cache="true" action="{!OnloadCall}">
+<apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.js')}" />
+<apex:stylesheet value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/css/jquery.dataTables.css')}" />
+<c:loadingComponent />
+<apex:pageMessages escape="false" id="errorMessage"/> 
+    <!-- Version 1.1 START  --> 
+    <!--  Completed Page Implemention -->
+    <!-- version 1.1 END -->
+    <!-- Version 1.2 START  --> 
+    <!--  added NoRecoedLevel by anand 19 Feb -->
+    <!-- version 1.2 END -->
+    <!-- Version 1.3 START  --> 
+    <!--  Changed the Sales Area Display Logic -->
+    <!-- version 1.3 END -->
+    <!-- version 1.4 added render condition to project details  -->
+    <!-- version 1.5 neeha Changed AssignedTo component -->
+    <!--   1.6             Priyanka            Change in architecture                    None           -->
+    <!--   1.7             Anand               done buton display changes                None           -->
+    <!--   1.8             Brundha             UI                                        None           -->
+    <!--   1.9             Anand               Assigned To                               None   15 MAR  -->
+    <!--   2.0             Bala                Increased field length                   None    22 MAR  --> 
+    <!--   2.1             Prachi              making the Task assignedTo editable       None   19 APR  --> 
+    <!--   2.2             Neeha               added a rendered condition on Fetch Current  None    27 MAY  -->
+    <!--   TJ20140505      Tarun               Added the landing page link                                             None     -->
+    <!--   TJ20140509      Tarun               Added Navigation Flow Text                                              None     -->
+    <!--   VK20210326      Vinay Kumar         Removed render condition for Default Discount                           None    -->
+    <style>
+        .customerLink{font-size:15px;height:20px;margin-bottom:1px;padding:5px;border:solid 1px;border-color:#6E96B2; background-color:#E5F3FC;font-weight:bold;text-align:left;}
+        .navFlow{font-size:13px;font-style:oblique;margin-bottom:3px;}
+        #project .pbSubheader{margin-bottom:0px;}
+        #project  .detailList{border:1px solid #E2E3E4;}
+        //#project  .detailList .dataCol{color:#000000;}
+        #project  .detailList tr th{border-bottom:none;}
+        #project  .detailList tr td{border-bottom:none;}
+        //#project  .detailList .data2Col {border:none;padding-left:0px;}
+        .bPageBlock .detailList .list tr th{color:white;}
+        body .pbBody table.list tr td{border-bottom: none;}
+        body .pbBody table.list tr th{color:white;background-color:#63A4C5;}
+        
+        #project #details .detailList{border-bottom:none;}
+        #project #description .detailList{border-top:none;}
+        #project .nextbutton a.btn{width:60px;float:left;}
+        
+        
+    </style>
+    <apex:actionStatus id="stat">
+        <apex:facet name="start">
+            <div class="spinnerMask" id="spinnerMask">
+            <div class="spinnerCt"><img
+                src="/img/analytics/reportbuilder/icons/spinner32.gif"
+                alt="Loading..." width="32" height="32" align="center"
+                class="spinner" title="Loading..." />
+            <div class="loadingIndicator">Loading...</div>
+            </div>
+            <div class="mask"></div>
+            </div>
+        </apex:facet>
+    </apex:actionStatus>
+    <script>
+    function setFocusOnLoad() {}
+    function loadDatatables(){
+        var tab=j$('#listUser').dataTable({
+                    "aaSorting":[],
+                    "bLengthChange":false,
+                    "bPaginate":false,
+                    "bInfo":false,
+                    sPlaceHolder : "foot:before",});
+             j$('#listUser'+'_filter').after('<br /><br />');
+        j$('#listUser').after('<br />');
+     }
+     function loadDatatables(){
+        var tab=j$('.list').dataTable({
+                    "aaSorting":[],
+                    "bLengthChange":false,
+                    "bPaginate":false,
+                    "bInfo":false,
+                    sPlaceHolder : "foot:before",});
+             j$('.list'+'_filter').after('<br /><br />');
+        j$('.list').after('<br />');
+     }
+    
+        function setFocusOnLoad() {
+        }
+        var j$ = jQuery.noConflict();
+    j$(document).ready(function(){                              //<TJ20140401> - added javascript to generate HTML Table with additional functionalities
+        loadDatatables();
+    });
+    </script>
+    <apex:form id="myform">
+    <!-- <TJ20140505> Added Landing Page Link -->
+    <div align="left" class="navFlow">
+        <apex:commandLink id="link0" value="Landing Page" action="{!businessComponentAction}" target="_self" style="color:blue;">
+        <apex:param name="desiredAction" value="landingpage" assignTo="{!businessaction}" />
+        <apex:param name="newPageLabel" value="PAHome" assignTo="{!newPageLabel}" />
+        </apex:commandLink>
+    <!-- <TJ20140509> Added Navigation Flow Text-->
+        <apex:outputText value="{!if(NOT(ISNULL(navigationText)),'>>','')} "/>
+        <apex:outputText value="{!navigationText}"/>
+        <apex:outputText value=">>Project Selection"/>
+    </div>
+    <div class="customerLink">
+        Project Selection
+    </div> 
+    
+    <div id="project">
+    <apex:pageBlock >
+        
+        <!--CUSTOMER DETAILS SECTION-->
+        <apex:pageBlockSection title="Customer Information"  columns="2" collapsible="true"  >
+                <!-- <TJ20140515> -->
+                <apex:pageblocksectionitem >
+                <apex:outputlabel value="Business"/>
+                <apex:outputText value="{!BUName}"/>
+                </apex:pageblocksectionitem>
+                <apex:pageblockSectionItem rendered="{!service.PAServicestate.ogItems.salesAdminPermissionSetFlag}">
+                    <apex:outputText value="On Behalf Of" />
+                    <apex:outputText value="{!service.paServiceState.ogItems.userName}" />
+                </apex:pageblockSectionItem>
+                <apex:pageblockSectionItem rendered="{!NOT(service.PAServicestate.ogItems.salesAdminPermissionSetFlag)}"></apex:pageblockSectionItem>
+                <apex:pageblockSectionItem >
+                    <apex:outputText value="Sold To Code" />
+                    <apex:outputText value="{!service.PAServicestate.currentRequest.customer.paERPCustomer.Customer_Code__c}" />
+                </apex:pageblockSectionItem>
+                <apex:pageblockSectionItem >
+                    <apex:outputText value="Sold To"></apex:outputText>
+                    <apex:outputText value="{!service.PAServicestate.currentRequest.customer.paERPCustomer.Name}" />
+                </apex:pageblockSectionItem>
+                <apex:pageblockSectionItem >
+                    <apex:outputText value="Sales Area" />
+                    <apex:outputPanel >
+                        <apex:outputText escape="false"
+                            
+                            value="{!service.PAServicestate.currentRequest.customer.paERPCustomer.Sales_Org_code__c}-{!service.PAServicestate.currentRequest.customer.paERPCustomer.Sales_Org__c}
+                                    <br>{!service.PAServicestate.currentRequest.customer.paERPCustomer.Distribution_Channel_Code__c}-{!service.PAServicestate.currentRequest.customer.paERPCustomer.Distribution_channel__c}
+                                    <br>{!service.PAServicestate.currentRequest.customer.paERPCustomer.Division_code__c}-{!service.PAServicestate.currentRequest.customer.paERPCustomer.Division__c}" />                                                                 
+                    </apex:outputPanel>
+                </apex:pageblockSectionItem>
+                <apex:pageblockSectionItem >
+                    <apex:outputText value="Location" />
+                    <apex:outputText escape="false"
+                        value="{!service.PAServicestate.currentRequest.customer.paERPCustomer.Street__c}
+                        <br>{!service.PAServicestate.currentRequest.customer.paERPCustomer.City__c}<br>{!service.PAServicestate.currentRequest.customer.paERPCustomer.State_Province__c}<br>
+                        {!service.PAServicestate.currentRequest.customer.paERPCustomer.Country__c}<br>{!service.PAServicestate.currentRequest.customer.paERPCustomer.Zip_Postal_Code__c}"/>
+                </apex:pageblockSectionItem>
+<!--                        <TJ20140602>-->
+                <apex:pageBlockSectionItem rendered="{!(service.PAServicestate.currentrequest.pricingRequest.Request_Type__c != 'Non Customer Specific')}">
+                        <apex:outputText value="Payment Terms"/>
+                        <apex:outputText value="{!service.PAServicestate.currentRequest.customer.paERPcustomer.Terms_of_Payment_Code__c} - {!service.PAServicestate.currentRequest.customer.paERPcustomer.Terms_of_Payment__c}"/>
+                </apex:pageBlockSectionItem>
+<!--                        <TJ20140602>
+                            <MS20140611> Added incoterms place-->
+                <apex:pageBlockSectionItem rendered="{!(service.PAServicestate.currentrequest.pricingRequest.Request_Type__c != 'Non Customer Specific')}">
+                            <apex:outputText value="Incoterms"/>
+                            <apex:outputText value="{!service.PAServicestate.currentRequest.customer.paERPcustomer.Incoterms_1_Code__c}({!service.PAServicestate.currentRequest.customer.paERPcustomer.Incoterms_1__c})-{!service.PAServicestate.currentRequest.customer.paERPcustomer.Incoterms_2__c}"/>
+                </apex:pageBlockSectionItem>
+                        
+                         <!-- BB20140508 Capital Project Added Customer Order Block section  START-->
+                        <apex:pageBlockSectionItem rendered="{!service.PAServicestate.erpCustomer.paERPCustomer.Customer_Order_Block_Code__c != null}">
+                             <apex:outputText value="Customer Order Block" />
+                             <apex:outputText escape="false"  value="{!service.PAServicestate.erpCustomer.paERPCustomer.Customer_Order_Block_Code__c}-{!service.PAServicestate.erpCustomer.paERPCustomer.Customer_Order_Block__c}"/>  
+                        </apex:pageBlockSectionItem>
+                        <!-- BB20140508 END -->            
+        </apex:pageBlockSection>
+        <!--CUSTOMER DETAILS SECTION ENDS-->
+        <!-- MS20141011 Adding buttons above list -->
+         <apex:pageBlockSection title="Project Variants"  columns="1" collapsible="true"
+                                                        rendered="{! AND(service.PAServicestate.currentProjectPrice.projectSelection !='edit',
+                                                        service.PAServicestate.currentProjectPrice.projectSelection !='new',
+                                                        service.PAServicestate.currentProjectPrice.projectSelection !='clone',
+                                                        service.PAServicestate.currentProjectPrice.projectSelection !='editApproved',
+                                                        service.PAServicestate.currentProjectPrice.projectSelection !='projectId')}" >
+            
+                <apex:outputPanel >
+                     <center style="padding:10px;">  
+                 
+                    <apex:commandLink value="New Project" action="{!businessComponentAction}" rendered="{!service.PAServicestate.currentProjectPrice.projectSelection != 'new'}" styleClass="btn" style="text-decoration:none;">
+                        <apex:param name="desiredAction" value="new" assignTo="{!businessAction}" />
+                        <apex:param name="newPageLabel" value="PANewProject" assignTo="{!newPageLabel}" />
+                        <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                        <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                   </apex:commandLink> &nbsp;&nbsp;&nbsp;
+                   <!-- VER 2.8  Roll out Issue  -to hide Fetch current when there are no All projects-->
+                  <apex:commandLink value="Fetch Current Project" action="{!businessComponentAction}" rendered="{!AND(service.PAServicestate.currentProjectPrice.projectSelection != 'current',service.PAServicestate.currentProjectPrice.ListWrappers.size!=0)}" styleClass="btn" style="text-decoration:none;">
+                        <apex:param name="desiredAction" value="current" assignTo="{!businessAction}" />
+                        <apex:param name="newPageLabel" value="PANewProject" assignTo="{!newPageLabel}" />
+                        <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                        <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                        <!-- VER 2.8 END -->
+                   </apex:commandLink> &nbsp;&nbsp;&nbsp;
+                   <apex:commandLink value="Fetch All Project" action="{!businessComponentAction}" rendered="{!service.PAServicestate.currentProjectPrice.projectSelection != 'all'}"  styleClass="btn" style="text-decoration:none;">
+                        <apex:param name="desiredAction" value="all" assignTo="{!businessAction}" />
+                        <apex:param name="newPageLabel" value="PANewProject" assignTo="{!newPageLabel}" />
+                        <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                        <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                   </apex:commandLink>&nbsp;&nbsp;&nbsp;
+                   <!-- MS20141016 adding cancel -->
+                   <apex:commandLink action="{!businessComponentAction}" style="text-decoration:none; color:#484848" styleClass="btn" value="Cancel" >
+                    <apex:param value="PACurrentPrices" name="newPageLabel" assignTo="{!newPageLabel}" />
+                    <!-- <TJ20140509> Passing Label to display navigation flow -->
+                    <apex:param value="{!IF(CONTAINS(navigationText,$Label.Current_Prices),$Label.Current_Prices,$Label.Customer_Requests)}" assignTo="{!pageName}"/>
+                    <apex:param value="ProjectNewPricingRequestCancel"  name="desiredaction" assignTo="{!businessaction}" />
+                   </apex:commandLink>
+   
+                      &nbsp;&nbsp;&nbsp; </center>
+               </apex:outputPanel>    
+         </apex:pageBlockSection>     
+        <!--CURRENT PROJECTS SECTION-->
+        <apex:pageBlockSection title="Current Projects" columns="1" rendered="{!service.PAServicestate.currentProjectPrice.projectSelection ='current'}" >
+            <apex:repeat value="{!service.PAServicestate.currentProjectPrice.ListWrappers}"
+                var="wrapper">
+                    <c:PARelatedListComponent WrapperRecordsDisp="{!wrapper.wrapperList}"
+                        columnsDisp="{!wrapper.keyCombinationcolumns}"
+                        viewMode="{!currentPageLabel}"
+                        selected="{!service.PAServicestate.currentProjectPrice.selectedProjectId}"
+                        actionAtr="{!service.PAServicestate.currentProjectPrice.projectAction}"
+                        typeOfRequest="{!wrapper.priceType}"
+                        typeOfSObjectList="{!wrapper.sObjectTypeName}" 
+                        labelName="{!pageName}" currentHeader="Project Selection">
+                    </c:PARelatedListComponent>
+            </apex:repeat>   
+        </apex:pageBlockSection>
+        <!--CURRENT PROJECTS SECTION ENDS-->
+        
+        <!--ALL PROJECT SECTION-->
+        <apex:pageBlockSection title="All Projects" columns="1" rendered="{!service.PAServicestate.currentProjectPrice.projectSelection ='all'}" >
+            <apex:repeat value="{!service.PAServicestate.currentProjectPrice.ListWrappers}"  var="wrapper">
+                    <c:PARelatedListComponent WrapperRecordsDisp="{!wrapper.wrapperList}"
+                        columnsDisp="{!wrapper.keyCombinationcolumns}"
+                        viewMode="{!currentPageLabel}"
+                        selected="{!service.PAServicestate.currentProjectPrice.selectedProjectId}"
+                        actionAtr="{!service.PAServicestate.currentProjectPrice.projectAction}"
+                        typeOfRequest="{!wrapper.priceType}"
+                        typeOfSObjectList="{!wrapper.sObjectTypeName}" 
+                        labelName="{!pageName}" currentHeader="Project Selection">
+                    </c:PARelatedListComponent>
+            
+            </apex:repeat>  
+        </apex:pageBlockSection>
+         <!--ALL PROJECT SECTION ENDS-->
+         
+        <!--PROJECT DETAILS SECTION-->
+        <div id="details">
+            <apex:pageBlockSection title="Project Details" columns="2" collapsible="true"  
+                                        rendered="{!OR(service.PAServicestate.currentProjectPrice.projectSelection =='edit',service.PAServicestate.currentProjectPrice.projectSelection =='new',
+                                                    service.PAServicestate.currentProjectPrice.projectSelection =='clone',service.PAServicestate.currentProjectPrice.projectSelection =='editApproved',
+                                                    service.PAServicestate.currentProjectPrice.projectSelection =='projectId')}">   
+            
+            <!-- Ver 2.1 PS 2013-04-19 APAC Rollout-making the project name editable when the status is Draft/Rejected/Recalled -->                                                                            
+            <apex:pageBlockSectionItem > 
+                <apex:outputText value="Project Name"  />
+                <apex:outputPanel >
+                    <div class="requiredInput" style="float:left;">
+                    <div class="requiredBlock" style="float:left;"></div>
+                        <apex:inputText style="float:left;margin: 0px;" value="{!service.PAServicestate.currentProjectPrice.ProjectPrice.Name }" 
+                                        rendered="{!OR(service.PAServicestate.currentProjectPrice.projectSelection =='edit',service.PAServicestate.currentProjectPrice.projectSelection =='new',
+                                                     AND(service.PAServicestate.currentProjectPrice.projectSelection =='clone',service.PAServicestate.currentProjectPrice.dispNext==true))}" maxLength="80" />
+                    </div>  
+                        <apex:outPutText value="{!service.PAServicestate.currentProjectPrice.ProjectPrice.Name }"  
+                                        rendered="{!OR(service.PAServicestate.currentProjectPrice.projectSelection =='editApproved',
+                                                    service.PAServicestate.currentProjectPrice.projectSelection =='projectId',
+                                                    AND(service.PAServicestate.currentProjectPrice.projectSelection =='clone',service.PAServicestate.currentProjectPrice.dispNext==false))}" />
+
+                </apex:outputPanel> 
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem >
+                <apex:outputText value="Project Volume" />
+                <apex:outputPanel style="float:left;">
+                    <div class="requiredInput" style="float:left;">
+                    <div class="requiredBlock" style="float:left;"></div>
+                        <apex:inputField style="float:left;margin: 0px;" value="{!service.PAServicestate.currentProjectPrice.ProjectPrice.Project_Volume__c }"  
+                                                                            rendered="{!OR(service.PAServicestate.currentProjectPrice.projectSelection =='new',
+                                                                            AND(service.PAServicestate.currentProjectPrice.projectSelection =='clone',service.PAServicestate.currentProjectPrice.dispNext==true),
+                                                                            service.PAServicestate.currentProjectPrice.projectSelection =='edit',
+                                                                            AND(service.PAServicestate.currentProjectPrice.projectSelection =='editApproved',service.PAServicestate.currentProjectPrice.disableFields==true))}" />
+                    </div>
+                    <apex:outPutText value="{!service.PAServicestate.currentProjectPrice.ProjectPrice.Project_Volume__c }" 
+                                       rendered="{!OR(service.PAServicestate.currentProjectPrice.projectSelection =='projectId',
+                                                      AND(service.PAServicestate.currentProjectPrice.projectSelection =='clone',service.PAServicestate.currentProjectPrice.dispNext==false),
+                                                      AND(service.PAServicestate.currentProjectPrice.projectSelection =='editApproved',service.PAServicestate.currentProjectPrice.disableFields==false) )}" />
+                </apex:outputPanel> 
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem >
+                <apex:outputText value="Valid From"></apex:outputText>
+                <apex:outputPanel style="float:left;">
+                    <div class="requiredInput" style="float:left;">
+                    <div class="requiredBlock" style="float:left;"></div>   
+                        <apex:inputField style="float:left;margin: 0px;" value="{!service.PAServicestate.currentProjectPrice.ProjectPrice.Valid_From__c }" 
+                                                                            rendered="{!OR(service.PAServicestate.currentProjectPrice.projectSelection =='new',
+                                                                            AND(service.PAServicestate.currentProjectPrice.projectSelection =='clone',service.PAServicestate.currentProjectPrice.dispNext==true),
+                                                                            service.PAServicestate.currentProjectPrice.projectSelection =='edit',
+                                                                            AND(service.PAServicestate.currentProjectPrice.projectSelection =='editApproved',service.PAServicestate.currentProjectPrice.disableFields==true))}" />
+                    </div>
+                    <apex:outPutField value="{!service.PAServicestate.currentProjectPrice.ProjectPrice.Valid_From__c }" 
+                                      rendered="{!OR(service.PAServicestate.currentProjectPrice.projectSelection =='projectId',
+                                                 AND(service.PAServicestate.currentProjectPrice.projectSelection =='clone',service.PAServicestate.currentProjectPrice.dispNext==false),
+                                                 AND(service.PAServicestate.currentProjectPrice.projectSelection =='editApproved',service.PAServicestate.currentProjectPrice.disableFields==false))}" />
+                </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem >
+                <apex:outputText value="Valid To"></apex:outputText>
+                <apex:outputPanel style="float:left;">
+                    <div class="requiredInput" style="float:left;">
+                    <div class="requiredBlock" style="float:left;"></div>  
+                        <apex:inputField style="float:left;margin: 0px;" value="{!service.PAServicestate.currentProjectPrice.ProjectPrice.Valid_To__c }"  
+                                                                            rendered="{!OR(service.PAServicestate.currentProjectPrice.projectSelection =='new',
+                                                                            AND(service.PAServicestate.currentProjectPrice.projectSelection =='clone',service.PAServicestate.currentProjectPrice.dispNext==true),
+                                                                            service.PAServicestate.currentProjectPrice.projectSelection =='edit',
+                                                                            AND(service.PAServicestate.currentProjectPrice.projectSelection =='editApproved',service.PAServicestate.currentProjectPrice.disableFields==true))}"/> 
+                    </div>
+                    <apex:outPutField value="{!service.PAServicestate.currentProjectPrice.ProjectPrice.Valid_To__c }" 
+                                       rendered="{!OR(service.PAServicestate.currentProjectPrice.projectSelection =='projectId',
+                                       AND(service.PAServicestate.currentProjectPrice.projectSelection =='clone',service.PAServicestate.currentProjectPrice.dispNext==false),
+                                       AND(service.PAServicestate.currentProjectPrice.projectSelection =='editApproved',service.PAServicestate.currentProjectPrice.disableFields==false))}" />
+                </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+            
+                        <apex:pageBlockSectionItem >
+                <apex:outputText value="Pricing Condition" />
+                    <apex:outPutPanel >
+<!--                     <TJ20150603> -->
+                    <apex:outPutText value="{!service.PAServicestate.currentProjectPrice.ProjectPrice.Pricing_Condition_Code__c}-{!service.PAServicestate.currentProjectPrice.ProjectPrice.Pricing_Condition__c}" 
+                                    rendered="{!OR(service.PAServicestate.currentProjectPrice.projectSelection =='edit',service.PAServicestate.currentProjectPrice.projectSelection =='editApproved',
+                                                service.PAServicestate.currentProjectPrice.projectSelection =='projectId',
+                                                service.PAServicestate.currentProjectPrice.projectSelection =='clone')}" />
+                    <div class="requiredInput" style="float:left;">
+                    <div class="requiredBlock" style="float:left;"></div> 
+                        <apex:selectList style="float:left;margin: 0px;" size="1" value="{!service.PAServicestate.currentProjectPrice.currentRequest.pricingCondition.selectedPricingCondition}" 
+                                                    rendered="{!service.PAServicestate.currentProjectPrice.projectSelection =='new' }" >
+                            <apex:selectOptions value="{!service.PAServicestate.currentRequest.pricingCondition.ListOptions}"></apex:selectOptions>
+                            <apex:actionsupport action="{!service.PAServicestate.currentProjectPrice.disableDefDiscount}" event="onchange" status="stat" rerender="myform"/>
+                        </apex:selectList>
+                    </div>    
+                    </apex:outPutPanel>
+            </apex:pageBlockSectionItem>
+
+             <!---<VK20210326> START--->
+             <apex:pageBlockSectionItem >
+             <!---<VK20210326> END--->
+                <apex:outputText value="Default Discount" />
+                <apex:outputPanel style="float:left;">
+                    <div class="requiredInput" style="float:left;">
+                    <div class="requiredBlock" style="float:left;"></div> <!-- Bala extended MaxLength = 10 from 5 UAT Issue-->
+                        <apex:inputText style="float:left;margin: 0px;" value="{!service.PAServicestate.currentProjectPrice.ProjectPrice.Default_Discount__c }" maxLength="10"
+                                                                            rendered="{!OR(service.PAServicestate.currentProjectPrice.projectSelection =='new',
+                                                                            AND(service.PAServicestate.currentProjectPrice.projectSelection =='clone',service.PAServicestate.currentProjectPrice.dispNext==true),
+                                                                            service.PAServicestate.currentProjectPrice.projectSelection =='edit',
+                                                                            AND(service.PAServicestate.currentProjectPrice.projectSelection =='editApproved',service.PAServicestate.currentProjectPrice.disableFields==true))}" >                      
+                        </apex:inputText>
+                    </div>
+                    <apex:outPutText value="{!service.PAServicestate.currentProjectPrice.ProjectPrice.Default_Discount__c }" 
+                                           rendered="{!OR(service.PAServicestate.currentProjectPrice.projectSelection =='projectId',
+                                           AND(service.PAServicestate.currentProjectPrice.projectSelection =='clone',service.PAServicestate.currentProjectPrice.dispNext==false),
+                                           AND(service.PAServicestate.currentProjectPrice.projectSelection =='editApproved',service.PAServicestate.currentProjectPrice.disableFields==false))}" />
+                </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+<!--                     <TJ20150603> -->            
+            <!--Ver 2.1 PS 2013-04-19 APAC Rollout-making the Task Assigned To editable on click of 'Edit Header' button -->
+            <apex:pageBlockSectionItem > 
+                <apex:outputText value="Task Assigned To" />
+                 
+                 <apex:outputPanel >
+                                <apex:outPutPanel rendered="{!OR(service.PAServicestate.currentProjectPrice.projectSelection =='new',service.PAServicestate.currentProjectPrice.projectSelection =='edit',
+                                                            AND(service.PAServicestate.currentProjectPrice.projectSelection =='clone',service.PAServicestate.currentProjectPrice.dispNext==true))}">                                
+                                <div class="requiredInput" style="float: left;">
+                                <div class="requiredBlock" style="float: left;"></div>
+                                    <apex:inputText style="float:left;margin: 0px;" value="{!service.PAServicestate.currentProjectPrice.currentRequest.userName}" disabled="true" />
+                                </div>  
+                                    
+                                               
+                                    <!-- Ver 1.9 starts -->           
+                                    <c:PAUserPopulation selectedBuAtr="{!service.paServiceState.erpCustomer.ogItems.selectedBU}"
+                                        userIdAtr="{!service.PAServicestate.currentProjectPrice.currentRequest.userSelected}"
+                                        userNameAtr="{!service.PAServicestate.currentProjectPrice.currentRequest.userName}"
+                                        salesOrgCodeAtr="{!service.PAServicestate.erpCustomer.salesOrgCode}"
+                                        distCodeAtr="{!service.PAServicestate.erpCustomer.distCode}"
+                                        divisionCodeAtr="{!service.PAServicestate.erpCustomer.divCode}"
+                                        assignedToAtr="All" dispSearchFilters="false"/>
+                               
+                                    <!-- Ver 1.9 end-->              
+                               </apex:outPutPanel>
+
+                        <apex:outPutText value="{!service.PAServicestate.currentProjectPrice.ProjectPrice.Assigned_To__r.Name}"  
+                                         rendered="{!OR(service.PAServicestate.currentProjectPrice.projectSelection =='projectId',
+                                                        service.PAServicestate.currentProjectPrice.projectSelection =='editApproved',
+                                                        AND(service.PAServicestate.currentProjectPrice.projectSelection =='clone',service.PAServicestate.currentProjectPrice.dispNext==false))}"/> 
+                </apex:outputPanel> 
+               
+            </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+        </div>
+        
+        <div id="description">
+            <apex:pageBlockSection columns="1" rendered="{!OR(service.PAServicestate.currentProjectPrice.projectSelection =='edit',service.PAServicestate.currentProjectPrice.projectSelection =='new',
+                                                        service.PAServicestate.currentProjectPrice.projectSelection =='clone',service.PAServicestate.currentProjectPrice.projectSelection =='editApproved',
+                                                        service.PAServicestate.currentProjectPrice.projectSelection =='projectId')}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value="Project Description" />
+                    <apex:outPutPanel >
+                    <apex:inputTextarea value="{!service.PAServicestate.currentProjectPrice.ProjectPrice.Project_Description__c}" rows="3" cols="150" 
+                                        rendered="{!OR(service.PAServicestate.currentProjectPrice.projectSelection =='edit',service.PAServicestate.currentProjectPrice.projectSelection =='new',
+                                                       AND(service.PAServicestate.currentProjectPrice.projectSelection =='clone',service.PAServicestate.currentProjectPrice.dispNext==true),
+                                           AND(service.PAServicestate.currentProjectPrice.projectSelection =='editApproved',service.PAServicestate.currentProjectPrice.disableFields==true))}"/>
+                     <apex:outputText value="{!service.PAServicestate.currentProjectPrice.ProjectPrice.Project_Description__c}"
+                                            rendered="{!OR(service.PAServicestate.currentProjectPrice.projectSelection ='projectId',
+                                            AND(service.PAServicestate.currentProjectPrice.projectSelection =='clone',service.PAServicestate.currentProjectPrice.dispNext==false),
+                                           AND(service.PAServicestate.currentProjectPrice.projectSelection =='editApproved',service.PAServicestate.currentProjectPrice.disableFields==false))}" />
+                    </apex:outPutPanel>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </div>
+         
+        <apex:outputPanel rendered="{!service.PAServicestate.currentProjectPrice.projectSelection ='new'}">
+           
+          <div class="nextbutton" style="text-align:center;padding:10px 0px 20px 35%;">
+                <apex:commandLink value="Next" action="{!businessComponentAction}" styleClass="btn" style="text-decoration:none;">
+                    <apex:param name="desiredAction" value="insertProject" assignTo="{!businessAction}" />  
+                    <apex:param name="newPageLabel" value="PAAddProjectRequest" assignTo="{!newPageLabel}" />
+                    <!-- <TJ20140509> Passing Label to Display Navigation Flow Text-->
+                    <apex:param name="pageName" value="Project Selection" assignTo="{!pageName}"/>
+                </apex:commandLink> 
+                
+                <apex:commandLink value="Cancel" action="{!businessComponentAction}" styleClass="btn" style="text-decoration:none;">
+                    <apex:param name="desiredAction" value="cancelNewProject" assignTo="{!businessAction}" />  
+                    <apex:param name="newPageLabel" value="PANewProject" assignTo="{!newPageLabel}" />
+                </apex:commandLink>     
+           </div>                       
+            
+        </apex:outputPanel>
+      
+        <apex:outputPanel rendered="{!service.PAServicestate.currentProjectPrice.projectSelection ='edit'}">
+           
+           <div class="nextbutton" style="text-align:center;padding:10px 0px 20px 43%;">         
+                <apex:commandLink value="Next" action="{!businessComponentAction}" styleClass="btn" style="text-decoration:none;">                
+                    <apex:param name="desiredAction" value="EditProject" assignTo="{!businessAction}" />                     
+                    <apex:param name="newPageLabel" value="PAPricingRequest" assignTo="{!newPageLabel}" />                  
+                    <!-- <TJ20140509> Passing Label to Display Navigation Flow Text-->
+                    <apex:param name="pageName" value="Project Selection" assignTo="{!pageName}"/>                  
+                </apex:commandLink> 
+                            
+                <apex:commandLink value="Cancel" action="{!businessComponentAction}" styleClass="btn" style="text-decoration:none;">
+                    <apex:param name="desiredAction" value="cancelNewProject" assignTo="{!businessAction}" />  
+                    <apex:param name="newPageLabel" value="PANewProject" assignTo="{!newPageLabel}" />
+                    <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                    <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                </apex:commandLink> 
+                
+            </div>    
+               
+        </apex:outputPanel>  
+          
+        <apex:outputPanel rendered="{!service.PAServicestate.currentProjectPrice.projectSelection ='editApproved' && service.PAServicestate.currentProjectPrice.dispNext==true}">
+            
+           <div class="nextbutton" style="text-align:center;padding:10px 0px 20px 43%;">        
+                <apex:commandLink value="Next" action="{!businessComponentAction}" styleClass="btn" style="text-decoration:none;">                
+                    <apex:param name="desiredAction" value="EditApprovrdProject" assignTo="{!businessAction}" />                     
+                    <apex:param name="newPageLabel" value="PANewProject" assignTo="{!newPageLabel}" />                  
+                    <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                    <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>                  
+                </apex:commandLink> 
+                            
+                <apex:commandLink value="Cancel" action="{!businessComponentAction}" styleClass="btn" style="text-decoration:none;">                
+                    <apex:param name="desiredAction" value="cancelNewProject" assignTo="{!businessAction}" />                   
+                    <apex:param name="newPageLabel" value="PANewProject" assignTo="{!newPageLabel}" />                  
+                    <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                    <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>                  
+                </apex:commandLink> &nbsp;&nbsp;&nbsp;               
+            </div>    
+                           
+        </apex:outputPanel> 
+        <!--PROJECT DETAILS SECTION ENDS-->
+        
+        <!--PROJECT SELECTION SECTION -->       
+            <apex:pageBlockSection title="Project Variants"  columns="1" collapsible="true"
+                                                        rendered="{! AND(service.PAServicestate.currentProjectPrice.projectSelection !='edit',
+                                                        service.PAServicestate.currentProjectPrice.projectSelection !='new',
+                                                        service.PAServicestate.currentProjectPrice.projectSelection !='clone',
+                                                        service.PAServicestate.currentProjectPrice.projectSelection !='editApproved',
+                                                        service.PAServicestate.currentProjectPrice.projectSelection !='projectId')}" >
+                        
+                <apex:outputPanel >
+                     <center style="padding:10px;">  
+                 
+                    <apex:commandLink value="New Project" action="{!businessComponentAction}" rendered="{!service.PAServicestate.currentProjectPrice.projectSelection != 'new'}" styleClass="btn" style="text-decoration:none;">
+                        <apex:param name="desiredAction" value="new" assignTo="{!businessAction}" />
+                        <apex:param name="newPageLabel" value="PANewProject" assignTo="{!newPageLabel}" />
+                        <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                        <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                   </apex:commandLink> &nbsp;&nbsp;&nbsp;
+                   <!-- VER 2.8  Roll out Issue  -to hide Fetch current when there are no All projects-->
+                  <apex:commandLink value="Fetch Current Project" action="{!businessComponentAction}" rendered="{!AND(service.PAServicestate.currentProjectPrice.projectSelection != 'current',service.PAServicestate.currentProjectPrice.ListWrappers.size!=0)}" styleClass="btn" style="text-decoration:none;">
+                        <apex:param name="desiredAction" value="current" assignTo="{!businessAction}" />
+                        <apex:param name="newPageLabel" value="PANewProject" assignTo="{!newPageLabel}" />
+                        <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                        <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                        <!-- VER 2.8 END -->
+                   </apex:commandLink> &nbsp;&nbsp;&nbsp;
+                   <apex:commandLink value="Fetch All Project" action="{!businessComponentAction}" rendered="{!service.PAServicestate.currentProjectPrice.projectSelection != 'all'}"  styleClass="btn" style="text-decoration:none;">
+                        <apex:param name="desiredAction" value="all" assignTo="{!businessAction}" />
+                        <apex:param name="newPageLabel" value="PANewProject" assignTo="{!newPageLabel}" />
+                        <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                        <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                   </apex:commandLink> &nbsp;&nbsp;&nbsp;
+                   <!-- MS20141016 adding cancel -->
+                   <apex:commandLink action="{!businessComponentAction}" style="text-decoration:none; color:#484848" styleClass="btn" value="Cancel" >
+                    <apex:param value="PACurrentPrices" name="newPageLabel" assignTo="{!newPageLabel}" />
+                    <!-- <TJ20140509> Passing Label to display navigation flow -->
+                    <apex:param value="{!IF(CONTAINS(navigationText,$Label.Current_Prices),$Label.Current_Prices,$Label.Customer_Requests)}" assignTo="{!pageName}"/>
+                    <apex:param value="ProjectNewPricingRequestCancel"  name="desiredaction" assignTo="{!businessaction}" />
+                   </apex:commandLink>
+   
+                      &nbsp;&nbsp;&nbsp; </center>
+               </apex:outputPanel>    
+         </apex:pageBlockSection> 
+
+        <!--PROJECT SELECTION SECTION ENDS-->
+        
+        <!--REQUEST SECTION-->
+        <apex:pageBlockSection title="Request Detail Section" collapsible="true"  
+                                        rendered="{!OR(service.PAServicestate.currentProjectPrice.dispRecordsFromSAP=='editApprovedProject',
+                                                        service.PAServicestate.currentProjectPrice.projectSelection =='clone',
+                                                        service.PAServicestate.currentProjectPrice.dispRecordsFromSAP=='IdApprovedProject')
+                                                        &&(service.PAServicestate.currentProjectPrice.dispRecordsFromSAP!='IdCompleteProject') }" >
+                                                       
+            <apex:pageblockSectionItem >
+                <apex:outputText value="Request Name"/>
+                <apex:outputPanel style="float:left;" >
+                    <div class="requiredInput" style="float:left;">
+                    <div class="requiredBlock" style="float:left;"></div>
+                    <apex:inputText style="float:left;margin: 0px;"  value="{!service.PAServicestate.currentProjectPrice.currentRequest.pricingRequest.Request_Name__c}" rendered="{!service.PAServicestate.currentRequest.pricingRequest.Request_Name__c ==null}" maxLength="80"/>
+                    </div>
+                    <apex:outputText value="{!service.PAServicestate.currentProjectPrice.currentRequest.pricingRequest.Request_Name__c}" rendered="{!service.PAServicestate.currentRequest.pricingRequest.Request_Name__c!=null}"/>
+                </apex:outputPanel>
+            </apex:pageblockSectionItem>
+            <apex:pageblockSectionItem >
+                 <apex:outputText value="Request Status"/>
+                 <apex:outputText value="{!service.PAServicestate.currentProjectPrice.currentRequest.pricingRequest.Request_Approval_Status__c}" />
+            </apex:pageblockSectionItem>
+            <apex:pageBlockSectionItem >
+                        <apex:outputText value="Request Reason"></apex:outputText>
+                        <apex:outputPanel style="float:left;">
+                        <!--Ver 2.1 PS 2013-04-19 APAC Rollout-checking if request reason is null or not -->
+                            <apex:outputText value="{!service.PAServicestate.currentRequest.PricingRequest.Request_Reason__c}" rendered="{!service.PAServicestate.currentRequest.pricingRequest.Request_Reason__c!=null}"/>
+                                                                                                                                        
+                                <div class="requiredInput" style="float: left;">
+                                    <div class="requiredBlock" style="float: left;"></div>
+                                    <apex:selectList style="float:left;margin: 0px;" rendered="{!service.PAServicestate.currentRequest.pricingRequest.Request_Reason__c==null}"
+                                        value="{!service.PAServicestate.currentRequest.PricingRequest.Request_Reason__c}"
+                                        size="1">
+                                        <apex:selectOptions value="{!service.PAServicestate.currentRequest.listOptions}"  />
+                                    </apex:selectList>
+                                </div>
+                                
+                            </apex:outputPanel>
+                    </apex:pageBlockSectionItem> 
+            <apex:pageBlockSectionItem id="reqClass" rendered="{!OR((service.paServiceState.ogItems.orgGroupItems.Enable_Request_Class__c),(service.paServiceState.erpCustomer.ogitems.orgGroupItems.Enable_Request_Class__c))}">
+                          
+                            <apex:outputLabel value="Request Class" />
+                            <apex:outputPanel style="float:left;">
+                                <div class="requiredInput" style="float: left;">
+                                    <div class="requiredBlock" style="float: left;"></div>
+                                    <apex:selectList style="float:left;margin: 0px;"
+                                        value="{!service.paServiceState.currentRequest.pricingRequest.Request_Class__c}"
+                                        size="1">
+                                        <apex:selectOptions value="{!service.paServiceState.ogItems.requestClassList}" />
+                                    </apex:selectList>
+                                </div>
+                            </apex:outputPanel>
+            </apex:pageBlockSectionItem>        
+        </apex:pageBlockSection>
+        <!--REQUEST SECTION ENDS-->
+         
+        <!--PROJECT RECORD SECTION -->
+        <apex:pageBlockSection title="Record Section" columns="1" id="pageBlockSec1"  
+                                                   rendered="{!OR(service.PAServicestate.currentProjectPrice.dispRecordsFromSAP=='editApprovedProject',
+                                                                  service.PAServicestate.currentProjectPrice.dispRecordsFromSAP=='IdApprovedProject',
+                                                                  service.PAServicestate.currentProjectPrice.projectSelection =='clone',
+                                                                  service.PAServicestate.currentProjectPrice.dispRecordsFromSAP=='IdCompleteProject',
+                                                                  service.PAServicestate.currentProjectPrice.dispRecordsFromSAP=='IdProjectHeaderSubmitted')}"> 
+                   <apex:repeat value="{!service.PAServicestate.currentProjectPrice.relatedListSAPRecord}"
+                        var="wrapper">
+                        
+                            <c:PAERPPricesRelatedList WrapperRecordsDisp="{!wrapper.wrapperList}"
+                        columnsDisp="{!wrapper.keyCombinationcolumns}"
+                        viewMode="{!currentPageLabel}"
+                        selected="{!service.PAServicestate.currentRequest.pricingRequestId}"
+                        actionAtr="{!businessaction}"
+                        typeOfSObjectList="{!wrapper.sObjectTypeName}" typeOfRequest="{!wrapper.priceType}"
+                        showAddToRequest="true"
+                        showCheckBox="true">
+                        
+
+                       
+                        
+
+                        
+                    </c:PAERPPricesRelatedList>
+                        
+                   </apex:repeat> 
+                   
+               <apex:outputPanel rendered="{!service.PAServicestate.currentProjectPrice.projectSelection=='clone'}">
+                    <center>
+                        <apex:commandLink value="Add Selected To Request" action="{!businessComponentAction}"  styleClass="btn" style="text-decoration:none;">
+                            <apex:param name="desiredAction" value="addClonedMaterialToRequest" assignTo="{!businessAction}" />
+                            <apex:param name="newPageLabel" value="PANewProject" assignTo="{!newPageLabel}" />
+                            <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                            <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                        </apex:commandLink> &nbsp;&nbsp;&nbsp; 
+                       
+                        <apex:commandLink value="Done" action="{!businessComponentAction}"   styleClass="btn" style="text-decoration:none;">
+                            <apex:param name="desiredAction" value="doneAddedToRequestClone" assignTo="{!businessAction}" /> 
+                            <apex:param name="newPageLabel" value="PAPricingRequest" assignTo="{!newPageLabel}" />
+                            <!-- <TJ20140509> Passing Label to Display Navigation Flow Text-->
+                            <apex:param name="pageName" value="Project Selection" assignTo="{!pageName}"/>
+                        </apex:commandLink> &nbsp;&nbsp;&nbsp; 
+                    </center>
+                </apex:outputPanel>
+                
+                <apex:outputPanel rendered="{!service.PAServicestate.currentProjectPrice.dispRecordsFromSAP=='IdApprovedProject'}">
+                                                
+                    <center>
+                        <apex:commandLink value="Add Selected To Request" action="{!businessComponentAction}"  styleClass="btn" style="text-decoration:none;">
+                            <apex:param name="desiredAction" value="addRecordToReqForApprovedProject" assignTo="{!businessAction}" />
+                            <apex:param name="newPageLabel" value="PANewProject" assignTo="{!newPageLabel}" />
+                            <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                            <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                        </apex:commandLink> &nbsp;&nbsp;&nbsp; 
+                        
+                        <apex:commandLink value="Done" action="{!businessComponentAction}"  styleClass="btn" style="text-decoration:none;">
+                            <apex:param name="desiredAction" value="doneAddedToRequestApproved" assignTo="{!businessAction}" /> 
+                            <apex:param name="newPageLabel" value="PAPricingRequest" assignTo="{!newPageLabel}" />
+                            <!-- <TJ20140509> Passing Label to Display Navigation Flow Text-->
+                            <apex:param name="pageName" value="Project Selection" assignTo="{!pageName}"/>
+                        </apex:commandLink> &nbsp;&nbsp;&nbsp; 
+                    </center>
+                </apex:outputPanel>
+                
+                <apex:outputPanel rendered="{!service.PAServicestate.currentProjectPrice.dispRecordsFromSAP=='editApprovedProject' && service.PAServicestate.currentProjectPrice.editApprovedAll==false}">
+                    <center>
+                        <apex:commandLink value="Add Selected To Request" action="{!businessComponentAction}"  styleClass="btn" style="text-decoration:none;">
+                            <apex:param name="desiredAction" value="addRecordToReqForApprovedProject" assignTo="{!businessAction}" />
+                            <apex:param name="newPageLabel" value="PANewProject" assignTo="{!newPageLabel}" />
+                            <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                            <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                        </apex:commandLink> &nbsp;&nbsp;&nbsp; 
+                        
+                        <apex:commandLink value="Done" action="{!businessComponentAction}"  styleClass="btn" style="text-decoration:none;">
+                            <apex:param name="desiredAction" value="doneAddedToRequestApproved" assignTo="{!businessAction}" /> 
+                            <apex:param name="newPageLabel" value="PAPricingRequest" assignTo="{!newPageLabel}" />
+                            <!-- <TJ20140509> Passing Label to Display Navigation Flow Text-->
+                            <apex:param name="pageName" value="Project Selection" assignTo="{!pageName}"/>
+                        </apex:commandLink> &nbsp;&nbsp;&nbsp; 
+                    </center>
+                </apex:outputPanel>
+                <!-- this panel will display buttons on VF or VT change of Approved projects(all records will go for approval) -->
+                 <apex:outputPanel rendered="{!service.PAServicestate.currentProjectPrice.dispRecordsFromSAP=='editApprovedProject' && service.PAServicestate.currentProjectPrice.editApprovedAll==true}">
+                    <center>
+                        <apex:commandLink value="Add Selected To Request" action="{!businessComponentAction}"  styleClass="btn" style="text-decoration:none;">
+                            <apex:param name="desiredAction" value="addRecordToReqForApprovedProject" assignTo="{!businessAction}" />
+                            <apex:param name="newPageLabel" value="PANewProject" assignTo="{!newPageLabel}" />
+                            <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                            <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                        </apex:commandLink> &nbsp;&nbsp;&nbsp; 
+                        
+                        <apex:commandLink value="Done" action="{!businessComponentAction}" rendered="{!service.PAServicestate.currentProjectPrice.dispDoneButton ='dipsDoneSAP'}"  styleClass="btn" style="text-decoration:none;">
+                            <apex:param name="desiredAction" value="doneAddedToRequest" assignTo="{!businessAction}" /> 
+                            <apex:param name="newPageLabel" value="PAPricingRequest" assignTo="{!newPageLabel}" />
+                            <!-- <TJ20140509> Passing Label to Display Navigation Flow Text-->
+                            <apex:param name="pageName" value="Project Selection" assignTo="{!pageName}"/>
+                        </apex:commandLink> &nbsp;&nbsp;&nbsp; 
+                    </center>
+                </apex:outputPanel>
+                
+        </apex:pageBlockSection>
+        <!--PROJECT RECORD SECTION ENDS-->
+        
+        <!--ALERT MESSAGE -->
+         <apex:outputPanel id="popUPwindow3" rendered="{!service.PAServicestate.currentProjectPrice.dispAlert==true}"
+                styleClass="BackPage" />
+            <apex:outputPanel id="popUPwindow2" rendered="{!service.PAServicestate.currentProjectPrice.dispAlert==true}"
+                styleClass="FrontPageAlert">
+            
+            <apex:panelGrid style="float:right;">
+                <apex:commandLink action="{!businessComponentAction}"  styleClass="btn" style="text-decoration:none;">
+                    <apex:image url="{!$Resource.closeButton}" width="15" height="15"/> 
+                    <apex:param name="desiredAction" value="closeAlertMessage" assignTo="{!businessAction}" />
+                     <apex:param name="newPageLabel" value="PANewProject" assignTo="{!newPageLabel}" />
+                     <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                     <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                </apex:commandLink>
+            </apex:panelGrid> 
+            <br/>
+            
+            <center>
+                <apex:outPutText Value="Would You Like To Change The Rates Or Add More Records" style="font-weight:bold;"/>
+            </center>   
+            <br/><br/>
+                    <apex:outputPanel >
+                        <center>
+                            <apex:commandLink value="YES" action="{!businessComponentAction}"  styleClass="btn" style="text-decoration:none;">
+                                <apex:param name="desiredAction" value="yesRecordLevelChange" assignTo="{!businessAction}" />
+                                <apex:param name="newPageLabel" value="PANewProject" assignTo="{!newPageLabel}" />
+                                <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                                <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                            </apex:commandLink> &nbsp;&nbsp;
+                            <apex:commandLink value="NO" action="{!businessComponentAction}" rendered="{!service.PAServicestate.currentProjectPrice.projectSelection != 'new'}" styleClass="btn" style="text-decoration:none;">
+                                <apex:param name="desiredAction" value="NoRecordLevelChange" assignTo="{!businessAction}" />
+                                <apex:param name="newPageLabel" value="PAPricingRequest" assignTo="{!newPageLabel}" />
+                                <!-- <TJ20140509> Passing Label to Display Navigation Flow Text-->
+                                <apex:param name="pageName" value="Project Selection" assignTo="{!pageName}"/>
+                            </apex:commandLink> 
+                        </center>
+                    </apex:outputPanel>
+              
+                
+            </apex:outPutPanel>
+      <!--ALERT MESSAGE ENDS-->
+      
+      
+      <!--ROUNDOFF MESSAGE -->
+         <apex:outputPanel id="popUPwindow4" rendered="{!service.PAServicestate.currentProjectPrice.dispRoundOffMessage==true}"
+                styleClass="BackPage" />
+            <apex:outputPanel id="popUPwindow5" rendered="{!service.PAServicestate.currentProjectPrice.dispRoundOffMessage==true}"
+                styleClass="FrontPageAlert">
+            
+            <apex:panelGrid style="float:right;">
+                <apex:commandLink action="{!businessComponentAction}"  styleClass="btn" style="text-decoration:none;">
+                    <apex:image url="{!$Resource.closeButton}" width="15" height="15"/> 
+                    <apex:param name="desiredAction" value="closeAlertMessage" assignTo="{!businessAction}" />
+                     <apex:param name="newPageLabel" value="PANewProject" assignTo="{!newPageLabel}" />
+                    <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                    <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                </apex:commandLink>
+            </apex:panelGrid>  
+            <br/>
+            <center>
+                <apex:outPutText value="Rounding will take place Do you want to proceed?" style="font-weight:bold;"/>
+            </center> 
+                    <apex:outputPanel rendered="{!service.PAServicestate.currentProjectPrice.projectSelection ='new'}">
+                    
+                        <div class="nextbutton" style="text-align:center;padding:10px 0px 20px 35%;">
+                            <apex:commandLink value="OK" action="{!businessComponentAction}" styleClass="btn" style="text-decoration:none;">
+                                <apex:param name="desiredAction" value="insertProject" assignTo="{!businessAction}" />  
+                                <apex:param name="desiredAction1" value="yes" assignTo="{!service.PAServicestate.currentProjectPrice.doRoundOff}" /> 
+                                <apex:param name="newPageLabel" value="PAAddProjectRequest" assignTo="{!newPageLabel}" />
+                                <!-- <TJ20140509> Passing Label to Display Navigation Flow Text-->
+                                <apex:param name="pageName" value="Project Selection" assignTo="{!pageName}"/>
+                            </apex:commandLink> 
+                            
+                            <apex:commandLink value="Cancel" action="{!businessComponentAction}" styleClass="btn" style="text-decoration:none;">
+                                <apex:param name="desiredAction" value="NoRoundOff" assignTo="{!businessAction}" />  
+                                <apex:param name="newPageLabel" value="PANewProject" assignTo="{!newPageLabel}" />
+                                <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                                <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                            </apex:commandLink>     
+                        </div>                       
+        
+                </apex:outputPanel>
+                
+                <apex:outputPanel rendered="{!service.PAServicestate.currentProjectPrice.projectSelection ='edit'}">
+                    
+                <div class="nextbutton" style="text-align:center;padding:10px 0px 20px 35%;">         
+                    <apex:commandLink value="Ok" action="{!businessComponentAction}" styleClass="btn" style="text-decoration:none;">                
+                        <apex:param name="desiredAction" value="EditProject" assignTo="{!businessAction}" /> 
+                        <apex:param name="desiredAction1" value="yes" assignTo="{!service.PAServicestate.currentProjectPrice.doRoundOff}" />                     
+                        <apex:param name="newPageLabel" value="PAPricingRequest" assignTo="{!newPageLabel}" />                  
+                        <!-- <TJ20140509> Passing Label to Display Navigation Flow Text-->
+                        <apex:param name="pageName" value="Project Selection" assignTo="{!pageName}"/>                  
+                    </apex:commandLink> 
+                    <apex:commandLink value="Cancel" action="{!businessComponentAction}" styleClass="btn" style="text-decoration:none;">
+                        <apex:param name="desiredAction" value="NoRoundOff" assignTo="{!businessAction}" />  
+                        <apex:param name="newPageLabel" value="PANewProject" assignTo="{!newPageLabel}" />
+                        <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                        <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>   
+                    </apex:commandLink> 
+              </div>                    
+                </apex:outputPanel>
+                
+            <apex:outputPanel rendered="{!service.PAServicestate.currentProjectPrice.projectSelection ='editApproved' && service.PAServicestate.currentProjectPrice.dispNext==true}">
+            <div class="nextbutton" style="text-align:center;padding:10px 0px 20px 35%;">        
+                <apex:commandLink value="Ok" action="{!businessComponentAction}" styleClass="btn" style="text-decoration:none;">                
+                    <apex:param name="desiredAction" value="EditApprovrdProject" assignTo="{!businessAction}" /> 
+                    <apex:param name="desiredAction1" value="yes" assignTo="{!service.PAServicestate.currentProjectPrice.doRoundOff}" />                   
+                    <apex:param name="newPageLabel" value="PANewProject" assignTo="{!newPageLabel}" />                  
+                    <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                    <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>                  
+                </apex:commandLink> 
+                <apex:commandLink value="Cancel" action="{!businessComponentAction}" styleClass="btn" style="text-decoration:none;">                
+                    <apex:param name="desiredAction" value="NoRoundOff" assignTo="{!businessAction}" />                   
+                    <apex:param name="newPageLabel" value="PANewProject" assignTo="{!newPageLabel}" />                  
+                    <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                    <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>                  
+                </apex:commandLink> &nbsp;&nbsp;&nbsp;               
+            </div>    
+        </apex:outputPanel> 
+        
+                <apex:outputPanel rendered="{!service.PAServicestate.currentProjectPrice.projectSelection=='clone'}">
+                    <center>
+                        <apex:commandLink value="OK" action="{!businessComponentAction}"  styleClass="btn" style="text-decoration:none;">
+                            <apex:param name="desiredAction" value="addClonedMaterialToRequest" assignTo="{!businessAction}" />
+                            <apex:param name="desiredAction1" value="yes" assignTo="{!service.PAServicestate.currentProjectPrice.doRoundOff}" />  
+                            <apex:param name="newPageLabel" value="PANewProject" assignTo="{!newPageLabel}" />
+                            <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                            <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                        </apex:commandLink> &nbsp;&nbsp;&nbsp; 
+                       
+                        <apex:commandLink value="Cancel" action="{!businessComponentAction}"   styleClass="btn" style="text-decoration:none;">
+                            <apex:param name="desiredAction" value="NoRoundOff" assignTo="{!businessAction}" /> 
+                            <apex:param name="newPageLabel" value="PANewProject" assignTo="{!newPageLabel}" />
+                            <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                            <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                        </apex:commandLink> &nbsp;&nbsp;&nbsp; 
+                    </center>
+                </apex:outputPanel>
+                    
+            </apex:outPutPanel>
+      <!--ALERT MESSAGE ENDS-->
+        
+        
+    </apex:pageBlock>
+    </div>
+</apex:form>
+
+ <style type="text/css">
+   
+        .FrontPageAlert{
+        background-color: white;
+        //border-width: 2px;
+        border: 2px solid #63A4C5;
+        z-index: 9999;
+        left: 25%;
+        right: 
+        padding:10px;
+        position: absolute; 
+        top:30px;
+        width: 550px;
+        height: 90px;
+        }
+        
+        .BackPage {
+        background-color: #696969;
+        opacity: 0.5;
+        filter: alpha(opacity = 50);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        }
+        
+        .spinnerCt {
+        left: 50%;
+        top: 35%;
+        position: absolute;
+        //z-index: 1;
+        z-index: 50;
+        padding: 20px 40px;
+        box-shadow: 0pt 2px 5px rgb(172, 172, 172);
+        border-radius: 1em 1em 1em 1em;
+        border: 1px solid rgb(206, 236, 255);
+        background-color: rgb(206, 236, 255);
+        background-style: solid;
+    }
+    
+    .spinner {
+        padding: 10px 15px 10px 0pt;
+        vertical-align: middle;
+    }
+    
+    .spinnerCt .loadingIndicator {
+        display: inline;
+        font-size: 135%;
+        font-weight: bold;
+    }
+    
+    .mask {
+        width: 100%;
+        height: 100%;
+        background-color: rgb(0, 0, 0);
+        opacity: 0.45;
+        filter: alpha(opacity =     45);
+        position: absolute;
+        z-index: 45;
+        top: 0pt;
+        left: 0pt;
+    }
+    
+    .FrontPageSoldToBehalf{
+    top: 5%;
+    }
+    .noTableFooter
+    {
+    margin:0px!important;
+    }
+     </style>
+
+ 
+</apex:page>

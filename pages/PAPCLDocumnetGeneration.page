@@ -1,0 +1,141 @@
+<apex:page controller="ctrlPAMain" tabstyle="Price_Approval__tab" id="currentPage" sidebar="false" renderAs="pdf"
+
+    action="{!onLoadCall}" cache="true" >
+    
+  <apex:form >
+  <apex:outputPanel >
+ <apex:image value="{!$Resource.dupont_logo}" height="150px" width="200px"/>
+  <apex:outputText value="Du Pont De Nemours International S.A.R.L.<br/>2,chemin du Pavillon<br/>
+        P.O. Box 50<br/>CH-1218 Le Grand-Saconnex<br/>Geneva – Switzerland<br/>Tel. +41 (0)22 717 51 11<br/>
+      Fax +41 (0)22 717 51 09" escape="false" style="float:right;"/>
+  </apex:outputPanel><br/><br/><br/>
+  <hr></hr>
+  <apex:repeat value="{!service.paServiceState.currentRequest.listrequestdetils}" var="b">
+  <table>
+  
+  <tr>
+  
+  <td>{!b.Sold_To__c}</td>
+  </tr>
+  <tr>
+  
+  <td>{!b.Street__c}</td>
+  </tr>
+  <tr>
+  
+  <td>{!b.City__c}</td>
+  </tr>
+  <tr>
+  
+  <td>{!b.Country__c}</td>
+  </tr>
+  </table>
+   </apex:repeat>
+   <apex:outputpanel >
+ &nbsp;<apex:outputtext value="Contact:"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<apex:outputtext value="{!service.paServiceState.currentRequest.listofCustomerContacts[0]}"></apex:outputtext>
+ <apex:outputText value="{0,date,yyyy-MMM-dd }" style="float:right;">
+       <apex:param value="{!TODAY()}" /></apex:outputText><br/>
+</apex:outputpanel>
+ 
+ 
+ <br/><br/>
+ <apex:outputtext value="Dear Customer,"/><br/><br/>
+ <p>
+ Herewith we are pleased to confirm that the below project price has been approved internally. <br/>
+May we kindly ask you to use this ID number reference when placing an order against this project.<br/>
+Thank you for choosing our products and services.
+</P><br/>
+
+   <apex:repeat value="{!service.paServiceState.currentRequest.listofProjectPrices}" var="b1">
+   <center>
+   <apex:outputtext value="PROJECT PRICES"/>&nbsp;&nbsp;&nbsp;&nbsp;00<apex:outputtext value="{!b1.Project_Id__c}"/><br/></center><br/>
+  <table width="500px" >
+  <tr>
+  <td width="200px">Project id:</td>
+  <td width="300px" text-align="left">00{!b1.Project_Id__c}</td>
+  </tr>
+  <tr>
+  <td>Project Name:</td>
+  <td>{!b1.name}</td>
+  </tr>
+  <tr>
+  <td>Validity Project:</td>
+  <td>{!text(b1.Valid_From__c)} - {!text(b1.Valid_To__c)}</td>
+  </tr>
+  <tr>
+  <td>Maximum volume:</td>
+  <td>{!b1.Project_Volume__c}</td>
+  </tr>
+  
+  </table>
+   </apex:repeat>
+ 
+    <apex:repeat value="{!service.paServiceState.currentRequest.listrequestdetils}" var="b1">
+  <table width="500px" >
+  <tr>
+  <td width="200px">Payment terms:</td>
+  <td width="300px" text-align="left">{!b1.Terms_Of_Payment__c}</td>
+  </tr>
+  <tr>
+  <td>Incoterm:</td>
+  <td>{!b1.Incoterm__c}</td>
+  </tr>
+  <tr>
+  <td>General remarks:</td>
+  <td>Sales and Payment conditions as per DuPont Price List</td>
+  </tr>
+  </table>
+   </apex:repeat>
+    
+  
+  <br/>
+ 
+    <apex:dataTable value="{!service.paServiceState.currentRequest.listofwrappertables}" var="mList" border="1" cellpadding="4">
+    
+  <apex:column headerValue="Product/PH Code">
+            <apex:outputText value="{!mList.sobjectRecord['Material_Code__c']}" rendered="{!mList.sobjectRecord['Material_Code__c'] <> NULL}"/>
+            <apex:outputText value="{!mList.sobjectRecord['F_Product_Hierarchy_Code__c']}" rendered="{!mList.sobjectRecord['F_Product_Hierarchy_Code__c'] <> NULL}"/>
+        </apex:column>
+         
+        <apex:column headerValue="Product/PH Name">
+        	<apex:outputText value="{!mList.stringMap['salestext']}"/>
+            <apex:outputText value="{!mList.sobjectRecord['Product_Hierarchy__c']}" rendered="{!mList.sobjectRecord['Product_Hierarchy__c'] <> NULL}"/>
+        </apex:column>
+        <apex:column headerValue="Material Price Group">
+     
+            <apex:outputtext value="{!mList.sobjectRecord['Material_Price_Group__c']}" rendered="{!mList.sobjectRecord['Material_Price_Group__c'] <> NULL}"></apex:outputText>
+        </apex:column>
+        
+       
+                <apex:column headerValue="Project Discount">
+            <apex:outputText value="{!mList.sobjectRecord['rate__c']} {!mList.sobjectRecord['Unit__c']}"></apex:outputText>
+        </apex:column>
+     <apex:column headerValue="Validity">
+     
+            <apex:outputtext value="{!mList.sobjectRecord['Valid_From__c']} - {!mList.sobjectRecord['Valid_To__c']}"></apex:outputText>
+        </apex:column> 
+        
+    </apex:dataTable>
+    
+    
+   
+  
+
+<apex:outputpanel >
+<br/><br/><br/>
+ <apex:repeat value="{!service.paServiceState.currentRequest.listrequestdetils}" var="b2">
+<apex:outputtext value="Issued By"/>
+<br/><br/>
+
+<apex:outputText value="{!$User.FirstName} {!$User.LastName}" />
+
+
+
+</apex:repeat>
+
+</apex:outputpanel>
+  
+  
+  </apex:form>
+  
+</apex:page>

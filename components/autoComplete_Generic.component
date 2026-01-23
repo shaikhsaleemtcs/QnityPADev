@@ -1,0 +1,198 @@
+<apex:component >
+<!-- SL20220614     Satyandra Lodhi     Updated Ajax version from 15.0 to 55.0 and component version from 15.0 to 55.0 to support salesforce release <IS TI-00094390> --> 
+<apex:attribute name="salesOrg" type="string" required="false" description="sales org"/>
+<apex:attribute name="erpdcCode" type="string" required="false" description="erpdcCode"/>
+<apex:attribute name="erpCluster" type="string" required="false" description="SAP Cluster"/>
+<apex:attribute name="orgGrp" type="string" required="false" description="Org Group"/>
+<apex:attribute name="bu" type="string" required="false" description="Business"/>
+<apex:attribute name="division" type="string" required="false" description="Division"/>
+<apex:attribute name="KCAtr" type="string" required="false" description="Key combination"/>
+<apex:attribute name="reqType" type="String" description="Request Type"/>
+<style>
+.loadinggif {background:url('{!URLFOR($Resource.autoComplete, '/autoComplete/loading.gif')}') no-repeat right center;}
+.ui-autocomplete {
+    z-index: 11111;
+}
+.ui-autocomplete.source:hover {
+    z-index: 11111;
+}
+
+.ui-menu .ui-menu-item a{
+    z-index: 11111;
+}   
+</style>
+
+    <script src="/soap/ajax/55.0/connection.js" type="text/javascript"/>
+    <apex:includeScript value="{!URLFOR($Resource.autoComplete, '/autoComplete/jquery-2.0.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.autoComplete, '/autoComplete/jquery-ui.js')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.autoComplete, '/autoComplete/jquery-ui.css')}"/>
+  <script>
+  $ = jQuery.noConflict();
+  var sobjectType='';
+  var availableTags = [];
+  function search(elem)
+  {
+      try
+      {
+          //console.log('Fired autocomplete');
+          var availableTags = [];
+          var txtSearch= document.getElementById(elem.id).value;
+          //console.log(txtSearch);
+          if(txtSearch.length>2)
+          {
+          //console.log('inside length > 3');
+              sforce.connection.sessionId = '{!$Api.Session_ID}';
+            //  availableTags=[];
+              if(elem.id.indexOf('soldTo')!=-1)
+              {
+                sobjectType = 'soldTo';
+                query='SELECT Name,Customer_Code__c FROM ERP_Customer__c WHERE Customer_Code__c LIKE \''+txtSearch+'%\' AND Sales_Org_Code__c = \'{!salesOrg}\' AND Distribution_Channel_Code__c = \'{!erpdcCode}\' AND Division_Code__c = \'{!division}\' AND Source_Cluster__c = \'{!erpCluster}\' Limit 20';
+              }
+              if(elem.id.indexOf('Material')!=-1)
+              {
+                sobjectType = 'material';
+                var qry = 'SELECT Id,ERP_Pricing_Procedure__c,Max_Valid_From_Offset_Cust_Spec__c,Display_Standardized_Rate__c,Latest_Valid_To_Offset_Cust_Spec__c,Latest_Valid_From_Offset_Non_Cust_Spec__c, Retroactive_Limit__c,Enable_Variable_Config_Materials__c,Business__r.Business__c FROM Organizational_Group_Item__c WHERE ';
+                qry+='Business__c =\'{!bu}\' AND OrgGroup__r.ERP_Sales_Org_Code__c = \'{!salesOrg}\' AND OrgGroup__r.ERP_Distribution_Channel_Code__c = \'{!erpdcCode}\' AND OrgGroup__r.ERP_Division_Code__c = \'{!division}\'';
+                                        
+                var querybuorgGrp = sforce.connection.query(qry);
+                var recrds = querybuorgGrp.getArray("records");
+                enableVarConfigMaterial = false;
+                if(recrds.length!=0)
+                    enableVarConfigMaterial =recrds[0]['Enable_Variable_Config_Materials__c'];
+                isMCMGreenTape = false;
+                isMCMPaste = false;
+                if(recrds.length!=0 && (recrds[0]['Business__r']['Business__c'] == 'MCM AP Green Tape'))
+                {
+                    isMCMGreenTape = true;
+                }
+                else if(recrds.length!=0 && (recrds[0]['Business__r']['Business__c']== 'MCM AP Paste'))
+                {
+                    isMCMPaste = true;
+                }
+                if(isMCMGreenTape)
+                {
+                   
+                    if(enableVarConfigMaterial)
+                    {
+                        query = 'SELECT ERP_Material_Code__c,Name FROM Material__c WHERE ERP_Sales_Org_Code__c =\'{!salesOrg}\' AND ERP_Distribution_Channel_Code__c=\'{!erpdcCode}\' AND ERP_Source_Cluster__c = \'{!erpCluster}\' ';
+                        query += ' AND ERP_Product_Hierarchy_Code__c like \'F423GT%\' AND ERP_Material_General_Data__r.ERP_IsConfigurable__c='+enableVarConfigMaterial+' AND ERP_Deletion_Flag__c = false AND RecordType.Name=\'ERP Material - Extended Data\' AND ( ERP_Material_Code__c LIKE \''+txtSearch+'%\' OR Name LIKE \'%'+txtSearch+'%\' ) LIMIT 20';
+                    }
+                    else
+                    {   
+                        query = 'SELECT ERP_Material_Code__c,Name FROM Material__c WHERE ERP_Sales_Org_Code__c =\'{!salesOrg}\' AND ERP_Distribution_Channel_Code__c=\'{!erpdcCode}\' AND ERP_Source_Cluster__c = \'{!erpCluster}\' ';
+                        query += ' AND ERP_Product_Hierarchy_Code__c like \'F423GT%\' AND ERP_Deletion_Flag__c = false AND RecordType.Name=\'ERP Material - Extended Data\' AND ( ERP_Material_Code__c LIKE \''+txtSearch+'%\' OR Name LIKE \'%'+txtSearch+'%\' ) LIMIT 20';
+                    
+                    }
+                }
+                else if(isMCMPaste)
+                {   
+                    if(enableVarConfigMaterial)
+                    {
+                        query = 'SELECT ERP_Material_Code__c,Name FROM Material__c WHERE ERP_Sales_Org_Code__c =\'{!salesOrg}\' AND ERP_Distribution_Channel_Code__c=\'{!erpdcCode}\' AND ERP_Source_Cluster__c = \'{!erpCluster}\' ';
+                        query += ' AND (NOT ERP_Material_Code__c like \'B%\') AND ERP_Material_General_Data__r.ERP_IsConfigurable__c='+enableVarConfigMaterial+' AND ERP_Deletion_Flag__c = false AND RecordType.Name=\'ERP Material - Extended Data\' AND ( ERP_Material_Code__c LIKE \''+txtSearch+'%\' OR Name LIKE \'%'+txtSearch+'%\' ) LIMIT 20';
+                    }
+                    else
+                    {   
+                        query = 'SELECT ERP_Material_Code__c,Name FROM Material__c WHERE ERP_Sales_Org_Code__c =\'{!salesOrg}\' AND ERP_Distribution_Channel_Code__c=\'{!erpdcCode}\' AND ERP_Source_Cluster__c = \'{!erpCluster}\' ';
+                        query += ' AND (NOT ERP_Material_Code__c like \'B%\') AND ERP_Deletion_Flag__c = false AND RecordType.Name=\'ERP Material - Extended Data\' AND ( ERP_Material_Code__c LIKE \''+txtSearch+'%\' OR Name LIKE \'%'+txtSearch+'%\' ) LIMIT 20';
+                    
+                    }
+                }
+                else
+                {
+                    if(enableVarConfigMaterial)
+                    {
+                        query = 'SELECT ERP_Material_Code__c,Name FROM Material__c WHERE ERP_Sales_Org_Code__c =\'{!salesOrg}\' AND ERP_Distribution_Channel_Code__c=\'{!erpdcCode}\' AND ERP_Source_Cluster__c = \'{!erpCluster}\' ';
+                        query += 'AND ERP_Material_General_Data__r.ERP_IsConfigurable__c='+enableVarConfigMaterial+' AND ERP_Deletion_Flag__c = false AND RecordType.Name=\'ERP Material - Extended Data\' AND ( ERP_Material_Code__c LIKE \''+txtSearch+'%\' OR Name LIKE \'%'+txtSearch+'%\' ) LIMIT 20';
+                    }
+                    else
+                    {   
+                        query = 'SELECT ERP_Material_Code__c,Name FROM Material__c WHERE ERP_Sales_Org_Code__c =\'{!salesOrg}\' AND ERP_Distribution_Channel_Code__c=\'{!erpdcCode}\' AND ERP_Source_Cluster__c = \'{!erpCluster}\' ';
+                        query += ' AND ERP_Deletion_Flag__c = false AND RecordType.Name=\'ERP Material - Extended Data\' AND ( ERP_Material_Code__c LIKE \''+txtSearch+'%\' OR Name LIKE \'%'+txtSearch+'%\' ) LIMIT 20';
+                    
+                    }
+                    
+                }
+              }
+              else if(elem.id.indexOf('targetField')!=-1)
+              {
+                //console.log('product found!');
+                sobjectType = 'product';
+                var requiredPHLength;
+                var kcName = '{!KCAtr}';
+                for(var i=9; i>=1; i--)
+                {
+                    if(kcName != null && (kcName.indexOf('PH'+i)!=-1))
+                    {
+                        requiredPHLength = i;
+                        break;
+                    }
+                }
+                //console.log('PH Lenght:-'+requiredPHLength);
+                query = 'SELECT F_Product_Hierarchy_Code__c,Product_Hierarchy__r.PH_Level__c,Business_Description__c  FROM BU_PH__c WHERE ';
+                if(requiredPHLength >= 1)
+                    query +='OrgGroup__c=\'{!orgGrp}\' AND Product_Hierarchy__r.PH_Level__c <='+requiredPHLength+' AND (F_Product_Hierarchy_Code__c LIKE \''+txtSearch+'%\' OR Business_Description__c LIKE \'%'+txtSearch+'%\') ORDER BY Product_Hierarchy__r.PH_Level__c LIMIT 20';
+                else
+                    query +='OrgGroup__c=\'{!orgGrp}\' AND (F_Product_Hierarchy_Code__c LIKE \''+txtSearch+'%\' OR Business_Description__c LIKE \'%'+txtSearch+'%\') ORDER BY Product_Hierarchy__r.PH_Level__c LIMIT 20';
+                
+                
+                
+              }
+              else if(elem.id.indexOf('FRB')!=-1)
+              {
+                //console.log('profit found!');
+                sobjectType = 'FRB';
+                query = 'SELECT ERP_Profit_Center_Code__c,Description__c  FROM Profit_Center__c WHERE ERP_Profit_Center_Code__c LIKE \''+txtSearch+'%\' OR Description__c LIKE \'%'+txtSearch+'%\' LIMIT 20';
+              }
+              //if(txtSearch.length>2)
+              //{
+              //    console.log('Adding image');
+                  $(elem).addClass('loadinggif');
+                  availableTags =[];
+                  //console.log('query:-'+query);
+                  var queryResult = sforce.connection.query(query);
+               //   console.log(queryResult);
+                  records = queryResult.getArray("records");
+                  if(records.length>0)
+                  {
+                 //     console.log('Records found!');
+                      for (var i=0; i<records.length; i++) 
+                      {
+                        if(sobjectType=='soldTo')
+                            availableTags.push({label: records[i]['Customer_Code__c']+'-'+records[i]['Name'], value: records[i]['Customer_Code__c']});
+                        if(sobjectType=='material')
+                            availableTags.push({label: records[i]['ERP_Material_Code__c']+'-'+records[i]['Name'], value: records[i]['ERP_Material_Code__c']});
+                        if(sobjectType=='product')
+                            availableTags.push({label: records[i]['F_Product_Hierarchy_Code__c']+'-'+records[i]['Product_Hierarchy__r']['PH_Level__c'].substring(0,1)+'-'+records[i]['Business_Description__c'], value: records[i]['F_Product_Hierarchy_Code__c']});
+                        if(sobjectType=='FRB')
+                            availableTags.push({label: records[i]['ERP_Profit_Center_Code__c']+'-'+records[i]['Description__c'], value: records[i]['ERP_Profit_Center_Code__c']}); 
+                      }
+                  }
+                  else
+                  {
+                          console.log('No records found!');
+                          $(elem).removeClass('loadinggif');
+                          
+                  }          
+                  //console.log(availableTags);
+                  $(elem).autocomplete({
+                      source: availableTags,
+                      open: function()
+                      {
+                           $(this).removeClass('loadinggif');
+                      }
+                        
+                    });
+            }
+            else
+            {
+                $(elem).removeClass('loadinggif');
+            }
+        }
+        catch(e)
+        {
+            console.log('Errors:-'+e);
+        }
+  }
+</script>
+</apex:component>

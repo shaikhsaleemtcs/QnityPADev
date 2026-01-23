@@ -1,0 +1,464 @@
+<apex:page controller="ctrlPAMain" tabstyle="Price_Approval__tab" sidebar="false" showHeader="true" id="currentPage" cache="true" action="{!onLoadCall}">
+<apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.js')}" />
+<c:loadingComponent />
+    <apex:pageMessages escape="false" id="errorMessage"/> 
+    <!-- Version 1.1 START  --> 
+    <!-- Done UI changes - Prachi 15th feb -->
+    <!-- version 1.1 END -->
+    <!-- 1.2   Brundha    UI    None-->
+    <!-- 1.3    Utkarsh     Changed the Requestor intor requester -->
+    <!-- Tag            Last Modified By        Last Modified Date              Description                     -->
+    <!-- PP20130710     Priyanka Pillala            10 Jul 2013         Adding Request Class - APAC ROLLOUT2    -->
+    <!-- VR20131107     Vinoth Rajapandian          07 Nov 2013         DTT Rollout Issue - Modifying the render condition for level 5 approver setup and commenting select option  -->
+    <!-- PP20131106     Added List to sort Countries - DTT ROLLOUT USAT Issue-->
+    <!-- VR20130719     Vinoth Rajapandian          19 Jul 2013         Modified the render condition for Floor and Reference - APAC ROLLOUT2   -->
+    <!-- TJ20140505     Tarun Jain                  05 May 2014         Added the landing page link         -->
+    <!-- TJ20140509     Tarun Jain                  09 May 2014         Added Navigation Flow Text          -->
+    <style>
+        .navFlow{font-size:13px;font-style:oblique;margin-bottom:3px;}
+        .customerLink{font-size:15px;height:20px;margin-bottom:1px;padding:5px;border:solid 1px;border-color:#6E96B2; background-color:#E5F3FC;font-weight:bold;text-align:left;}
+        #SalesArea  .detailList{padding:0px;border:1px solid #E2E3E4;}
+        #SalesArea  .detailList .dataCol{padding:3px;} 
+        #SalesArea  .detailList{padding:10px;} 
+        #SalesArea  .detailList .dataCol .requiredBlock{top:0px; height:20px;bottom:0px;}
+        #SalesArea  .detailList tr th{border-bottom:none;} 
+        #SalesArea  .detailList tr td{border-bottom:none;} 
+        #SalesArea  .bPageBlock{float:left;width:100%;}
+        #SalesArea  .pbSubheader{margin-bottom:0px;} 
+        
+        #appSetUp  .detailList{padding:0px;border:1px solid #E2E3E4;}
+        #appSetUp  .detailList .dataCol{padding:0px;}
+        #appSetUp  .detailList .dataCol .requiredBlock{top:0px; height:20px;bottom:0px;}
+        #appSetUp  .detailList tr th{border-bottom:none;} 
+        #appSetUp  .detailList tr td{border-bottom:none;} 
+        #appSetUp  .bPageBlock{float:left;width:100%;}
+        #appSetUp  .pbSubheader{margin-bottom:0px;}
+        
+        #appSetUp a.btn{width:60px;float:left;} 
+        //#SalesArea .detailList .dataCol span.FrontScreen{top: 80px;right: 60%;} 
+        //.FrontScreen{top: 80px;right: 60%;} 
+         
+    </style>
+   
+    <script type="text/javascript">
+        function confirmCancel()
+        {
+            var con = confirm('{!$Label.Cancel_Admin_Configuration_Confirmation}');
+            return con;     
+        } 
+
+        function confirmSave()
+        {
+            var con = confirm('{!$Label.Setup_Details_Modified_Confirmation}');
+            return con;
+        }
+        function confirmDelete()
+        {
+            var con = confirm('{!$Label.Delete_Approval_Setup_Confirmation}');
+            return con;
+        }   
+        
+        function redirect(selectedId, detailId)
+        {
+            window.location = '/apex/ManageApprover?adminMasterId=' + selectedId +'&adminDetailId=' + detailId ;
+            return false;
+        }
+        function setPCKC()
+        {
+        	return true;
+        }
+    </script>  
+    
+    <apex:actionStatus id="stat">
+       <apex:facet name="start">
+            <div class="spinnerMask" id="spinnerMask">
+            <div class="spinnerCt"><img
+                src="/img/analytics/reportbuilder/icons/spinner32.gif"
+                alt="Loading..." width="32" height="32" align="center"
+                class="spinner" title="Loading..." />
+            <div class="loadingIndicator">Loading...</div>
+            </div>
+            <div class="mask"></div>
+            </div>
+        </apex:facet>
+     </apex:actionStatus> 
+    <apex:form >
+    <!-- <TJ20140505> Added Landing Page Link -->
+        <div align="left" class="navFlow">
+            <apex:commandLink id="link0" value="Landing Page" action="{!businessComponentAction}" target="_self" style="color:blue;">
+            <apex:param name="desiredAction" value="landingpage" assignTo="{!businessaction}" />
+            <apex:param name="newPageLabel" value="PAHome" assignTo="{!newPageLabel}" />
+            </apex:commandLink>
+    <!-- <TJ20140509> Added Navigation Flow Text -->
+            <apex:outputText value="{!if(NOT(ISNULL(navigationText)),'>>','')} "/>
+            <apex:outputText value="{!navigationText}"/>
+            <apex:outputText value=">>  {!$Label.Approval_Set_Up}"/>
+        </div>
+    </apex:form>
+<!--        <TJ20140417>   Changed Page Label-->    
+    <div class="customerLink">
+        {!$Label.Approval_Set_Up}
+    </div> 
+           
+    <apex:form id="myForm">
+    
+  
+    <div id="SalesArea">  
+        <apex:pageblock >           
+         
+            <apex:pageBlockSection columns="2" title="Sales Area Details">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Business"/>
+                    <apex:outputPanel > 
+                        <apex:outputPanel style="float:left;" rendered="{!NOT(service.PAServicestate.approvalSetup.onEditClick) && NOT(service.PAServicestate.approvalSetup.editReadOnlyDisplay)}">
+                            <div class="requiredInput" style="float:left;" >
+                                <div class="requiredBlock" style="float:left;"></div>
+
+                                <apex:inputText style="float:left;margin:0px;" value="{!service.PAServicestate.approvalsetup.selectedBU}" disabled="true"/>
+                             </div>
+                         </apex:outputPanel>                          
+                       <apex:outputText value="{!service.PAServicestate.approvalSetup.selectedBU}" rendered="{!service.PAServicestate.approvalSetup.onEditClick || service.PAServicestate.approvalSetup.editReadOnlyDisplay}"/> 
+                   </apex:outputPanel>                                                           
+                </apex:pageBlockSectionItem>                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Sales Organization"/>
+                    <apex:outputPanel >
+                        <apex:outputText value="{!service.PAServicestate.approvalSetup.salesorgDisplay}" rendered="{!service.PAServicestate.approvalSetup.onEditClick || service.PAServicestate.approvalSetup.editReadOnlyDisplay}"/>
+                        <apex:outputPanel style="float:left;" rendered="{!NOT(service.PAServicestate.approvalSetup.onEditClick) && NOT(service.PAServicestate.approvalSetup.editReadOnlyDisplay)}">
+                            <div class="requiredInput" style="float:left;">
+                                <div class="requiredBlock" style="float:left;"></div>
+                                <apex:inputText style="float:left;margin: 0px;" value="{!service.PAServicestate.approvalSetup.salesorgDisplay}" disabled="{!service.PAServicestate.approvalSetup.salesorgDisplay <> NULL}" rendered="{!NOT(service.PAServicestate.approvalSetup.onEditClick) && NOT(service.PAServicestate.approvalSetup.editReadOnlyDisplay)}"/> &nbsp;                 
+                            </div>
+                        </apex:outputPanel>    
+                            <apex:commandLink action="{!businessComponentAction}" rendered="{!NOT(service.PAServicestate.approvalSetup.onEditClick) && NOT(service.PAServicestate.approvalSetup.editReadOnlyDisplay)}" status="stat" reRender="myForm">
+							<!-- MS20140929 Making enablePopUp attribute true -->
+                            <c:PASalesAreaSelectionComponent BUIdFromPage="{!service.paServiceState.approvalSetup.selectedBU}"
+                                soConcatSAComponenet="{!service.paServiceState.approvalSetup.salesorgDisplay}"
+                                dcConcatSAComponenet="{!service.paServiceState.approvalSetup.distChannelDisplay}"
+                                divConcatSAComponenet="{!service.paServiceState.approvalSetup.divisionSelectDisplay}"
+                                enableRequestClass="{!service.paServiceState.approvalSetup.enableRequestClassFlag}"
+                                requestClass="{!service.paServiceState.approvalSetup.requestClass}" 
+                                enablePopUp="{!service.paServiceState.approvalSetup.enablePopUp}" 
+                                setupPageCheck="true"/>
+                             <!--<apex:param name="desiredAction" value="selectSalesArea" assignTo="{!businessAction}" />
+                                <apex:param name="newPageLabel" value="PAApprovalSetup" assignTo="{!newPageLabel}" />  -->   
+                                <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                                <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                            </apex:commandLink>            
+                    </apex:outputPanel>                    
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Distribution Channel"/>
+                    <apex:outputText value="{!service.PAServicestate.approvalSetup.distChannelDisplay}"/> 
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Division"/>
+                    <apex:outputText value="{!service.PAServicestate.approvalSetup.divisionSelectDisplay}"/>  
+                </apex:pageBlockSectionItem>
+        
+                <!-- PP20130710 START -->
+                <apex:pageBlockSectionItem rendered="{!service.PAServicestate.approvalSetup.salesorgDisplay <> NULL && service.paServiceState.approvalSetup.enableRequestClassFlag}">
+                    <apex:outputLabel value="Request Class"/>
+                    <apex:outputPanel >
+                        <apex:selectList value="{!service.PAServicestate.approvalSetup.adminMaster.Request_Class__c}" size="1" rendered="{!NOT(service.PAServicestate.approvalSetup.onEditClick) && NOT(service.PAServicestate.approvalSetup.editReadOnlyDisplay)}">
+                            <apex:selectOption itemValue="--None--" itemLabel="--None--"/>
+                            <apex:selectOptions value="{!service.paServiceState.approvalSetup.requestClassList}"/>
+                        </apex:selectList>
+                        <apex:outputText value="{!service.PAServicestate.approvalSetup.adminMaster.Request_Class__c}" rendered="{!service.PAServicestate.approvalSetup.onEditClick || service.PAServicestate.approvalSetup.editReadOnlyDisplay}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <!-- PP20130710 END -->        
+        
+                 <apex:pageBlockSectionItem rendered="{!service.PAServicestate.approvalSetup.salesorgDisplay <> NULL}">
+                     <apex:outputLabel value="Request Type"/>
+                     <apex:outputPanel >
+                        <apex:outputText value="{!service.PAServicestate.approvalSetup.adminMaster.Request_Type__c}" rendered="{!service.PAServicestate.approvalSetup.onEditClick || service.PAServicestate.approvalSetup.editReadOnlyDisplay}"/>
+                        <apex:inputField value="{!service.PAServicestate.approvalSetup.adminMaster.Request_Type__c}" rendered="{!NOT(service.PAServicestate.approvalSetup.onEditClick) && NOT(service.PAServicestate.approvalSetup.editReadOnlyDisplay)}">
+                            <apex:actionSupport event="onchange" action="{!businessComponentActionforRerender}" status="stat" reRender="myForm">
+                                <apex:param name="desiredAction" value="displayCountry" assignTo="{!businessAction}" />
+                            </apex:actionSupport>  
+                        </apex:inputField>   
+                     </apex:outputPanel>                     
+                 </apex:pageBlockSectionItem>
+                 
+                 <apex:pageBlockSectionItem rendered="{!service.PAServicestate.approvalSetup.salesorgDisplay == NULL}">
+                     <apex:outputLabel value="Request Type"/>
+                     <apex:outputField value="{!service.PAServicestate.approvalSetup.adminMaster.Request_Type__c}"/>
+                 </apex:pageBlockSectionItem>
+                 
+                 <apex:pageBlockSectionItem rendered="{!service.PAServicestate.approvalSetup.salesorgDisplay <> NULL}">
+                      <apex:outputLabel value="Price Category" />
+                      <apex:outputPanel >
+                        <apex:outputText value="{!service.PAServicestate.approvalSetup.adminMaster.Price_Category__c}" rendered="{!service.PAServicestate.approvalSetup.onEditClick || service.PAServicestate.approvalSetup.editReadOnlyDisplay}"/>
+                        <!-- VR20130719 - APAC ROLLOUT2-->
+                        <!-- 
+                        <apex:selectList rendered="{!service.PAServicestate.approvalSetup.adminMaster.Request_Type__c == 'Import' && NOT(service.PAServicestate.approvalSetup.onEditClick) && NOT(service.PAServicestate.approvalSetup.editReadOnlyDisplay)}" value="{!service.PAServicestate.approvalSetup.adminMaster.Price_Category__c}">
+                            <apex:selectOption itemvalue="Import"/>
+                        </apex:selectList>
+                         -->
+                         <!-- VR20130719 - APAC ROLLOUT2-->
+                        <apex:inputField value="{!service.PAServicestate.approvalSetup.adminMaster.Price_Category__c}" rendered="{!NOT(service.PAServicestate.approvalSetup.onEditClick) && NOT(service.PAServicestate.approvalSetup.editReadOnlyDisplay)}">
+                            <apex:actionSupport event="onchange" action="{!businessComponentActionforRerender}" status="stat" reRender="myForm">
+                                <apex:param name="desiredAction" value="displaySpot" assignTo="{!businessAction}" />
+                                <apex:param name="newPageLabel" value="PAApprovalSetup" assignTo="{!newPageLabel}" />
+                                <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                                <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                            </apex:actionSupport>                       
+                        </apex:inputField>
+                      </apex:outputPanel>                          
+                 </apex:pageBlockSectionItem>
+                 
+                 <apex:pageBlockSectionItem rendered="{!service.PAServicestate.approvalSetup.salesorgDisplay == NULL}">
+                      <apex:outputLabel value="Price Category" />
+                      <apex:outputField value="{!service.PAServicestate.approvalSetup.adminMaster.Price_Category__c}"/>                        
+                 </apex:pageBlockSectionItem> 
+                                 
+                 <apex:pageBlockSectionItem >               
+                        <apex:outputLabel value="Country" rendered="{!(service.PAServicestate.approvalSetup.onEditClick || (NOT (service.PAServicestate.approvalSetup.onEditClick) && service.PAServicestate.approvalSetup.countryDisplay)) || (service.PAServicestate.approvalSetup.editReadOnlyDisplay || (NOT (service.PAServicestate.approvalSetup.editReadOnlyDisplay) && service.PAServicestate.approvalSetup.countryDisplay))}"/>                    
+                    <apex:outputPanel >   
+                        <apex:outputText value="{!service.PAServicestate.approvalSetup.adminMaster.Country__c}" rendered="{!service.PAServicestate.approvalSetup.onEditClick || service.PAServicestate.approvalSetup.editReadOnlyDisplay}"/> 
+                        <apex:inputText style="float:left;margin: 0px;" disabled="true" value="{!service.PAServicestate.approvalSetup.selectedCountry}" rendered="{!(NOT(service.PAServicestate.approvalSetup.onEditClick) && service.PAServicestate.approvalSetup.countryDisplay) && (NOT(service.PAServicestate.approvalSetup.editReadOnlyDisplay) && service.PAServicestate.approvalSetup.countryDisplay)}"/> &nbsp;                    
+                        <apex:commandLink action="{!businessComponentActionforRerender}" rendered="{!(NOT(service.PAServicestate.approvalSetup.onEditClick) && service.PAServicestate.approvalSetup.countryDisplay) && (NOT(service.PAServicestate.approvalSetup.editReadOnlyDisplay) && service.PAServicestate.approvalSetup.countryDisplay)}" status="stat" reRender="myForm">
+                            <apex:image id="theImage" url="{!$Resource.LookUpImage}"/>
+                            <apex:param name="desiredAction" value="selectCountry" assignTo="{!businessAction}" />
+<!--                            <apex:param name="newPageLabel" value="PAApprovalSetup" assignTo="{!newPageLabel}" />-->
+                            <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                            <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                        </apex:commandLink> 
+                    </apex:outputPanel>           
+                </apex:pageBlockSectionItem>
+                
+                 <apex:pageBlockSectionItem rendered="{!service.PAServicestate.approvalSetup.spotDisplay || (service.PAServicestate.approvalSetup.onEditClick || service.PAServicestate.approvalSetup.editReadOnlyDisplay) && service.PAServicestate.approvalSetup.adminMaster.Price_Category__c == 'Pricing Task'}" id="spotType">      
+                     <apex:outputLabel value="Pricing Task Type"/>
+                     <apex:outputPanel >
+                        <apex:outputText value="{!service.PAServicestate.approvalSetup.adminMaster.Pricing_Task_Type__c}" rendered="{!service.PAServicestate.approvalSetup.onEditClick || service.PAServicestate.approvalSetup.editReadOnlyDisplay}"/>
+                        <apex:inputField value="{!service.PAServicestate.approvalSetup.adminMaster.Pricing_Task_Type__c}" rendered="{!NOT(service.PAServicestate.approvalSetup.onEditClick) && NOT(service.PAServicestate.approvalSetup.editReadOnlyDisplay)}">  
+                        </apex:inputField> 
+                     </apex:outputPanel>                 
+                 </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>               
+             </apex:pageBlock>
+          </div>      
+             
+         <apex:outputPanel id="popUPwindow2" rendered="{!service.PAServicestate.approvalSetup.displayCountryPopUp}" styleClass="BackPage" />      
+         <apex:outputPanel id="popUPwindow3" rendered="{!service.PAServicestate.approvalSetup.displayCountryPopUp}" styleClass="FrontPageSoldTo" >
+             <apex:panelGrid style="float:right;">
+                <apex:commandLink action="{!service.PAServicestate.approvalSetup.closeCountryDisplay}" rerender="myForm">
+                    <apex:image url="{!$Resource.closeButton}" width="15" height="15"/>
+<!--                    <apex:param name="desiredAction" value="closeCountryDisplay" assignTo="{!businessAction}" />-->
+<!--                    <apex:param name="newPageLabel" value="PAApprovalSetup" assignTo="{!newPageLabel}" />-->
+                    <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                    <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                </apex:commandLink>
+                </apex:panelGrid>
+             
+                 <div id="appSetUp">
+                    <apex:pageBlock >    
+                        <apex:pageBlockSection title="Select Country">
+                        <!-- PP20131106 -->             
+                            <apex:pageBlockTable style="width:255px;" value="{!service.PAServicestate.approvalSetup.keyFieldListAll}" var="countrySelect">
+                                <apex:column headerValue="Country Code">
+                                    <apex:commandLink action="{!service.PAServicestate.approvalSetup.closeCountryDisplay}" value="{!countrySelect}" rerender="myForm">
+                                    <apex:param name="country" value="{!service.PAServicestate.approvalSetup.mapKeyField[countrySelect]}" assignTo="{!service.PAServicestate.approvalSetup.selectedCountry}"/>
+<!--                                    <apex:param name="desiredAction" value="closeCountryDisplay" assignTo="{!businessAction}" />-->
+<!--                                    <apex:param name="newPageLabel" value="PAApprovalSetup" assignTo="{!newPageLabel}" />-->
+                                    <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                                    <apex:param name="pageName" value="stay" assignTo="{!pageName}"/> 
+                                </apex:commandLink><br/>
+                                </apex:column>
+                                <apex:column headerValue="Country Name">
+                                    <apex:outputText value="{!service.PAServicestate.approvalSetup.mapKeyField[countrySelect]}"></apex:outputText>                                
+                                </apex:column>                          
+                          </apex:pageBlockTable>
+                        </apex:pageBlockSection>       
+                    </apex:pageBlock>   
+                  </div>       
+                </apex:outputPanel> 
+                 
+                <div id="appSetUp"> 
+                    <apex:pageBlock id="pageBlock">          
+                        <apex:pageBlockSection title="Approval Set Up" >
+                            <apex:pageBlockTable value="{!service.PAServicestate.approvalSetup.detailWrapObjectList}" var="st" style="width:130%;"> 
+                            
+                                  <apex:column headerValue="Level">
+                                    <apex:outputText value="{!st.sObjectList[0].Approval_Level__c}"/> 
+                                  </apex:column>   
+                                    
+                                  <apex:column headerValue="Routing Parameter">
+                                    <apex:inputField style="float:left;margin: 0px;" value="{!st.sObjectList[0].Routing_Parameter__c}"  required="true" rendered="{!NOT(service.PAServicestate.approvalSetup.editReadOnlyDisplay) && NOT(service.PAServicestate.approvalSetup.readonlyDisplayonID) && Not(service.PAServicestate.approvalSetup.routingParameterEditFlag)}">
+                                        <apex:actionSupport event="onchange"/>
+                                    </apex:inputField> 
+                                    <apex:outputText value="{!st.sObjectList[0].Routing_Parameter__c}" rendered="{!(service.PAServicestate.approvalSetup.editReadOnlyDisplay) || service.PAServicestate.approvalSetup.readonlyDisplayonID}" /> 
+                                    <apex:selectList style="float:left;margin: 0px;" size="1" value="{!st.sObjectList[0].Routing_Parameter__c}" required="true" rendered="{!NOT(service.PAServicestate.approvalSetup.editReadOnlyDisplay) && NOT(service.PAServicestate.approvalSetup.readonlyDisplayonID) && service.PAServicestate.approvalSetup.routingParameterEditFlag}">                                
+                                        <apex:selectOption itemvalue="--None--" />
+                                        <apex:selectOption itemvalue="Required" /> 
+                                        <apex:selectOption itemvalue="Not Required" />
+                                        <apex:actionSupport event="onchange" /> 
+                                    </apex:selectList>
+                                  </apex:column> 
+                                  
+                                  <apex:column headerValue="Key Field" >
+                                    <apex:inputField value="{!st.sObjectList[0].Key_Field__c}" rendered="{!NOT(service.PAServicestate.approvalSetup.editReadOnlyDisplay) && NOT(service.PAServicestate.approvalSetup.readonlyDisplayonID) && st.sObjectList[0].Routing_Parameter__c <> 'Not Required'}" >
+                                        <apex:actionSupport event="onchange" />
+                                    </apex:inputField>
+                                    <apex:outputText value="{!st.sObjectList[0].Key_Field__c}" rendered="{!(service.PAServicestate.approvalSetup.editReadOnlyDisplay || service.PAServicestate.approvalSetup.readonlyDisplayonID) && st.sObjectList[0].Routing_Parameter__c <> 'Not Required'}"/>
+                                    <apex:outputText rendered="{!service.PAServicestate.approvalSetup.editReadOnlyDisplay || service.PAServicestate.approvalSetup.readonlyDisplayonID || st.sObjectList[0].Routing_Parameter__c == 'Not Required'}"/> 
+                                    </apex:column> 
+                                  
+                                  <apex:column headerValue="Approver Role" >
+                                  <!-- VR20131107 DTT Rollout Issue - Modifying the render condition for level 5 approver setup --><!--  && (st.sObjectList[0].Approval_Level__c <> '5') -->
+                                    <apex:inputField value="{!st.sObjectList[0].Approver_Role__c}" rendered = "{!NOT(service.PAServicestate.approvalSetup.editReadOnlyDisplay) && NOT(service.PAServicestate.approvalSetup.readonlyDisplayonID)&& (st.sObjectList[0].Routing_Parameter__c <> 'Not Required')}">                             
+                                    </apex:inputField>
+                                    <apex:selectList disabled="true" style="width:75px" size="1" value="{!st.sObjectList[0].Approver_Role__c}" rendered="{!isBlank(st.sObjectList[0].Key_Field__c) && st.sObjectList[0].Routing_Parameter__c <> 'Not Required' && st.sObjectList[0].Approval_Level__c == '5'}">
+                                        <apex:selectOptions value="{!service.PAServicestate.approvalSetup.approverRoles}" /> 
+                                    </apex:selectList>
+                                    <!--  VR20131107 DTT Rollout Issue - Commenting as this condition is not required
+                                        <apex:selectList size="1" value="{!st.sObjectList[0].Approver_Role__c}" rendered="{!NOT(service.PAServicestate.approvalSetup.editReadOnlyDisplay) && NOT(service.PAServicestate.approvalSetup.readonlyDisplayonID) && (st.sObjectList[0].Routing_Parameter__c <> 'Not Required') && st.sObjectList[0].Approval_Level__c == '5' && NOT isBlank(st.sObjectList[0].Key_Field__c)}">
+                                            <apex:selectOptions value="{!service.PAServicestate.approvalSetup.approverRoles}" /> 
+                                        </apex:selectList>
+                                    -->
+                                    <apex:outputText value="{!st.sObjectList[0].Approver_Role__c}" rendered="{!(service.PAServicestate.approvalSetup.editReadOnlyDisplay || service.PAServicestate.approvalSetup.readonlyDisplayonID) && (st.sObjectList[0].Routing_Parameter__c <> 'Not Required')}" />
+                                    <apex:outputText rendered="{!service.PAServicestate.approvalSetup.editReadOnlyDisplay || service.PAServicestate.approvalSetup.readonlyDisplayonID || (st.sObjectList[0].Routing_Parameter__c == 'Not Required')}"/>                                 
+                                  </apex:column>  
+                                  
+                                  <apex:column headerValue="Manage Approver Link" rendered="{!(service.PAServicestate.approvalSetup.manageApproverLinkDisplay || service.PAServicestate.approvalSetup.readonlyDisplayonID) && st.sObjectList[0].Routing_Parameter__c <> 'Not Required' && st.sObjectList[0].Key_Field__c <> 'Requester'}">
+                                   <apex:commandLink value="Manage Approver" style="color:Blue" action="{!businessComponentAction}" >
+                                    <apex:param name="adminId" value="{!st.sObjectList[0].Id}" assignTo="{!adminDetailId}"/> 
+                                    <apex:param name="keyfield" value="{!st.sObjectList[0].Key_Field__c}" assignTo="{!service.PAServicestate.approvalSetup.keyfield}"/>
+                                    <apex:param name="approverRole" value="{!st.sObjectList[0].Approver_Role__c}" assignTo="{!service.PAServicestate.approvalSetup.approverRole}"/>
+                                    <apex:param name="desiredAction" value="goToManageApprover" assignTo="{!businessAction}" />
+                                    <apex:param name="newPageLabel" value="PAManageApprover" assignTo="{!newPageLabel}" /> 
+                                    <!-- <TJ20140509> Passing Label for Displaying Navigation Flow -->
+                                    <apex:param name="pageName" value="{!$Label.Approval_Set_Up}" assignTo="{!pageName}"/>
+                                   </apex:commandLink>                                                             
+                                  </apex:column>
+                                   
+                                  <apex:column rendered="{!(service.PAServicestate.approvalSetup.manageApproverLinkDisplay || service.PAServicestate.approvalSetup.readonlyDisplayonID) && st.sObjectList[0].Routing_Parameter__c <> 'Not Required' && st.sObjectList[0].Key_Field__c <> 'Requester'}">
+                                    <apex:image url="{!$Resource.RadioButtonGreen}" width="15" height="15" rendered="{!st.stringMap['showGreenFlag'] == 'true'}"/>
+                                    <apex:image url="{!$Resource.RadioButtonRed}" width="15" height="15" rendered="{!st.stringMap['showGreenFlag'] == 'false'}"/>
+                                  </apex:column>                   
+                            </apex:pageBlockTable>                                   
+                        </apex:pageBlockSection>                 
+
+              
+                <div style="float:left;text-align:center;padding:10px 0px 10px 40%;">
+                    <apex:commandLink value="{!$Label.Save_Button}" action="{!businessComponentAction}" styleClass="btn" style="text-decoration:none;" rendered="{!NOT(service.PAServicestate.approvalSetup.onEditClick) && NOT(service.PAServicestate.approvalSetup.editReadOnlyDisplay) && NOT(service.PAServicestate.approvalSetup.readonlyDisplayonID)}" onclick="return confirmSave()">
+                        <apex:param name="desiredAction" value="saveMasterMethod" assignTo="{!businessAction}" />
+                        <apex:param name="newPageLabel" value="PAApprovalSetup" assignTo="{!newPageLabel}" />
+                        <!-- apex:param name="newPageLabel" value="{!service.PAServicestate.approvalSetup.adminMaster.id}" assignTo="{!service.PAServicestate.approvalSetup.adminMasterId}" /-->
+                        <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                        <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                    </apex:commandLink>
+                    <apex:commandLink value="{!$Label.Save_Button}" action="{!businessComponentAction}" styleClass="btn" style="text-decoration:none;" rendered="{!service.PAServicestate.approvalSetup.onEditClick && NOT(service.PAServicestate.approvalSetup.editReadOnlyDisplay) && NOT(service.PAServicestate.approvalSetup.readonlyDisplayonID)}" onclick="return confirmSave()">
+                        <apex:param name="desiredAction" value="saveMasterMethodafterEdit" assignTo="{!businessAction}" />
+                        <apex:param name="newPageLabel" value="PAApprovalSetup" assignTo="{!newPageLabel}" />
+                        <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                        <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                    </apex:commandLink>
+                    <apex:commandLink value="{!$Label.Cancel_Button}" onclick="return confirmCancel()" styleClass="btn" style="text-decoration:none;" action="{!businessComponentAction}" rendered="{!NOT(service.PAServicestate.approvalSetup.editReadOnlyDisplay) && NOT(service.PAServicestate.approvalSetup.readonlyDisplayonID)}">
+                        <apex:param name="desiredAction" value="goToBULandingPagecancel" assignTo="{!businessAction}" />
+                        <apex:param name="newPageLabel" value="PABUAdminHome" assignTo="{!newPageLabel}" />
+                        <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                        <apex:param name="pageName" value="{!IF(CONTAINS(navigationText,$Label.BU_Admin_Home_Page),$Label.BU_Admin_Home_Page,$Label.Approval_Set_Up)}" assignTo="{!pageName}"/> 
+                    </apex:commandLink> 
+                    <apex:commandLink value="{!$Label.Edit_Button}" action="{!businessComponentAction}" styleClass="btn" style="text-decoration:none;" rendered="{!service.PAServicestate.approvalSetup.editReadOnlyDisplay || service.PAServicestate.approvalSetup.readonlyDisplayonID}">
+                        <apex:param name="desiredAction" value="editSetUpDetail" assignTo="{!businessAction}" />
+                        <apex:param name="newPageLabel" value="PAApprovalSetup" assignTo="{!newPageLabel}" />
+                        <apex:param name="desiredAction" value="false" assignTo="{!service.PAServicestate.approvalSetup.editReadOnlyDisplay}" />
+                        <apex:param name="desiredAction" value="false" assignTo="{!service.PAServicestate.approvalSetup.readonlyDisplayonID}" />
+                        <apex:param name="desiredAction" value="false" assignTo="{!service.PAServicestate.approvalSetup.manageApproverLinkDisplay}" />
+                        <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                        <apex:param name="pageName" value="stay" assignTo="{!pageName}"/> 
+                    </apex:commandLink>
+                    <apex:commandLink onclick="return confirmDelete()" value="{!$Label.Delete_Button}" action="{!businessComponentAction}" styleClass="btn" style="text-decoration:none;" rendered="{!service.PAServicestate.approvalSetup.editReadOnlyDisplay || service.PAServicestate.approvalSetup.readonlyDisplayonID}">
+                        <apex:param name="desiredAction" value="deleteAdminMasterRecord" assignTo="{!businessAction}" />
+                        <apex:param name="newPageLabel" value="PABUAdminHome" assignTo="{!newPageLabel}" />
+                        <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                        <apex:param name="pageName" value="{!IF(CONTAINS(navigationText,$Label.BU_Admin_Home_Page),$Label.BU_Admin_Home_Page,$Label.Approval_Set_Up)}" assignTo="{!pageName}"/>
+                    </apex:commandLink>
+                    <apex:commandLink value="{!$Label.Back_Button}" action="{!businessComponentAction}" styleClass="btn" style="text-decoration:none;" rendered="{!service.PAServicestate.approvalSetup.editReadOnlyDisplay || service.PAServicestate.approvalSetup.readonlyDisplayonID}">
+                        <apex:param name="desiredAction" value="goToBULandingPage" assignTo="{!businessAction}" />
+                        <apex:param name="newPageLabel" value="PABUAdminHome" assignTo="{!newPageLabel}" />
+                        <!-- <TJ20140509> Passing label for displying navigation text -->
+                        <apex:param name="pageName" value="{!IF(CONTAINS(navigationText,$Label.BU_Admin_Home_Page),$Label.BU_Admin_Home_Page,$Label.Approval_Set_Up)}" assignTo="{!pageName}"/>
+                    </apex:commandLink>
+                 </div>   
+             
+              </apex:pageBlock>
+          </div>  
+      </apex:form>        
+                                           
+    <style type="text/css">
+   .FrontPageSoldTo
+    {
+       background-color: white;
+        //border-width: 2px;
+        border: 2px solid #63A4C5;
+        //border-style: solid;
+        z-index: 9999;
+        left:45% ;
+        right:;
+        padding:10px;
+        position: absolute; 
+        top:15%;
+        //margin-left: -600px;
+        width:300px;
+    }
+     
+      .BackPage
+    {            
+        background-color:#696969;
+        opacity: 0.5;
+        filter: alpha(opacity = 50);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 9998;
+    
+    }
+    
+    .spinnerCt {
+        left: 50%;
+        top: 35%;
+        position: absolute;
+        z-index: 1;
+        padding: 20px 40px;
+        box-shadow: 0pt 2px 5px rgb(172, 172, 172);
+        border-radius: 1em 1em 1em 1em;
+        border: 1px solid rgb(206, 236, 255);
+        background-color: rgb(206, 236, 255);
+        background-style: solid;
+    }
+    
+    .spinner {
+        padding: 10px 15px 10px 0pt;
+        vertical-align: middle;
+    }
+    
+    .spinnerCt .loadingIndicator {
+        display: inline;
+        font-size: 135%;
+        font-weight: bold;
+    }
+    
+    .mask {
+        width: 100%;
+        height: 100%;
+        background-color: rgb(0, 0, 0);
+        opacity: 0.45;
+        filter: alpha(opacity =     45);
+        position: absolute;
+        z-index: 0;
+        top: 0pt;
+        left: 0pt;
+    }
+.noTableFooter
+{
+margin:0px!important;
+}
+</style>                               
+</apex:page>

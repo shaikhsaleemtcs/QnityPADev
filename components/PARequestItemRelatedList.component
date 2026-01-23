@@ -1,0 +1,1343 @@
+<!--    This component is used to display the records from PRICING REQUEST ITEM object in the table -->
+<!--    Ver.    Developer               Changes                                                                     -->
+<!--    1.1     Priyanka            Removed apex:repeats                                                            -->
+<!--    1.2     Prachi              Rendering conditions for 'Valid To ,Valid From,New Valid To and New Valid From' -->
+<!-- Ver 1.3    Priyanka    Customer Price Group to CPG and Material Group Code to MPG---ISSUE# 23 UAT -->
+<!-- Ver 1.4    Priyanka    Displaying New Rate only in case of scaling also---ISSUE# 101 UAT -->
+<!-- Ver 1.5    Prachi      increased the width of the table (19thmarch)-->
+<!-- Ver 1.6    Neeharika   Added Mat column n bgcolor for NPC-->
+<!--    1.7         Priyanka        Added 'Add Prices' button along with 'Delete Selected'
+                                    - APAC ROLLOUT                                                  None        --> 
+<!--    1.8         Priyanka        Added 'USD' and 'Per' columns for Approver
+                                    - APAC ROLLOUT                                                  None        -->
+<!--    1.9         Priyanka        SIT Issue # 72 FIX - Changed header for Customer Hierarchy
+                                    Columns - APAC ROLLOUT                                          None        -->                                 
+<!--    2.0         Neeharika       Enhancement for removal of Edit link from SFDC PA               None        -->
+<!-- PP20131018 Priyanka            Increased the width of the table - UI Issue - ROLLOUT2          None        -->
+<!-- PP20131025 Priyanka        Removed colouring of Current Column for Expiry and FOC - ROLLOUT2   None        -->     
+<!--    2.1     Bisnupriya      Added dynamic header for Standardized Currency and modified the logic to display
+                                    Standardized Currency and Standardized UoM  - APAC ROLLOUT2     None        -->     
+<!--    VR20130719  Vinoth Rajapandian  Modified Rendered condition for Flr. and Ref.               None        -->
+<!--BB20140404  Bisnupriya      CAPITAL ROLLOUT -Added error indicator for cloned request Items     None        -->                                         
+<!-- SP20140426 Shiva       CAPITAL PROJECT      Floor Reference Price view                         None        -->
+<!-- SP20140509 Shiva       CAPITAL PROJECT      Payment Terms & Fixed date                         None        -->
+<!-- TJ20140513 Tarun Jain          Added attributes to store and pass page label on links.         None        -->
+<!-- AV20140515 Abhijeet Vaishnab           Added volume columns and done inline editing.           None        -->
+<!-- HL20140902 Hema Latha  Changed the Volume column and added maxlength to have only 8 characters None        -->
+<!-- TJ20140908 Tarun Jain  Layout of Scale Pricing                                                 None        -->
+<!-- VK20200819 Vinay Kumar  Added 3 new cloumns for BI AP SURFACES                                 None        -->
+<!-- AG20201014 Amandeep Gautam  Removed render condition from NewRate Datacell                     None        -->
+<!--<NS20180606> 
+Last Modified By    :   Vinay Kumar
+Last Modified Date  :   19 Aug 2020
+Description         :   Added 3 new cloumns for BI AP SURFACES as per the Business Requirement
+---------------------------------------------------------------------------------------------------------------------
+Last Modified By    :   Amandeep Gautam
+Last Modified Date  :   14 Oct 2020
+Description         :   Removed render condition from NewRate Datacell for Import Request under IS SC-00096150
+*********************************************************************************************************************-->
+<apex:component controller="PARelatedList" allowDML="true"
+    access="global">
+<apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.js')}" />
+    <style>
+#change .bPageBlock {
+    border: 0px;
+}
+.noti {
+    
+    
+}
+
+</style>
+<Script>
+function setFocusOnLoad() {}
+</Script>
+
+
+    
+    <!-- ATTRIBUTES -->
+    <!-- Ver 1.8 -->
+    <apex:attribute description="Show Net Floor" name="ShowNetFloor" type="boolean" assignTo="{!isNetFloorVisible}"/>
+    
+    <apex:attribute description="Show Standardized Rate" name="showStandardizedRate" type="boolean" />
+    
+    <apex:attribute description="PR ID for Email Tempalte" type="String"
+        name="pricingRequest" assignTo="{!pricingRequestId}" />
+
+    <apex:attribute description="Status of the request" type="String"
+        name="status" />
+
+    <apex:attribute description="sObject Wrapper List" type="PAWrapper[]"
+        name="WrapperRecordsDisp" assignTo="{!wrapperList}" />
+    <apex:attribute description="ViewMode from Component" name="viewMode"
+        type="string" />
+
+    <apex:attribute description="Holds Selected sObject's Id"
+        name="selected" type="String" />
+    <apex:attribute description="Desired Action" name="actionAtr"
+        type="string" />
+    <apex:attribute description="Holds sObject Type"
+        name="typeOfSObjectList" type="String" />
+    <apex:attribute description="Holds Pricing Request Type"
+        name="typeOfRequest" type="String" assignTo="{!priceType}" />
+    <apex:attribute description="Columns List" name="columnsDisp"
+        type="Schema.FieldSetMember[]" />
+    <apex:attribute description="To display edit Link" name="showEditLink"
+        type="boolean" />
+    <apex:attribute description="To display Name in PH" name="showPHName"
+        type="boolean" />
+    <apex:attribute description="To display delete Link"
+        name="showDeleteLink" type="boolean" />
+    <apex:attribute description="To display clone Link"
+        name="showCloneLink" type="boolean" />
+    <apex:attribute description="To display new Link" name="showNewLink"
+        type="boolean" />
+    <apex:attribute description="To display expire Link"
+        name="showExpireLink" type="boolean" />
+    <apex:attribute description="To display Changes Section"
+        name="showChangesSection" type="boolean" />
+    <apex:attribute description="To display checkbox" name="showCheckbox"
+        type="boolean" />
+    <apex:attribute description="To diaplay price view section" name="priceViewClicked"
+        type="boolean" />
+        
+    <!-- SP20140509 START -->   
+    <apex:attribute description="To diaplay paymentterms change section" name="paytermsClicked"
+        type="boolean" />
+    <apex:attribute description="To check if payment terms is applicable" name="isPaytermsApplicable"
+        type="boolean" />
+    <apex:attribute description="List of payment terms select option" name="isFixedDateApplicableAttr"
+        type="boolean"/>
+    <!-- SP20140509 END --> 
+    
+    <apex:attribute description="To display Select Unedited and Delete selected buttons"
+        name="showSelectButtons" type="boolean" />
+    <apex:attribute description="To display checkbox"
+        name="disableCheckbox" type="boolean" />
+    <apex:attribute description="for add req item" name="showaddtorequest"
+        type="boolean" />
+    <apex:attribute description="To display Flag" name="showFlag"
+        type="boolean" />
+    <apex:attribute description="To display Action Section"
+        name="actionShowFlag" type="boolean" />
+        <!-- IM20150123 For RPQ -->
+        <apex:attribute description="RPQ Columns List"
+        name="RPQColumns" type="Schema.FieldSetMember[]" />
+        <apex:attribute description="RPQ Approver Columns List"
+        name="RPQApproverColumns" type="Schema.FieldSetMember[]" />
+        <apex:attribute description="To display RPQ Related Columns"
+        name="showRPQColumns" type="boolean" />
+        <apex:attribute description="To display RPQ Approver Related Columns"
+        name="showRPQApproverColumns" type="boolean" />
+         <apex:attribute description="To set default ratechange"
+        name="defaultRateChg" type="double" assignTo="{!defaultRateChange}" />
+        <apex:attribute description="To set default quantity"
+        name="defaultQuantity" type="Integer" assignTo="{!defaultQty}" />
+        
+    <apex:attribute description="Common Columns List"
+        name="pricingRecordColumns" type="Schema.FieldSetMember[]" />
+    <apex:attribute description="Sold To Columns List"
+        name="pricingRecordSoldToColumns" type="Schema.FieldSetMember[]" />
+    <apex:attribute description="Scaled Columns" name="scaledFlagColumns"
+        type="Schema.FieldSetMember[]" />
+    <apex:attribute description="Date columns" name="dateFieldColumns"
+        type="Schema.FieldSetMember[]" />
+        <!-- SP20140426 START -->
+        <apex:attribute description="Floor Ref Columns" name="flrRefViewColumns"
+        type="Schema.FieldSetMember[]" />
+        <!-- SP20140426 END -->
+    <apex:attribute description="New Date columns"
+        name="newDateFieldColumns" type="Schema.FieldSetMember[]" />
+
+    <apex:attribute description="New columns" name="newFieldColumns"
+        type="Schema.FieldSetMember[]" />
+
+    <apex:attribute description="displaySoldToColumns"
+        name="showSoldToColumns" type="boolean" />
+
+    <apex:attribute description="Business and Sales Area"
+        name="BUSalesArea" type="String" assignTo="{!requestBUSalesArea}" />
+
+    <!-- <TJ20140513> Added attribute to store and pass page label -->
+    <apex:attribute description="To store current page label"
+        name="currentHeader" type="String"/>
+    <apex:attribute description="To pass the page label for navigation flow text"
+        name="labelName" type="String"/>
+    <apex:attribute description="To set page header for editreqitems"
+        name="editlink" type="String"/>
+    <apex:attribute description="To store navigation text"
+        name="navigation" type="String"/>
+    <!-- AV20140515-added attribute to check if volume is applicable or not -->
+    <apex:attribute description="To check if volume is applicable"
+        name="isVolumeApplicable" type="boolean"/>  
+    <!-- AV20140515 START -->
+    <apex:attribute description="Sales Volume columns" name="salesVolumeColumns"
+        type="Schema.FieldSetMember[]" />
+    <!-- AV20140515 END --> 
+    <!--    <TJ20140619>-->
+    <apex:attribute description="Flag for Error on Pricing Request" name="errorFlag"
+        type="boolean" />
+    <apex:attribute description="Passing type of request" name="reqType" type="String" assignTo="{!requestType}"/>
+    <!-- <TJ20140908> -->
+    <apex:attribute description="Is Scale Applicable" name="isScalePrice" type="boolean"/>
+    <apex:attribute description="Is Volume Screen" name="sVol" type="boolean"/>
+    <apex:attribute description="Is Floor Screen" name="floorView" type="boolean"/>
+    <apex:attribute description="Redirecting to scalePricing screen" name="scalePr" type="boolean"/>
+    <apex:attribute description="Check Scale Field" name="checkScale" type="String" assignTo="{!scaleCheck}"/>
+    <apex:attribute description="Check Procedure Conditions for Scale" name="scalePr" type="boolean"/>
+    <apex:attribute description="Check Procedure Conditions for Scale" name="enableScale" type="boolean"/>
+    <apex:attribute description="Currency List" name="CurrencyList" type="SelectOption[]"/>
+    <apex:attribute description="Scale Currency List" name="ScCurrencyList" type="SelectOption[]"/>
+    <apex:attribute description="UoM List" name="UoMList" type="SelectOption[]"/>
+    <apex:attribute description="Scale Base Field" name="scaleBase" type="String" assignTo="{!scaleBase1}"/>
+    <apex:attribute description="Scale Type" name="scaleType" type="String"/>
+    <apex:attribute description="Plus/Minus" name="plus_minus" type="String" assignTo="{!plusminus1}"/>
+    <apex:attribute description="Pricing request Type-2" name="pReqType" type="String"/>
+    <!-- MS20140923 Added attribute to check MG5 enabled -->
+    <apex:attribute description="Check MG5 enabled" name="showMG5" type="boolean"/>
+    <apex:attribute description="Check Proj" name="showProj" type="boolean"/>
+    <!-- <TJ20150511> -->
+    <apex:attribute description="Export Scale" name="expScale" type="boolean"/>
+    <apex:attribute description="Export Import Items" name="expImp" type="boolean"/>
+    <div id="change"><apex:pageBlock id="page">
+        
+        <!-- Apply Changes FOR MASSIVE AND NCS-->
+        <apex:panelGrid columns="2" style="width:1230px">
+        <apex:pageBlockSection title="Changes" id="pgblcksection"
+            rendered="{!showChangesSection && IF((wrapperList==NULL || wrapperList.size==0),false,true)}">
+            <apex:pageBlockSectionItem id="formId" rendered="{!!showRPQColumns}">
+            <!--Start <GT20140904> -->
+                <apex:outputpanel >
+                <apex:outputText value="Rate Change" rendered="{!OR(IF(rateType!='Expire',true,false),scalePr)}"/>
+                <apex:outputText value="Change" rendered="{!OR(IF(rateType=='Expire',true,false),scalePr)}"/>
+                </apex:outputpanel>
+                <apex:outputpanel >
+                    <apex:inputtext maxlength="12" value="{!rateChange}" size="5" rendered="{!IF(rateType!='Expire',true,false)}" />
+                    <apex:selectList size="1" value="{!rateType}"
+                        rendered="{!NOT(rateTypeChange)}">
+                        <apex:actionSupport status="stat" event="onchange"
+                            reRender="pgblcksection" />
+                        <apex:selectOption itemValue="--Select--" itemLabel="--Select--" />
+                        <apex:selectOption itemValue="New Rate" itemLabel="New Rate" />
+                        <apex:selectOption itemValue="Percentage" itemLabel="Percentage" />
+                        <apex:selectOption itemValue="Absolute" itemLabel="Absolute" />
+                        
+                        <apex:selectOption itemValue="Expire" itemLabel="Expire" />
+                    </apex:selectList>
+                    <apex:selectList size="1" value="{!rateType}"
+                        rendered="{!rateTypeChange}">
+                        <apex:actionSupport status="stat" event="onchange"
+                            reRender="pgblcksection" />
+                        <apex:selectOption itemValue="New Rate" itemLabel="New Rate" />
+                         <apex:selectOption itemValue="Expire" itemLabel="Expire" />
+                    </apex:selectList>
+                    <!--  -->
+                    <apex:outputpanel id="changeType">
+                        <apex:selectList size="1" value="{!rateChangeType}"
+                            rendered="{!NOT( rateType == 'New Rate') && NOT(rateTypeChange)&& NOT( rateType == 'Expire')}">
+                            <apex:selectOption itemValue="(+)" itemLabel="(+)" />
+                            <apex:selectOption itemValue="(-)" itemLabel="(-)" />
+                        </apex:selectList>
+
+                    </apex:outputpanel>
+                </apex:outputpanel>
+                <!--End <GT20140904> -->
+            </apex:pageBlockSectionItem>
+
+            <apex:pageBlockSectionItem rendered="{!showRPQColumns}">
+            <apex:outputpanel rendered="{!showRPQColumns}">
+                <apex:outputText value="Rate Change" rendered="{!OR(IF(rateType!='Expire',true,false),scalePr)}"/>
+                </apex:outputpanel>
+                <apex:outputpanel rendered="{!showRPQColumns}">                    
+                    <div class="requiredInput" style="float: left;">
+                    <div class="requiredBlock" style="float: left;"></div>
+                    <apex:inputtext maxlength="12" value="{!rateChange}" size="5" rendered="{!IF(rateType!='Expire',true,false)}" />
+                    <apex:selectList size="1" value="{!rateType}" rendered="{!NOT(rateTypeChange)}">
+                        <apex:selectOption itemValue="Percentage" itemLabel="Percentage" />
+                     <!--     <apex:selectOption itemValue="New Rate" itemLabel="New Rate" />
+                        <apex:selectOption itemValue="Absolute" itemLabel="Absolute" /> -->
+                    </apex:selectList>                      
+                    
+                    <apex:outputpanel id="changeTypeRPQ">
+                        <apex:selectList size="1" value="{!rateChangeType}"
+                            rendered="{!NOT( rateType == 'New Rate') && NOT(rateTypeChange)&& NOT( rateType == 'Expire')}">
+                            <apex:selectOption itemValue="(+)" itemLabel="(+)" />
+                            <apex:selectOption itemValue="(-)" itemLabel="(-)" />
+                        </apex:selectList>
+
+                    </apex:outputpanel>
+                    </div>
+                </apex:outputpanel>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem rendered="{!showRPQColumns}">
+            <apex:outputpanel rendered="{!showRPQColumns}">
+                <apex:outputText value="Quantity" rendered="{!OR(IF(rateType!='Expire',true,false),scalePr)}"/>
+                </apex:outputpanel>
+                <apex:outputpanel rendered="{!showRPQColumns}">                    
+                    <div class="requiredInput" style="float: left;">
+                    <div class="requiredBlock" style="float: left;"></div>
+                    <apex:inputtext maxlength="12" value="{!qtyChange}" size="5" rendered="{!IF(rateType!='Expire',true,false)}" />
+                    </div>
+                </apex:outputpanel>
+            </apex:pageBlockSectionItem>
+
+            <apex:pageBlockSectionItem rendered="{!!showRPQColumns}"></apex:pageBlockSectionItem>
+
+            <apex:pageBlockSectionItem rendered="{!AND(IF(rateType=='Expire',false,true),IF(reqType=='Project Pricing',false,true))}" >
+                Valid From
+                <apex:inputfield value="{!wrapperPricingReqItem.New_Valid_From__c}" />
+            </apex:pageBlockSectionItem>
+            <!-- Start: <GT20140904> -->
+            <apex:pageBlockSectionItem rendered="{!IF(rateType=='Expire',true,false)}" >
+                Expire On
+                <apex:inputfield value="{!wrapperPricingReqItem.New_Valid_To__c}" />
+            </apex:pageBlockSectionItem>
+            <!-- End: <GT20140904> -->
+            <apex:pageBlockSectionItem rendered="{!AND(IF(rateType=='Expire',false,true),IF(reqType=='Project Pricing',false,true))}">
+                Valid To
+                <apex:inputfield value="{!wrapperPricingReqItem.New_Valid_To__c}" />
+            </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+        </apex:panelGrid>
+
+        
+        <apex:outputpanel rendered="{!showChangesSection && IF((wrapperList==NULL || wrapperList.size==0),false,true)}">
+        <br/>
+            <center><apex:commandLink styleClass="btn"
+                value="Apply Changes" action="{!applyChanges}"
+                style="text-decoration:none; color:#484848;margin-right:32%">
+            <!-- TJ20140626 -->
+                <apex:param name="saveTable" value="true" assignTo="{!errorFlag}"/>
+                <apex:param value="false" assignTo="{!selectAllFlag}" />
+            </apex:commandLink> <br />
+            <br />
+            </center>
+        </apex:outputpanel>
+
+
+        <apex:pageBlockSection title="Changes" id="paytermsId"
+            rendered="{!IF((wrapperList==NULL || wrapperList.size==0),false,true) && isPaytermsApplicable && status!= 'Submitted'}">
+            <apex:pageBlockSectionItem id="formId">
+                <apex:outputtext value="Payment Terms"/>  
+                <apex:outputpanel >
+                    <apex:selectList size="1" value="{!wrapperPricingReqItem.New_Customer_Price_Payment_Terms__c}">
+                        <apex:actionSupport status="stat" event="onchange" action="{!enableFixedDateMethod}" reRender="paytermsId"/>
+                        <apex:selectOptions value="{!wrapperList[0].stringMapSelectoptions['payTerms']}" />
+                    </apex:selectList>
+                </apex:outputpanel>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem rendered="{!isFixedDateApplicable || isFixedDateApplicableAttr}">
+                <apex:outputtext value="Fixed Date"/>
+                <apex:inputfield value="{!wrapperPricingReqItem.New_Payment_Terms_Fixed_Date__c}" />
+            </apex:pageBlockSectionItem>
+            
+        </apex:pageBlockSection>
+
+        <apex:outputpanel rendered="{!IF((wrapperList==NULL || wrapperList.size==0),false,true) && isPaytermsApplicable && status!= 'Submitted'}">
+            <center>
+            <apex:commandLink styleClass="btn" value="Apply Changes" action="{!applyChangesPaymentTerms}"
+                style="text-decoration:none; color:#484848">
+                <!-- TJ20140626 -->
+                <apex:param name="saveTable" value="true" assignTo="{!errorFlag}"/>
+                <apex:param value="false" assignTo="{!selectAllFlag}" />
+            </apex:commandLink> <br /><br />
+            </center>
+        </apex:outputpanel>
+<!--         <TJ20140903> -->
+        <apex:panelGrid columns="2" style="width:1230px">
+        <apex:pageBlockSection title="New Volume" rendered="{!IF(reqtype=='Massive' || (reqType=='Customer Specific' && pReqType=='Permanent'),true,false) && isVolumeApplicable && status!= 'Submitted' && status!= 'Approved'}">
+        <apex:pageBlockSectionItem >
+        New Volume
+        <apex:inputText maxLength="8" value="{!newVol}">
+        </apex:inputText>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem >
+        New Volume UOM
+        <apex:selectList size="1" value="{!newVolUom}" >
+        <apex:selectOptions value="{!UoMList}"/>
+        </apex:selectList>        
+        </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+        </apex:panelGrid>
+        
+        <apex:outputPanel rendered="{!IF(reqtype=='Massive' || (reqType=='Customer Specific' && pReqType=='Permanent'),true,false) && isVolumeApplicable && status!= 'Submitted' && status!= 'Approved'}">
+        <br/>
+        <center><apex:commandLink styleClass="btn"
+                value="Apply Changes" action="{!saveInLineVolChangesMassive}"
+                style="text-decoration:none; color:#484848; float:center; text-align:center;">
+                <apex:param name="resetselectall" value="false" assignTo="{!selectAllVolumeFlag}"/>
+            </apex:commandLink> <br />
+            
+            </center>
+        </apex:outputPanel>
+        
+        <!--    <TJ20140908>  -->
+                
+        <apex:pageBlockSection id="ScaledPrices" title="Scaled Prices" rendered="{!IF((wrapperList==NULL || wrapperList.size==0),false,true) && IF(sVol!=true,true,false) && IF(floorView!=true,true,false) && scalePr}">
+        
+         <apex:pageBlockSectionItem id="formId">
+            <!--Start <GT20140904> -->
+                <apex:panelGrid columns="3" width="300px" style="margin-left:15%;"> 
+                <apex:outputText value="Rate Change" style="text-decoration:none; color:#484848; font-size:91%; font-weight:bold;"/>
+                &nbsp;                
+                <apex:outputpanel >                    
+                    <div class="requiredInput" style="float: left;">
+                    <div class="requiredBlock" style="float: left;"></div>
+                    <apex:selectList size="1" value="{!rateType}"
+                        rendered="{!NOT(rateTypeChange)}">
+                        <apex:selectOption itemValue="--Select--" itemLabel="--Select--" />
+                        <apex:selectOption itemValue="New Rate" itemLabel="New Rate" />
+                        <apex:selectOption itemValue="Percentage" itemLabel="Percentage" />
+                        <apex:selectOption itemValue="Absolute" itemLabel="Absolute" />
+                    </apex:selectList>                      
+                    <apex:selectList size="1" value="{!rateType}"
+                        rendered="{!rateTypeChange}">                        
+                        <apex:selectOption itemValue="New Rate" itemLabel="New Rate" />
+                    </apex:selectList>
+                    </div>
+                </apex:outputpanel>                
+                <!--End <GT20140904> -->
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText value="Scale Unit/Scale UoM" style="text-decoration:none; color:#484848; font-size:91%; font-weight:bold;"/>
+                    &nbsp;
+                <apex:selectList size="1" value="{!scUoM}" rendered="{!IF(scaleBase == 'Value Scale',true,false)}">
+                    <apex:selectOptions value="{!ScCurrencyList}"/>
+                </apex:selectList>
+                <apex:selectList size="1" value="{!scUoM}" rendered="{!IF(scaleBase == 'Quantity Scale',true,false)}">
+                <apex:selectOptions value="{!UoMList}"/>
+                </apex:selectList>
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText value="Per" style="text-decoration:none; color:#484848; font-size:91%; font-weight:bold;"/>
+                &nbsp;
+                <apex:inputText value="{!newPer}" size="4"/>
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText value="Valid From" style="text-decoration:none; color:#484848; font-size:91%; font-weight:bold;"/>
+                &nbsp;
+                <apex:inputfield value="{!wrapperPricingReqItem.New_Valid_From__c}" />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText value="Valid To" style="text-decoration:none; color:#484848; font-size:91%; font-weight:bold;"/>
+                &nbsp;
+                <apex:inputfield value="{!wrapperPricingReqItem.New_Valid_To__c}" />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText value="Check Scale Rate" style="text-decoration:none; color:#484848; font-size:91%; font-weight:bold;"/>
+                &nbsp;
+                <apex:outputText value="{!checkScale}"/>
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText value="Plus/Minus" style="text-decoration:none; color:#484848; font-size:91%; font-weight:bold;"/>
+                &nbsp;
+                <apex:outputText value="{!plus_minus}"/>
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText />
+                <apex:outputText value="Scale Type" style="text-decoration:none; color:#484848; font-size:91%; font-weight:bold;"/>
+                &nbsp;
+                <apex:outputText value="{!scaleType}"/>                
+            </apex:panelGrid>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem >
+        <apex:panelGrid columns="3" width="300px">        
+        <apex:outputText />
+        <apex:outputText value="Scale Quantity/Scale Value" style="text-decoration:none; color:#484848; font-size:91%; font-weight:bold;"/>
+        <apex:outputText value="Rate" style="margin-left: 20px; text-decoration:none; color:#484848; font-size:91%; font-weight:bold;"/>
+        <apex:outputText value="#01" style="text-decoration:none; color:#484848; font-size:80%; font-weight:bold;"/>
+        <apex:inputText value="{!val1}" style="width: 75px; margin-left: 30px;"/>
+        <apex:inputText value="{!rate1}" style="width: 75px"/>
+        <apex:outputText value="#02" style="text-decoration:none; color:#484848; font-size:80%;"/>
+        <apex:inputText value="{!val2}" style="width: 75px; margin-left: 30px;"/>
+        <apex:inputText value="{!rate2}" style="width: 75px"/>
+        <apex:outputText value="#03" style="text-decoration:none; color:#484848; font-size:80%;"/>
+        <apex:inputText value="{!val3}" style="width: 75px; margin-left: 30px;"/>
+        <apex:inputText value="{!rate3}" style="width: 75px"/>
+        <apex:outputText value="#04" style="text-decoration:none; color:#484848; font-size:80%;"/>
+        <apex:inputText value="{!val4}" style="width: 75px; margin-left: 30px;"/>
+        <apex:inputText value="{!rate4}" style="width: 75px"/>
+        <apex:outputText value="#05" style="text-decoration:none; color:#484848; font-size:80%;"/>
+        <apex:inputText value="{!val5}" style="width: 75px; margin-left: 30px;"/>
+        <apex:inputText value="{!rate5}" style="width: 75px"/>
+        <apex:outputText value="#06" style="text-decoration:none; color:#484848; font-size:80%;"/>
+        <apex:inputText value="{!val6}" style="width: 75px; margin-left: 30px;"/>
+        <apex:inputText value="{!rate6}" style="width: 75px"/>
+        <apex:outputText value="#07" style="text-decoration:none; color:#484848; font-size:80%;"/>
+        <apex:inputText value="{!val7}" style="width: 75px; margin-left: 30px;"/>
+        <apex:inputText value="{!rate7}" style="width: 75px"/>
+        <apex:outputText value="#08" style="text-decoration:none; color:#484848; font-size:80%;"/>
+        <apex:inputText value="{!val8}" style="width: 75px; margin-left: 30px;"/>
+        <apex:inputText value="{!rate8}" style="width: 75px"/>
+        <apex:outputText value="#09" style="text-decoration:none; color:#484848; font-size:80%;"/>
+        <apex:inputText value="{!val9}" style="width: 75px; margin-left: 30px;"/>
+        <apex:inputText value="{!rate9}" style="width: 75px"/>
+        <apex:outputText value="#10" style="text-decoration:none; color:#484848; font-size:80%;"/>
+        <apex:inputText value="{!val10}" style="width: 75px; margin-left: 30px;"/>
+        <apex:inputText value="{!rate10}" style="width: 75px"/>
+             
+<!--         <apex:outputText value="Unit"/> -->
+<!--         <apex:selectList size="1" value="{!newUnit}" > -->
+<!--             <apex:selectOptions value="{!CurrencyList}"/> -->
+<!--         </apex:selectList> -->
+<!--         <apex:outputText value="Per"/> -->
+<!--         <apex:inputText value="{!newPer}" style="width: 50px"/> -->
+<!--         <apex:outputText value="UoM"/> -->
+<!--         <apex:selectList size="1" value="{!newUoM}" > -->
+<!--             <apex:selectOptions value="{!UoMList}"/> -->
+<!--         </apex:selectList>         -->
+        </apex:panelGrid>
+        </apex:pageBlockSectionItem>
+        </apex:pageBlockSection> 
+        
+        <apex:outputPanel rendered="{!IF((wrapperList==NULL || wrapperList.size==0),false,true) && IF(sVol!=true,true,false) && IF(floorView!=true,true,false) && scalePr && isScalePrice && status!= 'Submitted' && status!= 'Approved'}">
+        <br/>                
+        <apex:commandLink styleClass="btn"
+                value="Apply Changes" action="{!saveScale}"
+                style="text-decoration:none; color:#484848; margin-left:450px; text-align:center;">
+                <apex:param name="resetselectall" value="false" assignTo="{!selectAllScaleFlag}"/>
+        </apex:commandLink>        
+
+        <apex:commandLink styleClass="btn"
+                value="Send To xls" action="/apex/PAExportScalePrices"
+                style="text-decoration:none; color:#484848;text-align:center;">
+<!--         <TJ20150511> -->
+            <apex:param name="Export Scale Prices" value="false" assignTo="{!expScale}"/>
+            <apex:param name="Export Import Items" value="false" assignTo="{!expImp}"/>                
+        </apex:commandLink> <br />
+        <br />        
+        </apex:outputPanel>
+        
+        
+        <apex:outputPanel id="pageBlockTab"
+            rendered="{!IF((wrapperList==NULL || wrapperList.size==0),false,true)}">
+
+
+            <!-- PP20131018 - UI Issue -->
+
+            <table class="list1" id="reqitab" border="0" cellSpacing="0" cellPadding="0" style="position:'relative';">
+                <colgroup span="6" />
+                <thead class="rich-table-thead">
+                    <tr class="">
+
+                        <th class="" colSpan="30" scope="colgroup">{!priceType}</th>
+
+                    </tr>
+
+                    <tr>
+                        
+                        <apex:variable value="m1" var="m1" rendered="{!actionShowFlag}">
+                            <th class="headerRow" scope="col">Action</th>
+                        </apex:variable>
+                        <apex:variable value="a1" var="a1" rendered="{!IF(reqType=='Massive',true,false)}">
+                        <th class="headerRow" scope="col" style="display:none;"></th>
+                        </apex:variable>
+                        <apex:variable value="p1" var="p1" rendered="{!AND(showCheckBox,!showRPQColumns)}">
+                            <th class="headerRow"  scope="col" ><apex:inputCheckBox value="{!selectAllFlag}" id="selAll">
+                                <apex:actionSupport event="onclick" action="{!selectAll}" reRender="selPRI" status="stat">
+<!--                                <apex:param name="saveTable" value="{!IF(selectAllFlag==true,true,false)}" assignTo="{!errorFlag}"/>-->
+                                </apex:actionSupport>
+
+                                </apex:inputCheckbox></th>
+                        </apex:variable>
+                        <apex:variable value="p1" var="p1" rendered="{!AND(showRPQColumns,showCheckBox)}">
+                            <th class="headerRow"  scope="col" ><apex:inputCheckBox value="{!selectAllFlag}" id="selAll">
+                                <apex:actionSupport event="onclick" action="{!selectAll}" >
+<!--                                <apex:param name="saveTable" value="{!IF(selectAllFlag==true,true,false)}" assignTo="{!errorFlag}"/>-->
+                                </apex:actionSupport>
+
+                                </apex:inputCheckbox></th>
+                        </apex:variable>
+                        <apex:repeat value="{!RPQColumns}" var="r" rendered="{!showRPQColumns}">
+                        <apex:variable value="allother" var="allother" rendered="{!AND( NOT(Contains(r.label,'Price Reduction')), NOT(Contains(r,'Floor')), NOT(Contains(r,'Reference')), NOT(Contains(r,'Cost')), r.label!='Rate',r.label!='New Valid From',r.label!='New Valid To',r.label!='New Per',r.label!='New UoM',r.label!='Deal Margin',r.label!='Sales Reduction',r.label!='Deal Revenue' )}">
+                            <th class="headerRow"  scope="col" > 
+                            {!r.label}
+                            </th>  
+                            </apex:variable>
+                             <apex:variable value="pricered" var="pricered" rendered="{!Contains(r.label,'Price Reduction')}">
+                                <th class="headerRow"  scope="col" > 
+                                    Price Reduction %
+                                </th>  
+                             </apex:variable>
+                        <apex:variable value="per" var="per" rendered="{!IF(r.label=='New Per',true,false)}">
+                        <th class="dataCell" >Per</th>
+                        </apex:variable>
+                        <apex:variable value="uom" var="uom" rendered="{!IF(r.label=='New UoM',true,false)}">
+                        <th class="dataCell" >UoM</th>
+                        </apex:variable>
+                        <apex:variable value="validfrom" var="validfrom" rendered="{!IF(r.label=='New Valid From',true,false)}">
+                        <th class="dataCell" >Quote Valid From</th>
+                        </apex:variable>
+                        <apex:variable value="validto" var="validto" rendered="{!IF(r.label=='New Valid To',true,false)}">
+                        <th class="dataCell" >Quote Valid To</th>
+                        </apex:variable>     
+                        <apex:variable value="levelprice" var="levelprice" rendered="{!IF(r.label=='Rate',true,false)}">
+                        <th class="dataCell" >Level Price</th>
+                        </apex:variable>
+                        <apex:variable value="flrprice" var="flrprice" rendered="{!Contains(r,'Floor')}">
+                        <th class="dataCell" >Floor Price</th>
+                        </apex:variable>
+                        <apex:variable value="refprice" var="refprice" rendered="{!Contains(r,'Reference')}">
+                        <th class="dataCell" >Reference Price</th>
+                        </apex:variable>
+                        <apex:variable value="costprice" var="costprice" rendered="{!AND(showRPQApproverColumns,r.label=='Cost Price')}">
+                        <th class="dataCell" >Cost Price</th>
+                        </apex:variable>
+                        <apex:variable value="salesred" var="salesred" rendered="{!AND(showRPQApproverColumns,r.label=='Sales Reduction')}">
+                        <th class="dataCell" >Sales Reduction</th>
+                        </apex:variable>
+                        <apex:variable value="dealmar" var="dealmar" rendered="{!AND(showRPQApproverColumns,r.label=='Deal Margin')}">
+                        <th class="dataCell" >Deal Margin %</th>
+                        </apex:variable>
+                        <apex:variable value="dealrev" var="dealrev" rendered="{!AND(showRPQApproverColumns,r.label=='Deal Revenue')}">
+                        <th class="dataCell" >Deal Revenue</th>
+                        </apex:variable>
+                        
+                        </apex:repeat>
+                        <!--  <apex:variable value="flrprice" var="flrprice" rendered="{!OR(showRPQColumns,showRPQApproverColumns)}">
+                        <th class="dataCell" >Floor Price</th>
+                        </apex:variable>
+                        <apex:variable value="flrprice" var="flrprice" rendered="{!OR(showRPQColumns,showRPQApproverColumns)}">
+                        <th class="dataCell" >Reference Price</th>
+                        </apex:variable>
+                        <apex:variable value="flrprice" var="flrprice" rendered="{!showRPQApproverColumns}">
+                        <th class="dataCell" >Cost Price</th>
+                        </apex:variable>
+                        -->
+                        <!--         <TJ20140903> -->
+                        <apex:variable value="ab1" var="ab1" rendered="{!IF(reqtype=='Massive',true,false || (reqType=='Customer Specific' && pReqType=='Permanent')) && isVolumeApplicable && status!= 'Submitted' && status!= 'Approved'}">
+                            <th class="headerRow"  scope="col" ><apex:inputCheckBox value="{!selectAllVolumeFlag}" id="selVolAll">
+                                <apex:actionSupport event="onclick" action="{!selectAllVolume}" reRender="selVol" status="stat">
+                                </apex:actionSupport>
+
+                                </apex:inputCheckbox></th>
+                        </apex:variable>
+                        
+                        <!--         <TJ20140908> -->
+                        <apex:variable value="ab2" var="ab2" rendered="{!IF(sVol!=true,true,false) && IF(floorView!=true,true,false) && scalePr && isScalePrice && status!= 'Submitted' && status!= 'Approved'}">
+                            <th class="headerRow"  scope="col" ><apex:inputCheckBox value="{!selectAllScaleFlag}" id="selSclAll">
+                                <apex:actionSupport event="onclick" action="{!selectAllScale}" reRender="selScl" status="stat">
+                                </apex:actionSupport>
+
+                                </apex:inputCheckbox></th>
+                        </apex:variable>
+                        
+                        <!-- <TJ20140908> -->
+                        <apex:variable value="Scale" var="scl" rendered="{!AND(enableScale,status!= 'Submitted',status!= 'Approved')}">
+                        <th class="dataCell" >Scl</th>
+                        </apex:variable>
+                        <!-- <apex:repeat value="{!SUBSTITUTE(columnsDisp, ' ', '<br/>')}" var="r">  -->
+                        <apex:repeat value="{!columnsDisp}" var="r"> 
+                            <!-- Ver 1.3, 1.9 -->
+                            <th class="headerRow"  scope="col" > 
+                            {!IF(CONTAINS(r.label,'Customer Price Group Code'),SUBSTITUTE(r.label,'Customer Price Group','CPG'),IF(CONTAINS(r.label,'Material Price Group Code'),SUBSTITUTE(r.Label,'Material Price Group','MPG'),IF(CONTAINS(r.Label,'Customer Hierarchy'),SUBSTITUTE(r.Label,'Customer Hierarchy','Customer'),IF(CONTAINS(r.Label,'Stamp Floor Price'),SUBSTITUTE(r.Label,'Stamp Floor Price','Floor Price'),IF(CONTAINS(r.Label,'Stamp Reference Price'),SUBSTITUTE(r.Label,'Stamp Reference Price','Ref Price'),IF(CONTAINS(r.Label,'Stamp Current Net Price'),SUBSTITUTE(r.Label,'Stamp Current Net Price','Current Net'),IF(CONTAINS(r.Label,'Stamp New Net Price'),SUBSTITUTE(r.Label,'Stamp New Net Price','New Net'),IF(CONTAINS(r.Label,'Stamp Floor Net Price'),SUBSTITUTE(r.Label,'Stamp Floor Net Price','Net Floor'),IF(CONTAINS(r.Label,'Stamp Reference Net Price'),SUBSTITUTE(r.Label,'Stamp Reference Net Price','Net Ref'),IF(CONTAINS(r.Label,'Formula'),SUBSTITUTE(r.Label,'Formula',''),IF(CONTAINS(r.Label,'Number of Material with Gross Price'),'Mat',r.Label)))))))))))}
+                            </th>  
+                        </apex:repeat>
+                        <apex:variable value="Quantity" var="qty" rendered="{!IF(sVol!=true,true,false) && IF(floorView!=true,true,false) && scalePr}">
+                        <th class="headerRow" scope="col">
+                        Qty
+                        </th>
+                        </apex:variable>
+                        <apex:variable value="MG5" var="mg" rendered="{!showMG5}">
+                            <th class="headerRow"  scope="col" >
+                            Material Group 5 Code
+                            </th>
+                            <th class="headerRow"  scope="col" >
+                            Material Group 5
+                            </th>
+                        </apex:variable>
+                        <!-- MS20141115 -->
+                        <apex:variable value="Proj" var="mg" rendered="{!showProj}">
+                            <th class="headerRow"  scope="col" >
+                            Project
+                            </th>
+                        </apex:variable>
+                        <apex:repeat value="{!pricingRecordColumns}" var="r" rendered="{!wrapperList.size!=0 && wrapperList[0].sObjectRecord['Pricing_Request_Type__c'] != 'Import'}"> 
+                            <!-- Ver 1.3, 1.9 -->
+                            <th class="headerRow"  scope="col" > 
+                            {!r.label}
+                            </th>  
+                        </apex:repeat>
+                        <apex:repeat value="{!pricingRecordColumns}" var="r" rendered="{!wrapperList.size!=0 && wrapperList[0].sObjectRecord['Pricing_Request_Type__c'] == 'Import'}"> 
+                            <!-- Ver 1.3, 1.9 -->
+                            <apex:variable value="w1" var="w1" rendered="{!NOT(priceViewClicked && CONTAINS(r.Label,'Rate'))}">
+                                <th class="headerRow"  scope="col" > 
+                                {!r.label}
+                                </th>
+                            </apex:variable>  
+                        </apex:repeat>
+                        <!-- MS20140923 Adding columns for MG5 -->
+                        
+                        <!-- AV20140515-added isVolumeApplicable in render condition -->
+                        <apex:variable value="w1" var="w1"
+                            rendered="{!wrapperList.size!=0 && !showRPQColumns && !showRPQApproverColumns && wrapperList[0].sObjectRecord['Pricing_Request_Type__c'] != 'Pricing Task' && NOT(priceViewClicked) && NOT(paytermsClicked) && NOT(isVolumeApplicable) && NOT(isScalePrice)}">
+                            <th class="dataCell" >Valid From</th>
+                            <th class="dataCell" >Valid To</th>
+                        </apex:variable>
+                        <apex:variable value="New Quantity" var="Nqty" rendered="{!IF(sVol!=true,true,false) && IF(floorView!=true,true,false) && scalePr}">
+                        <th class="headerRow" scope="col">
+                        New Qty
+                        </th>
+                        </apex:variable>
+<!--                         <TJ20150106> Removed New Rate from field set -->
+                <!--         <apex:variable value="New Rate" var="nr" rendered="{!IF((reqType!='Import' && !showRPQColumns && !showRPQApproverColumns),true,false)}">
+                      -->
+                        <apex:variable value="New Rate" var="nr" rendered="{!IF((reqType!='Import' && !showRPQColumns && !showRPQApproverColumns) || (reqType=='Import' && priceViewClicked && !showRPQColumns && !showRPQApproverColumns),true,false)}">
+                       
+                        <th class="headerRow" scope="col">
+                        New Rate
+                        </th>
+                        </apex:variable>
+                        <!-- <VK20200819>  --->
+                        <apex:variable value="Rate One" var="nr" rendered="{!NewRateColumnDisplay}">
+                       
+                        <th class="headerRow" scope="col">
+                        New Rate in USD
+                        </th>
+                        </apex:variable>
+                        <!--  <VK20200819>  --->
+                        <!-- <TJ20141231> Added Delta Current % -->
+                        <apex:variable value="% Delta Current" var="DelCur" rendered="{!IF(sVol!=true,true,false) && IF(priceViewClicked==true,true,false) && NOT(scalePr)&& IF(reqType!='Import',true,false)}">
+                        <th class="headerRow" scope="col">
+                        Delta % 
+                        </th>
+                        </apex:variable>
+                        <apex:repeat value="{!newFieldColumns}" var="r3">
+                            <th class="headerRow"  scope="col" >{!IF(wrapperList.size!=0 && wrapperList[0].sObjectRecord['Pricing_Request_Type__c']=='Pricing Task' && CONTAINS(r3.label,'UoM'),'UoM',IF(wrapperList.size !=0   && wrapperList[0].sObjectRecord['Pricing_Request_Type__c']=='Pricing Task' && CONTAINS(r3.label,'New Rate'),'Spot Price',IF(wrapperList.size !=0 && wrapperList[0].sObjectRecord['Pricing_Request_Type__c']=='Pricing Task' && CONTAINS(r3.label,'New Unit'),'Unit',IF(wrapperList.size!=0 && wrapperList[0].sObjectRecord['Pricing_Request_Type__c']=='Pricing Task' && CONTAINS(r3.label,'New Per'),'Per',r3.label))))}</th>
+                        </apex:repeat>
+                        <!-- <VK20200819>  --->
+                        <apex:variable value="Floor Price in USD" var="nr" rendered="{!NOT(isPaytermsApplicable)  && !!NewRateColumnDisplay}">
+                       
+                        <th class="headerRow" scope="col">
+                        Floor Price in USD
+                        </th>
+                        </apex:variable>
+                        
+                        <apex:variable value="Ref Price in USD" var="nr" rendered="{!NOT(isPaytermsApplicable)  && !!NewRateColumnDisplay}">
+                       
+                        <th class="headerRow" scope="col">
+                        Ref Price in USD
+                        </th>
+                        </apex:variable>
+                        <!-- <VK20200819>  --->
+                        <!-- VR20130719 - APAC ROLLOUT2-->
+                        <!-- AV20140515-added isVolumeApplicable in render condition -->
+                        <apex:variable value="w1" var="w1"
+                            rendered="{!wrapperList.size!=0 && !showRPQColumns && !showRPQApproverColumns && NOT(priceViewClicked) && NOT(paytermsClicked) && NOT(isVolumeApplicable) && NOT(isScalePrice) && NOT(scalePr) && wrapperList[0].sObjectRecord['Pricing_Request_Type__c'] != 'Pricing Task' && wrapperList.size!=0 && (wrapperList[0].sObjectRecord['Pricing_Request_Type__c'] != 'Import' && !(wrapperList[0].sObjectRecord['Pricing_Request__r.Request_Type__c']=='Import' && (CONTAINS(wrapperList[0].sObjectRecord['Pricing_Request__r.Pricing_Request_Type__c'],'Floor') || CONTAINS(wrapperList[0].sObjectRecord['Pricing_Request_Type__c'],'Reference'))))}">
+                            <th class="dataCell" >New Valid From</th>
+                            <th class="dataCell" >New Valid To</th>
+                        </apex:variable>
+                    
+                        <apex:repeat value="{!scaledFlagColumns}" var="r4">
+                            <th class="headerRow"  scope="col">
+                            <apex:image url="{!$Resource.DownArrow}" width="15" height="17" style="float:left;" id="ima" rendered="{!CONTAINS(r4.label,'Current') || CONTAINS(r4.label,'Floor') || CONTAINS(r4.label,'Reference')}"/>
+                            {!IF(CONTAINS(r4.label,'Scale'),'Scl',IF(CONTAINS(r4.label,'Floor'),'Flr',IF(CONTAINS(r4.label,'Ref'),'Ref',IF(CONTAINS(r4.label,'Exp'),'Exp',IF(CONTAINS(r4.label,'Cur'),'Cur',IF(CONTAINS(r4.label,'Gross'),'Mat',r4.label))))))}</th>
+                        </apex:repeat>
+                        
+                        
+                        
+                        <!-- SP20140426 START -->
+                        <apex:repeat value="{!flrRefViewColumns}" var="r" rendered="{!NOT(isPaytermsApplicable)}">
+                            <th class="headerRow"  scope="col">
+                                {!IF(CONTAINS(r.Label,'Stamp Floor Price'),SUBSTITUTE(r.Label,'Stamp Floor Price','Floor Price'),IF(CONTAINS(r.Label,'Stamp Reference Price'),SUBSTITUTE(r.Label,'Stamp Reference Price','Ref Price'),IF(CONTAINS(r.Label,'Stamp Current Net Price'),SUBSTITUTE(r.Label,'Stamp Current Net Price','Current Net'),IF(CONTAINS(r.Label,'Stamp New Net Price'),SUBSTITUTE(r.Label,'Stamp New Net Price','New Net'),IF(CONTAINS(r.Label,'Stamp Floor Net Price'),SUBSTITUTE(r.Label,'Stamp Floor Net Price','Net Floor'),IF(CONTAINS(r.Label,'Stamp Reference Net Price'),SUBSTITUTE(r.Label,'Stamp Reference Net Price','Net Ref'),IF(CONTAINS(r.Label,'Gross'),'Mat',r.Label)))))))}
+                            </th>
+                        </apex:repeat>
+                        <!-- SP20140426 END  -->
+                        
+                        <!-- SP20140509 START -->
+                        <apex:repeat value="{!flrRefViewColumns}" var="r" rendered="{!isPaytermsApplicable}">
+                            <th class="headerRow"  scope="col">
+                                {!r.label}
+                            </th>
+                        </apex:repeat>
+                        <!-- SP20140509 END  -->
+                        
+                        <!-- AV20140515 START -->
+                        <apex:repeat value="{!salesVolumeColumns}" var="r" rendered="{!isVolumeApplicable}">
+                            <th class="headerRow"  scope="col">
+                                {!IF(AND(CONTAINS(r.Label,'Volume'),NOT(CONTAINS(r.Label,'New')),NOT(CONTAINS(r.Label,'UoM'))),SUBSTITUTE(r.Label,'Volume','Old Volume'),IF(AND(CONTAINS(r.Label,'Volume_UoM'),NOT(CONTAINS(r.Label,'New'))),SUBSTITUTE(r.Label,'Volume_UoM','Old Vol UoM'),IF(CONTAINS(r.Label,'New Volume_UoM'),SUBSTITUTE(r.Label,'New Volume_UoM','New Vol UoM'),r.Label)))}
+                            </th>
+                        </apex:repeat>
+                        <!-- AV20140515 END  -->
+                        
+                        <!-- Ver 1.8 START -->
+                        <!-- AV20140515-added isVolumeApplicable in render condition -->
+                            <apex:variable var="e12" value="e12" rendered="{!NOT(showRPQColumns) && NOT(priceViewClicked) && NOT(paytermsClicked) && NOT(isVolumeApplicable) && NOT(isScalePrice) && NOT(scalePr) && wrapperList!=null && wrapperList.size !=0
+                                && wrapperList[0].sObjectRecord['Pricing_Request__r.Display_Standardized_Rate__c'] && IF(CONTAINS(wrapperList[0].sObjectRecord['Pricing_Request__r.Pricing_Request_Type__c'],'Import'),false,true)}">
+                                <!--<BB20130627> --Ver 2.1 START  -->
+                            <!--    && (wrapperList[0].sObjectRecord['Approval_Status__c'] == 'Submitted' || wrapperList[0].sObjectRecord['Approval_Status__c'] == 'pending')&& wrapperList[0].sObjectRecord['Pricing_Request__r.Current_Approver__c']==$User.Id}"> -->
+                                <th class="headerRow" scope="col" >
+                                    {!wrapperList[0].sObjectRecord['Pricing_Request__r.Standardized_Currency__c']}
+                                <!-- Ver 2.1 END  -->   
+                                </th>
+                                <th class="headerRow" scope="col" >
+                                    Per
+                                </th>
+
+                            </apex:variable>
+                            <apex:variable value="ab3" var="ab3" rendered="{!IF(sVol!=true,true,false) && IF(floorView!=true,true,false) && scalePr && isScalePrice}">
+                            <th class="headerRow"  scope="col" >
+                                Scl Unit/UoM
+                            </th>
+                        </apex:variable>
+                            <!-- Ver 1.8 END -->
+                    </tr>
+                </thead>
+                <apex:repeat value="{!wrapperList}" var="v">
+                    <tr class="dataRow even first last">
+                        <apex:variable var="p1" value="p1" rendered="{!actionShowFlag}">
+                        <!-- Removing the width property to remove unnecessary spaces in action tab  -->
+                            <td class="dataCell" colSpan="1">
+                            <apex:commandLink action="{!loadPage}" style="color:blue" value="New"
+                                rendered="{!v.stringMap['showNewLink']=='true'}">
+                                <apex:param value="PAEditReqItem" name="passMode"
+                                    assignTo="{!viewMode}" />
+                                <apex:param value="PAEditReqItem" name="passMode"
+                                    assignTo="{!currentPageLabel}" />
+                                <apex:param value="New-{!v.sObjectRecord['Id']}"
+                                    name="passReqItem" assignTo="{!selected}" />
+                                <apex:param value="New" name="sendAction"
+                                    assignTo="{!actionAtr}" />
+                                <!-- <TJ20140513> Passing page label -->
+                                <apex:param value="{!currentHeader}" name="pageName" assignTo="{!labelName}"/>
+                                <apex:param value="true" name="editlink" assignTo="{!editlink}"/>
+                            </apex:commandLink>
+                             {!IF(v.stringMap['showNewLink']=='true' && ( v.stringMap['showDelLink']=='true'),'|','')}
+<!-- commented for removal of edit link enhancement -START ver 2.0  v.stringMap['showEditLink']=='true' || removed from above line-->
+                            <apex:commandLink action="{!loadPage}" style="color:blue" value="Edit" rendered="{!((v.stringMap['showEditLink']=='true' || (v.sObjectRecord['Pricing_Request_Type__c']=='Import' && showEditLink)) && v.sObjectRecord['Pricing_Request_Type__c']!='Permanent')}">
+                                <apex:param value="PAEditReqItem" name="passMode"
+                                    assignTo="{!viewMode}" />
+                                <apex:param value="PAEditReqItem" name="passMode"
+                                    assignTo="{!currentPageLabel}" />
+                                <apex:param value="Edit-{!v.sObjectRecord['Id']}"
+                                    name="passReqItem" assignTo="{!selected}" />
+                                <apex:param value="Edit" name="sendAction"
+                                    assignTo="{!actionAtr}" />
+                                <!-- <TJ20140513> Passing page label -->
+                                <apex:param value="{!currentHeader}" name="pageName" assignTo="{!labelName}"/>
+                                <apex:param value="true" name="editlink" assignTo="{!editlink}"/>
+                                </apex:commandLink> 
+<!-- commented for removal of edit link enhancement  ver 2.0 -->
+                            {!IF(v.stringMap['showEditLink']=='true' && v.stringMap['showDelLink']=='true' && v.sObjectRecord['Pricing_Request_Type__c']!='Permanent','|','')} 
+                            <apex:commandLink status="stat" style="color:blue" value="Del"
+                                rendered="{!v.stringMap['showDelLink']=='true' || (v.sObjectRecord['Pricing_Request_Type__c']=='Import' && showDeleteLink)}"
+                                onclick="return confirm('Are you sure you want to Delete?');"
+                                action="{!deleteSelected}">
+                                <apex:param value="{!v.sObjectRecord['Id']}" name="deleteId"
+                                    assignTo="{!deleteSelectedId}" />
+                                <apex:param value="{!BOOLEAN_TRUE}" name="deleteReqItemId"
+                                    assignTo="{!v.isSelected}" />
+                                <!-- <TJ20140513> Passing page label -->
+                                <apex:param value="{!currentHeader}" name="pageName" assignTo="{!labelName}"/>
+                            </apex:commandLink> {!IF(v.stringMap['showDelLink']=='true'&& v.stringMap['showExpLink']=='true','|','')} <apex:commandLink action="{!loadPage}" value="Exp" style="color:blue"
+                                rendered="{!v.stringMap['showExpLink']=='true'}">
+                                <apex:param value="PAEditReqItem" name="passMode"
+                                    assignTo="{!viewMode}" />
+                                <apex:param value="PAEditReqItem" name="passMode"
+                                    assignTo="{!currentPageLabel}" />
+                                <apex:param value="Exp-{!v.sObjectRecord['Id']}"
+                                    name="passReqItem" assignTo="{!selected}" />
+                                <apex:param value="Expire" name="sendAction"
+                                    assignTo="{!actionAtr}" />
+                                <!-- <TJ20140513> Passing page label -->
+                                <apex:param value="{!currentHeader}" name="pageName" assignTo="{!labelName}"/>
+                                <apex:param value="true" name="editlink" assignTo="{!editlink}"/>
+                            </apex:commandLink>
+                            
+                            <apex:commandLink action="{!loadPage}" style="color:blue" value="View"
+                                rendered="{!v.stringMap['showViewLink']=='true'}">
+                                <apex:param value="{!IF(priceViewClicked==true && v.sObjectRecord['isNPCApplicable__c']==true,IF(v.sObjectRecord['Net_Price_Status__c'] !=null && v.sObjectRecord['Net_Price_Status__c'] =='Net Price Received' && NOT(v.sObjectRecord['Total_Materials__c'] > 1 && v.sObjectRecord['Net_Price_Calculated_Materials__c'] > 1),'PAMaterialNet','PAEditReqItem'),'PAEditReqItem')}" name="passMode"
+                                    assignTo="{!viewMode}" />
+                                <apex:param value="{!IF(priceViewClicked==true && v.sObjectRecord['isNPCApplicable__c']==true,IF(v.sObjectRecord['Net_Price_Status__c'] !=null && v.sObjectRecord['Net_Price_Status__c'] =='Net Price Received' && NOT(v.sObjectRecord['Total_Materials__c'] > 1 && v.sObjectRecord['Net_Price_Calculated_Materials__c'] > 1),'PAMaterialNet','PAEditReqItem'),'PAEditReqItem')}" name="passMode"
+                                    assignTo="{!currentPageLabel}" />
+                                <apex:param value="View-{!v.sObjectRecord['Id']}"
+                                    name="passReqItem" assignTo="{!selected}" />
+                                <apex:param value="View" name="sendAction"
+                                    assignTo="{!actionAtr}" />
+                                <!-- <TJ20140513> Passing page label -->
+                                <apex:param value="{!currentHeader}" name="pageName" assignTo="{!labelName}"/>
+                                <apex:param value="true" name="editlink" assignTo="{!editlink}"/>
+                            </apex:commandLink>
+                            
+                            <!-- <BB20140404> Added the Error Indicator START-->    
+                             <apex:commandLink action="{!loadPage}" rendered="{!AND(Not(priceViewClicked),OR(CONTAINS(v.sObjectRecord['Error_Indicator__c'],'Error'),CONTAINS(v.sObjectRecord['Error_Indicator__c'],'ERROR')),NOT(v.sObjectRecord['Error_Indicator__c'] == null))}" status="stat" reRender="myForm" title="{!v.sObjectRecord['Error_Indicator__c']}">
+                            <apex:image url="{!$Resource.RadioButtonRed}"/>
+                            <apex:param value="PAPricingRequest" name="passMode"
+                                    assignTo="{!viewMode}" />
+                            <apex:param value="PAPricingRequest" name="passMode"
+                                    assignTo="{!currentPageLabel}" />
+                            </apex:commandLink>
+                        
+                             <apex:commandLink action="{!loadPage}" rendered="{!AND(Not(priceViewClicked),CONTAINS(v.sObjectRecord['Error_Indicator__c'],'WARNING'),NOT(v.sObjectRecord['Error_Indicator__c'] == null))}" status="stat" reRender="myForm" title="{!v.sObjectRecord['Error_Indicator__c']}">
+                            <apex:image url="{!$Resource.RadioButtonYellow}"/> 
+                            <apex:param value="PAPricingRequest" name="passMode"
+                                    assignTo="{!viewMode}" />
+                                <apex:param value="PAPricingRequest" name="passMode"
+                                    assignTo="{!currentPageLabel}" />                               
+                        </apex:commandLink> 
+                         <!-- <BB20140404> END-->
+                            </td>
+                        </apex:variable>
+                        <apex:variable value="a1" var="a1" rendered="{!IF(reqType=='Massive',true,false)}">
+                        <td class="dataCell" colSpan="1" style="display:none;"></td>
+                        </apex:variable>
+                        <apex:variable value="q1" var="q1" rendered="{!showCheckBox}">
+                            <td class="dataCell" colSpan="1" id="{!v.sObjectRecord['Id']}sel"><apex:inputCheckBox value="{!v.isSelected}" id="selPRI"
+                                disabled="{!v.stringMap['disableCheckBox']=='true'}"></apex:inputCheckBox>
+                            </td>
+                        </apex:variable>
+                        
+                        <apex:repeat value="{!RPQColumns}" var="r" rendered="{!showRPQColumns}">
+                            <apex:outputPanel rendered="{!IF(r.label == 'New Rate',true,false)}">
+                            <td class="dataCell" colSpan="1">{!v.stringMap['newRateLocale']}</td>
+                            </apex:outputPanel>
+                            
+                            <!-- <VK20200819>  --->
+                            <apex:outputPanel rendered="{!IF(r.label == 'Rate One' && !!NewRateColumnDisplay,true,false)}">
+                            <td class="dataCell" colSpan="1">{!v.sObjectRecord['Rate_One__c']}</td>
+                            </apex:outputPanel>
+                            <!-- <VK20200819>  --->
+                            
+                            
+                            <apex:outputPanel rendered="{!IF(r.label == 'New Valid From',true,false)}">
+                            <td class="dataCell" colSpan="1"><apex:outputField value="{!v.sObjectRecord['New_Valid_From__c']}"/></td>
+                            </apex:outputPanel>
+
+                            
+                            <apex:outputPanel rendered="{!IF(r.label == 'New Valid To',true,false)}">
+                            <td class="dataCell" colSpan="1"><apex:outputField value="{!v.sObjectRecord['New_Valid_To__c']}"/></td>
+                            </apex:outputPanel>
+
+                            
+                             <apex:outputPanel rendered="{!IF(r.label != 'New Rate' && r.label != 'New Valid From' && r.label != 'New Valid To' && r.label!='Cost Price' && r.label!='Deal Margin' && r.label!='Sales Reduction' && r.label!='Deal Revenue' && r.label!='Stamp Floor Price' && r.label!='Stamp Reference Price',true,false)}">
+                            <td class="dataCell" colSpan="1">{!v.sObjectRecord[r]}</td>
+                            </apex:outputPanel>
+                            
+                            
+                             <apex:outputPanel rendered="{!AND(showRPQApproverColumns,r.label=='Cost Price')}">
+                            <td class="dataCell" colSpan="1">{!v.sObjectRecord[r]}</td>                        
+                            </apex:outputPanel>
+                            
+                            <apex:outputPanel rendered="{!AND(showRPQApproverColumns,r.label=='Sales Reduction')}">
+                            <td class="dataCell" colSpan="1">{!v.sObjectRecord[r]}</td>                        
+                            </apex:outputPanel>
+                            
+                            <apex:outputPanel rendered="{!AND(showRPQApproverColumns,r.label=='Deal Margin')}">
+                            <td class="dataCell" colSpan="1">{!v.sObjectRecord[r]}</td>                        
+                            </apex:outputPanel>
+                            
+                            <apex:outputPanel rendered="{!AND(showRPQApproverColumns,r.label=='Deal Revenue')}">
+                            <td class="dataCell" colSpan="1">{!v.sObjectRecord[r]}</td>                        
+                            </apex:outputPanel>
+                            
+                            <apex:outputPanel rendered="{!AND(showRPQColumns,r.label=='Stamp Reference Price')}">
+                            <td class="dataCell" colSpan="1" bgcolor="{!IF(AND(v.sObjectRecord['Stamp_Reference_Price__c']==null,NOT(v.sObjectRecord['Below_Reference_Flag__c'])),'',IF(v.sObjectRecord['Below_Reference_Flag__c']==true, '#FFFF00', '#99CC66'))}">{!v.sObjectRecord[r]}</td>                        
+                            </apex:outputPanel>
+                            
+                            <apex:outputPanel rendered="{!AND(showRPQColumns,r.label=='Stamp Floor Price')}">
+                            <td class="dataCell" colSpan="1" bgcolor="{!IF(AND(v.sObjectRecord['Stamp_Floor_Price__c']==null,NOT(v.sObjectRecord['Below_Floor_Flag__c'])),'',IF(v.sObjectRecord['Below_Floor_Flag__c']==true, '#FFFF00', '#99CC66'))}">{!v.sObjectRecord[r]}</td>                        
+                            </apex:outputPanel>
+                            
+                        </apex:repeat>
+                        <!--  <apex:repeat value="{!RPQApproverColumns}" var="r" rendered="{!showRPQApproverColumns}">
+                            <td class="dataCell" colSpan="1">{!v.sObjectRecord[r]}</td>
+                        </apex:repeat>
+                        <apex:variable value="flrprice" var="flrprice" rendered="{!OR(showRPQColumns,showRPQApproverColumns)}">
+                        <td class="dataCell" colSpan="1">{!v.sObjectRecord['Stamp_Floor_Price__c']}</td>                        
+                        </apex:variable>
+                        
+                        <apex:variable value="flrprice" var="flrprice" rendered="{!OR(showRPQColumns,showRPQApproverColumns)}">
+                        <td class="dataCell" colSpan="1">{!v.sObjectRecord['Stamp_Reference_Price__c']}</td>                        
+                        </apex:variable>
+                        
+                        <apex:variable value="flrprice" var="flrprice" rendered="{!showRPQApproverColumns}">
+                        <td class="dataCell" colSpan="1">{!v.sObjectRecord['Cost_Price__c']}</td>                        
+                        </apex:variable>
+                        -->
+                        
+                        
+                        
+                        <!--         <TJ20140903> -->
+                        <apex:variable value="ab1" var="ab1" rendered="{!IF(reqType=='Massive',true,false || (reqType=='Customer Specific' && pReqType=='Permanent')) && isVolumeApplicable && status!= 'Submitted' && status!= 'Approved'}">
+                        <td class="dataCell" colspan="1" id="{!v.sObjectRecord['Id']}selvol"><apex:inputCheckBox value="{!v.changevolume}" id="selVol">
+                        </apex:inputCheckbox></td>
+                        </apex:variable>
+                        <!--         <TJ20140908> -->
+                        <apex:variable value="ab2" var="ab2" rendered="{!IF(sVol!=true,true,false) && IF(floorView!=true,true,false) && scalePr && isScalePrice && status!= 'Submitted' && status!= 'Approved'}">
+                        <td class="dataCell" colspan="1" id="{!v.sObjectRecord['Id']}selScl"><apex:inputCheckBox value="{!v.changescale}" id="selScl">
+                        </apex:inputCheckbox></td>
+                        </apex:variable>
+                        
+                        <!-- <TJ20140908> -->
+                        <apex:variable value="Scale" var="scl" rendered="{!AND(v.sObjectRecord['Scaled_Price_Flag__c'],enableScale,status!= 'Submitted',status!= 'Approved')}">
+                        <td class="dataCell" colSpan="1">
+                        <input type="checkbox" disabled="true" checked="true" value=""/>
+                        </td>
+                        </apex:variable>
+                        <apex:variable value="Scale" var="scl" rendered="{!AND(NOT v.sObjectRecord['Scaled_Price_Flag__c'],enableScale,status!= 'Submitted',status!= 'Approved')}">
+                        <td class="dataCell" colSpan="1">
+                        <input type="checkbox" disabled="true" value=""/>
+                        </td>
+                        </apex:variable>
+                        <apex:repeat value="{!columnsDisp}" var="r">
+
+                            <td class="dataCell" colSpan="1">{!IF(CONTAINS(r.Label,'Rate'),v.stringMap['rateLocale'],v.sObjectRecord[r])}</td>
+
+                        </apex:repeat>
+                        <apex:variable value="Quantity" var="qty" rendered="{!IF(sVol!=true,true,false) && IF(floorView!=true,true,false) && scalePr}">
+                        <td class="dataCell" colSpan="1">{!v.quantity}</td>                        
+                        </apex:variable>
+                          <!-- MS20140923 Adding columns for MG5 -->
+                        <apex:variable value="MG5" var="mg" rendered="{!showMG5}">
+                            <td class="dataCell"  scope="col" >
+                            {!v.sObjectRecord['Material_Group_5_Code__c']}
+                            </td>
+                            <td class="dataCell"  scope="col" >
+                            {!v.sObjectRecord['Material_Group_5__c']}
+                            </td>
+                        </apex:variable>
+                        <!-- MS20141115 -->
+                        <apex:variable value="Proj" var="mg" rendered="{!showProj}">
+                            <td class="dataCell"  scope="col" >
+                            {!v.sObjectRecord['Project__c']}
+                            </td>
+                        </apex:variable>
+                        <apex:repeat value="{!pricingRecordColumns}" var="r" rendered="{!wrapperList.size!=0 && wrapperList[0].sObjectRecord['Pricing_Request_Type__c'] != 'Import'}">
+
+                            <td class="dataCell" colSpan="1">{!IF(CONTAINS(r.Label,'Rate'),v.stringMap['rateLocale'],v.sObjectRecord[r])}</td>
+
+                        </apex:repeat>
+                        <apex:repeat value="{!pricingRecordColumns}" var="r" rendered="{!wrapperList.size!=0 && wrapperList[0].sObjectRecord['Pricing_Request_Type__c'] == 'Import'}">
+
+                            <apex:variable value="w1" var="w1" rendered="{!NOT(priceViewClicked && CONTAINS(r.Label,'Rate'))}">
+                                <td class="dataCell" colSpan="1">{!IF(CONTAINS(r.Label,'Rate'),v.stringMap['rateLocale'],v.sObjectRecord[r])}</td>
+                            </apex:variable>
+
+                        </apex:repeat>
+                      
+                        <!-- AV20140515-added isVolumeApplicable in render condition -->
+                        <apex:variable value="w1" var="w1"
+                            rendered="{!NOT(priceViewClicked) && !showRPQColumns && !showRPQApproverColumns && NOT(paytermsClicked) && NOT(isVolumeApplicable) && NOT(isScalePrice) && NOT(scalePr) && v.sObjectRecord['Pricing_Request_Type__c'] != 'Pricing Task'}">
+                            <td class="dataCell" colSpan="1"><apex:outputField value="{!v.sObjectRecord['Valid_From__c']}"></apex:outputField>
+                            </td>
+                            <td class="dataCell" colSpan="1"><apex:outputField value="{!v.sObjectRecord['Valid_To__c']}"></apex:outputField>
+                            </td>
+                        </apex:variable>
+                        <apex:variable value="New Quantity" var="Nqty" rendered="{!IF(sVol!=true,true,false) && IF(floorView!=true,true,false) && scalePr}">
+                        <!-- <AV20151505>-Production issue-Scale price not getting updated by Scale pricing button -->
+                        <td class="dataCell" colSpan="1">{!IF(v.stringMap['newRateLocale']!=null || !ISBLANK(v.stringMap['newRateLocale']),IF(!ISBLANK(nQTY),nQTY,IF(!ISBLANK(v.nQuantity),v.nQuantity,'')),'')}</td>                        
+                        </apex:variable>
+<!--                         <TJ20150106> Removed New Rate from field set -->
+                        <!--AG20201014  START--->
+                        <apex:variable value="New Rate" var="nr" rendered="{!IF((reqType!='Import' && !showRPQColumns && !showRPQApproverColumns) || (reqType=='Import' && priceViewClicked && !showRPQColumns && !showRPQApproverColumns),true,false)}">
+                        <!--AG20201014  END--->
+                        <td class="dataCell" colSpan="1">{!v.stringMap['newRateLocale']}</td>
+                        </apex:variable>
+                        <!-- <VK20200819>  --->
+                        <apex:variable value="Rate One" var="nr" rendered="{!IF((reqType!='Import' && !showRPQColumns && !showRPQApproverColumns && !!NewRateColumnDisplay) || (reqType=='Import' && priceViewClicked && !showRPQColumns && !showRPQApproverColumns && !!NewRateColumnDisplay),true,false)}">
+                        
+                        <td class="dataCell" colSpan="1">{!v.sObjectRecord['Rate_One__c']}</td>
+                        </apex:variable>
+                        <!-- <VK20200819>  --->
+                        <!-- <TJ20141231> Added Delta Current % -->
+                        <apex:variable value="% Delta Current" var="DelCur" rendered="{!IF(sVol!=true,true,false) && IF(priceViewClicked==true,true,false) && NOT(scalePr) && IF(reqType!='Import',true,false)}">
+                        <td class="dataCell" colSpan="1">
+                            <apex:outputText value="{0,number,00.000}" rendered="{!IF(v.sObjectRecord['Stamp_Converted_Current_Price__c']!=null &&  v.sObjectRecord['Stamp_Converted_Current_Price__c']!='0,00' && v.sObjectRecord['Stamp_Converted_Current_Price__c']!='0.00' && !ISBLANK(v.sObjectRecord['Rate__c']),true,false)}">
+                            <apex:param value="{!((Value(v.sObjectRecord['New_Rate__c'])-Value(v.sObjectRecord['Stamp_Converted_Current_Price__c']))/Value(v.sObjectRecord['Stamp_Converted_Current_Price__c']))*100}"/>
+                        </apex:outputText>
+                        <apex:outputText value=" %" rendered="{!IF(v.sObjectRecord['Stamp_Converted_Current_Price__c']!=null &&  v.sObjectRecord['Stamp_Converted_Current_Price__c']!='0,00' && v.sObjectRecord['Stamp_Converted_Current_Price__c']!='0.00' && !ISBLANK(v.sObjectRecord['Rate__c']),true,false)}"/>
+                        </td>
+                        </apex:variable>
+                        <apex:repeat value="{!newFieldColumns}" var="r3">
+
+
+
+                            <td class="dataCell" colSpan="1">
+                            <!-- Ver 1.4 --> {!IF(CONTAINS(r3.Label,'Rate'),v.stringMap['newRateLocale'],IF(CONTAINS(r3.Label,'Quantity'),v.stringMap['quantityLocale'],v.sObjectRecord[r3]))}</td>
+
+                        </apex:repeat>
+                        <!-- <VK20200819>  --->
+                        <apex:variable value="Floor Price in USD" var="nr" rendered="{!IF((reqType!='Import' && !showRPQColumns && !showRPQApproverColumns  && !!NewRateColumnDisplay) || (reqType=='Import' && priceViewClicked && !showRPQColumns && !showRPQApproverColumns  && !!NewRateColumnDisplay),true,false)}">
+                        
+                        <td class="dataCell" colSpan="1">{!v.sObjectRecord['Floor_Price_in_USD__c']}</td>
+                            
+                        </apex:variable>
+                        
+                        <apex:variable value="Ref Price in USD" var="nr" rendered="{!IF((reqType!='Import' && !showRPQColumns && !showRPQApproverColumns  && !!NewRateColumnDisplay) || (reqType=='Import' && priceViewClicked && !showRPQColumns && !showRPQApproverColumns  && !!NewRateColumnDisplay),true,false)}">
+                        
+                        <td class="dataCell" colSpan="1">{!v.sObjectRecord['Ref_Price_in_USD__c']}</td>
+                            
+                        </apex:variable>
+                        <!-- <VK20200819>  --->
+                        
+                        <!-- VR20130719 - APAC ROLLOUT2-->
+                        <!-- AV20140515-added isVolumeApplicable in render condition -->
+                        <apex:variable value="w1" var="w1"
+                            rendered="{!NOT(priceViewClicked) && !showRPQColumns && !showRPQApproverColumns && NOT(paytermsClicked) && NOT(isVolumeApplicable) && NOT(isScalePrice) && v.sObjectRecord['Pricing_Request_Type__c'] != 'Pricing Task' && (v.sObjectRecord['Pricing_Request_Type__c'] != 'Import' && !(wrapperList[0].sObjectRecord['Pricing_Request__r.Request_Type__c']=='Import' && (CONTAINS(wrapperList[0].sObjectRecord['Pricing_Request__r.Pricing_Request_Type__c'],'Floor') || CONTAINS(wrapperList[0].sObjectRecord['Pricing_Request_Type__c'],'Reference'))))}">
+                            <td class="dataCell" colSpan="1"><apex:outputField value="{!v.sObjectRecord['New_Valid_From__c']}"></apex:outputField>
+                            </td>
+                            <td class="dataCell" colSpan="1"><apex:outputField value="{!v.sObjectRecord['New_Valid_To__c']}"></apex:outputField>
+                            </td>
+                        </apex:variable>
+
+                        <apex:repeat value="{!scaledFlagColumns}" var="r4">
+
+                        
+                                
+                                    <apex:variable value="v1"
+                                        var="v1" 
+                                        rendered="{!CONTAINS(r4.label,'Floor') && IF((v.sObjectRecord['Pricing_Request_Type__c']=='Import' && (CONTAINS(r4.label,'Exp') || CONTAINS(r4.label,'Scale'))),false,true)}">
+                                        <!-- <AV20151104>-Production issue-added condition to prevent background colour for net floor and net reference -->
+                                        <td class="dataCell" bgcolor="{!IF(OR(AND(v.sObjectRecord['Stamp_Floor_Price__c']==null,NOT(v.sObjectRecord['Below_Floor_Flag__c'])),OR(v.sObjectRecord['Stamp_Floor_Price__c']==null,v.sObjectRecord['Stamp_Floor_Net_Price__c']!=null,v.sObjectRecord['Stamp_Reference_Net_Price__c']!=null)),'',IF(v.sObjectRecord[r4], '#FFFF00', '#99CC66'))}" colSpan="1">
+                                        <apex:outputText value="{!v.sObjectRecord['Materials_Below_Net_Floor__c']}" rendered="{!CONTAINS(r4.label,'Floor') && OR(AND(v.sObjectRecord['Customer_Specific__c'] , (v.sObjectRecord['Pricing_Request_Type__c']=='Permanent' || v.sObjectRecord['Pricing_Request_Type__c']=='Project'),(v.sObjectRecord['Pricing_Request__r.Request_Type__c']!='Massive')),v.sObjectRecord['Pricing_Request_Type__c']=='Import')}"/>
+                                        </td> 
+                                    </apex:variable>
+                                    
+                                    <!-- PP20131025 -->
+                                    <apex:variable value="v1"
+                                        var="v1" 
+                                        rendered="{!CONTAINS(r4.label,'Current') && IF((v.sObjectRecord['Pricing_Request_Type__c']=='Import' && (CONTAINS(r4.label,'Exp') || CONTAINS(r4.label,'Scale'))),false,true)}">
+                                        <td class="dataCell" bgcolor="{!IF(OR(v.sObjectRecord['Expire__c'],v.sObjectRecord['Pricing_Request__r.Spot_Type__c'] == 'Free of Charge'),'',if( v.sObjectRecord[r4]==true, '#FFFF00','#99CC66'))}" colSpan="1">
+                                        <apex:outputText value="{!v.sObjectRecord['Materials_Below_Net_Current__c']}" rendered="{!CONTAINS(r4.label,'Current') && OR(AND(v.sObjectRecord['Customer_Specific__c'] , (v.sObjectRecord['Pricing_Request_Type__c']=='Permanent' || v.sObjectRecord['Pricing_Request_Type__c']=='Project'),(v.sObjectRecord['Pricing_Request__r.Request_Type__c']!='Massive')),v.sObjectRecord['Pricing_Request_Type__c']=='Import')}"/>
+                                        </td> 
+                                    </apex:variable>
+                                
+                
+                            
+                                    <apex:variable value="v1"
+                                        var="v1" 
+                                        rendered="{!CONTAINS(r4.label,'Reference') && IF( (v.sObjectRecord['Pricing_Request_Type__c']=='Import' && (CONTAINS(r4.label,'Exp') || CONTAINS(r4.label,'Scale'))),false,true)}">
+                                        <!-- <AV20151104>-Production issue-added condition to prevent background colour for net floor and net reference -->
+                                        <td class="dataCell" bgcolor="{!IF(OR(AND(v.sObjectRecord['Stamp_Reference_Price__c']==null,NOT(v.sObjectRecord['Below_Reference_Flag__c'])),OR(v.sObjectRecord['Stamp_Reference_Price__c']==null,v.sObjectRecord['Stamp_Floor_Net_Price__c']!=null,v.sObjectRecord['Stamp_Reference_Net_Price__c']!=null)),'',IF((v.sObjectRecord[r4]==true), '#FFFF00', '#99CC66'))}" colSpan="1">
+                                        <apex:outputText value="{!v.sObjectRecord['Materials_Below_Net_Reference__c']}" rendered="{!CONTAINS(r4.label,'Reference') && OR(AND(v.sObjectRecord['Customer_Specific__c'] , (v.sObjectRecord['Pricing_Request_Type__c']=='Permanent' || v.sObjectRecord['Pricing_Request_Type__c']=='Project'),(v.sObjectRecord['Pricing_Request__r.Request_Type__c']!='Massive')),v.sObjectRecord['Pricing_Request_Type__c']=='Import')}"/>
+                                        </td> 
+                                    </apex:variable>
+                                
+                            
+                            <apex:variable value="v1"
+                                var="v1" 
+                                rendered="{!AND(NOT(CONTAINS(r4.label,'Mat')),IF((v.sObjectRecord['Pricing_Request_Type__c']!='Import' && CONTAINS(r4.label,'Exp')),true,false) && IF(v.sObjectRecord[r4]==false,true,false) && NOT CONTAINS(r4.label,'Floor') && NOT CONTAINS(r4.label,'Current') && NOT CONTAINS(r4.label,'Reference'))}">
+                                <td class="dataCell" colSpan="1">
+                                <input type="checkbox" disabled="true" value=""/>
+                                </td>
+                            
+                            </apex:variable>
+                            <!--  <NS20180606>-- Start -- Added <td> for expire field in imports - for datatables warning issue#IS ID-00084783 -->
+                            <apex:variable value="v1"
+                                var="v1" 
+                                rendered="{!AND(NOT(CONTAINS(r4.label,'Mat')),IF((v.sObjectRecord['Pricing_Request_Type__c'] =='Import' && CONTAINS(r4.label,'Exp')),true,false) && IF(v.sObjectRecord[r4]==false,true,false) && NOT CONTAINS(r4.label,'Floor') && NOT CONTAINS(r4.label,'Current') && NOT CONTAINS(r4.label,'Reference'))}">
+                               <td class="dataCell" colSpan="1">
+                                
+                               </td>
+                            </apex:variable>
+                            <!--  <NS20180606>-- END -- Added <td> for expire field in imports - for datatables warning issue#IS ID-00084783 -->
+                            <apex:variable value="v1" var="v1"
+                                rendered="{!AND(NOT(CONTAINS(r4.label,'Mat')),IF((v.sObjectRecord['Pricing_Request_Type__c']!='Import' && CONTAINS(r4.label,'Exp')),true,false) && IF(v.sObjectRecord[r4]==true,true,false) && NOT CONTAINS(r4.label,'Floor') && NOT CONTAINS(r4.label,'Current') && NOT CONTAINS(r4.label,'Reference'))}">
+                                <td class="dataCell" colSpan="1">
+                                <input type="checkbox" disabled="true" value="" checked="true" />
+                                </td>
+                            </apex:variable> 
+<!--                        {!IF(AND(v.sObjectRecord['Customer_Specific__c'],OR(v.sObjectRecord['Pricing_Request_Type__c']=='Permanent',v.sObjectRecord['Pricing_Request_Type__c']=='Project' )),true,false)}-->
+                            <apex:variable value="v1"
+                                        var="v1" 
+                                        rendered="{!AND( CONTAINS(r4.label,'Mat'),IF(OR(AND(v.sObjectRecord['Customer_Specific__c'],OR(v.sObjectRecord['Pricing_Request_Type__c']=='Permanent',v.sObjectRecord['Pricing_Request_Type__c']=='Project')),v.sObjectRecord['Pricing_Request_Type__c']=='Import'),true,false))}">
+                                        <td class="dataCell" colSpan="1">
+                                        <apex:outputText value="{!v.sObjectRecord['Number_of_Material_with_Gross_Price__c']}" rendered="{!AND(CONTAINS(r4.label,'Mat'),CONTAINS(v.sObjectRecord['Net_Price_Status__c'],'Net Price Received'))}"/>
+                                        <apex:outputText value="W" rendered="{!AND(CONTAINS(r4.label,'Mat'),CONTAINS(v.sObjectRecord['Net_Price_Status__c'],'Waiting for Net Price'))}"/>
+                                        <apex:outputText value="E" rendered="{!AND(CONTAINS(r4.label,'Mat'),CONTAINS(v.sObjectRecord['Net_Price_Status__c'],'Error'))}"/>
+                                        </td> 
+                        </apex:variable> 
+                            
+                            
+                        </apex:repeat>
+                        
+                        <!-- SP20140426-- START -->
+                        <apex:repeat value="{!flrRefViewColumns}" var="r" rendered="{!NOT(isPaytermsApplicable)}">
+                            <td class="headerRow"  scope="col">
+                                {!IF(CONTAINS(r.Label,'Stamp New Net Price'),v.stringMap['newNet'],IF(CONTAINS(r.Label,'Stamp Current Net Price'),v.stringMap['currentNet'],IF(CONTAINS(r.Label,'Stamp Floor Net Price'),v.stringMap['netFloor'],IF(CONTAINS(r.Label,'Stamp Reference Net Price'),v.stringMap['netRef'],v.sObjectRecord[r]))))}
+                            </td>
+                        </apex:repeat> <!-- ,IF(CONTAINS(r.Label,'Stamp Current Net Price'),v.stringMap['currentNet'] -->
+                        <!-- SP20140426--  END -->
+                        
+                        <!-- SP20140509-- START -->
+                        <apex:repeat value="{!flrRefViewColumns}" var="r" rendered="{!isPaytermsApplicable}">
+                            <td class="dataCell" colSpan="1"> <apex:outputField value="{!v.sObjectRecord[r]}" /> </td>
+                        </apex:repeat> 
+                        <!-- SP20140509--  END -->
+                        
+                        <!-- AV20140515 START-Sales volume column added and inline editing for new vol and new vol uom done -->
+                        <!-- AV20140515 -Added condition to provide inline editing only for draft requests -->
+                        <!-- HL20140902 - Changed the width of Volumn column from width:50px to width:80px and added maxLength="8"-->
+                        <!-- HL20152901 - added or condition for UOM in the output text-->
+                        <apex:repeat value="{!salesVolumeColumns}" var="r" rendered="{!isVolumeApplicable}">
+                            <td class="dataCell" colSpan="1"> 
+                           <!-- AV20150226-Production issue --> 
+                          <apex:outputtext value="{!IF(OR(NOT(CONTAINS(r.Label,'New')),CONTAINS(r.Label,'New') && (NOT(v.sObjectRecord['Approval_Status__c']=='Draft') && NOT(v.sObjectRecord['Approval_Status__c']=='Rejected') && NOT(v.sObjectRecord['Approval_Status__c']=='Recalled') && NOT(v.sObjectRecord['Approval_Status__c']=='Validated'))),IF(OR(NOT(CONTAINS(r.label,'UoM')),CONTAINS(r.label,'UoM')),'{1,number,###,###,###,##0}',v.sObjectrecord[r]),'')}"> 
+                             <apex:param value="{!v.sObjectrecord[r]}" />                          
+                             </apex:outputtext>  
+                            
+                          <apex:inputfield style="width:80px" value="{!v.sObjectrecord[r]}" rendered="{!CONTAINS(r.Label,'New') && (v.sObjectRecord['Approval_Status__c']=='Draft' || v.sObjectRecord['Approval_Status__c']=='Rejected' || v.sObjectRecord['Approval_Status__c']=='Recalled' || v.sObjectRecord['Approval_Status__c']=='Validated')}" onkeydown="checkLimit(this,this.form.countdown,8);"  onkeyup="checkLimit(this,this.form.countdown,8);" onchange="checkLimit(this,this.form.countdown,8);"> 
+                             </apex:inputfield> 
+<!--                           <apex:selectList size="1" value="{!newVolUoM}" rendered="{!(CONTAINS(r.label,'UoM')) && CONTAINS(r.Label,'New') && (v.sObjectRecord['Approval_Status__c']=='Draft' || v.sObjectRecord['Approval_Status__c']=='Rejected' || v.sObjectRecord['Approval_Status__c']=='Recalled' || v.sObjectRecord['Approval_Status__c']=='Validated')}">  -->
+<!--                            <apex:selectOptions value="{!UoMList}"/> -->
+<!--                              </apex:selectList>           -->
+                     <!--  <apex:inputtext style="width:80px" maxLength="8" value="{!v.sObjectrecord[r]}" id="myNumberInput" onclick="hideInput(!v.sObjectrecord[r])" rendered="{!NOT(reqtype == 'Massive') && CONTAINS(r.Label,'New') && (v.sObjectRecord['Approval_Status__c']=='Draft' || v.sObjectRecord['Approval_Status__c']=='Rejected' || v.sObjectRecord['Approval_Status__c']=='Recalled' || v.sObjectRecord['Approval_Status__c']=='Validated')}"> --> 
+                    <!--       <apex:actionSupport event="onchange" reRender="myNumberDisplay"/>  -->
+                    <!--        </apex:inputtext> -->
+                            
+                    <!--        <apex:outputtext value="{!IF(OR(NOT(CONTAINS(r.Label,'New')),CONTAINS(r.Label,'New') && (NOT(v.sObjectRecord['Approval_Status__c']=='Draft') && NOT(v.sObjectRecord['Approval_Status__c']=='Rejected') && NOT(v.sObjectRecord['Approval_Status__c']=='Recalled') && NOT(v.sObjectRecord['Approval_Status__c']=='Validated'))),IF(NOT(CONTAINS(r.label,'UoM')),'{0,number,###,###,###,##0}',v.sObjectrecord[r]),'')}" id="myNumberDisplay" > --> 
+                    <!--        <apex:param value="{!v.sObjectrecord[r]}"/> -->
+                    <!--        </apex:outputtext> -->
+                            
+                            
+<!--                           <apex:outputtext value="{!IF(NOT(CONTAINS(r.label,'UoM')),'{0,number,###,###,###,##0}',v.sObjectrecord[r])}" rendered="{!NOT(CONTAINS(r.label,'UoM')) && CONTAINS(r.Label,'New') && (v.sObjectRecord['Approval_Status__c']=='Draft' || v.sObjectRecord['Approval_Status__c']=='Rejected' || v.sObjectRecord['Approval_Status__c']=='Recalled' || v.sObjectRecord['Approval_Status__c']=='Validated')}"> -->
+<!--                             <apex:param value="{!v.sObjectrecord[r]}" /> -->
+<!--                             </apex:outputtext> -->
+<!--                            <apex:outputField value="{!v.sObjectRecord[r]}" rendered="{!CONTAINS(r.Label,'New') && (v.sObjectRecord['Approval_Status__c']=='Draft' || v.sObjectRecord['Approval_Status__c']=='Rejected' || v.sObjectRecord['Approval_Status__c']=='Recalled' || v.sObjectRecord['Approval_Status__c']=='Validated')}" >-->
+<!--                            <apex:inLineEditSupport event="ondblclick" showOnEdit="saveButton,cancelButton" />-->
+<!--                            </apex:outputField>-->
+                            </td>
+                        </apex:repeat>
+                        
+                        <!-- AV20140515 END  -->
+                        
+                        <!-- Ver 1.8 START -->
+                            <!-- AV20140515-added isVolumeApplicable in render condition -->
+                            <apex:variable var="e123" value="e123" rendered="{!wrapperList!=null && wrapperList.size !=0
+                                && wrapperList[0].sObjectRecord['Pricing_Request__r.Display_Standardized_Rate__c']&&NOT(priceViewClicked) && NOT(showRPQColumns) && NOT(paytermsClicked) && NOT(isVolumeApplicable) && NOT(isScalePrice) && NOT(scalePr) && IF(CONTAINS(wrapperList[0].sObjectRecord['Pricing_Request__r.Pricing_Request_Type__c'],'Import'),false,true)}">
+                                <!--<BB20130627> -- Ver 2.1 START Commented showStandardizedRate and approver check -->
+                            <!--    && showStandardizedRate && (wrapperList[0].sObjectRecord['Approval_Status__c'] == 'Submitted' || wrapperList[0].sObjectRecord['Approval_Status__c'] == 'pending') && wrapperList[0].sObjectRecord['Pricing_Request__r.Current_Approver__c']==$User.Id}">-->
+                                <!-- Ver 2.1 END  -->
+                                <td class="dataCell" colSpan="1">
+                                    {!v.stringMap['usdRateLocale']}
+                                </td>
+                            </apex:variable>
+                            <!-- AV20140515-added isVolumeApplicable in render condition -->
+                            <apex:variable var="e123" value="e123" rendered="{!wrapperList!=null && wrapperList.size !=0
+                                && wrapperList[0].sObjectRecord['Pricing_Request__r.Display_Standardized_Rate__c'] && NOT(showRPQColumns) && NOT(priceViewClicked) && NOT(paytermsClicked) && NOT(isVolumeApplicable) && NOT(isScalePrice) && NOT(scalePr) && IF(CONTAINS(wrapperList[0].sObjectRecord['Pricing_Request__r.Pricing_Request_Type__c'],'Import'),false,true)}">
+                                <!--<BB20130627> -- Ver 2.1 START Commented showStandardizedRate and approver check -->
+                            <!--     && wrapperList[0].sObjectRecord['Pricing_Request_Type__c'] != 'Pricing Task' && showStandardizedRate && (wrapperList[0].sObjectRecord['Approval_Status__c'] == 'Submitted' || wrapperList[0].sObjectRecord['Approval_Status__c'] == 'pending') && wrapperList[0].sObjectRecord['Pricing_Request__r.Current_Approver__c']==$User.Id}">-->
+                                <td class="dataCell" colSpan="1">
+                                    {!v.sObjectRecord['Base_UoM__c']}
+                                </td>
+                                <!-- Ver 2.1 END  -->   
+                            </apex:variable>
+                            <!-- Ver 1.8 END -->
+                           <apex:variable value="ab3" var="ab3" rendered="{!IF(sVol!=true,true,false) && IF(floorView!=true,true,false) && scalePr && isScalePrice}">
+                        <td class="dataCell" colSpan="1">
+                            {!v.sObjectRecord['Scale_UoM_Scale_Unit__c']}
+                        </td>
+                    </apex:variable>
+                    </tr>
+                    
+                </apex:repeat>
+            </table>
+            
+        </apex:outputPanel>
+        <br />
+            
+            <!-- AV20140515-START added save and cancel button for inline editing of New Volume and New Vol UoM field -->
+            
+            <apex:commandLink id="saveButton" style="text-decoration:none; color:#484848;margin-left:256px;"
+                styleClass="btn" value="Save" action="{!saveInLineVolChanges}" rendered="{!AND(NOT(scalePr),IF(reqtype=='Massive',false,true) && isVolumeApplicable && status!= 'Submitted' && status!= 'Approved')}">
+            </apex:commandLink>
+<!--            <apex:commandButton id="cancelButton" style="text-decoration:none; color:#484848; display:none"-->
+<!--                styleClass="btn" value="Cancel" action="{!cancelInLineVolChanges}" rendered="{!isVolumeApplicable}" rerender="page" />  -->
+                
+            <center>
+            <apex:outputPanel rendered="{!showSelectButtons && IF((wrapperList==NULL || wrapperList.size==0),false,true)}">            
+            <!-- AV20140515-END -->
+            <br />
+            <div style="text-decoration:none;color:#484848;margin-right:30%;">
+            <!-- Ver 1.7 START -->
+                    <apex:commandLink styleClass="btn" style="text-decoration:none;" value="Add Materials" action="{!loadPage}" rendered="{!!showRPQColumns}">
+                        <apex:param value="{!IF(wrapperList != null && wrapperList.size != 0 && wrapperList[0].sObjectRecord['Pricing_Request__r.Pricing_Request_Type__c'] == 'Project Pricing','PAAddProjectRequest',IF(Contains(pReqType,'Massive'),'PACustomerDetail','PAEditReqItem'))}" name="passMode" assignTo="{!viewMode}" />
+                        <apex:param value="{!IF(wrapperList != null && wrapperList.size != 0 && wrapperList[0].sObjectRecord['Pricing_Request__r.Pricing_Request_Type__c'] == 'Project Pricing','PAAddProjectRequest',IF(Contains(pReqType,'Massive'),'PACustomerDetail','PAEditReqItem'))}" name="passMode" assignTo="{!currentPageLabel}" />
+                        <apex:param value="{!IF(Contains(pReqType,'Massive'),'NewAddPricesPCKCsoldtoSelect~'+priceType,'NewAddPricesPCKC~'+priceType)}" name="sendAction" assignTo="{!selected}" />
+                        <apex:param value="{!IF(Contains(pReqType,'Massive'),'NewAddPricesPCKCsoldtoSelect~'+priceType,'NewAddPricesPCKC~'+priceType)}" name="sendAction" assignTo="{!actionAtr}" />
+                        <!-- <TJ20140513> Passing page label --> 
+                        <apex:param value="{!IF(wrapperList != null && wrapperList.size != 0 && wrapperList[0].sObjectRecord['Pricing_Request__r.Pricing_Request_Type__c'] == 'Project Pricing',IF(CONTAINS(navigation,($Label.Add_Project_Request)),$Label.Add_Project_Request,currentHeader), IF(wrapperList != null && wrapperList.size != 0 && wrapperList[0].sObjectRecord['Pricing_Request__r.Pricing_Request_Type__c'] == 'Permanent' && wrapperList[0].sObjectRecord['Pricing_Request__r.Request_Type__c'] == 'Customer Specific',IF(CONTAINS(navigation,($Label.Edit_Req_Item)),$Label.Edit_Req_Item,currentHeader),IF(CONTAINS(navigation,($Label.Add_Req_Item)),$Label.Add_Req_Item,currentHeader)))}" name="pageName" assignTo="{!labelName}"/>
+                        <apex:param value="false" assignTo="{!editLink}"/>
+                    </apex:commandLink> 
+            <!-- Ver 1.7 END -->
+            <apex:commandLink style="text-decoration:none; "
+                styleClass="btn" value="Select Unedited" action="{!selectUnedited}" />
+            <apex:commandLink style="text-decoration:none;" onclick="return confirm('Are you sure you want to Delete?');"
+                styleClass="btn" value="Delete Selected" action="{!deleteSelected}">
+                <apex:param name="deleteact" value="false" assignTo="{!selectAllFlag}" />
+            </apex:commandLink>
+<!--             <TJ20140908> -->
+            <apex:commandLink styleClass="btn"
+                value="Toggle Scale" action="{!changeToNonScale}" rendered="{!enableScale && status!= 'Submitted' && status!= 'Approved'}"
+                style="text-decoration:none; color:#484848; float:center; text-align:center;" >
+                <apex:param name="resetselectall" value="false" assignTo="{!selectAllFlag}"/>
+                
+            </apex:commandLink>
+            <apex:commandLink value="Scale Pricing" styleClass="btn" style="text-decoration:none;" action="{!loadPage}" rendered="{!enableScale && status!= 'Submitted' && status!= 'Approved'}">
+            <apex:param value="PAPricingRequestView" name="passMode"
+             assignTo="{!viewMode}" />
+            <apex:param value="PAPricingRequestView" name="passMode"
+             assignTo="{!currentPageLabel}" />
+            <apex:param value="sclPricing~{!priceType}" name="sendAction"
+              assignTo="{!actionAtr}" />
+            <apex:param value="sclPricing~{!priceType}" name="sendAction" assignTo="{!selected}" />
+<!--              <TJ20140513> Passing page label -->
+             <apex:param value="{!currentHeader}" name="pageName" assignTo="{!labelName}"/>
+             <apex:param name="sVol" value="false" assignTo="{!sVol}"/>
+             <apex:param name="scalePrices" value="true" assignTo="{!scalePr}"/>
+             <apex:param name="Floor" value="false" assignTo="{!floorView}"/>
+            </apex:commandLink>
+            </div> 
+       </apex:outputPanel></center>
+    </apex:pageBlock></div>
+</apex:component>

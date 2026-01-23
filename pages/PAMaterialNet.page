@@ -1,0 +1,340 @@
+<!--    Ver.            Developer           Changes                                                             Dependencies    -->
+<!--    TJ20140505      Tarun               Added the landing page link                                             None     -->
+<!--    TJ20140509      Tarun               Added Navigation Flow Text                                              None    -->
+
+<apex:page controller="ctrlPAMain" sidebar="false" showHeader="true" tabstyle="Price_Approval__tab" id="currentPage" cache="true"
+    action="{!onLoadCall}">
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.js')}" />
+<c:loadingComponent />
+    <apex:pageMessages />
+    <apex:form > 
+    <!-- <TJ20140505> Added Landing Page Link -->
+    <div align="left" style="font-size:13px;font-style:oblique;margin-bottom:3px;">
+        <apex:commandLink id="link0" value="Landing Page" action="{!businessComponentAction}" target="_self" style="color:blue;">
+        <apex:param name="desiredAction" value="landingpage" assignTo="{!businessaction}" />
+        <apex:param name="newPageLabel" value="PAHome" assignTo="{!newPageLabel}" />
+        </apex:commandLink>
+    <!-- <TJ20140509> Added Navigation Flow Text-->
+        <apex:outputText value="{!if(NOT(ISNULL(navigationText)),'>>','')} "/>
+        <apex:outputText value="{!navigationText}"/>
+        <apex:outputText value=">>Net Price Simulation"/>
+    </div>
+    <div class="customerLink">
+        Net Price Simulation
+
+</div>
+
+    
+    
+   <apex:pageBlock >  
+   <div id="pricedetail"><apex:pageBlockSection title="Pricing Condition Detail"
+                rendered="{!OR(service.paServicestate.currentRequestItem.pricingReqItem.Pricing_Request_Type__c == 'Permanent',service.paServicestate.currentRequestItem.pricingReqItem.Pricing_Request_Type__c == 'Pricing Task',service.paServicestate.currentRequestItem.pricingReqItem.Pricing_Request_Type__c == 'Import')}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value="Pricing Condition"></apex:outputText>
+                    <apex:outputText value="{!service.paServicestate.currentRequestItem.pricingReqItem.Pricing_Condition_Code__c}-{!service.paServicestate.currentRequestItem.pricingReqItem.Pricing_Condition__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value="Key Combination"></apex:outputText>
+                    <apex:outputText value="{!service.paServicestate.currentRequestItem.pricingReqItem.Key_Combination_Code__c}-{!service.paServicestate.currentRequestItem.pricingReqItem.Key_Combination_SFDC__c}" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection></div>
+
+            <div id="customerprice">
+            <apex:pageBlockSection title="Customer and Material Information"
+                rendered="{!OR(service.paServicestate.currentRequestItem.pricingReqItem.Pricing_Request_Type__c == 'Permanent',service.paServicestate.currentRequestItem.pricingReqItem.Pricing_Request_Type__c == 'Project')}">
+                <apex:pageBlockSectionItem rendered="{!AND(OR(service.paServicestate.currentRequestItem.pricingReqItem.Pricing_Request_Type__c == 'Permanent',service.paServicestate.currentRequestItem.pricingReqItem.Pricing_Request_Type__c == 'Project',service.paServicestate.currentRequestItem.pricingReqItem.Pricing_Request_Type__c == 'Import'),service.paServicestate.currentRequestItem.pricingReqItem.Sold_To_Code__c != null)}">
+                    <apex:outputText value="Sold To Code"></apex:outputText>
+                    <apex:outputText value="{!service.paServicestate.currentRequestItem.pricingReqItem.Sold_To_Code__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!AND(OR(service.paServicestate.currentRequestItem.pricingReqItem.Pricing_Request_Type__c == 'Permanent',service.paServicestate.currentRequestItem.pricingReqItem.Pricing_Request_Type__c == 'Project'),service.paServicestate.currentRequestItem.pricingReqItem.Sold_To__c != null)}">
+                    <apex:outputText value="Sold To"></apex:outputText>
+                    <apex:outputText value="{!service.paServicestate.currentRequestItem.pricingReqItem.Sold_To__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value="Sales Area"></apex:outputText>
+                    <apex:outputText escape="false"
+                        value="{!service.paServicestate.currentRequestItem.pricingReqItem.Sales_Org_code__c}-{!service.paServicestate.currentRequestItem.pricingReqItem.Sales_Org__c}
+                        <br>{!service.paServicestate.currentRequestItem.pricingReqItem.Dist_Channel_Code__c} - 
+                              {!service.paServicestate.currentRequestItem.pricingReqItem.Dist_Channel__c}<br>{!service.paServicestate.currentRequestItem.pricingReqItem.Division_code__c} - {!service.paServicestate.currentRequestItem.pricingReqItem.Division__c}" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                     
+                    </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!service.paServicestate.currentRequestItem.pricingReqItem.Pricing_Request_Type__c<> 'Pricing Task' && OR(CONTAINS(SUBSTITUTE(service.paServicestate.currentRequestItem.pricingReqItem.Key_Combination__c,'Material Price Group',''),'Material'),CONTAINS(SUBSTITUTE(service.paServicestate.currentRequestItem.pricingReqItem.Key_Combination__c,'Material Group',''),'Material'))}">
+                    <apex:outputText value="Material Code"></apex:outputText>
+                    <apex:outputText value="{!service.paServicestate.currentRequestItem.pricingReqItem.Material_Code__c}" />
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem rendered="{!service.paServicestate.currentRequestItem.pricingReqItem.Pricing_Request_Type__c<> 'Pricing Task' &&  OR(CONTAINS(SUBSTITUTE(service.paServicestate.currentRequestItem.pricingReqItem.Key_Combination__c,'Material Price Group',''),'Material'),CONTAINS(SUBSTITUTE(service.paServicestate.currentRequestItem.pricingReqItem.Key_Combination__c,'Material Group',''),'Material'))}">
+                    <apex:outputText value="Material"></apex:outputText>
+                    <apex:outputText value="{!service.paServicestate.currentRequestItem.pricingReqItem.Material__c}" />
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem rendered="{!service.paServicestate.currentRequestItem.pricingReqItem.Pricing_Request_Type__c<> 'Pricing Task' &&  CONTAINS(service.paServicestate.currentRequestItem.pricingReqItem.Key_Combination__c,'PH') && NOT(ISBLANK(service.paServicestate.currentRequestItem.calNetPrice.materialCode))}">
+                    <apex:outputText value="Material Code"></apex:outputText>
+                    <apex:outputText value="{!service.paServicestate.currentRequestItem.calNetPrice.materialCode}" />
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem rendered="{!service.paServicestate.currentRequestItem.pricingReqItem.Pricing_Request_Type__c<> 'Pricing Task' &&  CONTAINS(service.paServicestate.currentRequestItem.pricingReqItem.Key_Combination__c,'PH') && NOT(ISBLANK(service.paServicestate.currentRequestItem.calNetPrice.materialDesc))}">
+                    <apex:outputText value="Material"></apex:outputText>
+                    <apex:outputText value="{!service.paServicestate.currentRequestItem.calNetPrice.materialDesc}" />
+                </apex:pageBlockSectionItem>
+
+            
+            </apex:pageBlockSection></div>
+            <!-- Adding a button TO BE removed -->
+<!--            <apex:commandLink action="{!populateMap}" value="Net Pricing" /> <br/>-->
+<!--            <apex:commandLink action="{!fireWorkflow}" value="Fire work Flow"/> <br/>-->
+<!--             <apex:commandLink action="{!viewNetPrice}" value="View Net Pricing"/> <br/-->
+<!--             <apex:commandLink action="{!populateMap}" value="Sychronous Check">-->
+<!--                <apex:param value="a0Ze00000008w90" assignTo="{!priId}" /> -->
+<!--            </apex:commandLink> <br/> -->
+<!--             <apex:commandLink action="{!populateMap}" value="Asychronous Check">-->
+<!--                <apex:param value="a0Ze000000093bH" assignTo="{!priId}" />-->
+<!--            </apex:commandLink>-->
+          
+         
+            
+            
+           <div class="tableStyling">
+                  <apex:pageBlocksection title="Net Price Simulation" id="pb">
+                <apex:pageBlocksectionItem > 
+               <apex:pageBlockTable value="{!service.PAServicestate.currentRequestItem.calNetPrice.netPriceWrapperList}" var="a"
+                      > 
+<!--                          PRICING CONDITION HEADER pricingConditionLabel -->
+
+                              <apex:column >  
+                                  <apex:facet name="header" >
+                                      <apex:outputText value="Pricing Condition"   ></apex:outputText>
+                                  </apex:facet>
+<!--                             style="font-weight:800; font-size:9pt;  color:#484848"-->
+                            <apex:outputText style="font-weight:bold; font-size:13px; color: rgb(74, 74, 86);"  value="{!a.pricingConditionOnPage}" rendered="{!a.isSubTotal}"/>
+                             <apex:outputText style="font-weight:bold; font-size:11px; color: rgb(74, 74, 86);"  value="{!a.pricingConditionOnPage}" rendered="{!NOT(a.isSubTotal)}"/>
+                                          </apex:column>
+                                        
+                                        
+<!--  rendered="{!AND(pccodeCalculationTypeMap[a.pricingConditionLabel]!=null,pccodeCalculationTypeMap[a.pricingConditionLabel]!='Percentage')}"
+  rendered="{!AND(pccodeCalculationTypeMap[a]!=null,pccodeCalculationTypeMap[a]!='-')}" neeha % HEADER -->
+                              <apex:column >
+                                  <apex:facet name="header">
+                                      <apex:outputText style="float:right" value="%" ></apex:outputText>
+                                  </apex:facet> 
+                                   <apex:outputText style="float:right" value="{!SUBSTITUTE(a.percentCurrent,'.',service.paServicestate.currentRequestItem.seperatorOnPage)}" rendered="{!AND(a!=null,CONTAINS(service.PAServicestate.currentRequestItem.calNetPrice.pccodeCalculationTypeMap[a.pricingConditionLabel],'Percentage'))}"/>
+
+                                  
+                             
+                              </apex:column>
+<!--                         CURRENT PRICE HEADER -->
+                              <apex:column >
+                                  <apex:facet name="header">
+                                      <apex:outputText style="float:right" value="Current Price"  />
+                                  </apex:facet>
+                                  <apex:outputText style="float:right;font-weight:bold" rendered="{!a.isSubTotal}" value="{!SUBSTITUTE(a.currentPrice,'.',service.paServicestate.currentRequestItem.seperatorOnPage)}"   />
+                                  <apex:outputText style="float:right;" rendered="{!NOT(a.issubTotal)}" value="{!SUBSTITUTE(a.currentPrice,'.',service.paServicestate.currentRequestItem.seperatorOnPage)}"   />
+                                          </apex:column>
+<!--                                % HEADER FOR NEW PRICE-->
+                              <apex:column > 
+                                  <apex:facet name="header">
+                                      <apex:outputText style="float:right" value="%" ></apex:outputText>
+                                  </apex:facet> 
+                                  <apex:outputText style="float:right" value="{!SUBSTITUTE(a.percent,'.',service.paServicestate.currentRequestItem.seperatorOnPage)}"  rendered="{!AND(a!=null,CONTAINS(service.PAServicestate.currentRequestItem.calNetPrice.pccodeCalculationTypeMap[a.pricingConditionLabel],'Percentage'))}"  />
+                              </apex:column>
+<!--    NEW PRICE HEADER -->
+                              <apex:column >
+                                  <apex:facet name="header">
+                                      <apex:outputText style="float:right" value="New Price"  />
+                                  </apex:facet>
+                                  <apex:outputText style="float:right;font-weight:bold" rendered="{!a.issubTotal}" value="{!SUBSTITUTE(a.newPrice,'.',service.paServicestate.currentRequestItem.seperatorOnPage)}"   />
+                                  <apex:outputText style="float:right;" rendered="{!NOT(a.issubTotal)}" value="{!SUBSTITUTE(a.newPrice,'.',service.paServicestate.currentRequestItem.seperatorOnPage)}"   />
+                              </apex:column> 
+                        </apex:pageBlockTable>
+
+
+                  </apex:pageBlockSectionItem>
+                  
+<!--                  Gross Price Check   -->
+            <apex:pageBlockSectionItem >   <!-- width="100px"-->  
+     
+          
+            
+               <apex:pageBlockTable value="{!service.PAServicestate.currentRequestItem.calNetPrice.FlrRefWrapperList}" var="net" width="1500%" >
+               
+<!--                     <apex:column >-->
+<!--                          <apex:inputText disabled="true" value="{!net.price}"  />-->
+<!--                    </apex:column>-->
+                    <apex:column value="{!net.price}" style="color: rgb(74, 74, 86); font-size: 11px; font-weight: bold;" >
+                   </apex:column>
+<!--                    <TJ20150703> START -->
+                    <apex:column >
+                    <apex:facet name="header"  >
+                                      <apex:outputText style="float:right;" value="Rate" ></apex:outputText>
+                                  </apex:facet> 
+                  <apex:inputText style="text-align:right; float:right;" rendered="{!AND((net.price == 'New Rate'),NOT(CONTAINS(businessAction,'View')),NOT(net.sclFlag))}" value="{!net.rate}" size="5" /> 
+                    <apex:outputText style="float:right;" rendered="{!IF(net.price=='Net Floor Price' || net.price=='Delta Floor' || net.price=='Net Reference Price' || net.price=='Delta Reference',service.paServicestate.currentRequest.isNetFloorVisible,OR(NOT (net.price == 'New Rate'),CONTAINS(businessAction,'View'),net.sclFlag))}" value="{!SUBSTITUTE(net.rate,'.',service.paServicestate.currentRequestItem.seperatorOnPage)}" />
+                          </apex:column>
+                     
+                     <apex:column >
+                     <apex:facet name="header"  >
+                                      <apex:outputText value="Unit"></apex:outputText>
+                                  </apex:facet>
+                        <apex:outputText style="float:right;"  value="{!net.unit}" rendered="{!IF(net.price=='Net Floor Price' || net.price=='Delta Floor' || net.price=='Net Reference Price' || net.price=='Delta Reference',service.paServicestate.currentRequest.isNetFloorVisible,true)}"/>
+                    </apex:column>
+                     
+                     <apex:column >
+                     <apex:facet name="header"  >
+                                      <apex:outputText value="Per" ></apex:outputText>
+                                  </apex:facet>
+                      <apex:outputText style="float:right;"  value="{!net.per}"  rendered="{!IF(net.price=='Net Floor Price' || net.price=='Delta Floor' || net.price=='Net Reference Price' || net.price=='Delta Reference',service.paServicestate.currentRequest.isNetFloorVisible,true)}" />
+                        </apex:column>
+                    
+                    <apex:column >
+                    <apex:facet name="header"  >
+                                      <apex:outputText value="UoM" ></apex:outputText>
+                                  </apex:facet>
+                      <apex:outputText style="float:right;"  value="{!net.uom}" rendered="{!IF(net.price=='Net Floor Price' || net.price=='Delta Floor' || net.price=='Net Reference Price' || net.price=='Delta Reference',service.paServicestate.currentRequest.isNetFloorVisible,true)}"  />
+               </apex:column>  
+                <apex:column >
+                    <apex:facet name="header"  >
+                                      <apex:outputText style="float:right;" value="Delta %"></apex:outputText>
+                                  </apex:facet>
+                               <apex:outputText style="float:right;" value="{!SUBSTITUTE(net.percent,'.',service.paServicestate.currentRequestItem.seperatorOnPage)} %" rendered="{!AND(net.percent!=null,IF(net.price=='Net Floor Price' || net.price=='Delta Floor' || net.price=='Net Reference Price' || net.price=='Delta Reference',service.paServicestate.currentRequest.isNetFloorVisible,true))}" />
+                     </apex:column>
+<!--                    <TJ20150703> END -->                     
+                     <apex:column >
+                    <apex:facet name="header"  >
+                                      <apex:outputText value="Scl"></apex:outputText>
+                                  </apex:facet>
+                               <apex:inputCheckBox disabled="true" value="{!net.sclFlag}" rendered="{!net.price == 'New Rate' || net.price == 'Current Rate'}"/>
+                     </apex:column>
+                       
+                     <apex:column >
+                    <apex:facet name="header"  >
+                                      <apex:outputText value="Valid From" ></apex:outputText>
+                                  </apex:facet>
+                                  <apex:outputField value="{!net.prIteminWrapper.New_Valid_From__c}" style="color:#484848" id="newVF" rendered="{!AND(NOT(net.showPercent),(net.price == 'New Rate' ))}"/>
+                                  <script>document.getElementById('{!$Component.newVF}').disabled = true; </script>
+                                  <apex:outputField value="{!net.prIteminWrapper.Valid_From__c}" id="VF" rendered="{!AND(NOT(net.showPercent),(net.price == 'Current Rate'))}"/>
+                                  <script>document.getElementById('{!$Component.VF}').disabled = true; </script>
+                                 
+                     </apex:column>
+                     
+                     <apex:column >
+                    <apex:facet name="header"  >
+                                      <apex:outputText value="Valid To" ></apex:outputText>
+                                  </apex:facet> 
+                                  <apex:outputField value="{!net.prIteminWrapper.New_Valid_To__c}" id="newVto" rendered="{!net.price == 'New Rate' }"/>
+                                      <script>document.getElementById('{!$Component.newVto}').disabled = true; </script>
+                                      
+                                    <apex:outputField value="{!net.prIteminWrapper.Valid_To__c}" id="Vto" rendered="{!net.price == 'Current Rate'}"/>
+                                  <script>document.getElementById('{!$Component.Vto}').disabled = true; </script>
+                                 
+                     </apex:column>
+                     
+                </apex:pageBlockTable>
+     
+<!--            -->
+<!--              -->
+            </apex:pageBlockSectionItem>
+          
+                 </apex:pageBlocksection> 
+                   </div>
+                  </apex:pageBlock>
+                 <!--   <center>-->
+                <div id="buttons" style="float:left;text-align:center;padding:0px 0px 10px 37%;"> 
+                <apex:outputPanel rendered="{!NOT(CONTAINS(businessAction,'View'))}">
+                <apex:commandLink value="Save" action="{!businessComponentAction}"  styleClass="btn"
+                    style="text-decoration:none;">
+                    <apex:param name="desiredAction"
+                        value="saveNetPrice" assignTo="{!businessAction}" />
+                    <apex:param name="newPageLabel"
+                        value="{!IF(service.PAServicestate.currentRequestItem.pricingReqItem.Pricing_Request_Type__c == 'Import','PAImportReqItems','PAPricingRequest')}" assignTo="{!newPageLabel}" />
+                    <!-- <TJ20140509> Passing Label to Display Navigation Flow Text-->
+                        <apex:param name="pageName" value="{!IF(Contains(navigationText,$Label.Price_Request),$Label.Price_Request,'Net Price Simulation')}" assignTo="{!pageName}"/>
+                </apex:commandLink>
+                
+                <apex:commandLink value="Calculate" action="{!businessComponentAction}" styleClass="btn"
+                    style="text-decoration:none;">
+                    <apex:param name="desiredAction"
+                        value="calculateNetPrice" assignTo="{!businessAction}" />
+                    <apex:param name="newPageLabel"
+                        value="PAMaterialNet" assignTo="{!newPageLabel}" />
+                    <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                    <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                </apex:commandLink>
+                <apex:commandLink value="Cancel" action="{!businessComponentAction}" styleClass="btn"
+                    style="text-decoration:none;">
+<!--                    <apex:param name="desiredAction"-->
+<!--                        value="CancelNetPrice" assignTo="{!businessAction}" />-->
+                    <apex:param name="desiredAction"
+                        value="{!IF(service.PAServicestate.currentRequestItem.pricingReqItem.New__c==true,'NewCancelNetPrice','EditCancelNetPrice')}" assignTo="{!businessAction}" />
+                    <apex:param name="newPageLabel" 
+                        value="PAEditReqItem" assignTo="{!newPageLabel}" />
+                    <!-- <TJ20140509> Passing Label to Display Navigation Flow Text-->
+                    <apex:param name="pageName" value="{!IF(CONTAINS(navigationText,$Label.Edit_Req_Item),$Label.Edit_Req_Item,'Net Price Simulation')}" assignTo="{!pageName}"/>
+                </apex:commandLink>
+                </apex:outputPanel>
+<!--                ViewNetPriceDetailsAsynch PAPricingRequest-->
+             <center>
+              <apex:outputPanel rendered="{!(CONTAINS(businessAction,'View'))}"> 
+                <!-- DONE BUTTON IN CASE OF VIEW     -->
+                  <apex:commandLink value="Done" action="{!businessComponentAction}"  styleClass="btn"
+                    style="text-decoration:none;">
+<!--                    <apex:param name="desiredAction"-->
+<!--                        value="CancelNetPrice" assignTo="{!businessAction}" />-->
+                    <apex:param name="desiredAction"
+                        value="ViewDone" assignTo="{!businessAction}" />
+                    <apex:param name="newPageLabel" 
+                        value="{!IF(CONTAINS(businessAction,'ViewNetPriceDetailsAsynch'),'PAMaterialDetail',IF(service.PAServicestate.currentRequestItem.priceviewclicked==true,'PAPricingRequestView','PAPricingRequest'))}" assignTo="{!newPageLabel}" />
+                    <!-- <TJ20140509> Passing Label to Display Navigation Flow Text-->
+                    <apex:param name="pageName" value="{!IF(CONTAINS(businessAction,'ViewNetPriceDetailsAsynch'),IF(CONTAINS(navigationText,'View Materials'),'View Materials','Net Price Simulation'),IF(CONTAINS(navigationText,'Price Request View'),'Price Request View',IF(CONTAINS(navigationText,$Label.Price_Request),$Label.Price_Request,'Net Price Simulation')))}" assignTo="{!pageName}"/>
+                </apex:commandLink>
+                </apex:outputPanel>
+                </center>
+                 </div>
+               <!--  -</center>  --->
+<!--                  <center>-->
+<!--              <apex:commandLink value="Save" action="{!Save}" styleClass="btn" style="text-decoration:none;"/>-->
+<!--                    <apex:commandLink value="Calculate" action="{!recalculate}"  styleClass="btn" style="text-decoration:none;"/>-->
+<!--                       <apex:commandLink value="Cancel"  styleClass="btn" style="text-decoration:none;"/>-->
+<!--                        -->
+<!--               </center>-->
+       
+
+  
+     </apex:form>
+<style>
+    .noTableFooter
+    {
+    margin:0px!important;
+    }
+    
+    .customerLink{font-size:15px;height:20px;margin-bottom:1px;padding:5px;border:solid 1px;border-color:#6E96B2; background-color:#E5F3FC;font-weight:bold;text-align:left;}
+    
+   
+    #buttons a.btn{width:80px;float:left;}
+    #buttons1 a.btn{width:80px;float:left;}
+    #priceReq .pbSubheader{margin-bottom:0px;}
+    #priceReq .detailList{border:1px solid #E2E3E4;}
+    
+    #customerprice .pbSubheader{margin-bottom:0px;}
+    #customerprice .detailList {
+        border: 1px solid #E2E3E4;
+    }
+    #pricedetail .detailList tr th {
+        border-bottom: none;
+    }
+    #pricedetail .detailList tr td {
+        border-bottom: none;
+    }   
+    #customerprice .detailList tr th {
+    border-bottom: none;
+    }
+    #customerprice .detailList tr td {
+        border-bottom: none;
+    }
+    .pbBody table.list tr.dataRow td {
+        border-bottom:none;
+    }
+   
+</style>
+</apex:page>

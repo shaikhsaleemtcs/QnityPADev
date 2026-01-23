@@ -1,0 +1,100 @@
+<!--    Ver.            Developer               	Changes                                                         Dependencies    -->
+<!-- BR20130723		Brundha Rajkumar23 Jul 2013		Added panel grid for modifying the  width for Pricing exception	and added rendered condition based on the attribute PE	and added Up arrow and down arrow 		None            -->
+<apex:component controller="PASelectOptions" allowDML="true">
+	
+	<apex:attribute description="unSelectedOptionList" name="unSelectOptionList" 
+		type="string[]" assignTo="{!unSelectedList}"/>
+	<apex:attribute description="selectedOptionList" name="selectOptionList" 
+		type="string[]" assignTo="{!selectedList}"/>
+	<apex:attribute description="selectedOptionList" name="selectOptionListFinal" 
+		type="string[]" assignTo="{!selectedListFinal}"/>
+		<!-- BR20130723	starts-->
+		<apex:attribute description="Pricing exception style"
+		name="PE" type="boolean" />
+	<!-- BR20130723	ends-->
+	
+				<!-- BR20130723	starts added rendered part-->
+					<apex:panelGrid columns="3" id="myPanelGrid" rendered="{!PE==false}">
+	  
+						<apex:selectList value="{!selectedOptions}" multiselect="true" size="5" style="width:340px">
+							<apex:selectOptions value="{!ListOptionsUnselected}" />
+						</apex:selectList>
+					 	<apex:panelGroup >
+							<br />
+						<apex:commandLink status="stat" style="text-decoration:none; color:#484848"
+								action="{!commandAction}"
+								reRender="myPanelGrid" >
+						<img src="/img/arrow2_picklist_right.gif" width="17" height="17" align="texttop" style="cursor:pointer;"/>
+							<apex:param name="value" value="doSelect"
+										assignTo="{!commandType}" />
+						</apex:commandLink>
+									<br />
+									<br />
+									<br />
+						<apex:commandLink status="stat" style="text-decoration:none; color:#484848"
+								action="{!commandAction}"
+								reRender="myPanelGrid">
+						<img src="/img/arrow2_picklist_left.gif" width="17" height="17" align="texttop" style="cursor:pointer;"/>
+							<apex:param name="value" value="doUnselect"
+										assignTo="{!commandType}" />
+						</apex:commandLink> 
+				                
+						</apex:panelGroup>
+						<apex:selectList value="{!unSelectedOptions}"
+								multiselect="true" size="5" style="width:340px">
+							<apex:selectOptions value="{!ListOptionsSelected}" />
+						</apex:selectList>  
+					</apex:panelGrid>
+					<!-- BR20130723	starts-->
+					<apex:panelGrid columns="1" id="myPanelGrid1" rendered="{!PE==true}" >
+						Available for Selection
+						<apex:selectList value="{!selectedOptions}" multiselect="true" size="5" style="width:785px!important;" >
+							<apex:selectOptions value="{!ListOptionsUnselected}" />
+						</apex:selectList>
+							
+						
+							
+						<center>
+					 	<apex:panelGroup >
+							
+							
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<apex:commandLink status="stat" style="float:center;text-decoration:none; color:#484848"
+								
+								action="{!commandAction}"
+								reRender="myPanelGrid1" >
+						
+								<img src="/img/arrow2_picklist_right.gif" width="17" height="17" align="texttop" style="transform:rotate(90deg);-ms-transform:rotate(90deg);-webkit-transform:rotate(90deg);cursor:pointer;filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);-ms-filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);"/>
+							 <apex:param name="value" value="doSelect"
+										assignTo="{!commandType}" />
+						</apex:commandLink>
+									
+						<apex:commandLink status="stat" style="text-decoration:none; color:#484848"
+								
+								action="{!commandAction}"
+								reRender="myPanelGrid1">
+								<img src="/img/arrow2_picklist_left.gif" width="17" height="17" align="texttop" style="transform:rotate(90deg);-ms-transform:rotate(90deg);-webkit-transform:rotate(90deg);cursor:pointer;filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);-ms-filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);"/>
+							<apex:param name="value" value="doUnselect"
+										assignTo="{!commandType}" />
+						</apex:commandLink> 
+				          
+						</apex:panelGroup>
+						
+						</center>
+						
+							
+						
+						Selected Values
+						<apex:selectList value="{!unSelectedOptions}"
+								multiselect="true" size="5" style="width:785px!important;" >
+								
+							<apex:selectOptions value="{!ListOptionsSelected}" />
+							
+						</apex:selectList>  
+					</apex:panelGrid>
+					<!-- BR20130723	ends-->
+
+</apex:component>

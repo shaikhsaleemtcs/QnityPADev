@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>SFDC SAP Price Sync</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>SFDC SAP Price Sync</value>
+    </caseValues>
+    <fields>
+        <label><!-- Assigned To --></label>
+        <name>Assigned_To__c</name>
+        <relationshipLabel><!-- SFDC SAP Price Sync (Assigned To) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- BU Admin --></label>
+        <name>BU_Admin__c</name>
+        <relationshipLabel><!-- SFDC SAP Price Sync (BU Admin) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Corrective Action --></label>
+        <name>Corrective_Action__c</name>
+    </fields>
+    <fields>
+        <label><!-- Error Type --></label>
+        <name>Error_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- KC_SAP --></label>
+        <name>KC_SAP__c</name>
+    </fields>
+    <fields>
+        <help><!-- This is the pre-split original 18 digit Salesforce ID of this record that came from the original One Dupont Salesforce instance before the business units were separated. Its is case insensitive and unique. --></help>
+        <label><!-- Legacy Pricing Util SFID --></label>
+        <name>Legacy_Pricing_Util_SFID__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP BU --></label>
+        <name>SAP_BU__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP_Cluster --></label>
+        <name>SAP_Cluster__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Customer_Price_Payment_Terms --></label>
+        <name>SAP_Customer_Price_Payment_Terms__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Destination Country Code --></label>
+        <name>SAP_Destination_Country_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Dist Channel Code --></label>
+        <name>SAP_Dist_Channel_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Division Code --></label>
+        <name>SAP_Division_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Document Currency Code --></label>
+        <name>SAP_Document_Currency_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP End User Code --></label>
+        <name>SAP_End_User_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Ext Matl Grp Code --></label>
+        <name>SAP_Ext_Matl_Grp_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Fixed_Date_Payment_Terms --></label>
+        <name>SAP_Fixed_Date_Payment_Terms__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Key_Combination_Code --></label>
+        <name>SAP_Key_Combination_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Material Code --></label>
+        <name>SAP_Material_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Material Group 2 Code --></label>
+        <name>SAP_Material_Group_2_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP PCKC Code --></label>
+        <name>SAP_PCKC_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Payer Code --></label>
+        <name>SAP_Payer_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Per --></label>
+        <name>SAP_Per__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Price Zone Code --></label>
+        <name>SAP_Price_Zone_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Pricing_Condition_Code --></label>
+        <name>SAP_Pricing_Condition_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Pricing Condition Record Number --></label>
+        <name>SAP_Pricing_Condition_Record_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Product Hierarchy Code --></label>
+        <name>SAP_Product_Hierarchy_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Rate &amp; Unit &amp; Per &amp; UoM --></label>
+        <name>SAP_Rate_Unit_Per_UoM__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Rate --></label>
+        <name>SAP_Rate__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Sales Order Item Code --></label>
+        <name>SAP_Sales_Order_Item_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Sales Order Type Code --></label>
+        <name>SAP_Sales_Order_Type_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Sales Org Code --></label>
+        <name>SAP_Sales_Org_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Scale QTY --></label>
+        <name>SAP_Scale_QTY__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Scale Rate --></label>
+        <name>SAP_Scale_Rate__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Scale_UoM_Unit --></label>
+        <name>SAP_Scale_UoM_Unit__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Ship To Code --></label>
+        <name>SAP_Ship_To_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Sold To Code --></label>
+        <name>SAP_Sold_To_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Unit --></label>
+        <name>SAP_Unit__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP UoM --></label>
+        <name>SAP_UoM__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Valid_From --></label>
+        <name>SAP_Valid_From__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Valid_To --></label>
+        <name>SAP_Valid_To__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Value Center Code --></label>
+        <name>SAP_Value_Center_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA BU --></label>
+        <name>SFDC_PA_BU__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA Customer_Price_Payment_Terms --></label>
+        <name>SFDC_PA_Customer_Price_Payment_Terms__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA Destination Country Code --></label>
+        <name>SFDC_PA_Destination_Country_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA Dist Channel Code --></label>
+        <name>SFDC_PA_Dist_Channel_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA Division Code --></label>
+        <name>SFDC_PA_Division_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA Document Currency Code --></label>
+        <name>SFDC_PA_Document_Currency_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA End User Code --></label>
+        <name>SFDC_PA_End_User_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA Ext Matl Grp Code --></label>
+        <name>SFDC_PA_Ext_Matl_Grp_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA Fixed_Date_Payment_Terms --></label>
+        <name>SFDC_PA_Fixed_Date_Payment_Terms__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA Material Code --></label>
+        <name>SFDC_PA_Material_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA Material Group 2 Code --></label>
+        <name>SFDC_PA_Material_Group_2_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA Payer Code --></label>
+        <name>SFDC_PA_Payer_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA Per --></label>
+        <name>SFDC_PA_Per__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA Price Record --></label>
+        <name>SFDC_PA_Price_Record__c</name>
+        <relationshipLabel><!-- SFDC SAP Price Sync --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA Price Zone Code --></label>
+        <name>SFDC_PA_Price_Zone_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA Product Hierarchy Code --></label>
+        <name>SFDC_PA_Product_Hierarchy_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA Rate --></label>
+        <name>SFDC_PA_Rate__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA Sales Order Item Code --></label>
+        <name>SFDC_PA_Sales_Order_Item_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA Sales Order Type Code --></label>
+        <name>SFDC_PA_Sales_Order_Type_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA Sales Org Code --></label>
+        <name>SFDC_PA_Sales_Org_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA Scale QTY --></label>
+        <name>SFDC_PA_Scale_QTY__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA Scale Rate --></label>
+        <name>SFDC_PA_Scale_Rate__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA Scale_UoM_Unit --></label>
+        <name>SFDC_PA_Scale_UoM_Unit__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA Ship To Code --></label>
+        <name>SFDC_PA_Ship_To_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA Sold To Code --></label>
+        <name>SFDC_PA_Sold_To_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA Unit --></label>
+        <name>SFDC_PA_Unit__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA UoM --></label>
+        <name>SFDC_PA_UoM_c__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA Valid_From --></label>
+        <name>SFDC_PA_Valid_From__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA Valid_To --></label>
+        <name>SFDC_PA_Valid_To__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA Value Center Code --></label>
+        <name>SFDC_PA_Value_Center_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SFDC PA Rate &amp; Unit &amp; Per &amp; UoM --></label>
+        <name>SFDC_Rate_Unit_Per_Uom__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Closed</masterLabel>
+            <translation><!-- Closed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Open</masterLabel>
+            <translation><!-- Open --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Sys Id --></label>
+        <name>Sys_Id__c</name>
+    </fields>
+    <sharingReasons>
+        <label><!-- Share with all viewers --></label>
+        <name>Share_with_all_viewers</name>
+    </sharingReasons>
+    <sharingReasons>
+        <label><!-- Share with assignee --></label>
+        <name>Share_with_assignee</name>
+    </sharingReasons>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- SFDC Price record id is mandatory --></errorMessage>
+        <name>SFDCPA_Price_record_mandatory</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Change_Assigned_To --></label>
+        <name>Change_Assigned_To</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Status_Update --></label>
+        <name>Status_Update</name>
+    </webLinks>
+</CustomObjectTranslation>

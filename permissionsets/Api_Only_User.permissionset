@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Assigning this will add security by helping to prevent anyone from logging in as the user from the Shared Email Account even if the password was reset in error</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Api Only User</label>
+    <license>Salesforce</license>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ApiUserOnly</name>
+    </userPermissions>
+</PermissionSet>

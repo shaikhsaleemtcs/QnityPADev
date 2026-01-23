@@ -1,0 +1,767 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>OrganizationalGroup_ACT_Global</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>OrganizationalGroup_ACST Global</label>
+        <sharedTo>
+            <group>ACSTGlobal</group>
+        </sharedTo>
+        <booleanFilter>(1 AND 2) OR (3 AND 4)</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Sales Area</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>F4B1,F418,F427,F43B,F4B9,F4F1,F4B0,F471</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>ACST Global</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>OrganizationalGroup_CPM_AP</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>OrganizationalGroup_CPM AP</label>
+        <sharedTo>
+            <group>CPMAP</group>
+        </sharedTo>
+        <booleanFilter>(1 AND 2) OR (3 AND 4)</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Sales Area</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>F418,F4J5,F4I5,F4B9,F4B1,F4F1,F4G1,F41C,F4B0,F471,F4D3,F4B0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>CPM AP</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>OrganizationalGroup_CPM_EMEA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>OrganizationalGroup_CPM EMEA</label>
+        <sharedTo>
+            <group>CPMEMEA</group>
+        </sharedTo>
+        <booleanFilter>(1 AND 2) OR (3 AND 4)</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Sales Area</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>F458</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>CPM EMEA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>OrganizationalGroup_CPM_NA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>OrganizationalGroup_CPM NA</label>
+        <sharedTo>
+            <group>CPMNA</group>
+        </sharedTo>
+        <booleanFilter>(1 AND 2) OR (3 AND 4)</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Sales Area</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>F4I5,F46A</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>CPM NA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>OrganizationalGroup_DPP_LA_Kalrez</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>OrganizationalGroup DPP LA Kalrez</label>
+        <sharedTo>
+            <group>DPPLAKalrez</group>
+        </sharedTo>
+        <booleanFilter>(1 AND 2) OR (3 AND 4)</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Sales Area</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>B987</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>DPP Global Kalrez</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>OrganizationalGroup_DPP_Vespel_Global</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>OrganizationalGroup DPP Vespel Global</label>
+        <sharedTo>
+            <group>DPPGlobalKalrez</group>
+        </sharedTo>
+        <booleanFilter>(1 AND 2) OR (3 AND 4)</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Sales Area</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>B900,B903,B911,B918,B971,B987,B9B1,B9B9,B9G3,B9I3,B9J9,C311,C3I3</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>DPP Global Kalrez</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Organizational_Group_Sharing_Rule_for_ACT</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Organizational Group Sharing Rule for ACST</label>
+        <sharedTo>
+            <group>ACST</group>
+        </sharedTo>
+        <booleanFilter>(1 AND 2) OR (3 AND 4)</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Sales Area</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1848,A871,2742,1321,1310,A715,1326,1312,A753,A855,A752,A674,A670,A636</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>ACST</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Organizational_Group_Sharing_Rule_for_APT_AP</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Organizational Group Sharing Rule for APT AP</label>
+        <sharedTo>
+            <group>APT_AP</group>
+        </sharedTo>
+        <booleanFilter>(1 AND 2) OR (3 AND 4)</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Sales Area</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>2742,A671,1760,1762,A873,A855,A857,A858,2730,A761,1187,A871</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>APT AP</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Organizational_Group_Sharing_Rule_for_APT_EMEA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Organizational Group Sharing Rule for APT EMEA</label>
+        <sharedTo>
+            <group>APT_EMEA</group>
+        </sharedTo>
+        <booleanFilter>(1 AND 2)OR (3 AND 4)</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Sales Area</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>A715,A752,A802,A674,A670,A753,A636,A807</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>APT EMEA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Organizational_Group_Sharing_Rule_for_APT_NA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Organizational Group Sharing Rule for APT NA</label>
+        <sharedTo>
+            <group>APT_NA</group>
+        </sharedTo>
+        <booleanFilter>(1 AND 2)OR (3 AND 4)</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Sales Area</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>A798,1304,A749,A776</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>APT NA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Organizational_Group_Sharing_Rule_for_CMPT_AP</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Organizational Group Sharing Rule for CMPT AP</label>
+        <sharedTo>
+            <group>CMPT_AP</group>
+        </sharedTo>
+        <booleanFilter>(1 AND 2)OR (3 AND 4)</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Sales Area</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1310,1312,1320,1321,1326,1760,2730,2742,A715,9024</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>CMPT AP</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Organizational_Group_Sharing_Rule_for_CMPT_EMEA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Organizational Group Sharing Rule for CMPT EMEA</label>
+        <sharedTo>
+            <group>CMPT_EMEA</group>
+        </sharedTo>
+        <booleanFilter>(1 AND 2)OR (3 AND 4)</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Sales Area</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1310,A636,A670,A674,A715,A752,A753,A855</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>CMPT EMEA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Organizational_Group_Sharing_Rule_for_Litho_AP</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Organizational Group Sharing Rule for Litho AP</label>
+        <sharedTo>
+            <group>Litho_AP</group>
+        </sharedTo>
+        <booleanFilter>(1 AND 2) OR (3 AND 4)</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Sales Area</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>2730,2742,A855,A858,A871</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>Litho AP</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Organizational_Group_Sharing_Rule_for_Litho_EMEA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Organizational Group Sharing Rule for Litho EMEA</label>
+        <sharedTo>
+            <group>Litho_EMEA</group>
+        </sharedTo>
+        <booleanFilter>(1 AND 2) OR (3 AND 4)</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Sales Area</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>A715,A752,A674,A670,A753,A636,1304,2730</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>Litho EMEA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Organizational_Group_Sharing_Rule_for_Litho_NA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Organizational Group Sharing Rule for Litho NA</label>
+        <sharedTo>
+            <group>Litho_NA</group>
+        </sharedTo>
+        <booleanFilter>(1 AND 2) OR (3 AND 4)</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Sales Area</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1304</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>Litho NA</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Organizational_Group_Sharing_Rule_for_Semi_Silicones</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Organizational Group Sharing Rule for Semi Silicones</label>
+        <sharedTo>
+            <group>Semi_Silicones</group>
+        </sharedTo>
+        <booleanFilter>(1 AND 2) OR (3 AND 4)</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Sales Area</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>A776,A798,A670,A674,A715,A752,A753,A807,A636,1187,1762,A671,A761,A857,A858</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>Semi Silicones</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Price_Approval_Business_Records_Sharing</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Price Approval Business Records Sharing</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>DuPontCorporate797661</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_OG_with_DM</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share OG with DM</label>
+        <sharedTo>
+            <group>DM</group>
+        </sharedTo>
+        <booleanFilter>((1 AND 2) OR ( 3 AND 4))</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Sales Area</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1843,1848,2742,1760,1187,2730</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>DM</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Organization_Group_with_CMPT_AMS</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share Organization Group with CMPT AMS</label>
+        <sharedTo>
+            <group>CMPT_AMS</group>
+        </sharedTo>
+        <booleanFilter>((1 AND 2) OR ( 3 AND 4))</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>CMPT AMS</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Sales Area</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1310</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Organization_Group_with_ICS_AP</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share Organization Group with ICS AP</label>
+        <sharedTo>
+            <group>ICS_AP</group>
+        </sharedTo>
+        <booleanFilter>((1 AND 2) OR (3 AND 4))</booleanFilter>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>ICS AP</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Sales Area</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1187,1760,2730,2742,9852,A855,A858,A871</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Organization_Group_with_LED</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share Organization Group with LED Silicones</label>
+        <sharedTo>
+            <group>LED_Silicones</group>
+        </sharedTo>
+        <booleanFilter>((1 AND 2) OR( 3 AND 4))</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Sales Area</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1187,1762,A671,A715,A752,A753,A761,A776,A807,A857,A858,A873</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>LED Silicones</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Organization_Group_with_OLED</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share Organization Group with OLED</label>
+        <sharedTo>
+            <group>OLED</group>
+        </sharedTo>
+        <booleanFilter>((1 AND 2) OR ( 3 AND 4))</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Sales Area</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1187,1760,1843,1848,2742,A116</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>OLED</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Organization_group_with_DM_OCR</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share Organization group with DM OCR</label>
+        <sharedTo>
+            <group>DM_OCR</group>
+        </sharedTo>
+        <booleanFilter>((1 AND 2) OR (3 AND 4))</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Sales Area</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>F429,F4B1,F4I5</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>DM OCR</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Organization_group_with_ICS_EMEA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share Organization group with ICS EMEA</label>
+        <sharedTo>
+            <group>ICS_EMEA</group>
+        </sharedTo>
+        <booleanFilter>((1 AND 2) OR ( 3 AND 4))</booleanFilter>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>ICS EMEA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Sales Area</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>A636,A670,A674,A715,A752,A753,A808</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_Organization_group_with_ICS_NA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share Organization group with ICS NA</label>
+        <sharedTo>
+            <group>ICS_NA</group>
+        </sharedTo>
+        <booleanFilter>((1 AND 2) OR ( 3 AND 4))</booleanFilter>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>ICS NA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>1304,A672</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Sales Area</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Share_organization_group_with_ICS_LA</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Share organization group with ICS LA</label>
+        <sharedTo>
+            <group>ICS_LA</group>
+        </sharedTo>
+        <booleanFilter>((1 AND 2) OR ( 3 AND 4))</booleanFilter>
+        <criteriaItems>
+            <field>Business__c</field>
+            <operation>equals</operation>
+            <value>ICS LA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Business</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>RecordTypeId</field>
+            <operation>equals</operation>
+            <value>ERP Sales Area</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>ERP_Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>A673,A672</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+</SharingRules>

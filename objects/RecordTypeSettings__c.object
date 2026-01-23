@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>Custom Settings for a particular RecordType</description>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>FullName__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>RecordType FullName (Object API Name + &apos;.&apos; + DeveloperName)</description>
+        <externalId>true</externalId>
+        <inlineHelpText>RecordType DeveloperName</inlineHelpText>
+        <label>FullName</label>
+        <length>255</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>OppProductScheduler__c</fullName>
+        <description>Settings for the OppProductScheduler</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Settings for the OppProductScheduler</inlineHelpText>
+        <label>OppProductScheduler</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReasonIsRequired__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Reason is required for this record when checked.</description>
+        <label>ReasonIsRequired</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ReasonRoot__c</fullName>
+        <description>Unique Name of the Reason Rool</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Unique Name of the Reason Root</inlineHelpText>
+        <label>Reason Root</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SegmentIsRequired__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Is the Primary Segment Required for this recordtype.</description>
+        <inlineHelpText>Is the Primary Segment Required for this recordtype.</inlineHelpText>
+        <label>SegmentIsRequired</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SegmentationRoot__c</fullName>
+        <description>Developer Name of Segmentation Root</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Developer Name of Segmentation Root</inlineHelpText>
+        <label>Segmentation Root</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>RecordType Settings</label>
+    <visibility>Public</visibility>
+</CustomObject>

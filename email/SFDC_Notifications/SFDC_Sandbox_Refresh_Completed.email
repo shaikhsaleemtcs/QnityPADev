@@ -1,0 +1,17 @@
+<b>TO:  SFDC Corporate Org Administrators / Engagement Leaders</b>
+<br>
+<br>
+<b>DuPont Utilities QA (UTQA) Sandbox refresh is complete, fully activated and ready for use.</b>
+<br>
+<br>
+<b>What you need to do:</b>
+You can log into the refreshed sandbox at URL:<br>
+https://test.salesforce.com by appending the .sandbox_name to your production username. For example, if your username in production is user1.util@company.com then your username in sandbox named “UTQA” is user1.util@company.UTQA  
+<br>
+<br>
+<b>Note:</b> Remember to update and verify your email address as soon as you log in since it is also appended with ".utqa "
+<br> 
+<br> 
+<b>More Information:</b><br>
+Sandbox Refresh Schedule featured in CRM Content Library in OneDuPont Org (subscribe to receive notification of updates):<br>
+https://one-dupont.my.salesforce.com/sfc/#version?id=06830000000aAS5

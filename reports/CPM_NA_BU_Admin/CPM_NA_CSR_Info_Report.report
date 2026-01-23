@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Organizational_Group_User__c.Related_User__c</field>
+    </columns>
+    <columns>
+        <field>Organizational_Group_User__c.PA_Notify_opt_in__c</field>
+    </columns>
+    <currency>USD</currency>
+    <description>CSR Notification information</description>
+    <filter>
+        <criteriaItems>
+            <column>FK_$Organizational_Group_Item__c.Business__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>OG-0000097554</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Organizational_Group_User__c.PA_Notify_opt_in__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>false</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>OrgGroup__c.ERP_Sales_Org_Code__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>CPM NA CSR Info Report</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntityCustomEntity$OrgGroup__c$Organizational_Group_User__c@Organizational_Group_User__c.Organizational_Group_Item__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CUST_CREATED_DATE</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

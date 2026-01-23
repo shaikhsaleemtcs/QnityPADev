@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>For Auto User Access Functionality to Map Public Groups with Approving Business</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Approving_Business__c</fullName>
+        <description>To Capture Approving Business to be mapped with Public Groups for Approvers</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Approving Business for the Public Group</inlineHelpText>
+        <label>Approving Business</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Public_Group__c</fullName>
+        <description>Public Group for Approvers</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Public Group for Approvers. Save Name field value same as this field value</inlineHelpText>
+        <label>Public Group</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>AUA_PGABMapping</label>
+    <visibility>Public</visibility>
+</CustomObject>

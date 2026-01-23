@@ -1,0 +1,710 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Approval_Notification_Mail_to_Requester</fullName>
+        <description>Approval Notification Mail to Requester.</description>
+        <protected>false</protected>
+        <recipients>
+            <type>creator</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Price_Approval_Email_Templates/Final_Approval_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>Final_price_approval_notification_to_CMPT_BU_Admin</fullName>
+        <description>Final price approval notification to CMPT AMS BU Admin</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>CMPT_AMS_Admin</recipient>
+            <type>group</type>
+        </recipients>
+        <senderType>DefaultWorkflowUser</senderType>
+        <template>Price_Approval_Email_Templates/Final_Approval_Notification_to_admin</template>
+    </alerts>
+    <alerts>
+        <fullName>MassImport_Email</fullName>
+        <description>MassImport Email</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>batch.sfdc@deployuser.com.specutil.esu</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/LeadsNewassignmentnotificationSAMPLE</template>
+    </alerts>
+    <alerts>
+        <fullName>Onbehalf_Approval_Notification</fullName>
+        <description>Onbehalf Approval Notification</description>
+        <protected>false</protected>
+        <recipients>
+            <field>On_Behalf_Of__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Price_Approval_Email_Templates/Final_Approval_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>Rejection_Notification_Mail_to_Requester</fullName>
+        <description>Rejection Notification Mail to Requester.</description>
+        <protected>false</protected>
+        <recipients>
+            <type>creator</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Price_Approval_Email_Templates/Rejection_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>Task_Email_for_Pricing_Task</fullName>
+        <description>Task Email for Pricing Task</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Assigned_To__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Price_Approval_Email_Templates/Task_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>Used_to_get_the_onbehalfofnotification</fullName>
+        <description>Used to get the onbehalfofnotification</description>
+        <protected>false</protected>
+        <recipients>
+            <field>On_Behalf_Of__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Price_Approval_Email_Templates/OnBehalf_Of</template>
+    </alerts>
+    <alerts>
+        <fullName>Used_to_get_the_rejection_notification</fullName>
+        <description>Used to get the rejection notification</description>
+        <protected>false</protected>
+        <recipients>
+            <type>creator</type>
+        </recipients>
+        <recipients>
+            <field>On_Behalf_Of__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Price_Approval_Email_Templates/Rejection_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>used_to_get_approval_notification</fullName>
+        <description>used to get approval notification</description>
+        <protected>false</protected>
+        <recipients>
+            <type>creator</type>
+        </recipients>
+        <recipients>
+            <field>On_Behalf_Of__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Price_Approval_Email_Templates/Final_Approval_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>used_to_get_approval_notification_for_PG_LA_admin</fullName>
+        <description>used to get approval notification for PG LA admin</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>PG_LA_Admin</recipient>
+            <type>group</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Price_Approval_Email_Templates/Final_Approval_Notification_to_admin</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Approver1_NULL</fullName>
+        <field>Approver1__c</field>
+        <name>Approver1-NULL</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approver2_NULL</fullName>
+        <field>Approver2__c</field>
+        <name>Approver2-NULL</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approver3_NULL</fullName>
+        <field>Approver3__c</field>
+        <name>Approver3-NULL</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approver4_NULL</fullName>
+        <field>Approver4__c</field>
+        <name>Approver4-NULL</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Approver5_NULL</fullName>
+        <field>Approver5__c</field>
+        <name>Approver5-NULL</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Check_Backup_Flag</fullName>
+        <field>Sent_to_Backup_Approver__c</field>
+        <literalValue>1</literalValue>
+        <name>Check Backup Flag</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>CurrentApprover_NULL</fullName>
+        <field>Current_Approver__c</field>
+        <name>CurrentApprover-NULL</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>CurrentLevel_NULL</fullName>
+        <field>Current_Level__c</field>
+        <name>CurrentLevel-NULL</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Field_update_on_State</fullName>
+        <field>State_Province__c</field>
+        <formula>&quot;hello&quot;</formula>
+        <name>Field update on State</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>NPC_Status_NULL</fullName>
+        <field>NPC_Status__c</field>
+        <name>NPC Status NULL</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Nullify_Backup_1</fullName>
+        <field>Backup_Level_1__c</field>
+        <name>Nullify Backup 1</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Nullify_Backup_2</fullName>
+        <field>Backup_Level_2__c</field>
+        <name>Nullify Backup 2</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Nullify_Backup_3</fullName>
+        <field>Backup_Level_3__c</field>
+        <name>Nullify Backup 3</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Nullify_Backup_4</fullName>
+        <field>Backup_Level_4__c</field>
+        <name>Nullify Backup 4</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Nullify_Backup_5</fullName>
+        <field>Backup_Level_5__c</field>
+        <name>Nullify Backup 5</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Nullify_Date_1</fullName>
+        <field>Approver1_Date__c</field>
+        <name>Nullify Date 1</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Nullify_Date_2</fullName>
+        <field>Approver2_Date__c</field>
+        <name>Nullify Date 2</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Nullify_Date_3</fullName>
+        <field>Approver3_Date__c</field>
+        <name>Nullify Date 3</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Nullify_Date_4</fullName>
+        <field>Approver4_Date__c</field>
+        <name>Nullify Date 4</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Nullify_Date_5</fullName>
+        <field>Approver5_Date__c</field>
+        <name>Nullify Date 5</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Send_Email_To_Admins</fullName>
+        <description>Send Email To Admins</description>
+        <field>Send_Email_To_Admins__c</field>
+        <literalValue>1</literalValue>
+        <name>Send Email To Admins</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Sent_To_BU_Admin_ReportingOnly</fullName>
+        <description>This will update when a approval is sent to BU Admin</description>
+        <field>Sent_to_BUAdmin_Reporting__c</field>
+        <literalValue>1</literalValue>
+        <name>Sent To BU Admin-ReportingOnly</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Sent_to_BU_Admin</fullName>
+        <field>Sent_to_BUAdmin__c</field>
+        <literalValue>1</literalValue>
+        <name>Sent to BU Admin</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Sent_to_BU_Admin_Fieldupdate</fullName>
+        <field>Sent_to_BUAdmin__c</field>
+        <literalValue>1</literalValue>
+        <name>Sent to BU Admin Field update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Sent_to_BackUp_Approver_Reporting</fullName>
+        <description>This will update when a approval is sent o backup approver</description>
+        <field>Sent_to_Backup_Approver_Reporting__c</field>
+        <literalValue>1</literalValue>
+        <name>Sent to BackUp Approver-Reporting</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Approved</fullName>
+        <field>Request_Approval_Status__c</field>
+        <literalValue>Approved</literalValue>
+        <name>Status-Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Recalled</fullName>
+        <field>Request_Approval_Status__c</field>
+        <literalValue>Recalled</literalValue>
+        <name>Status-Recalled</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Rejected</fullName>
+        <field>Request_Approval_Status__c</field>
+        <literalValue>Rejected</literalValue>
+        <name>Status-Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Status_Submitted</fullName>
+        <field>Request_Approval_Status__c</field>
+        <literalValue>Submitted</literalValue>
+        <name>Status-Submitted</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Uncheck_Backup_Flag</fullName>
+        <field>Sent_to_Backup_Approver__c</field>
+        <literalValue>0</literalValue>
+        <name>Uncheck Backup Flag</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Approval_1_Date</fullName>
+        <field>Approver1_Date__c</field>
+        <formula>now()</formula>
+        <name>Update Approval 1 Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Approval_2_Date</fullName>
+        <field>Approver2_Date__c</field>
+        <formula>now()</formula>
+        <name>Update Approval 2 Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Approval_3_Date</fullName>
+        <field>Approver3_Date__c</field>
+        <formula>now()</formula>
+        <name>Update Approval 3 Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Approval_4_Date</fullName>
+        <field>Approver4_Date__c</field>
+        <formula>now()</formula>
+        <name>Update Approval 4 Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Approval_5_Date</fullName>
+        <field>Approver5_Date__c</field>
+        <formula>now()</formula>
+        <name>Update Approval 5 Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Submitted_Date</fullName>
+        <field>Submitted_On__c</field>
+        <formula>now()</formula>
+        <name>Update Submitted Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Final Approval Notification to CMPT AMS  BU Admin</fullName>
+        <actions>
+            <name>Final_price_approval_notification_to_CMPT_BU_Admin</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>AND ( ISPICKVAL( Request_Approval_Status__c , &apos;Approved&apos;), BU__c = &apos;CMPT AMS&apos;,NOT($Setup.Global_On_Off_Switch__c.Workflow_Rules__c)  )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Nullify Approval Date Fields</fullName>
+        <actions>
+            <name>Nullify_Date_1</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Nullify_Date_2</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Nullify_Date_3</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Nullify_Date_4</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Nullify_Date_5</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>AND(OR(ISPICKVAL( Request_Approval_Status__c , &apos;Rejected&apos;),ISPICKVAL(Request_Approval_Status__c , &apos;Recalled&apos;)), NOT($Setup.Global_On_Off_Switch__c.Workflow_Rules__c))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Nullify Backup Approvers Fields</fullName>
+        <actions>
+            <name>Nullify_Backup_1</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Nullify_Backup_2</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Nullify_Backup_3</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Nullify_Backup_4</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Nullify_Backup_5</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>AND(OR(ISPICKVAL( Request_Approval_Status__c , &apos;Rejected&apos;),ISPICKVAL(Request_Approval_Status__c , &apos;Recalled&apos;)), NOT($Setup.Global_On_Off_Switch__c.Workflow_Rules__c))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>OnBehalfOfNotification</fullName>
+        <actions>
+            <name>Used_to_get_the_onbehalfofnotification</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>AND(On_Behalf_Of__c &lt;&gt; CreatedById, On_Behalf_Of__c &lt;&gt;null,ISPICKVAL( Request_Approval_Status__c, &apos;Submitted&apos;), NOT($Setup.Global_On_Off_Switch__c.Workflow_Rules__c),NOT(AND(BU__c = &apos;DPP Global Kalrez&apos; , OR(SalesArea__c=&apos;B9G3-10-13&apos;))))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Pricing Task Email After Approval</fullName>
+        <actions>
+            <name>Task_Email_for_Pricing_Task</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>Send email after pricing task request is approved</description>
+        <formula>AND(ISPICKVAL( Pricing_Request_Type__c , &apos;Pricing Task&apos;),  ISPICKVAL(Request_Approval_Status__c , &apos;Approved&apos; ), NOT($Setup.Global_On_Off_Switch__c.Workflow_Rules__c) )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Send to BU Admin %285 days%29</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Pricing_Request__c.Request_Approval_Status__c</field>
+            <operation>equals</operation>
+            <value>Submitted</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Pricing_Request__c.Sent_to_Backup_Approver__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>This time based workflow rule will trigger, after 5 days.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Sent_to_BU_Admin_Fieldupdate</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Pricing_Request__c.LastModifiedDate</offsetFromField>
+            <timeLength>5</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Send to BU Admin - All other requests</fullName>
+        <active>true</active>
+        <formula>AND( ISPICKVAL( Request_Approval_Status__c , &apos;Submitted&apos;),NOT(ISPICKVAL( Pricing_Request_Type__c ,&apos;Pricing Task&apos;)),  Sent_to_Backup_Approver__c = True,  NOT(Approval_Escalation_Price_Requests__c  = &apos;No Escalation&apos;),NOT($Setup.Global_On_Off_Switch__c.Workflow_Rules__c) )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Sent_to_BU_Admin_Fieldupdate</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Pricing_Request__c.Escalation_Date_Price_Requests__c</offsetFromField>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Send to BU Admin - Pricing Task</fullName>
+        <active>true</active>
+        <formula>AND( ISPICKVAL( Request_Approval_Status__c , &apos;Submitted&apos;),ISPICKVAL( Pricing_Request_Type__c ,&apos;Pricing Task&apos;), Sent_to_Backup_Approver__c = True, NOT(Approval_Escalation_Price_Requests__c = &apos;No Escalation&apos;),NOT($Setup.Global_On_Off_Switch__c.Workflow_Rules__c) )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Sent_to_BU_Admin_Fieldupdate</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Pricing_Request__c.Escalation_Date_Pricing_Task__c</offsetFromField>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Send to Backup Approver</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Pricing_Request__c.Request_Approval_Status__c</field>
+            <operation>equals</operation>
+            <value>Submitted</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Check_Backup_Flag</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Pricing_Request__c.LastModifiedDate</offsetFromField>
+            <timeLength>3</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Send to Backup Approver %285 days%29</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Pricing_Request__c.Request_Approval_Status__c</field>
+            <operation>equals</operation>
+            <value>Submitted</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Pricing_Request__c.Sent_to_Backup_Approver__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <description>This time based workflow rule will trigger, after 5 days.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Check_Backup_Flag</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Pricing_Request__c.LastModifiedDate</offsetFromField>
+            <timeLength>5</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Send to Backup Approver - All other requests</fullName>
+        <active>true</active>
+        <formula>AND( ISPICKVAL( Request_Approval_Status__c , &apos;Submitted&apos;),NOT(ISPICKVAL( Pricing_Request_Type__c ,&apos;Pricing Task&apos;)),  Sent_to_Backup_Approver__c = False,  NOT(Approval_Escalation_Price_Requests__c  = &apos;No Escalation&apos;),NOT($Setup.Global_On_Off_Switch__c.Workflow_Rules__c) )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Check_Backup_Flag</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Pricing_Request__c.Escalation_Date_Price_Requests__c</offsetFromField>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Send to Backup Approver - Pricing Task</fullName>
+        <active>true</active>
+        <formula>AND( ISPICKVAL( Request_Approval_Status__c , &apos;Submitted&apos;),ISPICKVAL( Pricing_Request_Type__c ,&apos;Pricing Task&apos;),  Sent_to_Backup_Approver__c = False,  NOT(Approval_Escalation_Price_Requests__c  = &apos;No Escalation&apos;),NOT($Setup.Global_On_Off_Switch__c.Workflow_Rules__c) )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Check_Backup_Flag</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Pricing_Request__c.Escalation_Date_Pricing_Task__c</offsetFromField>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Send to Support Team Email For MassImport</fullName>
+        <actions>
+            <name>MassImport_Email</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>AND( ISPICKVAL( Request_Approval_Status__c , &apos;Approved&apos;),  ISPICKVAL( Request_Type__c , &apos;Mass Import&apos;), NOT($Setup.Global_On_Off_Switch__c.Workflow_Rules__c)  )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Sent to BU Admin-Reporting</fullName>
+        <actions>
+            <name>Sent_To_BU_Admin_ReportingOnly</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>To find if a PR is sent to BU Admin and the update field is to be used in reporting</description>
+        <formula>AND(Current_Approver__r.ProfileId  = &apos;00eVy000003IUM9&apos;,NOT($Setup.Global_On_Off_Switch__c.Workflow_Rules__c))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Sent to BackUp Approver-Reporting</fullName>
+        <actions>
+            <name>Sent_to_BackUp_Approver_Reporting</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Pricing_Request__c.Sent_to_Backup_Approver__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>To find if a PR is sent to backup approver and the field is to be used in reporting</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>AUA_PGABMapping</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>AUA_PGABMapping</value>
+    </caseValues>
+    <fields>
+        <help><!-- Approving Business for the Public Group --></help>
+        <label><!-- Approving Business --></label>
+        <name>Approving_Business__c</name>
+    </fields>
+    <fields>
+        <help><!-- Public Group for Approvers. Save Name field value same as this field value --></help>
+        <label><!-- Public Group --></label>
+        <name>Public_Group__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

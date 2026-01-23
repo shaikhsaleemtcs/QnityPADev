@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Overall Umbrella/Container Object for the Audit Process</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ReadWrite</externalSharingModel>
+    <fields>
+        <fullName>End_Date__c</fullName>
+        <description>Ending Date for Audit Process</description>
+        <inlineHelpText>Enter Audit End Date</inlineHelpText>
+        <label>End Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Legacy_Pricing_Util_SFID__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>This field is populated with the legacy One DuPont SF ID and was used during the split to map related records during the split and insert process to maintain the migrated record’s parent-child record relationships.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>This is the pre-split original 18 digit Salesforce ID of this record that came from the original One Dupont Salesforce instance before the business units were separated. Its is case insensitive and unique.</inlineHelpText>
+        <label>Legacy Pricing Util SFID</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Novus_External_Id__c</fullName>
+        <caseSensitive>true</caseSensitive>
+        <description>Stores Legacy Id</description>
+        <externalId>true</externalId>
+        <label>Novus External Id</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Process_Owner__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>User who is owner of the Audit Process and is functionality administrator.</description>
+        <inlineHelpText>User who is owner of the Audit Process and is functionality administrator.</inlineHelpText>
+        <label>Process Owner</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Audit_Processes</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Snapshot_Date__c</fullName>
+        <description>Date on which Snapshot is taken</description>
+        <inlineHelpText>Enter Date on which Snapshot is taken for Both Prod and Util Org</inlineHelpText>
+        <label>Snapshot Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Snapshot_Status__c</fullName>
+        <description>To capture the state of Snapshot Process</description>
+        <inlineHelpText>Enter state in which Snapshot Process is</inlineHelpText>
+        <label>Snapshot Status</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Completed</fullName>
+                    <default>false</default>
+                    <label>Completed</label>
+                </value>
+                <value>
+                    <fullName>In Progress</fullName>
+                    <default>false</default>
+                    <label>In Progress</label>
+                </value>
+                <value>
+                    <fullName>Not Started</fullName>
+                    <default>true</default>
+                    <label>Not Started</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Snapshot_Taken_By__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The person who has taken snapshot of prod.</description>
+        <inlineHelpText>Enter user name who is responsible for taking snapshot for audit process</inlineHelpText>
+        <label>Snapshot Taken By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Audit_Processes1</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Start_Date__c</fullName>
+        <description>Starting Date for Audit Process</description>
+        <inlineHelpText>Enter Start Date for Audit Process</inlineHelpText>
+        <label>Start Date</label>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <label>User Access Review</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Audit Process Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>User Access Reviews</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
+    <webLinks>
+        <fullName>Review</fullName>
+        <availability>online</availability>
+        <description>Button to trigger the custom visualforce page to view collated User Access Review Details Data in single page</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Review</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/36.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/36.0/apex.js&quot;)} 
+
+if(!{!ISBLANK(User_Access_Review__c.Snapshot_Taken_By__c)}){ 
+
+window.location = &apos;/apex/AUAReviewPage?scontrolCaching=1&amp;id={!User_Access_Review__c.Id}&apos;;
+
+}else{
+alert(&quot;The snapshot has not been taken for this Audit Process. Please contact support or wait for its completion.&quot;);
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Take_Snapshot</fullName>
+        <availability>online</availability>
+        <description>Execute batch to capture User Information along with security data in the object</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Take Snapshot</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/36.0/connection.js&quot;)}
+{!REQUIRESCRIPT(&quot;/soap/ajax/36.0/apex.js&quot;)}
+
+var cnfrm = false;
+
+if(!{!ISBLANK(User_Access_Review__c.Snapshot_Taken_By__c)}){
+  cnfrm = false;
+  alert(&quot;The snapshot has already been taken for this Audit Process.&quot;);
+}else{
+   cnfrm   = confirm(&quot;Are you sure to Take Snapshot. This process cannot be reverted?&quot;);
+}
+
+if(cnfrm == true)
+{
+    sforce.apex.execute(&quot;AUATakeSnapshot&quot;,&quot;startSnapshotProcess&quot;,{AuditProcessId:&quot;{!User_Access_Review__c.Id}&quot;});
+    alert(&quot;Snapshot will now be taken asynchronously in the background. The Snapshot Status field will be changed to \&quot;Completed\&quot;, once the Snapshot is taken successfully.&quot;);
+    window.location.reload();
+}</url>
+    </webLinks>
+</CustomObject>

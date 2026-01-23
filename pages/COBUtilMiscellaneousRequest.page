@@ -1,0 +1,359 @@
+<!--   Ver.            Developer                  Changes                                   															Dependencies-->
+<!--    1.1			 Ankit Khandelwal    Description: Removed the dependency on Request_Inititor__c field value for "Send for CSR Review" button 			None	-->
+
+<!-- ***************Modification Log ***************************
+<IS-ID-00062919>
+Last Modified By    :   Ankit Khandelwal
+Last Modified Date  :   27 Jan 2016
+Description        :  Removed the dependency on Request_Inititor__c field value for "Send for CSR Review" button -->
+
+
+<apex:page controller="CtrlCOBUtilCustomerOnboardingRequest" tabstyle="Customer_Data_Request__c" id="MiscellaneousPageId">
+<head>
+<style>
+.buttons a.btn{width:70px;height:200px;}
+.spinnerCt {
+    left: 50%;
+    top: 35%;
+    position: fixed;
+    z-index: 1050;
+    padding: 20px 40px;
+    box-shadow: 0pt 2px 5px rgb(172, 172, 172);
+    border-radius: 1em 1em 1em 1em;
+    border: 1px solid rgb(206, 236, 255);
+    background-color: rgb(206, 236, 255);
+    background-style: solid;
+}
+
+.spinner {
+    padding: 10px 15px 10px 0pt;
+    vertical-align: middle;
+    float: left
+}
+
+.spinnerCt .loadingIndicator {
+    display: inline;
+    font-size: 135%;
+    font-weight: bold;
+    float: left
+}
+
+.mask {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    opacity: 0.45;
+    filter: alpha(opacity =     45);
+    position: absolute;
+    z-index: 1000;
+    top: 0pt;
+    left: 0pt;
+}
+</style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.js"></script>
+<script type="text/javascript">
+
+    /* function OpenAlertForCancel(){
+    Confirm("Please confirm to Cancel & Closed the request"); 
+    }*/
+
+function RemoveApprNone() {
+        $('[id$="apprtermtype"] option[value=""]').remove();
+        var txtVal2 = document.getElementById("{!$Component.MainPage.pb.PbOut5.apprtermtype}").value;
+        renderApprRisk(txtVal2);
+    }
+    
+function RemoveDestNone() {
+        $('[id$="desttermtype"] option[value=""]').remove();
+        var txtVal4 = document.getElementById("{!$Component.MainPage.pb.PbOut41.desttermtype}").value;
+        renderDestRisk(txtVal4);
+    }
+    
+function ApprRiskNone() {
+        $('[id$="apprrisk"] option[value=""]').remove();
+    }
+    
+function DestRiskNone() {
+        $('[id$="destrisk"] option[value=""]').remove();
+    }
+
+function setApprCreditType(){
+var txtVal2 = document.getElementById("{!$Component.MainPage.pb.PbOut5.apprtermtype}").value;
+renderApprRisk(txtVal2);
+}
+
+/** Combining **/
+
+function sellingCompanyDependents(){
+var txtVal11 = document.getElementById("{!$Component.MainPage.pbb.Pbb1.CompanyCode}").value;
+
+rerenderCompanyDependents(txtVal11);
+
+}
+
+var previousOnload = window.onload; 
+window.onload = function() { 
+    if (previousOnload) { 
+        previousOnload(); 
+    } 
+    sellingCompanyDependents(); 
+}
+
+function GroupKeyLoad(){
+var txtVal5 = document.getElementById("{!$Component.MainPage.pb.Pb1.GKey}").value;
+OtherGroupKey(txtVal5);
+}
+
+</script>
+</head>
+
+<body>
+<apex:form id="MainPage" rendered="{!IF((displayMainPage==true && showEditErrorPage==false ),true,false)}">
+<apex:sectionHeader title="" subtitle="Miscellaneous customer data request"/>
+    <apex:actionStatus id="counterStatus">
+        <apex:facet name="start">
+            <div class="spinnerMask" id="spinnerMask">
+                <div class="spinnerCt">
+                    <img src="/img/analytics/reportbuilder/icons/spinner32.gif" alt="Loading..." width="32" height="32" class="spinner" title="Loading..." />
+                    <div class="loadingIndicator">Loading...</div>
+                </div>
+                <div class="mask"></div>
+            </div>
+        </apex:facet>
+    </apex:actionStatus>
+
+   <apex:actionFunction id="renderApprRisk" name="renderApprRisk" reRender="apprrisk" status="CounterStatus" action="{!setApprovedCreditTermType}" immediate="true" oncomplete="ApprRiskNone();">
+   <apex:param name="SecondParam"  value="" />
+   </apex:actionFunction>
+   <apex:actionFunction id="renderDestRisk" name="renderDestRisk" reRender="destrisk" status="CounterStatus" action="{!setDestinationCreditTermType}" immediate="true" oncomplete="DestRiskNone();">
+   <apex:param name="ForthParam"  value="" />
+   </apex:actionFunction> 
+   
+    <!--Combining-->
+    <apex:actionFunction name="rerenderCompanyDependents" status="counterStatus" immediate="true" rerender="pbb,pwPanel,taxcategory,propcurreCode1,propcurreCode2,propcurreCode,sbu,proposedcreditrep,proposedcreditrep1,custcurrency,salesId">
+    <apex:param name="EleventhParam" assignTo="{!sellingCompanyCode}" value="" />
+    </apex:actionFunction>  
+    <!--<apex:actionFunction name="OtherGroupKey" rerender="Pbb1" status="counterStatus" immediate="true" action="{!checkOtherGroupKey}">
+    <apex:param name="fifthParam"  value="" />
+    </apex:actionFunction>--> 
+   
+<apex:pageBlock title="Request Information" id="pb" rendered="{!IF((recordID != 'null' && OnboardingReq.Request_Initiator__c =='CSR Initiated'),true,false)}"> 
+
+        <apex:outputPanel style="visibility:hidden;font-color:#F8F8F8 !important;display:none;font-weigth:0px;">
+        <apex:inputField value="{!OnboardingReq.SF_Region__c}" style="visibility:hidden;font-color:#F8F8F8 !important;display:none;font-weigth:0px;"/>
+        <apex:inputField value="{!OnboardingReq.Company_Code__c}" style="visibility:hidden"/>
+        </apex:outputPanel>
+
+    <apex:pagemessages />
+    <apex:pageBlockButtons location="both">
+        <b><apex:commandLink value="    Save    " action="{!SaveAndSubmit}" styleClass="btn" rerender="pb" style="text-decoration:none;" status="counterStatus"><apex:param id="param1" name="IsSaveOrSubmit1" assignTo="{!IsSaveOrSubmit}" value="Save"/><apex:param id="param11" name="FlagSaveDirectly" assignTo="{!FlagSaveDirectly}" value="true"/> </apex:commandLink>
+        <apex:commandLink value="    Cancel    "  action="{!Cancel}" styleClass="btn" style="text-decoration:none;" immediate="true" status="counterStatus"></apex:commandLink>     
+        <apex:commandLink value="    Save & Submit    " action="{!SaveAndSubmit}" rerender="pb" styleClass="btn" style="text-decoration:none;" status="counterStatus" rendered="{!IF((ProfileName=='Data Analyst' || (ProfileName == 'DMS Process Managers')), False,True)}"><apex:param name="IsSaveOrSubmit" id="param2" assignTo="{!IsSaveOrSubmit}" value="Submit"/><apex:param id="param12" name="FlagSaveDirectly" assignTo="{!FlagSaveDirectly}" value="true"/></apex:commandLink>
+        <apex:commandLink value="    Send for CA Review    " immediate="true" action="{!SendforReviewComments}" rerender="pb" styleClass="btn" style="text-decoration:none;" status="counterStatus" rendered="{!IF(((ProfileName=='Data Analyst' || (ProfileName == 'DMS Process Managers')) && sendToCA==true && (OnboardingReq.Request_Initiator__c =='CSR Initiated' || OnboardingReq.Request_Initiator__c =='CA Initiated')), True,False)}"><apex:param name="IsSaveOrSubmit13" id="param13" assignTo="{!IsSaveOrSubmit}" value="Submit"/><apex:param name="CAReview" id="CAReview" assignTo="{!CAReview}" value="True"/><apex:param id="buttonClickedCA" name="buttonClickedCA" assignTo="{!SubCtrlButtonClicked}" value="CA"></apex:param></apex:commandLink>
+        
+        <apex:commandLink value="    Send for CSR Review  " immediate="true" action="{!SendforReviewComments}" rerender="pb" styleClass="btn" style="text-decoration:none;" status="counterStatus" rendered="{!IF((((ProfileName=='Data Analyst') || (ProfileName == 'DMS Process Managers') || (ProfileName=='Credit Analyst' || ProfileName =='Credit Process Managers'))&& OnboardingReq.Request_Initiator__c =='CSR Initiated'), True,False)}"><apex:param name="IsSaveOrSubmit14" id="param14" assignTo="{!IsSaveOrSubmit}" value="Submit"/><apex:param name="CSRReview" id="CSRReview" assignTo="{!CSRReview}" value="True"/><apex:param id="buttonClickedCSR" name="buttonClickedCSR" assignTo="{!SubCtrlButtonClicked}" value="CSR"></apex:param></apex:commandLink>
+        <!--<apex:commandLink value="    Close    " action="{!RedirectCancelAndClose}" immediate="true" styleClass="btn" style="text-decoration:none;" status="counterStatus1"></apex:commandLink>-->
+        <!--apex:commandLink value="    Send for CA Review    " immediate="true" action="{!SendforReviewComments}" rerender="pb" styleClass="btn" style="text-decoration:none;" status="counterStatus" rendered="{!IF((ProfileName=='Data Analyst' || (ProfileName == 'DMS Process Managers')), True,False)}"><apex:param name="IsSaveOrSubmit13" id="param13" assignTo="{!IsSaveOrSubmit}" value="Submit"/><apex:param name="CAReview" id="CAReview" assignTo="{!CAReview}" value="True"/></apex:commandLink-->
+        <apex:commandLink value="    Complete    " action="{!SaveAndSubmit}" rerender="pb" styleClass="btn" style="text-decoration:none;" status="counterStatus" rendered="{!IF((ProfileName=='Data Analyst'|| (ProfileName == 'DMS Process Managers')), True,False)}"><apex:param name="IsSaveOrSubmit3" id="param3" assignTo="{!IsSaveOrSubmit}" value="Submit"/><apex:param name="IsComplete" id="param5" assignTo="{!isComplete}" value="True"/><apex:param id="param131" name="FlagSaveDirectly" assignTo="{!FlagSaveDirectly}" value="true"/></apex:commandLink>
+        <!--<apex:commandLink value="    Reject    "  immediate="true" action="{!SaveAndSubmit}" rerender="pb" styleClass="btn" style="text-decoration:none;" status="counterStatus" rendered="{!IF((ProfileName=='Data Analyst'|| (ProfileName == 'DMS Process Managers')), True,False)}"><apex:param name="IsSaveOrSubmit4" id="param4" assignTo="{!IsSaveOrSubmit}" value="Submit"/><apex:param name="IsReject" id="param6" assignTo="{!isReject}" value="True"/></apex:commandLink>-->
+        <apex:commandLink value="    Reject    " immediate="true" action="{!SendforReviewComments}" rendered="{!IF(((ProfileName=='Credit Analyst' || ProfileName =='Credit Process Managers' || ProfileName=='Data Analyst'|| ProfileName == 'DMS Process Managers')),true,false)}" styleClass="btn" style="text-decoration:none;"><apex:param id="buttonClickedReject" name="buttonClickedReject" assignTo="{!SubCtrlButtonClicked}" value="REJ"></apex:param></apex:commandLink> </b>
+        <!--<apex:commandLink value="    Reject    " immediate="true" action="{!CancelAndClose}" onclick="return confirm('Please confirm to Reject the request.');" rendered="{!IF(((ProfileName=='Credit Analyst' || ProfileName =='Credit Process Managers')),true,false)}" styleClass="btn" style="text-decoration:none;"></apex:commandLink> </b> -->
+    </apex:pageBlockButtons>
+
+    <apex:pageBlockSection Id="Pb1" Title="Request Details" columns="2">
+        <!--<apex:outputText rendered="{!IF(RecordTypeName == 'Miscellaneous customer data request',true,false)}"/>-->
+        <!--<apex:outputField value="{!OnboardingReq.Customer__c}" rendered="{!IF(RecordTypeName != 'New Customer Creation',true,false)}"/>
+        <apex:outputField value="{!OnboardingReq.Account__c}" id="cdrId"/>-->
+        <apex:outputField value="{!OnboardingReq.Name}" id="cdrname"/>
+        <apex:outputText />
+        <apex:outputField value="{!OnboardingReq.Customer__c}" rendered="{!IF(RecordTypeName != 'New Customer Creation',true,false)}"/>
+        <apex:outputText />
+        <apex:outputField value="{!OnboardingReq.Requestor_Name__c}"/>
+        <apex:outputField value="{!OnboardingReq.Requestor_Phone_Number__c}"/>
+        <apex:outputField value="{!OnboardingReq.Requestor_Email__c}"/>
+        
+        <apex:outputText ></apex:outputText>
+        <apex:outputField value="{!OnboardingReq.Request_Description__c}" style="width: 300px; height: 100px;"/>
+        <apex:outputText ></apex:outputText>
+        <!-- <AL2015/12/02>Added by support team for Contact Look up-->
+        <!--<apex:inputField id="Contact" value="{!OnboardingReq.Partner_Contact__c}"  />-->
+        <apex:outputText value="{!RecordTypeName}" label="Type of Request"></apex:outputText>
+        <apex:outputField value="{!OnboardingReq.Priority__c}"/>
+        <apex:outputField value="{!OnboardingReq.Request_Status__c}"/>
+        <apex:outputText ></apex:outputText>
+        <apex:outputField value="{!OnboardingReq.SF_Region__c}"/>
+        <apex:outputField value="{!OnboardingReq.Company_Code__c}"><apex:actionSupport reRender="credrep" event="oncomplete"/></apex:outputField>
+        <apex:outputField value="{!OnboardingReq.SBU__c}"/>
+        <apex:outputField value="{!OnboardingReq.Sales_Organization__c}"/>
+        <apex:outputField value="{!OnboardingReq.Sub_Business__c}"/>
+        <apex:outputField value="{!OnboardingReq.Group_Key__c}"/>
+        <apex:outputField value="{!OnboardingReq.Other_Group_Key__c}" rendered="{!IF(OnboardingReq.Other_Group_Key__c!='',True,false)}"/>
+        <apex:outputField value="{!OnboardingReq.Distribution_Channel__c}"/>
+        <apex:outputField value="{!OnboardingReq.Account_Group__c}"/>
+        <apex:outputField value="{!OnboardingReq.Division__c}"/>
+        <apex:outputText ></apex:outputText>
+        <apex:outputField value="{!OnboardingReq.Miscellaneous_Type_Intent__c}"/>
+        <apex:outputText ></apex:outputText>
+        <apex:outputField value="{!OnboardingReq.Business_Justification__c}"/>
+        <apex:outputText ></apex:outputText>
+        <apex:outputField value="{!OnboardingReq.Country_Credit_Comments__c}" rendered="{!IF((ProfileName == 'Data Analyst' || (ProfileName == 'DMS Process Managers')) ,true,false)}"/>
+        <!--<apex:outputField value="{!OnboardingReq.Leveraged_CSR__c}"  rendered="{!IF(ProfileName != 'Sales Representative',true,false)}"/>-->
+    </apex:pageBlockSection>
+    
+    
+            
+            <apex:pageBlockSection Id="Pb111" Title="Data Analyst Comments" columns="2" rendered="{!IF((ProfileName == 'Data Analyst' || (ProfileName == 'DMS Process Managers')) ,true,false)}">
+            <apex:inputField value="{!OnboardingReq.Sold_To_Customer_Number__c}"/>
+            <apex:inputField value="{!OnboardingReq.Customer_Number__c}" label="Ship To/Bill To/Pay To Customer Number"/>
+            <apex:inputField value="{!OnboardingReq.Source_Cluster__c}"/>
+            <apex:outputText ></apex:outputText>
+            <apex:inputField value="{!OnboardingReq.Data_Analyst_Comments__c}" style="width: 300px; height: 100px;" required="true"/>
+            </apex:pageBlockSection>
+            
+            
+            <apex:pageBlockSection Id="Pb112" Title="Country Credit Comments" columns="2" rendered="{!IF((ProfileName=='Credit Analyst' || ProfileName =='Credit Process Managers') ,true,false)}">
+            <apex:inputField value="{!OnboardingReq.Country_Credit_Comments__c}" style="width: 300px; height: 100px;" required="true"/>
+            </apex:pageBlockSection>    
+             
+ 
+</apex:pageBlock> 
+
+<apex:pageBlock title="Request Information" id="pc" rendered="{!IF((recordID != 'null' && OnboardingReq.Request_Initiator__c !='CSR Initiated'),true,false)}"> 
+
+        <apex:outputPanel style="visibility:hidden;font-color:#F8F8F8 !important;display:none;font-weigth:0px;">
+        <apex:inputField value="{!OnboardingReq.SF_Region__c}" style="visibility:hidden;font-color:#F8F8F8 !important;display:none;font-weigth:0px;"/>
+        <apex:inputField value="{!OnboardingReq.Company_Code__c}" style="visibility:hidden"/>
+        </apex:outputPanel>
+
+<!--IS ID-00062919(changes done by Ankit Khandelwal)Removed the dependency on Request_Inititor__c field value for "Send for CSR Review" button -->
+
+    <apex:pagemessages />
+    <apex:pageBlockButtons location="both">
+        <b><apex:commandLink value="    Save    " action="{!SaveAndSubmit}" styleClass="btn" rerender="pc" style="text-decoration:none;" status="counterStatus"><apex:param id="param1" name="IsSaveOrSubmit1" assignTo="{!IsSaveOrSubmit}" value="Save"/><apex:param id="param11" name="FlagSaveDirectly" assignTo="{!FlagSaveDirectly}" value="true"/> </apex:commandLink>
+        <apex:commandLink value="    Cancel    "  action="{!Cancel}" styleClass="btn" style="text-decoration:none;" immediate="true" status="counterStatus"></apex:commandLink>     
+        <apex:commandLink value="    Save & Submit    " action="{!SaveAndSubmit}" rerender="pc" styleClass="btn" style="text-decoration:none;" status="counterStatus" rendered="{!IF((ProfileName=='Data Analyst' || (ProfileName == 'DMS Process Managers')), False,True)}"><apex:param name="IsSaveOrSubmit" id="param2" assignTo="{!IsSaveOrSubmit}" value="Submit"/><apex:param id="param12" name="FlagSaveDirectly" assignTo="{!FlagSaveDirectly}" value="true"/></apex:commandLink>
+        <apex:commandLink value="    Send for CA Review    " immediate="true" action="{!SendforReviewComments}" rerender="pc" styleClass="btn" style="text-decoration:none;" status="counterStatus" rendered="{!IF(((ProfileName=='Data Analyst' || (ProfileName == 'DMS Process Managers')) && sendToCA==true && (OnboardingReq.Request_Initiator__c =='CSR Initiated' || OnboardingReq.Request_Initiator__c =='CA Initiated')), True,False)}"><apex:param name="IsSaveOrSubmit13" id="param13" assignTo="{!IsSaveOrSubmit}" value="Submit"/><apex:param name="CAReview" id="CAReview" assignTo="{!CAReview}" value="True"/><apex:param id="buttonClickedCA" name="buttonClickedCA" assignTo="{!SubCtrlButtonClicked}" value="CA"></apex:param></apex:commandLink>
+        <apex:commandLink value="    Send for CSR Review  " immediate="true" action="{!SendforReviewComments}" rerender="pc" styleClass="btn" style="text-decoration:none;" status="counterStatus" rendered="{!IF((((ProfileName=='Data Analyst') || (ProfileName == 'DMS Process Managers') || (ProfileName=='Credit Analyst' || ProfileName =='Credit Process Managers')) /* && OnboardingReq.Request_Initiator__c =='CSR Initiated' */), True,False)}"><apex:param name="IsSaveOrSubmit14" id="param14" assignTo="{!IsSaveOrSubmit}" value="Submit"/><apex:param name="CSRReview" id="CSRReview" assignTo="{!CSRReview}" value="True"/><apex:param id="buttonClickedCSR" name="buttonClickedCSR" assignTo="{!SubCtrlButtonClicked}" value="CSR"></apex:param></apex:commandLink>
+        <apex:commandLink value="    Complete    " action="{!SaveAndSubmit}" rerender="pc" styleClass="btn" style="text-decoration:none;" status="counterStatus" rendered="{!IF((ProfileName=='Data Analyst'|| (ProfileName == 'DMS Process Managers')), True,False)}"><apex:param name="IsSaveOrSubmit3" id="param3" assignTo="{!IsSaveOrSubmit}" value="Submit"/><apex:param name="IsComplete" id="param5" assignTo="{!isComplete}" value="True"/><apex:param id="param131" name="FlagSaveDirectly" assignTo="{!FlagSaveDirectly}" value="true"/></apex:commandLink>
+        <apex:commandLink value="    Reject    " immediate="true" action="{!SendforReviewComments}" rendered="{!IF(((ProfileName=='Credit Analyst' || ProfileName =='Credit Process Managers' || ProfileName=='Data Analyst'|| ProfileName == 'DMS Process Managers')),true,false)}" styleClass="btn" style="text-decoration:none;"><apex:param id="buttonClickedReject" name="buttonClickedReject" assignTo="{!SubCtrlButtonClicked}" value="REJ"></apex:param></apex:commandLink> </b>
+        </apex:pageBlockButtons>
+
+    <apex:pageBlockSection Id="Pc1" Title="Request Details" columns="2">
+        <apex:outputField value="{!OnboardingReq.Name}" id="cdrname"/>
+        <apex:outputText />
+        <apex:outputField value="{!OnboardingReq.Requestor_Name__c}"/>
+        <apex:outputField value="{!OnboardingReq.Requestor_Phone_Number__c}"/>
+        <apex:outputField value="{!OnboardingReq.Requestor_Email__c}"/>
+        <apex:outputText />
+        <apex:outputField value="{!OnboardingReq.Request_Description__c}" style="width: 300px; height: 100px;"/>
+        <apex:outputText ></apex:outputText>
+        <apex:outputText value="{!RecordTypeName}" label="Type of Request"></apex:outputText>
+        <apex:outputField value="{!OnboardingReq.Priority__c}"/>
+        <apex:outputField value="{!OnboardingReq.Request_Status__c}"/>
+        <apex:outputField value="{!OnboardingReq.Company_Code__c}"><apex:actionSupport reRender="credrep" event="oncomplete"/></apex:outputField>
+        <apex:outputField label="SAP Customer Number" value="{!OnboardingReq.Customer_Number__c}"/>
+        <apex:outputField value="{!OnboardingReq.Sales_Organization__c}"/>
+        <apex:outputField value="{!OnboardingReq.Distribution_Channel__c}"/>
+        <apex:outputField value="{!OnboardingReq.Division__c}"/>
+        <apex:outputText ></apex:outputText>
+        <apex:outputField value="{!OnboardingReq.Account_Group__c}"/>
+    </apex:pageBlockSection>
+    
+    
+            
+            <apex:pageBlockSection Id="Pc111" Title="Data Analyst Comments" columns="2" rendered="{!IF((ProfileName == 'Data Analyst' || (ProfileName == 'DMS Process Managers')) ,true,false)}">
+            <apex:inputField value="{!OnboardingReq.Sold_To_Customer_Number__c}"/>
+            <apex:inputField value="{!OnboardingReq.Customer_Number__c}" label="Ship To/Bill To/Pay To Customer Number"/>
+            <apex:inputField value="{!OnboardingReq.Source_Cluster__c}"/>
+            <apex:outputText ></apex:outputText>
+            <apex:inputField value="{!OnboardingReq.Data_Analyst_Comments__c}" style="width: 300px; height: 100px;" required="true"/>
+            </apex:pageBlockSection>
+            
+            
+            <apex:pageBlockSection Id="Pc112" Title="Country Credit Comments" columns="2" rendered="{!IF((ProfileName=='Credit Analyst' || ProfileName =='Credit Process Managers') ,true,false)}">
+            <apex:inputField value="{!OnboardingReq.Country_Credit_Comments__c}" style="width: 300px; height: 100px;" required="true"/>
+            </apex:pageBlockSection>    
+             
+ 
+</apex:pageBlock> 
+
+
+
+<apex:pageBlock title="Request Information" id="pbb" rendered="{!IF(recordID == 'null',true,false)}"> 
+
+        <!--<apex:outputPanel style="visibility:hidden;font-color:#F8F8F8 !important;display:none;font-weigth:0px;">
+        <apex:inputField value="{!OnboardingReq.SF_Region__c}" style="visibility:hidden;font-color:#F8F8F8 !important;display:none;font-weigth:0px;"/>
+        <apex:inputField id="compcode" value="{!OnboardingReq.Company_Code__c}" style="visibility:hidden"/>
+        <apex:inputField value="{!OnboardingReq.SBU__c}" style="visibility:hidden" />
+        </apex:outputPanel>-->
+
+    <apex:pagemessages />
+    <apex:pageBlockButtons location="both">
+        <b><apex:commandLink value="    Save    " action="{!SaveAndSubmit}" styleClass="btn" rerender="pbb" style="text-decoration:none;" status="counterStatus"><apex:param id="param1" name="IsSaveOrSubmit1" assignTo="{!IsSaveOrSubmit}" value="Save"/><apex:param id="param11" name="FlagSaveDirectly" assignTo="{!FlagSaveDirectly}" value="true"/> </apex:commandLink>
+        <apex:commandLink value="    Cancel    "  action="{!Cancel}" styleClass="btn" style="text-decoration:none;" immediate="true" status="counterStatus"></apex:commandLink>     
+        <apex:commandLink value="    Save & Submit    " action="{!SaveAndSubmit}" rerender="pbb" styleClass="btn" style="text-decoration:none;" status="counterStatus" rendered="{!IF((ProfileName=='Data Analyst' || (ProfileName == 'DMS Process Managers')), False,True)}"><apex:param name="IsSaveOrSubmit" id="param2" assignTo="{!IsSaveOrSubmit}" value="Submit"/><apex:param id="param12" name="FlagSaveDirectly" assignTo="{!FlagSaveDirectly}" value="true"/></apex:commandLink>
+        </b>
+        </apex:pageBlockButtons> 
+ <apex:pageBlockSection Id="Pbb1" Title="Request Details" columns="2">
+        <!--<apex:outputText rendered="{!IF(RecordTypeName == 'Miscellaneous customer data request',true,false)}"/>-->
+        <!--<apex:outputField value="{!OnboardingReq.Customer__c}" rendered="{!IF(RecordTypeName != 'New Customer Creation',true,false)}"/>-->
+        <apex:outputField value="{!OnboardingReq.Name}" id="cdrname"/>
+        <apex:outputText />
+        <apex:outputField value="{!OnboardingReq.Requestor_Name__c}"/>
+        <apex:inputField value="{!OnboardingReq.Requestor_Phone_Number__c}" required="true"/>
+        <apex:outputField value="{!OnboardingReq.Requestor_Email__c}"/>
+        <apex:outputText />
+        <!--<apex:outputText rendered="{!IF(isRender!=true,true,false)}"/>-->
+        <apex:inputField value="{!OnboardingReq.Request_Description__c}" style="width: 300px; height: 100px;" required="true"/>
+        
+        <!--<apex:outputField value="{!OnboardingReq.Account__c}" id="cdrId" rendered="{!IF(accountid!='null',true,false)}" />-->
+        <apex:outputText ></apex:outputText>
+        <!--<apex:outputText ></apex:outputText>-->
+        <!-- <AL2015/12/02>Added by support team for Contact Look up-->
+        <!--<apex:inputField id="Contact" value="{!OnboardingReq.Partner_Contact__c}"  />-->
+        <apex:outputText value="{!RecordTypeName}" label="Type of Request"></apex:outputText>
+        <apex:inputField value="{!OnboardingReq.Priority__c}"/>
+        <apex:outputField value="{!OnboardingReq.Request_Status__c}"/>
+        <apex:inputField value="{!OnboardingReq.Company_Code__c}" required="true"/>
+        <apex:inputField label="SAP Customer Number" value="{!OnboardingReq.Customer_Number__c}"/>
+        <!--<apex:outputText ></apex:outputText>
+        <apex:inputField value="{!OnboardingReq.SF_Region__c}" required="true"/>
+        <apex:inputField id="CompanyCode" value="{!OnboardingReq.Company_Code__c}" required="true" onChange="sellingCompanyDependents();"/>
+        <apex:inputField value="{!OnboardingReq.SBU__c}" required="true"/>-->
+        <!--<apex:selectList id="sbu" value="{!OnboardingReq.SBU__c}" multiselect="false" size="1" label="SBU" required="true">
+            <apex:selectOptions value="{!SBUOptions}" ></apex:selectOptions>
+        </apex:selectList>-->          
+        <apex:inputField id="salesId" value="{!OnboardingReq.Sales_Organization__c}" required="true"/>
+        <!--<apex:inputField value="{!OnboardingReq.Sub_Business__c}" required="true"/>
+        <apex:inputField id="GKey" value="{!OnboardingReq.Group_Key__c}" onchange="GroupKeyLoad();" required="true" />
+        <apex:inputField id="othergroupkey" value="{!OnboardingReq.Other_Group_Key__c}" required="{!if(OnboardingReq.Group_Key__c =='Other' ,true,false)}" rendered="{!openOtherGroupKey}"/>-->
+        <apex:inputField value="{!OnboardingReq.Distribution_Channel__c}" required="true"/>
+        <apex:inputField value="{!OnboardingReq.Division__c}" required="true"/>
+        <apex:outputText ></apex:outputText>
+        <apex:inputField value="{!OnboardingReq.Account_Group__c}"  rendered="{!IF(RecordTypeName == 'Miscellaneous customer data request',true,false)}"/>
+        <apex:outputField value="{!OnboardingReq.Account_Group__c}" rendered="{!IF(RecordTypeName != 'Miscellaneous customer data request',true,false)}" />
+        </apex:pageBlockSection>   
+        <apex:pageBlockSection Id="Pb112" Title="Country Credit Comments" columns="2" rendered="{!IF((ProfileName=='Credit Analyst' || ProfileName =='Credit Process Managers') ,true,false)}">
+            <apex:inputField value="{!OnboardingReq.Country_Credit_Comments__c}" style="width: 300px; height: 100px;" required="true"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection Id="Pb111" Title="Data Analyst Comments" columns="2" rendered="{!IF((ProfileName == 'Data Analyst' || (ProfileName == 'DMS Process Managers')) ,true,false)}">
+            <apex:inputField value="{!OnboardingReq.Sold_To_Customer_Number__c}"/>
+            <apex:inputField value="{!OnboardingReq.Customer_Number__c}" label="Ship To/Bill To/Pay To Customer Number"/>
+            <apex:inputField value="{!OnboardingReq.Source_Cluster__c}"/>
+            <apex:outputText ></apex:outputText>
+            <apex:inputField value="{!OnboardingReq.Data_Analyst_Comments__c}" style="width: 300px; height: 100px;" required="true"/>
+            </apex:pageBlockSection>  
+        <!--<apex:inputField value="{!OnboardingReq.Leveraged_CSR__c}"  rendered="{!IF(ProfileName != 'Sales Representative',true,false)}"/>-->
+    
+
+ 
+</apex:pageBlock> 
+
+</apex:form>
+
+    <apex:form id="EditErrorPage" rendered="{!showEditErrorPage}" >
+    <b><apex:pageMessage summary="You cannot Edit this record now as it is locked." severity="error" strength="1" ></apex:pageMessage></b>
+    </apex:form>
+
+</body>
+</apex:page>

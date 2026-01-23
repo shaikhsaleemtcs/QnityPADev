@@ -1,0 +1,22 @@
+<apex:component >
+<style>
+    .loader {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background-color: #67809B;
+        background: url('/img/analytics/reportbuilder/icons/spinner32.gif') 50% 50% no-repeat rgb(249,249,249);
+    }
+    </style>
+    <script type="text/javascript">
+    var j$=jQuery.noConflict();
+    j$(window).load(function() {
+        j$(".loader").fadeOut("slow");
+    })
+    </script>
+    <div class="loader"></div>
+
+</apex:component>

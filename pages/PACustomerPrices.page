@@ -1,0 +1,87 @@
+<apex:page controller="ctrlPAMain" standardStylesheets="true"
+	tabstyle="Price_Approval__tab" sidebar="false" showHeader="false"
+	id="currentPage" cache="false" action="{!OnloadCall}">
+	<style>
+#CustomerRequest #soldTo .pbSubheader {
+	margin-bottom: 0px;
+}
+
+#CustomerRequest #soldTo .detailList {
+	border: 1px solid #E2E3E4;
+}
+
+#CustomerRequest #soldTo .detailList .dataCol {
+	color: #000000;
+}
+</style>
+
+	<apex:form >
+
+		<apex:pageblock >
+			<table width="98%" border="0" cellpadding="0" cellspacing="0">
+
+				<tr>
+					<td align="right"><apex:commandLink value="Back"
+						action="{!businessComponentAction}" style="text-decoration:none;">
+
+						<apex:param value="PACustomerRequests" assignTo="{!newPageLabel}"
+							name="newPage" />
+					</apex:commandLink></td>
+				</tr>
+
+			</table>
+
+			<div id="soldTo"><!-- Sold To Customer Detail Section --> <apex:pageBlockSection title="Customer Information">
+				<apex:pageBlockSectionItem >
+					<apex:outputText value="Sold To Code" />
+
+					<apex:outputText value="{!service.PAServicestate.erpCustomer.customerCode}" />
+				</apex:pageBlockSectionItem>
+				<apex:pageBlockSectionItem >
+					<apex:outputText value="Sold To" />
+					<apex:outputText value="{!service.PAServicestate.erpCustomer.customerName}" />
+				</apex:pageBlockSectionItem>
+				<apex:pageBlockSectionItem >
+					<apex:outputText value="Sales Area" />
+
+					<apex:outputText escape="false"
+						value="{!service.PAServicestate.erpCustomer.SalesArea}" />
+
+				</apex:pageBlockSectionItem>
+				<apex:pageBlockSectionItem >
+					<apex:outputText value="Location" />
+					<apex:outputText escape="false"
+						value="{!service.PAServiceState.erpCustomer.street
+						+ IF(service.PAServiceState.erpCustomer.street !=null
+						&& service.PAServiceState.erpCustomer.street !='','
+						<br />','')+ service.PAServiceState.erpCustomer.city + IF(service.PAServiceState.erpCustomer.City !=null && service.PAServiceState.erpCustomer.City !='','<br/>','') +
+                                service.PAServiceState.erpCustomer.StateProvince + IF(service.PAServiceState.erpCustomer.StateProvince !=null && service.PAServiceState.erpCustomer.StateProvince !='','<br/>','') +  
+                                 service.PAServiceState.erpCustomer.Country +IF(service.PAServiceState.erpCustomer.Country !=null && service.PAServiceState.erpCustomer.Country !='','<br/>','')+ service.PAServiceState.erpCustomer.ZipPostalCode}" />
+                                
+                        </apex:pageBlockSectionItem>
+			</apex:pageBlockSection></div>
+			<apex:pageblocksection columns="1">
+<center>
+				<apex:repeat value="{!service.PAServicestate.currentRequest.salesPriceSAP.relatedWrappersList}"
+					var="wrapper">
+
+					<c:PAERPPricesRelatedList WrapperRecordsDisp="{!wrapper.wrapperList}"
+						columnsDisp="{!wrapper.keyCombinationcolumns}"
+						isRPQ="{!service.PAServiceState.ogitems.isEndUserRebate}"
+						viewMode="{!newPageLabel}" ViewCustomerprices="true"
+						actionAtr="{!businessaction}" typeOfRequest="{!wrapper.priceType}"
+						typeOfSObjectList="{!wrapper.sObjectTypeName}">
+					</c:PAERPPricesRelatedList>
+
+
+				</apex:repeat>
+</center>
+			</apex:pageblocksection>
+
+
+		</apex:pageblock>
+	</apex:form>
+
+
+
+</apex:page>
