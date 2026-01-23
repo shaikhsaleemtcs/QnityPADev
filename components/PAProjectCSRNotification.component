@@ -1,0 +1,8 @@
+<apex:component access="global" controller="PARelatedList">
+  <apex:attribute description="PR ID for Email Tempalte" type="String"
+		name="soldToname" assignTo="{!ProjectPriceId}" />
+		 <apex:outputtext value="{!soldToNameForCSRNotification}"></apex:outputtext>
+
+
+		
+</apex:component>

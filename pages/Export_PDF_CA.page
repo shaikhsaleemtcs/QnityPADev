@@ -1,0 +1,1402 @@
+<apex:page controller="RenderPDFControllerDMS"  renderAs="PDF" tabstyle="Customer_Data_Request__c" id="pageId">
+<body>
+<apex:form id="MainPage" rendered="{!IF((displayLayout==true),true,false)}">
+
+<!-- code for DCA/CA PDF extract -->
+
+<table>
+
+<tr>
+   
+   <td> <apex:image url="{!$Resource.dupont_logo}" height="50%"/>
+   </td>
+   
+</tr>      
+</table>
+
+<table>
+<tr>
+   
+   <td> <h1>
+   <apex:outputText value="{!OnboardingReqdetails.RecordType.name}"></apex:outputText>
+
+   </h1>
+   </td>
+   
+</tr>      
+</table>
+
+
+<table border="1" cellpadding="0" cellspacing="0">
+<tr style="background-color: #A9BCF5">
+   <td> <b><apex:outputText value="Request Details"></apex:outputText></b></td>
+   <td></td>
+   
+</tr>      
+<tr>
+   <td> <apex:outputText value="Request Number  :"></apex:outputText></td>
+   <td> <apex:outputField value="{!OnboardingReqdetails.Name}"></apex:outputField></td>
+</tr>
+<tr>
+   <td> <apex:outputText value="Request Type  :"></apex:outputText></td>
+   <td> <apex:outputText value="{!OnboardingReqdetails.RecordType.name}"></apex:outputText></td>
+</tr>
+<tr>
+   <td> <apex:outputText value="Customer Name  :" rendered="{!isMiscOrPartner}"></apex:outputText></td>
+   <td> <apex:outputText value="{!OnboardingReqdetails.Customer__c}"></apex:outputText></td>
+</tr>
+<tr>
+   <td> <apex:outputText value="Description  :"></apex:outputText></td>
+   <td> <apex:outputField value="{!OnboardingReqdetails.Request_Description__c}"></apex:outputField></td>
+</tr>
+<tr>
+   <td> <apex:outputText value="Status  :"></apex:outputText></td>
+   <td nowrap="0"> <apex:outputField value="{!OnboardingReqdetails.Request_Status__c}"></apex:outputField></td>
+</tr>
+<tr>
+   <td> <apex:outputText value="Priority  :"></apex:outputText></td>
+   <td> <apex:outputField value="{!OnboardingReqdetails.Priority__c}"></apex:outputField></td>
+</tr>
+<tr>
+   <td> <apex:outputText value="Requestor  :"></apex:outputText></td>
+   <td> <apex:outputField value="{!OnboardingReqdetails.Requestor_Name__c}"></apex:outputField></td>
+</tr>
+<tr>
+   <td> <apex:outputText value="Phone Number  :"></apex:outputText></td>
+   <td> <apex:outputField value="{!OnboardingReqdetails.Requestor_Phone_Number__c}"></apex:outputField></td>
+</tr>
+<tr>
+   <td> <apex:outputText value="Requestor Email  :"></apex:outputText></td>
+   <td> <apex:outputField value="{!OnboardingReqdetails.Requestor_Email__c}"></apex:outputField></td>
+</tr>
+  
+</table>
+
+<table>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+</table>
+
+<table border="1" cellpadding="0" cellspacing="0">
+<tr style="background-color: #A9BCF5">
+   <td> <b><apex:outputText value="Company Code Data"></apex:outputText></b></td>
+   <td></td>
+   
+</tr>      
+<tr>
+   <td> <apex:outputText value="Requesting Region   :"></apex:outputText></td>
+   <td> <apex:outputField value="{!OnboardingReqdetails.SF_Region__c}"></apex:outputField></td>
+</tr>
+<tr>
+   <td> <apex:outputText value="Requesting Company Code  :"></apex:outputText></td>
+   <td> <apex:outputField value="{!OnboardingReqdetails.Company_Code__c}"></apex:outputField></td>
+</tr>
+<tr>
+   <td> <apex:outputText value="Requesting SBU  :"></apex:outputText></td>
+   <td> <apex:outputField value="{!OnboardingReqdetails.SBU__c}"></apex:outputField></td>
+</tr>
+<tr>
+   <td> <apex:outputText value="Requesting Group Key  :"></apex:outputText></td>
+   <td> <apex:outputField value="{!OnboardingReqdetails.Group_Key__c}"></apex:outputField></td>
+</tr>
+<tr>
+   <td> <apex:outputText value="Requesting Sales Organization  :"></apex:outputText></td>
+   <td> <apex:outputField value="{!OnboardingReqdetails.Sales_Organization__c}"></apex:outputField></td>
+</tr>
+<tr>
+   <td> <apex:outputText value="Requesting Distribution Channel  :"></apex:outputText></td>
+   <td> <apex:outputField value="{!OnboardingReqdetails.Distribution_Channel__c}"></apex:outputField></td>
+</tr>
+<tr>
+   <td> <apex:outputText value="Requesting Division  :"></apex:outputText></td>
+   <td> <apex:outputField value="{!OnboardingReqdetails.Division__c}"></apex:outputField></td>
+</tr>
+<tr>
+   <td> <apex:outputText value="Miscellaneous Type Intent  :" rendered="{!isMiscOrPartner}" ></apex:outputText></td>
+   <td> <apex:outputField value="{!OnboardingReqdetails.Miscellaneous_Type_Intent__c}"></apex:outputField></td>
+</tr>
+<tr>
+   <td> <apex:outputText value="Business Justification  :" rendered="{!isMiscOrPartner}" ></apex:outputText></td>
+   <td> <apex:outputField value="{!OnboardingReqdetails.Business_Justification__c}"></apex:outputField></td>
+</tr>
+  
+</table>
+
+<table>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+</table>
+
+<table border="1" cellpadding="0" cellspacing="0">
+<tr style="background-color: #A9BCF5">
+   <td> <b><apex:outputText value="Customer Data"></apex:outputText></b></td>
+   <td></td>
+</tr>
+<tr>
+   <td> <apex:outputText value="Customer Code  :"></apex:outputText></td>
+   <td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Customer_Number__c}"></apex:outputField></td>
+</tr>      
+<tr>
+   <td> <apex:outputText value="Sold To Customer Code  :"></apex:outputText></td>
+   <td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Sold_To_Customer_Number__c}"></apex:outputField></td>
+</tr>
+<tr>
+   <td> <apex:outputText value="Account Group  :"></apex:outputText></td>
+   <td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Account_Group__c}"></apex:outputField></td>
+</tr>
+
+  
+</table>
+
+
+<table>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+</table>
+<apex:outputPanel rendered="{!!isMiscOrPartner}">
+<table border="1" cellpadding="0" cellspacing="0">
+<tr style="background-color: #A9BCF5">
+   <td> <b><apex:outputText value="Request Control Data"></apex:outputText></b></td>
+   <td></td>
+</tr>      
+<tr>
+   <td> <apex:outputText value="Organizer  :"></apex:outputText></td>
+   <td width="50%"> </td>
+</tr>
+<tr>
+   <td> <apex:outputText value="Country Credit Analyst  :"></apex:outputText></td>
+   <td width="50%"> </td>
+</tr>
+
+<tr>
+   <td> <apex:outputText value="Destination Credit Analyst  :"></apex:outputText></td>
+   <td width="50%"> </td>
+</tr>
+<tr>
+   <td> <apex:outputText value="Comments  :"></apex:outputText></td>
+   <td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Destination_Credit_Comments__c}"></apex:outputField></td>
+</tr>
+
+  
+</table>
+<table>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+</table>
+
+
+<table>
+<tr><td></td></tr>
+<tr><td></td></tr>
+    <tr><td></td></tr>
+    <tr><td></td></tr>
+</table>
+<table border="1" cellpadding="0" cellspacing="0">
+<tr style="background-color: #A9BCF5">
+   <td> <b><apex:outputText value="CSR Comments "></apex:outputText></b></td>
+   
+</tr>    
+  
+<tr>
+   
+   <td width="50%"> <apex:outputField value="{!OnboardingReqdetails.CSR_Comments__c}"></apex:outputField></td>
+</tr>
+</table>
+
+<table>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+
+</table>
+
+<table>
+<tr>
+
+<td align="top">
+<table border="1" cellpadding="0" cellspacing="0">
+<tr style="background-color: #A9BCF5">
+<td> <b><apex:outputText value="Customer Name"></apex:outputText></b></td>
+<td></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Customer Name1  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Customer_Name__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Customer Name2  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Customer_Name_2__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Customer Name3  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Customer_Name_3__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Customer Name4  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Customer_Name_4__c}"></apex:outputField></td>
+</tr>
+<tr style="background-color: #A9BCF5">
+<td> <b><apex:outputText value="Customer Address Information"></apex:outputText></b></td>
+<td></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Sold To office/House Number  :" rendered="{!!isExtendRecordType}" ></apex:outputText>
+    <apex:outputText value="office/House Number  :" rendered="{!isExtendRecordType}" ></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Sold_To_Office_House_Number__c}"></apex:outputField></td>
+</tr>
+<tr>    
+<td> <apex:outputText value="Sold-To Street  :" rendered="{!!isExtendRecordType}" ></apex:outputText>
+     <apex:outputText value="Street  :" rendered="{!isExtendRecordType}"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Sold_to_Street__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Sold-To City  :" rendered="{!!isExtendRecordType}" ></apex:outputText>
+    <apex:outputText value="City  :" rendered="{!isExtendRecordType}" ></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Sold_to_City__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Sold-To Country  :" rendered="{!!isExtendRecordType}" ></apex:outputText>
+    <apex:outputText value="Country  :" rendered="{!isExtendRecordType}" ></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Sold_to_Country__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Sold-To State/Province  :" rendered="{!!isExtendRecordType}" ></apex:outputText>
+    <apex:outputText value="State/Province  :" rendered="{!isExtendRecordType}" ></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Sold_to_State_Province__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Sold-To Region  :" rendered="{!!isExtendRecordType}" ></apex:outputText>
+    <apex:outputText value="Region  :" rendered="{!isExtendRecordType}" ></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Sold_to_Region__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Sold-To District  :" rendered="{!!isExtendRecordType}" ></apex:outputText>
+    <apex:outputText value="District  :" rendered="{!isExtendRecordType}" ></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Sold_to_District__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Sold-To Postal Code  :" rendered="{!!isExtendRecordType}" ></apex:outputText>
+    <apex:outputText value="Postal Code  :" rendered="{!isExtendRecordType}" ></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Sold_to_Postal_Code__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Sold-To Telephone  :" rendered="{!!isExtendRecordType}" ></apex:outputText>
+    <apex:outputText value="Telephone  :" rendered="{!isExtendRecordType}" ></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Sold_to_Telephone__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Sold-To Fax Number  :" rendered="{!!isExtendRecordType}" ></apex:outputText>
+    <apex:outputText value="Fax Number  :" rendered="{!isExtendRecordType}" ></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Sold_to_Fax_Number__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Sold-To eMail  :" rendered="{!!isExtendRecordType}" ></apex:outputText>
+    <apex:outputText value="E-Mail  :" rendered="{!isExtendRecordType}" ></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Sold_to_e_mail__c}"></apex:outputField></td>
+</tr>
+<tr style="background-color: #A9BCF5">
+<td> <b><apex:outputText value="Customer Tax Information"></apex:outputText></b></td>
+<td></td>
+</tr>
+<tr>
+<td> <apex:outputText value="VAT registration number  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Vat_Number__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Tax Classification  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Tax_Classification__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Tax Category  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Tax_Category__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Tax Code 1  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Tax_Code_1__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Tax Code 2  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Tax_Code_2__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Tax Code 3  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Tax_Code_3__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Tax Code 4  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Tax_Code_4__c}"></apex:outputField></td>
+</tr>
+<tr style="background-color: #A9BCF5">
+<td> <b><apex:outputText value="Marketing Information"></apex:outputText></b></td>
+<td></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Estimated Average Monthly Purchases  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Estimated_Average_Monthly_Purchases__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Estimated Number of Orders per Month  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Estimated_Number_of_Orders_per_Month__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Sales district  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Sales_District__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Sales Office  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Sales_Office__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td></td>
+<td> </td>
+</tr>
+<tr>
+<td> <apex:outputText value="Business Strategic  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Business_Strategic__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Sales District  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Sales_District__c}"></apex:outputField></td>
+</tr>
+<tr style="background-color: #A9BCF5">
+<td> <b><apex:outputText value="Comments"></apex:outputText></b></td>
+<td></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Comments  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Data_Analyst_Comments__c}"></apex:outputField></td>
+</tr>
+</table>
+</td>
+
+<td>
+<table border="1" cellpadding="0" cellspacing="0">
+<tr style="background-color: #A9BCF5">
+<td nowrap="0"> <b><apex:outputText value="Additional Customer Details"></apex:outputText></b></td>
+<td></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Customer Language  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Customer_language__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Business category  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Business_category__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Type Of Business  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Business_Type__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Type Of OwnerShip  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Ownership_Type__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Customer Industry  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Industry__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Customer Website  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Website__c}"></apex:outputField></td>
+</tr>
+
+
+
+</table>
+</td>
+
+</tr>
+</table>
+<!--new code-->
+<table>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+</table>
+
+<table border="1" cellpadding="0" cellspacing="0">
+<tr style="background-color: #A9BCF5">
+<td align="left"> <b><apex:outputText value="Proposed Credit and Payment Information"></apex:outputText></b></td>
+<td></td>
+</tr>
+<tr>
+
+<td>
+<table border="1" cellpadding="0" cellspacing="0">
+<tr>
+<td> <apex:outputText value="Proposed Terms of Payment  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Proposed_Terms_of_Payment__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Proposed Non Standard Terms of Payment  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Proposed_Non_Standard_Terms_of_Payment__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Proposed Credit Limit  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Proposed_Credit_Limit__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Proposed Credit Limit Currency Code  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Proposed_Credit_Limit_Currency_Code__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Proposed Credit Term Type  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Proposed_Credit_Term_Type__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Proposed Risk Category  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Proposed_Risk_Category__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Preferred Bank Name  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Preferred_Bank_Name__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Last Internal Review  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Last_Internal_Review__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Next Internal Review  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Next_Internal_Review__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Last External Review  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Last_External_Review__c}"></apex:outputField></td>
+</tr>
+</table>
+</td>
+
+<td>
+<table border="1" cellpadding="0" cellspacing="0">
+<tr>
+<td> <apex:outputText value="Cash Management Group  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Proposed_Cash_Management_Group__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Payment Index  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Proposed_Payment_Index__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Rating  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Proposed_Rating__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Credit information number  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Proposed_credit_information_number__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Payment Method  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Payment_Method__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="DUNS Number  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.DUNS_Number__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Cred.rep.grp  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Proposed_Cred_rep_grp__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Proposed Customer Group  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Proposed_Customer_Group__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Alternative Preferred Bank Name  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Alternative_Preferred_Bank_Name__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Customer credit group  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Proposed_Customer_credit_group__c}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Reference data  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Proposed_Reference_date__c  }"></apex:outputField></td>
+</tr>
+</table>
+</td>
+
+</tr>
+</table>
+
+<table>
+<tr><td></td></tr>
+<tr><td></td></tr>
+
+<tr>
+<td>
+
+<table border="1" cellpadding="0" cellspacing="0">
+<tr style="background-color: #A9BCF5">
+<td align="left" nowrap="0"><b><apex:outputText value="Destination Credit Information"></apex:outputText></b></td>
+<td></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Destination Terms of Payment  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Destination_Terms_of_Payment__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Dest. Non Standard Terms of Payment  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Dest_Non_Standard_Terms_of_Payment__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Destination Credit Limit  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Destination_Credit_limit__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Destination Credit Limit Currency Code  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Destination_Credit_Limit_Currency_code__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Destination Credit Term Type"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Destination_credit_term_type__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Destination Risk Category  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Destination_risk_category__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Destination Credit Comments  :"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Destination_Credit_Comments__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+
+</table>
+
+</td>
+</tr>
+
+</table>
+
+<table>
+<tr><td></td></tr>
+<tr><td></td></tr>
+
+</table>
+
+
+<table>
+
+
+<tr>
+<td>
+
+<table border="1" cellpadding="0" cellspacing="0">
+<tr style="background-color: #A9BCF5">
+<td align="left" nowrap="0"> <b><apex:outputText value="Country Credit Information"></apex:outputText></b></td>
+<td></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Approved  Terms of Payment"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Approved_Terms_of_Payment__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Approved Non Standard Terms of Payment"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Approved_Non_Standard_Terms_of_Payment__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Approved  Credit Limit"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Approved_Credit_Limit__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Approved  Credit Limit Currency Code"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Approved_Credit_Limit_Currency_Code__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Approved  Credit Term Type"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Approved_Credit_Term_Type__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Approved  Risk Category"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Approved_Risk_Category__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Last Internal Review"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Last_Internal_Review__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Next Internal Review"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Next_Internal_Review__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Last External Review"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Last_External_Review__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Country Credit Comments"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Country_Credit_Comments__c  }" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+</table>
+
+</td>
+
+<td>
+
+<table border="1" cellpadding="0" cellspacing="0">
+<tr style="background-color: #A9BCF5">
+<td align="left" nowrap="0"> </td>
+
+</tr>
+<tr>
+<td> <apex:outputText value="Cash Management Group"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Approved_Cash_Management_Group__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Payment Index"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Approved_Payment_Index__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Rating"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Approved_Rating__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Credit information number"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Approved_credit_information_number__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Cred.rep.grp"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Approved_Cred_rep_grp__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Customer credit group"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Approved_Customer_credit_group__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Reference data"></apex:outputText></td>
+<td width="50%"> <apex:outputField value="{!OnboardingReqdetails.Approved_Reference_date__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+</table>
+
+</td>
+</tr>
+
+</table>
+</apex:outputPanel>
+
+<apex:outputPanel rendered="{!isModifyCreditData}">
+<table border="1" cellpadding="0" cellspacing="0">
+<tr style="background-color: #A9BCF5">
+<td> <b><apex:outputText value="Modify Credit Data"></apex:outputText></b></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Risk Category :"></apex:outputText></td>
+<td> <apex:outputField value="{!OnboardingReqdetails.Risk_Category__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+<td> <apex:outputText value="Credit Control Area :"></apex:outputText></td>
+<td> <apex:outputField value="{!OnboardingReqdetails.Credit_Control_Area__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Approved Reference Date :"></apex:outputText></td>
+<td> <apex:outputField value="{!OnboardingReqdetails.Approved_Reference_date__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+<td> <apex:outputText value="Cred.rep.grp :"></apex:outputText></td>
+<td> <apex:outputField value="{!OnboardingReqdetails.Cred_rep_grp__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Last Internal Review :"></apex:outputText></td>
+<td> <apex:outputField value="{!OnboardingReqdetails.Last_Internal_Review__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+<td> <apex:outputText value="Approved Customer Group :"></apex:outputText></td>
+<td> <apex:outputField value="{!OnboardingReqdetails.Approved_Customer_Group__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Next Internal Review :"></apex:outputText></td>
+<td > <apex:outputField value="{!OnboardingReqdetails.Next_Internal_Review__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+<td> <apex:outputText value="Approved Credit Information Number :"></apex:outputText></td>
+<td> <apex:outputField value="{!OnboardingReqdetails.Approved_credit_information_number__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+</table>
+
+</apex:outputPanel>
+<table>
+<tr><td></td></tr>
+ <tr><td></td></tr>
+ <tr><td></td></tr>
+</table>
+<apex:outputPanel rendered="{!If(OnboardingReqdetails.RecordType.name =='Miscellaneous customer data request'|| OnboardingReqdetails.RecordType.name == 'Modify Credit Data', true, false)}" >
+<table border="1" cellpadding="0" cellspacing="0">
+<tr style="background-color: #A9BCF5">
+<td> <b><apex:outputText value="Country Credit Comments"></apex:outputText></b></td>
+<td></td>
+</tr>
+<tr>
+<td> <apex:outputText value="Country Credit Comments :"></apex:outputText></td>
+
+<td > <apex:outputField value="{!OnboardingReqdetails.Country_Credit_Comments__c}" rendered="{!IF((displaySection==true && isFromDCAtoCA==true),true,false)}"></apex:outputField></td>
+</tr>
+</table>
+
+</apex:outputPanel>
+
+ <!-- Customer Data Request Line Item -->
+            <apex:outputPanel rendered="{!lineItemList.size!=0}" >
+                <table style="page-break-before: always;">
+                    <tr>
+                        <td> <h1>
+                            <apex:outputText value="Customer Data Request Line Item Details">
+                            </apex:outputText></h1>
+                        </td>
+                    </tr>      
+                </table>
+                <apex:outputPanel >
+                    <apex:repeat value="{!lineItemList}" var="lineItem" id="Repeat">
+                        <table>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                        </table> 
+                        <apex:outputPanel rendered="{!IF((lineItem.RecordType.name=='Link Contact'),true,false)}">
+                            <table border="1" cellpadding="0" cellspacing="0">
+                                <tr style="background-color: #A9BCF5">
+                                   <td> <apex:outputField value="{!lineItem.RecordType.name}"></apex:outputField></td>
+                                   <td></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table border="1" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td> <apex:outputText value="Customer Data Request :"></apex:outputText></td>
+                                                <td> <apex:outputField value="{!lineItem.Customer_Data_Request__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                                <td> <apex:outputText value="Account Name :"></apex:outputText></td>
+                                                <td> <apex:outputField value="{!OnboardingReqdetails.Account_at_customer__c}"></apex:outputField></td>
+                                            </tr> 
+                                            <tr>
+                                                <td> <apex:outputText value="Contact Name :"></apex:outputText></td>
+                                                <td> <apex:outputField value="{!lineItem.Contact_Name__c}"></apex:outputField></td>
+                                            </tr> 
+                                            <tr>
+                                                <td> <apex:outputText value="Email :"></apex:outputText></td>
+                                                <td> <apex:outputField value="{!lineItem.Contact_e_mail__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                                <td> <apex:outputText value="Fax :"></apex:outputText></td>
+                                                <td> <apex:outputField value="{!lineItem.Contact_Fax__c}"></apex:outputField></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table border="1" cellpadding="0" cellspacing="0">
+                                            <!-- 
+                                            <tr>
+                                               <td> <apex:outputText value="Contact Owner :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem.OwnerId}"></apex:outputField> </td>
+                                            </tr>-->
+                                            <tr>
+                                               <td> <apex:outputText value="Phone :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem.Contact_Telephone__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Mobile :"></apex:outputText></td>
+                                               <td> <!--<apex:outputField value="{!lineItem.Contact_Telephone__c}"></apex:outputField> --></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Department :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem.Contact_Department__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Customer Contact function:"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem.Customer_Contact_Function__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Comments:"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem.Comments__c}"></apex:outputField></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </apex:outputPanel>
+                    </apex:repeat>
+                    
+                    <!--Add New Partner function-->
+                    <apex:repeat value="{!lineItemList}" var="lineItem1" id="Repeat4">
+                        <table>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                        </table> 
+                        <apex:outputPanel rendered="{!IF((lineItem1.RecordType.name=='Create new partner function'),true,false)}">
+                            <table border="1" cellpadding="0" cellspacing="0">
+                                <tr style="background-color: #A9BCF5">
+                                    <td><b><apex:outputText value="Create new partner function"></apex:outputText></b></td>
+                                </tr>
+                            </table>
+                            <table border="1" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <table border="1" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td> <apex:outputText value="Customer Data Request Line Item Number :"></apex:outputText></td>
+                                                <td> <apex:outputField value="{!lineItem1.Name}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                                <td> <apex:outputText value="Customer Name :"></apex:outputText></td>
+                                                <td> <apex:outputField value="{!lineItem1.Customer_Name__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                                <td> <apex:outputText value="Customer Name 2 :"></apex:outputText></td>
+                                                <td> <apex:outputField value="{!lineItem1.Customer_Name_2__c}"></apex:outputField></td>
+                                            </tr> 
+                                            <tr>
+                                                <td> <apex:outputText value="Customer Name 3 :"></apex:outputText></td>
+                                                <td> <apex:outputField value="{!lineItem1.Customer_Name_3__c}"></apex:outputField></td>
+                                            </tr> 
+                                            <tr>
+                                                <td> <apex:outputText value="Customer Name 4 :"></apex:outputText></td>
+                                                <td> <apex:outputField value="{!lineItem1.Customer_Name_4__c}"></apex:outputField></td>
+                                            </tr>                       
+                                            <tr>
+                                                <td> <apex:outputText value="Company Code :"></apex:outputText></td>
+                                                <td> <apex:outputField value="{!lineItem1.Company_Code__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                                <td> <apex:outputText value="Request Type :"></apex:outputText></td>
+                                                <td> <apex:outputField value="{!lineItem1.RecordType.name}"></apex:outputField></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table border="1" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                               <td> <apex:outputText value="Customer Data Request :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem1.Customer_Data_Request__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Customer Number :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem1.Customer_Number__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Sales Organization :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem1.Sales_Organization__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Distribution Channel :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem1.Distribution_Channel__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Division :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem1.Division__c}"></apex:outputField></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table border="1" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td><b><apex:outputText value="Partner Information"></apex:outputText></b></td>
+                                </tr>
+                            </table>
+                            <table border="1" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <table border="1" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                               <td> <apex:outputText value="Account Group :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem1.Account_Group__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Name 1 :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem1.Name1__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Name 2 :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem1.Name2__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Name 3 :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem1.Name3__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Name 4 :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem1.Name4__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Street :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem1.Street__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Office/ House Number :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem1.Office_House_Number__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="House Supplement :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem1.House_Supplement__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Comments :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem1.Comments__c}"></apex:outputField></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table border="1" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                               <td> <apex:outputText value="City :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem1.City__c}"></apex:outputField></td>
+                                            </tr>
+                    
+                                            <tr>
+                                               <td> <apex:outputText value="District :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem1.District__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Country :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem1.Country__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Postal Code :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem1.Postal_Code__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Telephone :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem1.Telephone__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Fax Number :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem1.Fax_Number__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Email Address :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem1.Email_Address__c}"></apex:outputField></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </apex:outputPanel>
+                    </apex:repeat>
+                    
+                    <apex:repeat value="{!lineItemList}" var="lineItem2" id="Repeat7">
+                        <table>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                        </table> 
+                        <apex:outputPanel rendered="{!IF((lineItem2.RecordType.name=='Link Existing Partner Function'),true,false)}">
+                            <table>
+                                <tr style="background-color: #A9BCF5">
+                                    <td><b><apex:outputText value="Link Existing Partner"></apex:outputText></b></td>
+                                </tr>
+                            </table>
+                            <table border="1" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <table border="1" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                               <td> <apex:outputText value="Customer Data Request Line Item Number :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem2.Name}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Customer Name :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem2.Customer_Name__c}"></apex:outputField></td>
+                                            </tr> 
+                                            <tr>
+                                               <td> <apex:outputText value="Customer Name 2 :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem2.Customer_Name_2__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Customer Name 3 :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem2.Customer_Name_3__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Customer Name 4 :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem2.Customer_Name_4__c}"></apex:outputField></td>
+                                            </tr>  
+                                            <tr>
+                                               <td> <apex:outputText value="Company Code :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem2.Company_Code__c}"></apex:outputField></td>
+                                            </tr>
+                    
+                                            <tr>
+                                               <td> <apex:outputText value="Request Type :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem2.RecordType.name}"></apex:outputField></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table border="1" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                               <td> <apex:outputText value="Customer Data Request :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem2.Customer_Data_Request__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Customer Number :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem2.Customer_Number__c}"></apex:outputField></td>
+                                            </tr>
+                    
+                    
+                                            <tr>
+                                               <td> <apex:outputText value="Sales Organization :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem2.Sales_Organization__c}"></apex:outputField></td>
+                                            </tr>
+                    
+                                            <tr>
+                                               <td> <apex:outputText value="Distribution Channel :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem2.Distribution_Channel__c}"></apex:outputField></td>
+                                            </tr>
+                    
+                                            <tr>
+                                               <td> <apex:outputText value="Division :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem2.Division__c}"></apex:outputField></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table border="1" cellpadding="0" cellspacing="0">
+                                <tr >
+                                    <td><b><apex:outputText value="New Partner Information"></apex:outputText></b></td>
+                                </tr>
+                            </table>
+                            <table border="1" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <table border="1" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                               <td> <apex:outputText value="Partner Function Code/Type :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem2.Partner_Function__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Partner Number :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem2.Partner_Number__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Partner Name from User :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem2.ERP_Relationship_User__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Comments :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem2.Comments__c}"></apex:outputField></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </apex:outputPanel>
+                    </apex:repeat>
+                    <apex:repeat value="{!lineItemList}" var="lineItem3" id="Repeat1">
+                        <table>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                        </table>
+                        <apex:outputPanel rendered="{!IF((lineItem3.RecordType.name=='Create new bill to, ship to, payer'),true,false)}">
+                            <table>
+                                <tr style="background-color: #A9BCF5">
+                                    <td><b><apex:outputText value="Shipping Address"></apex:outputText></b></td>
+                                </tr>
+                            </table>
+                            <table border="1" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <table border="1" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                               <td> <apex:outputText value="Customer Data Request Line Item Number :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Name}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Customer Name :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Customer_Name__c}"></apex:outputField></td>
+                                            </tr> 
+                                            <tr>
+                                               <td> <apex:outputText value="Customer Name 2 :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Customer_Name_2__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Customer Name 3 :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Customer_Name_3__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Customer Name 4 :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Customer_Name_4__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Customer Number :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Customer_Number__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Company Code :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Company_Code__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Request Type :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.RecordType.name}"></apex:outputField></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table border="1" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                               <td> <apex:outputText value="Customer Data Request :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Customer_Data_Request__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Sales Organization :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Sales_Organization__c}"></apex:outputField></td>
+                                            </tr>
+                    
+                                            <tr>
+                                               <td> <apex:outputText value="Distribution Channel :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Distribution_Channel__c}"></apex:outputField></td>
+                                            </tr>
+                    
+                                            <tr>
+                                               <td> <apex:outputText value="Division :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Division__c}"></apex:outputField></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table border="1" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td><b><apex:outputText value="Address Information"></apex:outputText></b></td>
+                                </tr>
+                            </table>
+                            <table border="1" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <table border="1" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                               <td> <apex:outputText value="Account Group :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Account_Group__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Office/ House Number :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Office_House_Number__c}"></apex:outputField></td>
+                                            </tr> 
+                                              
+                                            <tr>
+                                               <td> <apex:outputText value="House Supplement :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.House_Supplement__c}"></apex:outputField></td>
+                                            </tr>           
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table border="1" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                               <td> <apex:outputText value="Street :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Street__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="City :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.City__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Country :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Country__c}"></apex:outputField></td>
+                                            </tr>
+                    
+                                            <tr>
+                                               <td> <apex:outputText value="State/Province :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.State_Province__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Region :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Region__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="District :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.District__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Postal Code :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Postal_Code__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="P.O.Box :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.P_O_Box__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="P.O.Box City :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.P_O_Box_City__c}"></apex:outputField></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table border="1" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td><b><apex:outputText value="Sales Data"></apex:outputText></b></td>
+                                </tr>
+                            </table>
+                            <table border="1" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <table border="1" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                               <td> <apex:outputText value="Delivery Plant :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Ship_to_Delivery_Plant__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Sales Office :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Ship_to_Sales_Office__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Shipping Conditions :"></apex:outputText></td>
+                                               <td> <apex:outputText value="{!lineItem3.Shipping_Conditions__c}"></apex:outputText></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table border="1" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                               <td> <apex:outputText value="On/By Indicator :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.On_By_Indicator__c}"></apex:outputField></td>
+                                            </tr>
+                    
+                                            <tr>
+                                               <td> <apex:outputText value="Incoterms (Part 1) :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Incoterms_Part_1__c}"></apex:outputField></td>
+                                            </tr>
+                    
+                                            <tr>
+                                               <td> <apex:outputText value="Incoterms (Part 2) :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Incoterms_Part_2__c}"></apex:outputField></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table border="1" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td><b><apex:outputText value="International Section"></apex:outputText></b></td>
+                                </tr>
+                            </table>
+                            <table border="1" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <table border="1" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                               <td> <apex:outputText value="Local Version Language :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Local_Version__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Local Language Customer Name 1 :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Local_Language_Customer_Name_1__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Local Language Customer Name 2 :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Local_language_Customer_Name_2__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Local Language Customer Name 3  :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Local_language_Customer_Name_3__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Local Language Customer Name 4  :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Local_language_Customer_Name_4__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Local Language Office/House Number :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Local_Language_Office_House_Number__c}"></apex:outputField></td>
+                                            </tr> 
+                                              
+                                            <tr>
+                                               <td> <apex:outputText value="Local Language House Supplement :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Local_Language_House_Supplement__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Local Language Street :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Local_Language_Street__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Local Language City:"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Local_Language_City__c}"></apex:outputField></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table border="1" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                               <td> <apex:outputText value="Local Language Country :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Local_Language_Country__c}"></apex:outputField></td>
+                                            </tr>
+                    
+                                            <tr>
+                                               <td> <apex:outputText value="Local Language State/Province :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Local_Language_State_Province__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Local Language Region :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Local_Language_Region__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Local Language District :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Local_Language_District__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Local Language Postal Code :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Local_Language_Postal_Code__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Local Language Data Line :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Local_language_Data_Line__c}"></apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                               <td> <apex:outputText value="Local Language Telebox :"></apex:outputText></td>
+                                               <td> <apex:outputField value="{!lineItem3.Local_language_Telebox__c}"></apex:outputField></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </apex:outputPanel>
+                    </apex:repeat>                                                                                        
+                </apex:outputPanel>  
+            </apex:outputPanel>  
+
+<table border="1" cellpadding="0" cellspacing="0">
+<tr style="background-color: #A9BCF5">
+   <td> <b><apex:outputText value="Attachments and related lists "></apex:outputText></b></td>
+   <td></td>
+</tr>      
+<tr>
+   <td>
+   <apex:pageBlock >
+   <apex:pageBlockTable value="{!attachemntsList}" var="attachemnt">
+   <apex:column value="{!attachemnt.Name}"/>
+    </apex:pageBlockTable>
+    </apex:pageBlock>
+   </td>
+</tr>
+</table>
+
+</apex:form>
+<!-- End of DCA/CA extract -->
+
+
+
+</body>
+</apex:page>

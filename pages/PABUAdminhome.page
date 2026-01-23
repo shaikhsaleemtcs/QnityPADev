@@ -1,0 +1,321 @@
+<apex:page controller="ctrlPAMain" tabstyle="Price_Approval__tab" sidebar="false" showHeader="true" id="currentPage" cache="true" action="{!onLoadCall}">
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.js')}" />
+<apex:stylesheet value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/css/jquery.dataTables.css')}" />
+ <c:loadingComponent />
+    <apex:pageMessages escape="false" id="errorMessage"/> 
+    
+    <!-- Version 1.1 START  --> 
+    <!-- Done UI changes - Prachi 14th feb -->
+    <!-- version 1.1 END -->
+<!--    Ver.            Developer               Changes                                                         Dependencies    -->
+<!--    1.2             Priyanka        Changed table component to 'PARelatedListComponent'                                     -->
+<!--                                    from PARelatedList                                                      None            -->
+<!--    1.3             Brundha         UI                                                                      None            -->
+<!--    PP20131105      Priyanka        DTT USAT Issue - Provide buttons to the top of the page                 None -->
+<!--    VR20131107  Vinoth Rajapandian  DTT Rollout Issue - Added Commandlink to hold the business when navigating to home screen and commented outputlink      None    -->
+<!--    TJ20140505      Tarun Jain      Added the landing page link                                             None     -->    
+<!--    TJ20140509      Tarun Jain      Added Navigation Flow Text                                              None    -->
+<!--    HL20140918      Hema Latha      Added Attributes for routing to manage approver from bu admin home page, export button to save details  None -->
+    <style>
+        .navFlow{height:20px;padding:5px;font-size:13px;font-style:oblique;margin-bottom:8px;}
+        .customerLink{font-size:15px;height:20px;margin-bottom:1px;padding:5px;border:solid 1px;border-color:#6E96B2; background-color:#E5F3FC;font-weight:bold;text-align:left;}
+        #landPage  .detailList{padding:0px;border:1px solid #E2E3E4;}
+        #landPage  .detailList .data2Col{padding:0px;}
+        #landPage  .detailList .dataCol{padding:0px;}
+        #landPage  .detailList .dataCol .requiredBlock{top:0px; height:20px;bottom:0px;}
+        #landPage  .detailList tr td{border-bottom:none;} 
+        #landPage  .bPageBlock{float:left;width:100%;}
+        #landPage  .pbSubheader{margin-bottom:0px;}
+        .bPageBlock .detailList .list tr th{color: white;padding: 0px;border: 0px;}
+        #landPage .detailList tr th{color:white;background-color:#63A4C5;}
+        body .pbBody table.list tr td{border-bottom: none;padding:0px;}
+        body .pbBody table.list tr th{color:white;background-color:#63A4C5;}
+         #landPage .detailList .list tr th{color:black;}
+         body .pbBody table.list tr td{border-bottom: none;}    
+         #landPage table.list tr th{color:black;background-color:#f8f8f8;border:1px solid #E2E3E4;} 
+         body .pbBody table.list{border:1px solid #e0e3e5;background-color:#fff;}
+         body .pbBody table.list tr td{border:1px solid #e0e3e5;background-color:#fff;}
+        #landPage .pbBody{margin:0px;}
+        #landPage  .detailList{border:1px solid #E2E3E4;}        
+        #landPage  .detailList tr th{border-bottom:none;}
+        .buttons a.btn{width:70px;float:left;}
+        .noTableFooter
+        {
+        margin:0px!important;
+        }
+        .spinnerCt {
+        left: 50%;
+        top: 35%;
+        position: absolute;
+        //z-index: 1;
+        z-index: 50;
+        padding: 20px 40px;
+        box-shadow: 0pt 2px 5px rgb(172, 172, 172);
+        border-radius: 1em 1em 1em 1em;
+        border: 1px solid rgb(206, 236, 255);
+        background-color: rgb(206, 236, 255);
+        background-style: solid;
+    }
+    
+    .spinner {
+        padding: 10px 15px 10px 0pt;
+        vertical-align: middle;
+    }
+    
+    .spinnerCt .loadingIndicator {
+        display: inline;
+        font-size: 135%;
+        font-weight: bold;
+    }
+        
+    .mask {
+        width: 100%;
+        height: 100%;
+        background-color: rgb(0, 0, 0);
+        opacity: 0.45;
+        filter: alpha(opacity =     45);
+        position: absolute;
+        z-index: 45;
+        top: 0pt;
+        left: 0pt;
+    }
+    </style>
+    
+    <script type="text/javascript">
+    	var j$ = jQuery.noConflict(); 
+    	j$(document).ready(function(){
+        datatable();
+		});
+		function datatable(){   
+    		var tab1=j$('.list').dataTable({
+            "bLengthChange":false,
+            sPaginationType: "full_numbers",
+            sPlaceHolder : "foot:before",
+    		});
+    	j$('#PARelatedListComponentTable'+'_filter').after('<br /><br />');
+    	j$('#PARelatedListComponentTable').after('<br />');
+		}
+
+        function confirmDelete()
+        {
+            var con = confirm('Action will delete the approval setup details. Do you want to proceed?');
+            return con;
+        } 
+        
+        function redirectEdit(selectedId)
+        {
+        window.location = '/apex/ApprovalSetuppa?adminMasterId=' + selectedId;
+        return false;
+        }
+        
+        function redirect(selectedId)
+        {
+        window.location = '/apex/ApprovalSetuppa?adminMasterId=' + selectedId+'&ClickValue='+'Idval';
+        return false;
+        }
+         
+                                         //<TJ20140401> - added javascript to generate HTML Table with additional functionalities
+ 
+   
+      /*  function loadDatatables()
+         {
+           var tab=j$('#PARelatedListComponentTable').dataTable({
+                "bLengthChange":false,
+                "bStateSave":true,
+                //"aLengthMenu": [100,200],
+                "iDisplayLength" : totalRowsInt,
+                "aoColumnDefs" : [{"bSortable": false,"bSearchable": false, "aTargets":[0]}],
+                sPaginationType: "full_numbers",
+                sPlaceHolder : "foot:before",
+                "fnStateSave": function (oSettings, oData) {
+                                    localStorage.setItem( 'DataTables', JSON.stringify(oData) );
+                                    },
+                    "fnStateLoad": function (oSettings) {
+                                    if(bool==='true'){
+                                        return JSON.parse( localStorage.getItem('DataTables') );
+                                    }
+                                   },
+                    "fnStateLoadParams": function(oSettings,oData){
+                                            if(bool==='false'){
+                                                oData.oSearch.sSearch = "";
+                                            }
+                                        }   
+                });                     
+        j$('#PARelatedListComponentTable'+'_filter').after('<br /><br />');
+        j$('#PARelatedListComponentTable').after('<br />');
+    }*/
+    
+    </script>
+    <apex:form >
+    <apex:actionStatus id="stat">
+        <apex:facet name="start">
+            <div class="spinnerMask" id="spinnerMask">
+                <div class="spinnerCt">
+                    <img src="/img/analytics/reportbuilder/icons/spinner32.gif" alt="Loading..." width="32" height="32" align="center" class="spinner" title="Loading..." />
+                    <div class="loadingIndicator">Loading...</div>
+                </div>
+                <div class="mask"></div>
+            </div>
+        </apex:facet>
+    </apex:actionStatus>
+    <!-- <TJ20140505> Added Landing Page Link -->
+        <div align="left" class="navFlow">
+            <apex:commandLink id="link0" value="Landing Page" action="{!businessComponentAction}" target="_self" style="color:blue;">
+            <apex:param name="desiredAction" value="landingpage" assignTo="{!businessaction}" />
+            <apex:param name="newPageLabel" value="PAHome" assignTo="{!newPageLabel}" />
+            </apex:commandLink>
+    <!-- <TJ20140509> Added Navigation Flow Text-->
+            <apex:outputText value="{!if(NOT(ISNULL(navigationText)),'>>','')} "/>
+            <apex:outputText value="{!navigationText}"/>
+            <apex:outputText value=">>{!$Label.BU_Admin_Home_Page}"/>
+        </div>
+<!--        <TJ20140417>   Changed Page Label-->        
+    <div class="customerLink">
+        {!$Label.BU_Admin_Home_Page}
+    </div>
+    <!--<MS20140905> Adding Filters -->
+        <apex:pageBlock >
+            <apex:pageBlockSection title="Search Criteria" columns="1" id="PriceCategory">
+                <apex:pageBlockSectionItem >
+                    Sales Area
+                    <apex:selectList size="1" value="{!service.paServicestate.approvalSetup.salesAreaFilter}" >
+                        <apex:selectOptions value="{!service.paServicestate.approvalSetup.SalesAreaOptionsList}"/>
+                      <apex:actionSupport event="onchange" action="{!service.paServicestate.approvalSetup.sortApprovalSetupByFilter}" reRender="FilterOptions,tableId,errorMessage" status="stat"> 
+                      </apex:actionSupport> 
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    Request Type
+                    <apex:selectList size="1" value="{!service.paServicestate.approvalSetup.requestTypeFilter}" >
+                        <apex:selectOptions value="{!service.paServicestate.approvalSetup.RequestTypeOptionsList}"/>
+                      <apex:actionSupport event="onchange" action="{!service.paServicestate.approvalSetup.sortApprovalSetupByFilter}" reRender="FilterOptions,category,tableId,errorMessage" status="stat">
+                      </apex:actionSupport> 
+                    </apex:selectList>
+              </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    Price Category
+                    <apex:selectList size="1" value="{!service.paServicestate.approvalSetup.priceCategoryFilter}" id="category">
+                        <apex:selectOptions value="{!service.paServicestate.approvalSetup.PriceCategoryOptionsList}"/>
+                      <apex:actionSupport event="onchange" action="{!service.paServicestate.approvalSetup.sortApprovalSetupByFilter}" reRender="FilterOptions,tableId,errorMessage" status="stat"> 
+                      </apex:actionSupport> 
+                    </apex:selectList>
+              </apex:pageBlockSectionItem>
+             </apex:pageBlockSection>
+             </apex:pageBlock>
+       <!-- HL20140918 - Added Selected1, Selected2,ActionAtr1  -->
+    <div id="landPage">
+        <apex:pageBlock id="tableId">
+              <apex:pageBlockSection title="Admin Master Details" columns="1" collapsible="false">   
+
+                <div id="records">
+                  <apex:outputPanel >
+                    <div style="float:right;">
+                          <apex:commandLink value=" Previous Page |" action="{!businessComponentActionForRerender}" 
+                                         status="stat" rendered="{!service.PAServicestate.approvalSetup.prevPage}" >  
+                    <apex:param name="desiredAction" value="FetchRecordswithOffsetback" assignTo="{!businessAction}"/>
+                    <apex:param name="newpage" value="BU_Admin_Home_Page" assignTo="{!newPageLabel}"/>
+                    <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                    <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                    </apex:commandLink>  
+                          <apex:commandLink value=" Next Page" action="{!businessComponentActionForRerender}" 
+                                         status="stat"  rendered="{!service.PAServicestate.approvalSetup.nextPage}">  
+                    <apex:param name="desiredAction" value="FetchRecordswithOffset" assignTo="{!businessAction}"/>
+                    <apex:param name="newpage" value="BU_Admin_Home_Page" assignTo="{!newPageLabel}"/>
+                    <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                     <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                    </apex:commandLink>  
+                          </div>
+                    </apex:outputPanel>  
+                    <!-- END Pagination link --> 
+                    <apex:repeat value="{!service.PAServicestate.approvalSetup.relatedWrappersList}"
+                        var="wrapper">
+                        <!-- Ver 1.2 START -->
+                        <c:PARelatedListComponent WrapperRecordsDisp="{!wrapper.wrapperList}"
+                            columnsDisp="{!wrapper.keyCombinationcolumns}"
+                            viewMode="{!currentPageLabel}" 
+                            selected="{!service.PAServicestate.approvalSetup.adminMasterId}"
+                            actionAtr="{!service.PAServicestate.approvalSetup.readonlyDisplayonID}"
+                            actionAtr1="{!service.PAServicestate.approvalSetup.ManageApprover}"
+                            selected1="{!service.PAServicestate.approvalSetup.keyfield}"
+                            selected2="{!service.PAServicestate.approvalSetup.approverRole}"
+                            typeOfSObjectList="{!wrapper.sObjectTypeName}" showEditLink="true"
+                            showDeleteLink="true"
+                            labelName="{!pageName}"
+                            currentHeader="{!$Label.BU_Admin_Home_Page}">
+                        </c:PARelatedListComponent>
+                        <!-- Ver 1.2 END -->
+                    </apex:repeat>
+                      <apex:outputPanel >
+                    <div style="float:right;">
+                          <apex:commandLink value=" Previous Page |" action="{!businessComponentActionForRerender}" 
+                                         status="stat" rendered="{!service.PAServicestate.approvalSetup.prevPage}" >  
+                    <apex:param name="desiredAction" value="FetchRecordswithOffsetback" assignTo="{!businessAction}"/>
+                    <apex:param name="newpage" value="BU_Admin_Home_Page" assignTo="{!newPageLabel}"/>
+                    <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                    <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                    </apex:commandLink>  
+                          <apex:commandLink value=" Next Page" action="{!businessComponentActionForRerender}" 
+                                         status="stat"  rendered="{!service.PAServicestate.approvalSetup.nextPage}">  
+                    <apex:param name="desiredAction" value="FetchRecordswithOffset" assignTo="{!businessAction}"/>
+                    <apex:param name="newpage" value="BU_Admin_Home_Page" assignTo="{!newPageLabel}"/>
+                    <!-- <TJ20140509> Passing parameter to display navigation flow text -->
+                     <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                    </apex:commandLink>  
+                          </div>
+                    </apex:outputPanel>  
+                    <!-- END Pagination link --> 
+                </div>
+            </apex:pageBlockSection>
+<!-- PP20131105 -->
+<apex:pageBlockbuttons >
+            <div class="buttons" style="float:left;text-align:center;padding:10px 0px 10px 15%;">
+                <apex:commandLink value="{!$Label.Create_New_Button}"
+                    action="{!businessComponentAction}" styleClass="btn"
+                    style="text-decoration:none;">
+                    <apex:param name="desiredAction" value="goToapprovalSetup"
+                        assignTo="{!businessAction}" />
+                    <apex:param name="newPageLabel" value="PAApprovalSetup"
+                        assignTo="{!newPageLabel}" />
+                    <!-- <TJ20140509> Passing Label for Displaying Navigation Flow -->
+                    <apex:param name="pageName" value="{!$Label.BU_Admin_Home_Page}" assignTo="{!pageName}"/>
+                    <apex:param name="readonlyOnIdFlag" value="false"
+                        assignTo="{!service.PAServicestate.approvalSetup.readonlyDisplayonId}" />                       
+                </apex:commandLink>
+                
+<!--                <apex:commandLink value="Back" action="{!businessComponentAction}"-->
+<!--                                styleClass="btn" style="text-decoration:none;">-->
+<!--                        <apex:param name="desiredAction" value="statusCancel"-->
+<!--                 assignTo="{!businessaction}" />-->
+<!--                     <apex:param name="newPageLabel" value="PAHome" -->
+<!--                 assignTo="{!newPageLabel}" />-->
+<!--                 -->
+<!--                </apex:commandLink>-->
+                <!-- VR20131107 DTT Rollout Issue - Added Commandlink to hold the business when navigating to home screen   -->
+                <apex:commandLink value="Back" action="{!businessComponentAction}"
+                                  styleClass="btn" style="text-decoration:none;">
+                                  <apex:param name="desiredAction" value="BackToHome"
+                                  assignTo="{!businessaction}" />
+                                  <apex:param name="newPageLabel" value="PAHome" 
+                                  assignTo="{!newPageLabel}" />
+                </apex:commandLink>
+                <!-- VR20131107 DTT Rollout Issue - Commented the outputlink and added Commandlink  -->
+                <!-- 
+                <apex:outputLink value="/apex/PAHome" styleClass="btn" style="text-decoration:none" >Back</apex:outputLink>
+                 -->
+              <!--    <div style="text-align:center;padding:10px 0px 10px 0px;"> -->  
+              <!--HL20140918 - Added export button  -->                        
+                    <apex:commandLink value="Export" action="/apex/PAExportToExcelApprovalSetup" styleClass="btn" style="text-decoration:none; color:#484848" />
+                     
+               <!--  <apex:outputLink value="/apex/PAHome" styleClass="btn" style="text-decoration:none;" rendered="{!service.PAServicestate.currentRequest.pclDisplayPopUp=='fetch'}">Cancel</apex:outputLink> --> 
+              <!--   </div> --> 
+                 
+            </div>
+            <!-- PP20131105 -->   
+            </apex:pageBlockbuttons>                   
+        </apex:pageBlock>
+    </div>      
+
+    </apex:form>
+</apex:page>

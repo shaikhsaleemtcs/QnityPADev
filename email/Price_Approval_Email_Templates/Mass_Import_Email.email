@@ -1,0 +1,33 @@
+<messaging:emailTemplate subject="SFDC PA Notification – New Mass Import Request" recipientType="User" relatedToType="Pricing_Request__c">
+    <messaging:htmlEmailBody > 
+    Subject:  SFDC PA Notification –<apex:outputText /> &nbsp; <apex:outputText value="{!relatedTo.Request_Type__c}"/>&nbsp;- &nbsp; <apex:outputText value="{!relatedTo.Pricing_Request_Type__c}"/>&nbsp;
+  <br/><br/>
+         Dear Team,
+<br/> <br/>   Confidential 
+  <br/><br/>
+  A Mass Import Request has been requested. Please find the details of the request below.<br/>
+<br/>
+<apex:outputText value="Business"></apex:outputText>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<apex:outputText value="{!relatedTo.BU__c}"></apex:outputText><br/>
+<apex:outputText value="Request Id"></apex:outputText>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<apex:outputText value="{!relatedTo.Name}"></apex:outputText><br/>
+<apex:outputText value="Requested On"></apex:outputText>&nbsp;&nbsp;&nbsp;:<apex:outputText value="{0,date,yyyy-MMM-dd }">
+       <apex:param value="{!relatedTo.createddate}" />
+</apex:outputText><br/>
+<apex:outputText value="Request"></apex:outputText>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<apex:outputText value="{!relatedTo.Request_Name__c}"></apex:outputText><br/>
+<apex:outputText value="Reason"></apex:outputText>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<apex:outputText value="{!relatedTo.Request_Reason__c}"></apex:outputText><br/>
+<apex:outputText value="Description"></apex:outputText>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<apex:outputText escape="false" value="{!relatedTo.Description__c}"></apex:outputText><br/>
+
+<p>
+<apex:outputText >
+To view the request details and comments,click this link<br/> 
+
+{!LEFT($Api.Partner_Server_URL_140, FIND(".com/",$Api.Partner_Server_URL_140)+3)}/{!relatedTo.id}
+
+</apex:outputText>
+
+</p>
+<apex:outputtext value="Thank you"/>,<br/>
+<apex:outputtext value=" Salesforce.com Price Approval"/><br/><br/>
+Confidential 
+
+    </messaging:htmlEmailBody> 
+</messaging:emailTemplate>

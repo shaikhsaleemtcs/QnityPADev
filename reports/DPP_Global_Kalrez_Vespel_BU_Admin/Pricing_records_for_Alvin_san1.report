@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <columns>
+        <field>ERP_Sales_Prices_SAP__c.Sales_Org_Code__c</field>
+    </columns>
+    <columns>
+        <field>ERP_Sales_Prices_SAP__c.Distribution_Channel_Code__c</field>
+    </columns>
+    <columns>
+        <field>ERP_Sales_Prices_SAP__c.Division_Code__c</field>
+    </columns>
+    <columns>
+        <field>ERP_Sales_Prices_SAP__c.Sold_To_Code__c</field>
+    </columns>
+    <columns>
+        <field>CUST_ID</field>
+    </columns>
+    <columns>
+        <field>ERP_Sales_Prices_SAP__c.isPriceHolder__c</field>
+    </columns>
+    <columns>
+        <field>CUST_OWNER_NAME</field>
+    </columns>
+    <currency>USD</currency>
+    <description>Pricing records by End user code which need to be transferred to Alvin san</description>
+    <filter>
+        <criteriaItems>
+            <column>CUST_OWNER_NAME</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Yinhong Chen</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>ERP_Sales_Prices_SAP__c.Sales_Org_Code__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>B950,B974,B918,B900</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>ERP_Sales_Prices_SAP__c.End_User_Code__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>55517393,55517456,55517509,55517545,55517571,55517587,55517632,55517652,55517704,55517789,55517588,55517783,55517795,55517803,55517851,55535230,55535232,55517757,55535231,55695562,55517376,55590639,55598791,55590633,55590624,55590625,55590626,55661235,55631111,55590641,55598793,55590623,55590628,55590629,55590630,55590632,55590634,55590637,55599321,55641292,55661743,55681492,55691923,55591085,55517642,55517582,55658326,55644373,55517629,55582490,55517644,55651850,55648797,55595207,55595208,55517701,55638359,55632042,55632261,55596560,55632642,55652033,55659273,55675337,55707094,55517213,55528599,55517549,55517400,55517472,55517401,55559863,55517640,55559931,55517402,55517471,55517404,55517474,55517403,55517473,55517849,55532918,55517854,55517855,55517581,55532920,55517830,55661236,55664337,55683929,55686307,55691621,55517389,55517476,55517602,55517626,55517656,55517744,55517839,55517841,55517842,55517867,55532938,55536260,55556792,55562793,5</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Pricing records for Alvin san</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$ERP_Sales_Prices_SAP__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CUST_CREATED_DATE</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

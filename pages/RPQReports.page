@@ -1,0 +1,614 @@
+<!--    Ver.            Developer           Changes                                     Tag                        Dependencies    -->
+<!--    1               Ibtesam            New Page with RPQ Data                      IM20150217                        None    -->
+<apex:page tabstyle="Price_Approval__tab" sidebar="false" showHeader="true" controller="ctrlPAMain" id="currentPage" cache="true" action="{!onLoadCall}">
+   <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.min.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.js')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/css/jquery.dataTables.css')}" />
+    <c:loadingComponent />
+    <apex:pageMessages escape="false" id="errorMessage"/>
+    <!-- Version 1.1 START  --> 
+    <!-- Done UI changes - SAM 4th feb -->
+    <!-- SL20220614     Satyandra Lodhi     Update Ajax version from 15.0 to 55.0 and page version from 26.0 to 55.0 to support salesforce release <IS TI-00094390> --> 
+    <style>
+        
+        .bPageBlock .detailList .list tr th{color:black;}
+        body .pbBody table.list tr td{border-bottom: none;}
+         .bPageBlock .detailList .list1 tr th{color:black;}
+         body .pbBody table.list1 tr td{border-bottom: none;}       
+         body .pbBody table.list1{border:1px solid #e0e3e5;background-color:#fff;width: 2200px;}
+
+        .bPageBlock .detailList #listUser tr th{color:black;}
+         body .pbBody table#listUser tr td{border-bottom: none;}        
+         body .pbBody table#listUser{border:1px solid #e0e3e5;background-color:#fff;width: 100%;}
+         body .pbBody table#listUser tr:first-child th{color:black;background-color:#f8f8f8;border:1px solid #E2E3E4;font-weight:bolder;}
+
+
+    </style>
+    <script src="/soap/ajax/55.0/connection.js" type="text/javascript"/>
+    <script src="/soap/ajax/55.0/apex.js" type="text/javascript"/>
+    <script type='text/javascript'>
+        
+      function setFocusOnLoad() {}
+        var j$ = jQuery.noConflict();
+        j$(document).ready(function() {
+            loadDatatables();
+        });
+        
+          function loadDatatables()
+         {       
+                      
+           var tab1=j$('.rpqTable').dataTable({
+                    "bLengthChange":false,
+                    "bPaginate":false,
+                    sPlaceHolder : "foot:before",
+                    }); 
+                        
+          j$('.list1'+'_filter').after('<br /><br />');
+          j$('.list1').after('<br />');
+          
+          j$('.list'+'_filter').after('<br /><br />');
+          j$('.list').after('<br />');
+         }
+     
+    </script>
+    <style>
+    
+    #reportPanel{
+        width:90%;
+    }
+    #row1,#row2,#row3,#row4,#row5{
+        width: 50%; float:left;
+    }
+    .mask {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    opacity: 0.45;
+    filter: alpha(opacity = 45);
+    position: absolute;
+    z-index: 0;
+    top: 0pt;
+    left: 0pt;
+    }
+    .spinnerCt {
+    left: 50%;
+    top: 35%;
+    position: absolute;
+    z-index: 1;
+    padding: 20px 40px;
+    box-shadow: 0pt 2px 5px rgb(172, 172, 172);
+    border-radius: 1em 1em 1em 1em;
+    border: 1px solid rgb(206, 236, 255);
+    background-color: rgb(206, 236, 255);
+    background-style: solid;
+}
+
+.spinner {
+    padding: 10px 15px 10px 0pt;
+    vertical-align: middle;
+}
+
+.spinnerCt .loadingIndicator {
+    display: inline;
+    font-size: 135%;
+    font-weight: bold;
+}
+    .FrontScreenImp {
+    background-color: white;
+    //border-width: 2px;
+    border: 2px solid #63A4C5;
+    z-index: 9999;
+    left: 40%;
+    padding: 10px;
+    position: absolute;
+    width: 645px;
+    margin-left: -250px;
+    top: 150px;
+}
+.BackScreenImp {
+    background-color: #696969;
+    opacity: 0.5;
+    filter: alpha(opacity = 50);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 9998;
+}
+.noTableFooter
+   {
+    margin:0px!important;
+    }
+        .requiredInput .requiredBlock{top:0px;bottom:1px;}
+        .requiredInput select{height:20px;margin: 0px;}
+  </style>
+    
+    <!--   <div id="reportPanel">
+    <div id="row1">
+        <div id="column1">Report1</div><div id="column2">Report2</div>
+    </div>
+    <div id="row2">
+        <div id="column3">Report3</div><div id="column4">Report4</div>
+    </div>
+    <div id="row3">
+        <div id="column5">Report5</div>
+    </div>
+    
+    </div>-->
+     
+     <apex:actionStatus id="stat">
+        <apex:facet name="start">
+            <div class="spinnerMask" id="spinnerMask">
+            <div class="spinnerCt"><img
+                src="/img/analytics/reportbuilder/icons/spinner32.gif"
+                alt="Loading..." width="32" height="32" align="center"
+                class="spinner" title="Loading..." />
+            <div class="loadingIndicator">Loading...</div>
+            </div>
+            <div class="mask"></div>
+            </div>
+        </apex:facet>
+    </apex:actionStatus>
+    
+    <apex:pageblock id="myblock">
+    <apex:form id="myform">
+    
+        <center>
+        
+        <apex:outputLabel value="Selected BU : " style="font-weight: bold; padding-right: 5px;"/>
+        <apex:outputText value="{!service.paServiceState.rpqReporting.selectedBUName}" style="padding-right: 10px;"/>
+        
+        <apex:outputLabel value="Select Report" style="font-weight: bold; padding-right: 5px;"/>
+        <apex:selectList size="1" value="{!service.paServiceState.rpqReporting.selectedReport}" multiselect="false" style="padding-right: 10px;">
+            <apex:selectOptions value="{!service.paServiceState.rpqReporting.reportList}" />
+            <!-- <apex:actionSupport event="onchange" reRender="myblock" status="stat" />  -->
+        </apex:selectList>
+        
+        <apex:outputLabel value="Valid On" style="font-weight: bold; padding: 0px 5px 0px 5px;"/>
+        <apex:inputField value="{!service.paServiceState.rpqReporting.dummyreq.Due_Date__c}" style="padding-right: 10px;"/>
+        <apex:commandButton value="Go" rerender="myblock" status="stat" action="{!service.paServiceState.rpqReporting.fetchChartData}" oncomplete="loadDatatables(); refreshchartdata();"/>
+        </center>
+    
+    
+        <!-- <center>
+        <apex:outputLabel value="Sold To" style="font-weight: bold;"/>&nbsp;&nbsp;
+        <apex:selectList size="1" value="{!service.paServiceState.rpqReporting.selectedDist}" multiselect="false">
+            <apex:selectOptions value="{!service.paServiceState.rpqReporting.dists}" />
+            <apex:actionSupport event="onchange" reRender="endusers" status="stat" />
+        </apex:selectList>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <apex:outputLabel value="End User" style="font-weight: bold;"/>&nbsp;&nbsp;
+        <apex:selectList size="1" value="{!service.paServiceState.rpqReporting.selectedEndUser}" multiselect="false" id="endusers">
+            <apex:selectOptions value="{!service.paServiceState.rpqReporting.endusers}" />
+        </apex:selectList>
+        </center> -->
+    
+    <br/>
+    
+    <apex:outputPanel id="chartscript">
+    <script>
+    function refreshchartdata(){
+    //alert('{!service.paServiceState.rpqReporting.selectedReport}');
+        if('{!service.paServiceState.rpqReporting.selectedReport}'=='1'){
+        j$('[id$="divchart1"]').show();
+         chart1.show();
+         }
+         if('{!service.paServiceState.rpqReporting.selectedReport}'=='2'){
+         j$('[id$="divchart2"]').show();
+         chart2.show();
+         }
+         if('{!service.paServiceState.rpqReporting.selectedReport}'=='3'){
+         j$('[id$="divchart3"]').show();
+         chart3.show();
+         }
+         if('{!service.paServiceState.rpqReporting.selectedReport}'=='4'){
+         j$('[id$="divchart4"]').show();
+         chart4.show();
+         }
+     }
+    </script>
+    </apex:outputPanel>
+    <div style="display:none;" id="divchart1">
+    <apex:outputPanel style="float:left" id="mychart1">
+                    <apex:chart height="400" width="500" resizable="true" data="{!service.paServiceState.rpqReporting.chartData}" hidden="true" id="chart1" name="chart1">
+                          <apex:axis type="Numeric" position="left" fields="data1" title="Number of RPQs" grid="true" steps="4" minimum="0" />
+                          <apex:axis type="Category" position="bottom" fields="name" title="Distributor (Sold To)"></apex:axis>
+                        <apex:barSeries orientation="vertical" axis="left" xField="name" yField="data1" title="Total Active RPQs" stacked="false"></apex:barSeries>
+                    </apex:chart>  
+    </apex:outputPanel>
+    </div>
+                  
+    <div style="display:none;" id="divchart2">
+        <apex:outputPanel style="float:left;" id="mychart2">
+                    <apex:chart height="400" width="500" resizable="true" data="{!service.paServiceState.rpqReporting.chartData}" id="chart2" hidden="true" name="chart2">
+                          <apex:axis type="Numeric" position="left" fields="data1" title="Quantity" grid="true" steps="4" minimum="0" />
+                          <apex:axis type="Category" position="bottom" fields="name" title="Material (SKU)"></apex:axis>
+                        <apex:barSeries orientation="vertical" axis="left" xField="name" yField="data1" title="Top Requested SKUs" stacked="false"></apex:barSeries>
+                    </apex:chart>  
+        </apex:outputPanel>
+    </div>
+    
+    <div style="display:none;" id="divchart3">
+        <apex:outputPanel style="float:left;" id="mychart3">
+                    <apex:chart height="400" width="500" resizable="true" data="{!service.paServiceState.rpqReporting.chartData}" id="chart3" hidden="true" name="chart3">
+                          <apex:axis type="Numeric" position="left" fields="data2" title="Discount %" grid="true" steps="4" minimum="0" />
+                          <apex:axis type="Category" position="bottom" fields="name" title="Material (SKU)"></apex:axis>
+                        <apex:barSeries orientation="vertical" axis="left" xField="name" yField="data2" title="Most Discounted SKUs" stacked="false"></apex:barSeries>
+                    </apex:chart>  
+        </apex:outputPanel>
+    </div>
+        
+        <br/><br/>
+        <apex:pageblocksection columns="1" rendered="{!IF(service.paServiceState.rpqReporting.selectedReport=='1',true,false)}">
+        
+            <apex:pageblocksectionitem >
+            
+                <apex:outputPanel style="float:left; width: 100%;">
+                <apex:outputText value="Total Active Quotes" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: large; font-weight: normal; float:left; "/>
+                <br/><br/><br/><br/>
+                    <apex:outputPanel rendered="{!AND(service.paServiceState.rpqReporting.quoteHighlightrep1.totalActiveQuotesList.quote!=null,service.paServiceState.rpqReporting.quoteHighlightrep1.totalActiveQuotesList.quote.size>0)}">
+                    <apex:pageblockTable value="{!service.paServiceState.rpqReporting.quoteHighlightrep1.totalActiveQuotesList.quote}" var="quoteprice" style="width:100%;" styleClass="rpqTable">
+                        
+                        <apex:column headerValue="Request Number" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.Pricing_Request__r.Name}" />
+                        </apex:column>
+                        <apex:column headerValue="On Behalf Of" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.Pricing_Request__r.On_Behalf_Of__r.Name}" />
+                        </apex:column>
+                        <apex:column headerValue="Sold To" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.Sold_To__c}" />
+                        </apex:column>
+                        <apex:column headerValue="End User" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.End_User__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Quantity" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.Quantity__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Style" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.Material__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Material Code" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.Material_Code__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Rate" style="border-bottom:none;" >
+                                <apex:outputField value="{!quoteprice.Rate__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Valid From" style="border-bottom:none;" >
+                                <apex:outputField value="{!quoteprice.Valid_From__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Valid To" style="border-bottom:none;" >
+                                <apex:outputField value="{!quoteprice.Valid_To__c}" />
+                        </apex:column>
+                    </apex:pageblockTable>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!OR(service.paServiceState.rpqReporting.quoteHighlightrep1.totalActiveQuotesList.quote==null,service.paServiceState.rpqReporting.quoteHighlightrep1.totalActiveQuotesList.quote.size=0)}">
+                        <apex:outputText value="No Data Found for this Criteria" />
+                    </apex:outputPanel>
+
+                    <center>
+                    <apex:outputPanel rendered="{!AND(service.paServiceState.rpqReporting.quoteHighlightrep1.totalActiveQuotesList.quote!=null,service.paServiceState.rpqReporting.quoteHighlightrep1.totalActiveQuotesList.quote.size>0)}">
+                                <apex:commandLink value="Export" action="/apex/PAGenerateExportRPQ" styleClass="btn" style="text-decoration:none;">
+                                    <apex:param name="export" value="exportRPQ" assignTo="{!businessaction}" />
+                                </apex:commandLink>
+                            <!--  <apex:commandButton value="Export" action="{!ExportData}" /> -->
+                    </apex:outputPanel>
+                    </center>
+                                        
+                </apex:outputPanel> 
+            </apex:pageblocksectionitem>
+            
+            <!--  <apex:pageblocksectionitem >
+                <apex:outputPanel style="float:left" id="mychart1">
+                    <apex:chart height="400" width="400" data="{!service.paServiceState.rpqReporting.chartData}" hidden="false" id="chart1" name="chart1">
+                          <apex:axis type="Numeric" position="left" fields="data1" title="Total Active RPQs" grid="true" steps="4" minimum="0" />
+                          <apex:axis type="Category" position="bottom" fields="name" title="Distributor (Sold To)"></apex:axis>
+                        <apex:barSeries orientation="vertical" axis="left" xField="name" yField="data1" title="Total Active RPQs" stacked="false"></apex:barSeries>
+                    </apex:chart>  
+                  </apex:outputPanel>
+            </apex:pageblocksectionitem> -->
+        </apex:pageblocksection>
+        
+        <apex:pageblocksection columns="1" rendered="{!IF(service.paServiceState.rpqReporting.selectedReport=='2',true,false)}">
+            <apex:pageblocksectionitem >
+                <apex:outputPanel style="float:left; width: 100%;">
+                <apex:outputText value="Most Requested Materials" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: large; font-weight: normal; float:left; "/>
+                <br/><br/><br/><br/>
+                    <apex:outputPanel rendered="{!AND(service.paServiceState.rpqReporting.quoteHighlightrep2.topRequestedSKUs.quote!=null,service.paServiceState.rpqReporting.quoteHighlightrep2.topRequestedSKUs.quote.size>0)}">
+                    <apex:pageblockTable value="{!service.paServiceState.rpqReporting.quoteHighlightrep2.topRequestedSKUs.quote}" var="quoteprice" style="width:100%;" styleClass="rpqTable">
+                        
+                        <apex:column headerValue="Request Number" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.Pricing_Request__r.Name}" />
+                        </apex:column>
+                        <apex:column headerValue="Sold To" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.Sold_To__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Sold To Code" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.Sold_To_Code__c}" />
+                        </apex:column>
+                        <apex:column headerValue="End User" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.End_User__c}" />
+                        </apex:column>
+                        <apex:column headerValue="End User Code" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.End_User_Code__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Quantity" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.Quantity__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Style" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.Material__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Material Code" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.Material_Code__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Rate" style="border-bottom:none;" >
+                                <apex:outputField value="{!quoteprice.Rate__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Valid From" style="border-bottom:none;" >
+                                <apex:outputField value="{!quoteprice.Valid_From__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Valid To" style="border-bottom:none;" >
+                                <apex:outputField value="{!quoteprice.Valid_To__c}" />
+                        </apex:column>
+                    </apex:pageblockTable>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!OR(service.paServiceState.rpqReporting.quoteHighlightrep2.topRequestedSKUs.quote==null,service.paServiceState.rpqReporting.quoteHighlightrep2.topRequestedSKUs.quote.size=0)}">
+                        <apex:outputText value="No Data Found for this Criteria" />
+                    </apex:outputPanel>
+
+                    <center>
+                    <apex:outputPanel rendered="{!AND(service.paServiceState.rpqReporting.quoteHighlightrep2.topRequestedSKUs.quote!=null,service.paServiceState.rpqReporting.quoteHighlightrep2.topRequestedSKUs.quote.size>0)}">
+                                <apex:commandLink value="Export" action="/apex/PAGenerateExportRPQ" styleClass="btn" style="text-decoration:none;">
+                                    <apex:param name="export" value="exportRPQ" assignTo="{!businessaction}" />
+                                </apex:commandLink>
+                            <!--  <apex:commandButton value="Export" action="{!ExportData}" /> -->
+                    </apex:outputPanel>
+                    </center>
+                                        
+                </apex:outputPanel> 
+            </apex:pageblocksectionitem>
+            
+            <!--  <apex:pageblocksectionitem >
+                <apex:outputPanel style="float:left" id="mychart2">
+                    <apex:chart height="400" width="400" data="{!service.paServiceState.rpqReporting.chartData}" hidden="false" id="chart2" name="chart2">
+                          <apex:axis type="Category" position="left" fields="data1" title="Top Requested SKUs" grid="true" steps="4" minimum="0" />
+                          <apex:axis type="Category" position="bottom" fields="name" title="Material (SKU)"></apex:axis>
+                        <apex:barSeries orientation="vertical" axis="left" xField="name" yField="data1" title="Top Requested SKUs" stacked="false"></apex:barSeries>
+                    </apex:chart>  
+                  </apex:outputPanel>
+            </apex:pageblocksectionitem>-->
+            
+        </apex:pageblocksection> 
+        
+        <apex:pageblocksection columns="1" rendered="{!IF(service.paServiceState.rpqReporting.selectedReport=='3',true,false)}">
+            <apex:pageblocksectionitem >
+                <apex:outputPanel style="float:left; width: 100%;">
+                <apex:outputText value="Most Discounted Materials" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: large; font-weight: normal; float:left; "/>
+                <br/><br/><br/><br/>
+                    <apex:outputPanel rendered="{!AND(service.paServiceState.rpqReporting.quoteHighlightrep3.topDiscountedSKUs.quote!=null,service.paServiceState.rpqReporting.quoteHighlightrep3.topDiscountedSKUs.quote.size>0)}">
+                    <apex:pageblockTable value="{!service.paServiceState.rpqReporting.quoteHighlightrep3.topDiscountedSKUs.quote}" var="quoteprice" style="width:100%;" styleClass="rpqTable">
+                        
+                        <apex:column headerValue="Request Number" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.Pricing_Request__r.Name}" />
+                        </apex:column>
+                        <apex:column headerValue="Sold To" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.Sold_To__c}" />
+                        </apex:column>
+                        <apex:column headerValue="End User" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.End_User__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Discount %" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.Discount__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Style" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.Material__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Material Code" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.Material_Code__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Rate" style="border-bottom:none;" >
+                                <apex:outputField value="{!quoteprice.Rate__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Valid From" style="border-bottom:none;" >
+                                <apex:outputField value="{!quoteprice.Valid_From__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Valid To" style="border-bottom:none;" >
+                                <apex:outputField value="{!quoteprice.Valid_To__c}" />
+                        </apex:column>
+                    </apex:pageblockTable>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!OR(service.paServiceState.rpqReporting.quoteHighlightrep3.topDiscountedSKUs.quote==null,service.paServiceState.rpqReporting.quoteHighlightrep3.topDiscountedSKUs.quote.size=0)}">
+                        <apex:outputText value="No Data Found for this Criteria" />
+                    </apex:outputPanel>
+                    
+                    
+                    <center>
+                    <apex:outputPanel rendered="{!AND(service.paServiceState.rpqReporting.quoteHighlightrep3.topDiscountedSKUs.quote!=null,service.paServiceState.rpqReporting.quoteHighlightrep3.topDiscountedSKUs.quote.size>0)}">
+                                <apex:commandLink value="Export" action="/apex/PAGenerateExportRPQ" styleClass="btn" style="text-decoration:none;">
+                                    <apex:param name="export" value="exportRPQ" assignTo="{!businessaction}" />
+                                </apex:commandLink>
+                            <!--  <apex:commandButton value="Export" action="{!ExportData}" /> -->
+                    </apex:outputPanel>
+                    </center>
+                    
+                </apex:outputPanel> 
+            </apex:pageblocksectionitem>
+            
+            <!--  <apex:pageblocksectionitem >
+                <apex:outputPanel style="float:left">
+                    <apex:chart height="400" width="400" data="{!service.paServiceState.rpqReporting.Chartdata}">
+                    
+                          <apex:axis type="Numeric" position="left" fields="data1" 
+                            title="Most Discounted SKUs" grid="true" steps="4" minimum="0" />
+                          <apex:axis type="Category" position="bottom" fields="name" 
+                            title="Distributor (Sold To)">
+                        </apex:axis>
+                        <apex:barSeries orientation="vertical" axis="left" 
+                            xField="name" yField="data1" title="data1" stacked="false">
+                            </apex:barSeries>
+                    </apex:chart>  
+                  </apex:outputPanel>
+            </apex:pageblocksectionitem>-->
+        </apex:pageblocksection> 
+        
+        <apex:pageblocksection columns="1" rendered="{!IF(service.paServiceState.rpqReporting.selectedReport=='4',true,false)}">
+            
+            <apex:pageblocksectionitem >
+                <apex:outputPanel style="float:left; width: 100%;">
+                <apex:outputText value="Highest Value Quote" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: large; font-weight: normal; float:left; "/>
+                <br/><br/><br/><br/>
+                    <apex:outputPanel rendered="{!AND(service.paServiceState.rpqReporting.quoteHighlightrep4.higestvalueQuote.quote!=null,service.paServiceState.rpqReporting.quoteHighlightrep4.higestvalueQuote.quote.size>0)}">
+                    <apex:outputLabel value="Total Quote Value: "/> 
+                    
+                            <!-- <AV20150813>-RPQ issue-total quote price format edited -->
+                            <apex:outputText value="{0, number, '$' 00.00}" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: small; font-weight: normal;">
+                                
+                                <apex:param value="{!service.paServiceState.rpqReporting.highestValueDealTotal}" />
+                            </apex:outputText>
+                            <!-- <AV20150813>-RPQ issue-total quote price format edited -->
+                    <!--  <apex:outputText Value="{!service.paServiceState.rpqReporting.highestValueDealTotal}"/>--><br/>
+                    <apex:pageblockTable value="{!service.paServiceState.rpqReporting.quoteHighlightrep4.higestvalueQuote.quote}" var="quoteprice" style="width:100%;" styleClass="rpqTable">
+                        
+                        <apex:column headerValue="Request Number" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.Pricing_Request__r.Name}" />
+                        </apex:column>
+                        <apex:column headerValue="Sold To" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.Sold_To__c}" />
+                        </apex:column>
+                        <apex:column headerValue="End User" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.End_User__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Discount %" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.Discount__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Style" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.Material__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Material Code" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.Material_Code__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Rate" style="border-bottom:none;" >
+                                <apex:outputField value="{!quoteprice.Rate__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Valid From" style="border-bottom:none;" >
+                                <apex:outputField value="{!quoteprice.Valid_From__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Valid To" style="border-bottom:none;" >
+                                <apex:outputField value="{!quoteprice.Valid_To__c}" />
+                        </apex:column>
+                    </apex:pageblockTable>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!OR(service.paServiceState.rpqReporting.quoteHighlightrep4.higestvalueQuote.quote==null,service.paServiceState.rpqReporting.quoteHighlightrep4.higestvalueQuote.quote.size=0)}">
+                        <apex:outputText value="No Data Found for this Criteria" />
+                    </apex:outputPanel>
+                    
+                    <center>
+                    <apex:outputPanel rendered="{!AND(service.paServiceState.rpqReporting.quoteHighlightrep4.higestvalueQuote.quote!=null,service.paServiceState.rpqReporting.quoteHighlightrep4.higestvalueQuote.quote.size>0)}">
+                                <apex:commandLink value="Export" action="/apex/PAGenerateExportRPQ" styleClass="btn" style="text-decoration:none;">
+                                    <apex:param name="export" value="exportRPQ" assignTo="{!businessaction}" />
+                                </apex:commandLink>
+                            <!--  <apex:commandButton value="Export" action="{!ExportData}" /> -->
+                    </apex:outputPanel>
+                    </center>
+                    
+                </apex:outputPanel> 
+            </apex:pageblocksectionitem>
+            
+            <!--  <apex:pageblocksectionitem >
+                <apex:outputPanel style="float:left">
+                    <apex:chart height="400" width="400" data="{!service.paServiceState.rpqReporting.Chartdata}">
+                    
+                          <apex:axis type="Numeric" position="left" fields="data1" 
+                            title="Highest Value Quote" grid="true" steps="4" minimum="0" />
+                          <apex:axis type="Category" position="bottom" fields="name" 
+                            title="Distributor (Sold To)">
+                        </apex:axis>
+                        <apex:barSeries orientation="vertical" axis="left" 
+                            xField="name" yField="data1" title="data1" stacked="false">
+                            </apex:barSeries>
+                    </apex:chart>  
+                  </apex:outputPanel>
+            </apex:pageblocksectionitem>-->
+        </apex:pageblocksection>
+        
+        <apex:pageblocksection columns="1" rendered="{!IF(service.paServiceState.rpqReporting.selectedReport=='5',true,false)}">
+            <apex:pageblocksectionitem >
+                <apex:outputPanel layout="block">
+                <apex:outputText value="Highest Value Quote" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: large; font-weight: normal;"/>
+                <br/><br/>
+                <apex:outputPanel layout="block" id="rep4details" style="width:300px;">
+                    <apex:pageblockSection columns="2">
+                        <apex:pageblocksectionitem >
+                            <apex:outputText value="Customer" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: small; font-weight: normal;"/>
+                        </apex:pageblocksectionitem>
+                        <apex:pageblocksectionitem >
+                            <apex:outputText value="{!service.paServiceState.rpqReporting.highestValueSoldto}" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: small; font-weight: normal;"/>
+                        </apex:pageblocksectionitem>
+                    </apex:pageblockSection>
+                    <apex:pageblockSection columns="2">
+                        <apex:pageblocksectionitem >
+                            <apex:outputText value="End User" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: small; font-weight: normal;"/>
+                        </apex:pageblocksectionitem>
+                        <apex:pageblocksectionitem >
+                            <apex:outputText value="{!service.paServiceState.rpqReporting.highestValueEndUser}" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: small; font-weight: normal;"/>
+                        </apex:pageblocksectionitem>
+                    </apex:pageblockSection>
+                    <apex:pageblockSection columns="2">
+                        <apex:pageblocksectionitem >
+                            <apex:outputText value="Sales Rep" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: small; font-weight: normal;"/>
+                        </apex:pageblocksectionitem>
+                        <apex:pageblocksectionitem >
+                            <apex:outputText value="{!service.paServiceState.rpqReporting.highestValueSalesRep}" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: small; font-weight: normal;"/>
+                        </apex:pageblocksectionitem>
+                    </apex:pageblockSection>
+                    <apex:pageblockSection columns="2">
+                        <apex:pageblocksectionitem >
+                            <apex:outputText value="Total Deal Value" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: small; font-weight: normal;"/>
+                        </apex:pageblocksectionitem>
+                        <apex:pageblocksectionitem >
+                            <apex:outputText value="{!service.paServiceState.rpqReporting.highestValueDealTotal}" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: small; font-weight: normal;"/>
+                        </apex:pageblocksectionitem>
+                    </apex:pageblockSection>
+                    <apex:pageblockSection columns="2">
+                        <apex:pageblocksectionitem >
+                            <apex:outputText value="Quote Number" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: small; font-weight: normal;"/>
+                        </apex:pageblocksectionitem>
+                        <apex:pageblocksectionitem >
+                            <apex:outputText value="{!service.paServiceState.rpqReporting.highestValueQuoteNumber}" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: small; font-weight: normal;"/>
+                        </apex:pageblocksectionitem>
+                    </apex:pageblockSection>
+                <br/>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!AND(service.paServiceState.rpqReporting.quoteHighlight1.higestvalueQuote.quote!=null,service.paServiceState.rpqReporting.quoteHighlight1.higestvalueQuote.quote.size>0)}">
+                    <apex:pageblockTable value="{!service.paServiceState.rpqReporting.quoteHighlight1.higestvalueQuote.quote}" var="quoteprice" style="width:100%;" styleClass="rpqTable">
+                        
+                        <apex:column headerValue="Quantity" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.Quantity__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Style" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.Material__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Material Code" style="border-bottom:none;" >
+                                <apex:outputText value="{!quoteprice.Material_Code__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Rate" style="border-bottom:none;" >
+                                <apex:outputField value="{!quoteprice.Rate__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Valid From" style="border-bottom:none;" >
+                                <apex:outputField value="{!quoteprice.Valid_From__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Valid To" style="border-bottom:none;" >
+                                <apex:outputField value="{!quoteprice.Valid_To__c}" />
+                        </apex:column>
+                    </apex:pageblockTable>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+            </apex:pageblocksectionitem>
+            
+        </apex:pageblocksection> 
+
+</apex:form>
+    </apex:pageblock>
+    
+</apex:page>

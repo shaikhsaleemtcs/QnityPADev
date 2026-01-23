@@ -1,0 +1,267 @@
+<!--    Ver.            Developer               Changes                                                     Dependencies    -->
+<!--    1.1             Bala            Modified On Behalf Of look up(17-02-13)                                 None        -->
+<!--    1.2             Priyanka        Changed table component to 'PARelatedListComponent'                                 -->
+<!--                                    from PARelatedList                                                      None        -->
+<!--    1.3             Priyanka            Change in architecture                                              None    -->
+<!--    1.4             Priyanka            Added 'Cancel' button                                               None    -->
+<!--    1.5             Priyanka            Changed Header                                                      None    -->
+<!--    1.6             Prachi              added red bar for sales org                                         None     -->
+<!--    1.7             Priyanka            Inserted break tag before buttons                                   None    -->
+<!--    1.8             Brundha            UI                                           None    -->
+<!--    TJ20140505      Tarun               Added the landing page link                                         None     -->
+<!--    TJ20140509      Tarun               Added Navigation Flow Text                  None     -->
+<!--    MS20140522      Mohit               Moved create button positions  to above and below tables, modified for single Create Non-Customer Specific button -->
+<apex:page controller="ctrlPAMain" tabstyle="Price_Approval__tab" sidebar="false" showHeader="true" id="currentPage" cache="true"
+    action="{!onLoadCall}">
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.min.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.js')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/css/jquery.dataTables.css')}" />
+    <c:loadingComponent /> 
+     <apex:pageMessages escape="false" id="errorMessage"/> 
+    
+    <style>     
+        .customerLink {
+        font-size: 15px;
+        height: 20px;
+        margin-bottom: 1px;
+        padding: 5px;
+        border: solid 1px;
+        border-color: #6E96B2;  
+        background-color: #E5F3FC;
+        font-weight: bold;
+        text-align: left;
+        }
+        .navFlow{font-size:13px;font-style:oblique;margin-bottom:3px;}
+        #sales .detailList{padding:0px;border:1px solid #E2E3E4;}
+        #sales .detailList .data2Col{padding:0px;} 
+        //#sales .detailList .dataCol .requiredBlock{top:0px;height:20px;bottom:0px;}
+        #sales .detailList tr th{border-bottom:none;} 
+        #sales .detailList tr td{border-bottom:none;} 
+        #sales .bPageBlock{float:left;width:100%;}
+        #sales .pbSubheader{margin-bottom:0px;} 
+        
+        #repeatList .pbBody{margin:0px;}
+        body .pbBody table.list tr td{border-bottom: none;}
+        body .pbBody table.list tr th{color:white;background-color:#63A4C5;}
+        #repeatList table.list tr:first-child th{color:white;background-color:#63A4C5;}
+        #repeatList table.list tr:nth-child(2) th{color:black;background-color:#f8f8f8;border:1px solid #E2E3E4;}
+        .bPageBlock .detailList .list tr th{color:black;}
+        .noTableFooter
+        {
+        margin:0px!important;
+        }
+    </style>
+    
+    <script type="text/javascript">
+      function setFocusOnLoad() {}
+      function confirmDelete(Id)
+      {
+        var con = confirm("Are you sure you want to Delete?");
+        if (con == true)
+            {
+                deletePricingRequest(Id);
+            }
+        else
+            {}       
+      }
+      var j$ = jQuery.noConflict();                                 //<TJ20140401> - added javascript to generate HTML Table with additional functionalities
+          j$(document).ready(function(){
+          var tab=j$('#PARelatedListComponentTableMassiveChange').dataTable({
+                    "bLengthChange":false,
+                    "aLengthMenu": [100,200],
+                    "iDisplayLength" : 100,
+                    "aoColumnDefs" : [{"bSortable": false,"bSearchable": false, "aTargets":[0]}],
+                    sPaginationType: "full_numbers",
+                    sPlaceHolder : "foot:before",
+                    });                     
+          j$('#PARelatedListComponentTableMassiveChange'+'_filter').after('<br /><br />');
+          j$('#PARelatedListComponentTableMassiveChange').after('<br />');
+          
+          var tab1=j$('#PARelatedListComponentTableNonCustomerSpecific').dataTable({
+                    "bLengthChange":false,
+                    "aLengthMenu": [100,200],
+                    "iDisplayLength" : 100,
+                    "aoColumnDefs" : [{"bSortable": false,"bSearchable": false, "aTargets":[0]}],
+                    sPaginationType: "full_numbers",
+                    sPlaceHolder : "foot:before",
+                    });                     
+          j$('#PARelatedListComponentTableNonCustomerSpecific'+'_filter').after('<br /><br />');
+          j$('#PARelatedListComponentTableNonCustomerSpecific').after('<br />');
+          
+          var tab1=j$('#PARelatedListComponentTableReferencePricing').dataTable({
+                    "bLengthChange":false,
+                    "aLengthMenu": [100,200],
+                    "iDisplayLength" : 100,
+                    "aoColumnDefs" : [{"bSortable": false,"bSearchable": false, "aTargets":[0]}],
+                    sPaginationType: "full_numbers",
+                    sPlaceHolder : "foot:before",
+                    });                     
+          j$('#PARelatedListComponentTableReferencePricing'+'_filter').after('<br /><br />');
+          j$('#PARelatedListComponentTableReferencePricing').after('<br />');
+          
+          var tab1=j$('#PARelatedListComponentTableFloorPricing').dataTable({
+                    "bLengthChange":false,
+                    "aLengthMenu": [100,200],
+                    "iDisplayLength" : 100,
+                    "aoColumnDefs" : [{"bSortable": false,"bSearchable": false, "aTargets":[0]}],
+                    sPaginationType: "full_numbers",
+                    sPlaceHolder : "foot:before",
+                    });                     
+          j$('#PARelatedListComponentTableFloorPricing'+'_filter').after('<br /><br />');
+          j$('#PARelatedListComponentTableFloorPricing').after('<br />');
+          
+          var tab2=j$('#PAERPPricesRelatedListTable').dataTable({
+                    "bLengthChange":false,                    
+                    "iDisplayLength" : 100,
+                    "aoColumnDefs" : [{"bSortable": false,"bSearchable": false, "aTargets":[0]}],
+                    sPaginationType: "full_numbers",
+                    sPlaceHolder : "foot:before",
+                    });                     
+          j$('#PAERPPricesRelatedListTable'+'_filter').after('<br /><br />');
+          j$('#PAERPPricesRelatedListTable').after('<br />');
+        });
+    </script>
+    <apex:form id="formId">
+    <!-- Ver 1.5 -->
+        <!-- <TJ20140505> Added Landing Page Link -->
+        <div align="left" class="navFlow">
+            <apex:commandLink id="link0" value="Landing Page" action="{!businessComponentAction}" target="_self" style="color:blue;">
+            <apex:param name="desiredAction" value="landingpage" assignTo="{!businessaction}" />
+            <apex:param name="newPageLabel" value="PAHome" assignTo="{!newPageLabel}" />
+            </apex:commandLink>
+        <!-- <TJ20140509> Added Navigation Flow Text-->
+            <apex:outputText value="{!if(NOT(ISNULL(navigationText)),'>>','')} "/>
+            <apex:outputText value="{!navigationText}"/>
+            <apex:outputText value=">>{!IF(CONTAINS(businessAction,'Massive')||CONTAINS(service.PAServicestate.currentRequest.customer.ogitems.value,'Massive'),'Massive',IF(CONTAINS(businessAction,'NonCustomerSpecific')||CONTAINS(businessAction,'Non Customer Specific') ||CONTAINS(service.PAServicestate.currentRequest.customer.ogitems.value,'NonCustomerSpecific'),'Non Customer Specific',''))} Requests"/>
+        </div>
+<!--        <TJ20140417>   Changed Page Label-->        
+    <div class="customerLink">{!IF(CONTAINS(businessAction,'Massive')||CONTAINS(service.PAServicestate.currentRequest.customer.ogitems.value,'Massive'),'Massive',IF(CONTAINS(businessAction,'NonCustomerSpecific')||CONTAINS(businessAction,'Non Customer Specific') ||CONTAINS(service.PAServicestate.currentRequest.customer.ogitems.value,'NonCustomerSpecific'),'Non Customer Specific',''))} Requests</div>
+    
+    
+
+    <div id="sales">
+        <apex:pageBlock >
+            <apex:pageBlockSection title="Sales Area Detail">
+                <apex:pageblocksectionitem >
+                <!-- <TJ20140515> -->
+                    <apex:outputlabel value="Business"/>
+                    <apex:outputText value="{!BUName}"/>
+                </apex:pageblocksectionitem>
+<!--                         <TJ20140923> -->
+                <apex:pageBlockSectionItem rendered="{!(CONTAINS(businessAction,'Massive')||CONTAINS(service.PAServicestate.currentRequest.customer.ogitems.value,'Massive')) && service.PAServicestate.ogItems.salesAdminPermissionSetFlag}">
+                    <apex:outputText value="On Behalf Of" />
+                    <apex:outputPanel >
+                        <!-- OnBehalOf popu up Bala Version 1.1 start-->
+<!--                         <TJ20140923> -->
+                         <apex:outputText style="float:left;margin: 0px;" value="{!service.paServiceState.ogItems.userName}"/>                        
+                        <!-- Version 1.1 End  -->
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value="Sales Area" />
+                    <apex:outputPanel style="float:left;" >
+                        <apex:outputText escape="false" style="float:left;margin: 0px;" value="{!service.PAServicestate.currentRequest.pricingRequest.Sales_Org_code__c}-{!service.PAServicestate.currentRequest.pricingRequest.Sales_Org__c}
+                                    <br>{!service.PAServicestate.currentRequest.pricingRequest.Dist_Channel_Code__c} - 
+                                    {!service.PAServicestate.currentRequest.pricingRequest.Dist_Channel__c}<br>{!service.PAServicestate.currentRequest.pricingRequest.Division_code__c} - {!service.PAServicestate.currentRequest.pricingRequest.Division__c}" rendered="{!service.paServiceState.currentRequest.pricingRequest.Division_Code__c!=null}"/>
+                    </apex:outputpanel>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <!-- Ver 1.7 -->
+            <br/>
+            <center>
+            <apex:commandLink action="{!businessComponentAction}" style="text-decoration:none; color:#484848" styleClass="btn" 
+                                value="Cancel" >
+                                <apex:param value="PAAddReqItem" name="passMode"
+                                    assignTo="{!newPageLabel}" />                                                          
+                                <apex:param value="{!businessAction}"
+                                    name="sendAction1" assignTo="{!businessaction}" />
+                                    
+                     </apex:commandLink>
+                     </center>
+                     <br/>
+                     <!-- <MS20140522> Added Create button on top of tables -->
+<!--                      <TJ20140923> -->
+                     <center>
+                     <apex:commandLink style="text-decoration:none; color:#484848;" styleClass="btn"
+                        value="Create {!IF(CONTAINS(businessAction,'Massive')||CONTAINS(service.PAServicestate.currentRequest.customer.ogitems.value,'Massive'),'Massive Change',IF(CONTAINS(businessAction,'NonCustomerSpecific')||CONTAINS(businessAction,'Non Customer Specific')||CONTAINS(service.PAServicestate.currentRequest.customer.ogitems.value,'NonCustomerSpecific'),'Non Customer Specific',''))} Request"
+                        action="{!businessComponentAction}">
+                        <apex:param value="PANewRequest" name="passMode" assignTo="{!newPageLabel}" />
+                        <!-- <TJ20140509> Passing Page Name to display navigation flow text -->
+<!--                         <TJ20140923> -->                   
+                        <apex:param value="{!IF(CONTAINS(businessAction,'Massive')||CONTAINS(service.PAServicestate.currentRequest.customer.ogitems.value,'Massive'),'Massive',IF(CONTAINS(businessAction,'NonCustomerSpecific')||CONTAINS(businessAction,'NonCustomerSpecific')||CONTAINS(service.PAServicestate.currentRequest.customer.ogitems.value,'NonCustomerSpecific'),'NonCustomerSpecific',''))} Requests" name="pageName" assignTo="{!pageName}"/>
+                        <apex:param value="{!IF(CONTAINS(businessAction,'Massive')||CONTAINS(service.PAServicestate.currentRequest.customer.ogitems.value,'Massive'),'CustRequestReasons',IF(CONTAINS(businessAction,'NonCustomerSpecific')||CONTAINS(businessAction,'NonCustomerSpecific')||CONTAINS(service.PAServicestate.currentRequest.customer.ogitems.value,'NonCustomerSpecific'),'NonCustReasons',''))}"
+                            name="passPriceType" assignTo="{!service.PAservicestate.currentRequest.customer.ogitems.value}" />
+                        <apex:param value="{!IF(CONTAINS(businessAction,'Massive')||CONTAINS(service.PAServicestate.currentRequest.customer.ogitems.value,'Massive'),'Massive Change',IF(CONTAINS(businessAction,'NonCustomerSpecific')||CONTAINS(businessAction,'NonCustomerSpecific')||CONTAINS(service.PAServicestate.currentRequest.customer.ogitems.value,'NonCustomerSpecific'),'NonCustomerSpecific',''))}NewPricingRequest" name="sendAction" assignTo="{!businessaction}" />
+                    </apex:commandLink>
+                    </center>
+                    <br />  
+<!--             <apex:pageBlockSection title="Pricing Conditions and Key Combinations" columns="1" rendered="{!AND(OR(CONTAINS(businessAction,'NonCustomerSpecific'),CONTAINS(businessAction,'Non Customer Specific'),CONTAINS(service.PAServicestate.currentRequest.customer.ogitems.value,'NonCustomerSpecific')),NOT(service.PAServicestate.currentRequest.reqOvw))}"> -->
+<!--             <apex:pageBlockTable value="{!service.paServicestate.currentRequest.keyCombination.pcKCList1}" var="pckc" columns="1"> -->
+<!--             <apex:column style="width:1030px;"> -->
+<!--             <apex:commandlink value="{!pckc}" action="{!businessComponentAction}"> -->
+<!--             	 <apex:param name="PCKC Selected" value="{!pckc}" assignTo="{!service.paServicestate.currentRequest.salesPriceSAP.pckcSelected}"/> -->
+<!-- 				 <apex:param name="newPageLabel" value="PAMassiveAndPriceListRequests" assignTo="{!newPageLabel}"/> -->
+<!-- 				 <apex:param name="desiredAction" value="{!IF(CONTAINS(businessAction,'cpSelChange'),businessAction,businessAction+'cpSelChange')}" assignTo="{!businessAction}"/>  -->
+<!-- 				 <apex:param name="ncsPCKC" value="true" assignTo="{!service.PAServicestate.currentRequest.ncsPCKC}"/> -->
+				 
+<!-- 			</apex:commandlink> -->
+<!--             </apex:column> -->
+<!--             </apex:pageBlockTable> -->
+<!--             </apex:pageBlockSection> -->
+<!--             <br/><br/> -->
+            <!-- Pricing Requests of 'Massive' and 'Non Customer Specific' Type -->
+            <div id="repeatList">
+            <apex:outputPanel >
+                <apex:repeat value="{!service.PAServicestate.currentRequest.relatedWrappersList}"
+                    var="wrapper">
+                    <!-- Ver 1.2 START --> <!-- <MS20140903> Enabling clone for Non Customer Specific -->
+                    <c:PARelatedListComponent WrapperRecordsDisp="{!wrapper.wrapperList}"
+                        columnsDisp="{!wrapper.keyCombinationcolumns}"
+                        cloneEnable="{!service.PAServicestate.currentRequest.cloneFlag}"
+                        viewMode="{!currentPageLabel}"
+                        selected="{!service.PAServicestate.currentRequest.pricingRequestId}"
+                        actionAtr="{!businessaction}" typeOfRequest="{!wrapper.priceType}"
+                        typeOfSObjectList="{!wrapper.sObjectTypeName}" cloneShowFlag="true" actionShowFlag="true"
+                        labelName="{!pageName}" currentHeader="{!IF(wrapper.priceType=='Massive Change','Massive',IF(wrapper.priceType=='Non Customer Specific','Non Customer Specific',''))} Requests">
+                        
+                    </c:PARelatedListComponent>
+                    <!-- Ver 1.2 START -->
+                    <br/>
+
+                </apex:repeat>
+               </apex:outputPanel>
+				
+                <!-- <MS20140522> Moved button to below tables, modified for single Create Non-Customer Specific button -->
+                <center>
+<br/>
+                <apex:commandLink style="text-decoration:none; color:#484848;" styleClass="btn"
+                        value="Create {!IF(CONTAINS(businessAction,'Massive')||CONTAINS(service.PAServicestate.currentRequest.customer.ogitems.value,'Massive'),'Massive Change',IF(CONTAINS(businessAction,'NonCustomerSpecific')||CONTAINS(businessAction,'Non Customer Specific')||CONTAINS(service.PAServicestate.currentRequest.customer.ogitems.value,'NonCustomerSpecific'),'Non Customer Specific',''))} Request"
+                        action="{!businessComponentAction}">
+                        <apex:param value="PANewRequest" name="passMode" assignTo="{!newPageLabel}" />
+                        <!-- <TJ20140509> Passing Page Name to display navigation flow text -->
+<!--                         <TJ20140923> -->                        
+                        <apex:param value="{!IF(CONTAINS(businessAction,'Massive')||CONTAINS(service.PAServicestate.currentRequest.customer.ogitems.value,'Massive'),'Massive',IF(CONTAINS(businessAction,'Non Customer Specific')||CONTAINS(businessAction,'NonCustomerSpecific')||CONTAINS(service.PAServicestate.currentRequest.customer.ogitems.value,'NonCustomerSpecific'),'Non Customer Specific',''))} Requests" name="pageName" assignTo="{!pageName}"/>
+                        <apex:param value="{!IF(CONTAINS(businessAction,'Massive')||CONTAINS(service.PAServicestate.currentRequest.customer.ogitems.value,'Massive'),'CustRequestReasons',IF(CONTAINS(businessAction,'Non Customer Specific')||CONTAINS(businessAction,'NonCustomerSpecific')||CONTAINS(service.PAServicestate.currentRequest.customer.ogitems.value,'NonCustomerSpecific'),'NonCustReasons',''))}"
+                            name="passPriceType" assignTo="{!service.PAservicestate.currentRequest.customer.ogitems.value}" />
+                        <apex:param value="{!IF(CONTAINS(businessAction,'Massive')||CONTAINS(service.PAServicestate.currentRequest.customer.ogitems.value,'Massive'),'Massive Change',IF(CONTAINS(businessAction,'NonCustomerSpecific')||CONTAINS(businessAction,'Non Customer Specific')||CONTAINS(service.PAServicestate.currentRequest.customer.ogitems.value,'NonCustomerSpecific'),'Non Customer Specific',''))}NewPricingRequest" name="sendAction" assignTo="{!businessaction}" />
+                    </apex:commandLink>
+                    </center>
+                    <br />
+             <!--                      <TJ20140923> -->       
+            <center>
+            <apex:commandLink action="{!businessComponentAction}" style="text-decoration:none; color:#484848" styleClass="btn" 
+                                value="Cancel" >
+                               <apex:param value="PAAddReqItem" name="passMode"
+                                    assignTo="{!newPageLabel}" />                                                          
+                                <apex:param value="{!businessAction}"
+                                    name="sendAction1" assignTo="{!businessaction}" />
+                                    
+                     </apex:commandLink>
+                     </center>
+                     <br/>
+            </div>
+        </apex:pageBlock>
+        </div>
+    </apex:form>
+</apex:page>

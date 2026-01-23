@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>NPC Response</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>NPC Response</value>
+    </caseValues>
+    <fields>
+        <label><!-- Condition Rate Key --></label>
+        <name>Condition_Rate_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- External Id --></label>
+        <name>External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- F Response Status --></label>
+        <name>F_Response_Status__c</name>
+    </fields>
+    <fields>
+        <help><!-- This is the pre-split original 18 digit Salesforce ID of this record that came from the original One Dupont Salesforce instance before the business units were separated. Its is case insensitive and unique. --></help>
+        <label><!-- Legacy Pricing Util SFID --></label>
+        <name>Legacy_Pricing_Util_SFID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Material Number --></label>
+        <name>Material_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- NPC Message Type --></label>
+        <name>NPC_Message_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- NPC Message --></label>
+        <name>NPC_Message__c</name>
+    </fields>
+    <fields>
+        <label><!-- NPC Request --></label>
+        <name>NPC_Request__c</name>
+        <relationshipLabel><!-- NPC Response --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- NPC Response Status --></label>
+        <name>NPC_Response_Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- Novus External Id --></label>
+        <name>Novus_External_Id__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

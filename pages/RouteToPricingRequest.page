@@ -1,0 +1,20 @@
+<!-- Page used to route the Pricing request ID to the custom page  -->
+<!--  Ver.        Developer           Changes                                                   Dependencies
+-------------------------------------------------------------------------------------------------------------------
+  1.1              Prachi            changed the routing                                            None-->
+
+<apex:page standardController="Pricing_Request__c" extensions="OverRideSystemAdmin" action="{!route}">
+  <script>
+        //var appid = '{!$CurrentPage.parameters.id}';
+        //window.location.href='/apex/PAPricingRequest?id='+appid;
+        //window.location.href='/apex/PAPricingRequestCSRDisplay?id='+appid;
+        //window.focus();
+  </script>
+  
+  <style>
+     .noTableFooter
+      {
+      margin:0px!important;
+      }
+  </style>  
+</apex:page>

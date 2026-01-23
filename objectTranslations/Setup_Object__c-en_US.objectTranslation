@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Approver List</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Approver Lists</value>
+    </caseValues>
+    <fields>
+        <label><!-- Access Id --></label>
+        <name>Access_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- All Other Values Backup --></label>
+        <name>All_Other_Values_Backup__c</name>
+        <relationshipLabel><!-- Approver Lists (All Other Values Backup) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- All Other Values --></label>
+        <name>All_Other_Values__c</name>
+        <relationshipLabel><!-- Approver Lists (All Other Values) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Approver Backup --></label>
+        <name>Approver_Backup__c</name>
+        <relationshipLabel><!-- Approver Lists (Approver Backup) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Approver Id --></label>
+        <name>Approver_Id__c</name>
+        <relationshipLabel><!-- Approver Lists (Approver Id) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Approver Name --></label>
+        <name>Approver_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approver Role --></label>
+        <name>Approver_Role__c</name>
+        <picklistValues>
+            <masterLabel>Approver Role 1</masterLabel>
+            <translation><!-- Approver Role 1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 10</masterLabel>
+            <translation><!-- Approver Role 10 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 11</masterLabel>
+            <translation><!-- Approver Role 11 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 12</masterLabel>
+            <translation><!-- Approver Role 12 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 13</masterLabel>
+            <translation><!-- Approver Role 13 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 14</masterLabel>
+            <translation><!-- Approver Role 14 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 15</masterLabel>
+            <translation><!-- Approver Role 15 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 16</masterLabel>
+            <translation><!-- Approver Role 16 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 17</masterLabel>
+            <translation><!-- Approver Role 17 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 18</masterLabel>
+            <translation><!-- Approver Role 18 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 19</masterLabel>
+            <translation><!-- Approver Role 19 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 2</masterLabel>
+            <translation><!-- Approver Role 2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 20</masterLabel>
+            <translation><!-- Approver Role 20 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 21</masterLabel>
+            <translation><!-- Approver Role 21 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 22</masterLabel>
+            <translation><!-- Approver Role 22 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 23</masterLabel>
+            <translation><!-- Approver Role 23 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 24</masterLabel>
+            <translation><!-- Approver Role 24 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 25</masterLabel>
+            <translation><!-- Approver Role 25 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 26</masterLabel>
+            <translation><!-- Approver Role 26 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 27</masterLabel>
+            <translation><!-- Approver Role 27 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 28</masterLabel>
+            <translation><!-- Approver Role 28 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 29</masterLabel>
+            <translation><!-- Approver Role 29 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 3</masterLabel>
+            <translation><!-- Approver Role 3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 30</masterLabel>
+            <translation><!-- Approver Role 30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 4</masterLabel>
+            <translation><!-- Approver Role 4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 5</masterLabel>
+            <translation><!-- Approver Role 5 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 6</masterLabel>
+            <translation><!-- Approver Role 6 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 7</masterLabel>
+            <translation><!-- Approver Role 7 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 8</masterLabel>
+            <translation><!-- Approver Role 8 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approver Role 9</masterLabel>
+            <translation><!-- Approver Role 9 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Final Approver 1</masterLabel>
+            <translation><!-- Final Approver 1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Final Approver 2</masterLabel>
+            <translation><!-- Final Approver 2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Final Approver 3</masterLabel>
+            <translation><!-- Final Approver 3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Global Product Line Manager</masterLabel>
+            <translation><!-- Global Product Line Manager --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Legal Entity Approver</masterLabel>
+            <translation><!-- Legal Entity Approver --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Marketing Approver</masterLabel>
+            <translation><!-- Marketing Approver --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Product Approver</masterLabel>
+            <translation><!-- Product Approver --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Regional Business Leader</masterLabel>
+            <translation><!-- Regional Business Leader --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Regional Marketing Manager</masterLabel>
+            <translation><!-- Regional Marketing Manager --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Regional Sales Leader</masterLabel>
+            <translation><!-- Regional Sales Leader --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Regional Sales Manager</masterLabel>
+            <translation><!-- Regional Sales Manager --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Requester&apos;s Approver</masterLabel>
+            <translation><!-- Requester&apos;s Approver --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sales Approver</masterLabel>
+            <translation><!-- Sales Approver --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- BU --></label>
+        <name>BU__c</name>
+    </fields>
+    <fields>
+        <label><!-- Distribution Channel --></label>
+        <name>Distribution_Channel__c</name>
+    </fields>
+    <fields>
+        <label><!-- Division --></label>
+        <name>Division__c</name>
+    </fields>
+    <fields>
+        <label><!-- Key Field Id --></label>
+        <name>Key_Field_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Key Field Value --></label>
+        <name>Key_Field_Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- Key Field --></label>
+        <name>Key_Field__c</name>
+        <picklistValues>
+            <masterLabel>Country</masterLabel>
+            <translation><!-- Country --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Customer Group 4</masterLabel>
+            <translation><!-- Customer Group 4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>End Use</masterLabel>
+            <translation><!-- End Use --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>FRB10</masterLabel>
+            <translation><!-- FRB10 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>FRB4</masterLabel>
+            <translation><!-- FRB4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>FRB5</masterLabel>
+            <translation><!-- FRB5 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>FRB6</masterLabel>
+            <translation><!-- FRB6 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>FRB7</masterLabel>
+            <translation><!-- FRB7 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>FRB8</masterLabel>
+            <translation><!-- FRB8 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>FRB9</masterLabel>
+            <translation><!-- FRB9 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Market Segment</masterLabel>
+            <translation><!-- Market Segment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PH1</masterLabel>
+            <translation><!-- PH1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PH2</masterLabel>
+            <translation><!-- PH2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PH3</masterLabel>
+            <translation><!-- PH3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PH4</masterLabel>
+            <translation><!-- PH4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PH5</masterLabel>
+            <translation><!-- PH5 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PH6</masterLabel>
+            <translation><!-- PH6 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PH7</masterLabel>
+            <translation><!-- PH7 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PH8</masterLabel>
+            <translation><!-- PH8 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PH9</masterLabel>
+            <translation><!-- PH9 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Product Hierarchy</masterLabel>
+            <translation><!-- Product Hierarchy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Profit Center</masterLabel>
+            <translation><!-- Profit Center --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Reason Code</masterLabel>
+            <translation><!-- Reason Code --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Requester</masterLabel>
+            <translation><!-- Requester --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sales Office</masterLabel>
+            <translation><!-- Sales Office --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sales Org</masterLabel>
+            <translation><!-- Sales Org --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sales Reduction</masterLabel>
+            <translation><!-- Sales Reduction --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- This is the pre-split original 18 digit Salesforce ID of this record that came from the original One Dupont Salesforce instance before the business units were separated. Its is case insensitive and unique. --></help>
+        <label><!-- Legacy Pricing Util SFID --></label>
+        <name>Legacy_Pricing_Util_SFID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mixed Values Backup --></label>
+        <name>Mixed_Values_Backup__c</name>
+        <relationshipLabel><!-- Approver Lists (Mixed Values Backup) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Mixed Values --></label>
+        <name>Mixed_Values__c</name>
+        <relationshipLabel><!-- Approver Lists (Mixed Values) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Novus External Id --></label>
+        <name>Novus_External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Organisation --></label>
+        <name>Sales_Organisation__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unique Key --></label>
+        <name>Unique_Key__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

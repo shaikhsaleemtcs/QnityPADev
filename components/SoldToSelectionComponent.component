@@ -1,0 +1,309 @@
+<!--    Ver.            Developer       Changes                                         Dependencies    -->
+<!--    1.1             Shiva       modified the value of maxlength attr for
+<!--                                soldto code, soldto, SO and Location                None            -->
+<!--    1.2             Shiva       Commented Pagination Code(20-02-13)                 None            -->
+<!--    1.3             Shiva       Added title to the PageBlockSections                None            -->
+<!--    1.4             Prachi      UI change (UAT Issue 55)                            None            -->
+<!-- PP20140224		Priyanka Pillala	Customer Prices list views for CSRs - CAPITAL PROJECT					None -->
+<!-- AV20140408     Abhijeet Vaishnab   Added attributes -->
+ <!-- <BB20140508>  Bisnupriya          Added CustOrderGrpConCatAtr attributes CAPITAL PROJECT   None-->
+ 
+<apex:component controller="PASoldToSelection" allowDML="true" >
+
+<!---Attributes to Populate Fields in Page--->
+    <apex:attribute description="soldToCode" type="string" name="soldToCodeAtr" />
+    <apex:attribute description="soldTo" type="string" name="soldToAtr" />
+    <apex:attribute description="soldTo Id" type="string" name="soldToIdComponent" />
+    <apex:attribute description="sales Org" type="string" name="soAtr" />
+    <apex:attribute description="sales Org code" type="string" name="soCodeAtr" />
+    <apex:attribute description="dist. Chnl" type="string" name="dcAtr" />
+    <apex:attribute description="dist. Chnl Code" type="string" name="dcCodeAtr" />
+    <apex:attribute description="div" type="string" name="divAtr" />
+    <apex:attribute description="div Code" type="string" name="divCodeAtr" />
+    <apex:attribute description="street" type="string" name="streetAtr" />
+    <apex:attribute description="city" type="string" name="cityAtr" />
+    <apex:attribute description="state" type="string" name="stateAtr" />
+    <apex:attribute description="country" type="string" name="countryAtr" />
+    <apex:attribute description="postalCode" type="string" name="postalCodeAtr"/>   
+    <apex:attribute description="salesOff" type="string" name="salesOfficeAtr" />
+    <apex:attribute description="SalesOffice Code" type="string" name="salesOffCodeAtr" />
+    <apex:attribute description="paymentTerm" type="string" name="termsOfPaymentAtr" />
+    <apex:attribute description="payTermCode" type="string" name="termsOfPaymentCodeAtr" />
+    <apex:attribute description="incoTerm" type="string" name="incoTermAtr" />
+    <apex:attribute description="incoTerm Code " type="string" name="incoTermCodeAtr" />
+    <apex:attribute description="Customer price Grp" type="string" name="custPriceGrpAtr" />
+    <apex:attribute description="Customer price Grp Code " type="string" name="custPriceGrpCodecAtr" />
+    <apex:attribute description="price List Type" type="string" name="priceListTypeAtr" />
+    <apex:attribute description="price List Type Code" type="string" name="priceListTypeCodeAtr" />
+    <apex:attribute description="soldTo Code From Page" type="string" name="soldToCodeFromPageAtr" assignTo="{!soldToCodeFromPage}" />
+    <apex:attribute description="soldTo Id From Page" type="string" name="soldToIdFromPageAtr"/>
+    <apex:attribute description="BU of Requestor" type="string" name="BUSelectedAtr" assignTo="{!BUSelectedFromPage}" />  
+    <apex:attribute description="change SA" type="boolean" name="changeSAAtr" />
+    
+    
+    
+    <apex:attribute description="salesOrgConcat" type="string" name="salesOrgConcatAtr"/>  
+    <apex:attribute description="DistChannelConcat" type="string" name="DistChannelConcatAtr"  />  
+    <apex:attribute description="DivisionConcat" type="string" name="DivisionConcatAtr"  />  
+    <apex:attribute description="salesOfficeConcat" type="string" name="salesOfficeConcatAtr"/>  
+     <apex:attribute description="incotermConcat" type="string" name="incotermConcatAtr"  />  
+     <apex:attribute description="termsOfPaymentConcat" type="string" name="termsOfPaymentConcatAtr"  />  
+     <apex:attribute description="priceListTypeConcat" type="string" name="priceListTypeConcatAtr"  />  
+     <apex:attribute description="CPGConcat" type="string" name="CPGConcatAtr" />  
+     <apex:attribute description="salesAreaSelected" type="string" name="salesAreaSelectedAtr" />  
+     <!-- BB20140508-added custOrderGrpConCatAtr attributes START-->
+     <apex:attribute description="CustOrderGrpConCat" type="string" name="custOrderGrpConCatAtr" /> 
+     <!-- BB20140508-END -->
+     <apex:attribute description="LocationSelected" type="string" name="LocationSelectedAtr" />  
+      <!-- on jan 17th 
+       <apex:attribute description="StreetSelected" type="string" name="StreetSelectedAtr" /> -->
+     <!-- on 27 jan  -->
+     <apex:attribute description="selected On Behalf Of" type="string" name="selectedUserAtr" assignTo="{!selectedUser}"/>
+      <!-- location end --> 
+      <!-- PP20140224 -->
+      <!-- AV20140408-added soldToNewAtr attribute -->
+      <apex:attribute description="sold to code" type="string" name="soldtToNewAtr" />
+      <!-- AV20140408-ends -->
+    <!--    <apex:attribute description="request class" type="boolean" name="reqClassAtr" assignTo="{!reqClass}"/>-->
+<!--      <apex:attribute description="Request Class" type="boolean" name="reqClassFlagAtr" />-->
+       <!-- AV20140408-added oGItemAtr and ogItemValueAtr attributes -->
+       <apex:attribute description="OrgGroupItem" type="String" name="oGItemAtr" />
+       <apex:attribute description="OrgGroupItem Value" type="String" name="ogItemValueAtr" />
+       <!-- AV20140408-ends -->
+     
+   <style>
+        .headertext{font-size:15px;height:20px;margin-bottom:1px;padding:5px;border:solid 1px;border-color:#6E96B2; background-color:#E5F3FC;font-weight:bold;text-align:left;}
+   </style>
+   
+    <apex:outputPanel >
+<!--     <apex:outputText value="Sold To" />-->
+<!--    <apex:inputText value="{!soldToFieldValue}" size="7"></apex:inputText> -->
+        <apex:commandLink reRender="myId,myForm,myNewId" action="{!displayPopUpWindow}" status="stat" immediate="true">
+    
+            <apex:image id="theImage" url="{!$Resource.LookUpImage}"/>    	
+    </apex:commandLink>
+    
+    </apex:outputPanel>
+ 
+<!----SoldToLookUp PopUp Window---->
+ <apex:outputPanel id="backPage" rendered="{!displayPopUpWindow}" styleClass="BackPage" ></apex:outputPanel> 
+<apex:outputPanel id="popUPwindow" rendered="{!displayPopUpWindow}" styleClass="FrontPage" >
+
+    <apex:panelGrid style="float:right;">
+    <apex:commandLink action="{!closeWindow}" > 
+  
+   
+    
+    <apex:image url="{!$Resource.closeButton}" width="15" height="15"/>
+    </apex:commandLink>
+    </apex:panelGrid>
+    
+ <apex:pageMessages id="CompErrorMessage"></apex:pageMessages>  
+
+ 		<div class="headertext">
+               Sold To Selection
+        </div>
+<!--        <TJ20140521> -->
+<apex:pageBlock >
+        	<apex:commandLink value="Help" action="{!helpLink}" style="float:right;" target="_blank">
+    			<apex:param name="Help" value="Key Combination Selection" assignTo="{!label}"/>
+    		</apex:commandLink>
+    		<br/>
+    <apex:pageBlockSection title="Search Criteria"  collapsible="false" id="pageblocksectionid" >         
+    
+    <apex:pageBlockSectionItem >
+    <apex:outputText value="Sales Org"/> 
+    <apex:selectList size="1" value="{!filter_salesOrg}" >
+    <apex:actionsupport event="onchange" action="{!action}" rerender="pageblocksectionid">
+    <apex:param value="populateDcDDiv" assignTo="{!desiredAction}"/>
+    </apex:actionsupport> 
+    <apex:selectOptions value="{!listOfSalesOrg}"></apex:selectOptions>
+    </apex:selectList>
+    </apex:pageBlockSectionItem>
+       
+    <apex:pageBlockSectionItem >
+    <apex:outputText value="Dist. Channel" /> 
+    <apex:selectList size="1" value="{!filter_distChannel}" disabled="{!IF(filter_salesOrg=='',true,false)}">
+    <apex:actionsupport event="onchange"></apex:actionsupport> 
+    <apex:selectOptions value="{!listOfDistChannel}"></apex:selectOptions>
+    </apex:selectList>
+    </apex:pageBlockSectionItem>
+        
+    <apex:pageBlockSectionItem >
+    <apex:outputText value="Division" /> 
+    <apex:selectList size="1" value="{!filter_division}" disabled="{!IF(filter_salesOrg=='',true,false)}">
+    <apex:actionsupport event="onchange"></apex:actionsupport>  
+    <apex:selectOptions value="{!listOfDivision}"></apex:selectOptions>
+    </apex:selectList>
+    </apex:pageBlockSectionItem>
+        
+    <apex:pageBlockSectionItem >
+    <apex:outputText value="Sales Office Code"/><apex:inputText value="{!filter_salesOffice}" maxlength="4"/>
+    </apex:pageBlockSectionItem>
+         
+    <apex:pageBlockSectionItem >
+    <apex:outputText value="Sold To Code"/><apex:inputText value="{!filter_soldToCode}" maxlength="10"/>
+    </apex:pageBlockSectionItem>
+        
+    <apex:pageBlockSectionItem >
+    <apex:outputText value="Sold To"/> <apex:inputText value="{!filter_soldTo}" maxlength="80" />
+    </apex:pageBlockSectionItem>
+        
+    <apex:pageBlockSectionItem >
+    <apex:outputText value="Street"/> <apex:inputText value="{!filter_street}" maxlength="100"/>
+    </apex:pageBlockSectionItem>
+        
+    <apex:pageBlockSectionItem >
+    <apex:outputText value="City"/> <apex:inputText value="{!filter_city}" maxlength="100"/>
+    </apex:pageBlockSectionItem>
+        
+    <apex:pageBlockSectionItem >
+    <apex:outputText value="State/Province"/> <apex:inputText value="{!filter_state}" maxlength="100"/>
+    </apex:pageBlockSectionItem>
+        
+    <apex:pageBlockSectionItem >
+    <apex:outputText value="Country"/> 
+    <apex:selectList size="1" value="{!filter_country}" >
+    
+        <apex:selectOptions value="{!listOfCountry}"></apex:selectOptions>
+    </apex:selectList>
+    </apex:pageBlockSectionItem>
+     
+   </apex:pageBlockSection>
+     
+     <br/> 
+ <!--  reRender="tab1,CompErrorMessage" -->
+        <center>  
+      
+          <apex:commandButton value="Search"  status="stat" rerender="popUPwindow" action="{!dosearch}" >
+         
+          </apex:commandButton>
+       
+       </center> 
+
+    
+</apex:pageBlock>
+<div id="searchTable">
+<apex:pageBlock rendered="{!displayTableOnSearch}">
+{!ogItemValueAtr}
+<apex:pageBlockSection title="Search Results" columns="1">
+     <!-- <apex:pageBlockTable id="tab1" rendered="{!displayTableOnSearch}" style="width:100%;" styleClass="TableTitle" value="{!record}" var="v" >  --> 
+    <apex:pageBlockTable rendered="{!displayTableOnSearch}" value="{!record}" var="v" id="jQuery" >
+    <apex:column headerValue="Sold To Code" style="align"> 
+    <apex:commandLink value="{!v.Customer_Code__c}" action="{!returnData}">
+      
+      <apex:param name="soldTo Code" assignTo="{!soldToCodeAtr}" value="{!v.Customer_Code__c}"/>
+      <!-- <AV20140408>-starts -->
+      <apex:param name="sold to code" assignTo="{!soldtToNewAtr}" value="{!v.Customer_Code__c}"/>
+      <!-- <AV20140408>-ends -->
+      <apex:param name="Customer Name" assignTo="{!soldToAtr}" value="{!URLENCODE(v.Name)}"/>
+      <apex:param name="Sales Org " assignTo="{!soAtr}" value="{!v.Sales_Org__c}"/>
+      <apex:param name="Sales Org code" assignTo="{!soCodeAtr}" value="{!v.Sales_Org_Code__c}"/>
+      <apex:param name="Dist. Channel" assignTo="{!dcAtr}" value="{!v.Distribution_Channel__c}"/>
+      <apex:param name="Dist. Channel code" assignTo="{!dcCodeAtr}" value="{!v.Distribution_Channel_Code__c}"/>
+      <apex:param name="DIVFieldValue" assignTo="{!divCodeAtr}" value="{!v.Division_Code__c}"/>
+      <apex:param name="DIVDescValue" assignTo="{!divAtr}" value="{!v.Division__c}"/>
+      <apex:param name="Street" assignTo="{!streetAtr}" value="{!URLENCODE(v.Street__c)}"/>
+      <apex:param name="City" assignTo="{!cityAtr}" value="{!URLENCODE(v.City__c)}"/>
+      <apex:param name="State" assignTo="{!stateAtr}" value="{!URLENCODE(v.State__c)}"/> 
+      <apex:param name="Country" assignTo="{!countryAtr}" value="{!URLENCODE(v.Country__c)}"/>
+      <apex:param name="postal code" assignTo="{!postalCodeAtr}" value="{!v.ZIP_Postal_Code__c}"/>
+      <apex:param name="SalesOffice" assignTo="{!salesOfficeAtr}" value="{!v.Sales_Office_Code__c}"/>
+      <apex:param name="SalesOfficeCode" assignTo="{!salesOffCodeAtr}" value="{!v.Sales_Office__c}"/>
+      <apex:param name="terms Of Payment" assignTo="{!termsOfPaymentAtr}" value="{!v.Terms_of_Payment__c}"/>
+      <apex:param name="terms Of Payment Code" assignTo="{!termsOfPaymentCodeAtr}" value="{!v.Terms_of_Payment_Code__c}"/>
+      <apex:param name="Incoterm" assignTo="{!incoTermAtr}" value="{!v.Incoterms_1__c}"/>
+      <apex:param name="Incoterm Code" assignTo="{!incoTermCodeAtr}" value="{!v.Incoterms_1_Code__c}"/>
+      <apex:param name="PriceGrpDesc" assignTo="{!custPriceGrpAtr}" value="{!v.Customer_Price_Group__c}"/>
+      <apex:param name="PriceGrpCode" assignTo="{!custPriceGrpCodeAtr}" value="{!v.Customer_Price_Group_Code__c}"/>
+      <apex:param name="PriceListType" assignTo="{!priceListTypeAtr}" value="{!v.Price_List_Type__c}"/>
+      <apex:param name="PriceListType Code" assignTo="{!priceListTypeCodeAtr}" value="{!v.Price_List_Type_Code__c}"/>
+      <apex:param name="soldTo Id" assignTo="{!soldToIdFromPageAtr}" value="{!v.Id}"/>
+      
+      <apex:param name="changeSAAtr" assignTo="{!changeSAAtr}" value="{!changeSAFlag}"/>
+      <!-- street 
+      <apex:param name="street" assignTo="{!StreetSelectedAtr}" value="{!URLENCODE(v.Street__c)}"/> -->
+      
+      <apex:param name="SalesOffice concat" assignTo="{!salesOfficeConcatAtr}" value="{!v.Sales_Office_Code__c+'-'+v.Sales_Office__c}"/>
+      <apex:param name="terms Of Payment concat" assignTo="{!termsOfPaymentConcatAtr}" value="{!v.Terms_of_Payment_Code__c+'-'+v.Terms_of_Payment__c}"/>
+      <apex:param name="Incoterm concat" assignTo="{!incotermConcatAtr}" value="{!v.Incoterms_1_Code__c+'-'+v.Incoterms_1__c}"/>
+      <apex:param name="PriceGrpconcat" assignTo="{!CPGconcatAtr}" value="{!v.Customer_Price_Group_Code__c+'-'+v.Customer_Price_Group__c}"/>
+      <apex:param name="PriceListType Concat" assignTo="{!priceListTypeConcatAtr}" value="{!v.Price_List_Type_Code__c+'-'+v.Price_List_Type__c}"/>   
+      <apex:param name="Sales Area concat" assignTo="{!salesAreaSelectedAtr}" value="{!v.Sales_Org_Code__c +'-'+v.Sales_Org__c +'<br>'+v.Distribution_Channel_Code__c+'-'+v.Distribution_Channel__c+'<br>'+v.Division_Code__c+'-'+v.Division__c}"/>                                                                                  
+      <apex:param name="Location concat" assignTo="{!LocationSelectedAtr}" value="{!v.Street__c +'<br>'+v.City__c +'<br>'+v.State__c+'<br>'+v.Country__c+'<br>'+v.ZIP_Postal_Code__c}"/>  
+       <!-- <BB20140508>-added custOrderGrpConCatAtr attributes START-->
+      <apex:param name="CustOrderGrp concat" assignTo="{!custOrderGrpConCatAtr}" value="{!v.Customer_Order_Block_Code__c+'-'+v.Customer_Order_Block__c}"/>
+       <!-- <BB20140508>-ends -->
+      <!-- <AV20140408>-starts -->
+      <apex:param name="ogItemsValue" assignTo="{!ogItemValueAtr}" value="changeSalesAreaClone"/>
+      <apex:param name="OGITEM" assignTo="{!oGItemAtr}" value="{!orgGroupItem.Id}"/>      
+      <!-- <AV20140408>-ends -->
+    
+      
+     </apex:commandLink>
+    </apex:column> 
+    <apex:column headerValue="Sold To"><apex:outputField value="{!v.Name}"/></apex:column>
+    <apex:column headerValue="Country"><apex:outputField value="{!v.Country__c}"/></apex:column>
+    <apex:column headerValue="State/Province"><apex:outputField value="{!v.State__c}"/></apex:column>
+    <apex:column headerValue="City"><apex:outputField value="{!v.City__c}"/> </apex:column>
+    <apex:column headerValue="Street"><apex:outputField value="{!v.Street__c}"/></apex:column>
+        <apex:column headerValue="Sales Area">{!v.Sales_Org_Code__c+'-'+v.Distribution_Channel_Code__c+'-'+v.Division_Code__c}</apex:column>
+<!--    <apex:column headerValue="Sales Org"><apex:outputField value="{!v.Sales_Org__c}"/></apex:column>-->
+<!--    <apex:column headerValue="Dist. Channel"><apex:outputField value="{!v.Distribution_Channel__c}"/></apex:column>-->
+<!--    <apex:column headerValue="Division"><apex:outputField value="{!v.Division__c}"/></apex:column>-->
+    <apex:column headerValue="Sales Office"><apex:outputField value="{!v.Sales_Office__c}"/></apex:column>
+    </apex:pageBlockTable>
+    </apex:pageBlockSection>
+     <br/>
+    
+</apex:pageBlock> 
+
+</div>
+</apex:outputPanel>
+
+<!--CSS-->
+
+   
+    <style type="text/css">   
+   
+   .FrontPage{
+        background-color: white;
+        z-index: 99999;
+        right: ;
+        padding:10px;
+        position: absolute; 
+        border: 2px solid #63A4C5;
+        //left: 0%;
+        //top:24px;
+        //left: 5%;
+        //top: 12%;
+        //width: 90%;
+        left: 10%;
+		top: 12%;
+        width: 1000px;
+    }
+    .BackPage{            
+        background-color:#696969;
+        opacity: 0.5;
+        filter: alpha(opacity = 50);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        
+    }
+    .TableTitle{
+        font-weight:normal;
+        color: #0079C1;
+        background-color:white;
+        text-align:left;
+        font-size:12px;
+    }
+
+    </style>
+<script>
+
+</script>
+</apex:component>

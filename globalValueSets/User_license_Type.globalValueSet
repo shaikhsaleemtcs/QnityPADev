@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Customer Community</fullName>
+        <default>false</default>
+        <label>Customer Community</label>
+    </customValue>
+    <customValue>
+        <fullName>Customer Community Plus</fullName>
+        <default>false</default>
+        <label>Customer Community Plus</label>
+    </customValue>
+    <customValue>
+        <fullName>Einstein Analytics Plus</fullName>
+        <default>false</default>
+        <label>Einstein Analytics Plus</label>
+    </customValue>
+    <customValue>
+        <fullName>Partner Community</fullName>
+        <default>false</default>
+        <label>Partner Community</label>
+    </customValue>
+    <customValue>
+        <fullName>Service Cloud</fullName>
+        <default>false</default>
+        <label>Service Cloud</label>
+    </customValue>
+    <description>List of User Licenses</description>
+    <masterLabel>User license Type</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

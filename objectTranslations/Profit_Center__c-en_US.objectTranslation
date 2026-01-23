@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Profit Center</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Profit Center</value>
+    </caseValues>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Profit Center 10 Code --></label>
+        <name>ERP_Profit_Center_10_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Profit Center 10 --></label>
+        <name>ERP_Profit_Center_10__c</name>
+    </fields>
+    <fields>
+        <label><!-- Profit Center 4 Code --></label>
+        <name>ERP_Profit_Center_4_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Profit Center 4 --></label>
+        <name>ERP_Profit_Center_4__c</name>
+    </fields>
+    <fields>
+        <label><!-- Profit Center 5 Code --></label>
+        <name>ERP_Profit_Center_5_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Profit Center 5 --></label>
+        <name>ERP_Profit_Center_5__c</name>
+    </fields>
+    <fields>
+        <label><!-- Profit Center 6 Code --></label>
+        <name>ERP_Profit_Center_6_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Profit Center 6 --></label>
+        <name>ERP_Profit_Center_6__c</name>
+    </fields>
+    <fields>
+        <label><!-- Profit Center 7 Code --></label>
+        <name>ERP_Profit_Center_7_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Profit Center 7 --></label>
+        <name>ERP_Profit_Center_7__c</name>
+    </fields>
+    <fields>
+        <label><!-- Profit Center 8 Code --></label>
+        <name>ERP_Profit_Center_8_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Profit Center 8 --></label>
+        <name>ERP_Profit_Center_8__c</name>
+    </fields>
+    <fields>
+        <label><!-- Profit Center 9 Code --></label>
+        <name>ERP_Profit_Center_9_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Profit Center 9 --></label>
+        <name>ERP_Profit_Center_9__c</name>
+    </fields>
+    <fields>
+        <label><!-- ERP Profit Center Code --></label>
+        <name>ERP_Profit_Center_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- ERP Profit Center Level --></label>
+        <name>ERP_Profit_Center_Level__c</name>
+    </fields>
+    <fields>
+        <label><!-- ERP Profit Center --></label>
+        <name>ERP_Profit_Center__c</name>
+    </fields>
+    <fields>
+        <label><!-- Final Level --></label>
+        <name>Final_Level__c</name>
+    </fields>
+    <fields>
+        <help><!-- This is the pre-split original 18 digit Salesforce ID of this record that came from the original One Dupont Salesforce instance before the business units were separated. Its is case insensitive and unique. --></help>
+        <label><!-- Legacy Pricing Util SFID --></label>
+        <name>Legacy_Pricing_Util_SFID__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

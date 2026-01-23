@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>ERP Customer - Material Key</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>ERP Customer - Material Key</value>
+    </caseValues>
+    <fields>
+        <label><!-- Code --></label>
+        <name>Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Field Name --></label>
+        <name>Field_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- This is the pre-split original 18 digit Salesforce ID of this record that came from the original One Dupont Salesforce instance before the business units were separated. Its is case insensitive and unique. --></help>
+        <label><!-- Legacy Pricing Util SFID --></label>
+        <name>Legacy_Pricing_Util_SFID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Name --></label>
+        <name>Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Novus External Id --></label>
+        <name>Novus_External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Inactive</masterLabel>
+            <translation><!-- Inactive --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>Campaign</masterLabel>
+            <translation><!-- Campaign --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Country</masterLabel>
+            <translation><!-- Country --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Customer Group 4</masterLabel>
+            <translation><!-- Customer Group 4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Customer Price Group</masterLabel>
+            <translation><!-- Customer Price Group --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Distributor Code</masterLabel>
+            <translation><!-- Distributor Code --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Document Currency</masterLabel>
+            <translation><!-- Document Currency --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ext Matl Grp</masterLabel>
+            <translation><!-- Ext Matl Grp --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Incoterms</masterLabel>
+            <translation><!-- Incoterms --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Material Group 1</masterLabel>
+            <translation><!-- Material Group 1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Material Group 2</masterLabel>
+            <translation><!-- Material Group 2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Material Group 3</masterLabel>
+            <translation><!-- Material Group 3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Material Group 4</masterLabel>
+            <translation><!-- Material Group 4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Material Group 5</masterLabel>
+            <translation><!-- Material Group 5 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Material Price Group</masterLabel>
+            <translation><!-- Material Price Group --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Plant</masterLabel>
+            <translation><!-- Plant --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Price List Type</masterLabel>
+            <translation><!-- Price List Type --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Price Zone</masterLabel>
+            <translation><!-- Price Zone --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pricing Exception</masterLabel>
+            <translation><!-- Pricing Exception --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sales District</masterLabel>
+            <translation><!-- Sales District --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sales Office</masterLabel>
+            <translation><!-- Sales Office --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sales Order Item</masterLabel>
+            <translation><!-- Sales Order Item --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sales Order Type</masterLabel>
+            <translation><!-- Sales Order Type --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sales Type</masterLabel>
+            <translation><!-- Sales Type --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Shipping Condition</masterLabel>
+            <translation><!-- Shipping Condition --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>State</masterLabel>
+            <translation><!-- State --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Terms of Payment</masterLabel>
+            <translation><!-- Terms of Payment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value Center</masterLabel>
+            <translation><!-- Value Center --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Variant</masterLabel>
+            <translation><!-- Variant --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

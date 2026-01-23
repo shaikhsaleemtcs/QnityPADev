@@ -1,0 +1,4104 @@
+/*
+ * Name      :   PAService_UT 
+ * Description  :   This is the test class for PAService
+ * Author      :   Infosys Limited
+ * Created Date :   30-03-2013
+ *
+ * Version    Modified Date    Modified By   Modification
+ * ------------------------------------------------------------------------------
+ * [SS20220826]- Added new method  for covering the code paServiceTestMethod26, paServiceTestMethod27
+ */
+@isTest 
+private class PAService_UT {
+
+    
+
+    public static testMethod void paServiceTestMethodPAQuery() {
+    //test.startTest();             
+    List<PAQuery__c> paQueyrList = new List<PAQuery__c>();
+            PAQuery__c paquery1 =   new PAQuery__c(Class__c='PASalesPriceSAP',Query__c='SELECT SELECT Id, OwnerId, Name, CreatedDate, CreatedById, LastModifiedDate, LastModifiedById, Approved_Date__c, BU__c, Customer_Price_Group_Code__c, Customer_Price_Group__c, Discount__c, Dist_Channel__c, Distribution_Channel_Code__c, Division_Code__c, Division__c, End_User_Code__c, End_User__c, External_ERP_ID__c, Key_Combination_Code__c, Key_Combination__c, Material_Code__c, Material__c, Per__c, Price_Holder__c, Pricing_Condition_Code__c, Pricing_Condition__c, Pricing_Request__c, Quantity__c, Rate__c, Sales_Org_Code__c, Sales_Org__c, Sales_Pricing_Procedure__c, Sold_To_Code__c, Sold_To__c, Unit__c, UoM__c, Valid_From__c, Valid_To__c, isPriceHolder__c FROM Rebate_Quote_Price__c',Variable__c='salesPriceRPQRecordsList');  paQueyrList.add(paquery1);
+            PAQuery__c paquery2 =  new PAQuery__c(Class__c='Trig_validatePriceAUNew',Query__c='SELECT New_Customer_Price_Payment_Terms__c,New_Payment_Terms_Fixed_Date__c,New_Volume__c, New_Volume_UoM__c,Ship_To_Country__c,Ship_To_Country_Code__c,country_code__c, Market_Segment_Code__c,Market_Segment__c,Project__c,Variant_Code__c,Variant__c,Document_Currency__c,Document_Currency_Code__c, ComPartner__c,ComPartner_Code__c,Plant__c,Plant_Code__c,Shipping_Condition__c,Shipping_Condition_Code__c,Destination_Country__c,Destination_Country_Code__c, Sales_Order_Type_Code__c,Sales_Order_Type__c,Valid_To__c,BU__c, Valid_From__c, UoM__c, Unit__c, Terms_Of_Payment__c, Terms_Of_Payment_Code__c, SystemModstamp, Stamp_Reference_Price__c, Stamp_Reference_Net_Price__c, Stamp_New_Net_Price__c, Stamp_Floor_Price__c, Stamp_Floor_Net_Price__c, Stamp_Current_Net_Price__c, Stamp_Converted_Current_Price__c, Sold_To__c, Sold_To_Code__c, ShipTo__c, ShipTo_Code__c, Scaled_Price_Flag__c, Scale_UoM_Scale_Unit__c, Scale_Type__c, Scale_Type_Code__c, Scale_Quantity_Scale_Value9__c, Scale_Quantity_Scale_Value8__c, Scale_Quantity_Scale_Value7__c, Scale_Quantity_Scale_Value6__c, Scale_Quantity_Scale_Value5__c, Scale_Quantity_Scale_Value4__c, Scale_Quantity_Scale_Value3__c, Scale_Quantity_Scale_Value2__c, Scale_Quantity_Scale_Value1__c, Scale_Quantity_Scale_Value10__c, Scale_Basis__c, Scale_Basis_Code__c, ScaleRate9__c, ScaleRate8__c, ScaleRate7__c, ScaleRate6__c, ScaleRate5__c, ScaleRate4__c, ScaleRate3__c, ScaleRate2__c, ScaleRate1__c, ScaleRate10__c, Sales_Org__c, Sales_Org_Code__c, Sales_Office__c,Customer_Hierarchy__c, Customer_Hierarchy_Code__c, Sales_Office_Code__c, SAP_Cluster__c, SAP_Client_Id__c, SAP_Application_Id__c, Rate__c, Quantity__c, Profit_Center__c, Profit_Center_Code__c, Product_Hierarchy__c, Product_Hierarchy_Code__c, Pricing_Task_UoM__c, Pricing_Request__c, Pricing_Request_Type__c, Pricing_Condition__c, Pricing_Condition_Code__c, Price_List_Type__c, Price_List_Type_Code__c, Plus_Minus__c, Plus_Minus_Code__c, Per__c, PH9__c, PH9_Code__c, PH8__c, PH8_Code__c, PH7__c, PH7_Code__c, PH6__c, PH6_Code__c, PH5__c, PH5_Code__c, PH4__c, PH4_Code__c, PH3__c, PH3_Code__c, PH2__c, PH2_Code__c, PH1__c, PH1_Code__c, PCKC__c, Non_Commercial_Products__c, New__c, New_Valid_To__c, New_Valid_From__c, New_UoM__c, New_Unit__c, New_Rate__c, New_Per__c, Name, Material__c, Material_Price_Group__c, Material_Price_Group_Code__c, Material_Code__c, LastModifiedDate, LastModifiedById, LastActivityDate, Key_Combination__c, Key_Combination_Code__c, IsDeleted, Incoterms_Code__c, Incoterms2__c, Inco_terms__c, Id, Gap__c, Gap_Pricing_Request_Item__c, Expire__c, End_User__c, End_User_Code__c, End_Use__c, End_Use_Code__c, Edit__c, ERP_Sales_Prices_SAP__c, ERP_Pricing_Procedure__c, Division__c, Division_Code__c, Dist_Channel__c, Dist_Channel_Code__c, Disc_Ref__c, Customer_Specific__c, Customer_Price_Group__c, Customer_Price_Group_Code__c, Currency__c, CurrencyIsoCode,CreatedDate, CreatedById, Country__c, Condition_Class__c, Condition_Class_Code__c, Check_Scale__c, Check_Scale_Code__c, Calculation_Type__c, Calculation_Type_Code__c, Below_Reference_Price__c, Below_Reference_Flag__c, Below_Floor_Price__c, Below_Floor_Flag__c, Below_Current_Flag__c, Approver5__c, Approver5_Date__c, Approver4__c, Approver4_Date__c, Approver3__c, Approver3_Date__c, Approver2__c, Approver2_Date__c, Approver1__c, Approver1_Date__c, Approved_Date__c, Approval_Status__c ,Pricing_Request__r.OwnerId,Price_Ref_Partner__c,Price_Ref_Partner_Code__c, ERP_Pricing_Procedure__r.SAP_Cluster__c FROM Pricing_request_item__c',Variable__c='priApprovedList');  paQueyrList.add(paquery2);
+            PAQuery__c paquery3 =  new PAQuery__c(Class__c='PASalesPriceSAP',Query__c='SELECT Id,Name,Country_Code__c,PCKC__c ,Country__c,Customer_Price_Group_Code__c,Customer_Price_Group__c,Customer_Specific__c,Distribution_Channel_Code__c,Dist_Channel__c, Division__c,Division_Code__c,Disc_Ref__c,End_Use_Code__c,End_Use__c,End_User_Code__c,End_User__c,Customer_Hierarchy_Code__c,Customer_Hierarchy__c, Incoterms_1_Code__c,Incoterms1__c,Key_Combination_Code__c,Key_Combination__c,Material_Code__c,Material__c,Material_Price_Group_Code__c, Material_Price_Group__c ,Per__c,PH1__c,PH1_Code__c,PH2__c,PH2_Code__c,PH3__c,PH3_Code__c,PH4__c,PH4_Code__c,PH5__c, PH5_Code__c,PH6__c,PH6_Code__c,PH7__c,PH7_Code__c,PH8__c,PH8_Code__c,PH9__c,PH9_Code__c,Price_List_Type_Code__c, Price_List_Type__c,Pricing_Condition__c,Pricing_Condition_Code__c,Product_Hierarchy__c,F_Product_Hierarchy_Code__c, Profit_Center_Code__c,Profit_Center__c,Quantity__c,Rate__c,Sales_Office_Code__c,Product_Hierarchy_Code__c, ScaleRate1__c,ScaleRate2__c,ScaleRate3__c,ScaleRate4__c, ScaleRate5__c,ScaleRate6__c,ScaleRate7__c,ScaleRate8__c, ScaleRate9__c,ScaleRate10__c, Sales_Office__c,Sales_Org__c,Sales_Org_Code__c,Sales_Price_Type__c,Sales_Pricing_Procedure__c,SAP_Application_Id__c, SAP_Client_ID__c,SAP_Cluster__c,Check_Scale__c,Scaled_Price_Flag__c,Scale_Type__c,Sold_To_Code__c,Sold_To__c, ShipTo__c,ShipTo_Code__c,Terms_of_Payment_Code__c,Unit__c,UoM__c,Approved_Date__c,Valid_From__c,Valid_To__c, Price_Holder__c,Volume__c,Volume_UoM__c,Pricing_Request__c,Pricing_Request__r.Name,Sales_District__c, Sales_District_Code__c,Campaign__c, Campaign_Code__c, Document_Currency__c, Document_Currency_Code__c, State__c, State_Code__c,Material_Group_5_Key__c,Material_Group_5_Key_Code__c FROM ERP_Sales_Prices_SAP__c',Variable__c='erpSalesPriceSAP');  paQueyrList.add(paquery3);
+            PAQuery__c paquery4 =  new PAQuery__c(Class__c='PAApprovalWF',Query__c='SELECT id, BU__c, Country__c, Sales_Organisation__c, Price_Category__c, Distribution_Channel__c, Division__c, Request_Type__c, Request_Class__c,End_User_Rebate_Routing__c,Is_End_User_Rebate__c from PA_BU_Admin_Master__c',Variable__c='adminMasterListRPQ');  paQueyrList.add(paquery4);
+            PAQuery__c paquery5 =  new PAQuery__c(Class__c='PARequestItem',Query__c='SELECT isNPCApplicable__c,Pricing_Request__r.BU__c,Pricing_Request__r.Reason_Detail__c,Price_Reduction__c,Sales_Reduction__c ,Deal_Margin__c ,Cost_Price__c ,BU__c,Ship_To_Country__c,Ship_To_Country_Code__c,Price_Ref_Partner_Code__c,Price_Ref_Partner__c,Market_Segment_Code__c,Market_Segment__c,Project__c,Variant_Code__c,Variant__c,Disc_Ref__c, ComPartner__c,ComPartner_Code__c,Plant__c,Plant_Code__c,Shipping_Condition__c,Shipping_Condition_Code__c,Destination_Country__c,Destination_Country_Code__c, Sales_Order_Type_Code__c,Sales_Order_Type__c,Country_Code__c,Country__c,F_Product_Hierarchy_Code__c,Product_Hierarchy_Code__c,Scale_UoM_Scale_Unit__c,Key_Combination_SFDC__c, Valid_To__c, Valid_From__c, UoM__c, Unit__c, Terms_Of_Payment__c, Terms_Of_Payment_Code__c, SystemModstamp, Stamp_Reference_Price__c, Stamp_Reference_Net_Price__c, Stamp_New_Net_Price__c, Stamp_Floor_Price__c, Stamp_Floor_Net_Price__c, Stamp_Current_Net_Price__c, Stamp_Converted_Current_Price__c, Sold_To__c, Sold_To_Code__c, ShipTo__c, ShipTo_Code__c, Scaled_Price_Flag__c, ScaleRate9__c, ScaleRate8__c, ScaleRate7__c, ScaleRate6__c, ScaleRate5__c, ScaleRate4__c, ScaleRate3__c, ScaleRate2__c, ScaleRate1__c, ScaleRate10__c, Scale_Quantity_Scale_Value9__c, Scale_Quantity_Scale_Value8__c, Scale_Quantity_Scale_Value7__c, Scale_Quantity_Scale_Value6__c, Scale_Quantity_Scale_Value5__c, Scale_Quantity_Scale_Value4__c, Scale_Quantity_Scale_Value3__c, Scale_Quantity_Scale_Value2__c, Scale_Quantity_Scale_Value1__c, Scale_Quantity_Scale_Value10__c, Sales_Org__c, Sales_Org_Code__c, Sales_Office__c, Sales_Office_Code__c, SAP_Cluster__c,SAP_Client_Id__c, SAP_Application_Id__c, Rate__c, Quantity__c,Plus_Minus__c,Plus_Minus_Code__c,Calculation_Type__c,Calculation_Type_Code__c,Check_Scale__c,Check_Scale_Code__c,Condition_Class__c, Condition_Class_Code__c,Scale_Basis__c,Scale_Basis_Code__c,Scale_Type_Code__c, Profit_Center__c, Profit_Center_Code__c, Product_Hierarchy__c, Pricing_Request__c, Pricing_Request__r.Spot_Type__c, Pricing_Request__r.Pricing_Request_Type__c, Pricing_Request_Type__c, Pricing_Condition__c, Pricing_Condition_Code__c, Price_List_Type__c, Price_List_Type_Code__c, Per__c, PH9__c, PH9_Code__c, PH8__c, PH8_Code__c, PH7__c, PH7_Code__c, PH6__c, PH6_Code__c, PH5__c, PH5_Code__c, PH4__c, PH4_Code__c, PH3__c, PH3_Code__c, PH2__c, PH2_Code__c, PH1__c, PH1_Code__c, PCKC__c, Non_Commercial_Products__c, New__c, New_Valid_To__c, New_Valid_From__c, New_UoM__c, New_Unit__c, New_Rate__c,Pricing_Task_UoM__c, New_Per__c, Name, Material__c, Material_Price_Group__c, Material_Price_Group_Code__c, Material_Code__c, LastModifiedDate, LastModifiedById, LastActivityDate, Key_Combination__c, Key_Combination_Code__c, IsDeleted, Incoterms_Code__c, Incoterms2__c, Inco_terms__c, Id, Gap__c, Gap_Pricing_Request_Item__c, Expire__c, End_User__c, End_User_Code__c, End_Use__c, End_Use_Code__c, Edit__c, ERP_Sales_Prices_SAP__c, Division__c, Division_Code__c, Dist_Channel__c, Dist_Channel_Code__c, Customer_Specific__c, Customer_Price_Group__c, Customer_Price_Group_Code__c, Currency__c, CreatedDate, CreatedById, Below_Reference_Flag__c, Below_Floor_Flag__c, Below_Current_Flag__c, Approver5__c, Approver5_Date__c, Approver4__c, Approver4_Date__c, Approver3__c, Approver3_Date__c, Approver2__c, Approver2_Date__c,Scale_Type__c,Approver1__c, Approver1_Date__c, Approved_Date__c, Approval_Status__c,Gap_Pricing_Request_Item__r.New_Valid_From__c,Gap_Pricing_Request_Item__r.New_Valid_To__c,Gap_Pricing_Request_Item__r.New_Rate__c, Gap_Pricing_Request_Item__r.New_Per__c,Gap_Pricing_Request_Item__r.New_Unit__c,Gap_Pricing_Request_Item__r.New_UoM__c,Gap_Pricing_Request_Item__r.Valid_From__c,Gap_Pricing_Request_Item__r.Valid_To__c,Gap_Pricing_Request_Item__r.Rate__c, Gap_Pricing_Request_Item__r.Per__c,Gap_Pricing_Request_Item__r.Unit__c,Gap_Pricing_Request_Item__r.UoM__c,ERP_Pricing_Procedure__c,ERP_Pricing_Procedure__r.Pricing_Procedure_Code__c, ERP_Pricing_Procedure__r.Pricing_Procedure__c,Pricing_Request__r.Request_Valid_From__c,Pricing_Request__r.Request_Valid_To__c, Pricing_Request__r.Sales_Org_Code__c, Pricing_Request__r.Dist_Channel_Code__c, Pricing_Request__r.Division_Code__c,Customer_Hierarchy_Code__c,Customer_Hierarchy__c, Materials_Below_Net_Current__c,Materials_Below_Net_Floor__c,Materials_Below_Net_Reference__c,Materials_with_Error_Response__c,Net_Price_Calculated_Materials__c,Total_Materials__c,Integration_Error_Message__c, Net_Price_Status__c,Number_of_Material_with_Gross_Price__c, Pricing_Request__r.Request_Type__c,USD_Rate__c,Base_UoM__c,Pricing_Request__r.Current_Approver__c,Pricing_Request__r.Pricing_exception__c,Pricing_Request__r.Landing_Cost__c,Pricing_Request__r.Standardized_Currency__c,Pricing_Request__r.Standardized_UoM__c,Error_Indicator__c, Pricing_Request__r.Default_Currency__c,Customer_Price_Payment_Terms__c,Payment_Terms_Fixed_Date__c,New_Customer_Price_Payment_Terms__c,New_Payment_Terms_Fixed_Date__c,isPaymentTermsApplicable__c,isVolumeApplicable__c,Volume__c,Volume_UoM__c,New_Volume__c,New_Volume_UoM__c ,Char_Name__c, Kcode__c, Material_Group_1__c, Material_Group_1_Code__c, Sales_District__c, Sales_District_Code__c, FixValDate__c, Partner_ZF__c, Partner_ZF_Code__c, Payer__c, Payer_Code__c,Disc_Ref_No__c,Campaign__c, Campaign_Code__c, Document_Currency__c, Document_Currency_Code__c, State__c, State_Code__c ,Material_Group_5_Key__c,Material_Group_5_Key_Code__c FROM Pricing_Request_Item__c',Variable__c='pricingReqItem');  paQueyrList.add(paquery5);
+            PAQuery__c paquery6 =  new PAQuery__c(Class__c='PARequestItem',Query__c='Select Ship_To_Country__c,Ship_To_Country_Code__c,Price_Ref_Partner_Code__c,Price_Ref_Partner__c,Market_Segment_Code__c,Market_Segment__c,Variant_Code__c,Variant__c,Sales_Order_Type_Code__c,Sales_Order_Type__c,Country_Code__c,Country__c,BU__c,F_Product_Hierarchy_Code__c,Product_Hierarchy_Code__c,Key_Combination_SFDC__c,Scale_UoM_Scale_Unit__c,Valid_To__c,Pricing_Request__r.Request_Type__c,Valid_From__c,UoM__c,Unit__c,Terms_Of_Payment__c,Terms_Of_Payment_Code__c,SystemModstamp,Stamp_Reference_Price__c,Stamp_Reference_Net_Price__c,Stamp_New_Net_Price__c,Stamp_Floor_Price__c,Stamp_Floor_Net_Price__c,Stamp_Current_Net_Price__c,Stamp_Converted_Current_Price__c,Sold_To__c,Sold_To_Code__c,ShipTo__c,ShipTo_Code__c,Scaled_Price_Flag__c,ScaleRate9__c, ScaleRate8__c, ScaleRate7__c, ScaleRate6__c, ScaleRate5__c, ScaleRate4__c, ScaleRate3__c, ScaleRate2__c,ScaleRate1__c,ScaleRate10__c,Scale_Quantity_Scale_Value9__c,Scale_Quantity_Scale_Value8__c, Scale_Quantity_Scale_Value7__c, Scale_Quantity_Scale_Value6__c, Scale_Quantity_Scale_Value5__c, Scale_Quantity_Scale_Value4__c,Scale_Quantity_Scale_Value3__c, Scale_Quantity_Scale_Value2__c, Scale_Quantity_Scale_Value1__c, Scale_Quantity_Scale_Value10__c, Sales_Org__c,Sales_Org_Code__c,Sales_Office__c,Sales_Office_Code__c,SAP_Cluster__c,SAP_Client_Id__c,SAP_Application_Id__c,Rate__c,Quantity__c,Plus_Minus__c,Plus_Minus_Code__c,Calculation_Type__c,Calculation_Type_Code__c,Check_Scale__c,Check_Scale_Code__c,Condition_Class__c, Condition_Class_Code__c,Scale_Basis__c,Scale_Basis_Code__c,Scale_Type_Code__c, Profit_Center__c,Profit_Center_Code__c,Product_Hierarchy__c,Pricing_Request__c,Pricing_Request__r.Spot_Type__c,Pricing_Request__r.Pricing_Request_Type__c, Pricing_Request_Type__c, Pricing_Condition__c,Pricing_Condition_Code__c, Price_List_Type__c, Price_List_Type_Code__c, Per__c, PH9__c, PH9_Code__c, PH8__c, PH8_Code__c, PH7__c,PH7_Code__c, PH6__c, PH6_Code__c, PH5__c, PH5_Code__c, PH4__c, PH4_Code__c, PH3__c, PH3_Code__c, PH2__c, PH2_Code__c, PH1__c, PH1_Code__c,PCKC__c, Non_Commercial_Products__c, New__c, New_Valid_To__c, New_Valid_From__c, New_UoM__c, New_Unit__c, New_Rate__c,Pricing_Task_UoM__c, New_Per__c, Name,Material__c, Material_Price_Group__c, Material_Price_Group_Code__c, Material_Code__c, LastModifiedDate, LastModifiedById, LastActivityDate, Key_Combination__c, Key_Combination_Code__c, IsDeleted, Incoterms_Code__c, Incoterms2__c, Inco_terms__c,Id,Gap__c,Gap_Pricing_Request_Item__c, Expire__c, End_User__c, End_User_Code__c, End_Use__c, End_Use_Code__c, Edit__c, ERP_Sales_Prices_SAP__c,Division__c, Division_Code__c, Dist_Channel__c, Dist_Channel_Code__c, Customer_Specific__c, Customer_Price_Group__c,Customer_Price_Group_Code__c, Currency__c, CreatedDate, CreatedById, Below_Reference_Flag__c, Below_Floor_Flag__c,Below_Current_Flag__c, Approver5__c, Approver5_Date__c, Approver4__c, Approver4_Date__c, Approver3__c, Approver3_Date__c, Approver2__c, Approver2_Date__c,Scale_Type__c, Approver1__c, Approver1_Date__c, Approved_Date__c, Approval_Status__c,Gap_Pricing_Request_Item__r.New_Valid_From__c,Gap_Pricing_Request_Item__r.New_Valid_To__c,Gap_Pricing_Request_Item__r.New_Rate__c,Gap_Pricing_Request_Item__r.New_Per__c,Gap_Pricing_Request_Item__r.New_Unit__c,Gap_Pricing_Request_Item__r.New_UoM__c,Gap_Pricing_Request_Item__r.Valid_From__c,Gap_Pricing_Request_Item__r.Valid_To__c,Gap_Pricing_Request_Item__r.Rate__c,Gap_Pricing_Request_Item__r.Per__c,Gap_Pricing_Request_Item__r.Unit__c,Gap_Pricing_Request_Item__r.UoM__c,ERP_Pricing_Procedure__c,ERP_Pricing_Procedure__r.Pricing_Procedure_Code__c,ERP_Pricing_Procedure__r.Pricing_Procedure__c,Pricing_Request__r.Request_Valid_From__c,Pricing_Request__r.Request_Valid_To__c,Pricing_Request__r.Sales_Org_Code__c,Pricing_Request__r.Dist_Channel_Code__c,Pricing_Request__r.Division_Code__c,New_Markup_Percentage__c,New_Base_Floor__c,Base_Floor__c,Markup_Percentage__c,Materials_Below_Net_Current__c,Materials_Below_Net_Floor__c,Materials_Below_Net_Reference__c,Materials_with_Error_Response__c,Net_Price_Calculated_Materials__c,Total_Materials__c,Integration_Error_Message__c,Net_Price_Status__c,Number_of_Material_with_Gross_Price__c,USD_Rate__c,Base_UoM__c,Pricing_Request__r.Current_Approver__c,Pricing_Request__r.Display_Standardized_Rate__c,Pricing_Request__r.Pricing_exception__c,Pricing_Request__r.Landing_Cost__c,Pricing_Request__r.Standardized_Currency__c,Pricing_Request__r.Standardized_UoM__c,Error_Indicator__c,Pricing_Request__r.Default_Currency__c,Sales_Type_Code__c,Sales_Type__c,Customer_Price_Payment_Terms__c,Fixed_Date_Payment_Terms__c,New_Customer_Price_Payment_Terms__c,New_Fixed_Date_Payment_Terms__c,PaymentTerms_Applicable__c,Material_Group_5_Key__c,Material_Group_5_Key_Code__c from Pricing_Request_Item__c',Variable__c='pricingReqItemObj');  paQueyrList.add(paquery6);
+            PAQuery__c paquery7 =  new PAQuery__c(Class__c='PARequestItem',Query__c='SELECT Calculation_Type__c,PCKC__c,Calculation_Type_Code__c,Check_Scale__c,Check_Scale_Code__c,Condition_Class__c,Condition_Class_Code__c,Plus_Minus_Code__c,Scale_Basis__c,Scale_Basis_Code__c, Id,Unit__c,Scaled_Price_Flag__c ,UoM__c,Per__c,Scale_Quantity_Scale_Value1__c,Scale_Quantity_Scale_Value2__c,Scale_Quantity_Scale_Value3__c,Scale_Quantity_Scale_Value4__c,Scale_Quantity_Scale_Value5__c,Scale_Quantity_Scale_Value6__c,Scale_Quantity_Scale_Value7__c, Scale_Quantity_Scale_Value8__c,Scale_Quantity_Scale_Value9__c,Scale_Quantity_Scale_Value10__c,ScaleRate1__c,ScaleRate2__c,ScaleRate3__c,ScaleRate4__c,ScaleRate5__c, ScaleRate6__c,ScaleRate7__c,ScaleRate8__c,ScaleRate9__c,ScaleRate10__c,Plus_Minus__c,Scale_Type__c,Scale_Type_Code__c,Scale_UoM_Scale_Unit__c,Quantity__c,Material_Group_5_Key__c,Material_Group_5_Key_Code__c FROM ERP_Sales_Prices_SAP__c',Variable__c='relatedSAPRecordsList');  paQueyrList.add(paquery7);
+            PAQuery__c paquery8 =  new PAQuery__c(Class__c='PARequestItem',Query__c='SELECT Calculation_Type__c,Calculation_Type_Code__c,Check_Scale__c,Check_Scale_Code__c,Condition_Class__c,Condition_Class_Code__c,Plus_Minus_Code__c,Scale_Basis__c,Scale_Basis_Code__c, Id,Unit__c,Scaled_Price_Flag__c ,UoM__c,Per__c,Scale_Quantity_Scale_Value1__c,Scale_Quantity_Scale_Value2__c,Scale_Quantity_Scale_Value3__c,Scale_Quantity_Scale_Value4__c,Scale_Quantity_Scale_Value5__c,Scale_Quantity_Scale_Value6__c,Scale_Quantity_Scale_Value7__c, Scale_Quantity_Scale_Value8__c,Scale_Quantity_Scale_Value9__c,Scale_Quantity_Scale_Value10__c,ScaleRate1__c,ScaleRate2__c,ScaleRate3__c,ScaleRate4__c,ScaleRate5__c, ScaleRate6__c,ScaleRate7__c,ScaleRate8__c,ScaleRate9__c,ScaleRate10__c,Plus_Minus__c,Scale_Type__c,Scale_Type_Code__c,Scale_UoM_Scale_Unit__c,Material_Group_5_Key__c,Material_Group_5_Key_Code__c FROM Sales_Prices__c',Variable__c='relatedNonSAPRecordsList');  paQueyrList.add(paquery8);
+            PAQuery__c paquery9 =  new PAQuery__c(Class__c='PARequestItem',Query__c='SELECT id,Project_Id__c,Name,Assigned_To__c,Assigned_To__r.Name,Project_Description__c,Sold_To_Code__c,Default_Discount__c,Pricing_Condition_Code__c, Pricing_Condition__c,CreatedBy.Name,Project_Volume__c,Valid_From__c,Valid_To__c,status__c,Project_status__c FROM Project_Price__c',Variable__c='projectPrice');  paQueyrList.add(paquery9);
+            PAQuery__c paquery10 =  new PAQuery__c(Class__c='PARequestItem',Query__c='SELECT Is_End_User_Rebate__c,Reason_Detail__c,F_NPC_Callout_Status__c,isVolumeApplicable__c,isFloorApplicable__c,isNPCApplicable__c,isPaymentTermsApplicable__c,Standardized_Currency__c,Standardized_UoM__c,Request_Class__c,Project_Id__c,Project_Name__c,Zip_PostalCode__c, Terms_Of_Payment__c, SalesArea__c,Terms_Of_Payment_Code__c, Task_Subject__c, SystemModstamp, Street__c, State_Province__c,Spot_Type__c, Sold_To__c, SoldTo_Code__c,Sales_Org__c, Sales_Org_Code__c, SAP_Client_Id__c, SAP_Application_Id__c,Request_Valid_To__c, Request_Valid_From__c, Request_Type__c, Request_Reason__c, Request_Name__c, Request_Approval_Status__c,Project_Price__c, Pricing_Request_Type__c, OwnerId, On_Behalf_Of__c, Non_Standard_Terms_Of_Payment__c, Non_Standard_Incoterm__c,Name, LastModifiedDate, LastModifiedById, LastActivityDate, IsDeleted, Incoterm__c, Id, Due_Date__c, Division__c, Division_Code__c,Dist_Channel__c, Dist_Channel_Code__c,Description__c,Customer_Specific__c,Current_Level__c, Current_Approver__c, Current_Approver__r.E_Pass_ID__c, CreatedDate, CreatedById, Country__c, City__c, CSR_Instruction__c, BU__c, Assigned_To__c, Approver5__c, Approver5_Date__c, Approver4__c, Approver4_Date__c, Approver3__c, Approver3_Date__c, Approver2__c, Approver2_Date__c, Approver1__c, Approver1_Date__c,Incoterms_Code__c,On_Behalf_Of__r.Name, Last_Modified_by__c,Asynchronous_Call_Out_Indicator__c, Approver1__r.E_Pass_Id__c, Approver2__r.E_Pass_Id__c, Approver3__r.E_Pass_Id__c, Approver4__r.E_Pass_Id__c, approver5__r.E_Pass_Id__c, Sent_To_Backup_Approver__c, Assigned_To__r.Name, Assigned_To__r.E_Pass_Id__c,created_by__c,Approver1__r.name, Approver2__r.name, Approver3__r.name, Approver4__r.name, approver5__r.name, Project_Header_Approval_Flag__c ,NPC_Status__c ,Landing_Cost__c, ComPartner__c,ComPartner_Code__c FROM Pricing_Request__c',Variable__c='priceRequestlist');  paQueyrList.add(paquery10);
+            PAQuery__c paquery11 =  new PAQuery__c(Class__c='PARequestItem',Query__c='SELECT Id,Name,city__c,country__c,country_code__c,currency_code__c,customer_code__c, Distribution_Channel_Code__c,Distribution_channel__c, Division__c,Division_code__c,Incoterms_1__c,Incoterms_1_Code__c,Incoterms_2__c,Customer_Price_Group_Code__c, Customer_Price_Group__c,Price_List_type__c, price_list_type_code__c,sales_office__c,sales_office_Code__c,sales_org_code__c, sales_org__c,State_Province__c,Street__c,Terms_Of_Payment__c,Terms_Of_Payment_Code__c, Zip_Postal_Code__c,Customer_Group_2_Code__c,Customer_Order_Block_Code__c,Customer_Order_Block__c,Account_Group_Code__c,state__c FROM ERP_Customer__c',Variable__c='paServiceState.erpCustomer.PAERPCustomer');  paQueyrList.add(paquery11);
+            PAQuery__c paquery12 =  new PAQuery__c(Class__c='PARequestItem',Query__c='SELECT Is_End_User_Rebate__c,Reason_Detail__c,F_NPC_Callout_Status__c,isVolumeApplicable__c,isFloorApplicable__c,isNPCApplicable__c,isPaymentTermsApplicable__c,Request_Class__c,Display_Standardized_Rate__c,Attachments_on_Customer_Prices__c, Project_Name__c,Zip_PostalCode__c,Terms_Of_Payment__c, SalesArea__c,Terms_Of_Payment_Code__c, Task_Subject__c, SystemModstamp, Street__c,State_Province__c,Spot_Type__c,Pricing_exception__c, Sold_To__c, SoldTo_Code__c,Sales_Org__c, Sales_Org_Code__c, SAP_Client_Id__c,SAP_Application_Id__c, Request_Valid_To__c, Request_Valid_From__c, Request_Type__c, Request_Reason__c,Request_Name__c, Request_Approval_Status__c,Project_Price__c,Project_Id__c, Pricing_Request_Type__c, OwnerId, Owner.Name, Owner.Email, On_Behalf_Of__c,Non_Standard_Terms_Of_Payment__c, Non_Standard_Incoterm__c,Name, LastModifiedDate, LastModifiedById,LastActivityDate, IsDeleted, Incoterm__c, Id, Due_Date__c, Division__c, Division_Code__c,Dist_Channel__c,Dist_Channel_Code__c,Description__c,Customer_Specific__c, Current_Level__c, Current_Approver__c,Current_Approver__r.E_Pass_ID__c, Current_Approver__r.Name, CreatedDate,CreatedById, Country__c,City__c, CSR_Instruction__c, BU__c, Assigned_To__c, Approver5__c, Approver5_Date__c,Approver4__c,Approver4_Date__c, Approver3__c, Approver3_Date__c, Approver2__c, Approver2_Date__c, Approver1__c,Landing_Cost__c,Approver1_Date__c,Incoterms_Code__c, On_Behalf_Of__r.Name, Last_Modified_by__c,Asynchronous_Call_Out_Indicator__c, Approver1__r.E_Pass_Id__c, Approver2__r.E_Pass_Id__c, Approver3__r.E_Pass_Id__c,Approver4__r.E_Pass_Id__c, approver5__r.E_Pass_Id__c, Backup_Level_1__c,Backup_Level_1__r.name,Backup_Level_2__c, Backup_Level_2__r.name, Backup_Level_3__c, Backup_Level_3__r.name,Backup_Level_4__c, Backup_Level_4__r.name, Backup_Level_5__c,Backup_Level_5__r.name, NPC_Status__c,Assigned_To__r.Name, Assigned_To__r.E_Pass_Id__c,created_by__c,Approver1__r.name, Approver2__r.name,Approver3__r.name, Approver4__r.name, approver5__r.name,Project_Header_Approval_Flag__c, Sent_to_Backup_Approver__c,Standardized_Currency__c,Standardized_UoM__c,approverText__c,Default_Currency__c, Auto_Approver_Level1__c,Auto_Approver_Level2__c,Auto_Approver_Level3__c,Auto_Approver_Level4__c,Auto_Approver_Level5__c,Customer_Order_Block_Code__c,Customer_Order_Block__c,Pricing_Condition__c,Key_Combination__c,Delegation_Comments__c, ComPartner__c,ComPartner_Code__c FROM Pricing_Request__c',Variable__c='request.requestServiceState.currentRequest.pricingRequest');  paQueyrList.add(paquery12);
+            PAQuery__c paquery13 =  new PAQuery__c(Class__c='PARequestItem',Query__c='SELECT Ship_To_Country__c,Ship_To_Country_Code__c,Price_Ref_Partner_Code__c,Price_Ref_Partner__c,Market_Segment_Code__c,Market_Segment__c,Project__c,Variant_Code__c,Variant__c,Sales_Order_Type_Code__c,Sales_Order_Type__c,Country_Code__c,Country__c,F_Product_Hierarchy_Code__c,Product_Hierarchy_Code__c,Key_Combination_SFDC__c,Scale_UoM_Scale_Unit__c, Valid_To__c, Valid_From__c, UoM__c, Unit__c, Terms_Of_Payment__c, Terms_Of_Payment_Code__c, SystemModstamp,Disc_Ref__c, Stamp_Reference_Price__c, Stamp_Reference_Net_Price__c, Stamp_New_Net_Price__c, Stamp_Floor_Price__c, Stamp_Floor_Net_Price__c, Stamp_Current_Net_Price__c, Stamp_Converted_Current_Price__c, Sold_To__c, Sold_To_Code__c, ShipTo__c, ShipTo_Code__c, Scaled_Price_Flag__c, ScaleRate9__c, ScaleRate8__c, ScaleRate7__c, ScaleRate6__c, ScaleRate5__c, ScaleRate4__c, ScaleRate3__c, ScaleRate2__c, ScaleRate1__c, ScaleRate10__c, Scale_Quantity_Scale_Value9__c, Scale_Quantity_Scale_Value8__c, Scale_Quantity_Scale_Value7__c, Scale_Quantity_Scale_Value6__c, Scale_Quantity_Scale_Value5__c, Scale_Quantity_Scale_Value4__c, Scale_Quantity_Scale_Value3__c, Scale_Quantity_Scale_Value2__c, Scale_Quantity_Scale_Value1__c, Scale_Quantity_Scale_Value10__c, Sales_Org__c, Sales_Org_Code__c, Sales_Office__c, Sales_Office_Code__c, SAP_Cluster__c,SAP_Client_Id__c, SAP_Application_Id__c, Rate__c, Quantity__c,Plus_Minus__c,Plus_Minus_Code__c,Calculation_Type__c,Calculation_Type_Code__c,Check_Scale__c,Check_Scale_Code__c,Condition_Class__c, Condition_Class_Code__c,Scale_Basis__c,Scale_Basis_Code__c,Scale_Type_Code__c, Profit_Center__c, Profit_Center_Code__c,Customer_Hierarchy_Code__c,Customer_Hierarchy__c, Product_Hierarchy__c, Pricing_Request__c, Pricing_Request__r.Spot_Type__c, Pricing_Request__r.Pricing_Request_Type__c, Pricing_Request_Type__c, Pricing_Condition__c, Pricing_Condition_Code__c, Price_List_Type__c, Price_List_Type_Code__c, Per__c, PH9__c, PH9_Code__c, PH8__c, PH8_Code__c, PH7__c, PH7_Code__c, PH6__c, PH6_Code__c, PH5__c, PH5_Code__c, PH4__c, PH4_Code__c, PH3__c, PH3_Code__c, PH2__c, PH2_Code__c, PH1__c, PH1_Code__c, PCKC__c, Non_Commercial_Products__c, New__c, New_Valid_To__c, New_Valid_From__c, New_UoM__c, New_Unit__c, New_Rate__c,Pricing_Task_UoM__c, New_Per__c, Name, Material__c, Material_Price_Group__c, Material_Price_Group_Code__c, Material_Code__c, LastModifiedDate, LastModifiedById, LastActivityDate, Key_Combination__c, Key_Combination_Code__c, IsDeleted, Incoterms_Code__c, Incoterms2__c, Inco_terms__c, Id, Gap__c, Gap_Pricing_Request_Item__c, Expire__c, End_User__c, End_User_Code__c, End_Use__c, End_Use_Code__c, Edit__c, ERP_Sales_Prices_SAP__c, Division__c, Division_Code__c, Dist_Channel__c, Dist_Channel_Code__c, Customer_Specific__c, Customer_Price_Group__c, Customer_Price_Group_Code__c, Currency__c, CreatedDate, CreatedById, Below_Reference_Flag__c, Below_Floor_Flag__c, Below_Current_Flag__c, Approver5__c, Approver5_Date__c, Approver4__c, Approver4_Date__c, Approver3__c, Approver3_Date__c, Approver2__c, Approver2_Date__c,Scale_Type__c, Approver1__c, Approver1_Date__c, Approved_Date__c, Approval_Status__c,Gap_Pricing_Request_Item__r.New_Valid_From__c,Gap_Pricing_Request_Item__r.New_Valid_To__c,Gap_Pricing_Request_Item__r.New_Rate__c, Gap_Pricing_Request_Item__r.New_Per__c,Gap_Pricing_Request_Item__r.New_Unit__c,Gap_Pricing_Request_Item__r.New_UoM__c,Gap_Pricing_Request_Item__r.Valid_From__c,Gap_Pricing_Request_Item__r.Valid_To__c,Gap_Pricing_Request_Item__r.Rate__c, Gap_Pricing_Request_Item__r.Per__c,Gap_Pricing_Request_Item__r.Unit__c,Gap_Pricing_Request_Item__r.UoM__c,USD_Rate__c,Base_UoM__c, Pricing_Request__r.Sales_Org_Code__c, Pricing_Request__r.Dist_Channel_Code__c, Pricing_Request__r.Division_Code__c, Materials_Below_Net_Current__c,Materials_Below_Net_Floor__c,Materials_Below_Net_Reference__c,Materials_with_Error_Response__c, Net_Price_Calculated_Materials__c,Total_Materials__c ,Integration_Error_Message__c,Net_Price_Status__c,Number_of_Material_with_Gross_Price__c,Pricing_Request__r.Request_Type__c,Pricing_Request__r.Current_Approver__c, Pricing_Request__r.Display_Standardized_Rate__c,Pricing_Request__r.Pricing_exception__c,Pricing_Request__r.Landing_Cost__c,Pricing_Request__r.Standardized_Currency__c,Pricing_Request__r.Standardized_UoM__c,Error_Indicator__c, Pricing_Request__r.Default_Currency__c,Customer_Price_Payment_Terms__c,Payment_Terms_Fixed_Date__c,New_Customer_Price_Payment_Terms__c,New_Payment_Terms_Fixed_Date__c,isPaymentTermsApplicable__c , ComPartner__c,ComPartner_Code__c, Char_Name__c, Kcode__c, Material_Group_1__c, Material_Group_1_Code__c, Sales_District__c, Sales_District_Code__c, FixValDate__c,Partner_ZF__c, Partner_ZF_Code__c, Payer__c, Payer_Code__c,Disc_Ref_No__c,Campaign__c, Campaign_Code__c, Document_Currency__c, Document_Currency_Code__c, State__c, State_Code__c FROM Pricing_Request_Item__c',Variable__c='requestItemList');  paQueyrList.add(paquery13);
+            PAQuery__c paquery14 =  new PAQuery__c(Class__c='PARequestItem',Query__c='SELECT Id,Name,Country_Code__c,Country__c,Customer_Price_Group_Code__c,Customer_Price_Group__c, Customer_Specific__c,Distribution_Channel_Code__c,Dist_Channel__c,Division__c,Customer_Hierarchy_Code__c,Customer_Hierarchy__c, Division_Code__c,End_Use_Code__c,End_Use__c,End_User_Code__c, End_User__c, Incoterms_1_Code__c,Incoterms1__c,Key_Combination_Code__c,Key_Combination__c,Material_Code__c, Material__c,Material_Price_Group_Code__c,Material_Price_Group__c ,Per__c,PH1__c, PH1_Code__c,PH2__c,PH2_Code__c,PH3__c,PH3_Code__c,PH4__c,PH4_Code__c,PH5__c,PH5_Code__c,PH6__c,PH6_Code__c, PH7__c,PH7_Code__c,PH8__c,PH8_Code__c,PH9__c,PH9_Code__c,Price_List_Type_Code__c,Price_List_Type__c, Pricing_Condition__c,Pricing_Condition_Code__c,Product_Hierarchy__c,Product_Hierarchy_Code__c, Profit_Center_Code__c,Profit_Center__c,Quantity__c,Rate__c,Sales_Office_Code__c, Sales_Office__c, Sales_Org__c,Sales_Org_Code__c,Sales_Price_Type__c,Sales_Pricing_Procedure__c,SAP_Application_Id__c, SAP_Client_ID__c,Check_Scale__c,Scaled_Price_Flag__c,Scale_Type__c,Sold_To_Code__c,Sold_To__c, ShipTo__c,ShipTo_Code__c,PCKC__c,Terms_of_Payment_Code__c,Approved_Date__c,Unit__c,UoM__c,Valid_From__c,Valid_To__c, ComPartner__c,ComPartner_Code__c, Char_Name__c, Kcode__c, Material_Group_1__c, Material_Group_1_Code__c, Sales_District__c, Sales_District_Code__c, FixValDate__c,Partner_ZF__c, Partner_ZF_Code__c, Payer__c, Payer_Code__c,Disc_Ref_No__c,Campaign__c, Campaign_Code__c, Document_Currency__c, Document_Currency_Code__c, State__c, State_Code__c FROM ERP_Sales_Prices_SAP__c',Variable__c='holList1');  paQueyrList.add(paquery14);
+            PAQuery__c paquery15 =  new PAQuery__c(Class__c='PARequestItem',Query__c='SELECT SystemModstamp, Status__c, Scale_Type__c, Scale_Type_Code__c, Scale_Basis_Code__c, Scale_Base__c, SAP_Condition_Type__c, SAP_Cluster__c, SAP_Client_Id__c, SAP_Application_Id__c, Pricing_Condition__c, Pricing_Condition_Description__c, Pricing_Condition_Code__c, Price_Types__c, Plus_Minus__c, Plus_Minus_Code__c, OwnerId, Name, LastModifiedDate, LastModifiedById, LastActivityDate, IsDeleted, Id, CurrencyIsoCode, CreatedDate, CreatedById, Condition_Class__c, Condition_Class_Code__c, Check_Scale__c, Check_Scale_Code__c, Calculation_Type__c, Calculation_Type_Code__c FROM ERP_Pricing_Condition__c',Variable__c='priCondObj');  paQueyrList.add(paquery15);
+            PAQuery__c paquery16 =  new PAQuery__c(Class__c='PARequestItem',Query__c='SELECT isNPCApplicable__c,Pricing_Request__r.BU__c,Pricing_Request__r.Reason_Detail__c,Pricing_Request__r.Is_End_User_Rebate__c,Price_Reduction__c,Sales_Reduction__c ,Deal_Margin__c ,Cost_Price__c,Deal_Revenue__c ,Ship_To_Country__c,Ship_To_Country_Code__c,Pricing_Request__r.Display_Standardized_Rate__c,Pricing_Request__r.Attachments_on_Customer_Prices__c,Price_Ref_Partner_Code__c,ERP_Pricing_Procedure__c,ERP_Pricing_Procedure__r.Pricing_Procedure_Code__c, ERP_Pricing_Procedure__r.Pricing_Procedure__c,Price_Ref_Partner__c,Market_Segment_Code__c,Market_Segment__c,Contract__c,Contract_Code__c,Variant_Code__c,Variant__c,Sales_Order_Type_Code__c,Sales_Order_Type__c,Country_Code__c,Country__c,BU__c,F_Product_Hierarchy_Code__c,Product_Hierarchy_Code__c,Key_Combination_SFDC__c,Scale_UoM_Scale_Unit__c,Valid_To__c,Pricing_Request__r.Request_Type__c, Valid_From__c, UoM__c, Unit__c, Terms_Of_Payment__c, Terms_Of_Payment_Code__c, SystemModstamp, Stamp_Reference_Price__c, Stamp_Reference_Net_Price__c, Stamp_New_Net_Price__c, Stamp_Floor_Price__c, Stamp_Floor_Net_Price__c, Stamp_Current_Net_Price__c, Stamp_Converted_Current_Price__c, Sold_To__c, Sold_To_Code__c, ShipTo__c, ShipTo_Code__c, Scaled_Price_Flag__c, ScaleRate9__c, ScaleRate8__c, ScaleRate7__c, ScaleRate6__c, ScaleRate5__c, ScaleRate4__c, ScaleRate3__c, ScaleRate2__c, ScaleRate1__c, ScaleRate10__c, Scale_Quantity_Scale_Value9__c, Scale_Quantity_Scale_Value8__c, Scale_Quantity_Scale_Value7__c, Scale_Quantity_Scale_Value6__c, Scale_Quantity_Scale_Value5__c, Scale_Quantity_Scale_Value4__c, Scale_Quantity_Scale_Value3__c, Scale_Quantity_Scale_Value2__c, Scale_Quantity_Scale_Value1__c, Scale_Quantity_Scale_Value10__c, Sales_Org__c, Sales_Org_Code__c, Sales_Office__c, Sales_Office_Code__c, SAP_Cluster__c,SAP_Client_Id__c, SAP_Application_Id__c, Rate__c, Quantity__c,Plus_Minus__c,Plus_Minus_Code__c,Calculation_Type__c,Calculation_Type_Code__c,Check_Scale__c,Check_Scale_Code__c,Condition_Class__c, Condition_Class_Code__c,Scale_Basis__c,Scale_Basis_Code__c,Scale_Type_Code__c, Profit_Center__c, Profit_Center_Code__c,Customer_Hierarchy_Code__c,Customer_Hierarchy__c, Product_Hierarchy__c, Pricing_Request__c, Pricing_Request__r.Spot_Type__c,Pricing_Request__r.Pricing_Request_Type__c, Pricing_Request_Type__c, Pricing_Condition__c, Pricing_Condition_Code__c, Price_List_Type__c, Price_List_Type_Code__c, Per__c, PH9__c, PH9_Code__c, PH8__c, PH8_Code__c, PH7__c, PH7_Code__c, PH6__c, PH6_Code__c, PH5__c, PH5_Code__c, PH4__c, PH4_Code__c, PH3__c, PH3_Code__c, PH2__c, PH2_Code__c, PH1__c, PH1_Code__c, PCKC__c, Non_Commercial_Products__c, New__c, New_Valid_To__c, New_Valid_From__c, New_UoM__c, New_Unit__c, New_Rate__c,Pricing_Task_UoM__c, New_Per__c, Name, Material__c, Material_Price_Group__c, Material_Price_Group_Code__c, Material_Code__c, LastModifiedDate, LastModifiedById, LastActivityDate, Key_Combination__c, Key_Combination_Code__c, IsDeleted, Incoterms_Code__c, Incoterms2__c, Inco_terms__c, Id, Gap__c, Gap_Pricing_Request_Item__c, Expire__c, End_User__c, End_User_Code__c, End_Use__c, End_Use_Code__c, Edit__c, ERP_Sales_Prices_SAP__c, Division__c, Division_Code__c, Dist_Channel__c, Dist_Channel_Code__c, Customer_Specific__c, Customer_Price_Group__c, Customer_Price_Group_Code__c, Currency__c, CreatedDate, CreatedById, Below_Reference_Flag__c, Below_Floor_Flag__c, Below_Current_Flag__c, Approver5__c, Approver5_Date__c, Approver4__c, Approver4_Date__c, Approver3__c, Approver3_Date__c, Approver2__c, Approver2_Date__c,Scale_Type__c, Approver1__c, Approver1_Date__c, Approved_Date__c, Approval_Status__c, Pricing_Request__r.Sales_Org_Code__c, Pricing_Request__r.Dist_Channel_Code__c, Pricing_Request__r.Division_Code__c, Materials_Below_Net_Current__c,Materials_Below_Net_Floor__c,Materials_Below_Net_Reference__c,Materials_with_Error_Response__c, Net_Price_Calculated_Materials__c,Total_Materials__c,Pricing_Request__r.Landing_Cost__c,Integration_Error_Message__c,Net_Price_Status__c, Number_of_Material_with_Gross_Price__c,USD_Rate__c,Base_UoM__c,Pricing_Request__r.Current_Approver__c,Pricing_Request__r.Pricing_exception__c, Pricing_Request__r.Standardized_Currency__c,Pricing_Request__r.Standardized_UoM__c,Error_Indicator__c, Pricing_Request__r.Default_Currency__c,Customer_Price_Payment_Terms__c,Payment_Terms_Fixed_Date__c,New_Customer_Price_Payment_Terms__c,New_Payment_Terms_Fixed_Date__c,isPaymentTermsApplicable__c, isVolumeApplicable__c,Volume__c,Volume_UoM__c,New_Volume__c,New_Volume_UoM__c,Material_Group_5__c,Material_Group_5_Code__c,Project__c, ComPartner__c,ComPartner_Code__c, Char_Name__c, Kcode__c, Material_Group_1__c, Material_Group_1_Code__c, Sales_District__c, Sales_District_Code__c, FixValDate__c, Partner_ZF__c, Partner_ZF_Code__c, Payer__c, Payer_Code__c,Disc_Ref_No__c,Campaign__c, Campaign_Code__c, Document_Currency__c, Document_Currency_Code__c, State__c, State_Code__c,Material_Group_5_Key__c,Material_Group_5_Key_Code__c FROM Pricing_Request_Item__c',Variable__c='priList');  paQueyrList.add(paquery16);
+            PAQuery__c paquery17 =  new PAQuery__c(Class__c='PARequestItem',Query__c='SELECT Calculation_Type__c,PCKC__c,Calculation_Type_Code__c,Check_Scale__c,Check_Scale_Code__c,Condition_Class__c,Condition_Class_Code__c,Plus_Minus_Code__c,Scale_Basis__c,Scale_Basis_Code__c, Id,Unit__c,Scaled_Price_Flag__c ,UoM__c,Per__c,Scale_Quantity_Scale_Value1__c,Scale_Quantity_Scale_Value2__c,Scale_Quantity_Scale_Value3__c,Scale_Quantity_Scale_Value4__c,Scale_Quantity_Scale_Value5__c,Scale_Quantity_Scale_Value6__c,Scale_Quantity_Scale_Value7__c, Scale_Quantity_Scale_Value8__c,Scale_Quantity_Scale_Value9__c,Scale_Quantity_Scale_Value10__c,ScaleRate1__c,ScaleRate2__c,ScaleRate3__c,ScaleRate4__c,ScaleRate5__c, ScaleRate6__c,ScaleRate7__c,ScaleRate8__c,ScaleRate9__c,ScaleRate10__c,Plus_Minus__c,Scale_Type__c,Scale_Type_Code__c,Scale_UoM_Scale_Unit__c,Quantity__c FROM ERP_Sales_Prices_SAP__c',Variable__c='relatedSAPRecordsList1');  paQueyrList.add(paquery17);
+            PAQuery__c paquery18 =  new PAQuery__c(Class__c='PARequestItem',Query__c='SELECT Calculation_Type__c,Calculation_Type_Code__c,Check_Scale__c,Check_Scale_Code__c,Condition_Class__c,Condition_Class_Code__c,Plus_Minus_Code__c,Scale_Basis__c,Scale_Basis_Code__c, Id,Unit__c,Scaled_Price_Flag__c ,UoM__c,Per__c,Scale_Quantity_Scale_Value1__c,Scale_Quantity_Scale_Value2__c,Scale_Quantity_Scale_Value3__c,Scale_Quantity_Scale_Value4__c,Scale_Quantity_Scale_Value5__c,Scale_Quantity_Scale_Value6__c,Scale_Quantity_Scale_Value7__c, Scale_Quantity_Scale_Value8__c,Scale_Quantity_Scale_Value9__c,Scale_Quantity_Scale_Value10__c,ScaleRate1__c,ScaleRate2__c,ScaleRate3__c,ScaleRate4__c,ScaleRate5__c, ScaleRate6__c,ScaleRate7__c,ScaleRate8__c,ScaleRate9__c,ScaleRate10__c,Plus_Minus__c,Scale_Type__c,Scale_Type_Code__c,Scale_UoM_Scale_Unit__c FROM Sales_Prices__c',Variable__c='relatedNonSAPRecordsList1');  paQueyrList.add(paquery18);
+            PAQuery__c paquery19 =  new PAQuery__c(Class__c='PARequestItem',Query__c='SELECT Id,Name,PCKC__c,Country_Code__c,Country__c,Customer_Price_Group_Code__c,Customer_Price_Group__c,Customer_Specific__c,Distribution_Channel_Code__c,Dist_Channel__c, Division__c,Division_Code__c,End_Use_Code__c,End_Use__c,End_User_Code__c,End_User__c,Incoterms_1_Code__c,Incoterms1__c,Key_Combination_Code__c,Key_Combination__c,Material_Code__c, Material__c,Material_Price_Group_Code__c,Material_Price_Group__c ,Per__c,PH1__c,PH1_Code__c,PH2__c,PH2_Code__c,PH3__c,PH3_Code__c,PH4__c,PH4_Code__c,PH5__c,PH5_Code__c, PH6__c,PH6_Code__c,PH7__c,PH7_Code__c,PH8__c,PH8_Code__c,PH9__c,PH9_Code__c,Price_List_Type_Code__c,Price_List_Type__c,Pricing_Condition__c,Pricing_Condition_Code__c, Product_Hierarchy__c,Profit_Center_Code__c,Profit_Center__c,Quantity__c,Rate__c,Sales_Office_Code__c, Sales_Office__c,Sales_Org__c,Sales_Org_Code__c,Customer_Hierarchy_Code__c,Customer_Hierarchy__c, Sales_Price_Type__c,Sales_Pricing_Procedure__c,SAP_Application_Id__c,SAP_Client_ID__c,Scaled_Price_Flag__c,Scale_Type__c,Sold_To_Code__c,Sold_To__c, ShipTo__c,ShipTo_Code__c,Terms_of_Payment_Code__c,Unit__c,UoM__c,Approved_Date__c,Valid_From__c,Valid_To__c,Price_Holder__c,Disc_Ref__c,Project_Id__c,Calculation_Type__c,Calculation_Type_Code__c, Check_Scale__c,Check_Scale_Code__c,Condition_Class__c,Condition_Class_Code__c,F_Product_Hierarchy_Code__c,Product_Hierarchy_Code__c,SAP_Cluster__c, ComPartner__c,ComPartner_Code__c,Char_Name__c, Kcode__c, Material_Group_1__c, Material_Group_1_Code__c, Sales_District__c, Sales_District_Code__c, FixValDate__c,Partner_ZF__c, Partner_ZF_Code__c, Payer__c, Payer_Code__c,Disc_Ref_No__c,Campaign__c, Campaign_Code__c, Document_Currency__c, Document_Currency_Code__c, State__c, State_Code__c FROM ERP_Sales_Prices_SAP__c',Variable__c='projectRecordList');  paQueyrList.add(paquery19);
+            PAQuery__c paquery20 =  new PAQuery__c(Class__c='PARequestItem',Query__c='SELECT BU__c,Pricing_Request__r.Reason_Detail__c,Pricing_Request__r.BU__c,Ship_To_Country__c,Ship_To_Country_Code__c,F_Product_Hierarchy_Code__c,Product_Hierarchy_Code__c,Key_Combination_SFDC__c,Scale_UoM_Scale_Unit__c,Country_Code__c, Valid_To__c, Valid_From__c, UoM__c, Unit__c, Terms_Of_Payment__c, Terms_Of_Payment_Code__c, SystemModstamp,Disc_Ref__c, Stamp_Reference_Price__c, Stamp_Reference_Net_Price__c, Stamp_New_Net_Price__c, Stamp_Floor_Price__c, Stamp_Floor_Net_Price__c, Stamp_Current_Net_Price__c, Stamp_Converted_Current_Price__c, Sold_To__c, Sold_To_Code__c, ShipTo__c, ShipTo_Code__c, Scaled_Price_Flag__c, ScaleRate9__c, ScaleRate8__c, ScaleRate7__c, ScaleRate6__c, ScaleRate5__c, ScaleRate4__c, ScaleRate3__c, ScaleRate2__c, ScaleRate1__c, ScaleRate10__c, Scale_Quantity_Scale_Value9__c, Scale_Quantity_Scale_Value8__c, Scale_Quantity_Scale_Value7__c, Scale_Quantity_Scale_Value6__c, Scale_Quantity_Scale_Value5__c, Scale_Quantity_Scale_Value4__c, Scale_Quantity_Scale_Value3__c, Scale_Quantity_Scale_Value2__c, Scale_Quantity_Scale_Value1__c, Scale_Quantity_Scale_Value10__c, Sales_Org__c, Sales_Org_Code__c, Sales_Office__c, Sales_Office_Code__c, SAP_Cluster__c,SAP_Client_Id__c, SAP_Application_Id__c, Rate__c, Quantity__c,Plus_Minus__c,Plus_Minus_Code__c,Calculation_Type__c,Calculation_Type_Code__c,Check_Scale__c,Check_Scale_Code__c,Condition_Class__c, Condition_Class_Code__c,Scale_Basis__c,Scale_Basis_Code__c,Scale_Type_Code__c, Profit_Center__c, Profit_Center_Code__c,Customer_Hierarchy_Code__c,Customer_Hierarchy__c, Product_Hierarchy__c, Pricing_Request__c, Pricing_Request__r.Spot_Type__c, Pricing_Request__r.Pricing_Request_Type__c, Pricing_Request_Type__c, Pricing_Condition__c, Pricing_Condition_Code__c, Price_List_Type__c, Price_List_Type_Code__c, Per__c, PH9__c, PH9_Code__c, PH8__c, PH8_Code__c, PH7__c, PH7_Code__c, PH6__c, PH6_Code__c, PH5__c, PH5_Code__c, PH4__c, PH4_Code__c, PH3__c, PH3_Code__c, PH2__c, PH2_Code__c, PH1__c, PH1_Code__c, PCKC__c, Non_Commercial_Products__c, New__c, New_Valid_To__c, New_Valid_From__c, New_UoM__c, New_Unit__c, New_Rate__c,Pricing_Task_UoM__c, New_Per__c, Name, Material__c, Material_Price_Group__c, Material_Price_Group_Code__c, Material_Code__c, LastModifiedDate, LastModifiedById, LastActivityDate, Key_Combination__c, Key_Combination_Code__c, IsDeleted, Incoterms_Code__c, Incoterms2__c, Inco_terms__c, Id, Gap__c, Gap_Pricing_Request_Item__c, Expire__c, End_User__c, End_User_Code__c, End_Use__c, End_Use_Code__c, Edit__c, ERP_Sales_Prices_SAP__c, Division__c, Division_Code__c, Dist_Channel__c, Dist_Channel_Code__c, Customer_Specific__c, Customer_Price_Group__c, Customer_Price_Group_Code__c, Currency__c, CreatedDate, CreatedById, Country__c, Below_Reference_Flag__c, Below_Floor_Flag__c, Below_Current_Flag__c, Approver5__c, Approver5_Date__c, Approver4__c, Approver4_Date__c, Approver3__c, Approver3_Date__c, Approver2__c, Approver2_Date__c,Scale_Type__c, Approver1__c, Approver1_Date__c, Approved_Date__c, Approval_Status__c,Gap_Pricing_Request_Item__r.New_Valid_From__c,Gap_Pricing_Request_Item__r.New_Valid_To__c,Gap_Pricing_Request_Item__r.New_Rate__c, Gap_Pricing_Request_Item__r.New_Per__c,Gap_Pricing_Request_Item__r.New_Unit__c,Gap_Pricing_Request_Item__r.New_UoM__c,Gap_Pricing_Request_Item__r.Valid_From__c,Gap_Pricing_Request_Item__r.Valid_To__c,Gap_Pricing_Request_Item__r.Rate__c, Gap_Pricing_Request_Item__r.Per__c,Gap_Pricing_Request_Item__r.Unit__c,Gap_Pricing_Request_Item__r.UoM__c,Pricing_Request__r.Request_Valid_From__c,Pricing_Request__r.Request_Valid_To__c, Pricing_Request__r.Sales_Org_Code__c, Pricing_Request__r.Dist_Channel_Code__c, Pricing_Request__r.Division_Code__c, Materials_Below_Net_Current__c,Materials_Below_Net_Floor__c,Materials_Below_Net_Reference__c,Materials_with_Error_Response__c,Net_Price_Calculated_Materials__c,Total_Materials__c,Integration_Error_Message__c ,Net_Price_Status__c,Number_of_Material_with_Gross_Price__c,Pricing_Request__r.Request_Type__c,USD_Rate__c,Base_UoM__c,Pricing_Request__r.Current_Approver__c,Pricing_Request__r.Display_Standardized_Rate__c,Pricing_Request__r.Pricing_exception__c,Pricing_Request__r.Landing_Cost__c,Pricing_Request__r.Standardized_Currency__c,Pricing_Request__r.Standardized_UoM__c,Error_Indicator__c, Pricing_Request__r.Default_Currency__c,Customer_Price_Payment_Terms__c,Payment_Terms_Fixed_Date__c,New_Customer_Price_Payment_Terms__c,New_Payment_Terms_Fixed_Date__c,isPaymentTermsApplicable__c, ComPartner__c,ComPartner_Code__c, Char_Name__c, Kcode__c, Material_Group_1__c, Material_Group_1_Code__c, Sales_District__c, Sales_District_Code__c, FixValDate__c, Partner_ZF__c, Partner_ZF_Code__c, Payer__c, Payer_Code__c,Disc_Ref_No__c,Campaign__c, Campaign_Code__c, Document_Currency__c, Document_Currency_Code__c, State__c, State_Code__c FROM Pricing_Request_Item__c',Variable__c='priReqItemList');  paQueyrList.add(paquery20);
+            PAQuery__c paquery21 =  new PAQuery__c(Class__c='PARequestItem',Query__c='SELECT F_NPC_Callout_Status__c,Is_End_User_Rebate__c,Reason_Detail__c,isVolumeApplicable__c,isFloorApplicable__c,isNPCApplicable__c,isPaymentTermsApplicable__c,Standardized_Currency__c,Standardized_UoM__c,Request_Class__c,Project_Id__c,Project_Name__c,Zip_PostalCode__c, Terms_Of_Payment__c, SalesArea__c,Terms_Of_Payment_Code__c, Task_Subject__c, SystemModstamp, Street__c, State_Province__c,Spot_Type__c, Sold_To__c, SoldTo_Code__c,Sales_Org__c, Sales_Org_Code__c, SAP_Client_Id__c, SAP_Application_Id__c,Request_Valid_To__c, Request_Valid_From__c, Request_Type__c, Request_Reason__c, Request_Name__c, Request_Approval_Status__c,Project_Price__c, Pricing_Request_Type__c, OwnerId, On_Behalf_Of__c, Non_Standard_Terms_Of_Payment__c, Non_Standard_Incoterm__c,Name, LastModifiedDate, LastModifiedById, LastActivityDate, IsDeleted, Incoterm__c, Id, Due_Date__c, Division__c, Division_Code__c,Dist_Channel__c, Dist_Channel_Code__c,Description__c,Customer_Specific__c,Current_Level__c, Current_Approver__c, Current_Approver__r.E_Pass_ID__c, CreatedDate, CreatedById, Country__c, City__c, CSR_Instruction__c, BU__c, Assigned_To__c, Approver5__c, Approver5_Date__c, Approver4__c, Approver4_Date__c, Approver3__c, Approver3_Date__c, Approver2__c, Approver2_Date__c, Approver1__c, Approver1_Date__c,Incoterms_Code__c,On_Behalf_Of__r.Name, Last_Modified_by__c,Asynchronous_Call_Out_Indicator__c, Approver1__r.E_Pass_Id__c, Approver2__r.E_Pass_Id__c, Approver3__r.E_Pass_Id__c, Approver4__r.E_Pass_Id__c, approver5__r.E_Pass_Id__c, Sent_To_Backup_Approver__c, Assigned_To__r.Name, Assigned_To__r.E_Pass_Id__c,created_by__c,Approver1__r.name, Approver2__r.name, Approver3__r.name, Approver4__r.name, approver5__r.name, Project_Header_Approval_Flag__c ,NPC_Status__c,Landing_Cost__c,Auto_Approver_Level1__c,Auto_Approver_Level2__c,Auto_Approver_Level3__c,Auto_Approver_Level4__c,Auto_Approver_Level5__c, ComPartner__c,ComPartner_Code__c FROM Pricing_Request__c',Variable__c='pricingRequest');  paQueyrList.add(paquery21);
+            PAQuery__c paquery22 =  new PAQuery__c(Class__c='PARequestItem',Query__c='SELECT F_NPC_Callout_Status__c,isVolumeApplicable__c,isFloorApplicable__c,isNPCApplicable__c,isPaymentTermsApplicable__c,Is_End_User_Rebate__c,Request_Class__c,Display_Standardized_Rate__c,Attachments_on_Customer_Prices__c, Project_Name__c,Zip_PostalCode__c,Terms_Of_Payment__c, SalesArea__c,Terms_Of_Payment_Code__c, Task_Subject__c, SystemModstamp, Street__c,State_Province__c,Spot_Type__c,Pricing_exception__c, Sold_To__c, SoldTo_Code__c,Sales_Org__c, Sales_Org_Code__c, SAP_Client_Id__c,SAP_Application_Id__c, Request_Valid_To__c, Request_Valid_From__c, Request_Type__c, Request_Reason__c,Request_Name__c, Request_Approval_Status__c,Project_Price__c,Project_Id__c, Pricing_Request_Type__c, OwnerId, Owner.Name, On_Behalf_Of__c,Non_Standard_Terms_Of_Payment__c, Non_Standard_Incoterm__c,Name, LastModifiedDate, LastModifiedById,LastActivityDate, IsDeleted, Incoterm__c, Id, Due_Date__c, Division__c, Division_Code__c,Dist_Channel__c,Dist_Channel_Code__c,Description__c,Customer_Specific__c, Current_Level__c, Current_Approver__c,Current_Approver__r.E_Pass_ID__c, Current_Approver__r.Name, CreatedDate,CreatedById, Country__c,City__c, CSR_Instruction__c, BU__c, Assigned_To__c, Approver5__c, Approver5_Date__c,Approver4__c,Approver4_Date__c, Approver3__c, Approver3_Date__c, Approver2__c, Approver2_Date__c, Approver1__c,Landing_Cost__c,Approver1_Date__c,Incoterms_Code__c, On_Behalf_Of__r.Name, Last_Modified_by__c,Asynchronous_Call_Out_Indicator__c, Approver1__r.E_Pass_Id__c, Approver2__r.E_Pass_Id__c, Approver3__r.E_Pass_Id__c,Approver4__r.E_Pass_Id__c, approver5__r.E_Pass_Id__c, Backup_Level_1__c,Backup_Level_1__r.name,Backup_Level_2__c, Backup_Level_2__r.name, Backup_Level_3__c, Backup_Level_3__r.name,Backup_Level_4__c, Backup_Level_4__r.name, Backup_Level_5__c,Backup_Level_5__r.name, NPC_Status__c,Assigned_To__r.Name, Assigned_To__r.E_Pass_Id__c,created_by__c,Approver1__r.name, Approver2__r.name,Approver3__r.name, Approver4__r.name, approver5__r.name,Project_Header_Approval_Flag__c, Sent_to_Backup_Approver__c,Standardized_Currency__c,Standardized_UoM__c,approverText__c,Default_Currency__c, Auto_Approver_Level1__c,Auto_Approver_Level2__c,Auto_Approver_Level3__c,Auto_Approver_Level4__c,Auto_Approver_Level5__c,Customer_Order_Block_Code__c,Customer_Order_Block__c,Pricing_Condition__c,Key_Combination__c, ComPartner__c,ComPartner_Code__c FROM Pricing_Request__c',Variable__c='request.pricingRequest');  paQueyrList.add(paquery22);
+            PAQuery__c paquery23 =  new PAQuery__c(Class__c='PARequestItem',Query__c='SELECT Ship_To_Country_Code__c,Ship_To_Country__c,ShipTo__c, ShipTo_Code__c, Id,Name,Country_Code__c,Country__c,Customer_Price_Group_Code__c,Customer_Price_Group__c, Customer_Specific__c,Dist_Channel_Code__c,Dist_Channel__c,Division__c, Division_Code__c,End_Use_Code__c,End_Use__c, Incoterms_1_Code__c,Incoterms1__c,Key_Combination_Code__c,Key_Combination__c,Material_Code__c, Material__c,Material_Price_Group_Code__c,Material_Price_Group__c ,Per__c, PH1_Code__c,PH2_Code__c,PH3_Code__c,PH4_Code__c,PH5_Code__c,PH6_Code__c, PH7_Code__c,PH8_Code__c,PH9_Code__c,Price_List_Type_Code__c,Price_List_Type__c, Pricing_Condition__c,Pricing_Condition_Code__c,Product_Hierarchy__c,Product_Hierarchy_Code__c, Profit_Center_Code__c,Profit_Center__c,Rate__c,Sales_Office_Code__c, Sales_Office__c, Sales_Org__c,Sales_Org_Code__c,Sales_Price_Type__c,Sales_Pricing_Procedure__c,SAP_Application_Id__c, SAP_Client_ID__c,Sold_To_Code__c,Sold_To__c, PCKC__c,Terms_of_Payment_Code__c,Approved_Date__c,Unit__c,UoM__c,Valid_From__c,Valid_To__c,ComPartner__c,ComPartner_Code__c, Char_Name__c, Kcode__c, Material_Group_1__c, Material_Group_1_Code__c, Sales_District__c, Sales_District_Code__c, FixValDate__c,Partner_ZF__c, Partner_ZF_Code__c, Payer__c, Payer_Code__c,Disc_Ref_No__c,Campaign__c, Campaign_Code__c, Document_Currency__c, Document_Currency_Code__c, State__c, State_Code__c FROM Sales_Prices__c',Variable__c='holList');  paQueyrList.add(paquery23);
+            PAQuery__c paquery24 =  new PAQuery__c(Class__c='PARequestItem',Query__c='SELECT Id,isNPCApplicable__c, Pricing_Condition__r.Pricing_Condition_Code__c, Pricing_Key_Combination__c, Pricing_Key_Combination__r.Key_Combination_Code__c, Key_Combination__c, Sequence_Number__c, Floor_Key_Combination__c, Floor_Pricing_Condition__c, Net_Floor_Key_Combination__c, Net_Reference_Key_Combination__c, Reference_Key_Combination__c, Reference_Pricing_Condition__c, isPaymentTermsApplicable__c, isVolumeApplicable__c, Pricing_Condition__r.Pricing_Condition__c,Pricing_Key_Combination__r.Key_Combination__c FROM ERP_Access_Sequence__c',Variable__c='accessSeqObj');  paQueyrList.add(paquery24);
+            PAQuery__c paquery25 =  new PAQuery__c(Class__c='PARequestItem',Query__c='select Pricing_Condition__c,Sales_Pricing_Procedure_Condition_Config__c,Sales_Pricing_Procedure__c, Pricing_Condition__r.Pricing_Condition_Code__c,Pricing_Condition__r.Pricing_Condition_Description__c, Pricing_Condition__r.Pricing_Condition__c,Pricing_Condition__r.Calculation_Type__c, Pricing_Condition__r.Scale_Type__c,Pricing_Condition__r.Scale_Base__c,Pricing_Condition__r.Check_Scale__c from ERP_Procedure_Conditions__c',Variable__c='proCondList');  paQueyrList.add(paquery25);
+            PAQuery__c paquery26 =  new PAQuery__c(Class__c='PARequestItem',Query__c='select id,ERP_Currency__c,ERP_UoM__c,Retroactive_Limit__c,Max_Valid_From_Offset_Cust_Spec__c,Latest_Valid_From_Offset_Non_Cust_Spec__c, Latest_Valid_To_Offset_Cust_Spec__c,Latest_Valid_To_Offset_Non_Cust_Spec__c,OrgGroup__c,OrgGroup__r.ERP_Sales_Org__c,Base_UoM__c, OrgGroup__r.ERP_Distribution_Channel__c,OrgGroup__r.ERP_Division__c,Business__r.Business__c,ERP_Pricing_Procedure__c, OrgGroup__r.ERP_Sales_Org_Code__c,OrgGroup__r.ERP_Distribution_Channel_Code__c,OrgGroup__r.ERP_Division_Code__c, Include_Customer_Currency__c, Enable_Variable_Config_Materials__c from Organizational_Group_Item__c',Variable__c='orgGroupItemList');  paQueyrList.add(paquery26);
+            PAQuery__c paquery27 =  new PAQuery__c(Class__c='PARequestItem',Query__c='select Id,ERP_Material_Code__c,Description__c,Name,ERP_Product_Hierarchy_Code__c,ERP_Product_Hierarchy_Level_1_Code__c, ERP_Product_Hierarchy_Level_2_Code__c,ERP_Product_Hierarchy_Level_3_Code__c,ERP_Product_Hierarchy_Level_4_Code__c, ERP_Product_Hierarchy_Level_5_Code__c,ERP_Product_Hierarchy_Level_6_Code__c,ERP_Product_Hierarchy_Level_7_Code__c, ERP_Product_Hierarchy_Level_8_Code__c,ERP_Product_Hierarchy_Level_9_Code__c FROM Material__c',Variable__c='matList');  paQueyrList.add(paquery27);
+            PAQuery__c paquery28 =  new PAQuery__c(Class__c='PARequest',Query__c='SELECT Id,Name,Customer_Code__c,Country__c,Street__c,Sales_Office__c,City__c, Account_Group__c,Distribution_Channel__c,Distribution_Channel_Code__c,Division__c, Division_Code__c ,PO_Box__c,Sales_Org__c,Sales_Org_Code__c ,State_Province__c, State__c,Zip_Postal_Code__c,Terms_of_Payment_Code__c,Terms_of_Payment__c, Incoterms_1__c,Incoterms_1_Code__c,Incoterms_2__c,Customer_Price_Group_Code__c, Customer_Price_Group__c ,Price_List_Type_Code__c,Price_List_Type__c,Sales_Office_Code__c, Deletion_Flag__c,Customer_General_Data__r.Deletion_Flag__c,Customer_Group_1__c, Customer_Group_1_Code__c,Customer_Group_2__c,Customer_Group_2_Code__c,Customer_Group_3__c, Customer_Group_3_Code__c,Customer_Group_4__c,Customer_Group_4_Code__c,Customer_Group_5__c, Customer_Group_5_Code__c,Customer_Order_Block_Code__c,Customer_Order_Block__c,Account_Group_Code__c FROM ERP_Customer__c',Variable__c='listOfCustomer');  paQueyrList.add(paquery28);
+            PAQuery__c paquery29 =  new PAQuery__c(Class__c='PARequest',Query__c='select Id,Project_Id__c,Name,Project_status__c,Assigned_To__c,Assigned_To__r.Name,Project_Description__c,CreatedBy.Name,PricingCondition_Id__c,Created_By__c, Pricing_Condition__c,Pricing_Condition_Code__c,Project_Volume__c, Default_Discount__c,Valid_From__c, Valid_To__c,status__c From Project_Price__c',Variable__c='projList');  paQueyrList.add(paquery29);
+            PAQuery__c paquery30 =  new PAQuery__c(Class__c='PARequest',Query__c='SELECT Id,Name,Customer_Group_2_Code__c, Customer_Group_2__c,city__c,country__c,country_code__c,currency_code__c,customer_code__c, Distribution_Channel_Code__c,Distribution_channel__c, Division__c,Division_code__c,Incoterms_1__c,Incoterms_1_Code__c,Incoterms_2__c,Customer_Price_Group_Code__c, Customer_Price_Group__c,Price_List_type__c, price_list_type_code__c,sales_office__c,sales_office_Code__c,sales_org_code__c, sales_org__c,State_Province__c,Street__c,Terms_Of_Payment__c,Terms_Of_Payment_Code__c, Zip_Postal_Code__c,Customer_Order_Block_Code__c,Customer_Order_Block__c,Account_Group_Code__c,State__c FROM ERP_Customer__c',Variable__c='customer.paErpCustomer');  paQueyrList.add(paquery30);
+            PAQuery__c paquery31 =  new PAQuery__c(Class__c='PARequest',Query__c='SELECT Subtype__c,F_NPC_Callout_Status__c,Reason_Detail__c,Default_Per__c,Total_Deal_Value__c ,Default_UoM__c,Is_End_User_Rebate__c,Default_Discount__c,End_User_Code__c,End_User__c,End_User_Country__c ,isVolumeApplicable__c,isFloorApplicable__c,isNPCApplicable__c,isPaymentTermsApplicable__c,Request_Class__c,Display_Standardized_Rate__c,Attachments_on_Customer_Prices__c, Project_Name__c,Zip_PostalCode__c,Terms_Of_Payment__c, SalesArea__c,Terms_Of_Payment_Code__c, Task_Subject__c, SystemModstamp, Street__c,State_Province__c,Spot_Type__c,Pricing_exception__c, Sold_To__c, SoldTo_Code__c,Sales_Org__c, Sales_Org_Code__c, SAP_Client_Id__c,SAP_Application_Id__c, Request_Valid_To__c, Request_Valid_From__c, Request_Type__c, Request_Reason__c,Request_Name__c, Request_Approval_Status__c,Project_Price__c,Project_Id__c, Pricing_Request_Type__c, OwnerId, Owner.Name, On_Behalf_Of__c,Non_Standard_Terms_Of_Payment__c, Non_Standard_Incoterm__c,Name, LastModifiedDate, LastModifiedById,LastActivityDate, IsDeleted, Incoterm__c, Id, Due_Date__c, Division__c, Division_Code__c,Dist_Channel__c,Dist_Channel_Code__c,Description__c,Customer_Specific__c, Current_Level__c, Current_Approver__c,Current_Approver__r.E_Pass_ID__c, Current_Approver__r.Name, CreatedDate,CreatedById, Country__c,City__c, CSR_Instruction__c, BU__c, Assigned_To__c, Approver5__c, Approver5_Date__c,Approver4__c,Approver4_Date__c, Approver3__c, Approver3_Date__c, Approver2__c, Approver2_Date__c, Approver1__c,Landing_Cost__c,Approver1_Date__c,Incoterms_Code__c, On_Behalf_Of__r.Name, Last_Modified_by__c,Asynchronous_Call_Out_Indicator__c, Approver1__r.E_Pass_Id__c, Approver2__r.E_Pass_Id__c, Approver3__r.E_Pass_Id__c,Approver4__r.E_Pass_Id__c, approver5__r.E_Pass_Id__c, Backup_Level_1__c,Backup_Level_1__r.name,Backup_Level_2__c, Backup_Level_2__r.name, Backup_Level_3__c, Backup_Level_3__r.name,Backup_Level_4__c, Backup_Level_4__r.name, Backup_Level_5__c,Backup_Level_5__r.name, NPC_Status__c,Assigned_To__r.Name, Assigned_To__r.E_Pass_Id__c,created_by__c,Approver1__r.name, Approver2__r.name,Approver3__r.name, Approver4__r.name, approver5__r.name,Project_Header_Approval_Flag__c, Sent_to_Backup_Approver__c,Standardized_Currency__c,Standardized_UoM__c,approverText__c,Default_Currency__c, Auto_Approver_Level1__c,Auto_Approver_Level2__c,Auto_Approver_Level3__c,Auto_Approver_Level4__c,Auto_Approver_Level5__c,Customer_Order_Block_Code__c,Customer_Order_Block__c,Pricing_Condition__c,Key_Combination__c, Delegation_Comments__c,ComPartner__c,ComPartner_Code__c,Request_Id__c, Owner.Email FROM Pricing_Request__c',Variable__c='pricingRequest');  paQueyrList.add(paquery31);
+            PAQuery__c paquery32 =  new PAQuery__c(Class__c='PAApprovalWF',Query__c='SELECT F_NPC_Callout_Status__c,End_User__c,End_User_Country__c,Default_Per__c,Default_UoM__c,Is_End_User_Rebate__c,Total_Deal_Value__c ,End_User_Code__c,Reason_Detail__c,Default_Discount__c,isVolumeApplicable__c,isFloorApplicable__c,isNPCApplicable__c,isPaymentTermsApplicable__c,Submitted_By__c,Display_Standardized_Rate__c,Standardized_Currency__c,Standardized_UoM__c,Request_Class__c,Pricing_Exception__c,Zip_PostalCode__c, Terms_Of_Payment__c, SalesArea__c,Terms_Of_Payment_Code__c, Task_Subject__c, SystemModstamp, Street__c, State_Province__c,Spot_Type__c, Sold_To__c, SoldTo_Code__c,Sales_Org__c, Sales_Org_Code__c, SAP_Client_Id__c, SAP_Application_Id__c,Request_Valid_To__c, Request_Valid_From__c, Request_Type__c, Request_Reason__c, Request_Name__c, Request_Approval_Status__c,Project_Price__c, Pricing_Request_Type__c, OwnerId, Owner.Name, On_Behalf_Of__c, Non_Standard_Terms_Of_Payment__c, Non_Standard_Incoterm__c,Name, LastModifiedDate, LastModifiedById, LastActivityDate, IsDeleted, Incoterm__c, Id, Due_Date__c, Division__c, Division_Code__c,Dist_Channel__c, Dist_Channel_Code__c,Description__c,Customer_Specific__c,Current_Level__c, Current_Approver__c, Current_Approver__r.E_Pass_ID__c, Current_Approver__r.Name,CreatedDate, CreatedById, Country__c, City__c, CSR_Instruction__c, BU__c, Assigned_To__c, Approver5__c, Approver5_Date__c, Approver4__c, Approver4_Date__c, Approver3__c, Approver3_Date__c, Approver2__c, Approver2_Date__c, Approver1__c,Approver1__r.Name, Approver2__r.Name, Approver3__r.Name, Approver4__r.Name, approver5__r.Name, Approver1_Date__c,Incoterms_Code__c,On_Behalf_Of__r.Name, Last_Modified_by__c,Asynchronous_Call_Out_Indicator__c, Approver1__r.E_Pass_Id__c, Approver2__r.E_Pass_Id__c, Approver3__r.E_Pass_Id__c, Approver4__r.E_Pass_Id__c, approver5__r.E_Pass_Id__c, Sent_To_Backup_Approver__c, NPC_Status__c, Assigned_To__r.Name, Assigned_To__r.E_Pass_Id__c,created_by__c, Project_Header_Approval_Flag__c,Landing_Cost__c, Backup_Level_1__c, Backup_Level_1__r.name, Backup_Level_2__c, Backup_Level_2__r.name, Backup_Level_3__c, Backup_Level_3__r.name, Backup_Level_4__c, Backup_Level_4__r.name, Backup_Level_5__c,Backup_Level_5__r.name, approverText__c,Default_Currency__c,Auto_Approver_Level1__c,Auto_Approver_Level2__c,Auto_Approver_Level3__c,Auto_Approver_Level4__c,Auto_Approver_Level5__c, Approver1__r.Email, Approver2__r.Email, Approver3__r.Email, Approver4__r.Email, approver5__r.Email, ComPartner__c, ComPartner_Code__c,Delegation_Comments__c,Attachments_on_Customer_Prices__c, Owner.Email FROM Pricing_Request__c',Variable__c='request.pricingRequest');  paQueyrList.add(paquery32);
+            PAQuery__c paquery33 =  new PAQuery__c(Class__c='PAApprovalWF',Query__c='SELECT PCKC__c,Pricing_Request__r.Reason_Detail__c,Expire__c,Stamp_Floor_Price__c,End_User_Code__c,End_User__c,Country_Code__c, Stamp_Reference_Price__c,Price_Reduction__c,Sales_Reduction__c,Pricing_Request__r.Is_End_User_Rebate__c ,Deal_Margin__c,SAP_Application_Id__c,SAP_Client_Id__c,Dist_Channel_Code__c ,Cost_Price__c,Pricing_Condition_Code__c ,Calculation_Type__c,isVolumeApplicable__c,New_Volume__c,New_Volume_UoM__c,isNPCApplicable__c,isPaymentTermsApplicable__c,New_Customer_Price_Payment_Terms__c,BU__c,F_Product_Hierarchy_Code__c,id, Below_Floor_Flag__c, Below_Reference_Flag__c, Below_Current_Flag__c,Materials_Below_Net_Floor__c,Materials_Below_Net_Reference__c,Materials_Below_Net_Current__c, Material_Code__c, Valid_From__c, Valid_To__c, Market_Segment_COde__C, MArket_Segment__c, Key_Combination__c,Key_Combination_Code__c,SAP_Cluster__c, Sold_To_Code__c, Country__c, Sales_Office__c, Quantity__c, Sales_Office_Code__c, Sales_Org__c, Sales_Org_Code__c, End_Use__c, End_Use_Code__c, PH1__c, PH2__c, PH1_Code__c, PH2_Code__c,PH3_Code__c,PH4_Code__c,PH5_Code__c,PH6_Code__c,PH7_Code__c,PH8_Code__c,PH9_Code__c, New_Rate__c, New_Per__c, New_Unit__c, New_UOM__c, New_Valid_From__c, New_Valid_To__c, Net_Price_Status__c, Pricing_Request__r.Sales_Org_Code__c,Error_Indicator__c,Profit_Center_Code__c,Division__c,Division_Code__c,Pricing_Request__r.Request_Reason__c,Pricing_Request_Type__c,Variant__c,Variant_Code__c, ComPartner__c,ComPartner_Code__c,Plant__c,Plant_Code__c,Shipping_Condition__c,Shipping_Condition_Code__c,Destination_Country__c,Destination_Country_Code__c, Char_Name__c, Kcode__c,Material_Group_1__c, Material_Group_1_Code__c, Sales_District__c, Sales_District_Code__c, FixValDate__c, Partner_ZF__c, Partner_ZF_Code__c, Payer__c, Payer_Code__c,Disc_Ref_No__c,Campaign__c, Campaign_Code__c, Document_Currency__c, Document_Currency_Code__c, State__c, State_Code__c FROM Pricing_Request_Item__c',Variable__c='pricingRequestItemsList');  paQueyrList.add(paquery33);
+            PAQuery__c paquery34 =  new PAQuery__c(Class__c='PAApprovalWF',Query__c='SELECT BU__c, Approver_Backup__c, All_Other_Values_Backup__c, Mixed_Values_Backup__c, Sales_Organisation__c, Distribution_Channel__c, Division__c, Approver_Role__c, Key_Field_Value__c,Key_Field_Id__c, Key_Field__c, Mixed_Values__c, All_Other_Values__c, Approver_Id__c,Approver_Id__r.name,Mixed_Values__r.name, All_Other_Values__r.name, Approver_Backup__r.name,All_Other_Values_Backup__r.name, Mixed_Values_Backup__r.name, Approver_Name__c FROM Setup_Object__c',Variable__c='setupObjectList');  paQueyrList.add(paquery34);
+            PAQuery__c paquery35 =  new PAQuery__c(Class__c='PAApprovalWF',Query__c='SELECT id, BU__c, Country__c, Sales_Organisation__c, Price_Category__c, Distribution_Channel__c, Division__c, Request_Type__c, Request_Class__c from PA_BU_Admin_Master__c',Variable__c='adminMasterList');  paQueyrList.add(paquery35);
+            PAQuery__c paquery36 =  new PAQuery__c(Class__c='PARequest',Query__c='SELECT Id,Name,city__c,country__c,country_code__c,currency_code__c,customer_code__c, Distribution_Channel_Code__c,Distribution_channel__c, Division__c,Division_code__c,Incoterms_1__c,Incoterms_1_Code__c,Incoterms_2__c,Customer_Price_Group_Code__c, Customer_Price_Group__c,Price_List_type__c, price_list_type_code__c,sales_office__c,sales_office_Code__c,sales_org_code__c, sales_org__c,State_Province__c,Street__c,Terms_Of_Payment__c,Terms_Of_Payment_Code__c, Zip_Postal_Code__c,Customer_Group_2_Code__c,Customer_Order_Block_Code__c,Customer_Order_Block__c,Account_Group_Code__c,state__c FROM ERP_Customer__c',Variable__c='customer.paErpCustomer');  paQueyrList.add(paquery36);
+            PAQuery__c paquery37 =  new PAQuery__c(Class__c='PARequest',Query__c='SELECT Ship_To_Country__c,Pricing_Request__r.Reason_Detail__c,Cost_Price__c,Price_Reduction__c,Ship_To_Country_Code__c,Price_Ref_Partner_Code__c,Price_Ref_Partner__c,Disc_Ref__c, Market_Segment_Code__c,Market_Segment__c,Country_Code__c,Country__c,F_Product_Hierarchy_Code__c, Product_Hierarchy_Code__c,Key_Combination_SFDC__c,Scale_UoM_Scale_Unit__c, Valid_To__c, Valid_From__c, UoM__c, Unit__c, Terms_Of_Payment__c, Terms_Of_Payment_Code__c, SystemModstamp,Stamp_Reference_Price__c, Stamp_Reference_Net_Price__c, Stamp_New_Net_Price__c, Stamp_Floor_Price__c, Stamp_Floor_Net_Price__c, Stamp_Current_Net_Price__c, Stamp_Converted_Current_Price__c, Sold_To__c, Sold_To_Code__c, ShipTo__c, ShipTo_Code__c, Scaled_Price_Flag__c,ScaleRate9__c, ScaleRate8__c, ScaleRate7__c, ScaleRate6__c, ScaleRate5__c, ScaleRate4__c, ScaleRate3__c, ScaleRate2__c, ScaleRate1__c,ScaleRate10__c, Scale_Quantity_Scale_Value9__c, Scale_Quantity_Scale_Value8__c, Scale_Quantity_Scale_Value7__c, Scale_Quantity_Scale_Value6__c, Scale_Quantity_Scale_Value5__c, Scale_Quantity_Scale_Value4__c, Scale_Quantity_Scale_Value3__c, Scale_Quantity_Scale_Value2__c, Scale_Quantity_Scale_Value1__c, Scale_Quantity_Scale_Value10__c, Sales_Org__c, Sales_Org_Code__c, Sales_Office__c,Sales_Office_Code__c, SAP_Cluster__c,SAP_Client_Id__c, SAP_Application_Id__c, Rate__c, Quantity__c,Plus_Minus__c, Plus_Minus_Code__c,Calculation_Type__c,Calculation_Type_Code__c,Check_Scale__c,Check_Scale_Code__c, Condition_Class__c,Condition_Class_Code__c,Scale_Basis__c,Scale_Basis_Code__c,Scale_Type_Code__c, Profit_Center__c, Profit_Center_Code__c,Customer_Hierarchy_Code__c,Customer_Hierarchy__c, Product_Hierarchy__c, Pricing_Request__c, Pricing_Request__r.Spot_Type__c, Pricing_Request__r.Pricing_Request_Type__c, Pricing_Request_Type__c, Pricing_Condition__c,Pricing_Condition_Code__c, Price_List_Type__c, Price_List_Type_Code__c, Per__c, PH9__c, PH9_Code__c, PH8__c, PH8_Code__c, PH7__c,PH7_Code__c, PH6__c, PH6_Code__c, PH5__c, PH5_Code__c, PH4__c, PH4_Code__c, PH3__c, PH3_Code__c, PH2__c, PH2_Code__c, PH1__c, PH1_Code__c,PCKC__c, Non_Commercial_Products__c, New__c, New_Valid_To__c, New_Valid_From__c, New_UoM__c, New_Unit__c, New_Rate__c,Pricing_Task_UoM__c, New_Per__c, Name, Material__c, Material_Price_Group__c, Material_Price_Group_Code__c, Material_Code__c, LastModifiedDate, LastModifiedById, LastActivityDate,Key_Combination__c, Key_Combination_Code__c, IsDeleted, Incoterms_Code__c, Incoterms2__c, Inco_terms__c, Id, Gap__c,Gap_Pricing_Request_Item__c, Expire__c, End_User__c, End_User_Code__c, End_Use__c, End_Use_Code__c, Edit__c, ERP_Sales_Prices_SAP__c,Division__c, Division_Code__c, Dist_Channel__c, Dist_Channel_Code__c,Customer_Specific__c, Customer_Price_Group__c,Customer_Price_Group_Code__c, Currency__c, CreatedDate, CreatedById,Below_Reference_Flag__c, Below_Floor_Flag__c,Below_Current_Flag__c, Approver5__c, Approver5_Date__c, Approver4__c, Approver4_Date__c, Approver3__c, Approver3_Date__c, Approver2__c, Approver2_Date__c,Scale_Type__c, Approver1__c, Approver1_Date__c, Approved_Date__c, Approval_Status__c, Gap_Pricing_Request_Item__r.New_Valid_From__c,Gap_Pricing_Request_Item__r.New_Valid_To__c, Gap_Pricing_Request_Item__r.New_Rate__c,Gap_Pricing_Request_Item__r.New_Per__c,Gap_Pricing_Request_Item__r.New_Unit__c, Gap_Pricing_Request_Item__r.New_UoM__c,Gap_Pricing_Request_Item__r.Valid_From__c,Gap_Pricing_Request_Item__r.Valid_To__c, Gap_Pricing_Request_Item__r.Rate__c,Gap_Pricing_Request_Item__r.Per__c,Gap_Pricing_Request_Item__r.Unit__c, Gap_Pricing_Request_Item__r.UoM__c,USD_Rate__c,Base_UoM__c,Pricing_Request__r.Sales_Org_Code__c, Pricing_Request__r.Dist_Channel_Code__c, Pricing_Request__r.Division_Code__c,Materials_Below_Net_Current__c, Materials_Below_Net_Floor__c,Materials_Below_Net_Reference__c,Materials_with_Error_Response__c, Net_Price_Calculated_Materials__c, Total_Materials__c ,Integration_Error_Message__c,Net_Price_Status__c,Number_of_Material_with_Gross_Price__c, Pricing_Request__r.Request_Type__c,Pricing_Request__r.Current_Approver__c,Pricing_Request__r.Display_Standardized_Rate__c, Pricing_Request__r.Pricing_exception__c,Pricing_Request__r.Landing_Cost__c,Pricing_Request__r.Standardized_Currency__c, Pricing_Request__r.Standardized_UoM__c,New_Volume__c, New_Volume_UoM__c, Project__c,Variant_Code__c,Variant__c,ComPartner__c,ComPartner_Code__c,Plant__c,Plant_Code__c,Shipping_Condition__c,Shipping_Condition_Code__c,Destination_Country__c,Destination_Country_Code__c,Sales_Order_Type_Code__c,Sales_Order_Type__c,New_Customer_Price_Payment_Terms__c,New_Payment_Terms_Fixed_Date__c, Char_Name__c, Kcode__c, Material_Group_1__c, Material_Group_1_Code__c, Sales_District__c, Sales_District_Code__c, Partner_ZF__c, Partner_ZF_Code__c, Payer__c, Payer_Code__c, Disc_Ref_No__c, FixValDate__c,Campaign__c, Campaign_Code__c, Document_Currency__c, Document_Currency_Code__c, State__c, State_Code__c,Material_Group_5_Key__c,Material_Group_5_Key_Code__c FROM Pricing_Request_Item__c',Variable__c='requestItemList');  paQueyrList.add(paquery37);
+            PAQuery__c paquery38 =  new PAQuery__c(Class__c='PARequest',Query__c='SELECT SystemModstamp, Status__c, Scale_Type__c, Scale_Type_Code__c, Scale_Basis_Code__c, Scale_Base__c, SAP_Condition_Type__c, SAP_Cluster__c, SAP_Client_Id__c, SAP_Application_Id__c, Pricing_Condition__c, Pricing_Condition_Description__c, Pricing_Condition_Code__c, Price_Types__c, Plus_Minus__c, Plus_Minus_Code__c, OwnerId, Name, LastModifiedDate, LastModifiedById, LastActivityDate, IsDeleted, Id, CurrencyIsoCode, CreatedDate, CreatedById, Condition_Class__c, Condition_Class_Code__c, Check_Scale__c, Check_Scale_Code__c, Calculation_Type__c, Calculation_Type_Code__c FROM ERP_Pricing_Condition__c',Variable__c='priCondObj');  paQueyrList.add(paquery38);
+            PAQuery__c paquery39 =  new PAQuery__c(Class__c='PARequest',Query__c='SELECT Default_Prices_Selection__c,Request_Class__c, Enable_Request_Class__c,Id,ERP_Pricing_Procedure__c,Max_Valid_From_Offset_Cust_Spec__c,Latest_Valid_To_Offset_Cust_Spec__c, Latest_Valid_From_Offset_Non_Cust_Spec__c,Retroactive_Limit__c,ERP_Currency__c,ERP_UoM__c,Non_Customer_Permanent_Request_Reasons__c, OrgGroup__r.ERP_Sales_Org_Code__c, OrgGroup__r.ERP_Sales_Org__c, OrgGroup__r.ERP_Distribution_Channel_Code__c, OrgGroup__r.ERP_Distribution_Channel__c,OrgGroup__r.ERP_Division_Code__c,OrgGroup__r.ERP_Division__c FROM Organizational_Group_Item__c',Variable__c='tempOgList');  paQueyrList.add(paquery39);
+            PAQuery__c paquery40 =  new PAQuery__c(Class__c='PARequest',Query__c='SELECT OrgGroup__r.ERP_Sales_Org__c, OrgGroup__r.ERP_Sales_Org_Code__c,OrgGroup__r.ERP_Distribution_Channel__c, OrgGroup__r.ERP_Distribution_Channel_Code__c,OrgGroup__r.ERP_Division__c,OrgGroup__r.ERP_Division_Code__c FROM Organizational_Group_User__c',Variable__c='ogUsersSA');  paQueyrList.add(paquery40);
+            PAQuery__c paquery41 =  new PAQuery__c(Class__c='PARequest',Query__c='select Default_Prices_Selection__c,Request_Class__c, Base_UoM__c,Enable_Request_Class__c,id,ERP_Pricing_Procedure__c,ERP_Pricing_Procedure__r.SAP_Cluster__c, ERP_Pricing_Procedure__r.SAP_Client_Id__c,ERP_Pricing_Procedure__r.SAP_Application_Id__c,isPaymentTermsApplicable__c,isVolumeApplicable__c from Organizational_Group_Item__c',Variable__c='orgGroupItemObj');  paQueyrList.add(paquery41);
+            PAQuery__c paquery42 =  new PAQuery__c(Class__c='PARequest',Query__c='select Sales_Pricing_Procedure_Condition_Config__c,Pricing_Condition__c,Pricing_Condition__r.Calculation_Type__c ,Pricing_Condition__r.Scale_Type__c,Pricing_Condition__r.Price_Types__c from ERP_Procedure_Conditions__c',Variable__c='proCondObj');  paQueyrList.add(paquery42);
+            PAQuery__c paquery43 =  new PAQuery__c(Class__c='PARequest',Query__c='SELECT Id,currency_code__c,customer_code__c,Distribution_Channel_Code__c,Distribution_channel__c, Division__c,Division_code__c,Customer_Order_Block_Code__c,Customer_Order_Block__c FROM ERP_Customer__c',Variable__c='cusList');  paQueyrList.add(paquery43);
+            PAQuery__c paquery44 =  new PAQuery__c(Class__c='PARequest',Query__c='SELECT Default_Prices_Selection__c,Request_Class__c, Base_UoM__c,Enable_Request_Class__c,Id,ERP_Pricing_Procedure__c,Business__r.Name, Max_Valid_From_Offset_Cust_Spec__c,Latest_Valid_To_Offset_Cust_Spec__c,Customer_Request_Reasons__c, Latest_Valid_From_Offset_Non_Cust_Spec__c,Rebate_Agreement__c ,Retroactive_Limit__c,ERP_Currency__c,ERP_UoM__c, landing_cost__c,Non_Customer_Permanent_Request_Reasons__c,Pricing_Task_Type__c,Pricing_Task_Reasons__c,Include_Customer_Currency__c,Project_Request_Reasons__c,Latest_Valid_To_Offset_Non_Cust_Spec__c,Approval_Escalation_Price_Requests__c,Approval_Escalation_Pricing_Task__c FROM Organizational_Group_Item__c',Variable__c='orgGroupItemsList');  paQueyrList.add(paquery44);
+            PAQuery__c paquery45 =  new PAQuery__c(Class__c='PARequest',Query__c='SELECT Default_Prices_Selection__c,Request_Class__c, Enable_Request_Class__c,Id,ERP_Pricing_Procedure__c,Max_Valid_From_Offset_Cust_Spec__c,Latest_Valid_To_Offset_Cust_Spec__c, Latest_Valid_From_Offset_Non_Cust_Spec__c,Retroactive_Limit__c FROM Organizational_Group_Item__c',Variable__c='buOrgGroup');  paQueyrList.add(paquery45);
+            PAQuery__c paquery46 =  new PAQuery__c(Class__c='PARequest',Query__c='select Id,Name,Country_Code__c,Country__c,Customer_Price_Group_Code__c,Customer_Price_Group__c,Customer_Specific__c,Distribution_Channel_Code__c,Dist_Channel__c, Division__c,Division_Code__c,Disc_Ref__c,End_Use_Code__c,End_Use__c,End_User_Code__c,End_User__c, Incoterms_1_Code__c,Incoterms1__c,Key_Combination_Code__c,Key_Combination__c,Material_Code__c,Material__c,Material_Price_Group_Code__c, Material_Price_Group__c ,Per__c,PH1__c,PH1_Code__c,PH2__c,PH2_Code__c,PH3__c,PH3_Code__c,PH4__c,PH4_Code__c,PH5__c, PH5_Code__c,PH6__c,PH6_Code__c,PH7__c,PH7_Code__c,PH8__c,PH8_Code__c,PH9__c,PH9_Code__c,Price_List_Type_Code__c, Price_List_Type__c,Pricing_Condition__c,Pricing_Condition_Code__c,Product_Hierarchy__c,F_Product_Hierarchy_Code__c, Profit_Center_Code__c,Profit_Center__c,Quantity__c,Rate__c,Sales_Office_Code__c,Product_Hierarchy_Code__c, Sales_Office__c,Sales_Org__c,Sales_Org_Code__c,Sales_Price_Type__c,Sales_Pricing_Procedure__c,SAP_Application_Id__c, SAP_Client_ID__c,SAP_Cluster__c,Check_Scale__c,Scaled_Price_Flag__c,Scale_Type__c,Sold_To_Code__c,Sold_To__c,Project_Id__c, ShipTo__c,ShipTo_Code__c,Terms_of_Payment_Code__c,Unit__c,UoM__c,Approved_Date__c,Valid_From__c,Valid_To__c,PCKC__c, ComPartner__c,ComPartner_Code__c, Price_Holder__c, Char_Name__c, Kcode__c, Material_Group_1__c, Material_Group_1_Code__c, Sales_District__c, Sales_District_Code__c,Partner_ZF__c, Partner_ZF_Code__c, Payer__c, Payer_Code__c,Disc_Ref_No__c, FixValDate__c,Campaign__c, Campaign_Code__c, Document_Currency__c, Document_Currency_Code__c, State__c, State_Code__c from ERP_Sales_Prices_SAP__c',Variable__c='listofDynamicTables');  paQueyrList.add(paquery46);
+            PAQuery__c paquery47 =  new PAQuery__c(Class__c='Trig_validatePriceAUNew',Query__c='SELECT New_Customer_Price_Payment_Terms__c,New_Payment_Terms_Fixed_Date__c,New_Volume__c, Price_Reduction__c, New_Volume_UoM__c,Ship_To_Country__c,Ship_To_Country_Code__c,country_code__c, Pricing_Request__r.End_User__c,Pricing_Request__r.End_User_Code__c,Pricing_Request__r.Sold_To__c,Pricing_Request__r.SoldTo_Code__c,Market_Segment_Code__c,Market_Segment__c,Project__c,Variant_Code__c,Variant__c, ComPartner__c,ComPartner_Code__c,Plant__c,Plant_Code__c,Shipping_Condition__c,Shipping_Condition_Code__c,Destination_Country__c,Destination_Country_Code__c, Sales_Order_Type_Code__c,Sales_Order_Type__c,Valid_To__c,BU__c, Valid_From__c, UoM__c, Unit__c, Terms_Of_Payment__c, Terms_Of_Payment_Code__c, SystemModstamp, Stamp_Reference_Price__c, Stamp_Reference_Net_Price__c, Stamp_New_Net_Price__c, Stamp_Floor_Price__c, Stamp_Floor_Net_Price__c, Stamp_Current_Net_Price__c, Stamp_Converted_Current_Price__c, Sold_To__c, Sold_To_Code__c, ShipTo__c, ShipTo_Code__c, Scaled_Price_Flag__c, Scale_UoM_Scale_Unit__c, Scale_Type__c, Scale_Type_Code__c, Scale_Quantity_Scale_Value9__c, Scale_Quantity_Scale_Value8__c, Scale_Quantity_Scale_Value7__c, Scale_Quantity_Scale_Value6__c, Scale_Quantity_Scale_Value5__c, Scale_Quantity_Scale_Value4__c, Scale_Quantity_Scale_Value3__c, Scale_Quantity_Scale_Value2__c, Scale_Quantity_Scale_Value1__c, Scale_Quantity_Scale_Value10__c, Scale_Basis__c, Scale_Basis_Code__c, ScaleRate9__c, ScaleRate8__c, ScaleRate7__c, ScaleRate6__c, ScaleRate5__c, ScaleRate4__c, ScaleRate3__c, ScaleRate2__c, ScaleRate1__c, ScaleRate10__c, Sales_Org__c, Sales_Org_Code__c, Sales_Office__c,Customer_Hierarchy__c, Customer_Hierarchy_Code__c, Sales_Office_Code__c, SAP_Cluster__c, SAP_Client_Id__c, SAP_Application_Id__c, Rate__c, Quantity__c, Profit_Center__c, Profit_Center_Code__c, Product_Hierarchy__c, Product_Hierarchy_Code__c, Pricing_Task_UoM__c, Pricing_Request__c,Pricing_Request__r.Request_Type__c,Pricing_Request__r.Customer_Specific__c,Pricing_Request__r.On_Behalf_Of__c, Pricing_Request_Type__c, Pricing_Condition__c, Pricing_Condition_Code__c, Price_List_Type__c, Price_List_Type_Code__c, Plus_Minus__c, Plus_Minus_Code__c, Per__c, PH9__c, PH9_Code__c, PH8__c, PH8_Code__c, PH7__c, PH7_Code__c, PH6__c, PH6_Code__c, PH5__c, PH5_Code__c, PH4__c, PH4_Code__c, PH3__c, PH3_Code__c, PH2__c, PH2_Code__c, PH1__c, PH1_Code__c, PCKC__c, Non_Commercial_Products__c, New__c, New_Valid_To__c, New_Valid_From__c, New_UoM__c, New_Unit__c, New_Rate__c, New_Per__c, Name, Material__c, Material_Price_Group__c, Material_Price_Group_Code__c, Material_Code__c, LastModifiedDate, LastModifiedById, LastActivityDate, Key_Combination__c, Key_Combination_Code__c, IsDeleted, Incoterms_Code__c, Incoterms2__c, Inco_terms__c, Id, Gap__c, Gap_Pricing_Request_Item__c, Expire__c, End_User__c, End_User_Code__c, End_Use__c, End_Use_Code__c, Edit__c, ERP_Sales_Prices_SAP__c, ERP_Pricing_Procedure__c, Division__c, Division_Code__c, Dist_Channel__c, Dist_Channel_Code__c, Disc_Ref__c, Customer_Specific__c, Customer_Price_Group__c, Customer_Price_Group_Code__c, Currency__c, CurrencyIsoCode,CreatedDate, CreatedById, Country__c, Condition_Class__c, Condition_Class_Code__c, Check_Scale__c, Check_Scale_Code__c, Calculation_Type__c, Calculation_Type_Code__c, Below_Reference_Price__c, Below_Reference_Flag__c, Below_Floor_Price__c, Below_Floor_Flag__c, Below_Current_Flag__c, Approver5__c, Approver5_Date__c, Approver4__c, Approver4_Date__c, Approver3__c, Approver3_Date__c, Approver2__c, Approver2_Date__c, Approver1__c, Approver1_Date__c, Approved_Date__c, Approval_Status__c ,Pricing_Request__r.OwnerId,Price_Ref_Partner__c,Price_Ref_Partner_Code__c, ERP_Pricing_Procedure__r.SAP_Cluster__c,Material_Group_1__c, Material_Group_1_Code__c,Char_Name__c,Kcode__c,Partner_ZF__c, Partner_ZF_Code__c, Payer__c, Payer_Code__c,Disc_Ref_No__c, FixValDate__c,Campaign__c, Campaign_Code__c, Document_Currency__c, Document_Currency_Code__c, State__c, State_Code__c FROM Pricing_request_item__c',Variable__c='priApprovedList');  paQueyrList.add(paquery47);
+            PAQuery__c paquery48 =  new PAQuery__c(Class__c='PASalesPriceSAP',Query__c='SELECT isNPCApplicable__c, Pricing_Condition__r.Pricing_Condition_Code__c, Pricing_Key_Combination__c, Pricing_Key_Combination__r.Key_Combination_Code__c, Key_Combination__c, Sequence_Number__c, Floor_Key_Combination__c, Floor_Pricing_Condition__c, Net_Floor_Key_Combination__c, Net_Reference_Key_Combination__c, Reference_Key_Combination__c, Reference_Pricing_Condition__c,isPaymentTermsApplicable__c,isVolumeApplicable__c FROM ERP_Access_Sequence__c',Variable__c='accessSeqObj');  paQueyrList.add(paquery48);
+            PAQuery__c paquery49 =  new PAQuery__c(Class__c='Trig_validatePriceAUNew',Query__c='Select Ship_To_Country_Code__c,Ship_To_Country__c,Pricing_Request__c, ShipTo__c, ShipTo_Code__c,markForDeletion__c,KC_SAP__c,isPriceHolder__c,BU__c, Valid_To__c, Valid_From__c, UoM__c, Unit__c, Terms_of_Payment_Code__c, SystemModstamp, Sold_To__c, Sold_To_Code__c, Sales_Pricing_Procedure__c, Sales_Price_Type__c, Sales_Org__c, Sales_Org_Code__c, Sales_Office__c, Sales_Office_Code__c, SAP_Cluster__c, SAP_Client_ID__c, SAP_Application_Id__c, Rate__c, Profit_Center__c, Profit_Center_Code__c, Product_Hierarchy__c, Product_Hierarchy_Code__c, Pricing_Condition__c, Pricing_Condition_Code__c, Price_List_Type__c, Price_List_Type_Code__c, Price_Holder__c, Plus_Minus__c, Plus_Minus_Code__c, Per__c, PH9_Code__c, PH8_Code__c,PH7_Code__c, PH6_Code__c, PH5_Code__c, PH4_Code__c,PH3_Code__c,PH2_Code__c, PH1_Code__c, PCKC__c,OwnerId, Name, Material__c, Material_Price_Group__c, Material_Price_Group_Code__c, Material_Code__c, LastModifiedDate, LastModifiedById, LastActivityDate, Key_Combination__c, Key_Combination_Code__c, IsDeleted, Incoterms_1_Code__c, Incoterms1__c, Id, End_Use__c, End_Use_Code__c, Division__c, Division_Code__c, Dist_Channel_Code__c, Dist_Channel__c, Customer_Specific__c, Customer_Price_Group__c, Customer_Price_Group_Code__c, CurrencyIsoCode, CreatedDate, CreatedById, Country__c, Country_Code__c, Condition_Class__c, Condition_Class_Code__c, Calculation_Type__c, Calculation_Type_Code__c, Approved_Date__c,ComPartner__c, ComPartner_Code__c, Partner_ZF__c, Partner_ZF_Code__c, Payer__c, Payer_Code__c, Disc_Ref_No__c, FixValDate__c, Campaign__c, Campaign_Code__c, Document_Currency__c, Document_Currency_Code__c, State__c, State_Code__c From Sales_Prices__c',Variable__c='linkedPricingRecords');  paQueyrList.add(paquery49);
+            PAQuery__c paquery50 =  new PAQuery__c(Class__c='PASalesPriceSAP',Query__c='SELECT Ship_To_Country__c,PCKC__c ,Ship_To_Country_Code__c,Terms_of_Payment__c,Price_Ref_Partner_Code__c,Price_Ref_Partner__c,Market_Segment_Code__c,Market_Segment__c,Project__c,Variant_Code__c,Variant__c,ComPartner__c,ComPartner_Code__c,Plant__c,Plant_Code__c,Shipping_Condition__c,Shipping_Condition_Code__c,Destination_Country__c,Destination_Country_Code__c,Sales_Order_Type_Code__c,Sales_Order_Type__c,Id,Name,Country_Code__c,Country__c,Customer_Price_Group_Code__c,Customer_Price_Group__c,SAP_Cluster__c, Customer_Specific__c,Distribution_Channel_Code__c,Dist_Channel__c,Division__c,Division_Code__c, End_Use_Code__c,End_Use__c,End_User_Code__c,End_User__c,Incoterms_1_Code__c,Incoterms1__c, Key_Combination_Code__c,Key_Combination__c,Material_Code__c,Material__c,Customer_Hierarchy_Code__c,Customer_Hierarchy__c, Material_Price_Group_Code__c,Material_Price_Group__c ,Per__c,PH1__c,PH1_Code__c,PH2__c, PH2_Code__c,PH3__c,PH3_Code__c,PH4__c,PH4_Code__c,PH5__c,PH5_Code__c,PH6__c,PH6_Code__c,PH7__c, PH7_Code__c,PH8__c,PH8_Code__c,PH9__c,PH9_Code__c,Price_List_Type_Code__c,Price_List_Type__c, Pricing_Condition__c,Pricing_Condition_Code__c,Product_Hierarchy__c,F_Product_Hierarchy_Code__c,Product_Hierarchy_Code__c, Profit_Center_Code__c,project_id__C,Profit_Center__c,Quantity__c,Rate__c,Sales_Office_Code__c, Sales_Office__c, Sales_Org__c,Sales_Org_Code__c,Sales_Price_Type__c,Sales_Pricing_Procedure__c, SAP_Application_Id__c,SAP_Client_ID__c,Check_Scale__c,Scaled_Price_Flag__c,Scale_Type__c, ScaleRate1__c,ScaleRate2__c,ScaleRate3__c,ScaleRate4__c,ScaleRate5__c,ScaleRate6__c, ScaleRate7__c,ScaleRate8__c,ScaleRate9__c,ScaleRate10__c, Sold_To_Code__c,Sold_To__c,ShipTo__c,ShipTo_Code__c,Terms_of_Payment_Code__c,Unit__c,UoM__c, Approved_Date__c,Valid_From__c,Valid_To__c,Price_Holder__c,Disc_ref__c,Volume__c,Volume_UoM__c,Customer_Price_Payment_Terms__c,Payment_Terms_Fixed_Date__c,Pricing_Request__c,Pricing_Request__r.Name,Char_Name__c, Kcode__c, Material_Group_1__c, PCKC__C,Material_Group_1_Code__c,Sales_District__c, Sales_District_Code__c,Partner_ZF__c, Partner_ZF_Code__c, Payer__c, Payer_Code__c,Disc_Ref_No__c, FixValDate__c,Campaign__c, Campaign_Code__c, Document_Currency__c, Document_Currency_Code__c, State__c, State_Code__c,Material_Group_5_Key__c,Material_Group_5_Key_Code__c FROM ERP_Sales_Prices_SAP__c',Variable__c='salespriceobj');  paQueyrList.add(paquery50);
+            PAQuery__c paquery51 =  new PAQuery__c(Class__c='Trig_validatePriceAUNew',Query__c='Select Ship_To_Country_Code__c,Ship_To_Country__c,Pricing_Request__c, ShipTo__c, ShipTo_Code__c,markForDeletion__c,KC_SAP__c,isPriceHolder__c,BU__c, Valid_To__c, Valid_From__c, UoM__c, Unit__c, Terms_of_Payment_Code__c, SystemModstamp, Sold_To__c, Sold_To_Code__c, Sales_Pricing_Procedure__c, Sales_Price_Type__c, Sales_Org__c, Sales_Org_Code__c, Sales_Office__c, Sales_Office_Code__c, SAP_Cluster__c, SAP_Client_ID__c, SAP_Application_Id__c, Rate__c, Profit_Center__c, Profit_Center_Code__c, Product_Hierarchy__c, Product_Hierarchy_Code__c, Pricing_Condition__c, Pricing_Condition_Code__c, Price_List_Type__c, Price_List_Type_Code__c, Price_Holder__c, Plus_Minus__c, Plus_Minus_Code__c, Per__c, PH9_Code__c, PH8_Code__c,PH7_Code__c, PH6_Code__c, PH5_Code__c, PH4_Code__c,PH3_Code__c,PH2_Code__c, PH1_Code__c, PCKC__c,OwnerId, Name, Material__c, Material_Price_Group__c, Material_Price_Group_Code__c, Material_Code__c, LastModifiedDate, LastModifiedById, LastActivityDate, Key_Combination__c, Key_Combination_Code__c, IsDeleted, Incoterms_1_Code__c, Incoterms1__c, Id, End_Use__c, End_Use_Code__c, Division__c, Division_Code__c, Dist_Channel_Code__c, Dist_Channel__c, Customer_Specific__c, Customer_Price_Group__c, Customer_Price_Group_Code__c, CurrencyIsoCode, CreatedDate, CreatedById, Country__c, Country_Code__c, Condition_Class__c, Condition_Class_Code__c, Calculation_Type__c, Calculation_Type_Code__c, Approved_Date__c,ComPartner__c,ComPartner_Code__c,Partner_ZF__c, Partner_ZF_Code__c, Payer__c, Payer_Code__c,Disc_Ref_No__c, FixValDate__c,Campaign__c, Campaign_Code__c, Document_Currency__c, Document_Currency_Code__c, State__c, State_Code__c From Sales_Prices__c',Variable__c='allHoldersList');  paQueyrList.add(paquery51);
+            PAQuery__c paquery52 =  new PAQuery__c(Class__c='PASalesPriceSAP',Query__c='SELECT Contract__c, Contract_Code__c, Ship_To_Country_Code__c, Ship_To_Country__c, ShipTo__c, ShipTo_Code__c, Calculation_Type_Code__c,Calculation_Type__c,Condition_Class_Code__c,Condition_Class__c,Plus_Minus_Code__c,Plus_Minus__c,Id,Name,Country_Code__c,Country__c,Customer_Price_Group_Code__c,Customer_Price_Group__c, Customer_Specific__c,Dist_Channel_Code__c,Dist_Channel__c,Division__c,Division_Code__c,End_Use_Code__c,End_Use__c,Incoterms_1_Code__c,Incoterms1__c,Market_Segment__c,Market_Segment_Code__c,Project__c,Variant__c,Variant_Code__c,ComPartner__c,ComPartner_Code__c,Plant__c,Plant_Code__c,Shipping_Condition__c,Shipping_Condition_Code__c,Destination_Country__c,Destination_Country_Code__c,Sales_Order_Type__c,Sales_Order_Type_Code__c, Key_Combination_Code__c,Key_Combination__c,Material_Code__c,Material__c,Material_Price_Group_Code__c,Material_Price_Group__c ,Per__c,PH1_Code__c,PH2_Code__c,PH3_Code__c, PH4_Code__c,PH5_Code__c,PH6_Code__c,PH7_Code__c,PH8_Code__c,PH9_Code__c,Price_List_Type_Code__c,Price_List_Type__c,Pricing_Condition__c,Pricing_Condition_Code__c, Product_Hierarchy__c,Product_Hierarchy_Code__c,Profit_Center_Code__c,Profit_Center__c,Rate__c,Sales_Office_Code__c, Sales_Office__c,Sales_Org__c,Sales_Org_Code__c, Sales_Price_Type__c,Sales_Pricing_Procedure__c,SAP_Application_Id__c,SAP_Client_ID__c,SAP_Cluster__c,Sold_To_Code__c,Sold_To__c,Terms_of_Payment_Code__c,Unit__c,UoM__c, Approved_Date__c,Valid_From__c,Valid_To__c,Price_Holder__c,Scale_UoM_Scale_Unit__c,Scale_Quantity_Scale_Value1__c,Scale_Quantity_Scale_Value2__c,Scale_Quantity_Scale_Value3__c,Scale_Quantity_Scale_Value4__c,Scale_Quantity_Scale_Value5__c,Scale_Quantity_Scale_Value6__c,Scale_Quantity_Scale_Value7__c, Scale_Quantity_Scale_Value8__c,Scale_Quantity_Scale_Value9__c,Scale_Quantity_Scale_Value10__c,ScaleRate1__c, ScaleRate2__c,ScaleRate3__c,ScaleRate4__c,ScaleRate5__c,ScaleRate6__c,ScaleRate7__c,ScaleRate8__c,ScaleRate9__c,ScaleRate10__c,Check_Scale__c,Check_Scale_Code__c,Scale_Basis__c,Scale_Basis_Code__c,Scale_Type__c,Scale_Type_Code__c,Char_Name__c, Kcode__c, Material_Group_1__c, Material_Group_1_Code__c,Sales_District__c, Sales_District_Code__c,Partner_ZF__c, Partner_ZF_Code__c, Payer__c, Payer_Code__c,Disc_Ref_No__c, FixValDate__c,Campaign__c, Campaign_Code__c, Document_Currency__c, Document_Currency_Code__c, State__c, State_Code__c,Material_Group_5_Key__c,Material_Group_5_Key_Code__c FROM Sales_Prices__c',Variable__c='salesPriceNonSAP');  paQueyrList.add(paquery52);
+            PAQuery__c paquery53 =  new PAQuery__c(Class__c='Trig_validatePriceAUNew',Query__c='Select Ship_To_Country_Code__c,Ship_To_Country__c,Pricing_Request__c, ShipTo__c, ShipTo_Code__c,markForDeletion__c,KC_SAP__c,isPriceHolder__c,BU__c, Valid_To__c, Valid_From__c, UoM__c, Unit__c, Terms_of_Payment_Code__c, SystemModstamp, Sold_To__c, Sold_To_Code__c, Sales_Pricing_Procedure__c, Sales_Price_Type__c, Sales_Org__c, Sales_Org_Code__c, Sales_Office__c, Sales_Office_Code__c, SAP_Cluster__c, SAP_Client_ID__c, SAP_Application_Id__c, Rate__c, Profit_Center__c, Profit_Center_Code__c, Product_Hierarchy__c, Product_Hierarchy_Code__c, Pricing_Condition__c, Pricing_Condition_Code__c, Price_List_Type__c, Price_List_Type_Code__c, Price_Holder__c, Plus_Minus__c, Plus_Minus_Code__c, Per__c, PH9_Code__c, PH8_Code__c,PH7_Code__c, PH6_Code__c, PH5_Code__c, PH4_Code__c,PH3_Code__c,PH2_Code__c, PH1_Code__c, PCKC__c,OwnerId, Name, Material__c, Material_Price_Group__c, Material_Price_Group_Code__c, Material_Code__c, LastModifiedDate, LastModifiedById, LastActivityDate, Key_Combination__c, Key_Combination_Code__c, IsDeleted, Incoterms_1_Code__c, Incoterms1__c, Id, End_Use__c, End_Use_Code__c, Division__c, Division_Code__c, Dist_Channel_Code__c, Dist_Channel__c, Customer_Specific__c, Customer_Price_Group__c, Customer_Price_Group_Code__c, CurrencyIsoCode, CreatedDate, CreatedById, Country__c, Country_Code__c, Condition_Class__c, Condition_Class_Code__c, Calculation_Type__c, Calculation_Type_Code__c, Approved_Date__c, ComPartner__c, ComPartner_Code__c,Partner_ZF__c, Partner_ZF_Code__c, Payer__c, Payer_Code__c,Disc_Ref_No__c, FixValDate__c,Campaign__c, Campaign_Code__c, Document_Currency__c, Document_Currency_Code__c, State__c, State_Code__c From Sales_Prices__c',Variable__c='childRecOfDelHolder');  paQueyrList.add(paquery53);
+            PAQuery__c paquery54 =  new PAQuery__c(Class__c='PASalesPriceSAP',Query__c='SELECT BU__c,Ship_To_Country__c,Ship_To_Country_Code__c,Terms_of_Payment__c,PCKC__C, Price_Ref_Partner_Code__c,Price_Ref_Partner__c,Market_Segment_Code__c,Market_Segment__c,Project__c,Contract_Code__c,Contract__c,Variant_Code__c,Variant__c,ComPartner__c,ComPartner_Code__c,Plant__c,Plant_Code__c,Shipping_Condition__c,Shipping_Condition_Code__c,Destination_Country__c,Destination_Country_Code__c,Sales_Order_Type_Code__c,Sales_Order_Type__c,Id,Name,Country_Code__c, Country__c,Customer_Price_Group_Code__c,Customer_Price_Group__c,Customer_Specific__c,Distribution_Channel_Code__c, Dist_Channel__c,Division__c,Division_Code__c,End_Use_Code__c,End_Use__c,End_User_Code__c,End_User__c,Condition_Class__c, Incoterms_1_Code__c,Incoterms1__c,Key_Combination_Code__c,Key_Combination__c,Material_Code__c,Material__c, Customer_Hierarchy_Code__c,Customer_Hierarchy__c,Material_Price_Group_Code__c,Material_Price_Group__c ,Per__c, PH1__c,PH1_Code__c,PH2__c,PH2_Code__c,PH3__c,PH3_Code__c,PH4__c,PH4_Code__c,PH5__c,PH5_Code__c,PH6__c,PH6_Code__c, PH7__c,PH7_Code__c,PH8__c,PH8_Code__c,PH9__c,PH9_Code__c,Price_List_Type_Code__c,Price_List_Type__c,markForDeletion__c, Pricing_Condition__c,Pricing_Condition_Code__c,Product_Hierarchy__c,F_Product_Hierarchy_Code__c,Condition_Class_Code__c, Product_Hierarchy_Code__c,Profit_Center_Code__c,Profit_Center__c,Quantity__c,Rate__c,Sales_Office_Code__c, Sales_Office__c,Sales_Org__c,Sales_Org_Code__c,Sales_Price_Type__c,Sales_Pricing_Procedure__c,Calculation_Type__c, SAP_Application_Id__c,SAP_Client_ID__c,SAP_Cluster__c,Check_Scale__c,Scaled_Price_Flag__c,Scale_Type__c, ScaleRate1__c,ScaleRate2__c,ScaleRate3__c,project_id__c,ScaleRate4__c,ScaleRate5__c,ScaleRate6__c,ScaleRate7__c,ScaleRate8__c,ScaleRate9__c,ScaleRate10__c,Sold_To_Code__c,Sold_To__c,ShipTo__c,ShipTo_Code__c,Calculation_Type_Code__c, Terms_of_Payment_Code__c,Unit__c,UoM__c,Approved_Date__c,Valid_From__c,Valid_To__c,Price_Holder__c,Disc_ref__c, Check_Scale_Code__c,Scale_Basis_Code__c,Scale_Basis__c,Scale_Quantity_Scale_Value1__c,Scale_Quantity_Scale_Value2__c, Scale_Quantity_Scale_Value3__c,Scale_Quantity_Scale_Value4__c,Scale_Quantity_Scale_Value5__c, Scale_Quantity_Scale_Value6__c,Scale_Quantity_Scale_Value7__c,Scale_Quantity_Scale_Value8__c,Scale_Quantity_Scale_Value9__c,Scale_Quantity_Scale_Value10__c,Scale_Type_Code__c,Scale_UoM_Scale_Unit__c, Plus_Minus_Code__c,Plus_Minus__c,Volume__c,Volume_UoM__c, Customer_Price_Payment_Terms__c,Payment_Terms_Fixed_Date__c,Pricing_Request__c,Pricing_Request__r.Name,Char_Name__c, Kcode__c, Material_Group_1__c, Material_Group_1_Code__c, Sales_District__c, Sales_District_Code__c,Partner_ZF__c, Partner_ZF_Code__c, Payer__c, Payer_Code__c, Disc_Ref_No__c, FixValDate__c,Campaign__c, Campaign_Code__c, Document_Currency__c, Document_Currency_Code__c, State__c, State_Code__c,Material_Group_5_Key__c,Material_Group_5_Key_Code__c FROM ERP_Sales_Prices_SAP__c',Variable__c='salesPriceRecordsList');  paQueyrList.add(paquery54);
+            PAQuery__c paquery55 =  new PAQuery__c(Class__c='Trig_validatePriceAUNew',Query__c='Select Ship_To_Country__c,Ship_To_Country_Code__c,Terms_of_Payment__c,Pricing_Request__c,markForDeletion__c,KC_SAP__c,Market_Segment_Code__c,Market_Segment__c,Project__c,Variant_Code__c,Variant__c, ComPartner__c,ComPartner_Code__c,Plant__c,Plant_Code__c,Shipping_Condition__c,Shipping_Condition_Code__c,Destination_Country__c,Destination_Country_Code__c,Document_Currency__c,Document_Currency_Code__c, Sales_Order_Type_Code__c,Sales_Order_Type__c, isPriceHolder__c,BU__c, Valid_To__c, Valid_From__c, UoM__c, Unit__c, Terms_of_Payment_Code__c, SystemModstamp, Sold_To__c, Sold_To_Code__c, ShipTo__c, ShipTo_Code__c, Scaled_Price_Flag__c, Scale_Type__c, Scale_Type_Code__c, Scale_Quantity_Scale_Value9__c, Scale_Quantity_Scale_Value8__c, Scale_Quantity_Scale_Value7__c, Scale_Quantity_Scale_Value6__c, Scale_Quantity_Scale_Value5__c, Scale_Quantity_Scale_Value4__c, Scale_Quantity_Scale_Value3__c, Scale_Quantity_Scale_Value2__c, Scale_Quantity_Scale_Value1__c, Scale_Quantity_Scale_Value10__c, Scale_Basis__c, Scale_Basis_Code__c, /*Scale_Base__c, */ScaleRate9__c, ScaleRate8__c, ScaleRate7__c, ScaleRate6__c, ScaleRate5__c, ScaleRate4__c, ScaleRate3__c, ScaleRate2__c, ScaleRate1__c, ScaleRate10__c, Sales_Pricing_Procedure__c, Sales_Price_Type__c, Sales_Org__c, Sales_Org_Code__c,Customer_Hierarchy__c, Customer_Hierarchy_Code__c, Sales_Office__c, Sales_Office_Code__c, SAP_Cluster__c, SAP_Client_ID__c, SAP_Application_Id__c, Record_Id__c, Rate__c, Quantity__c, Project_Id__c, Profit_Center__c, Profit_Center_Code__c, Product_Hierarchy__c, Product_Hierarchy_Code__c, Pricing_Condition__c, Pricing_Condition_Code__c, Price_List_Type__c, Price_List_Type_Code__c, Price_Holder__c, Plus_Minus__c, Plus_Minus_Code__c, Per__c, PH9__c, PH9_Code__c, PH8__c, PH8_Code__c, PH7__c, PH7_Code__c, PH6__c, PH6_Code__c, PH5__c, PH5_Code__c, PH4__c, PH4_Code__c, PH3__c, PH3_Code__c, PH2__c, PH2_Code__c, PH1__c, PH1_Code__c, PCKC__c, Owning_Business__c, OwnerId, Name, Material__c, Material_Price_Group__c, Material_Price_Group_Code__c, Material_Code__c, LastModifiedDate, LastModifiedById, LastActivityDate, Key_Combination__c, Key_Combination_Code__c, IsDeleted, Incoterms_1_Code__c, Incoterms1__c, Id, End_User__c, End_User_Code__c, End_Use__c, End_Use_Code__c, Division__c, Division_Code__c, Distribution_Channel_Code__c, Dist_Channel__c, Disc_Ref__c, Customer_Specific__c, Customer_Price_Group__c, Customer_Price_Group_Code__c, CurrencyIsoCode, CreatedDate, CreatedById, Country__c, Country_Code__c, Condition_Class__c, Condition_Class_Code__c, Check_Scale__c, Check_Scale_Code__c, Calculation_Type__c, Calculation_Type_Code__c,Price_Ref_Partner__c,Price_Ref_Partner_Code__c, Approved_Date__c From ERP_Sales_Prices_SAP__c',Variable__c='upsertHolderList');  paQueyrList.add(paquery55);
+            PAQuery__c paquery56 =  new PAQuery__c(Class__c='Trig_validatePriceAUNew',Query__c='Select Ship_To_Country_Code__c,Ship_To_Country__c,Pricing_Request__c, ShipTo__c, ShipTo_Code__c,markForDeletion__c,KC_SAP__c,isPriceHolder__c,BU__c, Valid_To__c, Valid_From__c, UoM__c, Unit__c, Terms_of_Payment_Code__c, SystemModstamp, Sold_To__c, Sold_To_Code__c, Sales_Pricing_Procedure__c, Sales_Price_Type__c, Sales_Org__c, Sales_Org_Code__c, Sales_Office__c, Sales_Office_Code__c, SAP_Cluster__c, SAP_Client_ID__c, SAP_Application_Id__c, Rate__c, Profit_Center__c, Profit_Center_Code__c, Product_Hierarchy__c, Product_Hierarchy_Code__c, Pricing_Condition__c, Pricing_Condition_Code__c, Price_List_Type__c, Price_List_Type_Code__c, Price_Holder__c, Plus_Minus__c, Plus_Minus_Code__c, Per__c, PH9_Code__c, PH8_Code__c,PH7_Code__c, PH6_Code__c, PH5_Code__c, PH4_Code__c,PH3_Code__c,PH2_Code__c, PH1_Code__c, PCKC__c,OwnerId, Name, Material__c, Material_Price_Group__c, Material_Price_Group_Code__c, Material_Code__c, LastModifiedDate, LastModifiedById, LastActivityDate, Key_Combination__c, Key_Combination_Code__c, IsDeleted, Incoterms_1_Code__c, Incoterms1__c, Id, End_Use__c, End_Use_Code__c, Division__c, Division_Code__c, Dist_Channel_Code__c, Dist_Channel__c, Customer_Specific__c, Customer_Price_Group__c, Customer_Price_Group_Code__c, CurrencyIsoCode, CreatedDate, CreatedById, Country__c, Country_Code__c, Condition_Class__c, Condition_Class_Code__c, Calculation_Type__c, Calculation_Type_Code__c, Approved_Date__c, ComPartner__c, ComPartner_Code__c From Sales_Prices__c',Variable__c='childRecOfDelHolder');  paQueyrList.add(paquery56);
+        insert paQueyrList;
+         IntegrationLoginCredentials__c pr4 = new IntegrationLoginCredentials__c (Name='admin.util@dupont.com.utqa', EncryptedLoginDetails__c='Infosys1234Xkh5hWWRryiH6c7tDrZrCH9jF');
+        insert pr4;   
+        
+        //test.stopTest();            
+}
+
+    static testMethod void paServiceTestMethod() {
+        
+        user u = createUser();
+        
+  
+        system.runAs(u){
+            
+             IntegrationLoginCredentials__c pr4 = new IntegrationLoginCredentials__c (Name='admin.util@dupont.com', EncryptedLoginDetails__c='Infosys1234Xkh5hWWRryiH6c7tDrZrCH9jF');
+        insert pr4;
+                
+
+        IntegrationLoginCredentials__c pr5 = new IntegrationLoginCredentials__c (Name='admin.util@dupont.com.utqa', EncryptedLoginDetails__c='Infosys1234Xkh5hWWRryiH6c7tDrZrCH9jF');
+        insert pr5;
+        PAService_UT.paServiceTestMethodPAQuery();
+            PAApprovalWF_UT.paApprovalWFTestMethodPAQuery();
+            List<PAProfilePermissions__c> paProfilePermissionsList = new List<PAProfilePermissions__c>();
+            PAProfilePermissions__c paProfilePermissions1 = new PAProfilePermissions__c();
+            paProfilePermissions1.Name = 'Sales Admin';
+            paProfilePermissionsList.add(paProfilePermissions1);
+
+
+            PAProfilePermissions__c paProfilePermissions2 = new PAProfilePermissions__c();
+            paProfilePermissions2.Name = 'Approver';
+            paProfilePermissionsList.add(paProfilePermissions2);
+
+            PAProfilePermissions__c paProfilePermissions3 = new PAProfilePermissions__c();
+            paProfilePermissions3.Name = 'BU Admin';
+            paProfilePermissionsList.add(paProfilePermissions3);
+
+            PAProfilePermissions__c paProfilePermissions4 = new PAProfilePermissions__c();
+            paProfilePermissions4.Name = 'Price Requester';
+            paProfilePermissionsList.add(paProfilePermissions4);    
+
+            PAProfilePermissions__c paProfilePermissions5 = new PAProfilePermissions__c();
+            paProfilePermissions5.Name = 'IT Admin';
+            paProfilePermissionsList.add(paProfilePermissions5);
+
+            insert paProfilePermissionsList;
+
+            Recordtype recType = [select id,name from Recordtype where name = 'Business'];
+
+            ERP_Pricing_Procedure__c erpPricingProcedure = new ERP_Pricing_Procedure__c();
+            erpPricingProcedure.Doc_Type__c = '';
+            erpPricingProcedure.Pricing_Procedure__c = 'ERP_PP-00001';
+            erpPricingProcedure.Pricing_Procedure_Description__c='BI EMEA Surfaces';
+            erpPricingProcedure.Pricing_Procedure_Code__c = 'ZD630A';
+            erpPricingProcedure.Pricing_Procedure__c = 'NOW Standard Pricing- EU';
+            erpPricingProcedure.SAP_Application_Id__c = 'V';
+            erpPricingProcedure.SAP_Client_Id__c = '510';
+            erpPricingProcedure.SAP_Cluster__c = 'WB1';
+            erpPricingProcedure.Status__c = 'Active';
+            insert erpPricingProcedure;
+
+            ERP_Pricing_Condition__c pricingCondition= new ERP_Pricing_Condition__c();
+            pricingCondition.SAP_Application_Id__c='V';
+            pricingCondition.SAP_Client_Id__c='510';
+            pricingCondition.SAP_Cluster__c='CB1';
+            pricingCondition.Pricing_Condition_Code__c='ZPSE';
+            insert pricingCondition;
+
+            ERP_Key_Combination__c keyCombination=new ERP_Key_Combination__c();
+            keyCombination.SAP_Application_Id__c='V';
+            keyCombination.SAP_Client_Id__c='510';
+            keyCombination.SAP_Cluster__c='CB1';
+            keyCombination.Key_Combination_Code__c='A580';
+            insert keyCombination;
+
+            OrgGroup__c orgGroup= new OrgGroup__c();        
+            orgGroup.CURRENCYISOCODE='USD';
+            //orgGroup.RecordTypeId = recType.Id;    
+            orgGroup.ERP_DISTRIBUTION_CHANNEL_CODE__C='10';
+            orgGroup.ERP_DISTRIBUTION_CHANNEL__C='DuPont Std';
+            orgGroup.ERP_DIVISION_CODE__C='02';
+            orgGroup.ERP_DIVISION__C='GSD Standard';
+            orgGroup.ERP_SALES_ORG_CODE__C='A640';
+            orgGroup.ERP_SALES_ORG__C='NOW DUP LUX 3430';
+            orgGroup.OWNING_BUSINESS__C='';
+            orgGroup.OWNING_ORG__C='';
+            orgGroup.EXTERNAL_ERP_ID__C='Askjlkj';
+            insert orgGroup;
+
+
+            OrgGroup__c orgGroup1 = new orgGroup__c();
+            orgGroup1.Business__c = 'BI EMEA Surfaces';
+            orgGroup1.RecordTypeId = recType.Id;
+
+            orgGroup1.OWNING_BUSINESS__C='Building Innovations';
+            orgGroup1.TYPE__C='ERP';
+            insert orgGroup1;
+
+            Organizational_Group_Item__c orgGrpItem= new Organizational_Group_Item__c();
+            orgGrpItem.Business__c = (orgGroup1).id;
+            orgGrpItem.OrgGroup__c = (orgGroup).id;
+            orgGrpItem.CURRENCYISOCODE = 'USD';
+            //orgGrpItem.APPROVAL_ESCALATION_DURATION__C = 23;
+            //orgGrpItem.CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Competitive pricing;Extending current prices;Pricing campaign;Other reason';
+            orgGrpItem.ERP_CURRENCY__C = 'USD;RUB';
+            orgGrpItem.ERP_UOM__C = 'EA;SH';
+            orgGrpItem.INCLUDE_CUSTOMER_CURRENCY__C = true;
+            orgGrpItem.LATEST_VALID_FROM_OFFSET_NON_CUST_SPEC__C = 90;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_CUST_SPEC__C = 12;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_NON_CUST_SPEC__C = 12;
+            orgGrpItem.MAX_VALID_FROM_OFFSET_CUST_SPEC__C = 90;
+            orgGrpItem.NON_CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Extending current prices; New materials; Periodic price review; Other reason; Pricing Compaign; Seasonal price';
+            orgGrpItem.RETROACTIVE_LIMIT__C =30;
+            orgGrpItem.CUSTOMER_REQUEST_REASONS__C = 'Seasonal price; Pricing campaign; Slow moving inventory; Customer negotiation; New customer; New materials; Competitive pricing; Extending current prices; Other reason';
+            orgGrpItem.PRICING_TASK_REASONS__C = '002-Trade fair sales activity;F06-Demonstration to Customer;F09-Research & Development;F12-Replacement;F15-Sales Promotion;M12- Pricing Discrepancy;M13-Quantity Correction;M31-Commercial Adjustment;S01-Paid Sample sales;Non-standard product;Other reason';
+            orgGrpItem.PROJECT_REQUEST_REASONS__C = 'Quantity Change;Time extension;Quantity and time change;Product change';
+            orgGrpItem.ERP_Pricing_Procedure__c = erpPricingProcedure.Id;
+            orgGrpItem.Rebate_Agreement__c='Annual Agreement';
+            orgGrpItem.Rebate_Agreement__c='';
+            orgGrpItem.Pricing_Task_Type__c='Spot Price; Free of Charge; Rebate Agreement; Display';
+            insert orgGrpItem;
+
+
+            Pricing_Request__c R1= new Pricing_Request__c();
+            R1.Request_Name__c='R1 For P1';
+            R1.Request_Approval_Status__c='Draft';
+            R1.Request_Reason__c='New Project';
+            R1.Request_Type__c = 'Customer Specific';
+            R1.Pricing_Request_Type__c = 'Permanent';       
+            R1.Customer_Specific__c = true;   
+            R1.BU__c='BI';  
+            R1.Sales_Org_Code__c='A640';
+            R1.Dist_Channel_Code__c='10'; 
+            R1.Division_Code__c='02'; 
+            R1.soldto_code__c = '5512345';
+            insert R1;
+
+            ERP_Customer__c cust = new ERP_Customer__c(city__c='Chennai',country__c='India',country_code__c='IND',
+                    currency_code__c='INR',customer_code__c='5512345',
+                    Distribution_Channel_Code__c='10',Distribution_channel__c='Dist Channel',
+                    Division__c='Division',Division_code__c='02',Incoterms_1__c='Inco1',Incoterms_1_Code__c='IncoCode',
+                    Incoterms_2__c='Inco2',Customer_Price_Group_Code__c='Z0',
+                    Customer_Price_Group__c='Others',Price_List_type__c='PriceList',
+                    price_list_type_code__c='A7',sales_office__c='salesOffice',
+                    sales_office_Code__c='salesOfficeCode',sales_org_code__c='A640',
+                    sales_org__c='sales Org',State_Province__c='TN',Street__c='MP',Terms_Of_Payment__c='None',
+                    Terms_Of_Payment_Code__c='None',Zip_Postal_Code__c='600039',Source_Cluster__c='CB1');
+            insert cust;
+        ApexPages.currentPage().getParameters().put('id',cust.Id);
+
+            PAServiceState paServiceState = new PAServiceState();        
+            PAOrganizationalGroupItems paOrgGroupItems = new PAOrganizationalGroupItems();
+
+            paServiceState.ogItems = paOrgGroupItems;
+            paOrgGroupItems.selectedBU  = OrgGroup1.Id; 
+            paOrgGroupItems.orgGroupItems=orgGrpItem;
+  
+     
+            PARequest Request = new PARequest(paServiceState);
+            request.pricingRequest=R1;  
+
+            PAERPCustomer paERPCustomer = new PAERPCustomer(paServiceState);
+            paERPCustomer.ogitems = paOrgGroupItems;
+            paERPCustomer.paERPCustomer = cust;
+
+            PARequest paRequest = new PARequest(paServiceState);
+            paServiceState.currentRequest = Request;
+            paServiceState.currentRequest.customer = paERPCustomer;
+            paServiceState.currentRequest.pricingRequest = R1;
+            paServiceState.currentRequest.customer = paERPCustomer;
+            PAPricingCondition paPricingCondition = new PAPricingCondition(paServiceState);
+            //paPricingCondition.pricingCondition = pricingCondition;
+            paServiceState.currentRequest.pricingCondition = paPricingCondition;
+
+            PAKeyCombination paKeyCombination = new PAKeyCombination(paServiceState);
+            paServiceState.currentRequest.keyCombination = paKeyCombination;
+
+            PAService PAService1 = new PAService();      
+            paService1.paServiceState = paServiceState;
+// Test.startTest();    //<SS20230501>
+            //PARequestItem paRequestItem = new PARequestItem(paServiceState);
+            request.pricingRequest=R1;
+            request.pricingRequest.Pricing_Request_Type__c='Pricing Task';
+            request.pricingRequest.Division_code__c='02';
+            request.pricingRequest.sales_org_code__c='A640';
+            request.pricingRequest.Dist_channel_code__c='10';
+            request.pricingRequest.soldto_code__c='5512345';
+  
+ //Test.startTest();
+            //request.pricingRequest.Request_Type__c='Customer Specific';
+            PAService1.getBusinessComponent('landingpage','OrganizationalGroupItem');   
+            PAService1.getBusinessComponent('Quit','ERPCustomer');
+            PAService1.getBusinessComponent('Cancel','ERPCustomer');
+            PAService1.getBusinessComponent('PCL','ERPCustomer');
+            PAService1.getBusinessComponent('NewPricingReqItem','ERPCustomer');
+            PAService1.getBusinessComponent('NewMaterial','ERPCustomer');
+            PAService1.getBusinessComponent('PCLGeneration','ERPCustomer');
+            
+                    
+            PAService1.getBusinessComponent('customerList','OrganizationalGroupItem');
+            PAService1.getBusinessComponent('generatePCL','ERPCustomer');
+            PAService1.getBusinessComponent('viewLog','ERPCustomer');
+            PAService1.getBusinessComponent('X','OrganizationalGroupItem');
+            PAService1.getBusinessComponent('BUSetup','OrganizationalGroupItem');
+            PAService1.getBusinessComponent('BUSetu','OrganizationalGroupItem');
+            PAService1.getBusinessComponent('BUSetup','ERPCustomer');
+            PAService1.getBusinessComponent('Abandon','Requests');
+
+            PAService1.getBusinessComponent('AddPrices','Requests');
+            PAService1.getBusinessComponent('AddMaterial','ProjectPrice');
+ Test.startTest(); //<SS20230501>
+            PAService1.getBusinessComponent('gotoApprovalSetup','ApprovalSetup');
+            PAService1.getBusinessComponent('customerPrices','ApprovalSetup');
+            //PAService1.getBusinessComponent('abandonImport','RequestItems');
+            try{
+                PAService1.getBusinessComponent('exportCSV','Requests');
+                PAService1.getBusinessComponent('NPCRequests','NetPriceDetail');
+            }
+            catch(exception e){}
+    
+                
+                //request.pricingRequest=R1;  
+                paServiceState.currentRequest.customer = paERPCustomer;
+                paServiceState.currentRequest.pricingRequest = R1;
+      
+                PAService1.paServiceState.currentRequestItem = new PARequestItem(paServiceState);
+                //PAService1.getBusinessComponent('NewPricingReqItem','RequestItems');
+                //PAService1.getBusinessComponent('NewPricingReqItem','RequestItems');
+             
+
+        try{
+        PAService1.getBusinessComponent('Quit','ERPCustomer');
+        }
+        catch(exception e){}
+        } 
+       Test.stopTest();
+    }
+
+    // Method to create test user.
+    private static user createUser(){
+     // 12/29/2016 - Merge&Spin -Updated the test  class to update the insert of UserRole and User
+        Profile p =[SELECT Id FROM Profile where name='Price Approval-Price requester'];      
+        UserRole r= TestUserUtil.createTestUserRole('BI-EMEA-Surfaces');
+
+        User u = TestUserUtil.createTestUser(r.id, p.id, 'test fName', 'test lName');
+            return u;
+    }
+
+    // Test method 2.
+    static testMethod void paServiceTestMethod1() {
+
+         // 12/29/2016 - Merge&Spin -Updated the test  class to update the insert of UserRole and User
+        
+        User u= createUser();
+        system.runAs(u){
+            IntegrationLoginCredentials__c pr4 = new IntegrationLoginCredentials__c (Name='admin.util@dupont.com.utqa', EncryptedLoginDetails__c='Infosys1234Xkh5hWWRryiH6c7tDrZrCH9jF');
+             insert pr4;
+            List<PAProfilePermissions__c> paProfilePermissionsList = new List<PAProfilePermissions__c>();
+            PAProfilePermissions__c paProfilePermissions1 = new PAProfilePermissions__c();
+            paProfilePermissions1.Name = 'Sales Admin';
+            paProfilePermissionsList.add(paProfilePermissions1);
+
+            PAService_UT.paServiceTestMethodPAQuery();
+            PAProfilePermissions__c paProfilePermissions2 = new PAProfilePermissions__c();
+            paProfilePermissions2.Name = 'Approver';
+            paProfilePermissionsList.add(paProfilePermissions2);
+
+            PAProfilePermissions__c paProfilePermissions3 = new PAProfilePermissions__c();
+            paProfilePermissions3.Name = 'BU Admin';
+            paProfilePermissionsList.add(paProfilePermissions3);
+
+            PAProfilePermissions__c paProfilePermissions4 = new PAProfilePermissions__c();
+            paProfilePermissions4.Name = 'Price Requester';
+            paProfilePermissionsList.add(paProfilePermissions4);        
+
+            PAProfilePermissions__c paProfilePermissions5 = new PAProfilePermissions__c();
+            paProfilePermissions5.Name = 'IT Admin';
+            paProfilePermissionsList.add(paProfilePermissions5);
+
+            insert paProfilePermissionsList;
+
+            Recordtype recType = [select id,name from Recordtype where name = 'Business'];
+            
+    
+            ERP_Pricing_Procedure__c erpPricingProcedure = new ERP_Pricing_Procedure__c();
+            erpPricingProcedure.Doc_Type__c = '';
+            erpPricingProcedure.Pricing_Procedure__c = 'ERP_PP-00001';
+            erpPricingProcedure.Pricing_Procedure_Description__c='BI EMEA Surfaces';
+            erpPricingProcedure.Pricing_Procedure_Code__c = 'ZD630A';
+            erpPricingProcedure.Pricing_Procedure__c = 'NOW Standard Pricing- EU';
+            erpPricingProcedure.SAP_Application_Id__c = 'V';
+            erpPricingProcedure.SAP_Client_Id__c = '510';
+            erpPricingProcedure.SAP_Cluster__c = 'WB1';
+            erpPricingProcedure.Status__c = 'Active';
+            insert erpPricingProcedure;
+
+            ERP_Pricing_Condition__c pricingCondition= new ERP_Pricing_Condition__c();
+            pricingCondition.SAP_Application_Id__c='V';
+            pricingCondition.SAP_Client_Id__c='510';
+            pricingCondition.SAP_Cluster__c='CB1';
+            pricingCondition.Pricing_Condition_Code__c='ZPSE';
+            insert pricingCondition;
+
+            ERP_Key_Combination__c keyCombination=new ERP_Key_Combination__c();
+            keyCombination.SAP_Application_Id__c='V';
+            keyCombination.SAP_Client_Id__c='510';
+            keyCombination.SAP_Cluster__c='CB1';
+            keyCombination.Key_Combination_Code__c='A580';
+            insert keyCombination;
+
+            OrgGroup__c orgGroup= new OrgGroup__c();        
+            orgGroup.CURRENCYISOCODE='USD';
+            //orgGroup.RecordTypeId = recType.Id;    
+            orgGroup.ERP_DISTRIBUTION_CHANNEL_CODE__C='10';
+            orgGroup.ERP_DISTRIBUTION_CHANNEL__C='DuPont Std';
+            orgGroup.ERP_DIVISION_CODE__C='02';
+            orgGroup.ERP_DIVISION__C='GSD Standard';
+            orgGroup.ERP_SALES_ORG_CODE__C='A640';
+            orgGroup.ERP_SALES_ORG__C='NOW DUP LUX 3430';
+            orgGroup.OWNING_BUSINESS__C='';
+            orgGroup.OWNING_ORG__C='';
+            orgGroup.EXTERNAL_ERP_ID__C='Askjlkj';
+            insert orgGroup;
+
+
+            OrgGroup__c orgGroup1 = new orgGroup__c();
+            orgGroup1.Business__c = 'BI EMEA Surfaces';
+            orgGroup1.RecordTypeId = recType.Id;
+
+            orgGroup1.OWNING_BUSINESS__C='Building Innovations';
+            orgGroup1.TYPE__C='ERP';
+            insert orgGroup1;
+
+            Organizational_Group_Item__c orgGrpItem= new Organizational_Group_Item__c();
+            orgGrpItem.Business__c = (orgGroup1).id;
+            orgGrpItem.OrgGroup__c = (orgGroup).id;
+            orgGrpItem.CURRENCYISOCODE = 'USD';
+            //orgGrpItem.APPROVAL_ESCALATION_DURATION__C = 23;
+            //orgGrpItem.CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Competitive pricing;Extending current prices;Pricing campaign;Other reason';
+            orgGrpItem.ERP_CURRENCY__C = 'USD;RUB';
+            orgGrpItem.ERP_UOM__C = 'EA;SH';
+            orgGrpItem.INCLUDE_CUSTOMER_CURRENCY__C = true;
+            orgGrpItem.LATEST_VALID_FROM_OFFSET_NON_CUST_SPEC__C = 90;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_CUST_SPEC__C = 12;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_NON_CUST_SPEC__C = 12;
+            orgGrpItem.MAX_VALID_FROM_OFFSET_CUST_SPEC__C = 90;
+            orgGrpItem.NON_CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Extending current prices; New materials; Periodic price review; Other reason; Pricing Compaign; Seasonal price';
+            orgGrpItem.RETROACTIVE_LIMIT__C =30;
+            orgGrpItem.CUSTOMER_REQUEST_REASONS__C = 'Seasonal price; Pricing campaign; Slow moving inventory; Customer negotiation; New customer; New materials; Competitive pricing; Extending current prices; Other reason';
+            orgGrpItem.PRICING_TASK_REASONS__C = '002-Trade fair sales activity;F06-Demonstration to Customer;F09-Research & Development;F12-Replacement;F15-Sales Promotion;M12- Pricing Discrepancy;M13-Quantity Correction;M31-Commercial Adjustment;S01-Paid Sample sales;Non-standard product;Other reason';
+            orgGrpItem.PROJECT_REQUEST_REASONS__C = 'Quantity Change;Time extension;Quantity and time change;Product change';
+            orgGrpItem.ERP_Pricing_Procedure__c = erpPricingProcedure.Id;
+            orgGrpItem.Rebate_Agreement__c='Annual Agreement';
+            orgGrpItem.Rebate_Agreement__c='';
+            orgGrpItem.Pricing_Task_Type__c='Spot Price; Free of Charge; Rebate Agreement; Display';
+            insert orgGrpItem;
+
+
+           /* Pricing_Request__c R1= new Pricing_Request__c();
+            R1.Request_Name__c='R1 For P1';
+            R1.Request_Approval_Status__c='Draft';
+            R1.Request_Reason__c='New Project';
+            R1.Request_Type__c = 'Customer Specific';
+            R1.Pricing_Request_Type__c = 'Permanent';       
+            R1.Customer_Specific__c = true;     
+            R1.Sales_Org_Code__c='A640';
+            R1.Dist_Channel_Code__c='10'; 
+            R1.Division_Code__c='02'; 
+            insert R1;*/
+            
+            Pricing_Request__c R1= new Pricing_Request__c();
+            R1.Request_Name__c='R1 For P1';
+            R1.Request_Approval_Status__c='Draft';
+            R1.Request_Reason__c='New Project';
+            R1.Request_Type__c = 'Customer Specific';
+            R1.Pricing_Request_Type__c = 'Permanent';       
+            R1.Customer_Specific__c = true;  
+            R1.BU__c='BI';   
+            R1.Sales_Org_Code__c='A640';
+            R1.Dist_Channel_Code__c='10'; 
+            R1.Division_Code__c='02'; 
+            R1.soldto_code__c = '5512345';
+            insert R1;
+
+            ERP_Customer__c cust = new ERP_Customer__c(city__c='Chennai',country__c='India',country_code__c='IND',
+                    currency_code__c='INR',customer_code__c='5512345',
+                    Distribution_Channel_Code__c='10',Distribution_channel__c='Dist Channel',
+                    Division__c='Division',Division_code__c='02',Incoterms_1__c='Inco1',Incoterms_1_Code__c='IncoCode',
+                    Incoterms_2__c='Inco2',Customer_Price_Group_Code__c='Z0',
+                    Customer_Price_Group__c='Others',Price_List_type__c='PriceList',
+                    price_list_type_code__c='A7',sales_office__c='salesOffice',
+                    sales_office_Code__c='salesOfficeCode',sales_org_code__c='A640',
+                    sales_org__c='sales Org',State_Province__c='TN',Street__c='MP',Terms_Of_Payment__c='None',
+                    Terms_Of_Payment_Code__c='None',Zip_Postal_Code__c='600039',Source_Cluster__c='CB1');
+            insert cust;
+
+            PAServiceState paServiceState = new PAServiceState();        
+            PAOrganizationalGroupItems paOrgGroupItems = new PAOrganizationalGroupItems();
+            paServiceState.ogItems = paOrgGroupItems;
+
+            paOrgGroupItems.selectedBU  = OrgGroup1.Id; 
+            paOrgGroupItems.orgGroupItems=orgGrpItem;
+    
+      
+            PARequest Request = new PARequest(paServiceState);
+            request.pricingRequest=R1;  
+
+
+            PAERPCustomer paERPCustomer = new PAERPCustomer(paServiceState);
+            paERPCustomer.ogitems = paOrgGroupItems;
+            paERPCustomer.paERPCustomer = cust;
+ test.starttest(); //<SS20230501>
+            //PARequest paRequest = new PARequest(paServiceState);
+            paServiceState.currentRequest = Request;
+
+
+            paServiceState.currentRequest.customer = paERPCustomer;
+            paServiceState.currentRequest.pricingRequest = R1;
+            paServiceState.currentRequest.customer = paERPCustomer;
+
+            PAPricingCondition paPricingCondition = new PAPricingCondition(paServiceState);
+            //paPricingCondition.pricingCondition = pricingCondition;
+            paServiceState.currentRequest.pricingCondition = paPricingCondition;
+
+            PAKeyCombination paKeyCombination = new PAKeyCombination(paServiceState);
+            paServiceState.currentRequest.keyCombination = paKeyCombination;
+
+            PAService PAService1 = new PAService();      
+            paService1.paServiceState = paServiceState;            
+            request.pricingRequest=R1;
+            request.pricingRequest.Pricing_Request_Type__c='Pricing Task';
+            request.pricingRequest.Division_code__c='02';
+            request.pricingRequest.sales_org_code__c='A640';
+            request.pricingRequest.Dist_channel_code__c='10';
+            request.pricingRequest.soldto_code__c='5512345';
+            //paServiceState.currentRequest=request;
+            //PARequestItem paRequestItem = new PARequestItem(paServiceState);            
+            //paService1.paServiceState.currentRequestItem = paRequestItem;
+
+            //request.pricingRequest.Request_Type__c='Customer Specific';
+
+       //     test.starttest();
+            try{
+                PAService1.getBusinessComponent('viewLog','RequestItems'); 
+            }
+            catch(exception e){}
+
+            try{
+                PAService1.getBusinessComponent('abc','abc'); 
+            }
+            catch(exception e){}
+            try{
+                paServiceState.currentProjectPrice=null;
+                PAService1.getBusinessComponent('abc','ProjectPrice');
+                }
+            catch(exception e){}
+            try{
+                request.pricingRequest=R1;
+                request.pricingRequest.Request_Type__c='Non Customer Specific';
+                request.pricingRequest.Division_code__c='02';
+                request.pricingRequest.sales_org_code__c='A640';
+                request.pricingRequest.Dist_channel_code__c='10';                
+                paServiceState.currentRequest=request;
+                PARequestItem paRequestItem = new PARequestItem(paServiceState);            
+                paService1.paServiceState.currentRequestItem = paRequestItem;
+                PAService1.getBusinessComponent('NewPricingReqItem','RequestItems'); 
+            }
+            catch(exception e){}
+            test.stoptest();
+        }
+
+    }
+    
+    static testMethod void paServiceTestMethod2() {
+        user u = createUser();
+
+        system.runAs(u){
+            List<PAProfilePermissions__c> paProfilePermissionsList = new List<PAProfilePermissions__c>();
+            PAProfilePermissions__c paProfilePermissions1 = new PAProfilePermissions__c();
+            paProfilePermissions1.Name = 'Sales Admin';
+            paProfilePermissionsList.add(paProfilePermissions1);
+
+            PAService_UT.paServiceTestMethodPAQuery();
+            PAProfilePermissions__c paProfilePermissions2 = new PAProfilePermissions__c();
+            paProfilePermissions2.Name = 'Approver';
+            paProfilePermissionsList.add(paProfilePermissions2);
+
+            PAProfilePermissions__c paProfilePermissions3 = new PAProfilePermissions__c();
+            paProfilePermissions3.Name = 'BU Admin';
+            paProfilePermissionsList.add(paProfilePermissions3);
+
+            PAProfilePermissions__c paProfilePermissions4 = new PAProfilePermissions__c();
+            paProfilePermissions4.Name = 'Price Requester';
+            paProfilePermissionsList.add(paProfilePermissions4);    
+
+            PAProfilePermissions__c paProfilePermissions5 = new PAProfilePermissions__c();
+            paProfilePermissions5.Name = 'IT Admin';
+            paProfilePermissionsList.add(paProfilePermissions5);
+
+            insert paProfilePermissionsList;
+
+            Recordtype recType = [select id,name from Recordtype where name = 'Business'];
+
+            ERP_Pricing_Procedure__c erpPricingProcedure = new ERP_Pricing_Procedure__c();
+            erpPricingProcedure.Doc_Type__c = '';
+            erpPricingProcedure.Pricing_Procedure__c = 'ERP_PP-00001';
+            erpPricingProcedure.Pricing_Procedure_Description__c='BI EMEA Surfaces';
+            erpPricingProcedure.Pricing_Procedure_Code__c = 'ZD630A';
+            erpPricingProcedure.Pricing_Procedure__c = 'NOW Standard Pricing- EU';
+            erpPricingProcedure.SAP_Application_Id__c = 'V';
+            erpPricingProcedure.SAP_Client_Id__c = '510';
+            erpPricingProcedure.SAP_Cluster__c = 'WB1';
+            erpPricingProcedure.Status__c = 'Active';
+            insert erpPricingProcedure;
+
+            ERP_Pricing_Condition__c pricingCondition= new ERP_Pricing_Condition__c();
+            pricingCondition.SAP_Application_Id__c='V';
+            pricingCondition.SAP_Client_Id__c='510';
+            pricingCondition.SAP_Cluster__c='CB1';
+            pricingCondition.Pricing_Condition_Code__c='ZPSE';
+            insert pricingCondition;
+
+            ERP_Key_Combination__c keyCombination=new ERP_Key_Combination__c();
+            keyCombination.SAP_Application_Id__c='V';
+            keyCombination.SAP_Client_Id__c='510';
+            keyCombination.SAP_Cluster__c='CB1';
+            keyCombination.Key_Combination_Code__c='A580';
+            insert keyCombination;
+
+            OrgGroup__c orgGroup= new OrgGroup__c();        
+            orgGroup.CURRENCYISOCODE='USD';
+            //orgGroup.RecordTypeId = recType.Id;    
+            orgGroup.ERP_DISTRIBUTION_CHANNEL_CODE__C='10';
+            orgGroup.ERP_DISTRIBUTION_CHANNEL__C='DuPont Std';
+            orgGroup.ERP_DIVISION_CODE__C='02';
+            orgGroup.ERP_DIVISION__C='GSD Standard';
+            orgGroup.ERP_SALES_ORG_CODE__C='A640';
+            orgGroup.ERP_SALES_ORG__C='NOW DUP LUX 3430';
+            orgGroup.OWNING_BUSINESS__C='';
+            orgGroup.OWNING_ORG__C='';
+            orgGroup.EXTERNAL_ERP_ID__C='Askjlkj';
+            insert orgGroup;
+
+
+            OrgGroup__c orgGroup1 = new orgGroup__c();
+            orgGroup1.Business__c = 'BI EMEA Surfaces';
+            orgGroup1.RecordTypeId = recType.Id;
+
+            orgGroup1.OWNING_BUSINESS__C='Building Innovations';
+            orgGroup1.TYPE__C='ERP';
+            insert orgGroup1;
+
+            Organizational_Group_Item__c orgGrpItem= new Organizational_Group_Item__c();
+            orgGrpItem.Business__c = (orgGroup1).id;
+            orgGrpItem.OrgGroup__c = (orgGroup).id;
+            orgGrpItem.CURRENCYISOCODE = 'USD';
+            //orgGrpItem.APPROVAL_ESCALATION_DURATION__C = 23;
+            //orgGrpItem.CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Competitive pricing;Extending current prices;Pricing campaign;Other reason';
+            orgGrpItem.ERP_CURRENCY__C = 'USD;RUB';
+            orgGrpItem.ERP_UOM__C = 'EA;SH';
+            orgGrpItem.INCLUDE_CUSTOMER_CURRENCY__C = true;
+            orgGrpItem.LATEST_VALID_FROM_OFFSET_NON_CUST_SPEC__C = 90;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_CUST_SPEC__C = 12;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_NON_CUST_SPEC__C = 12;
+            orgGrpItem.MAX_VALID_FROM_OFFSET_CUST_SPEC__C = 90;
+            orgGrpItem.NON_CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Extending current prices; New materials; Periodic price review; Other reason; Pricing Compaign; Seasonal price';
+            orgGrpItem.RETROACTIVE_LIMIT__C =30;
+            orgGrpItem.CUSTOMER_REQUEST_REASONS__C = 'Seasonal price; Pricing campaign; Slow moving inventory; Customer negotiation; New customer; New materials; Competitive pricing; Extending current prices; Other reason';
+            orgGrpItem.PRICING_TASK_REASONS__C = '002-Trade fair sales activity;F06-Demonstration to Customer;F09-Research & Development;F12-Replacement;F15-Sales Promotion;M12- Pricing Discrepancy;M13-Quantity Correction;M31-Commercial Adjustment;S01-Paid Sample sales;Non-standard product;Other reason';
+            orgGrpItem.PROJECT_REQUEST_REASONS__C = 'Quantity Change;Time extension;Quantity and time change;Product change';
+            orgGrpItem.ERP_Pricing_Procedure__c = erpPricingProcedure.Id;
+            orgGrpItem.Rebate_Agreement__c='Annual Agreement';
+            orgGrpItem.Rebate_Agreement__c='';
+            orgGrpItem.Pricing_Task_Type__c='Spot Price; Free of Charge; Rebate Agreement; Display';
+            insert orgGrpItem;
+
+
+            Pricing_Request__c R1= new Pricing_Request__c();
+            R1.Request_Name__c='R1 For P1';
+            R1.Request_Approval_Status__c='Draft';
+            R1.Request_Reason__c='New Project';
+            R1.Request_Type__c = 'Customer Specific';
+            R1.Pricing_Request_Type__c = 'Permanent';       
+            R1.Customer_Specific__c = true;    
+            R1.BU__c='BI'; 
+            R1.Sales_Org_Code__c='A640';
+            R1.Dist_Channel_Code__c='10'; 
+            R1.Division_Code__c='02'; 
+            R1.soldto_code__c = '5512345';
+            insert R1;
+    
+     
+            ERP_Customer__c cust = new ERP_Customer__c(city__c='Chennai',country__c='India',country_code__c='IND',
+                    currency_code__c='INR',customer_code__c='5512345',
+                    Distribution_Channel_Code__c='10',Distribution_channel__c='Dist Channel',
+                    Division__c='Division',Division_code__c='02',Incoterms_1__c='Inco1',Incoterms_1_Code__c='IncoCode',
+                    Incoterms_2__c='Inco2',Customer_Price_Group_Code__c='Z0',
+                    Customer_Price_Group__c='Others',Price_List_type__c='PriceList',
+                    price_list_type_code__c='A7',sales_office__c='salesOffice',
+                    sales_office_Code__c='salesOfficeCode',sales_org_code__c='A640',
+                    sales_org__c='sales Org',State_Province__c='TN',Street__c='MP',Terms_Of_Payment__c='None',
+                    Terms_Of_Payment_Code__c='None',Zip_Postal_Code__c='600039',Source_Cluster__c='CB1');
+            insert cust;
+           
+           IntegrationLoginCredentials__c EC = new IntegrationLoginCredentials__c (Name='admin.util@dupont.com', EncryptedLoginDetails__c='Infosys1234Xkh5hWWRryiH6c7tDrZrCH9jF');
+                  insert EC; 
+                  
+            PAServiceState paServiceState = new PAServiceState();        
+            PAOrganizationalGroupItems paOrgGroupItems = new PAOrganizationalGroupItems();
+
+            paServiceState.ogItems = paOrgGroupItems;
+
+            paOrgGroupItems.selectedBU  = OrgGroup1.Id; 
+            paOrgGroupItems.orgGroupItems=orgGrpItem;
+     
+      test.starttest();  //<SS20230501>
+            PARequest Request = new PARequest(paServiceState);
+            request.pricingRequest=R1;  
+
+            PAERPCustomer paERPCustomer = new PAERPCustomer(paServiceState);
+            paERPCustomer.ogitems = paOrgGroupItems;
+            paERPCustomer.paERPCustomer = cust;
+
+            //PARequest paRequest = new PARequest(paServiceState);
+            paServiceState.currentRequest = Request;
+            paServiceState.currentRequest.customer = paERPCustomer;
+            paServiceState.currentRequest.pricingRequest = R1;
+            paServiceState.currentRequest.customer = paERPCustomer;
+
+            PAPricingCondition paPricingCondition = new PAPricingCondition(paServiceState);
+            //paPricingCondition.pricingCondition = pricingCondition;
+            paServiceState.currentRequest.pricingCondition = paPricingCondition;
+
+            PAKeyCombination paKeyCombination = new PAKeyCombination(paServiceState);
+            paServiceState.currentRequest.keyCombination = paKeyCombination;
+
+            PAService PAService1 = new PAService();      
+            paService1.paServiceState = paServiceState;
+
+            //PARequestItem paRequestItem = new PARequestItem(paServiceState);
+            request.pricingRequest=R1;
+            request.pricingRequest.Pricing_Request_Type__c='Pricing Task';
+            request.pricingRequest.Division_code__c='02';
+            request.pricingRequest.sales_org_code__c='A640';
+            request.pricingRequest.Dist_channel_code__c='10';
+            request.pricingRequest.soldto_code__c='5512345';
+            
+            //request.pricingRequest=R1;  
+            paServiceState.currentRequest.customer = paERPCustomer;
+            paServiceState.currentRequest.pricingRequest = R1;          
+         //   test.starttest();
+     //       PAService1.paServiceState.currentRequestItem = new PARequestItem(paServiceState);
+            PAService1.getBusinessComponent('NewPricingReqItem','ERPCustomer');
+            paServiceState.currentRequest.customer = paERPCustomer;
+            paServiceState.currentRequest.pricingRequest = R1;
+//            PAService1.getBusinessComponent('NPCRequests','NetPriceDetail');
+            paServiceState.currentRequest.customer = paERPCustomer;
+            paServiceState.currentRequest.pricingRequest = R1;
+            PAService1.getBusinessComponent('generatePCL','ERPCustomer');
+            PAService1.getBusinessComponent('goToRequest','ERPCustomer');
+            paServiceState.currentRequest.customer = paERPCustomer;
+            paServiceState.currentRequest.pricingRequest = R1;
+            PAService1.getBusinessComponent('Cancel','ERPCustomer');
+            ApexPages.currentPage().getParameters().put('id',orgGrpItem.Id);
+            PAService1.getBusinessComponent('Quit','OrganizationalGroupItem');
+            test.stopTest();
+        }
+    }
+    
+    static testMethod void paServiceTestMethod3() {
+        user u = createUser();
+
+        system.runAs(u){
+            List<PAProfilePermissions__c> paProfilePermissionsList = new List<PAProfilePermissions__c>();
+            PAProfilePermissions__c paProfilePermissions1 = new PAProfilePermissions__c();
+            paProfilePermissions1.Name = 'Sales Admin';
+            paProfilePermissionsList.add(paProfilePermissions1);
+
+
+            PAProfilePermissions__c paProfilePermissions2 = new PAProfilePermissions__c();
+            paProfilePermissions2.Name = 'Approver';
+            paProfilePermissionsList.add(paProfilePermissions2);
+            PAService_UT.paServiceTestMethodPAQuery();
+            PAProfilePermissions__c paProfilePermissions3 = new PAProfilePermissions__c();
+            paProfilePermissions3.Name = 'BU Admin';
+            paProfilePermissionsList.add(paProfilePermissions3);
+
+            PAProfilePermissions__c paProfilePermissions4 = new PAProfilePermissions__c();
+            paProfilePermissions4.Name = 'Price Requester';
+            paProfilePermissionsList.add(paProfilePermissions4);    
+
+            PAProfilePermissions__c paProfilePermissions5 = new PAProfilePermissions__c();
+            paProfilePermissions5.Name = 'IT Admin';
+            paProfilePermissionsList.add(paProfilePermissions5);
+
+            insert paProfilePermissionsList;
+
+            Recordtype recType = [select id,name from Recordtype where name = 'Business'];
+
+            ERP_Pricing_Procedure__c erpPricingProcedure = new ERP_Pricing_Procedure__c();
+            erpPricingProcedure.Doc_Type__c = '';
+            erpPricingProcedure.Pricing_Procedure__c = 'ERP_PP-00001';
+            erpPricingProcedure.Pricing_Procedure_Description__c='BI EMEA Surfaces';
+            erpPricingProcedure.Pricing_Procedure_Code__c = 'ZD630A';
+            erpPricingProcedure.Pricing_Procedure__c = 'NOW Standard Pricing- EU';
+            erpPricingProcedure.SAP_Application_Id__c = 'V';
+            erpPricingProcedure.SAP_Client_Id__c = '510';
+            erpPricingProcedure.SAP_Cluster__c = 'WB1';
+            erpPricingProcedure.Status__c = 'Active';
+            insert erpPricingProcedure;
+
+            ERP_Pricing_Condition__c pricingCondition= new ERP_Pricing_Condition__c();
+            pricingCondition.SAP_Application_Id__c='V';
+            pricingCondition.SAP_Client_Id__c='510';
+            pricingCondition.SAP_Cluster__c='CB1';
+            pricingCondition.Pricing_Condition_Code__c='ZPSE';
+            insert pricingCondition;
+
+            ERP_Key_Combination__c keyCombination=new ERP_Key_Combination__c();
+            keyCombination.SAP_Application_Id__c='V';
+            keyCombination.SAP_Client_Id__c='510';
+            keyCombination.SAP_Cluster__c='CB1';
+            keyCombination.Key_Combination_Code__c='A580';
+            insert keyCombination;
+
+            OrgGroup__c orgGroup= new OrgGroup__c();        
+            orgGroup.CURRENCYISOCODE='USD';
+            //orgGroup.RecordTypeId = recType.Id;    
+            orgGroup.ERP_DISTRIBUTION_CHANNEL_CODE__C='10';
+            orgGroup.ERP_DISTRIBUTION_CHANNEL__C='DuPont Std';
+            orgGroup.ERP_DIVISION_CODE__C='02';
+            orgGroup.ERP_DIVISION__C='GSD Standard';
+            orgGroup.ERP_SALES_ORG_CODE__C='A640';
+            orgGroup.ERP_SALES_ORG__C='NOW DUP LUX 3430';
+            orgGroup.OWNING_BUSINESS__C='';
+            orgGroup.OWNING_ORG__C='';
+            orgGroup.EXTERNAL_ERP_ID__C='Askjlkj';
+            insert orgGroup;
+
+
+            OrgGroup__c orgGroup1 = new orgGroup__c();
+            orgGroup1.Business__c = 'BI EMEA Surfaces';
+            orgGroup1.RecordTypeId = recType.Id;
+
+            orgGroup1.OWNING_BUSINESS__C='Building Innovations';
+            orgGroup1.TYPE__C='ERP';
+            insert orgGroup1;
+
+            Organizational_Group_Item__c orgGrpItem= new Organizational_Group_Item__c();
+            orgGrpItem.Business__c = (orgGroup1).id;
+            orgGrpItem.OrgGroup__c = (orgGroup).id;
+            orgGrpItem.CURRENCYISOCODE = 'USD';
+            //orgGrpItem.APPROVAL_ESCALATION_DURATION__C = 23;
+            //orgGrpItem.CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Competitive pricing;Extending current prices;Pricing campaign;Other reason';
+            orgGrpItem.ERP_CURRENCY__C = 'USD;RUB';
+            orgGrpItem.ERP_UOM__C = 'EA;SH';
+            orgGrpItem.INCLUDE_CUSTOMER_CURRENCY__C = true;
+            orgGrpItem.LATEST_VALID_FROM_OFFSET_NON_CUST_SPEC__C = 90;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_CUST_SPEC__C = 12;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_NON_CUST_SPEC__C = 12;
+            orgGrpItem.MAX_VALID_FROM_OFFSET_CUST_SPEC__C = 90;
+            orgGrpItem.NON_CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Extending current prices; New materials; Periodic price review; Other reason; Pricing Compaign; Seasonal price';
+            orgGrpItem.RETROACTIVE_LIMIT__C =30;
+            orgGrpItem.CUSTOMER_REQUEST_REASONS__C = 'Seasonal price; Pricing campaign; Slow moving inventory; Customer negotiation; New customer; New materials; Competitive pricing; Extending current prices; Other reason';
+            orgGrpItem.PRICING_TASK_REASONS__C = '002-Trade fair sales activity;F06-Demonstration to Customer;F09-Research & Development;F12-Replacement;F15-Sales Promotion;M12- Pricing Discrepancy;M13-Quantity Correction;M31-Commercial Adjustment;S01-Paid Sample sales;Non-standard product;Other reason';
+            orgGrpItem.PROJECT_REQUEST_REASONS__C = 'Quantity Change;Time extension;Quantity and time change;Product change';
+            orgGrpItem.ERP_Pricing_Procedure__c = erpPricingProcedure.Id;
+            orgGrpItem.Rebate_Agreement__c='Annual Agreement';
+            orgGrpItem.Rebate_Agreement__c='';
+            orgGrpItem.Pricing_Task_Type__c='Spot Price; Free of Charge; Rebate Agreement; Display';
+            insert orgGrpItem;
+
+
+            Pricing_Request__c R1= new Pricing_Request__c();
+            R1.Request_Name__c='R1 For P1';
+            R1.Request_Approval_Status__c='Draft';
+            R1.Request_Reason__c='New Project';
+            R1.Request_Type__c = 'Customer Specific';
+            R1.Pricing_Request_Type__c = 'Permanent';       
+            R1.Customer_Specific__c = true;    
+            R1.BU__c='BI'; 
+            R1.Sales_Org_Code__c='A640';
+            R1.Dist_Channel_Code__c='10'; 
+            R1.Division_Code__c='02'; 
+            R1.soldto_code__c = '5512345';
+            insert R1;
+
+            ERP_Customer__c cust = new ERP_Customer__c(city__c='Chennai',country__c='India',country_code__c='IND',
+                    currency_code__c='INR',customer_code__c='5512345',
+                    Distribution_Channel_Code__c='10',Distribution_channel__c='Dist Channel',
+                    Division__c='Division',Division_code__c='02',Incoterms_1__c='Inco1',Incoterms_1_Code__c='IncoCode',
+                    Incoterms_2__c='Inco2',Customer_Price_Group_Code__c='Z0',
+                    Customer_Price_Group__c='Others',Price_List_type__c='PriceList',
+                    price_list_type_code__c='A7',sales_office__c='salesOffice',
+                    sales_office_Code__c='salesOfficeCode',sales_org_code__c='A640',
+                    sales_org__c='sales Org',State_Province__c='TN',Street__c='MP',Terms_Of_Payment__c='None',
+                    Terms_Of_Payment_Code__c='None',Zip_Postal_Code__c='600039',Source_Cluster__c='CB1');
+            insert cust;
+
+            PAServiceState paServiceState = new PAServiceState();        
+            PAOrganizationalGroupItems paOrgGroupItems = new PAOrganizationalGroupItems();
+
+            paServiceState.ogItems = paOrgGroupItems;
+
+            paOrgGroupItems.selectedBU  = OrgGroup1.Id; 
+            paOrgGroupItems.orgGroupItems=orgGrpItem;
+
+            PARequest Request = new PARequest(paServiceState);
+            request.pricingRequest=R1;  
+
+            PAERPCustomer paERPCustomer = new PAERPCustomer(paServiceState);
+            paERPCustomer.ogitems = paOrgGroupItems;
+            paERPCustomer.paERPCustomer = cust;
+
+            //PARequest paRequest = new PARequest(paServiceState);
+            paServiceState.currentRequest = Request;
+            paServiceState.currentRequest.customer = paERPCustomer;
+            paServiceState.currentRequest.pricingRequest = R1;
+            paServiceState.currentRequest.customer = paERPCustomer;
+
+            PAPricingCondition paPricingCondition = new PAPricingCondition(paServiceState);
+            //paPricingCondition.pricingCondition = pricingCondition;
+            paServiceState.currentRequest.pricingCondition = paPricingCondition;
+
+            PAKeyCombination paKeyCombination = new PAKeyCombination(paServiceState);
+            paServiceState.currentRequest.keyCombination = paKeyCombination;
+
+            PAService PAService1 = new PAService();      
+            PAService1.paServiceState = paServiceState;
+
+            //PARequestItem paRequestItem = new PARequestItem(paServiceState);
+            request.pricingRequest=R1;
+            request.pricingRequest.Pricing_Request_Type__c='Pricing Task';
+            request.pricingRequest.Division_code__c='02';
+            request.pricingRequest.sales_org_code__c='A640';
+            request.pricingRequest.Dist_channel_code__c='10';
+            request.pricingRequest.soldto_code__c='5512345';
+            
+            /*//request.pricingRequest=R1;  
+            paServiceState.currentRequest.customer = paERPCustomer;
+            paServiceState.currentRequest.pricingRequest = R1;          
+            PAService1.paServiceState.currentRequestItem = new PARequestItem(paServiceState);
+            PAService1.getBusinessComponent('NewPricingReqItem','ERPCustomer');
+            paServiceState.currentRequest.customer = paERPCustomer;
+            paServiceState.currentRequest.pricingRequest = R1;
+            PAService1.getBusinessComponent('NPCRequests','NetPriceDetail');
+            paServiceState.currentRequest.customer = paERPCustomer;
+            paServiceState.currentRequest.pricingRequest = R1;
+            PAService1.getBusinessComponent('generatePCL','ERPCustomer');
+            PAService1.getBusinessComponent('goToRequest','ERPCustomer');
+            paServiceState.currentRequest.customer = paERPCustomer;
+            paServiceState.currentRequest.pricingRequest = R1;
+            PAService1.getBusinessComponent('Cancel','ERPCustomer');
+            ApexPages.currentPage().getParameters().put('id',orgGrpItem.Id);
+            PAService1.getBusinessComponent('Quit','OrganizationalGroupItem');*/
+            test.starttest();
+            PAService1.getBusinessComponent('abandonImport','Requests');
+            test.stoptest();
+        }
+    }
+    static testMethod void paServiceTestMethod4() {
+        user u = createUser();
+
+        system.runAs(u){
+            
+             IntegrationLoginCredentials__c pr4 = new IntegrationLoginCredentials__c (Name='admin.util@dupont.com.utqa', EncryptedLoginDetails__c='Infosys1234Xkh5hWWRryiH6c7tDrZrCH9jF');
+             insert pr4;
+             
+            PAApprovalWF_UT.paApprovalWFTestMethodPAQuery();
+            List<PAProfilePermissions__c> paProfilePermissionsList = new List<PAProfilePermissions__c>();
+            PAProfilePermissions__c paProfilePermissions1 = new PAProfilePermissions__c();
+            paProfilePermissions1.Name = 'Sales Admin';
+            paProfilePermissionsList.add(paProfilePermissions1);
+            PAService_UT.paServiceTestMethodPAQuery();
+
+            PAProfilePermissions__c paProfilePermissions2 = new PAProfilePermissions__c();
+            paProfilePermissions2.Name = 'Approver';
+            paProfilePermissionsList.add(paProfilePermissions2);
+
+            PAProfilePermissions__c paProfilePermissions3 = new PAProfilePermissions__c();
+            paProfilePermissions3.Name = 'BU Admin';
+            paProfilePermissionsList.add(paProfilePermissions3);
+
+            PAProfilePermissions__c paProfilePermissions4 = new PAProfilePermissions__c();
+            paProfilePermissions4.Name = 'Price Requester';
+            paProfilePermissionsList.add(paProfilePermissions4);    
+
+            PAProfilePermissions__c paProfilePermissions5 = new PAProfilePermissions__c();
+            paProfilePermissions5.Name = 'IT Admin';
+            paProfilePermissionsList.add(paProfilePermissions5);
+
+            insert paProfilePermissionsList;
+
+            Recordtype recType = [select id,name from Recordtype where name = 'Business'];
+
+            ERP_Pricing_Procedure__c erpPricingProcedure = new ERP_Pricing_Procedure__c();
+            erpPricingProcedure.Doc_Type__c = '';
+            erpPricingProcedure.Pricing_Procedure__c = 'ERP_PP-00001';
+            erpPricingProcedure.Pricing_Procedure_Description__c='BI EMEA Surfaces';
+            erpPricingProcedure.Pricing_Procedure_Code__c = 'ZD630A';
+            erpPricingProcedure.Pricing_Procedure__c = 'NOW Standard Pricing- EU';
+            erpPricingProcedure.SAP_Application_Id__c = 'V';
+            erpPricingProcedure.SAP_Client_Id__c = '510';
+            erpPricingProcedure.SAP_Cluster__c = 'WB1';
+            erpPricingProcedure.Status__c = 'Active';
+            insert erpPricingProcedure;
+
+            ERP_Pricing_Condition__c pricingCondition= new ERP_Pricing_Condition__c();
+            pricingCondition.SAP_Application_Id__c='V';
+            pricingCondition.SAP_Client_Id__c='510';
+            pricingCondition.SAP_Cluster__c='CB1';
+            pricingCondition.Pricing_Condition_Code__c='ZPSE';
+            insert pricingCondition;
+
+            ERP_Key_Combination__c keyCombination=new ERP_Key_Combination__c();
+            keyCombination.SAP_Application_Id__c='V';
+            keyCombination.SAP_Client_Id__c='510';
+            keyCombination.SAP_Cluster__c='CB1';
+            keyCombination.Key_Combination_Code__c='A580';
+            insert keyCombination;
+
+            OrgGroup__c orgGroup= new OrgGroup__c();        
+            orgGroup.CURRENCYISOCODE='USD';
+            //orgGroup.RecordTypeId = recType.Id;    
+            orgGroup.ERP_DISTRIBUTION_CHANNEL_CODE__C='10';
+            orgGroup.ERP_DISTRIBUTION_CHANNEL__C='DuPont Std';
+            orgGroup.ERP_DIVISION_CODE__C='02';
+            orgGroup.ERP_DIVISION__C='GSD Standard';
+            orgGroup.ERP_SALES_ORG_CODE__C='A640';
+            orgGroup.ERP_SALES_ORG__C='NOW DUP LUX 3430';
+            orgGroup.OWNING_BUSINESS__C='';
+            orgGroup.OWNING_ORG__C='';
+            orgGroup.EXTERNAL_ERP_ID__C='Askjlkj';
+            insert orgGroup;
+
+
+            OrgGroup__c orgGroup1 = new orgGroup__c();
+            orgGroup1.Business__c = 'BI EMEA Surfaces';
+            orgGroup1.RecordTypeId = recType.Id;
+
+            orgGroup1.OWNING_BUSINESS__C='Building Innovations';
+            orgGroup1.TYPE__C='ERP';
+            insert orgGroup1;
+
+            Organizational_Group_Item__c orgGrpItem= new Organizational_Group_Item__c();
+            orgGrpItem.Business__c = (orgGroup1).id;
+            orgGrpItem.OrgGroup__c = (orgGroup).id;
+            orgGrpItem.CURRENCYISOCODE = 'USD';
+            //orgGrpItem.APPROVAL_ESCALATION_DURATION__C = 23;
+            //orgGrpItem.CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Competitive pricing;Extending current prices;Pricing campaign;Other reason';
+            orgGrpItem.ERP_CURRENCY__C = 'USD;RUB';
+            orgGrpItem.ERP_UOM__C = 'EA;SH';
+            orgGrpItem.INCLUDE_CUSTOMER_CURRENCY__C = true;
+            orgGrpItem.LATEST_VALID_FROM_OFFSET_NON_CUST_SPEC__C = 90;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_CUST_SPEC__C = 12;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_NON_CUST_SPEC__C = 12;
+            orgGrpItem.MAX_VALID_FROM_OFFSET_CUST_SPEC__C = 90;
+            orgGrpItem.NON_CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Extending current prices; New materials; Periodic price review; Other reason; Pricing Compaign; Seasonal price';
+            orgGrpItem.RETROACTIVE_LIMIT__C =30;
+            orgGrpItem.CUSTOMER_REQUEST_REASONS__C = 'Seasonal price; Pricing campaign; Slow moving inventory; Customer negotiation; New customer; New materials; Competitive pricing; Extending current prices; Other reason';
+            orgGrpItem.PRICING_TASK_REASONS__C = '002-Trade fair sales activity;F06-Demonstration to Customer;F09-Research & Development;F12-Replacement;F15-Sales Promotion;M12- Pricing Discrepancy;M13-Quantity Correction;M31-Commercial Adjustment;S01-Paid Sample sales;Non-standard product;Other reason';
+            orgGrpItem.PROJECT_REQUEST_REASONS__C = 'Quantity Change;Time extension;Quantity and time change;Product change';
+            orgGrpItem.ERP_Pricing_Procedure__c = erpPricingProcedure.Id;
+            orgGrpItem.Rebate_Agreement__c='Annual Agreement';
+            orgGrpItem.Rebate_Agreement__c='';
+            orgGrpItem.Pricing_Task_Type__c='Spot Price; Free of Charge; Rebate Agreement; Display';
+            insert orgGrpItem;
+
+
+            Pricing_Request__c R1= new Pricing_Request__c();
+            R1.Request_Name__c='R1 For P1';
+            R1.Request_Approval_Status__c='Draft';
+            R1.Request_Reason__c='New Project';
+            R1.Request_Type__c = 'Customer Specific';
+            R1.Pricing_Request_Type__c = 'Permanent';       
+            R1.Customer_Specific__c = true;    
+            R1.BU__c='BI'; 
+            R1.Sales_Org_Code__c='A640';
+            R1.Dist_Channel_Code__c='10'; 
+            R1.Division_Code__c='02'; 
+            R1.soldto_code__c = '5512345';
+            insert R1;
+
+            ERP_Customer__c cust = new ERP_Customer__c(city__c='Chennai',country__c='India',country_code__c='IND',
+                    currency_code__c='INR',customer_code__c='5512345',
+                    Distribution_Channel_Code__c='10',Distribution_channel__c='Dist Channel',
+                    Division__c='Division',Division_code__c='02',Incoterms_1__c='Inco1',Incoterms_1_Code__c='IncoCode',
+                    Incoterms_2__c='Inco2',Customer_Price_Group_Code__c='Z0',
+                    Customer_Price_Group__c='Others',Price_List_type__c='PriceList',
+                    price_list_type_code__c='A7',sales_office__c='salesOffice',
+                    sales_office_Code__c='salesOfficeCode',sales_org_code__c='A640',
+                    sales_org__c='sales Org',State_Province__c='TN',Street__c='MP',Terms_Of_Payment__c='None',
+                    Terms_Of_Payment_Code__c='None',Zip_Postal_Code__c='600039',Source_Cluster__c='CB1');
+            insert cust;
+            
+            IntegrationLoginCredentials__c EC = new IntegrationLoginCredentials__c (Name='admin.util@dupont.com', EncryptedLoginDetails__c='Infosys1234Xkh5hWWRryiH6c7tDrZrCH9jF');
+                  insert EC; 
+
+            PAServiceState paServiceState = new PAServiceState();        
+            PAOrganizationalGroupItems paOrgGroupItems = new PAOrganizationalGroupItems();
+
+            paServiceState.ogItems = paOrgGroupItems;
+
+            paOrgGroupItems.selectedBU  = OrgGroup1.Id; 
+            paOrgGroupItems.orgGroupItems=orgGrpItem;
+     
+       
+            PARequest Request = new PARequest(paServiceState);
+            request.pricingRequest=R1;  
+
+            PAERPCustomer paERPCustomer = new PAERPCustomer(paServiceState);
+            paERPCustomer.ogitems = paOrgGroupItems;
+            paERPCustomer.paERPCustomer = cust;
+
+            
+            paServiceState.currentRequest = Request;
+            paServiceState.currentRequest.customer = paERPCustomer;
+            paServiceState.currentRequest.pricingRequest = R1;
+            paServiceState.ogItems.value='NonCustomerSpecific';
+           
+
+            PAPricingCondition paPricingCondition = new PAPricingCondition(paServiceState);
+            paServiceState.currentRequest.pricingCondition = paPricingCondition;
+
+            PAKeyCombination paKeyCombination = new PAKeyCombination(paServiceState);
+            paServiceState.currentRequest.keyCombination = paKeyCombination;
+
+            PAService PAService1 = new PAService();      
+            PAService1.paServiceState = paServiceState;
+
+            PARequestItem paRequestItem = new PARequestItem(paServiceState);
+            request.pricingRequest=R1;
+            request.pricingRequest.Pricing_Request_Type__c='Pricing Task';
+            request.pricingRequest.Division_code__c='02';
+            request.pricingRequest.sales_org_code__c='A640';
+            request.pricingRequest.Dist_channel_code__c='10';
+            request.pricingRequest.soldto_code__c='5512345';
+            
+            paServiceState.currentRequest.customer = paERPCustomer;
+            paServiceState.currentRequest.pricingRequest = R1;          
+            paServiceState.currentRequestItem = new PARequestItem(paServiceState);
+       //     test.starttest();
+            PAService1.getBusinessComponent('NewPricingReqItem','ERPCustomer');
+            paServiceState.currentRequest.customer = paERPCustomer;
+            paServiceState.currentRequest.pricingRequest = R1;
+            PAService1.getBusinessComponent('NPCRequests','NetPriceDetail');
+            paServiceState.currentRequest.customer = paERPCustomer;
+            paServiceState.currentRequest.pricingRequest = R1;
+            PAService1.getBusinessComponent('generatePCL','ERPCustomer');
+            PAService1.getBusinessComponent('goToRequest','ERPCustomer');
+            paServiceState.currentRequest.customer = paERPCustomer;
+            paServiceState.currentRequest.pricingRequest = R1;
+            PAService1.getBusinessComponent('Cancel','ERPCustomer');
+            ApexPages.currentPage().getParameters().put('id',orgGrpItem.Id);
+   
+            PAService1.getBusinessComponent('Quit','OrganizationalGroupItem'); 
+    test.starttest(); //<SS20230501>
+            PAService1.getBusinessComponent('NonCustomerSpecific','Requests');
+            PAService1.getBusinessComponent('Massive','Requests');
+            PAService1.getBusinessComponent('Massive','Requests');
+      //       PAService1.getBusinessComponent('Quit','Requests');
+             PAService1.getBusinessComponent('soldtoSelect','Requests');
+      test.stoptest();  //<SS20230501>     
+             PAService PAService71 = new PAService();      
+            paService71.paServiceState = paServiceState;
+            PAService71.PAServiceState.erpCustomer = new PAErpCustomer();
+            PAService71.PAServiceState.erpCustomer.currentPrices = 'viewPricesOnLoad';
+            PAService71.getBusinessComponent('customerPrices','Requests');             
+             
+            
+        }
+    }
+    
+    static testMethod void paServiceTestMethod5() {
+        user u = createUser();
+
+        system.runAs(u){
+            List<PAProfilePermissions__c> paProfilePermissionsList = new List<PAProfilePermissions__c>();
+            PAProfilePermissions__c paProfilePermissions1 = new PAProfilePermissions__c();
+            paProfilePermissions1.Name = 'Sales Admin';
+            paProfilePermissionsList.add(paProfilePermissions1);
+            PAService_UT.paServiceTestMethodPAQuery();
+
+            PAProfilePermissions__c paProfilePermissions2 = new PAProfilePermissions__c();
+            paProfilePermissions2.Name = 'Approver';
+            paProfilePermissionsList.add(paProfilePermissions2);
+
+            PAProfilePermissions__c paProfilePermissions3 = new PAProfilePermissions__c();
+            paProfilePermissions3.Name = 'BU Admin';
+            paProfilePermissionsList.add(paProfilePermissions3);
+
+            PAProfilePermissions__c paProfilePermissions4 = new PAProfilePermissions__c();
+            paProfilePermissions4.Name = 'Price Requester';
+            paProfilePermissionsList.add(paProfilePermissions4);    
+
+            PAProfilePermissions__c paProfilePermissions5 = new PAProfilePermissions__c();
+            paProfilePermissions5.Name = 'IT Admin';
+            paProfilePermissionsList.add(paProfilePermissions5);
+
+            insert paProfilePermissionsList;
+
+            Recordtype recType = [select id,name from Recordtype where name = 'Business'];
+
+            ERP_Pricing_Procedure__c erpPricingProcedure = new ERP_Pricing_Procedure__c();
+            erpPricingProcedure.Doc_Type__c = '';
+            erpPricingProcedure.Pricing_Procedure__c = 'ERP_PP-00001';
+            erpPricingProcedure.Pricing_Procedure_Description__c='BI EMEA Surfaces';
+            erpPricingProcedure.Pricing_Procedure_Code__c = 'ZD630A';
+            erpPricingProcedure.Pricing_Procedure__c = 'NOW Standard Pricing- EU';
+            erpPricingProcedure.SAP_Application_Id__c = 'V';
+            erpPricingProcedure.SAP_Client_Id__c = '510';
+            erpPricingProcedure.SAP_Cluster__c = 'WB1';
+            erpPricingProcedure.Status__c = 'Active';
+            insert erpPricingProcedure;
+
+            ERP_Pricing_Condition__c pricingCondition= new ERP_Pricing_Condition__c();
+            pricingCondition.SAP_Application_Id__c='V';
+            pricingCondition.SAP_Client_Id__c='510';
+            pricingCondition.SAP_Cluster__c='CB1';
+            pricingCondition.Pricing_Condition_Code__c='ZPSE';
+            insert pricingCondition;
+
+            ERP_Key_Combination__c keyCombination=new ERP_Key_Combination__c();
+            keyCombination.SAP_Application_Id__c='V';
+            keyCombination.SAP_Client_Id__c='510';
+            keyCombination.SAP_Cluster__c='CB1';
+            keyCombination.Key_Combination_Code__c='A580';
+            insert keyCombination;
+
+            OrgGroup__c orgGroup= new OrgGroup__c();        
+            orgGroup.CURRENCYISOCODE='USD';
+            //orgGroup.RecordTypeId = recType.Id;    
+            orgGroup.ERP_DISTRIBUTION_CHANNEL_CODE__C='10';
+            orgGroup.ERP_DISTRIBUTION_CHANNEL__C='DuPont Std';
+            orgGroup.ERP_DIVISION_CODE__C='02';
+            orgGroup.ERP_DIVISION__C='GSD Standard';
+            orgGroup.ERP_SALES_ORG_CODE__C='A640';
+            orgGroup.ERP_SALES_ORG__C='NOW DUP LUX 3430';
+            orgGroup.OWNING_BUSINESS__C='';
+            orgGroup.OWNING_ORG__C='';
+            orgGroup.EXTERNAL_ERP_ID__C='Askjlkj';
+            insert orgGroup;
+
+
+            OrgGroup__c orgGroup1 = new orgGroup__c();
+            orgGroup1.Business__c = 'BI EMEA Surfaces';
+            orgGroup1.RecordTypeId = recType.Id;
+
+            orgGroup1.OWNING_BUSINESS__C='Building Innovations';
+            orgGroup1.TYPE__C='ERP';
+            insert orgGroup1;
+
+            Organizational_Group_Item__c orgGrpItem= new Organizational_Group_Item__c();
+            orgGrpItem.Business__c = (orgGroup1).id;
+            orgGrpItem.OrgGroup__c = (orgGroup).id;
+            orgGrpItem.CURRENCYISOCODE = 'USD';
+            //orgGrpItem.APPROVAL_ESCALATION_DURATION__C = 23;
+            //orgGrpItem.CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Competitive pricing;Extending current prices;Pricing campaign;Other reason';
+            orgGrpItem.ERP_CURRENCY__C = 'USD;RUB';
+            orgGrpItem.ERP_UOM__C = 'EA;SH';
+            orgGrpItem.INCLUDE_CUSTOMER_CURRENCY__C = true;
+            orgGrpItem.LATEST_VALID_FROM_OFFSET_NON_CUST_SPEC__C = 90;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_CUST_SPEC__C = 12;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_NON_CUST_SPEC__C = 12;
+            orgGrpItem.MAX_VALID_FROM_OFFSET_CUST_SPEC__C = 90;
+            orgGrpItem.NON_CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Extending current prices; New materials; Periodic price review; Other reason; Pricing Compaign; Seasonal price';
+            orgGrpItem.RETROACTIVE_LIMIT__C =30;
+            orgGrpItem.CUSTOMER_REQUEST_REASONS__C = 'Seasonal price; Pricing campaign; Slow moving inventory; Customer negotiation; New customer; New materials; Competitive pricing; Extending current prices; Other reason';
+            orgGrpItem.PRICING_TASK_REASONS__C = '002-Trade fair sales activity;F06-Demonstration to Customer;F09-Research & Development;F12-Replacement;F15-Sales Promotion;M12- Pricing Discrepancy;M13-Quantity Correction;M31-Commercial Adjustment;S01-Paid Sample sales;Non-standard product;Other reason';
+            orgGrpItem.PROJECT_REQUEST_REASONS__C = 'Quantity Change;Time extension;Quantity and time change;Product change';
+            orgGrpItem.ERP_Pricing_Procedure__c = erpPricingProcedure.Id;
+            orgGrpItem.Rebate_Agreement__c='Annual Agreement';
+            orgGrpItem.Rebate_Agreement__c='';
+            orgGrpItem.Pricing_Task_Type__c='Spot Price; Free of Charge; Rebate Agreement; Display';
+            insert orgGrpItem;
+
+
+            Pricing_Request__c R1= new Pricing_Request__c();
+            R1.Request_Name__c='R1 For P1';
+            R1.Request_Approval_Status__c='Draft';
+            R1.Request_Reason__c='New Project';
+            R1.Request_Type__c = 'Customer Specific';
+            R1.Pricing_Request_Type__c = 'Permanent';       
+            R1.Customer_Specific__c = true;   
+            R1.BU__c='BI';  
+            R1.Sales_Org_Code__c='A640';
+            R1.Dist_Channel_Code__c='10'; 
+            R1.Division_Code__c='02'; 
+            R1.soldto_code__c = '5512345';
+            insert R1;
+
+            ERP_Customer__c cust = new ERP_Customer__c(city__c='Chennai',country__c='India',country_code__c='IND',
+                    currency_code__c='INR',customer_code__c='5512345',
+                    Distribution_Channel_Code__c='10',Distribution_channel__c='Dist Channel',
+                    Division__c='Division',Division_code__c='02',Incoterms_1__c='Inco1',Incoterms_1_Code__c='IncoCode',
+                    Incoterms_2__c='Inco2',Customer_Price_Group_Code__c='Z0',
+                    Customer_Price_Group__c='Others',Price_List_type__c='PriceList',
+                    price_list_type_code__c='A7',sales_office__c='salesOffice',
+                    sales_office_Code__c='salesOfficeCode',sales_org_code__c='A640',
+                    sales_org__c='sales Org',State_Province__c='TN',Street__c='MP',Terms_Of_Payment__c='None',
+                    Terms_Of_Payment_Code__c='None',Zip_Postal_Code__c='600039',Source_Cluster__c='CB1');
+            insert cust;
+        ApexPages.currentPage().getParameters().put('id',cust.Id);
+
+            PAServiceState paServiceState = new PAServiceState();        
+            PAOrganizationalGroupItems paOrgGroupItems = new PAOrganizationalGroupItems();
+
+            paServiceState.ogItems = paOrgGroupItems;
+
+            paOrgGroupItems.selectedBU  = OrgGroup1.Id; 
+            paOrgGroupItems.orgGroupItems=orgGrpItem;
+
+            PARequest Request = new PARequest(paServiceState);
+            request.pricingRequest=R1;  
+
+            PAERPCustomer paERPCustomer = new PAERPCustomer(paServiceState);
+            paERPCustomer.ogitems = paOrgGroupItems;
+            paERPCustomer.paERPCustomer = cust;
+
+            //PARequest paRequest = new PARequest(paServiceState);
+            paServiceState.currentRequest = Request;
+            paServiceState.currentRequest.customer = paERPCustomer;
+            paServiceState.currentRequest.pricingRequest = R1;
+            paServiceState.currentRequest.customer = paERPCustomer;
+
+            PAPricingCondition paPricingCondition = new PAPricingCondition(paServiceState);
+            //paPricingCondition.pricingCondition = pricingCondition;
+            paServiceState.currentRequest.pricingCondition = paPricingCondition;
+
+            PAKeyCombination paKeyCombination = new PAKeyCombination(paServiceState);
+            paServiceState.currentRequest.keyCombination = paKeyCombination;
+
+            PAService PAService1 = new PAService();      
+            paService1.paServiceState = paServiceState;
+
+            //PARequestItem paRequestItem = new PARequestItem(paServiceState);
+            request.pricingRequest=R1;
+            request.pricingRequest.Pricing_Request_Type__c='Pricing Task';
+            request.pricingRequest.Division_code__c='02';
+            request.pricingRequest.sales_org_code__c='A640';
+            request.pricingRequest.Dist_channel_code__c='10';
+            request.pricingRequest.soldto_code__c='5512345';
+            
+            PAService1.getBusinessComponent('Massive','Requests');
+            
+            /*//request.pricingRequest.Request_Type__c='Customer Specific';
+            PAService1.getBusinessComponent('landingpage','OrganizationalGroupItem');   
+            PAService1.getBusinessComponent('Quit','ERPCustomer');
+            PAService1.getBusinessComponent('Cancel','ERPCustomer');
+            PAService1.getBusinessComponent('PCL','ERPCustomer');
+            PAService1.getBusinessComponent('NewPricingReqItem','ERPCustomer');
+            PAService1.getBusinessComponent('NewMaterial','ERPCustomer');
+            PAService1.getBusinessComponent('PCLGeneration','ERPCustomer');
+            
+                    
+            PAService1.getBusinessComponent('customerList','OrganizationalGroupItem');
+            PAService1.getBusinessComponent('generatePCL','ERPCustomer');
+            PAService1.getBusinessComponent('viewLog','ERPCustomer');
+            PAService1.getBusinessComponent('X','OrganizationalGroupItem');
+            PAService1.getBusinessComponent('BUSetup','OrganizationalGroupItem');
+            PAService1.getBusinessComponent('BUSetu','OrganizationalGroupItem');
+            PAService1.getBusinessComponent('BUSetup','ERPCustomer');
+            PAService1.getBusinessComponent('Abandon','Requests');
+
+            PAService1.getBusinessComponent('AddPrices','Requests');
+            PAService1.getBusinessComponent('AddMaterial','ProjectPrice');
+
+            PAService1.getBusinessComponent('gotoApprovalSetup','ApprovalSetup');
+            PAService1.getBusinessComponent('customerPrices','ApprovalSetup');
+
+            try{
+                PAService1.getBusinessComponent('exportCSV','Requests');
+                PAService1.getBusinessComponent('NPCRequests','NetPriceDetail');
+            }
+            catch(exception e){}
+    
+                Test.startTest();
+                //request.pricingRequest=R1;  
+                paServiceState.currentRequest.customer = paERPCustomer;
+                paServiceState.currentRequest.pricingRequest = R1;
+                
+                      
+                PAService1.paServiceState.currentRequestItem = new PARequestItem(paServiceState);
+                //PAService1.getBusinessComponent('NewPricingReqItem','RequestItems');
+                //PAService1.getBusinessComponent('NewPricingReqItem','RequestItems');
+                Test.stopTest();
+
+        try{
+        PAService1.getBusinessComponent('Quit','ERPCustomer');
+        }
+        catch(exception e){}
+        }*/       
+        }   
+    }
+    
+    static testMethod void paServiceTestMethod6(){
+        
+       
+        user u = createUser();
+
+        system.runAs(u){
+            PAApprovalWF_UT.paApprovalWFTestMethodPAQuery();
+            IntegrationLoginCredentials__c pr4 = new IntegrationLoginCredentials__c (Name='admin.util@dupont.com', EncryptedLoginDetails__c='Infosys1234Xkh5hWWRryiH6c7tDrZrCH9jF');
+        insert pr4;
+            
+            List<PAProfilePermissions__c> paProfilePermissionsList = new List<PAProfilePermissions__c>();
+            PAProfilePermissions__c paProfilePermissions1 = new PAProfilePermissions__c();
+            paProfilePermissions1.Name = 'Sales Admin';
+            paProfilePermissionsList.add(paProfilePermissions1);
+            PAService_UT.paServiceTestMethodPAQuery();
+
+            PAProfilePermissions__c paProfilePermissions2 = new PAProfilePermissions__c();
+            paProfilePermissions2.Name = 'Approver';
+            paProfilePermissionsList.add(paProfilePermissions2);
+
+            PAProfilePermissions__c paProfilePermissions3 = new PAProfilePermissions__c();
+            paProfilePermissions3.Name = 'BU Admin';
+            paProfilePermissionsList.add(paProfilePermissions3);
+
+            PAProfilePermissions__c paProfilePermissions4 = new PAProfilePermissions__c();
+            paProfilePermissions4.Name = 'Price Requester';
+            paProfilePermissionsList.add(paProfilePermissions4);    
+
+            PAProfilePermissions__c paProfilePermissions5 = new PAProfilePermissions__c();
+            paProfilePermissions5.Name = 'IT Admin';
+            paProfilePermissionsList.add(paProfilePermissions5);
+
+            insert paProfilePermissionsList;
+
+            Recordtype recType = [select id,name from Recordtype where name = 'Business'];
+
+            ERP_Pricing_Procedure__c erpPricingProcedure = new ERP_Pricing_Procedure__c();
+            erpPricingProcedure.Doc_Type__c = '';
+            erpPricingProcedure.Pricing_Procedure__c = 'ERP_PP-00001';
+            erpPricingProcedure.Pricing_Procedure_Description__c='BI EMEA Surfaces';
+            erpPricingProcedure.Pricing_Procedure_Code__c = 'ZD630A';
+            erpPricingProcedure.Pricing_Procedure__c = 'NOW Standard Pricing- EU';
+            erpPricingProcedure.SAP_Application_Id__c = 'V';
+            erpPricingProcedure.SAP_Client_Id__c = '510';
+            erpPricingProcedure.SAP_Cluster__c = 'WB1';
+            erpPricingProcedure.Status__c = 'Active';
+            insert erpPricingProcedure;
+
+            ERP_Pricing_Condition__c pricingCondition= new ERP_Pricing_Condition__c();
+            pricingCondition.SAP_Application_Id__c='V';
+            pricingCondition.SAP_Client_Id__c='510';
+            pricingCondition.SAP_Cluster__c='CB1';
+            pricingCondition.Pricing_Condition_Code__c='ZPNA';
+            insert pricingCondition;
+
+            ERP_Key_Combination__c keyCombination=new ERP_Key_Combination__c();
+            keyCombination.SAP_Application_Id__c='V';
+            keyCombination.SAP_Client_Id__c='510';
+            keyCombination.SAP_Cluster__c='CB1';
+            keyCombination.Key_Combination_Code__c='A580';
+            insert keyCombination;
+            ERP_Customer__c cust = new ERP_Customer__c(city__c='Chennai',country__c='India',country_code__c='IND',
+                    currency_code__c='INR',customer_code__c='5512345',
+                    Distribution_Channel_Code__c='10',Distribution_channel__c='Dist Channel',
+                    Division__c='Division',Division_code__c='02',Incoterms_1__c='Inco1',Incoterms_1_Code__c='IncoCode',
+                    Incoterms_2__c='Inco2',Customer_Price_Group_Code__c='Z0',
+                    Customer_Price_Group__c='Others',Price_List_type__c='PriceList',
+                    price_list_type_code__c='A7',sales_office__c='salesOffice',
+                    sales_office_Code__c='salesOfficeCode',sales_org_code__c='A640',
+                    sales_org__c='sales Org',State_Province__c='TN',Street__c='MP',Terms_Of_Payment__c='None',
+                    Terms_Of_Payment_Code__c='None',Zip_Postal_Code__c='600039',Source_Cluster__c='CB1');
+            insert cust;
+            OrgGroup__c orgGroup= new OrgGroup__c();        
+            orgGroup.CURRENCYISOCODE='USD';
+            //orgGroup.RecordTypeId = recType.Id;    
+            orgGroup.ERP_DISTRIBUTION_CHANNEL_CODE__C='10';
+            orgGroup.ERP_DISTRIBUTION_CHANNEL__C='DuPont Std';
+            orgGroup.ERP_DIVISION_CODE__C='02';
+            orgGroup.ERP_DIVISION__C='GSD Standard';
+            orgGroup.ERP_SALES_ORG_CODE__C='A640';
+            orgGroup.ERP_SALES_ORG__C='NOW DUP LUX 3430';
+            orgGroup.OWNING_BUSINESS__C='';
+            orgGroup.OWNING_ORG__C='';
+            orgGroup.EXTERNAL_ERP_ID__C='Askjlkj';
+            insert orgGroup;
+
+
+            OrgGroup__c orgGroup1 = new orgGroup__c();
+            orgGroup1.Business__c = 'BI EMEA Surfaces';
+            orgGroup1.RecordTypeId = recType.Id;
+
+            orgGroup1.OWNING_BUSINESS__C='Building Innovations';
+            orgGroup1.TYPE__C='ERP';
+            insert orgGroup1;
+
+            Organizational_Group_Item__c orgGrpItem= new Organizational_Group_Item__c();
+            orgGrpItem.Business__c = (orgGroup1).id;
+            orgGrpItem.OrgGroup__c = (orgGroup).id;
+            orgGrpItem.CURRENCYISOCODE = 'USD';
+            //orgGrpItem.APPROVAL_ESCALATION_DURATION__C = 23;
+            //orgGrpItem.CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Competitive pricing;Extending current prices;Pricing campaign;Other reason';
+            orgGrpItem.ERP_CURRENCY__C = 'USD;RUB';
+            orgGrpItem.ERP_UOM__C = 'EA;SH';
+            orgGrpItem.INCLUDE_CUSTOMER_CURRENCY__C = true;
+            orgGrpItem.LATEST_VALID_FROM_OFFSET_NON_CUST_SPEC__C = 90;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_CUST_SPEC__C = 12;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_NON_CUST_SPEC__C = 12;
+            orgGrpItem.MAX_VALID_FROM_OFFSET_CUST_SPEC__C = 90;
+            orgGrpItem.NON_CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Extending current prices; New materials; Periodic price review; Other reason; Pricing Compaign; Seasonal price';
+            orgGrpItem.RETROACTIVE_LIMIT__C =30;
+            orgGrpItem.CUSTOMER_REQUEST_REASONS__C = 'Seasonal price; Pricing campaign; Slow moving inventory; Customer negotiation; New customer; New materials; Competitive pricing; Extending current prices; Other reason';
+            orgGrpItem.PRICING_TASK_REASONS__C = '002-Trade fair sales activity;F06-Demonstration to Customer;F09-Research & Development;F12-Replacement;F15-Sales Promotion;M12- Pricing Discrepancy;M13-Quantity Correction;M31-Commercial Adjustment;S01-Paid Sample sales;Non-standard product;Other reason';
+            orgGrpItem.PROJECT_REQUEST_REASONS__C = 'Quantity Change;Time extension;Quantity and time change;Product change';
+            orgGrpItem.ERP_Pricing_Procedure__c = erpPricingProcedure.Id;
+            orgGrpItem.Rebate_Agreement__c='Annual Agreement';
+            orgGrpItem.Rebate_Agreement__c='';
+            orgGrpItem.Pricing_Task_Type__c='Spot Price; Free of Charge; Rebate Agreement; Display';
+            insert orgGrpItem;
+
+
+            Pricing_Request__c R1= new Pricing_Request__c();
+            R1.Request_Name__c='R1 For P1';
+            R1.Request_Approval_Status__c='Draft';
+            R1.Request_Reason__c='New Project';
+            R1.Request_Type__c = 'Non Customer Specific';
+            R1.Pricing_Request_Type__c = 'Permanent';       
+            R1.Customer_Specific__c = true;   
+            R1.BU__c='BI';  
+            R1.Sales_Org_Code__c='A640';
+            R1.Dist_Channel_Code__c='10'; 
+            R1.Division_Code__c='02'; 
+          //  R1.soldto_code__c = '5512345';
+            insert R1;
+            ApexPages.currentPage().getParameters().put('id',R1.Id);
+
+       /*     ERP_Customer__c cust = new ERP_Customer__c(city__c='Chennai',country__c='India',country_code__c='IND',
+                    currency_code__c='INR',customer_code__c='5512345',
+                    Distribution_Channel_Code__c='10',Distribution_channel__c='Dist Channel',
+                    Division__c='Division',Division_code__c='02',Incoterms_1__c='Inco1',Incoterms_1_Code__c='IncoCode',
+                    Incoterms_2__c='Inco2',Customer_Price_Group_Code__c='Z0',
+                    Customer_Price_Group__c='Others',Price_List_type__c='PriceList',
+                    price_list_type_code__c='A7',sales_office__c='salesOffice',
+                    sales_office_Code__c='salesOfficeCode',sales_org_code__c='A640',
+                    sales_org__c='sales Org',State_Province__c='TN',Street__c='MP',Terms_Of_Payment__c='None',
+                    Terms_Of_Payment_Code__c='None',Zip_Postal_Code__c='600039',Source_Cluster__c='CB1');
+            insert cust;
+        ApexPages.currentPage().getParameters().put('id',cust.Id); */
+
+            PAServiceState paServiceState = new PAServiceState();        
+            PAOrganizationalGroupItems paOrgGroupItems = new PAOrganizationalGroupItems();
+            paOrgGroupItems.selectedBU=(orgGroup1).id;
+            paServiceState.ogItems = paOrgGroupItems;
+            paServiceState.ogItems.buIdToNameMap = new map<Id,String>();
+            paServiceState.ogItems.buIdToNameMap.put(OrgGroup1.Id,OrgGroup1.Business__c);
+            paServiceState.ogItems.selectedBU  = OrgGroup1.Id; 
+            paServiceState.ogItems.orgGroupItems=orgGrpItem;
+
+            PARequest Request = new PARequest(paServiceState);
+            request.pricingRequest=R1;  
+
+            PAERPCustomer paERPCustomer = new PAERPCustomer(paServiceState);
+            paERPCustomer.ogitems = paOrgGroupItems;
+            paERPCustomer.paERPCustomer = cust;
+            paERPCustomer.customerCode=cust.customer_code__c;
+            paservicestate.erpcustomer=paERPCustomer;
+            paservicestate.erpcustomer.customercode=cust.customer_code__c;
+            //PARequest paRequest = new PARequest(paServiceState);
+            paServiceState.currentRequest = Request;
+            paServiceState.currentRequest.pricingrequest=R1;
+            paServiceState.currentRequest.customer = paERPCustomer;
+           
+           
+           
+
+          //  paServiceState.currentRequest.customer = paERPCustomer;
+
+            PAPricingCondition paPricingCondition = new PAPricingCondition(paServiceState);
+            //paPricingCondition.pricingCondition = pricingCondition;
+            paServiceState.currentRequest.pricingCondition = paPricingCondition;
+
+            PAKeyCombination paKeyCombination = new PAKeyCombination(paServiceState);
+            paServiceState.currentRequest.keyCombination = paKeyCombination;
+
+            PAService PAService1 = new PAService();      
+            paService1.paServiceState = paServiceState;
+
+            //PARequestItem paRequestItem = new PARequestItem(paServiceState);
+            request.pricingRequest=R1;
+            request.pricingRequest.Pricing_Request_Type__c='Permanent';
+            request.pricingRequest.Division_code__c='02';
+            request.pricingRequest.sales_org_code__c='A640';
+            request.pricingRequest.Dist_channel_code__c='10';
+            request.pricingRequest.soldto_code__c='5512345';
+            PAService1.getBusinessComponent('RPQReporting','OrganizationalGroupItem');
+            PAService PAService2 = new PAService();      
+            paService2.paServiceState = paServiceState;
+            PAService2.getBusinessComponent('exportRPQ','OrganizationalGroupItem');
+            PAService PAService3 = new PAService();      
+            paService3.paServiceState = paServiceState;
+            PAService3.getBusinessComponent('BUSetupAddNewPH','OrganizationalGroupItem');
+            PAService PAService4 = new PAService();      
+            paService4.paServiceState = paServiceState;
+            PAService4.getBusinessComponent('customerList','ERPCustomer');
+            PAService PAService5 = new PAService();      
+            paService5.paServiceState = paServiceState;
+            PAService5.getBusinessComponent('CancelFromEndUserSelBack','ERPCustomer');
+            PAService PAService6 = new PAService();
+            paServiceState.ogItems.isenduserrebate=true;  
+            paService6.paServiceState = paServiceState;
+            PAService6.getBusinessComponent('CancelBack','ERPCustomer');          
+            /*//request.pricingRequest.Request_Type__c='Customer Specific';
+            PAService1.getBusinessComponent('landingpage','OrganizationalGroupItem');   
+            PAService1.getBusinessComponent('Quit','ERPCustomer');
+            PAService1.getBusinessComponent('Cancel','ERPCustomer');
+            PAService1.getBusinessComponent('PCL','ERPCustomer');
+            PAService1.getBusinessComponent('NewPricingReqItem','ERPCustomer');
+            PAService1.getBusinessComponent('NewMaterial','ERPCustomer');
+            PAService1.getBusinessComponent('PCLGeneration','ERPCustomer');
+            
+                    
+            PAService1.getBusinessComponent('customerList','OrganizationalGroupItem');
+            PAService1.getBusinessComponent('generatePCL','ERPCustomer');
+            PAService1.getBusinessComponent('viewLog','ERPCustomer');
+            PAService1.getBusinessComponent('X','OrganizationalGroupItem');
+            PAService1.getBusinessComponent('BUSetup','OrganizationalGroupItem');
+            PAService1.getBusinessComponent('BUSetu','OrganizationalGroupItem');
+            PAService1.getBusinessComponent('BUSetup','ERPCustomer');
+            PAService1.getBusinessComponent('Abandon','Requests');
+
+            PAService1.getBusinessComponent('AddPrices','Requests');
+            PAService1.getBusinessComponent('AddMaterial','ProjectPrice');
+
+            PAService1.getBusinessComponent('gotoApprovalSetup','ApprovalSetup');
+            PAService1.getBusinessComponent('customerPrices','ApprovalSetup');
+
+            try{
+                PAService1.getBusinessComponent('exportCSV','Requests');
+                PAService1.getBusinessComponent('NPCRequests','NetPriceDetail');
+            }
+            catch(exception e){}
+    
+                Test.startTest();
+                //request.pricingRequest=R1;  
+                paServiceState.currentRequest.customer = paERPCustomer;
+                paServiceState.currentRequest.pricingRequest = R1;
+                
+             */   
+                //Test.startTest();      
+               // PARequestItem RItem = new PARequestItem(paServiceState);
+                //PAService1.paServiceState.currentRequestItem = RItem;
+                
+                //PAService1.getBusinessComponent('NewPricingReqItem','RequestItems');
+                //PAService1.getBusinessComponent('NewPricingReqItem','RequestItems');
+                //Test.stopTest();
+
+        /*try{
+        PAService1.getBusinessComponent('Quit','ERPCustomer');
+        }
+        catch(exception e){}
+        }   */   
+    }
+    
+
+    }
+    
+    
+    
+    
+    //Subbu********July082015
+    
+    static testMethod void paServiceTestMethod801(){
+        
+       
+        user u = createUser();
+    Test.startTest(); //<SS20230501>
+        system.runAs(u){
+            PAApprovalWF_UT.paApprovalWFTestMethodPAQuery();
+            IntegrationLoginCredentials__c pr4 = new IntegrationLoginCredentials__c (Name='admin.util@dupont.com', EncryptedLoginDetails__c='Infosys1234Xkh5hWWRryiH6c7tDrZrCH9jF');
+        insert pr4;
+            PAService_UT.paServiceTestMethodPAQuery();
+            List<PAProfilePermissions__c> paProfilePermissionsList = new List<PAProfilePermissions__c>();
+            PAProfilePermissions__c paProfilePermissions1 = new PAProfilePermissions__c();
+            paProfilePermissions1.Name = 'Sales Admin';
+            paProfilePermissionsList.add(paProfilePermissions1);
+
+
+            PAProfilePermissions__c paProfilePermissions2 = new PAProfilePermissions__c();
+            paProfilePermissions2.Name = 'Approver';
+            paProfilePermissionsList.add(paProfilePermissions2);
+
+            PAProfilePermissions__c paProfilePermissions3 = new PAProfilePermissions__c();
+            paProfilePermissions3.Name = 'BU Admin';
+            paProfilePermissionsList.add(paProfilePermissions3);
+
+            PAProfilePermissions__c paProfilePermissions4 = new PAProfilePermissions__c();
+            paProfilePermissions4.Name = 'Price Requester';
+            paProfilePermissionsList.add(paProfilePermissions4);    
+
+            PAProfilePermissions__c paProfilePermissions5 = new PAProfilePermissions__c();
+            paProfilePermissions5.Name = 'IT Admin';
+            paProfilePermissionsList.add(paProfilePermissions5);
+
+            insert paProfilePermissionsList;
+
+            Recordtype recType = [select id,name from Recordtype where name = 'Business'];
+
+            ERP_Pricing_Procedure__c erpPricingProcedure = new ERP_Pricing_Procedure__c();
+            erpPricingProcedure.Doc_Type__c = '';
+            erpPricingProcedure.Pricing_Procedure__c = 'ERP_PP-00001';
+            erpPricingProcedure.Pricing_Procedure_Description__c='BI EMEA Surfaces';
+            erpPricingProcedure.Pricing_Procedure_Code__c = 'ZD630A';
+            erpPricingProcedure.Pricing_Procedure__c = 'NOW Standard Pricing- EU';
+            erpPricingProcedure.SAP_Application_Id__c = 'V';
+            erpPricingProcedure.SAP_Client_Id__c = '510';
+            erpPricingProcedure.SAP_Cluster__c = 'WB1';
+            erpPricingProcedure.Status__c = 'Active';
+            insert erpPricingProcedure;
+
+            ERP_Pricing_Condition__c pricingCondition= new ERP_Pricing_Condition__c();
+            pricingCondition.SAP_Application_Id__c='V';
+            pricingCondition.SAP_Client_Id__c='510';
+            pricingCondition.SAP_Cluster__c='CB1';
+            pricingCondition.Pricing_Condition_Code__c='ZPNA';
+            insert pricingCondition;
+
+            ERP_Key_Combination__c keyCombination=new ERP_Key_Combination__c();
+            keyCombination.SAP_Application_Id__c='V';
+            keyCombination.SAP_Client_Id__c='510';
+            keyCombination.SAP_Cluster__c='CB1';
+            keyCombination.Key_Combination_Code__c='A580';
+            insert keyCombination;
+            ERP_Customer__c cust = new ERP_Customer__c(city__c='Chennai',country__c='India',country_code__c='IND',
+                    currency_code__c='INR',customer_code__c='5512345',
+                    Distribution_Channel_Code__c='10',Distribution_channel__c='Dist Channel',
+                    Division__c='Division',Division_code__c='02',Incoterms_1__c='Inco1',Incoterms_1_Code__c='IncoCode',
+                    Incoterms_2__c='Inco2',Customer_Price_Group_Code__c='Z0',
+                    Customer_Price_Group__c='Others',Price_List_type__c='PriceList',
+                    price_list_type_code__c='A7',sales_office__c='salesOffice',
+                    sales_office_Code__c='salesOfficeCode',sales_org_code__c='A640',
+                    sales_org__c='sales Org',State_Province__c='TN',Street__c='MP',Terms_Of_Payment__c='None',
+                    Terms_Of_Payment_Code__c='None',Zip_Postal_Code__c='600039',Source_Cluster__c='CB1');
+            insert cust;
+            OrgGroup__c orgGroup= new OrgGroup__c();        
+            orgGroup.CURRENCYISOCODE='USD';
+            //orgGroup.RecordTypeId = recType.Id;    
+            orgGroup.ERP_DISTRIBUTION_CHANNEL_CODE__C='10';
+            orgGroup.ERP_DISTRIBUTION_CHANNEL__C='DuPont Std';
+            orgGroup.ERP_DIVISION_CODE__C='02';
+            orgGroup.ERP_DIVISION__C='GSD Standard';
+            orgGroup.ERP_SALES_ORG_CODE__C='A640';
+            orgGroup.ERP_SALES_ORG__C='NOW DUP LUX 3430';
+            orgGroup.OWNING_BUSINESS__C='';
+            orgGroup.OWNING_ORG__C='';
+            orgGroup.EXTERNAL_ERP_ID__C='Askjlkj';
+            insert orgGroup;
+
+
+            OrgGroup__c orgGroup1 = new orgGroup__c();
+            orgGroup1.Business__c = 'BI EMEA Surfaces';
+            orgGroup1.RecordTypeId = recType.Id;
+
+            orgGroup1.OWNING_BUSINESS__C='Building Innovations';
+            orgGroup1.TYPE__C='ERP';
+            insert orgGroup1;
+
+            Organizational_Group_Item__c orgGrpItem= new Organizational_Group_Item__c();
+            orgGrpItem.Business__c = (orgGroup1).id;
+            orgGrpItem.OrgGroup__c = (orgGroup).id;
+            orgGrpItem.CURRENCYISOCODE = 'USD';
+            //orgGrpItem.APPROVAL_ESCALATION_DURATION__C = 23;
+            //orgGrpItem.CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Competitive pricing;Extending current prices;Pricing campaign;Other reason';
+            orgGrpItem.ERP_CURRENCY__C = 'USD;RUB';
+            orgGrpItem.ERP_UOM__C = 'EA;SH';
+            orgGrpItem.INCLUDE_CUSTOMER_CURRENCY__C = true;
+            orgGrpItem.LATEST_VALID_FROM_OFFSET_NON_CUST_SPEC__C = 90;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_CUST_SPEC__C = 12;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_NON_CUST_SPEC__C = 12;
+            orgGrpItem.MAX_VALID_FROM_OFFSET_CUST_SPEC__C = 90;
+            orgGrpItem.NON_CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Extending current prices; New materials; Periodic price review; Other reason; Pricing Compaign; Seasonal price';
+            orgGrpItem.RETROACTIVE_LIMIT__C =30;
+            orgGrpItem.CUSTOMER_REQUEST_REASONS__C = 'Seasonal price; Pricing campaign; Slow moving inventory; Customer negotiation; New customer; New materials; Competitive pricing; Extending current prices; Other reason';
+            orgGrpItem.PRICING_TASK_REASONS__C = '002-Trade fair sales activity;F06-Demonstration to Customer;F09-Research & Development;F12-Replacement;F15-Sales Promotion;M12- Pricing Discrepancy;M13-Quantity Correction;M31-Commercial Adjustment;S01-Paid Sample sales;Non-standard product;Other reason';
+            orgGrpItem.PROJECT_REQUEST_REASONS__C = 'Quantity Change;Time extension;Quantity and time change;Product change';
+            orgGrpItem.ERP_Pricing_Procedure__c = erpPricingProcedure.Id;
+            orgGrpItem.Rebate_Agreement__c='Annual Agreement';
+            orgGrpItem.Rebate_Agreement__c='';
+            orgGrpItem.Pricing_Task_Type__c='Spot Price; Free of Charge; Rebate Agreement; Display';
+            insert orgGrpItem;
+
+            //String name = 'test';
+
+            Pricing_Request__c R1= new Pricing_Request__c();
+            R1.Request_Name__c='R1 For P1';
+            R1.Request_Approval_Status__c='Draft';
+            R1.Request_Reason__c='New Project';
+            R1.Request_Type__c = 'Non Customer Specific';
+            R1.Pricing_Request_Type__c = 'Permanent';       
+            R1.Customer_Specific__c = true;   
+            R1.BU__c='BI';  
+            R1.Sales_Org_Code__c='A640';
+            R1.Dist_Channel_Code__c='10'; 
+            R1.Division_Code__c='02'; 
+          //  R1.soldto_code__c = '5512345';
+            insert R1;
+            ApexPages.currentPage().getParameters().put('id',R1.Id);
+            
+        Test.stopTest(); //<SS20230501>
+
+       /*     ERP_Customer__c cust = new ERP_Customer__c(city__c='Chennai',country__c='India',country_code__c='IND',
+                    currency_code__c='INR',customer_code__c='5512345',
+                    Distribution_Channel_Code__c='10',Distribution_channel__c='Dist Channel',
+                    Division__c='Division',Division_code__c='02',Incoterms_1__c='Inco1',Incoterms_1_Code__c='IncoCode',
+                    Incoterms_2__c='Inco2',Customer_Price_Group_Code__c='Z0',
+                    Customer_Price_Group__c='Others',Price_List_type__c='PriceList',
+                    price_list_type_code__c='A7',sales_office__c='salesOffice',
+                    sales_office_Code__c='salesOfficeCode',sales_org_code__c='A640',
+                    sales_org__c='sales Org',State_Province__c='TN',Street__c='MP',Terms_Of_Payment__c='None',
+                    Terms_Of_Payment_Code__c='None',Zip_Postal_Code__c='600039',Source_Cluster__c='CB1');
+            insert cust;
+        ApexPages.currentPage().getParameters().put('id',cust.Id); */
+
+            PAServiceState paServiceState = new PAServiceState();        
+            PAOrganizationalGroupItems paOrgGroupItems = new PAOrganizationalGroupItems();
+            paOrgGroupItems.selectedBU=(orgGroup1).id;
+            paServiceState.ogItems = paOrgGroupItems;
+            paServiceState.ogItems.buIdToNameMap = new map<Id,String>();
+            paServiceState.ogItems.buIdToNameMap.put(OrgGroup1.Id,OrgGroup1.Business__c);
+            paServiceState.ogItems.selectedBU  = OrgGroup1.Id; 
+            paServiceState.ogItems.orgGroupItems=orgGrpItem;
+
+            PARequest Request = new PARequest(paServiceState);
+            request.pricingRequest=R1;  
+
+            PAERPCustomer paERPCustomer = new PAERPCustomer(paServiceState);
+            paERPCustomer.ogitems = paOrgGroupItems;
+            paERPCustomer.paERPCustomer = cust;
+            paERPCustomer.customerCode=cust.customer_code__c;
+            paservicestate.erpcustomer=paERPCustomer;
+            paservicestate.erpcustomer.customercode=cust.customer_code__c;
+            //PARequest paRequest = new PARequest(paServiceState);
+            paServiceState.currentRequest = Request;
+            paServiceState.currentRequest.pricingrequest=R1;
+            paServiceState.currentRequest.customer = paERPCustomer;
+           
+           
+           
+
+          //  paServiceState.currentRequest.customer = paERPCustomer;
+
+            PAPricingCondition paPricingCondition = new PAPricingCondition(paServiceState);
+            //paPricingCondition.pricingCondition = pricingCondition;
+            paServiceState.currentRequest.pricingCondition = paPricingCondition;
+
+            PAKeyCombination paKeyCombination = new PAKeyCombination(paServiceState);
+            paServiceState.currentRequest.keyCombination = paKeyCombination;
+            
+       /*     PAProductHierarchy paProductHierarchy = new PAProductHierarchy(paServiceState);
+            paServiceState.currentRequest.productHierarchy = paProductHierarchy; 
+*/
+            PAService PAService1 = new PAService();      
+            paService1.paServiceState = paServiceState;
+            
+            paService1.name = 'test';
+
+            //PARequestItem paRequestItem = new PARequestItem(paServiceState);
+            request.pricingRequest=R1;
+            request.pricingRequest.Request_Type__c = 'Massive';
+            request.pricingRequest.Pricing_Request_Type__c='Permanent';
+            request.pricingRequest.Customer_Specific__c = true;
+            request.pricingRequest.Division_code__c='02';
+            request.pricingRequest.sales_org_code__c='A640';
+            request.pricingRequest.Dist_channel_code__c='10';
+            request.pricingRequest.soldto_code__c='5512345';
+            PAService1.getBusinessComponent('RPQReporting','OrganizationalGroupItem');
+            PAService PAService2 = new PAService();      
+            paService2.paServiceState = paServiceState;
+            PAService2.getBusinessComponent('exportRPQ','OrganizationalGroupItem');
+            PAService PAService3 = new PAService();      
+            paService3.paServiceState = paServiceState;
+            PAService3.getBusinessComponent('BUSetupAddNewPH','OrganizationalGroupItem');
+            PAService PAService4 = new PAService();      
+            paService4.paServiceState = paServiceState;
+            PAService4.getBusinessComponent('customerList','ERPCustomer');
+            PAService PAService5 = new PAService();      
+            paService5.paServiceState = paServiceState;
+            PAService5.getBusinessComponent('CancelFromEndUserSelBack','ERPCustomer');
+            PAService PAService6 = new PAService();
+            paServiceState.ogItems.isenduserrebate=true;  
+            paService6.paServiceState = paServiceState;
+            PAService6.getBusinessComponent('CancelBack','ERPCustomer');   
+            
+            PAService PAService7 = new PAService();      
+            paService7.paServiceState = paServiceState;
+            PAService7.getBusinessComponent('landingpage','ERPCustomer');
+            
+            PAService PAService8 = new PAService();      
+            paService8.paServiceState = paServiceState;
+            PAService8.getBusinessComponent('BUSetupAddNewPH','OrganizationalGroupItem');
+            
+            
+            PAService PAService9 = new PAService();      
+            paService9.paServiceState = paServiceState;
+            PAService9.getBusinessComponent('customerPrices','Requests');
+            
+            PAService PAService10 = new PAService();      
+            paService10.paServiceState = paServiceState;
+            PAService10.getBusinessComponent('AddPricesReqCreated','Requests');
+            
+            PAService PAService11 = new PAService();      
+            paService11.paServiceState = paServiceState;
+            PAService11.getBusinessComponent('Massive','Requests');
+            
+            PAService PAService12 = new PAService();      
+            paService12.paServiceState = paServiceState;
+            PAService12.getBusinessComponent('PCLGeneration','Requests');
+      //      PAService11.getBusinessComponent('Quit','Requests');
+                   
+            /*//request.pricingRequest.Request_Type__c='Customer Specific';
+            PAService1.getBusinessComponent('landingpage','OrganizationalGroupItem');   
+            PAService1.getBusinessComponent('Quit','ERPCustomer');
+            PAService1.getBusinessComponent('Cancel','ERPCustomer');
+            PAService1.getBusinessComponent('PCL','ERPCustomer');
+            PAService1.getBusinessComponent('NewPricingReqItem','ERPCustomer');
+            PAService1.getBusinessComponent('NewMaterial','ERPCustomer');
+            PAService1.getBusinessComponent('PCLGeneration','ERPCustomer');
+            
+                    
+            PAService1.getBusinessComponent('customerList','OrganizationalGroupItem');
+            PAService1.getBusinessComponent('generatePCL','ERPCustomer');
+            PAService1.getBusinessComponent('viewLog','ERPCustomer');
+            PAService1.getBusinessComponent('X','OrganizationalGroupItem');
+            PAService1.getBusinessComponent('BUSetup','OrganizationalGroupItem');
+            PAService1.getBusinessComponent('BUSetu','OrganizationalGroupItem');
+            PAService1.getBusinessComponent('BUSetup','ERPCustomer');
+            PAService1.getBusinessComponent('Abandon','Requests');
+
+            PAService1.getBusinessComponent('AddPrices','Requests');
+            PAService1.getBusinessComponent('AddMaterial','ProjectPrice');
+
+            PAService1.getBusinessComponent('gotoApprovalSetup','ApprovalSetup');
+            PAService1.getBusinessComponent('customerPrices','ApprovalSetup');
+
+            try{
+                PAService1.getBusinessComponent('exportCSV','Requests');
+                PAService1.getBusinessComponent('NPCRequests','NetPriceDetail');
+            }
+            catch(exception e){}
+    
+                Test.startTest();
+                //request.pricingRequest=R1;  
+                paServiceState.currentRequest.customer = paERPCustomer;
+                paServiceState.currentRequest.pricingRequest = R1;
+                
+             */   
+                //Test.startTest();  
+                //subbu    
+          /*      PARequestItem RItem = new PARequestItem(paServiceState);
+                PAService1.paServiceState.currentRequestItem = RItem;
+           */   
+           /*     paService2.paServiceState.currentRequest = new PARequest(PAserviceState);
+                 paService2.paServiceState.currentRequest.action('PAExportPrices','PAExportPrices','soldtoSelect');
+                 paService2.paServiceState.currentRequest.action('PAExportPrices','PAExportPrices','CSPContinue');
+                 paService2.paServiceState.currentRequest.action('PAExportPrices','PAExportPrices','TaskContinue');
+            */  
+                
+                
+                
+               // PAService1.getBusinessComponent('NewPricingReqItem','RequestItems');
+              //  PAService1.getBusinessComponent('NewPricingReqItem','RequestItems');
+                //Test.stopTest();
+
+        /*try{
+        PAService1.getBusinessComponent('Quit','ERPCustomer');
+        }
+        catch(exception e){}
+        }   */   
+    }
+    
+
+    }
+    
+    
+    //901
+     static testMethod void paServiceTestMethod901(){
+        
+       
+        user u = createUser();
+
+        system.runAs(u){
+            PAApprovalWF_UT.paApprovalWFTestMethodPAQuery();
+            IntegrationLoginCredentials__c pr4 = new IntegrationLoginCredentials__c (Name='admin.util@dupont.com', EncryptedLoginDetails__c='Infosys1234Xkh5hWWRryiH6c7tDrZrCH9jF');
+        insert pr4;
+            
+            List<PAProfilePermissions__c> paProfilePermissionsList = new List<PAProfilePermissions__c>();
+            PAProfilePermissions__c paProfilePermissions1 = new PAProfilePermissions__c();
+            paProfilePermissions1.Name = 'Sales Admin';
+            paProfilePermissionsList.add(paProfilePermissions1);
+
+
+            PAProfilePermissions__c paProfilePermissions2 = new PAProfilePermissions__c();
+            paProfilePermissions2.Name = 'Approver';
+            paProfilePermissionsList.add(paProfilePermissions2);
+            PAService_UT.paServiceTestMethodPAQuery();
+            PAProfilePermissions__c paProfilePermissions3 = new PAProfilePermissions__c();
+            paProfilePermissions3.Name = 'BU Admin';
+            paProfilePermissionsList.add(paProfilePermissions3);
+
+            PAProfilePermissions__c paProfilePermissions4 = new PAProfilePermissions__c();
+            paProfilePermissions4.Name = 'Price Requester';
+            paProfilePermissionsList.add(paProfilePermissions4);    
+
+            PAProfilePermissions__c paProfilePermissions5 = new PAProfilePermissions__c();
+            paProfilePermissions5.Name = 'IT Admin';
+            paProfilePermissionsList.add(paProfilePermissions5);
+
+            insert paProfilePermissionsList;
+
+            Recordtype recType = [select id,name from Recordtype where name = 'Business'];
+
+            ERP_Pricing_Procedure__c erpPricingProcedure = new ERP_Pricing_Procedure__c();
+            erpPricingProcedure.Doc_Type__c = '';
+            erpPricingProcedure.Pricing_Procedure__c = 'ERP_PP-00001';
+            erpPricingProcedure.Pricing_Procedure_Description__c='BI EMEA Surfaces';
+            erpPricingProcedure.Pricing_Procedure_Code__c = 'ZD630A';
+            erpPricingProcedure.Pricing_Procedure__c = 'NOW Standard Pricing- EU';
+            erpPricingProcedure.SAP_Application_Id__c = 'V';
+            erpPricingProcedure.SAP_Client_Id__c = '510';
+            erpPricingProcedure.SAP_Cluster__c = 'WB1';
+            erpPricingProcedure.Status__c = 'Active';
+            insert erpPricingProcedure;
+
+            ERP_Pricing_Condition__c pricingCondition= new ERP_Pricing_Condition__c();
+            pricingCondition.SAP_Application_Id__c='V';
+            pricingCondition.SAP_Client_Id__c='510';
+            pricingCondition.SAP_Cluster__c='CB1';
+            pricingCondition.Pricing_Condition_Code__c='ZPNA';
+            insert pricingCondition;
+
+            ERP_Key_Combination__c keyCombination=new ERP_Key_Combination__c();
+            keyCombination.SAP_Application_Id__c='V';
+            keyCombination.SAP_Client_Id__c='510';
+            keyCombination.SAP_Cluster__c='CB1';
+            keyCombination.Key_Combination_Code__c='A580';
+            insert keyCombination;
+            ERP_Customer__c cust = new ERP_Customer__c(city__c='Chennai',country__c='India',country_code__c='IND',
+                    currency_code__c='INR',customer_code__c='5512345',
+                    Distribution_Channel_Code__c='10',Distribution_channel__c='Dist Channel',
+                    Division__c='Division',Division_code__c='02',Incoterms_1__c='Inco1',Incoterms_1_Code__c='IncoCode',
+                    Incoterms_2__c='Inco2',Customer_Price_Group_Code__c='Z0',
+                    Customer_Price_Group__c='Others',Price_List_type__c='PriceList',
+                    price_list_type_code__c='A7',sales_office__c='salesOffice',
+                    sales_office_Code__c='salesOfficeCode',sales_org_code__c='A640',
+                    sales_org__c='sales Org',State_Province__c='TN',Street__c='MP',Terms_Of_Payment__c='None',
+                    Terms_Of_Payment_Code__c='None',Zip_Postal_Code__c='600039',Source_Cluster__c='CB1');
+            insert cust;
+            OrgGroup__c orgGroup= new OrgGroup__c();        
+            orgGroup.CURRENCYISOCODE='USD';
+            //orgGroup.RecordTypeId = recType.Id;    
+            orgGroup.ERP_DISTRIBUTION_CHANNEL_CODE__C='10';
+            orgGroup.ERP_DISTRIBUTION_CHANNEL__C='DuPont Std';
+            orgGroup.ERP_DIVISION_CODE__C='02';
+            orgGroup.ERP_DIVISION__C='GSD Standard';
+            orgGroup.ERP_SALES_ORG_CODE__C='A640';
+            orgGroup.ERP_SALES_ORG__C='NOW DUP LUX 3430';
+            orgGroup.OWNING_BUSINESS__C='';
+            orgGroup.OWNING_ORG__C='';
+            orgGroup.EXTERNAL_ERP_ID__C='Askjlkj';
+            insert orgGroup;
+
+
+            OrgGroup__c orgGroup1 = new orgGroup__c();
+            orgGroup1.Business__c = 'BI EMEA Surfaces';
+            orgGroup1.RecordTypeId = recType.Id;
+
+            orgGroup1.OWNING_BUSINESS__C='Building Innovations';
+            orgGroup1.TYPE__C='ERP';
+            insert orgGroup1;
+
+            Organizational_Group_Item__c orgGrpItem= new Organizational_Group_Item__c();
+            orgGrpItem.Business__c = (orgGroup1).id;
+            orgGrpItem.OrgGroup__c = (orgGroup).id;
+            orgGrpItem.CURRENCYISOCODE = 'USD';
+            //orgGrpItem.APPROVAL_ESCALATION_DURATION__C = 23;
+            //orgGrpItem.CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Competitive pricing;Extending current prices;Pricing campaign;Other reason';
+            orgGrpItem.ERP_CURRENCY__C = 'USD;RUB';
+            orgGrpItem.ERP_UOM__C = 'EA;SH';
+            orgGrpItem.INCLUDE_CUSTOMER_CURRENCY__C = true;
+            orgGrpItem.LATEST_VALID_FROM_OFFSET_NON_CUST_SPEC__C = 90;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_CUST_SPEC__C = 12;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_NON_CUST_SPEC__C = 12;
+            orgGrpItem.MAX_VALID_FROM_OFFSET_CUST_SPEC__C = 90;
+            orgGrpItem.NON_CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Extending current prices; New materials; Periodic price review; Other reason; Pricing Compaign; Seasonal price';
+            orgGrpItem.RETROACTIVE_LIMIT__C =30;
+            orgGrpItem.CUSTOMER_REQUEST_REASONS__C = 'Seasonal price; Pricing campaign; Slow moving inventory; Customer negotiation; New customer; New materials; Competitive pricing; Extending current prices; Other reason';
+            orgGrpItem.PRICING_TASK_REASONS__C = '002-Trade fair sales activity;F06-Demonstration to Customer;F09-Research & Development;F12-Replacement;F15-Sales Promotion;M12- Pricing Discrepancy;M13-Quantity Correction;M31-Commercial Adjustment;S01-Paid Sample sales;Non-standard product;Other reason';
+            orgGrpItem.PROJECT_REQUEST_REASONS__C = 'Quantity Change;Time extension;Quantity and time change;Product change';
+            orgGrpItem.ERP_Pricing_Procedure__c = erpPricingProcedure.Id;
+            orgGrpItem.Rebate_Agreement__c='Annual Agreement';
+            orgGrpItem.Rebate_Agreement__c='';
+            orgGrpItem.Pricing_Task_Type__c='Spot Price; Free of Charge; Rebate Agreement; Display';
+            insert orgGrpItem;
+
+            //String name = 'test';
+
+            Pricing_Request__c R1= new Pricing_Request__c();
+            R1.Request_Name__c='R1 For P1';
+            R1.Request_Approval_Status__c='Draft';
+            R1.Request_Reason__c='New Project';
+            R1.Request_Type__c = 'Non Customer Specific';
+            R1.Pricing_Request_Type__c = 'Permanent';       
+            R1.Customer_Specific__c = true;   
+            R1.BU__c='BI';  
+            R1.Sales_Org_Code__c='A640';
+            R1.Dist_Channel_Code__c='10'; 
+            R1.Division_Code__c='02'; 
+          //  R1.soldto_code__c = '5512345';
+            insert R1;
+            ApexPages.currentPage().getParameters().put('id',R1.Id);
+
+       /*     ERP_Customer__c cust = new ERP_Customer__c(city__c='Chennai',country__c='India',country_code__c='IND',
+                    currency_code__c='INR',customer_code__c='5512345',
+                    Distribution_Channel_Code__c='10',Distribution_channel__c='Dist Channel',
+                    Division__c='Division',Division_code__c='02',Incoterms_1__c='Inco1',Incoterms_1_Code__c='IncoCode',
+                    Incoterms_2__c='Inco2',Customer_Price_Group_Code__c='Z0',
+                    Customer_Price_Group__c='Others',Price_List_type__c='PriceList',
+                    price_list_type_code__c='A7',sales_office__c='salesOffice',
+                    sales_office_Code__c='salesOfficeCode',sales_org_code__c='A640',
+                    sales_org__c='sales Org',State_Province__c='TN',Street__c='MP',Terms_Of_Payment__c='None',
+                    Terms_Of_Payment_Code__c='None',Zip_Postal_Code__c='600039',Source_Cluster__c='CB1');
+            insert cust;
+        ApexPages.currentPage().getParameters().put('id',cust.Id); */
+
+            PAServiceState paServiceState = new PAServiceState();        
+            PAOrganizationalGroupItems paOrgGroupItems = new PAOrganizationalGroupItems();
+            paOrgGroupItems.selectedBU=(orgGroup1).id;
+            paServiceState.ogItems = paOrgGroupItems;
+            paServiceState.ogItems.buIdToNameMap = new map<Id,String>();
+            paServiceState.ogItems.buIdToNameMap.put(OrgGroup1.Id,OrgGroup1.Business__c);
+            paServiceState.ogItems.selectedBU  = OrgGroup1.Id; 
+            paServiceState.ogItems.orgGroupItems=orgGrpItem;
+
+            PARequest Request = new PARequest(paServiceState);
+            request.pricingRequest=R1;  
+
+            PAERPCustomer paERPCustomer = new PAERPCustomer(paServiceState);
+            paERPCustomer.ogitems = paOrgGroupItems;
+            paERPCustomer.paERPCustomer = cust;
+            paERPCustomer.customerCode=cust.customer_code__c;
+            paservicestate.erpcustomer=paERPCustomer;
+            paservicestate.erpcustomer.customercode=cust.customer_code__c;
+            //PARequest paRequest = new PARequest(paServiceState);
+            paServiceState.currentRequest = Request;
+            paServiceState.currentRequest.pricingrequest=R1;
+            paServiceState.currentRequest.customer = paERPCustomer;
+           
+           
+           
+
+          //  paServiceState.currentRequest.customer = paERPCustomer;
+
+            PAPricingCondition paPricingCondition = new PAPricingCondition(paServiceState);
+            //paPricingCondition.pricingCondition = pricingCondition;
+            paServiceState.currentRequest.pricingCondition = paPricingCondition;
+
+            PAKeyCombination paKeyCombination = new PAKeyCombination(paServiceState);
+            paServiceState.currentRequest.keyCombination = paKeyCombination;
+            
+       /*     PAProductHierarchy paProductHierarchy = new PAProductHierarchy(paServiceState);
+            paServiceState.currentRequest.productHierarchy = paProductHierarchy; 
+*/
+            PAService PAService1 = new PAService();      
+            paService1.paServiceState = paServiceState;
+            
+            paService1.name = 'test';
+
+            //PARequestItem paRequestItem = new PARequestItem(paServiceState);
+            request.pricingRequest=R1;
+            request.pricingRequest.Request_Type__c = 'Customer Specific';
+            request.pricingRequest.Pricing_Request_Type__c='Permanent';
+            request.pricingRequest.Customer_Specific__c = true;
+            request.pricingRequest.Division_code__c='02';
+            request.pricingRequest.sales_org_code__c='A640';
+            request.pricingRequest.Dist_channel_code__c='10';
+            request.pricingRequest.soldto_code__c='5512345';
+            PAService1.getBusinessComponent('RPQReporting','OrganizationalGroupItem');
+            PAService PAService2 = new PAService();      
+            paService2.paServiceState = paServiceState;
+            PAService2.getBusinessComponent('exportRPQ','OrganizationalGroupItem');
+            PAService PAService3 = new PAService();      
+            paService3.paServiceState = paServiceState;
+            PAService3.getBusinessComponent('BUSetupAddNewPH','OrganizationalGroupItem');
+            PAService PAService4 = new PAService();      
+            paService4.paServiceState = paServiceState;
+            PAService4.getBusinessComponent('customerList','ERPCustomer');
+            PAService PAService5 = new PAService();      
+            paService5.paServiceState = paServiceState;
+            PAService5.getBusinessComponent('CancelFromEndUserSelBack','ERPCustomer');
+            PAService PAService6 = new PAService();
+            paServiceState.ogItems.isenduserrebate=true;  
+            paService6.paServiceState = paServiceState;
+            PAService6.getBusinessComponent('CancelBack','ERPCustomer');   
+            
+            PAService PAService7 = new PAService();      
+            paService7.paServiceState = paServiceState;
+            PAService7.getBusinessComponent('landingpage','ERPCustomer');
+            
+            PAService PAService8 = new PAService();      
+            paService8.paServiceState = paServiceState;
+            PAService8.getBusinessComponent('BUSetupAddNewPH','OrganizationalGroupItem');
+            
+            
+     /*       PAService PAService9 = new PAService();      
+            paService9.paServiceState = paServiceState;
+            PAService9.getBusinessComponent('customerPrices','Requests');
+            
+            PAService PAService10 = new PAService();      
+            paService10.paServiceState = paServiceState;
+            PAService10.getBusinessComponent('AddPricesReqCreated','Requests');
+            
+            PAService PAService11 = new PAService();      
+            paService11.paServiceState = paServiceState;
+            PAService11.getBusinessComponent('Massive','Requests');
+            
+            PAService PAService12 = new PAService();      
+            paService12.paServiceState = paServiceState;
+            PAService12.getBusinessComponent('PCLGeneration','Requests');
+            
+            PAService PAService13 = new PAService();      
+            paService13.paServiceState = paServiceState;
+            PAService13.getBusinessComponent('RPQEndUserSelected','Requests');*/
+            
+            
+      //      PAService11.getBusinessComponent('Quit','Requests');
+                   
+            /*//request.pricingRequest.Request_Type__c='Customer Specific';
+            PAService1.getBusinessComponent('landingpage','OrganizationalGroupItem');   
+            PAService1.getBusinessComponent('Quit','ERPCustomer');
+            PAService1.getBusinessComponent('Cancel','ERPCustomer');
+            PAService1.getBusinessComponent('PCL','ERPCustomer');
+            PAService1.getBusinessComponent('NewPricingReqItem','ERPCustomer');
+            PAService1.getBusinessComponent('NewMaterial','ERPCustomer');
+            PAService1.getBusinessComponent('PCLGeneration','ERPCustomer');
+            
+                    
+            PAService1.getBusinessComponent('customerList','OrganizationalGroupItem');
+            PAService1.getBusinessComponent('generatePCL','ERPCustomer');
+            PAService1.getBusinessComponent('viewLog','ERPCustomer');
+            PAService1.getBusinessComponent('X','OrganizationalGroupItem');
+            PAService1.getBusinessComponent('BUSetup','OrganizationalGroupItem');
+            PAService1.getBusinessComponent('BUSetu','OrganizationalGroupItem');
+            PAService1.getBusinessComponent('BUSetup','ERPCustomer');
+            PAService1.getBusinessComponent('Abandon','Requests');
+
+            PAService1.getBusinessComponent('AddPrices','Requests');
+            PAService1.getBusinessComponent('AddMaterial','ProjectPrice');
+
+            PAService1.getBusinessComponent('gotoApprovalSetup','ApprovalSetup');
+            PAService1.getBusinessComponent('customerPrices','ApprovalSetup');
+
+            try{
+                PAService1.getBusinessComponent('exportCSV','Requests');
+                PAService1.getBusinessComponent('NPCRequests','NetPriceDetail');
+            }
+            catch(exception e){}
+    
+                Test.startTest();
+                //request.pricingRequest=R1;  
+                paServiceState.currentRequest.customer = paERPCustomer;
+                paServiceState.currentRequest.pricingRequest = R1;
+                
+             */   
+                //Test.startTest();  
+                //subbu    
+          /*      PARequestItem RItem = new PARequestItem(paServiceState);
+                PAService1.paServiceState.currentRequestItem = RItem;
+           */   
+           /*     paService2.paServiceState.currentRequest = new PARequest(PAserviceState);
+                 paService2.paServiceState.currentRequest.action('PAExportPrices','PAExportPrices','soldtoSelect');
+                 paService2.paServiceState.currentRequest.action('PAExportPrices','PAExportPrices','CSPContinue');
+                 paService2.paServiceState.currentRequest.action('PAExportPrices','PAExportPrices','TaskContinue');
+            */  
+                
+                
+                
+               // PAService1.getBusinessComponent('NewPricingReqItem','RequestItems');
+              //  PAService1.getBusinessComponent('NewPricingReqItem','RequestItems');
+                //Test.stopTest();
+
+        /*try{
+        PAService1.getBusinessComponent('Quit','ERPCustomer');
+        }
+        catch(exception e){}
+        }   */   
+    }
+    
+
+    }
+    
+    
+     static testMethod void paServiceTestMethod902(){
+        
+       
+        user u = createUser();
+
+        system.runAs(u){
+            PAApprovalWF_UT.paApprovalWFTestMethodPAQuery();
+            IntegrationLoginCredentials__c pr4 = new IntegrationLoginCredentials__c (Name='admin.util@dupont.com', EncryptedLoginDetails__c='Infosys1234Xkh5hWWRryiH6c7tDrZrCH9jF');
+        insert pr4;
+            
+            List<PAProfilePermissions__c> paProfilePermissionsList = new List<PAProfilePermissions__c>();
+            PAProfilePermissions__c paProfilePermissions1 = new PAProfilePermissions__c();
+            paProfilePermissions1.Name = 'Sales Admin';
+            paProfilePermissionsList.add(paProfilePermissions1);
+
+
+            PAProfilePermissions__c paProfilePermissions2 = new PAProfilePermissions__c();
+            paProfilePermissions2.Name = 'Approver';
+            paProfilePermissionsList.add(paProfilePermissions2);
+
+            PAProfilePermissions__c paProfilePermissions3 = new PAProfilePermissions__c();
+            paProfilePermissions3.Name = 'BU Admin';
+            paProfilePermissionsList.add(paProfilePermissions3);
+
+            PAProfilePermissions__c paProfilePermissions4 = new PAProfilePermissions__c();
+            paProfilePermissions4.Name = 'Price Requester';
+            paProfilePermissionsList.add(paProfilePermissions4);    
+
+            PAProfilePermissions__c paProfilePermissions5 = new PAProfilePermissions__c();
+            paProfilePermissions5.Name = 'IT Admin';
+            paProfilePermissionsList.add(paProfilePermissions5);
+
+            insert paProfilePermissionsList;
+
+            Recordtype recType = [select id,name from Recordtype where name = 'Business'];
+            PAService_UT.paServiceTestMethodPAQuery();
+            ERP_Pricing_Procedure__c erpPricingProcedure = new ERP_Pricing_Procedure__c();
+            erpPricingProcedure.Doc_Type__c = '';
+            erpPricingProcedure.Pricing_Procedure__c = 'ERP_PP-00001';
+            erpPricingProcedure.Pricing_Procedure_Description__c='BI EMEA Surfaces';
+            erpPricingProcedure.Pricing_Procedure_Code__c = 'ZD630A';
+            erpPricingProcedure.Pricing_Procedure__c = 'NOW Standard Pricing- EU';
+            erpPricingProcedure.SAP_Application_Id__c = 'V';
+            erpPricingProcedure.SAP_Client_Id__c = '510';
+            erpPricingProcedure.SAP_Cluster__c = 'WB1';
+            erpPricingProcedure.Status__c = 'Active';
+            insert erpPricingProcedure;
+
+            ERP_Pricing_Condition__c pricingCondition= new ERP_Pricing_Condition__c();
+            pricingCondition.SAP_Application_Id__c='V';
+            pricingCondition.SAP_Client_Id__c='510';
+            pricingCondition.SAP_Cluster__c='CB1';
+            pricingCondition.Pricing_Condition_Code__c='ZPNA';
+            insert pricingCondition;
+
+            ERP_Key_Combination__c keyCombination=new ERP_Key_Combination__c();
+            keyCombination.SAP_Application_Id__c='V';
+            keyCombination.SAP_Client_Id__c='510';
+            keyCombination.SAP_Cluster__c='CB1';
+            keyCombination.Key_Combination_Code__c='A580';
+            insert keyCombination;
+            ERP_Customer__c cust = new ERP_Customer__c(city__c='Chennai',country__c='India',country_code__c='IND',
+                    currency_code__c='INR',customer_code__c='5512345',
+                    Distribution_Channel_Code__c='10',Distribution_channel__c='Dist Channel',
+                    Division__c='Division',Division_code__c='02',Incoterms_1__c='Inco1',Incoterms_1_Code__c='IncoCode',
+                    Incoterms_2__c='Inco2',Customer_Price_Group_Code__c='Z0',
+                    Customer_Price_Group__c='Others',Price_List_type__c='PriceList',
+                    price_list_type_code__c='A7',sales_office__c='salesOffice',
+                    sales_office_Code__c='salesOfficeCode',sales_org_code__c='A640',
+                    sales_org__c='sales Org',State_Province__c='TN',Street__c='MP',Terms_Of_Payment__c='None',
+                    Terms_Of_Payment_Code__c='None',Zip_Postal_Code__c='600039',Source_Cluster__c='CB1');
+            insert cust;
+            OrgGroup__c orgGroup= new OrgGroup__c();        
+            orgGroup.CURRENCYISOCODE='USD';
+            //orgGroup.RecordTypeId = recType.Id;    
+            orgGroup.ERP_DISTRIBUTION_CHANNEL_CODE__C='10';
+            orgGroup.ERP_DISTRIBUTION_CHANNEL__C='DuPont Std';
+            orgGroup.ERP_DIVISION_CODE__C='02';
+            orgGroup.ERP_DIVISION__C='GSD Standard';
+            orgGroup.ERP_SALES_ORG_CODE__C='A640';
+            orgGroup.ERP_SALES_ORG__C='NOW DUP LUX 3430';
+            orgGroup.OWNING_BUSINESS__C='';
+            orgGroup.OWNING_ORG__C='';
+            orgGroup.EXTERNAL_ERP_ID__C='Askjlkj';
+            insert orgGroup;
+
+
+            OrgGroup__c orgGroup1 = new orgGroup__c();
+            orgGroup1.Business__c = 'BI EMEA Surfaces';
+            orgGroup1.RecordTypeId = recType.Id;
+
+            orgGroup1.OWNING_BUSINESS__C='Building Innovations';
+            orgGroup1.TYPE__C='ERP';
+            insert orgGroup1;
+
+            Organizational_Group_Item__c orgGrpItem= new Organizational_Group_Item__c();
+            orgGrpItem.Business__c = (orgGroup1).id;
+            orgGrpItem.OrgGroup__c = (orgGroup).id;
+            orgGrpItem.CURRENCYISOCODE = 'USD';
+            //orgGrpItem.APPROVAL_ESCALATION_DURATION__C = 23;
+            //orgGrpItem.CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Competitive pricing;Extending current prices;Pricing campaign;Other reason';
+            orgGrpItem.ERP_CURRENCY__C = 'USD;RUB';
+            orgGrpItem.ERP_UOM__C = 'EA;SH';
+            orgGrpItem.INCLUDE_CUSTOMER_CURRENCY__C = true;
+            orgGrpItem.LATEST_VALID_FROM_OFFSET_NON_CUST_SPEC__C = 90;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_CUST_SPEC__C = 12;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_NON_CUST_SPEC__C = 12;
+            orgGrpItem.MAX_VALID_FROM_OFFSET_CUST_SPEC__C = 90;
+            orgGrpItem.NON_CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Extending current prices; New materials; Periodic price review; Other reason; Pricing Compaign; Seasonal price';
+            orgGrpItem.RETROACTIVE_LIMIT__C =30;
+            orgGrpItem.CUSTOMER_REQUEST_REASONS__C = 'Seasonal price; Pricing campaign; Slow moving inventory; Customer negotiation; New customer; New materials; Competitive pricing; Extending current prices; Other reason';
+            orgGrpItem.PRICING_TASK_REASONS__C = '002-Trade fair sales activity;F06-Demonstration to Customer;F09-Research & Development;F12-Replacement;F15-Sales Promotion;M12- Pricing Discrepancy;M13-Quantity Correction;M31-Commercial Adjustment;S01-Paid Sample sales;Non-standard product;Other reason';
+            orgGrpItem.PROJECT_REQUEST_REASONS__C = 'Quantity Change;Time extension;Quantity and time change;Product change';
+            orgGrpItem.ERP_Pricing_Procedure__c = erpPricingProcedure.Id;
+            orgGrpItem.Rebate_Agreement__c='Annual Agreement';
+            orgGrpItem.Rebate_Agreement__c='';
+            orgGrpItem.Pricing_Task_Type__c='Spot Price; Free of Charge; Rebate Agreement; Display';
+            insert orgGrpItem;
+
+            //String name = 'test';
+
+            Pricing_Request__c R1= new Pricing_Request__c();
+            R1.Request_Name__c='R1 For P1';
+            R1.Request_Approval_Status__c='Draft';
+            R1.Request_Reason__c='New Project';
+            R1.Request_Type__c = 'Non Customer Specific';
+            R1.Pricing_Request_Type__c = 'Permanent';       
+            R1.Customer_Specific__c = true;   
+            R1.BU__c='BI';  
+            R1.Sales_Org_Code__c='A640';
+            R1.Dist_Channel_Code__c='10'; 
+            R1.Division_Code__c='02'; 
+          //  R1.soldto_code__c = '5512345';
+            insert R1;
+            ApexPages.currentPage().getParameters().put('id',R1.Id);
+
+       /*     ERP_Customer__c cust = new ERP_Customer__c(city__c='Chennai',country__c='India',country_code__c='IND',
+                    currency_code__c='INR',customer_code__c='5512345',
+                    Distribution_Channel_Code__c='10',Distribution_channel__c='Dist Channel',
+                    Division__c='Division',Division_code__c='02',Incoterms_1__c='Inco1',Incoterms_1_Code__c='IncoCode',
+                    Incoterms_2__c='Inco2',Customer_Price_Group_Code__c='Z0',
+                    Customer_Price_Group__c='Others',Price_List_type__c='PriceList',
+                    price_list_type_code__c='A7',sales_office__c='salesOffice',
+                    sales_office_Code__c='salesOfficeCode',sales_org_code__c='A640',
+                    sales_org__c='sales Org',State_Province__c='TN',Street__c='MP',Terms_Of_Payment__c='None',
+                    Terms_Of_Payment_Code__c='None',Zip_Postal_Code__c='600039',Source_Cluster__c='CB1');
+            insert cust;
+        ApexPages.currentPage().getParameters().put('id',cust.Id); */
+
+            PAServiceState paServiceState = new PAServiceState();        
+            PAOrganizationalGroupItems paOrgGroupItems = new PAOrganizationalGroupItems();
+            paOrgGroupItems.selectedBU=(orgGroup1).id;
+            paServiceState.ogItems = paOrgGroupItems;
+            paServiceState.ogItems.buIdToNameMap = new map<Id,String>();
+            paServiceState.ogItems.buIdToNameMap.put(OrgGroup1.Id,OrgGroup1.Business__c);
+            paServiceState.ogItems.selectedBU  = OrgGroup1.Id; 
+            paServiceState.ogItems.orgGroupItems=orgGrpItem;
+
+            PARequest Request = new PARequest(paServiceState);
+            request.pricingRequest=R1;  
+
+            PAERPCustomer paERPCustomer = new PAERPCustomer(paServiceState);
+            paERPCustomer.ogitems = paOrgGroupItems;
+            paERPCustomer.paERPCustomer = cust;
+            paERPCustomer.customerCode=cust.customer_code__c;
+            paservicestate.erpcustomer=paERPCustomer;
+            paservicestate.erpcustomer.customercode=cust.customer_code__c;
+            //PARequest paRequest = new PARequest(paServiceState);
+            paServiceState.currentRequest = Request;
+            paServiceState.currentRequest.pricingrequest=R1;
+            paServiceState.currentRequest.customer = paERPCustomer;
+           
+           
+           
+
+          //  paServiceState.currentRequest.customer = paERPCustomer;
+
+            PAPricingCondition paPricingCondition = new PAPricingCondition(paServiceState);
+            //paPricingCondition.pricingCondition = pricingCondition;
+            paServiceState.currentRequest.pricingCondition = paPricingCondition;
+
+            PAKeyCombination paKeyCombination = new PAKeyCombination(paServiceState);
+            paServiceState.currentRequest.keyCombination = paKeyCombination;
+            
+       /*     PAProductHierarchy paProductHierarchy = new PAProductHierarchy(paServiceState);
+            paServiceState.currentRequest.productHierarchy = paProductHierarchy; 
+*/
+            PAService PAService1 = new PAService();      
+            paService1.paServiceState = paServiceState;
+            
+            paService1.name = 'test';
+
+            //PARequestItem paRequestItem = new PARequestItem(paServiceState);
+            request.pricingRequest=R1;
+            request.pricingRequest.Request_Type__c = 'Massive';
+            request.pricingRequest.Pricing_Request_Type__c='Permanent';
+            request.pricingRequest.Customer_Specific__c = true;
+            request.pricingRequest.Division_code__c='02';
+            request.pricingRequest.sales_org_code__c='A640';
+            request.pricingRequest.Dist_channel_code__c='10';
+            request.pricingRequest.soldto_code__c='5512345';
+            PAService1.getBusinessComponent('RPQReporting','OrganizationalGroupItem');
+            PAService PAService2 = new PAService();      
+            paService2.paServiceState = paServiceState;
+            PAService2.getBusinessComponent('exportRPQ','OrganizationalGroupItem');
+            PAService PAService3 = new PAService();      
+            paService3.paServiceState = paServiceState;
+            PAService3.getBusinessComponent('BUSetupAddNewPH','OrganizationalGroupItem');
+            PAService PAService4 = new PAService();      
+            paService4.paServiceState = paServiceState;
+            PAService4.getBusinessComponent('customerList','ERPCustomer');
+            PAService PAService5 = new PAService();      
+            paService5.paServiceState = paServiceState;
+            PAService5.getBusinessComponent('CancelFromEndUserSelBack','ERPCustomer');
+            PAService PAService6 = new PAService();
+            paServiceState.ogItems.isenduserrebate=true;  
+            paService6.paServiceState = paServiceState;
+            PAService6.getBusinessComponent('CancelBack','ERPCustomer');   
+            
+            PAService PAService7 = new PAService();      
+            paService7.paServiceState = paServiceState;
+            PAService7.getBusinessComponent('landingpage','ERPCustomer');
+            
+            
+            PAService PAService71 = new PAService();      
+            paService71.paServiceState = paServiceState;
+              PAService71.PAServiceState.erpCustomer = new PAErpCustomer();
+            PAService71.PAServiceState.erpCustomer.currentPrices = 'viewPricesOnLoad';
+            PAService71.getBusinessComponent('customerPrices','Requests');
+            
+            
+        
+     
+          
+            
+                       
+            
+     /*       PAService PAService9 = new PAService();      
+            paService9.paServiceState = paServiceState;
+            PAService9.getBusinessComponent('customerPrices','Requests');
+            
+            PAService PAService10 = new PAService();      
+            paService10.paServiceState = paServiceState;
+            PAService10.getBusinessComponent('AddPricesReqCreated','Requests');
+            
+            PAService PAService11 = new PAService();      
+            paService11.paServiceState = paServiceState;
+            PAService11.getBusinessComponent('Massive','Requests');
+            
+            PAService PAService12 = new PAService();      
+            paService12.paServiceState = paServiceState;
+            PAService12.getBusinessComponent('PCLGeneration','Requests');
+            
+            PAService PAService13 = new PAService();      
+            paService13.paServiceState = paServiceState;
+            PAService13.getBusinessComponent('RPQEndUserSelected','Requests');*/
+            
+            
+      //      PAService11.getBusinessComponent('Quit','Requests');
+                   
+            /*//request.pricingRequest.Request_Type__c='Customer Specific';
+            PAService1.getBusinessComponent('landingpage','OrganizationalGroupItem');   
+            PAService1.getBusinessComponent('Quit','ERPCustomer');
+            PAService1.getBusinessComponent('Cancel','ERPCustomer');
+            PAService1.getBusinessComponent('PCL','ERPCustomer');
+            PAService1.getBusinessComponent('NewPricingReqItem','ERPCustomer');
+            PAService1.getBusinessComponent('NewMaterial','ERPCustomer');
+            PAService1.getBusinessComponent('PCLGeneration','ERPCustomer');
+            
+                    
+            PAService1.getBusinessComponent('customerList','OrganizationalGroupItem');
+            PAService1.getBusinessComponent('generatePCL','ERPCustomer');
+            PAService1.getBusinessComponent('viewLog','ERPCustomer');
+            PAService1.getBusinessComponent('X','OrganizationalGroupItem');
+            PAService1.getBusinessComponent('BUSetup','OrganizationalGroupItem');
+            PAService1.getBusinessComponent('BUSetu','OrganizationalGroupItem');
+            PAService1.getBusinessComponent('BUSetup','ERPCustomer');
+            PAService1.getBusinessComponent('Abandon','Requests');
+
+            PAService1.getBusinessComponent('AddPrices','Requests');
+            PAService1.getBusinessComponent('AddMaterial','ProjectPrice');
+
+            PAService1.getBusinessComponent('gotoApprovalSetup','ApprovalSetup');
+            PAService1.getBusinessComponent('customerPrices','ApprovalSetup');
+
+            try{
+                PAService1.getBusinessComponent('exportCSV','Requests');
+                PAService1.getBusinessComponent('NPCRequests','NetPriceDetail');
+            }
+            catch(exception e){}
+    
+                Test.startTest();
+                //request.pricingRequest=R1;  
+                paServiceState.currentRequest.customer = paERPCustomer;
+                paServiceState.currentRequest.pricingRequest = R1;
+                
+             */   
+                //Test.startTest();  
+                //subbu    
+          /*      PARequestItem RItem = new PARequestItem(paServiceState);
+                PAService1.paServiceState.currentRequestItem = RItem;
+           */   
+           /*     paService2.paServiceState.currentRequest = new PARequest(PAserviceState);
+                 paService2.paServiceState.currentRequest.action('PAExportPrices','PAExportPrices','soldtoSelect');
+                 paService2.paServiceState.currentRequest.action('PAExportPrices','PAExportPrices','CSPContinue');
+                 paService2.paServiceState.currentRequest.action('PAExportPrices','PAExportPrices','TaskContinue');
+            */  
+                
+                
+                
+               // PAService1.getBusinessComponent('NewPricingReqItem','RequestItems');
+              //  PAService1.getBusinessComponent('NewPricingReqItem','RequestItems');
+                //Test.stopTest();
+
+        /*try{
+        PAService1.getBusinessComponent('Quit','ERPCustomer');
+        }
+        catch(exception e){}
+        }   */   
+    }
+    
+    }
+    
+    static testMethod void paServiceTestMethod41() {
+        user u = createUser();
+
+        system.runAs(u){
+            
+             IntegrationLoginCredentials__c pr4 = new IntegrationLoginCredentials__c (Name='admin.util@dupont.com.utqa', EncryptedLoginDetails__c='Infosys1234Xkh5hWWRryiH6c7tDrZrCH9jF');
+             insert pr4;
+             
+            PAApprovalWF_UT.paApprovalWFTestMethodPAQuery();
+            List<PAProfilePermissions__c> paProfilePermissionsList = new List<PAProfilePermissions__c>();
+            PAProfilePermissions__c paProfilePermissions1 = new PAProfilePermissions__c();
+            paProfilePermissions1.Name = 'Sales Admin';
+            paProfilePermissionsList.add(paProfilePermissions1);
+
+
+            PAProfilePermissions__c paProfilePermissions2 = new PAProfilePermissions__c();
+            paProfilePermissions2.Name = 'Approver';
+            paProfilePermissionsList.add(paProfilePermissions2);
+            PAService_UT.paServiceTestMethodPAQuery();
+            PAProfilePermissions__c paProfilePermissions3 = new PAProfilePermissions__c();
+            paProfilePermissions3.Name = 'BU Admin';
+            paProfilePermissionsList.add(paProfilePermissions3);
+
+            PAProfilePermissions__c paProfilePermissions4 = new PAProfilePermissions__c();
+            paProfilePermissions4.Name = 'Price Requester';
+            paProfilePermissionsList.add(paProfilePermissions4);    
+
+            PAProfilePermissions__c paProfilePermissions5 = new PAProfilePermissions__c();
+            paProfilePermissions5.Name = 'IT Admin';
+            paProfilePermissionsList.add(paProfilePermissions5);
+
+            insert paProfilePermissionsList;
+
+            Recordtype recType = [select id,name from Recordtype where name = 'Business'];
+
+            ERP_Pricing_Procedure__c erpPricingProcedure = new ERP_Pricing_Procedure__c();
+            erpPricingProcedure.Doc_Type__c = '';
+            erpPricingProcedure.Pricing_Procedure__c = 'ERP_PP-00001';
+            erpPricingProcedure.Pricing_Procedure_Description__c='BI EMEA Surfaces';
+            erpPricingProcedure.Pricing_Procedure_Code__c = 'ZD630A';
+            erpPricingProcedure.Pricing_Procedure__c = 'NOW Standard Pricing- EU';
+            erpPricingProcedure.SAP_Application_Id__c = 'V';
+            erpPricingProcedure.SAP_Client_Id__c = '510';
+            erpPricingProcedure.SAP_Cluster__c = 'WB1';
+            erpPricingProcedure.Status__c = 'Active';
+            insert erpPricingProcedure;
+
+            ERP_Pricing_Condition__c pricingCondition= new ERP_Pricing_Condition__c();
+            pricingCondition.SAP_Application_Id__c='V';
+            pricingCondition.SAP_Client_Id__c='510';
+            pricingCondition.SAP_Cluster__c='CB1';
+            pricingCondition.Pricing_Condition_Code__c='ZPSE';
+            insert pricingCondition;
+
+            ERP_Key_Combination__c keyCombination=new ERP_Key_Combination__c();
+            keyCombination.SAP_Application_Id__c='V';
+            keyCombination.SAP_Client_Id__c='510';
+            keyCombination.SAP_Cluster__c='CB1';
+            keyCombination.Key_Combination_Code__c='A580';
+            insert keyCombination;
+
+            OrgGroup__c orgGroup= new OrgGroup__c();        
+            orgGroup.CURRENCYISOCODE='USD';
+            //orgGroup.RecordTypeId = recType.Id;    
+            orgGroup.ERP_DISTRIBUTION_CHANNEL_CODE__C='10';
+            orgGroup.ERP_DISTRIBUTION_CHANNEL__C='DuPont Std';
+            orgGroup.ERP_DIVISION_CODE__C='02';
+            orgGroup.ERP_DIVISION__C='GSD Standard';
+            orgGroup.ERP_SALES_ORG_CODE__C='A640';
+            orgGroup.ERP_SALES_ORG__C='NOW DUP LUX 3430';
+            orgGroup.OWNING_BUSINESS__C='';
+            orgGroup.OWNING_ORG__C='';
+            orgGroup.EXTERNAL_ERP_ID__C='Askjlkj';
+            insert orgGroup;
+
+
+            OrgGroup__c orgGroup1 = new orgGroup__c();
+            orgGroup1.Business__c = 'BI EMEA Surfaces';
+            orgGroup1.RecordTypeId = recType.Id;
+
+            orgGroup1.OWNING_BUSINESS__C='Building Innovations';
+            orgGroup1.TYPE__C='ERP';
+            insert orgGroup1;
+
+            Organizational_Group_Item__c orgGrpItem= new Organizational_Group_Item__c();
+            orgGrpItem.Business__c = (orgGroup1).id;
+            orgGrpItem.OrgGroup__c = (orgGroup).id;
+            orgGrpItem.CURRENCYISOCODE = 'USD';
+            //orgGrpItem.APPROVAL_ESCALATION_DURATION__C = 23;
+            //orgGrpItem.CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Competitive pricing;Extending current prices;Pricing campaign;Other reason';
+            orgGrpItem.ERP_CURRENCY__C = 'USD;RUB';
+            orgGrpItem.ERP_UOM__C = 'EA;SH';
+            orgGrpItem.INCLUDE_CUSTOMER_CURRENCY__C = true;
+            orgGrpItem.LATEST_VALID_FROM_OFFSET_NON_CUST_SPEC__C = 90;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_CUST_SPEC__C = 12;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_NON_CUST_SPEC__C = 12;
+            orgGrpItem.MAX_VALID_FROM_OFFSET_CUST_SPEC__C = 90;
+            orgGrpItem.NON_CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Extending current prices; New materials; Periodic price review; Other reason; Pricing Compaign; Seasonal price';
+            orgGrpItem.RETROACTIVE_LIMIT__C =30;
+            orgGrpItem.CUSTOMER_REQUEST_REASONS__C = 'Seasonal price; Pricing campaign; Slow moving inventory; Customer negotiation; New customer; New materials; Competitive pricing; Extending current prices; Other reason';
+            orgGrpItem.PRICING_TASK_REASONS__C = '002-Trade fair sales activity;F06-Demonstration to Customer;F09-Research & Development;F12-Replacement;F15-Sales Promotion;M12- Pricing Discrepancy;M13-Quantity Correction;M31-Commercial Adjustment;S01-Paid Sample sales;Non-standard product;Other reason';
+            orgGrpItem.PROJECT_REQUEST_REASONS__C = 'Quantity Change;Time extension;Quantity and time change;Product change';
+            orgGrpItem.ERP_Pricing_Procedure__c = erpPricingProcedure.Id;
+            orgGrpItem.Rebate_Agreement__c='Annual Agreement';
+            orgGrpItem.Rebate_Agreement__c='';
+            orgGrpItem.Pricing_Task_Type__c='Spot Price; Free of Charge; Rebate Agreement; Display';
+            insert orgGrpItem;
+
+
+            Pricing_Request__c R1= new Pricing_Request__c();
+            R1.Request_Name__c='R1 For P1';
+            R1.Request_Approval_Status__c='Draft';
+            R1.Request_Reason__c='New Project';
+            R1.Request_Type__c = 'Customer Specific';
+            R1.Pricing_Request_Type__c = 'Permanent';       
+            R1.Customer_Specific__c = true;    
+            R1.BU__c='BI'; 
+            R1.Sales_Org_Code__c='A640';
+            R1.Dist_Channel_Code__c='10'; 
+            R1.Division_Code__c='02'; 
+            R1.soldto_code__c = '5512345';
+            insert R1;
+
+            ERP_Customer__c cust = new ERP_Customer__c(city__c='Chennai',country__c='India',country_code__c='IND',
+                    currency_code__c='INR',customer_code__c='5512345',
+                    Distribution_Channel_Code__c='10',Distribution_channel__c='Dist Channel',
+                    Division__c='Division',Division_code__c='02',Incoterms_1__c='Inco1',Incoterms_1_Code__c='IncoCode',
+                    Incoterms_2__c='Inco2',Customer_Price_Group_Code__c='Z0',
+                    Customer_Price_Group__c='Others',Price_List_type__c='PriceList',
+                    price_list_type_code__c='A7',sales_office__c='salesOffice',
+                    sales_office_Code__c='salesOfficeCode',sales_org_code__c='A640',
+                    sales_org__c='sales Org',State_Province__c='TN',Street__c='MP',Terms_Of_Payment__c='None',
+                    Terms_Of_Payment_Code__c='None',Zip_Postal_Code__c='600039',Source_Cluster__c='CB1');
+            insert cust;
+            
+            IntegrationLoginCredentials__c EC = new IntegrationLoginCredentials__c (Name='admin.util@dupont.com', EncryptedLoginDetails__c='Infosys1234Xkh5hWWRryiH6c7tDrZrCH9jF');
+                  insert EC; 
+
+            PAServiceState paServiceState = new PAServiceState();        
+            PAOrganizationalGroupItems paOrgGroupItems = new PAOrganizationalGroupItems();
+
+            paServiceState.ogItems = paOrgGroupItems;
+
+            paOrgGroupItems.selectedBU  = OrgGroup1.Id; 
+            paOrgGroupItems.orgGroupItems=orgGrpItem;
+
+            test.starttest();             
+             PAService PAService71 = new PAService();      
+            paService71.paServiceState = paServiceState;
+            PAService71.PAServiceState.erpCustomer = new PAErpCustomer();
+            PAService71.PAServiceState.erpCustomer.customerCode='XYZ';
+            PAService71.PAServiceState.erpCustomer.currentPrices = 'viewPricesOnLoad';
+            PAService71.getBusinessComponent('customerPrices','Requests');             
+             
+            test.stoptest();
+        }
+    }
+    static testMethod void paServiceTestMethod42() {
+        user u = createUser();
+
+        system.runAs(u){
+            
+             IntegrationLoginCredentials__c pr4 = new IntegrationLoginCredentials__c (Name='admin.util@dupont.com.utqa', EncryptedLoginDetails__c='Infosys1234Xkh5hWWRryiH6c7tDrZrCH9jF');
+             insert pr4;
+             
+            PAApprovalWF_UT.paApprovalWFTestMethodPAQuery();
+            List<PAProfilePermissions__c> paProfilePermissionsList = new List<PAProfilePermissions__c>();
+            PAProfilePermissions__c paProfilePermissions1 = new PAProfilePermissions__c();
+            paProfilePermissions1.Name = 'Sales Admin';
+            paProfilePermissionsList.add(paProfilePermissions1);
+
+
+            PAProfilePermissions__c paProfilePermissions2 = new PAProfilePermissions__c();
+            paProfilePermissions2.Name = 'Approver';
+            paProfilePermissionsList.add(paProfilePermissions2);
+            PAService_UT.paServiceTestMethodPAQuery();
+            PAProfilePermissions__c paProfilePermissions3 = new PAProfilePermissions__c();
+            paProfilePermissions3.Name = 'BU Admin';
+            paProfilePermissionsList.add(paProfilePermissions3);
+
+            PAProfilePermissions__c paProfilePermissions4 = new PAProfilePermissions__c();
+            paProfilePermissions4.Name = 'Price Requester';
+            paProfilePermissionsList.add(paProfilePermissions4);    
+
+            PAProfilePermissions__c paProfilePermissions5 = new PAProfilePermissions__c();
+            paProfilePermissions5.Name = 'IT Admin';
+            paProfilePermissionsList.add(paProfilePermissions5);
+
+            insert paProfilePermissionsList;
+
+            Recordtype recType = [select id,name from Recordtype where name = 'Business'];
+
+            ERP_Pricing_Procedure__c erpPricingProcedure = new ERP_Pricing_Procedure__c();
+            erpPricingProcedure.Doc_Type__c = '';
+            erpPricingProcedure.Pricing_Procedure__c = 'ERP_PP-00001';
+            erpPricingProcedure.Pricing_Procedure_Description__c='BI EMEA Surfaces';
+            erpPricingProcedure.Pricing_Procedure_Code__c = 'ZD630A';
+            erpPricingProcedure.Pricing_Procedure__c = 'NOW Standard Pricing- EU';
+            erpPricingProcedure.SAP_Application_Id__c = 'V';
+            erpPricingProcedure.SAP_Client_Id__c = '510';
+            erpPricingProcedure.SAP_Cluster__c = 'WB1';
+            erpPricingProcedure.Status__c = 'Active';
+            insert erpPricingProcedure;
+
+            ERP_Pricing_Condition__c pricingCondition= new ERP_Pricing_Condition__c();
+            pricingCondition.SAP_Application_Id__c='V';
+            pricingCondition.SAP_Client_Id__c='510';
+            pricingCondition.SAP_Cluster__c='CB1';
+            pricingCondition.Pricing_Condition_Code__c='ZPSE';
+            insert pricingCondition;
+
+            ERP_Key_Combination__c keyCombination=new ERP_Key_Combination__c();
+            keyCombination.SAP_Application_Id__c='V';
+            keyCombination.SAP_Client_Id__c='510';
+            keyCombination.SAP_Cluster__c='CB1';
+            keyCombination.Key_Combination_Code__c='A580';
+            insert keyCombination;
+
+            OrgGroup__c orgGroup= new OrgGroup__c();        
+            orgGroup.CURRENCYISOCODE='USD';
+            //orgGroup.RecordTypeId = recType.Id;    
+            orgGroup.ERP_DISTRIBUTION_CHANNEL_CODE__C='10';
+            orgGroup.ERP_DISTRIBUTION_CHANNEL__C='DuPont Std';
+            orgGroup.ERP_DIVISION_CODE__C='02';
+            orgGroup.ERP_DIVISION__C='GSD Standard';
+            orgGroup.ERP_SALES_ORG_CODE__C='A640';
+            orgGroup.ERP_SALES_ORG__C='NOW DUP LUX 3430';
+            orgGroup.OWNING_BUSINESS__C='';
+            orgGroup.OWNING_ORG__C='';
+            orgGroup.EXTERNAL_ERP_ID__C='Askjlkj';
+            insert orgGroup;
+
+
+            OrgGroup__c orgGroup1 = new orgGroup__c();
+            orgGroup1.Business__c = 'BI EMEA Surfaces';
+            orgGroup1.RecordTypeId = recType.Id;
+
+            orgGroup1.OWNING_BUSINESS__C='Building Innovations';
+            orgGroup1.TYPE__C='ERP';
+            insert orgGroup1;
+
+            Organizational_Group_Item__c orgGrpItem= new Organizational_Group_Item__c();
+            orgGrpItem.Business__c = (orgGroup1).id;
+            orgGrpItem.OrgGroup__c = (orgGroup).id;
+            orgGrpItem.CURRENCYISOCODE = 'USD';
+            //orgGrpItem.APPROVAL_ESCALATION_DURATION__C = 23;
+            //orgGrpItem.CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Competitive pricing;Extending current prices;Pricing campaign;Other reason';
+            orgGrpItem.ERP_CURRENCY__C = 'USD;RUB';
+            orgGrpItem.ERP_UOM__C = 'EA;SH';
+            orgGrpItem.INCLUDE_CUSTOMER_CURRENCY__C = true;
+            orgGrpItem.LATEST_VALID_FROM_OFFSET_NON_CUST_SPEC__C = 90;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_CUST_SPEC__C = 12;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_NON_CUST_SPEC__C = 12;
+            orgGrpItem.MAX_VALID_FROM_OFFSET_CUST_SPEC__C = 90;
+            orgGrpItem.NON_CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Extending current prices; New materials; Periodic price review; Other reason; Pricing Compaign; Seasonal price';
+            orgGrpItem.RETROACTIVE_LIMIT__C =30;
+            orgGrpItem.CUSTOMER_REQUEST_REASONS__C = 'Seasonal price; Pricing campaign; Slow moving inventory; Customer negotiation; New customer; New materials; Competitive pricing; Extending current prices; Other reason';
+            orgGrpItem.PRICING_TASK_REASONS__C = '002-Trade fair sales activity;F06-Demonstration to Customer;F09-Research & Development;F12-Replacement;F15-Sales Promotion;M12- Pricing Discrepancy;M13-Quantity Correction;M31-Commercial Adjustment;S01-Paid Sample sales;Non-standard product;Other reason';
+            orgGrpItem.PROJECT_REQUEST_REASONS__C = 'Quantity Change;Time extension;Quantity and time change;Product change';
+            orgGrpItem.ERP_Pricing_Procedure__c = erpPricingProcedure.Id;
+            orgGrpItem.Rebate_Agreement__c='Annual Agreement';
+            orgGrpItem.Rebate_Agreement__c='';
+            orgGrpItem.Pricing_Task_Type__c='Spot Price; Free of Charge; Rebate Agreement; Display';
+            insert orgGrpItem;
+
+
+            Pricing_Request__c R1= new Pricing_Request__c();
+            R1.Request_Name__c='R1 For P1';
+            R1.Request_Approval_Status__c='Draft';
+            R1.Request_Reason__c='New Project';
+            R1.Request_Type__c = 'Customer Specific';
+            R1.Pricing_Request_Type__c = 'Permanent';       
+            R1.Customer_Specific__c = true;    
+            R1.BU__c='BI'; 
+            R1.Sales_Org_Code__c='A640';
+            R1.Dist_Channel_Code__c='10'; 
+            R1.Division_Code__c='02'; 
+            R1.soldto_code__c = '5512345';
+            insert R1;
+
+            ERP_Customer__c cust = new ERP_Customer__c(city__c='Chennai',country__c='India',country_code__c='IND',
+                    currency_code__c='INR',customer_code__c='5512345',
+                    Distribution_Channel_Code__c='10',Distribution_channel__c='Dist Channel',
+                    Division__c='Division',Division_code__c='02',Incoterms_1__c='Inco1',Incoterms_1_Code__c='IncoCode',
+                    Incoterms_2__c='Inco2',Customer_Price_Group_Code__c='Z0',
+                    Customer_Price_Group__c='Others',Price_List_type__c='PriceList',
+                    price_list_type_code__c='A7',sales_office__c='salesOffice',
+                    sales_office_Code__c='salesOfficeCode',sales_org_code__c='A640',
+                    sales_org__c='sales Org',State_Province__c='TN',Street__c='MP',Terms_Of_Payment__c='None',
+                    Terms_Of_Payment_Code__c='None',Zip_Postal_Code__c='600039',Source_Cluster__c='CB1');
+            insert cust;
+            
+            IntegrationLoginCredentials__c EC = new IntegrationLoginCredentials__c (Name='admin.util@dupont.com', EncryptedLoginDetails__c='Infosys1234Xkh5hWWRryiH6c7tDrZrCH9jF');
+                  insert EC; 
+
+            PAServiceState paServiceState = new PAServiceState();        
+            PAOrganizationalGroupItems paOrgGroupItems = new PAOrganizationalGroupItems();
+
+            paServiceState.ogItems = paOrgGroupItems;
+
+            paOrgGroupItems.selectedBU  = OrgGroup1.Id; 
+            paOrgGroupItems.orgGroupItems=orgGrpItem;
+
+            test.starttest();
+            PAService PAService1 = new PAService();      
+            PAService1.paServiceState = paServiceState;                       
+            PAService1.getBusinessComponent('Massive','Requests');             
+            test.stoptest();
+        }
+    }
+    static testMethod void paServiceTestMethod43() {
+        user u = createUser();
+
+        system.runAs(u){
+            
+             IntegrationLoginCredentials__c pr4 = new IntegrationLoginCredentials__c (Name='admin.util@dupont.com.utqa', EncryptedLoginDetails__c='Infosys1234Xkh5hWWRryiH6c7tDrZrCH9jF');
+             insert pr4;
+             
+            PAApprovalWF_UT.paApprovalWFTestMethodPAQuery();
+            List<PAProfilePermissions__c> paProfilePermissionsList = new List<PAProfilePermissions__c>();
+            PAProfilePermissions__c paProfilePermissions1 = new PAProfilePermissions__c();
+            paProfilePermissions1.Name = 'Sales Admin';
+            paProfilePermissionsList.add(paProfilePermissions1);
+
+
+            PAProfilePermissions__c paProfilePermissions2 = new PAProfilePermissions__c();
+            paProfilePermissions2.Name = 'Approver';
+            paProfilePermissionsList.add(paProfilePermissions2);
+            PAService_UT.paServiceTestMethodPAQuery();
+            PAProfilePermissions__c paProfilePermissions3 = new PAProfilePermissions__c();
+            paProfilePermissions3.Name = 'BU Admin';
+            paProfilePermissionsList.add(paProfilePermissions3);
+
+            PAProfilePermissions__c paProfilePermissions4 = new PAProfilePermissions__c();
+            paProfilePermissions4.Name = 'Price Requester';
+            paProfilePermissionsList.add(paProfilePermissions4);    
+
+            PAProfilePermissions__c paProfilePermissions5 = new PAProfilePermissions__c();
+            paProfilePermissions5.Name = 'IT Admin';
+            paProfilePermissionsList.add(paProfilePermissions5);
+
+            insert paProfilePermissionsList;
+
+            Recordtype recType = [select id,name from Recordtype where name = 'Business'];
+
+            ERP_Pricing_Procedure__c erpPricingProcedure = new ERP_Pricing_Procedure__c();
+            erpPricingProcedure.Doc_Type__c = '';
+            erpPricingProcedure.Pricing_Procedure__c = 'ERP_PP-00001';
+            erpPricingProcedure.Pricing_Procedure_Description__c='BI EMEA Surfaces';
+            erpPricingProcedure.Pricing_Procedure_Code__c = 'ZD630A';
+            erpPricingProcedure.Pricing_Procedure__c = 'NOW Standard Pricing- EU';
+            erpPricingProcedure.SAP_Application_Id__c = 'V';
+            erpPricingProcedure.SAP_Client_Id__c = '510';
+            erpPricingProcedure.SAP_Cluster__c = 'WB1';
+            erpPricingProcedure.Status__c = 'Active';
+            insert erpPricingProcedure;
+
+            ERP_Pricing_Condition__c pricingCondition= new ERP_Pricing_Condition__c();
+            pricingCondition.SAP_Application_Id__c='V';
+            pricingCondition.SAP_Client_Id__c='510';
+            pricingCondition.SAP_Cluster__c='CB1';
+            pricingCondition.Pricing_Condition_Code__c='ZPSE';
+            insert pricingCondition;
+
+            ERP_Key_Combination__c keyCombination=new ERP_Key_Combination__c();
+            keyCombination.SAP_Application_Id__c='V';
+            keyCombination.SAP_Client_Id__c='510';
+            keyCombination.SAP_Cluster__c='CB1';
+            keyCombination.Key_Combination_Code__c='A580';
+            insert keyCombination;
+
+            OrgGroup__c orgGroup= new OrgGroup__c();        
+            orgGroup.CURRENCYISOCODE='USD';
+            //orgGroup.RecordTypeId = recType.Id;    
+            orgGroup.ERP_DISTRIBUTION_CHANNEL_CODE__C='10';
+            orgGroup.ERP_DISTRIBUTION_CHANNEL__C='DuPont Std';
+            orgGroup.ERP_DIVISION_CODE__C='02';
+            orgGroup.ERP_DIVISION__C='GSD Standard';
+            orgGroup.ERP_SALES_ORG_CODE__C='A640';
+            orgGroup.ERP_SALES_ORG__C='NOW DUP LUX 3430';
+            orgGroup.OWNING_BUSINESS__C='';
+            orgGroup.OWNING_ORG__C='';
+            orgGroup.EXTERNAL_ERP_ID__C='Askjlkj';
+            insert orgGroup;
+
+
+            OrgGroup__c orgGroup1 = new orgGroup__c();
+            orgGroup1.Business__c = 'BI EMEA Surfaces';
+            orgGroup1.RecordTypeId = recType.Id;
+
+            orgGroup1.OWNING_BUSINESS__C='Building Innovations';
+            orgGroup1.TYPE__C='ERP';
+            insert orgGroup1;
+
+            Organizational_Group_Item__c orgGrpItem= new Organizational_Group_Item__c();
+            orgGrpItem.Business__c = (orgGroup1).id;
+            orgGrpItem.OrgGroup__c = (orgGroup).id;
+            orgGrpItem.CURRENCYISOCODE = 'USD';
+            //orgGrpItem.APPROVAL_ESCALATION_DURATION__C = 23;
+            //orgGrpItem.CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Competitive pricing;Extending current prices;Pricing campaign;Other reason';
+            orgGrpItem.ERP_CURRENCY__C = 'USD;RUB';
+            orgGrpItem.ERP_UOM__C = 'EA;SH';
+            orgGrpItem.INCLUDE_CUSTOMER_CURRENCY__C = true;
+            orgGrpItem.LATEST_VALID_FROM_OFFSET_NON_CUST_SPEC__C = 90;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_CUST_SPEC__C = 12;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_NON_CUST_SPEC__C = 12;
+            orgGrpItem.MAX_VALID_FROM_OFFSET_CUST_SPEC__C = 90;
+            orgGrpItem.NON_CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Extending current prices; New materials; Periodic price review; Other reason; Pricing Compaign; Seasonal price';
+            orgGrpItem.RETROACTIVE_LIMIT__C =30;
+            orgGrpItem.CUSTOMER_REQUEST_REASONS__C = 'Seasonal price; Pricing campaign; Slow moving inventory; Customer negotiation; New customer; New materials; Competitive pricing; Extending current prices; Other reason';
+            orgGrpItem.PRICING_TASK_REASONS__C = '002-Trade fair sales activity;F06-Demonstration to Customer;F09-Research & Development;F12-Replacement;F15-Sales Promotion;M12- Pricing Discrepancy;M13-Quantity Correction;M31-Commercial Adjustment;S01-Paid Sample sales;Non-standard product;Other reason';
+            orgGrpItem.PROJECT_REQUEST_REASONS__C = 'Quantity Change;Time extension;Quantity and time change;Product change';
+            orgGrpItem.ERP_Pricing_Procedure__c = erpPricingProcedure.Id;
+            orgGrpItem.Rebate_Agreement__c='Annual Agreement';
+            orgGrpItem.Rebate_Agreement__c='';
+            orgGrpItem.Pricing_Task_Type__c='Spot Price; Free of Charge; Rebate Agreement; Display';
+            insert orgGrpItem;
+
+
+            Pricing_Request__c R1= new Pricing_Request__c();
+            R1.Request_Name__c='R1 For P1';
+            R1.Request_Approval_Status__c='Draft';
+            R1.Request_Reason__c='New Project';
+            R1.Request_Type__c = 'Customer Specific';
+            R1.Pricing_Request_Type__c = 'Permanent';       
+            R1.Customer_Specific__c = true;    
+            R1.BU__c='BI'; 
+            R1.Sales_Org_Code__c='A640';
+            R1.Dist_Channel_Code__c='10'; 
+            R1.Division_Code__c='02'; 
+            R1.soldto_code__c = '5512345';
+            insert R1;
+
+            ERP_Customer__c cust = new ERP_Customer__c(city__c='Chennai',country__c='India',country_code__c='IND',
+                    currency_code__c='INR',customer_code__c='5512345',
+                    Distribution_Channel_Code__c='10',Distribution_channel__c='Dist Channel',
+                    Division__c='Division',Division_code__c='02',Incoterms_1__c='Inco1',Incoterms_1_Code__c='IncoCode',
+                    Incoterms_2__c='Inco2',Customer_Price_Group_Code__c='Z0',
+                    Customer_Price_Group__c='Others',Price_List_type__c='PriceList',
+                    price_list_type_code__c='A7',sales_office__c='salesOffice',
+                    sales_office_Code__c='salesOfficeCode',sales_org_code__c='A640',
+                    sales_org__c='sales Org',State_Province__c='TN',Street__c='MP',Terms_Of_Payment__c='None',
+                    Terms_Of_Payment_Code__c='None',Zip_Postal_Code__c='600039',Source_Cluster__c='CB1');
+            insert cust;
+            
+            IntegrationLoginCredentials__c EC = new IntegrationLoginCredentials__c (Name='admin.util@dupont.com', EncryptedLoginDetails__c='Infosys1234Xkh5hWWRryiH6c7tDrZrCH9jF');
+                  insert EC; 
+
+            PAServiceState paServiceState = new PAServiceState();        
+            PAOrganizationalGroupItems paOrgGroupItems = new PAOrganizationalGroupItems();
+
+            paServiceState.ogItems = paOrgGroupItems;
+
+            paOrgGroupItems.selectedBU  = OrgGroup1.Id; 
+            paOrgGroupItems.orgGroupItems=orgGrpItem;
+
+            test.starttest();
+            PAService PAService1 = new PAService();      
+            paServiceState.ogItems.value='NonCustomerSpecific';
+            PAService1.paServiceState = paServiceState;
+            PAService1.getBusinessComponent('Abandon','Requests');  
+            PAService1.getBusinessComponent('Quit','Requests');  
+            test.stoptest();
+        }
+    }
+     //SS20220826 - START
+    static testMethod void paServiceTestMethod26() {
+        
+        user u = createUser();
+        
+ test.starttest();
+        system.runAs(u){
+             PAQuery__c paquery57 =  new PAQuery__c(Class__c='PARequestItem',Query__c='SELECT Id,isNPCApplicable__c, Pricing_Condition__r.Pricing_Condition_Code__c, Pricing_Key_Combination__c, Pricing_Key_Combination__r.Key_Combination_Code__c, Key_Combination__c, Sequence_Number__c, Floor_Key_Combination__c, Floor_Pricing_Condition__c, Net_Floor_Key_Combination__c, Net_Reference_Key_Combination__c, Reference_Key_Combination__c, Reference_Pricing_Condition__c, isPaymentTermsApplicable__c, isVolumeApplicable__c, Pricing_Condition__r.Pricing_Condition__c,Pricing_Key_Combination__r.Key_Combination__c FROM ERP_Access_Sequence__c',Variable__c='accessSeqObj');  
+         insert paquery57;
+             IntegrationLoginCredentials__c pr4 = new IntegrationLoginCredentials__c (Name='admin.util@dupont.com', EncryptedLoginDetails__c='Infosys1234Xkh5hWWRryiH6c7tDrZrCH9jF');
+        insert pr4;
+                
+
+        IntegrationLoginCredentials__c pr5 = new IntegrationLoginCredentials__c (Name='admin.util@dupont.com.utqa', EncryptedLoginDetails__c='Infosys1234Xkh5hWWRryiH6c7tDrZrCH9jF');
+        insert pr5;
+        PAService_UT.paServiceTestMethodPAQuery();
+            PAApprovalWF_UT.paApprovalWFTestMethodPAQuery();
+            List<PAProfilePermissions__c> paProfilePermissionsList = new List<PAProfilePermissions__c>();
+            PAProfilePermissions__c paProfilePermissions1 = new PAProfilePermissions__c();
+            paProfilePermissions1.Name = 'Sales Admin';
+            paProfilePermissionsList.add(paProfilePermissions1);
+
+
+            PAProfilePermissions__c paProfilePermissions2 = new PAProfilePermissions__c();
+            paProfilePermissions2.Name = 'Approver';
+            paProfilePermissionsList.add(paProfilePermissions2);
+
+            PAProfilePermissions__c paProfilePermissions3 = new PAProfilePermissions__c();
+            paProfilePermissions3.Name = 'BU Admin';
+            paProfilePermissionsList.add(paProfilePermissions3);
+
+            PAProfilePermissions__c paProfilePermissions4 = new PAProfilePermissions__c();
+            paProfilePermissions4.Name = 'Price Requester';
+            paProfilePermissionsList.add(paProfilePermissions4);    
+
+            PAProfilePermissions__c paProfilePermissions5 = new PAProfilePermissions__c();
+            paProfilePermissions5.Name = 'IT Admin';
+            paProfilePermissionsList.add(paProfilePermissions5);
+
+            insert paProfilePermissionsList;
+
+            Recordtype recType = [select id,name from Recordtype where name = 'Business'];
+
+            ERP_Pricing_Procedure__c erpPricingProcedure = new ERP_Pricing_Procedure__c();
+            erpPricingProcedure.Doc_Type__c = '';
+            erpPricingProcedure.Pricing_Procedure__c = 'ERP_PP-00001';
+            erpPricingProcedure.Pricing_Procedure_Description__c='BI EMEA Surfaces';
+            erpPricingProcedure.Pricing_Procedure_Code__c = 'ZD630A';
+            erpPricingProcedure.Pricing_Procedure__c = 'NOW Standard Pricing- EU';
+            erpPricingProcedure.SAP_Application_Id__c = 'V';
+            erpPricingProcedure.SAP_Client_Id__c = '510';
+            erpPricingProcedure.SAP_Cluster__c = 'WB1';
+            erpPricingProcedure.Status__c = 'Active';
+            insert erpPricingProcedure;
+            
+            ERP_Pricing_Condition__c pricingCondition= new ERP_Pricing_Condition__c();
+            pricingCondition.SAP_Application_Id__c='V';
+            pricingCondition.SAP_Client_Id__c='510';
+            pricingCondition.SAP_Cluster__c='CB1';
+            pricingCondition.Pricing_Condition_Code__c='ZPSE';
+            insert pricingCondition;
+            
+           
+
+            ERP_Key_Combination__c keyCombination=new ERP_Key_Combination__c();
+            keyCombination.SAP_Application_Id__c='V';
+            keyCombination.SAP_Client_Id__c='510';
+            keyCombination.SAP_Cluster__c='CB1';
+            keyCombination.Key_Combination_Code__c='A580';
+            insert keyCombination;
+
+            OrgGroup__c orgGroup= new OrgGroup__c();        
+            orgGroup.CURRENCYISOCODE='USD';
+            //orgGroup.RecordTypeId = recType.Id;    
+            orgGroup.ERP_DISTRIBUTION_CHANNEL_CODE__C='10';
+            orgGroup.ERP_DISTRIBUTION_CHANNEL__C='DuPont Std';
+            orgGroup.ERP_DIVISION_CODE__C='02';
+            orgGroup.ERP_DIVISION__C='GSD Standard';
+            orgGroup.ERP_SALES_ORG_CODE__C='A640';
+            orgGroup.ERP_SALES_ORG__C='NOW DUP LUX 3430';
+            orgGroup.OWNING_BUSINESS__C='';
+            orgGroup.OWNING_ORG__C='';
+            orgGroup.EXTERNAL_ERP_ID__C='Askjlkj';
+            insert orgGroup;
+
+
+            OrgGroup__c orgGroup1 = new orgGroup__c();
+            orgGroup1.Business__c = 'BI EMEA Surfaces';
+            orgGroup1.RecordTypeId = recType.Id;
+
+            orgGroup1.OWNING_BUSINESS__C='Building Innovations';
+            orgGroup1.TYPE__C='ERP';
+            insert orgGroup1;
+
+            Organizational_Group_Item__c orgGrpItem= new Organizational_Group_Item__c();
+            orgGrpItem.Business__c = (orgGroup1).id;
+            orgGrpItem.OrgGroup__c = (orgGroup).id;
+            orgGrpItem.CURRENCYISOCODE = 'USD';
+            //orgGrpItem.APPROVAL_ESCALATION_DURATION__C = 23;
+            //orgGrpItem.CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Competitive pricing;Extending current prices;Pricing campaign;Other reason';
+            orgGrpItem.ERP_CURRENCY__C = 'USD;RUB';
+            orgGrpItem.ERP_UOM__C = 'EA;SH';
+            orgGrpItem.INCLUDE_CUSTOMER_CURRENCY__C = true;
+            orgGrpItem.LATEST_VALID_FROM_OFFSET_NON_CUST_SPEC__C = 90;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_CUST_SPEC__C = 12;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_NON_CUST_SPEC__C = 12;
+            orgGrpItem.MAX_VALID_FROM_OFFSET_CUST_SPEC__C = 90;
+            orgGrpItem.NON_CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Extending current prices; New materials; Periodic price review; Other reason; Pricing Compaign; Seasonal price';
+            orgGrpItem.RETROACTIVE_LIMIT__C =30;
+            orgGrpItem.CUSTOMER_REQUEST_REASONS__C = 'Seasonal price; Pricing campaign; Slow moving inventory; Customer negotiation; New customer; New materials; Competitive pricing; Extending current prices; Other reason';
+            orgGrpItem.PRICING_TASK_REASONS__C = '002-Trade fair sales activity;F06-Demonstration to Customer;F09-Research & Development;F12-Replacement;F15-Sales Promotion;M12- Pricing Discrepancy;M13-Quantity Correction;M31-Commercial Adjustment;S01-Paid Sample sales;Non-standard product;Other reason';
+            orgGrpItem.PROJECT_REQUEST_REASONS__C = 'Quantity Change;Time extension;Quantity and time change;Product change';
+            orgGrpItem.ERP_Pricing_Procedure__c = erpPricingProcedure.Id;
+            orgGrpItem.Rebate_Agreement__c='Annual Agreement';
+            orgGrpItem.Rebate_Agreement__c='';
+            orgGrpItem.Pricing_Task_Type__c='Spot Price; Free of Charge; Rebate Agreement; Display';
+            insert orgGrpItem;
+
+
+            Pricing_Request__c R1= new Pricing_Request__c();
+            R1.Request_Name__c='R1 For P1';
+            R1.Request_Approval_Status__c='Draft';
+            R1.Request_Reason__c='New Project';
+            R1.Request_Type__c = 'Customer Specific';
+            R1.Pricing_Request_Type__c = 'Pricing Task';       
+            R1.Customer_Specific__c = true;   
+            R1.BU__c='BI';  
+            R1.Sales_Org_Code__c='A640';
+            R1.Dist_Channel_Code__c='10'; 
+            R1.Division_Code__c='02'; 
+            R1.soldto_code__c = '5512345';
+            insert R1;
+
+            ERP_Customer__c cust = new ERP_Customer__c(city__c='Chennai',country__c='India',country_code__c='IND',
+                    currency_code__c='INR',customer_code__c='5512345',
+                    Distribution_Channel_Code__c='10',Distribution_channel__c='Dist Channel',
+                    Division__c='Division',Division_code__c='02',Incoterms_1__c='Inco1',Incoterms_1_Code__c='IncoCode',
+                    Incoterms_2__c='Inco2',Customer_Price_Group_Code__c='Z0',
+                    Customer_Price_Group__c='Others',Price_List_type__c='PriceList',
+                    price_list_type_code__c='A7',sales_office__c='salesOffice',
+                    sales_office_Code__c='salesOfficeCode',sales_org_code__c='A640',
+                    sales_org__c='sales Org',State_Province__c='TN',Street__c='MP',Terms_Of_Payment__c='None',
+                    Terms_Of_Payment_Code__c='None',Zip_Postal_Code__c='600039',Source_Cluster__c='CB1');
+            insert cust;
+        ApexPages.currentPage().getParameters().put('id',cust.Id);
+
+            PAServiceState paServiceState = new PAServiceState();        
+            PAOrganizationalGroupItems paOrgGroupItems = new PAOrganizationalGroupItems();
+
+            paServiceState.ogItems = paOrgGroupItems;
+            paOrgGroupItems.selectedBU  = OrgGroup1.Id; 
+            //system.debug('orgGrpItem = '+ orgGrpItem);
+            paOrgGroupItems.orgGroupItems=orgGrpItem;
+            //system.debug('paOrgGroupItems = '+ paOrgGroupItems);
+            
+            //paServiceState.ogItems.orgGroupItems = orgGrpItem;
+            //system.debug('paServiceState1 = '+ paServiceState);
+            PARequest Request = new PARequest(paServiceState);
+            request.pricingRequest=R1;  
+
+            PAERPCustomer paERPCustomer = new PAERPCustomer(paServiceState);
+            paERPCustomer.ogitems = paOrgGroupItems;
+            paERPCustomer.paERPCustomer = cust;
+            system.debug('paServiceState2 = '+ paServiceState);
+            PARequest paRequest = new PARequest(paServiceState);
+            paServiceState.currentRequest = Request;
+            paServiceState.currentRequest.customer = paERPCustomer;
+            paServiceState.currentRequest.pricingRequest = R1;
+            paServiceState.currentRequest.customer = paERPCustomer;
+            PAPricingCondition paPricingCondition = new PAPricingCondition(paServiceState);
+            //paPricingCondition.pricingCondition = pricingCondition;
+            paServiceState.currentRequest.pricingCondition = paPricingCondition;
+
+            PAKeyCombination paKeyCombination = new PAKeyCombination(paServiceState);
+            paServiceState.currentRequest.keyCombination = paKeyCombination;
+
+            //system.debug('paServiceState3 = '+ paServiceState);
+
+            //PARequestItem paRequestItem = new PARequestItem(paServiceState);
+            request.pricingRequest=R1;
+            request.pricingRequest.Pricing_Request_Type__c='Pricing Task';
+            request.pricingRequest.Division_code__c='02';
+            request.pricingRequest.sales_org_code__c='A640';
+            request.pricingRequest.Dist_channel_code__c='10';
+            request.pricingRequest.soldto_code__c='5512345';
+            
+            PAProjectPrice paProjectPrice = new PAProjectPrice(paServiceState);
+            paProjectPrice.projectSelection='edit';
+            paServiceState.currentProjectPrice=paProjectPrice;
+
+        
+            PAService paService1 = new PAService();
+            //system.debug('paServiceState4 = '+ paServiceState);
+            paService1.paServiceState = paServiceState;
+            //system.debug('paServiceState5 = '+ paService1.paServiceState);
+            PAService1.getBusinessComponent('done','RequestItems');
+            PAService1.getBusinessComponent('ProjectNewPricingRequest','ProjectPrice');
+       test.stoptest();
+    }
+    }
+    
+    static testMethod void paServiceTestMethod27() {
+        
+        user u = createUser();
+        
+ test.starttest();
+        system.runAs(u){
+             PAQuery__c paquery57 =  new PAQuery__c(Class__c='PARequestItem',Query__c='SELECT Id,isNPCApplicable__c, Pricing_Condition__r.Pricing_Condition_Code__c, Pricing_Key_Combination__c, Pricing_Key_Combination__r.Key_Combination_Code__c, Key_Combination__c, Sequence_Number__c, Floor_Key_Combination__c, Floor_Pricing_Condition__c, Net_Floor_Key_Combination__c, Net_Reference_Key_Combination__c, Reference_Key_Combination__c, Reference_Pricing_Condition__c, isPaymentTermsApplicable__c, isVolumeApplicable__c, Pricing_Condition__r.Pricing_Condition__c,Pricing_Key_Combination__r.Key_Combination__c FROM ERP_Access_Sequence__c',Variable__c='accessSeqObj');  
+         insert paquery57;
+             IntegrationLoginCredentials__c pr4 = new IntegrationLoginCredentials__c (Name='admin.util@dupont.com', EncryptedLoginDetails__c='Infosys1234Xkh5hWWRryiH6c7tDrZrCH9jF');
+        insert pr4;
+                
+
+        IntegrationLoginCredentials__c pr5 = new IntegrationLoginCredentials__c (Name='admin.util@dupont.com.utqa', EncryptedLoginDetails__c='Infosys1234Xkh5hWWRryiH6c7tDrZrCH9jF');
+        insert pr5;
+        PAService_UT.paServiceTestMethodPAQuery();
+            PAApprovalWF_UT.paApprovalWFTestMethodPAQuery();
+            List<PAProfilePermissions__c> paProfilePermissionsList = new List<PAProfilePermissions__c>();
+            PAProfilePermissions__c paProfilePermissions1 = new PAProfilePermissions__c();
+            paProfilePermissions1.Name = 'Sales Admin';
+            paProfilePermissionsList.add(paProfilePermissions1);
+
+
+            PAProfilePermissions__c paProfilePermissions2 = new PAProfilePermissions__c();
+            paProfilePermissions2.Name = 'Approver';
+            paProfilePermissionsList.add(paProfilePermissions2);
+
+            PAProfilePermissions__c paProfilePermissions3 = new PAProfilePermissions__c();
+            paProfilePermissions3.Name = 'BU Admin';
+            paProfilePermissionsList.add(paProfilePermissions3);
+
+            PAProfilePermissions__c paProfilePermissions4 = new PAProfilePermissions__c();
+            paProfilePermissions4.Name = 'Price Requester';
+            paProfilePermissionsList.add(paProfilePermissions4);    
+
+            PAProfilePermissions__c paProfilePermissions5 = new PAProfilePermissions__c();
+            paProfilePermissions5.Name = 'IT Admin';
+            paProfilePermissionsList.add(paProfilePermissions5);
+
+            insert paProfilePermissionsList;
+
+            Recordtype recType = [select id,name from Recordtype where name = 'Business'];
+
+            ERP_Pricing_Procedure__c erpPricingProcedure = new ERP_Pricing_Procedure__c();
+            erpPricingProcedure.Doc_Type__c = '';
+            erpPricingProcedure.Pricing_Procedure__c = 'ERP_PP-00001';
+            erpPricingProcedure.Pricing_Procedure_Description__c='BI EMEA Surfaces';
+            erpPricingProcedure.Pricing_Procedure_Code__c = 'ZD630A';
+            erpPricingProcedure.Pricing_Procedure__c = 'NOW Standard Pricing- EU';
+            erpPricingProcedure.SAP_Application_Id__c = 'V';
+            erpPricingProcedure.SAP_Client_Id__c = '510';
+            erpPricingProcedure.SAP_Cluster__c = 'WB1';
+            erpPricingProcedure.Status__c = 'Active';
+            insert erpPricingProcedure;
+            
+            ERP_Pricing_Condition__c pricingCondition= new ERP_Pricing_Condition__c();
+            pricingCondition.SAP_Application_Id__c='V';
+            pricingCondition.SAP_Client_Id__c='510';
+            pricingCondition.SAP_Cluster__c='CB1';
+            pricingCondition.Pricing_Condition_Code__c='ZPSE';
+            insert pricingCondition;
+            
+           
+
+            ERP_Key_Combination__c keyCombination=new ERP_Key_Combination__c();
+            keyCombination.SAP_Application_Id__c='V';
+            keyCombination.SAP_Client_Id__c='510';
+            keyCombination.SAP_Cluster__c='CB1';
+            keyCombination.Key_Combination_Code__c='A580';
+            insert keyCombination;
+
+            OrgGroup__c orgGroup= new OrgGroup__c();        
+            orgGroup.CURRENCYISOCODE='USD';
+            //orgGroup.RecordTypeId = recType.Id;    
+            orgGroup.ERP_DISTRIBUTION_CHANNEL_CODE__C='10';
+            orgGroup.ERP_DISTRIBUTION_CHANNEL__C='DuPont Std';
+            orgGroup.ERP_DIVISION_CODE__C='02';
+            orgGroup.ERP_DIVISION__C='GSD Standard';
+            orgGroup.ERP_SALES_ORG_CODE__C='A640';
+            orgGroup.ERP_SALES_ORG__C='NOW DUP LUX 3430';
+            orgGroup.OWNING_BUSINESS__C='';
+            orgGroup.OWNING_ORG__C='';
+            orgGroup.EXTERNAL_ERP_ID__C='Askjlkj';
+            insert orgGroup;
+
+
+            OrgGroup__c orgGroup1 = new orgGroup__c();
+            orgGroup1.Business__c = 'BI EMEA Surfaces';
+            orgGroup1.RecordTypeId = recType.Id;
+
+            orgGroup1.OWNING_BUSINESS__C='Building Innovations';
+            orgGroup1.TYPE__C='ERP';
+            insert orgGroup1;
+
+            Organizational_Group_Item__c orgGrpItem= new Organizational_Group_Item__c();
+            orgGrpItem.Business__c = (orgGroup1).id;
+            orgGrpItem.OrgGroup__c = (orgGroup).id;
+            orgGrpItem.CURRENCYISOCODE = 'USD';
+            //orgGrpItem.APPROVAL_ESCALATION_DURATION__C = 23;
+            //orgGrpItem.CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Competitive pricing;Extending current prices;Pricing campaign;Other reason';
+            orgGrpItem.ERP_CURRENCY__C = 'USD;RUB';
+            orgGrpItem.ERP_UOM__C = 'EA;SH';
+            orgGrpItem.INCLUDE_CUSTOMER_CURRENCY__C = true;
+            orgGrpItem.LATEST_VALID_FROM_OFFSET_NON_CUST_SPEC__C = 90;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_CUST_SPEC__C = 12;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_NON_CUST_SPEC__C = 12;
+            orgGrpItem.MAX_VALID_FROM_OFFSET_CUST_SPEC__C = 90;
+            orgGrpItem.NON_CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Extending current prices; New materials; Periodic price review; Other reason; Pricing Compaign; Seasonal price';
+            orgGrpItem.RETROACTIVE_LIMIT__C =30;
+            orgGrpItem.CUSTOMER_REQUEST_REASONS__C = 'Seasonal price; Pricing campaign; Slow moving inventory; Customer negotiation; New customer; New materials; Competitive pricing; Extending current prices; Other reason';
+            orgGrpItem.PRICING_TASK_REASONS__C = '002-Trade fair sales activity;F06-Demonstration to Customer;F09-Research & Development;F12-Replacement;F15-Sales Promotion;M12- Pricing Discrepancy;M13-Quantity Correction;M31-Commercial Adjustment;S01-Paid Sample sales;Non-standard product;Other reason';
+            orgGrpItem.PROJECT_REQUEST_REASONS__C = 'Quantity Change;Time extension;Quantity and time change;Product change';
+            orgGrpItem.ERP_Pricing_Procedure__c = erpPricingProcedure.Id;
+            orgGrpItem.Rebate_Agreement__c='Annual Agreement';
+            orgGrpItem.Rebate_Agreement__c='';
+            orgGrpItem.Pricing_Task_Type__c='Spot Price; Free of Charge; Rebate Agreement; Display';
+            insert orgGrpItem;
+
+
+            Pricing_Request__c R1= new Pricing_Request__c();
+            R1.Request_Name__c='R1 For P1';
+            R1.Request_Approval_Status__c='Draft';
+            R1.Request_Reason__c='New Project';
+            R1.Request_Type__c = 'Customer Specific';
+            R1.Pricing_Request_Type__c = 'Pricing Task';       
+            R1.Customer_Specific__c = true;   
+            R1.BU__c='BI';  
+            R1.Sales_Org_Code__c='A640';
+            R1.Dist_Channel_Code__c='10'; 
+            R1.Division_Code__c='02'; 
+            R1.soldto_code__c = '5512345';
+            insert R1;
+
+            ERP_Customer__c cust = new ERP_Customer__c(city__c='Chennai',country__c='India',country_code__c='IND',
+                    currency_code__c='INR',customer_code__c='5512345',
+                    Distribution_Channel_Code__c='10',Distribution_channel__c='Dist Channel',
+                    Division__c='Division',Division_code__c='02',Incoterms_1__c='Inco1',Incoterms_1_Code__c='IncoCode',
+                    Incoterms_2__c='Inco2',Customer_Price_Group_Code__c='Z0',
+                    Customer_Price_Group__c='Others',Price_List_type__c='PriceList',
+                    price_list_type_code__c='A7',sales_office__c='salesOffice',
+                    sales_office_Code__c='salesOfficeCode',sales_org_code__c='A640',
+                    sales_org__c='sales Org',State_Province__c='TN',Street__c='MP',Terms_Of_Payment__c='None',
+                    Terms_Of_Payment_Code__c='None',Zip_Postal_Code__c='600039',Source_Cluster__c='CB1');
+            insert cust;
+        ApexPages.currentPage().getParameters().put('id',cust.Id);
+
+            PAServiceState paServiceState = new PAServiceState();        
+            PAOrganizationalGroupItems paOrgGroupItems = new PAOrganizationalGroupItems();
+
+            paServiceState.ogItems = paOrgGroupItems;
+            paOrgGroupItems.selectedBU  = OrgGroup1.Id; 
+            //system.debug('orgGrpItem = '+ orgGrpItem);
+            paOrgGroupItems.orgGroupItems=orgGrpItem;
+            //system.debug('paOrgGroupItems = '+ paOrgGroupItems);
+            
+            //paServiceState.ogItems.orgGroupItems = orgGrpItem;
+            //system.debug('paServiceState1 = '+ paServiceState);
+            PARequest Request = new PARequest(paServiceState);
+            request.pricingRequest=R1;  
+            
+            
+            
+
+            PAERPCustomer paERPCustomer = new PAERPCustomer(paServiceState);
+            paERPCustomer.ogitems = paOrgGroupItems;
+            paERPCustomer.paERPCustomer = cust;
+            //system.debug('paServiceState2 = '+ paServiceState);
+            PARequest paRequest = new PARequest(paServiceState);
+            paServiceState.currentRequest = Request;
+            paServiceState.currentRequest.customer = paERPCustomer;
+            paServiceState.currentRequest.pricingRequest = R1;
+            paServiceState.currentRequest.customer = paERPCustomer;
+            PAPricingCondition paPricingCondition = new PAPricingCondition(paServiceState);
+            //paPricingCondition.pricingCondition = pricingCondition;
+            paServiceState.currentRequest.pricingCondition = paPricingCondition;
+
+            PAKeyCombination paKeyCombination = new PAKeyCombination(paServiceState);
+            paServiceState.currentRequest.keyCombination = paKeyCombination;
+
+            //system.debug('paServiceState3 = '+ paServiceState);
+
+            //PARequestItem paRequestItem = new PARequestItem(paServiceState);
+            request.pricingRequest=R1;
+            request.pricingRequest.Pricing_Request_Type__c='Pricing Task';
+            request.pricingRequest.Division_code__c='02';
+            request.pricingRequest.sales_org_code__c='A640';
+            request.pricingRequest.Dist_channel_code__c='10';
+            request.pricingRequest.soldto_code__c='5512345';
+            
+            PAProjectPrice paProjectPrice = new PAProjectPrice(paServiceState);
+            paProjectPrice.projectSelection='edit';
+            paServiceState.currentProjectPrice=paProjectPrice;
+            
+           
+            PASalesPriceSAP paSalesPriceSAP = new PASalesPriceSAP(paServiceState);
+            request.salesPriceSAP=paSalesPriceSAP;
+        
+            PAService paService1 = new PAService();
+            //system.debug('paServiceState4 = '+ paServiceState);
+            paService1.paServiceState = paServiceState;
+           // system.debug('paServiceState5 = '+ paService1.paServiceState);
+            PAService1.getBusinessComponent('goToRequest','ProjectPrice');
+            PAService1.getBusinessComponent('ProjectNewPricingRequestCancel','ProjectPrice');
+            //PAService1.getBusinessComponent('RPQEndUserSelected','Requests');
+            PAService1.getBusinessComponent('BUSetupAddNewPH','OrganizationalGroupItem');
+            PAService1.PAServiceState.erpCustomer = new PAErpCustomer();
+            PAService1.PAServiceState.erpCustomer.currentPrices = 'viewPricesOnLoad';
+            PAService1.getBusinessComponent('AddPricesReqCreated','Requests');      
+      test.stoptest();
+    }
+    }
+    static testMethod void paServiceTestMethod28() {
+        
+        user u = createUser();
+        
+ test.starttest();
+        system.runAs(u){
+             PAQuery__c paquery57 =  new PAQuery__c(Class__c='PARequestItem',Query__c='SELECT Id,isNPCApplicable__c, Pricing_Condition__r.Pricing_Condition_Code__c, Pricing_Key_Combination__c, Pricing_Key_Combination__r.Key_Combination_Code__c, Key_Combination__c, Sequence_Number__c, Floor_Key_Combination__c, Floor_Pricing_Condition__c, Net_Floor_Key_Combination__c, Net_Reference_Key_Combination__c, Reference_Key_Combination__c, Reference_Pricing_Condition__c, isPaymentTermsApplicable__c, isVolumeApplicable__c, Pricing_Condition__r.Pricing_Condition__c,Pricing_Key_Combination__r.Key_Combination__c FROM ERP_Access_Sequence__c',Variable__c='accessSeqObj');  
+         insert paquery57;
+             IntegrationLoginCredentials__c pr4 = new IntegrationLoginCredentials__c (Name='admin.util@dupont.com', EncryptedLoginDetails__c='Infosys1234Xkh5hWWRryiH6c7tDrZrCH9jF');
+        insert pr4;
+                
+
+        IntegrationLoginCredentials__c pr5 = new IntegrationLoginCredentials__c (Name='admin.util@dupont.com.utqa', EncryptedLoginDetails__c='Infosys1234Xkh5hWWRryiH6c7tDrZrCH9jF');
+        insert pr5;
+        PAService_UT.paServiceTestMethodPAQuery();
+            PAApprovalWF_UT.paApprovalWFTestMethodPAQuery();
+            List<PAProfilePermissions__c> paProfilePermissionsList = new List<PAProfilePermissions__c>();
+            PAProfilePermissions__c paProfilePermissions1 = new PAProfilePermissions__c();
+            paProfilePermissions1.Name = 'Sales Admin';
+            paProfilePermissionsList.add(paProfilePermissions1);
+
+
+            PAProfilePermissions__c paProfilePermissions2 = new PAProfilePermissions__c();
+            paProfilePermissions2.Name = 'Approver';
+            paProfilePermissionsList.add(paProfilePermissions2);
+
+            PAProfilePermissions__c paProfilePermissions3 = new PAProfilePermissions__c();
+            paProfilePermissions3.Name = 'BU Admin';
+            paProfilePermissionsList.add(paProfilePermissions3);
+
+            PAProfilePermissions__c paProfilePermissions4 = new PAProfilePermissions__c();
+            paProfilePermissions4.Name = 'Price Requester';
+            paProfilePermissionsList.add(paProfilePermissions4);    
+
+            PAProfilePermissions__c paProfilePermissions5 = new PAProfilePermissions__c();
+            paProfilePermissions5.Name = 'IT Admin';
+            paProfilePermissionsList.add(paProfilePermissions5);
+
+            insert paProfilePermissionsList;
+
+            Recordtype recType = [select id,name from Recordtype where name = 'Business'];
+
+            ERP_Pricing_Procedure__c erpPricingProcedure = new ERP_Pricing_Procedure__c();
+            erpPricingProcedure.Doc_Type__c = '';
+            erpPricingProcedure.Pricing_Procedure__c = 'ERP_PP-00001';
+            erpPricingProcedure.Pricing_Procedure_Description__c='BI EMEA Surfaces';
+            erpPricingProcedure.Pricing_Procedure_Code__c = 'ZD630A';
+            erpPricingProcedure.Pricing_Procedure__c = 'NOW Standard Pricing- EU';
+            erpPricingProcedure.SAP_Application_Id__c = 'V';
+            erpPricingProcedure.SAP_Client_Id__c = '510';
+            erpPricingProcedure.SAP_Cluster__c = 'WB1';
+            erpPricingProcedure.Status__c = 'Active';
+            insert erpPricingProcedure;
+            
+            ERP_Pricing_Condition__c pricingCondition= new ERP_Pricing_Condition__c();
+            pricingCondition.SAP_Application_Id__c='V';
+            pricingCondition.SAP_Client_Id__c='510';
+            pricingCondition.SAP_Cluster__c='CB1';
+            pricingCondition.Pricing_Condition_Code__c='ZPSE';
+            insert pricingCondition;
+            
+           
+
+            ERP_Key_Combination__c keyCombination=new ERP_Key_Combination__c();
+            keyCombination.SAP_Application_Id__c='V';
+            keyCombination.SAP_Client_Id__c='510';
+            keyCombination.SAP_Cluster__c='CB1';
+            keyCombination.Key_Combination_Code__c='A580';
+            insert keyCombination;
+
+            OrgGroup__c orgGroup= new OrgGroup__c();        
+            orgGroup.CURRENCYISOCODE='USD';
+            //orgGroup.RecordTypeId = recType.Id;    
+            orgGroup.ERP_DISTRIBUTION_CHANNEL_CODE__C='10';
+            orgGroup.ERP_DISTRIBUTION_CHANNEL__C='DuPont Std';
+            orgGroup.ERP_DIVISION_CODE__C='02';
+            orgGroup.ERP_DIVISION__C='GSD Standard';
+            orgGroup.ERP_SALES_ORG_CODE__C='A640';
+            orgGroup.ERP_SALES_ORG__C='NOW DUP LUX 3430';
+            orgGroup.OWNING_BUSINESS__C='';
+            orgGroup.OWNING_ORG__C='';
+            orgGroup.EXTERNAL_ERP_ID__C='Askjlkj';
+            insert orgGroup;
+
+
+            OrgGroup__c orgGroup1 = new orgGroup__c();
+            orgGroup1.Business__c = 'BI EMEA Surfaces';
+            orgGroup1.RecordTypeId = recType.Id;
+
+            orgGroup1.OWNING_BUSINESS__C='Building Innovations';
+            orgGroup1.TYPE__C='ERP';
+            insert orgGroup1;
+
+            Organizational_Group_Item__c orgGrpItem= new Organizational_Group_Item__c();
+            orgGrpItem.Business__c = (orgGroup1).id;
+            orgGrpItem.OrgGroup__c = (orgGroup).id;
+            orgGrpItem.CURRENCYISOCODE = 'USD';
+            //orgGrpItem.APPROVAL_ESCALATION_DURATION__C = 23;
+            //orgGrpItem.CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Competitive pricing;Extending current prices;Pricing campaign;Other reason';
+            orgGrpItem.ERP_CURRENCY__C = 'USD;RUB';
+            orgGrpItem.ERP_UOM__C = 'EA;SH';
+            orgGrpItem.INCLUDE_CUSTOMER_CURRENCY__C = true;
+            orgGrpItem.LATEST_VALID_FROM_OFFSET_NON_CUST_SPEC__C = 90;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_CUST_SPEC__C = 12;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_NON_CUST_SPEC__C = 12;
+            orgGrpItem.MAX_VALID_FROM_OFFSET_CUST_SPEC__C = 90;
+            orgGrpItem.NON_CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Extending current prices; New materials; Periodic price review; Other reason; Pricing Compaign; Seasonal price';
+            orgGrpItem.RETROACTIVE_LIMIT__C =30;
+            orgGrpItem.CUSTOMER_REQUEST_REASONS__C = 'Seasonal price; Pricing campaign; Slow moving inventory; Customer negotiation; New customer; New materials; Competitive pricing; Extending current prices; Other reason';
+            orgGrpItem.PRICING_TASK_REASONS__C = '002-Trade fair sales activity;F06-Demonstration to Customer;F09-Research & Development;F12-Replacement;F15-Sales Promotion;M12- Pricing Discrepancy;M13-Quantity Correction;M31-Commercial Adjustment;S01-Paid Sample sales;Non-standard product;Other reason';
+            orgGrpItem.PROJECT_REQUEST_REASONS__C = 'Quantity Change;Time extension;Quantity and time change;Product change';
+            orgGrpItem.ERP_Pricing_Procedure__c = erpPricingProcedure.Id;
+            orgGrpItem.Rebate_Agreement__c='Annual Agreement';
+            orgGrpItem.Rebate_Agreement__c='';
+            orgGrpItem.Pricing_Task_Type__c='Spot Price; Free of Charge; Rebate Agreement; Display';
+            insert orgGrpItem;
+
+
+            Pricing_Request__c R1= new Pricing_Request__c();
+            R1.Request_Name__c='R1 For P1';
+            R1.Request_Approval_Status__c='Draft';
+            R1.Request_Reason__c='New Project';
+            R1.Request_Type__c = 'Customer Specific';
+            R1.Pricing_Request_Type__c = 'Pricing Task';       
+            R1.Customer_Specific__c = true;   
+            R1.BU__c='BI';  
+            R1.Sales_Org_Code__c='A640';
+            R1.Dist_Channel_Code__c='10'; 
+            R1.Division_Code__c='02'; 
+            R1.soldto_code__c = '5512345';
+            insert R1;
+
+            ERP_Customer__c cust = new ERP_Customer__c(city__c='Chennai',country__c='India',country_code__c='IND',
+                    currency_code__c='INR',customer_code__c='5512345',
+                    Distribution_Channel_Code__c='10',Distribution_channel__c='Dist Channel',
+                    Division__c='Division',Division_code__c='02',Incoterms_1__c='Inco1',Incoterms_1_Code__c='IncoCode',
+                    Incoterms_2__c='Inco2',Customer_Price_Group_Code__c='Z0',
+                    Customer_Price_Group__c='Others',Price_List_type__c='PriceList',
+                    price_list_type_code__c='A7',sales_office__c='salesOffice',
+                    sales_office_Code__c='salesOfficeCode',sales_org_code__c='A640',
+                    sales_org__c='sales Org',State_Province__c='TN',Street__c='MP',Terms_Of_Payment__c='None',
+                    Terms_Of_Payment_Code__c='None',Zip_Postal_Code__c='600039',Source_Cluster__c='CB1');
+            insert cust;
+        ApexPages.currentPage().getParameters().put('id',cust.Id);
+
+            PAServiceState paServiceState = new PAServiceState();        
+            PAOrganizationalGroupItems paOrgGroupItems = new PAOrganizationalGroupItems();
+
+            paServiceState.ogItems = paOrgGroupItems;
+            paOrgGroupItems.selectedBU  = OrgGroup1.Id; 
+            //system.debug('orgGrpItem = '+ orgGrpItem);
+            paOrgGroupItems.orgGroupItems=orgGrpItem;
+            paOrgGroupItems.showPopup=false;
+            //system.debug('paOrgGroupItems = '+ paOrgGroupItems);
+            
+            //paServiceState.ogItems.orgGroupItems = orgGrpItem;
+            //system.debug('paServiceState1 = '+ paServiceState);
+            PARequest Request = new PARequest(paServiceState);
+            request.pricingRequest=R1;  
+            
+            
+            
+
+            PAERPCustomer paERPCustomer = new PAERPCustomer(paServiceState);
+            paERPCustomer.ogitems = paOrgGroupItems;
+            paERPCustomer.paERPCustomer = cust;
+            //system.debug('paServiceState2 = '+ paServiceState);
+            PARequest paRequest = new PARequest(paServiceState);
+            paServiceState.currentRequest = Request;
+            paServiceState.currentRequest.customer = paERPCustomer;
+            paServiceState.currentRequest.pricingRequest = R1;
+            paServiceState.currentRequest.customer = paERPCustomer;
+            PAPricingCondition paPricingCondition = new PAPricingCondition(paServiceState);
+            //paPricingCondition.pricingCondition = pricingCondition;
+            paServiceState.currentRequest.pricingCondition = paPricingCondition;
+            paServiceState.currentRequest.currentPricesSelection = 'Valid On';
+            PAKeyCombination paKeyCombination = new PAKeyCombination(paServiceState);
+            paServiceState.currentRequest.keyCombination = paKeyCombination;
+
+            //system.debug('paServiceState3 = '+ paServiceState);
+
+            PARequestItem paRequestItem = new PARequestItem(paServiceState);
+            paRequestItem.priceViewClicked = false;
+            paServiceState.currentRequestItem=paRequestItem;
+            
+            request.pricingRequest=R1;
+            request.pricingRequest.Pricing_Request_Type__c='Pricing Task';
+            request.pricingRequest.Division_code__c='02';
+            request.pricingRequest.sales_org_code__c='A640';
+            request.pricingRequest.Dist_channel_code__c='10';
+            request.pricingRequest.soldto_code__c='5512345';
+            
+            PAProjectPrice paProjectPrice = new PAProjectPrice(paServiceState);
+            paProjectPrice.projectSelection='edit';
+            paServiceState.currentProjectPrice=paProjectPrice;
+            
+           
+            PASalesPriceSAP paSalesPriceSAP = new PASalesPriceSAP(paServiceState);
+            request.salesPriceSAP=paSalesPriceSAP;
+        
+            PAService paService1 = new PAService();
+            //system.debug('paServiceState4 = '+ paServiceState);
+            paService1.paServiceState = paServiceState;
+            //system.debug('paServiceState5 = '+ paService1.paServiceState);
+            
+            PAService1.PAServiceState.erpCustomer = new PAErpCustomer();
+            PAService1.PAServiceState.erpCustomer.currentPrices = 'viewPricesOnLoad';
+            PAService1.getBusinessComponent('cpSelChange','Requests');                
+      test.stoptest();
+    }
+    }
+     static testMethod void paServiceTestMethod29() {
+        
+        user u = createUser();
+        
+ test.starttest();
+        system.runAs(u){
+             PAQuery__c paquery57 =  new PAQuery__c(Class__c='PARequestItem',Query__c='SELECT Id,isNPCApplicable__c, Pricing_Condition__r.Pricing_Condition_Code__c, Pricing_Key_Combination__c, Pricing_Key_Combination__r.Key_Combination_Code__c, Key_Combination__c, Sequence_Number__c, Floor_Key_Combination__c, Floor_Pricing_Condition__c, Net_Floor_Key_Combination__c, Net_Reference_Key_Combination__c, Reference_Key_Combination__c, Reference_Pricing_Condition__c, isPaymentTermsApplicable__c, isVolumeApplicable__c, Pricing_Condition__r.Pricing_Condition__c,Pricing_Key_Combination__r.Key_Combination__c FROM ERP_Access_Sequence__c',Variable__c='accessSeqObj');  
+         insert paquery57;
+             IntegrationLoginCredentials__c pr4 = new IntegrationLoginCredentials__c (Name='admin.util@dupont.com', EncryptedLoginDetails__c='Infosys1234Xkh5hWWRryiH6c7tDrZrCH9jF');
+        insert pr4;
+                
+
+        IntegrationLoginCredentials__c pr5 = new IntegrationLoginCredentials__c (Name='admin.util@dupont.com.utqa', EncryptedLoginDetails__c='Infosys1234Xkh5hWWRryiH6c7tDrZrCH9jF');
+        insert pr5;
+        PAService_UT.paServiceTestMethodPAQuery();
+            PAApprovalWF_UT.paApprovalWFTestMethodPAQuery();
+            List<PAProfilePermissions__c> paProfilePermissionsList = new List<PAProfilePermissions__c>();
+            PAProfilePermissions__c paProfilePermissions1 = new PAProfilePermissions__c();
+            paProfilePermissions1.Name = 'Sales Admin';
+            paProfilePermissionsList.add(paProfilePermissions1);
+
+
+            PAProfilePermissions__c paProfilePermissions2 = new PAProfilePermissions__c();
+            paProfilePermissions2.Name = 'Approver';
+            paProfilePermissionsList.add(paProfilePermissions2);
+
+            PAProfilePermissions__c paProfilePermissions3 = new PAProfilePermissions__c();
+            paProfilePermissions3.Name = 'BU Admin';
+            paProfilePermissionsList.add(paProfilePermissions3);
+
+            PAProfilePermissions__c paProfilePermissions4 = new PAProfilePermissions__c();
+            paProfilePermissions4.Name = 'Price Requester';
+            paProfilePermissionsList.add(paProfilePermissions4);    
+
+            PAProfilePermissions__c paProfilePermissions5 = new PAProfilePermissions__c();
+            paProfilePermissions5.Name = 'IT Admin';
+            paProfilePermissionsList.add(paProfilePermissions5);
+
+            insert paProfilePermissionsList;
+
+            Recordtype recType = [select id,name from Recordtype where name = 'Business'];
+
+            ERP_Pricing_Procedure__c erpPricingProcedure = new ERP_Pricing_Procedure__c();
+            erpPricingProcedure.Doc_Type__c = '';
+            erpPricingProcedure.Pricing_Procedure__c = 'ERP_PP-00001';
+            erpPricingProcedure.Pricing_Procedure_Description__c='BI EMEA Surfaces';
+            erpPricingProcedure.Pricing_Procedure_Code__c = 'ZD630A';
+            erpPricingProcedure.Pricing_Procedure__c = 'NOW Standard Pricing- EU';
+            erpPricingProcedure.SAP_Application_Id__c = 'V';
+            erpPricingProcedure.SAP_Client_Id__c = '510';
+            erpPricingProcedure.SAP_Cluster__c = 'WB1';
+            erpPricingProcedure.Status__c = 'Active';
+            insert erpPricingProcedure;
+            
+            ERP_Pricing_Condition__c pricingCondition= new ERP_Pricing_Condition__c();
+            pricingCondition.SAP_Application_Id__c='V';
+            pricingCondition.SAP_Client_Id__c='510';
+            pricingCondition.SAP_Cluster__c='CB1';
+            pricingCondition.Pricing_Condition_Code__c='ZPSE';
+            insert pricingCondition;
+            
+           
+
+            ERP_Key_Combination__c keyCombination=new ERP_Key_Combination__c();
+            keyCombination.SAP_Application_Id__c='V';
+            keyCombination.SAP_Client_Id__c='510';
+            keyCombination.SAP_Cluster__c='CB1';
+            keyCombination.Key_Combination_Code__c='A580';
+            insert keyCombination;
+
+            OrgGroup__c orgGroup= new OrgGroup__c();        
+            orgGroup.CURRENCYISOCODE='USD';
+            //orgGroup.RecordTypeId = recType.Id;    
+            orgGroup.ERP_DISTRIBUTION_CHANNEL_CODE__C='10';
+            orgGroup.ERP_DISTRIBUTION_CHANNEL__C='DuPont Std';
+            orgGroup.ERP_DIVISION_CODE__C='02';
+            orgGroup.ERP_DIVISION__C='GSD Standard';
+            orgGroup.ERP_SALES_ORG_CODE__C='A640';
+            orgGroup.ERP_SALES_ORG__C='NOW DUP LUX 3430';
+            orgGroup.OWNING_BUSINESS__C='';
+            orgGroup.OWNING_ORG__C='';
+            orgGroup.EXTERNAL_ERP_ID__C='Askjlkj';
+            insert orgGroup;
+
+
+            OrgGroup__c orgGroup1 = new orgGroup__c();
+            orgGroup1.Business__c = 'BI EMEA Surfaces';
+            orgGroup1.RecordTypeId = recType.Id;
+
+            orgGroup1.OWNING_BUSINESS__C='Building Innovations';
+            orgGroup1.TYPE__C='ERP';
+            insert orgGroup1;
+
+            Organizational_Group_Item__c orgGrpItem= new Organizational_Group_Item__c();
+            orgGrpItem.Business__c = (orgGroup1).id;
+            orgGrpItem.OrgGroup__c = (orgGroup).id;
+            orgGrpItem.CURRENCYISOCODE = 'USD';
+            //orgGrpItem.APPROVAL_ESCALATION_DURATION__C = 23;
+            //orgGrpItem.CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Competitive pricing;Extending current prices;Pricing campaign;Other reason';
+            orgGrpItem.ERP_CURRENCY__C = 'USD;RUB';
+            orgGrpItem.ERP_UOM__C = 'EA;SH';
+            orgGrpItem.INCLUDE_CUSTOMER_CURRENCY__C = true;
+            orgGrpItem.LATEST_VALID_FROM_OFFSET_NON_CUST_SPEC__C = 90;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_CUST_SPEC__C = 12;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_NON_CUST_SPEC__C = 12;
+            orgGrpItem.MAX_VALID_FROM_OFFSET_CUST_SPEC__C = 90;
+            orgGrpItem.NON_CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Extending current prices; New materials; Periodic price review; Other reason; Pricing Compaign; Seasonal price';
+            orgGrpItem.RETROACTIVE_LIMIT__C =30;
+            orgGrpItem.CUSTOMER_REQUEST_REASONS__C = 'Seasonal price; Pricing campaign; Slow moving inventory; Customer negotiation; New customer; New materials; Competitive pricing; Extending current prices; Other reason';
+            orgGrpItem.PRICING_TASK_REASONS__C = '002-Trade fair sales activity;F06-Demonstration to Customer;F09-Research & Development;F12-Replacement;F15-Sales Promotion;M12- Pricing Discrepancy;M13-Quantity Correction;M31-Commercial Adjustment;S01-Paid Sample sales;Non-standard product;Other reason';
+            orgGrpItem.PROJECT_REQUEST_REASONS__C = 'Quantity Change;Time extension;Quantity and time change;Product change';
+            orgGrpItem.ERP_Pricing_Procedure__c = erpPricingProcedure.Id;
+            orgGrpItem.Rebate_Agreement__c='Annual Agreement';
+            orgGrpItem.Rebate_Agreement__c='';
+            orgGrpItem.Pricing_Task_Type__c='Spot Price; Free of Charge; Rebate Agreement; Display';
+            insert orgGrpItem;
+
+
+            Pricing_Request__c R1= new Pricing_Request__c();
+            R1.Request_Name__c='R1 For P1';
+            R1.Request_Approval_Status__c='Draft';
+            R1.Request_Reason__c='New Project';
+            R1.Request_Type__c = 'Customer Specific';
+            R1.Pricing_Request_Type__c = 'Pricing Task';       
+            R1.Customer_Specific__c = true;   
+            R1.BU__c='BI';  
+            R1.Sales_Org_Code__c='A640';
+            R1.Dist_Channel_Code__c='10'; 
+            R1.Division_Code__c='02'; 
+            R1.soldto_code__c = '5512345';
+            insert R1;
+
+            ERP_Customer__c cust = new ERP_Customer__c(city__c='Chennai',country__c='India',country_code__c='IND',
+                    currency_code__c='INR',customer_code__c='5512345',
+                    Distribution_Channel_Code__c='10',Distribution_channel__c='Dist Channel',
+                    Division__c='Division',Division_code__c='02',Incoterms_1__c='Inco1',Incoterms_1_Code__c='IncoCode',
+                    Incoterms_2__c='Inco2',Customer_Price_Group_Code__c='Z0',
+                    Customer_Price_Group__c='Others',Price_List_type__c='PriceList',
+                    price_list_type_code__c='A7',sales_office__c='salesOffice',
+                    sales_office_Code__c='salesOfficeCode',sales_org_code__c='A640',
+                    sales_org__c='sales Org',State_Province__c='TN',Street__c='MP',Terms_Of_Payment__c='None',
+                    Terms_Of_Payment_Code__c='None',Zip_Postal_Code__c='600039',Source_Cluster__c='CB1');
+            insert cust;
+        ApexPages.currentPage().getParameters().put('id',cust.Id);
+
+            PAServiceState paServiceState = new PAServiceState();        
+            PAOrganizationalGroupItems paOrgGroupItems = new PAOrganizationalGroupItems();
+
+            paServiceState.ogItems = paOrgGroupItems;
+            paOrgGroupItems.selectedBU  = OrgGroup1.Id; 
+            //system.debug('orgGrpItem = '+ orgGrpItem);
+            paOrgGroupItems.orgGroupItems=orgGrpItem;
+            paOrgGroupItems.showPopup=false;
+            //system.debug('paOrgGroupItems = '+ paOrgGroupItems);
+            
+            //paServiceState.ogItems.orgGroupItems = orgGrpItem;
+            //system.debug('paServiceState1 = '+ paServiceState);
+            PARequest Request = new PARequest(paServiceState);
+            request.pricingRequest=R1;  
+            
+            
+            
+
+            PAERPCustomer paERPCustomer = new PAERPCustomer(paServiceState);
+            paERPCustomer.ogitems = paOrgGroupItems;
+            paERPCustomer.paERPCustomer = cust;
+            //system.debug('paServiceState2 = '+ paServiceState);
+            PARequest paRequest = new PARequest(paServiceState);
+            paServiceState.currentRequest = Request;
+            paServiceState.currentRequest.customer = paERPCustomer;
+            paServiceState.currentRequest.pricingRequest = R1;
+            paServiceState.currentRequest.customer = paERPCustomer;
+            PAPricingCondition paPricingCondition = new PAPricingCondition(paServiceState);
+            //paPricingCondition.pricingCondition = pricingCondition;
+            paServiceState.currentRequest.pricingCondition = paPricingCondition;
+            paServiceState.currentRequest.currentPricesSelection = 'Valid On';
+            PAKeyCombination paKeyCombination = new PAKeyCombination(paServiceState);
+            paServiceState.currentRequest.keyCombination = paKeyCombination;
+
+            //system.debug('paServiceState3 = '+ paServiceState);
+
+            PARequestItem paRequestItem = new PARequestItem(paServiceState);
+            paRequestItem.priceViewClicked = false;
+            paServiceState.currentRequestItem=paRequestItem;
+            
+            request.pricingRequest=R1;
+            request.pricingRequest.Pricing_Request_Type__c='Pricing Task';
+            request.pricingRequest.Division_code__c='02';
+            request.pricingRequest.sales_org_code__c='A640';
+            request.pricingRequest.Dist_channel_code__c='10';
+            request.pricingRequest.soldto_code__c='5512345';
+            
+            PAProjectPrice paProjectPrice = new PAProjectPrice(paServiceState);
+            paProjectPrice.projectSelection='edit';
+            paServiceState.currentProjectPrice=paProjectPrice;
+            
+           
+            PASalesPriceSAP paSalesPriceSAP = new PASalesPriceSAP(paServiceState);
+            request.salesPriceSAP=paSalesPriceSAP;
+        
+            PAService paService1 = new PAService();
+            //system.debug('paServiceState4 = '+ paServiceState);
+            paService1.paServiceState = paServiceState;
+            //system.debug('paServiceState5 = '+ paService1.paServiceState);
+            
+            PAService1.PAServiceState.erpCustomer = new PAErpCustomer();
+            PAService1.PAServiceState.erpCustomer.currentPrices = 'viewPricesOnLoad';           
+            PAService1.getBusinessComponent('Cancel','RequestItems');
+            
+            
+      test.stoptest();
+    }
+    }
+    
+    static testMethod void paServiceTestMethod30() {
+        
+        user u = createUser();
+        
+ test.starttest();
+        system.runAs(u){
+             PAQuery__c paquery57 =  new PAQuery__c(Class__c='PARequestItem',Query__c='SELECT Id,isNPCApplicable__c, Pricing_Condition__r.Pricing_Condition_Code__c, Pricing_Key_Combination__c, Pricing_Key_Combination__r.Key_Combination_Code__c, Key_Combination__c, Sequence_Number__c, Floor_Key_Combination__c, Floor_Pricing_Condition__c, Net_Floor_Key_Combination__c, Net_Reference_Key_Combination__c, Reference_Key_Combination__c, Reference_Pricing_Condition__c, isPaymentTermsApplicable__c, isVolumeApplicable__c, Pricing_Condition__r.Pricing_Condition__c,Pricing_Key_Combination__r.Key_Combination__c FROM ERP_Access_Sequence__c',Variable__c='accessSeqObj');  
+         insert paquery57;
+             IntegrationLoginCredentials__c pr4 = new IntegrationLoginCredentials__c (Name='admin.util@dupont.com', EncryptedLoginDetails__c='Infosys1234Xkh5hWWRryiH6c7tDrZrCH9jF');
+        insert pr4;
+                
+
+        IntegrationLoginCredentials__c pr5 = new IntegrationLoginCredentials__c (Name='admin.util@dupont.com.utqa', EncryptedLoginDetails__c='Infosys1234Xkh5hWWRryiH6c7tDrZrCH9jF');
+        insert pr5;
+        PAService_UT.paServiceTestMethodPAQuery();
+            PAApprovalWF_UT.paApprovalWFTestMethodPAQuery();
+            List<PAProfilePermissions__c> paProfilePermissionsList = new List<PAProfilePermissions__c>();
+            PAProfilePermissions__c paProfilePermissions1 = new PAProfilePermissions__c();
+            paProfilePermissions1.Name = 'Sales Admin';
+            paProfilePermissionsList.add(paProfilePermissions1);
+
+
+            PAProfilePermissions__c paProfilePermissions2 = new PAProfilePermissions__c();
+            paProfilePermissions2.Name = 'Approver';
+            paProfilePermissionsList.add(paProfilePermissions2);
+
+            PAProfilePermissions__c paProfilePermissions3 = new PAProfilePermissions__c();
+            paProfilePermissions3.Name = 'BU Admin';
+            paProfilePermissionsList.add(paProfilePermissions3);
+
+            PAProfilePermissions__c paProfilePermissions4 = new PAProfilePermissions__c();
+            paProfilePermissions4.Name = 'Price Requester';
+            paProfilePermissionsList.add(paProfilePermissions4);    
+
+            PAProfilePermissions__c paProfilePermissions5 = new PAProfilePermissions__c();
+            paProfilePermissions5.Name = 'IT Admin';
+            paProfilePermissionsList.add(paProfilePermissions5);
+
+            insert paProfilePermissionsList;
+
+            Recordtype recType = [select id,name from Recordtype where name = 'Business'];
+
+            ERP_Pricing_Procedure__c erpPricingProcedure = new ERP_Pricing_Procedure__c();
+            erpPricingProcedure.Doc_Type__c = '';
+            erpPricingProcedure.Pricing_Procedure__c = 'ERP_PP-00001';
+            erpPricingProcedure.Pricing_Procedure_Description__c='BI EMEA Surfaces';
+            erpPricingProcedure.Pricing_Procedure_Code__c = 'ZD630A';
+            erpPricingProcedure.Pricing_Procedure__c = 'NOW Standard Pricing- EU';
+            erpPricingProcedure.SAP_Application_Id__c = 'V';
+            erpPricingProcedure.SAP_Client_Id__c = '510';
+            erpPricingProcedure.SAP_Cluster__c = 'WB1';
+            erpPricingProcedure.Status__c = 'Active';
+            insert erpPricingProcedure;
+            
+            ERP_Pricing_Condition__c pricingCondition= new ERP_Pricing_Condition__c();
+            pricingCondition.SAP_Application_Id__c='V';
+            pricingCondition.SAP_Client_Id__c='510';
+            pricingCondition.SAP_Cluster__c='CB1';
+            pricingCondition.Pricing_Condition_Code__c='ZPSE';
+            insert pricingCondition;
+            
+           
+
+            ERP_Key_Combination__c keyCombination=new ERP_Key_Combination__c();
+            keyCombination.SAP_Application_Id__c='V';
+            keyCombination.SAP_Client_Id__c='510';
+            keyCombination.SAP_Cluster__c='CB1';
+            keyCombination.Key_Combination_Code__c='A580';
+            insert keyCombination;
+
+            OrgGroup__c orgGroup= new OrgGroup__c();        
+            orgGroup.CURRENCYISOCODE='USD';
+            //orgGroup.RecordTypeId = recType.Id;    
+            orgGroup.ERP_DISTRIBUTION_CHANNEL_CODE__C='10';
+            orgGroup.ERP_DISTRIBUTION_CHANNEL__C='DuPont Std';
+            orgGroup.ERP_DIVISION_CODE__C='02';
+            orgGroup.ERP_DIVISION__C='GSD Standard';
+            orgGroup.ERP_SALES_ORG_CODE__C='A640';
+            orgGroup.ERP_SALES_ORG__C='NOW DUP LUX 3430';
+            orgGroup.OWNING_BUSINESS__C='';
+            orgGroup.OWNING_ORG__C='';
+            orgGroup.EXTERNAL_ERP_ID__C='Askjlkj';
+            insert orgGroup;
+
+
+            OrgGroup__c orgGroup1 = new orgGroup__c();
+            orgGroup1.Business__c = 'BI EMEA Surfaces';
+            orgGroup1.RecordTypeId = recType.Id;
+
+            orgGroup1.OWNING_BUSINESS__C='Building Innovations';
+            orgGroup1.TYPE__C='ERP';
+            insert orgGroup1;
+
+            Organizational_Group_Item__c orgGrpItem= new Organizational_Group_Item__c();
+            orgGrpItem.Business__c = (orgGroup1).id;
+            orgGrpItem.OrgGroup__c = (orgGroup).id;
+            orgGrpItem.CURRENCYISOCODE = 'USD';
+            //orgGrpItem.APPROVAL_ESCALATION_DURATION__C = 23;
+            //orgGrpItem.CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Competitive pricing;Extending current prices;Pricing campaign;Other reason';
+            orgGrpItem.ERP_CURRENCY__C = 'USD;RUB';
+            orgGrpItem.ERP_UOM__C = 'EA;SH';
+            orgGrpItem.INCLUDE_CUSTOMER_CURRENCY__C = true;
+            orgGrpItem.LATEST_VALID_FROM_OFFSET_NON_CUST_SPEC__C = 90;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_CUST_SPEC__C = 12;
+            orgGrpItem.LATEST_VALID_TO_OFFSET_NON_CUST_SPEC__C = 12;
+            orgGrpItem.MAX_VALID_FROM_OFFSET_CUST_SPEC__C = 90;
+            orgGrpItem.NON_CUSTOMER_PERMANENT_REQUEST_REASONS__C = 'Extending current prices; New materials; Periodic price review; Other reason; Pricing Compaign; Seasonal price';
+            orgGrpItem.RETROACTIVE_LIMIT__C =30;
+            orgGrpItem.CUSTOMER_REQUEST_REASONS__C = 'Seasonal price; Pricing campaign; Slow moving inventory; Customer negotiation; New customer; New materials; Competitive pricing; Extending current prices; Other reason';
+            orgGrpItem.PRICING_TASK_REASONS__C = '002-Trade fair sales activity;F06-Demonstration to Customer;F09-Research & Development;F12-Replacement;F15-Sales Promotion;M12- Pricing Discrepancy;M13-Quantity Correction;M31-Commercial Adjustment;S01-Paid Sample sales;Non-standard product;Other reason';
+            orgGrpItem.PROJECT_REQUEST_REASONS__C = 'Quantity Change;Time extension;Quantity and time change;Product change';
+            orgGrpItem.ERP_Pricing_Procedure__c = erpPricingProcedure.Id;
+            orgGrpItem.Rebate_Agreement__c='Annual Agreement';
+            orgGrpItem.Rebate_Agreement__c='';
+            orgGrpItem.Pricing_Task_Type__c='Spot Price; Free of Charge; Rebate Agreement; Display';
+            insert orgGrpItem;
+
+
+            Pricing_Request__c R1= new Pricing_Request__c();
+            R1.Request_Name__c='R1 For P1';
+            R1.Request_Approval_Status__c='Draft';
+            R1.Request_Reason__c='New Project';
+            R1.Request_Type__c = 'Customer Specific';
+            R1.Pricing_Request_Type__c = 'Pricing Task';       
+            R1.Customer_Specific__c = true;   
+            R1.BU__c='BI';  
+            R1.Sales_Org_Code__c='A640';
+            R1.Dist_Channel_Code__c='10'; 
+            R1.Division_Code__c='02'; 
+            R1.soldto_code__c = '5512345';
+            insert R1;
+
+            ERP_Customer__c cust = new ERP_Customer__c(city__c='Chennai',country__c='India',country_code__c='IND',
+                    currency_code__c='INR',customer_code__c='5512345',
+                    Distribution_Channel_Code__c='10',Distribution_channel__c='Dist Channel',
+                    Division__c='Division',Division_code__c='02',Incoterms_1__c='Inco1',Incoterms_1_Code__c='IncoCode',
+                    Incoterms_2__c='Inco2',Customer_Price_Group_Code__c='Z0',
+                    Customer_Price_Group__c='Others',Price_List_type__c='PriceList',
+                    price_list_type_code__c='A7',sales_office__c='salesOffice',
+                    sales_office_Code__c='salesOfficeCode',sales_org_code__c='A640',
+                    sales_org__c='sales Org',State_Province__c='TN',Street__c='MP',Terms_Of_Payment__c='None',
+                    Terms_Of_Payment_Code__c='None',Zip_Postal_Code__c='600039',Source_Cluster__c='CB1');
+            insert cust;
+        ApexPages.currentPage().getParameters().put('id',cust.Id);
+
+            PAServiceState paServiceState = new PAServiceState();        
+            PAOrganizationalGroupItems paOrgGroupItems = new PAOrganizationalGroupItems();
+
+            paServiceState.ogItems = paOrgGroupItems;
+            paOrgGroupItems.selectedBU  = OrgGroup1.Id; 
+            //system.debug('orgGrpItem = '+ orgGrpItem);
+            paOrgGroupItems.orgGroupItems=orgGrpItem;
+            paOrgGroupItems.showPopup=false;
+           // system.debug('paOrgGroupItems = '+ paOrgGroupItems);
+            
+            //paServiceState.ogItems.orgGroupItems = orgGrpItem;
+            //system.debug('paServiceState1 = '+ paServiceState);
+            PARequest Request = new PARequest(paServiceState);
+            request.pricingRequest=R1;  
+            
+            
+            
+
+            PAERPCustomer paERPCustomer = new PAERPCustomer(paServiceState);
+            paERPCustomer.ogitems = paOrgGroupItems;
+            paERPCustomer.paERPCustomer = cust;
+            //system.debug('paServiceState2 = '+ paServiceState);
+            PARequest paRequest = new PARequest(paServiceState);
+            paServiceState.currentRequest = Request;
+            paServiceState.currentRequest.customer = paERPCustomer;
+            paServiceState.currentRequest.pricingRequest = R1;
+            paServiceState.currentRequest.customer = paERPCustomer;
+            PAPricingCondition paPricingCondition = new PAPricingCondition(paServiceState);
+            //paPricingCondition.pricingCondition = pricingCondition;
+            paServiceState.currentRequest.pricingCondition = paPricingCondition;
+            paServiceState.currentRequest.currentPricesSelection = 'Valid On';
+            PAKeyCombination paKeyCombination = new PAKeyCombination(paServiceState);
+            paServiceState.currentRequest.keyCombination = paKeyCombination;
+
+            //system.debug('paServiceState3 = '+ paServiceState);
+
+            PARequestItem paRequestItem = new PARequestItem(paServiceState);
+            paRequestItem.priceViewClicked = false;
+            paServiceState.currentRequestItem=paRequestItem;
+            
+            request.pricingRequest=R1;
+            request.pricingRequest.Pricing_Request_Type__c='Pricing Task';
+            request.pricingRequest.Division_code__c='02';
+            request.pricingRequest.sales_org_code__c='A640';
+            request.pricingRequest.Dist_channel_code__c='10';
+            request.pricingRequest.soldto_code__c='5512345';
+            
+            PAProjectPrice paProjectPrice = new PAProjectPrice(paServiceState);
+            paProjectPrice.projectSelection='edit';
+            paServiceState.currentProjectPrice=paProjectPrice;
+            
+           
+            PASalesPriceSAP paSalesPriceSAP = new PASalesPriceSAP(paServiceState);
+            request.salesPriceSAP=paSalesPriceSAP;
+        
+            PAService paService1 = new PAService();
+            //system.debug('paServiceState4 = '+ paServiceState);
+            paService1.paServiceState = paServiceState;
+            //system.debug('paServiceState5 = '+ paService1.paServiceState);
+            
+            PAService1.PAServiceState.erpCustomer = new PAErpCustomer();
+            PAService1.PAServiceState.erpCustomer.currentPrices = 'viewPricesOnLoad';
+        PAService1.getBusinessComponent('ExportPrices','Requests');        
+      test.stoptest();
+    }
+    }
+ //SS20220826 - ENDS   
+}

@@ -1,0 +1,239 @@
+<!--    Ver.            Developer       Changes                                 	-->
+<!--    PP20131021		Priyanka	Encoding of parameters while passing to page	-->
+<apex:component controller="PAChangeSalesArea">
+   
+
+    <apex:attribute description="soldToCode" type="string"
+        name="CSAsoldToCodeAtr" assignTo="{!soldToCode}" />
+    <apex:attribute description="selectedBusiness" type="string"
+        name="CSAselBUAtr" assignTo="{!selectedBusiness}" />
+        
+    <apex:attribute description="soldTo" type="string" name="CSAsoldToAtr" />
+    <apex:attribute description="soldTo Id" type="string"
+        name="CSAsoldToIdComponentAtr" />
+    <apex:attribute description="sales Org" type="string" name="CSAsoAtr" />
+    <apex:attribute description="sales Org code" type="string"
+        name="CSAsoCodeAtr" />
+    <apex:attribute description="dist. Chnl" type="string" name="CSAdcAtr" />
+    <apex:attribute description="dist. Chnl Code" type="string"
+        name="CSAdcCodeAtr" />
+    <apex:attribute description="div" type="string" name="CSAdivAtr" />
+    <apex:attribute description="div Code" type="string"
+        name="CSAdivCodeAtr" />
+    <apex:attribute description="city" type="string" name="CSAcityAtr" />
+    <apex:attribute description="street" type="string" name="CSAstreetAtr" />
+    <apex:attribute description="state" type="string" name="CSAstateAtr" />
+    <apex:attribute description="country" type="string"
+        name="CSAcountryAtr" />
+    <apex:attribute description="postalCode" type="string" 
+        name="CSApostalCodeAtr" />
+    <apex:attribute description="salesOff" type="string"
+        name="CSAsalesOfficeAtr" />
+    <apex:attribute description="SalesOffice Code" type="string"
+        name="CSAsalesOffCodeAtr" />
+    <apex:attribute description="paymentTerm" type="string"
+        name="CSAtermsOfPaymentAtr" />
+    <apex:attribute description="payTermCode" type="string"
+        name="CSAtermsOfPaymentCodeAtr" />
+    <apex:attribute description="incoTerm" type="string"
+        name="CSAincoTermAtr" />
+    <apex:attribute description="incoTerm Code " type="string"
+        name="CSAincoTermCodeAtr" />
+    <apex:attribute description="Customer price Grp" type="string"
+        name="CSAcustPriceGrpAtr" />
+    <apex:attribute description="Customer price Grp Code " type="string"
+        name="CSAcustPriceGrpCodecAtr" />
+    <apex:attribute description="price List Type" type="string"
+        name="CSApriceListTypeAtr" />
+    <apex:attribute description="price List Type Code" type="string"
+        name="CSApriceListTypeCodeAtr" />
+    <apex:attribute description="soldTo Code From Page" type="string"
+        name="CSAsoldToCodeFromPageAtr" />
+    <apex:attribute description="soldTo Id From Page" type="string"
+        name="CSAsoldToIdFromPageAtr" />
+    <apex:attribute description="BU of Requestor" type="string"
+        name="CSABUSelectedAtr" />
+
+
+    <apex:attribute description="salesOrgConcat" type="string"
+        name="CSAsalesOrgConcatAtr" />
+    <apex:attribute description="DistChannelConcat" type="string"
+        name="CSADistChannelConcatAtr" />
+    <apex:attribute description="DivisionConcat" type="string"
+        name="CSADivisionConcatAtr" />
+    <apex:attribute description="salesOfficeConcat" type="string"
+        name="CSAsalesOfficeConcatAtr" />
+    <apex:attribute description="incotermConcat" type="string"
+        name="CSAincotermConcatAtr" />  
+    <apex:attribute description="termsOfPaymentConcat" type="string"
+        name="CSAtermsOfPaymentConcatAtr" />
+    <apex:attribute description="priceListTypeConcat" type="string"
+        name="CSApriceListTypeConcatAtr" />
+    <apex:attribute description="CPGConcat" type="string"
+        name="CSACPGConcatAtr" />
+    <apex:attribute description="salesAreaSelected" type="string"
+        name="CSAsalesAreaSelectedAtr" />
+    <apex:attribute description="LocationSelected" type="string"
+        name="CSALocationSelectedAtr" />
+        <!-- For setting current page label -->
+
+ 
+    <apex:commandLink value="Customer belongs to multiple Sales Areas"
+        action="{!displayPopUpWindow}" style="color:blue;" reRender="myId"
+        status="stat">
+    </apex:commandLink>
+
+    <apex:outputpanel styleClass="BackPage" layout="block"
+        rendered="{!flagCSA}" />
+    <apex:outputPanel id="ChangeSalesAreapopup" rendered="{!flagCSA}"
+        styleClass="FrontPageChangeSalesArea">
+        <apex:panelGrid style="float:right;">
+            <apex:commandLink action="{!closeWindow}"> 
+                <apex:image url="{!$Resource.closeButton}" width="15" height="15" />
+            </apex:commandLink>
+        </apex:panelGrid> 
+
+        <apex:pageblock >
+
+            <apex:pageblockSection >
+               <!-- <div id="searchSold"> -->
+                    <apex:pageBlockSectionItem >
+                        <apex:outputText value="Customer Code" />
+                        <apex:inputtext value="{!soldToCode}" disabled="true" />
+                    </apex:pageBlockSectionItem>
+              <!--  </div> -->
+                <br />
+                <apex:pageBlockTable value="{!perm_custRecord}" var="v" style="width:700px;">
+
+                    <apex:column headerValue="Sales Org Code">
+                        <apex:commandLink action="{!returnData}" 
+                            value="{!v.Sales_Org_Code__c}">
+                            <apex:param name="soldToFieldValue"
+                                assignTo="{!CSAsoldToCodeAtr}" value="{!v.Customer_Code__c}" />
+                            <apex:param name="soldTo Id"
+                                assignTo="{!CSAsoldToIdComponentAtr}" value="{!v.Id}" />
+							<!-- PP20131021-->
+                            <apex:param name="CustomerName" assignTo="{!CSAsoldToAtr}"
+                                value="{!URLENCODE(v.Name)}" />
+                            <apex:param name="SOFieldValue" assignTo="{!CSAsoCodeAtr}"
+                                value="{!v.Sales_Org_Code__c}" />
+                            <apex:param name="DCFieldValue" assignTo="{!CSAdcCodeAtr}"
+                                value="{!v.Distribution_Channel_Code__c}" />
+                            <apex:param name="DIVFieldValue" assignTo="{!CSAdivCodeAtr}"
+                                value="{!v.Division_Code__c}" />
+                            <apex:param name="SODescValue" assignTo="{!CSAsoAtr}"
+                                value="{!v.Sales_Org__c}" />
+                            <apex:param name="DCDescValue" assignTo="{!CSAdcAtr}"
+                                value="{!v.Distribution_Channel__c}" />
+                            <apex:param name="DIVDescValue" assignTo="{!CSAdivAtr}"
+                                value="{!v.Division__c}" />
+                            <apex:param name="salesArea"
+                                assignTo="{!CSAsalesAreaSelectedAtr}"
+                                value="{!v.Sales_Org_Code__c +'-'+v.Sales_Org__c +'<br>'+v.Distribution_Channel_Code__c+'-'+v.Distribution_Channel__c+'<br>'+v.Division_Code__c+'-'+v.Division__c}" />
+                            <!-- PP20131021 START-->
+                            <apex:param name="Street" assignTo="{!CSAstreetAtr}" value="{!URLENCODE(v.Street__c)}"/>              
+                            <apex:param name="City" assignTo="{!CSAcityAtr}" value="{!URLENCODE(v.City__c)}"/>
+                            <apex:param name="State" assignTo="{!CSAstateAtr}" value="{!URLENCODE(v.State__c)}"/>
+                            <apex:param name="Country" assignTo="{!CSAcountryAtr}" value="{!URLENCODE(v.Country__c)}"/>
+                            
+                            <!-- Move Location parameter to the last -->
+<!--                            <apex:param name="Location" assignTo="{!CSALocationSelectedAtr}"-->
+<!--                                value="{!v.Street__c +'<br>'+v.City__c +'<br>'+v.State__c+'<br>'+v.Country__c+'<br>'+v.ZIP_Postal_Code__c}" />-->
+							<!-- PP20131021 END-->
+                            <!--
+                                 <apex:param name="SalesOffice" assignTo="{!salesOffice}" value="{!v.Sales_Office__c}"/>
+                                <apex:param name="SalesOffDetail" assignTo="{!salesOfficeDetail}" value=""/>
+                                <apex:param name="IncoTerm" assignTo="{!CSAincotermConcatAtr"}" value=""/>
+                                <apex:param name="IncotermCode" assignTo="{!IncotermCode}" value="{!v.Incoterms_Code__c}"/>
+                                <apex:param name="IncotermDesc" assignTo="{!Incoterm}" value="{!v.Incotems__c}"/>           
+                                <apex:param name="PaymentTerm" assignTo="{!termsOfPayDetail}" value=""/>
+                                <apex:param name="PaytermCode" assignTo="{!termsOfPayCode}" value="{!v.Terms_Of_Payment_Code__c}"/>
+                                <apex:param name="PaytermDesc" assignTo="{!termsOfPay}" value="{!v.Terms_Of_Payment__c}"/>
+                                <apex:param name="CustomerPriceGroupDetail" assignTo="{!custPriceGrpDetail}" value=""/>                           
+                                <apex:param name="PriceGrpCode" assignTo="{!custPriceGrpCode}" value="{!v.Price_Group_Code__c}"/>
+                                <apex:param name="PriceGrpDesc" assignTo="{!custPriceGrp}" value="{!v.Price_Group__c}"/>
+                                <apex:param name="PriceListType" assignTo="{!priceListTypeDetail}" value=""/>
+                                <apex:param name="PriceListTypeCode" assignTo="{!priceListTypeCode}" value="{!v.Price_List_Type_Code__c}"/>
+                                <apex:param name="PriceListTypeDesc" assignTo="{!priceListType}" value="{!v.Price_List_Type__c}"/>
+                                -->
+
+                            <apex:param name="SalesOffice concat"
+                                assignTo="{!CSAsalesOfficeConcatAtr}"
+                                value="{!v.Sales_Office_Code__c+'-'+v.Sales_Office__c}" />
+                            <apex:param name="terms Of Payment concat"
+                                assignTo="{!CSAtermsOfPaymentConcatAtr}"
+                                value="{!v.Terms_of_Payment_Code__c+'-'+v.Terms_of_Payment__c}" />
+                            <apex:param name="Incoterm concat"
+                                assignTo="{!CSAincotermConcatAtr}"
+                                value="{!v.Incoterms_1_Code__c+'-'+v.Incoterms_1__c}" />
+                            <apex:param name="PriceGrpconcat" assignTo="{!CSACPGConcatAtr}" 
+                                value="{!v.Customer_Price_Group_Code__c+'-'+v.Customer_Price_Group__c}" />
+                            <apex:param name="PriceListType Concat"
+                                assignTo="{!CSApriceListTypeConcatAtr}"
+                                value="{!v.Price_List_Type_Code__c+'-'+v.Price_List_Type__c}" />
+                                <!-- PP20131021 -->
+                                <apex:param name="Location" assignTo="{!CSALocationSelectedAtr}"
+                                value="{!v.Street__c +'<br>'+v.City__c +'<br>'+v.State__c+'<br>'+v.Country__c+'<br>'+v.ZIP_Postal_Code__c}" />
+                                
+
+                        </apex:commandLink> 
+                    </apex:column>
+
+
+                    <apex:column headerValue="Sales Org">
+                        <apex:outputField value="{!v.Sales_Org__c}" />
+                    </apex:column>
+                    <apex:column headerValue="Dist. Channel Code">
+                        <apex:outputField value="{!v.Distribution_Channel_Code__c}" />
+                    </apex:column>
+                    <apex:column headerValue="Dist. Channel"> 
+                        <apex:outputField value="{!v.Distribution_Channel__c}" />
+                    </apex:column>
+                    <apex:column headerValue="Division Code">
+                        <apex:outputField value="{!v.Division_Code__c}" />
+                    </apex:column>
+                    <apex:column headerValue="Division">
+                        <apex:outputField value="{!v.Division__c}" />
+                    </apex:column>
+                </apex:pageBlockTable>
+            </apex:pageblockSection>
+            </apex:pageBlock>
+
+
+            </apex:outputpanel>
+
+
+            <style type="text/css">
+.FrontPageChangeSalesArea {
+    background-color: white;
+    //border-width: 2px;
+    //border-style: solid;
+    z-index: 9999;
+    left: 20%;
+    right: 17.5%;
+    padding: 10px;
+    position: absolute;
+    top: 15%; 
+    border: 2px solid #63A4C5;
+    //margin-left: -600px;
+    width: 730px;
+    //width: 55.5%;
+}
+
+.BackPage {
+    background-color: #696969;
+    opacity: 0.5;
+    filter: alpha(opacity =     50);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+#soldDetails #allDetail .FrontPageChangeSalesArea .detailList {
+    border: none;
+}
+
+</style>
+</apex:component>

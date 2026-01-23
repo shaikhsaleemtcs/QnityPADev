@@ -1,0 +1,477 @@
+<!-- Bhargavi 20160919 COB implementation for ASEAN region (IS ID-00072470) -->
+
+<apex:page controller="CtrlCOBUtilCustomerOnboardingRequest" tabstyle="Customer_Data_Request__c" id="pageId">
+<head>
+<style>
+.buttons a.btn{width:70px;height:200px;}
+.spinnerCt {
+left: 50%;
+position: fixed;
+top: 35%;
+z-index: 1050;
+padding: 20px 40px;
+box-shadow: 0pt 2px 5px rgb(172, 172, 172);
+border-radius: 1em 1em 1em 1em;
+border: 1px solid rgb(206, 236, 255);
+background-color: rgb(206, 236, 255);
+background-style: solid;
+}
+
+.spinner {
+padding: 10px 15px 10px 0pt;
+vertical-align: middle;F
+float: left
+}
+.bPageBlock .dataCol{
+padding-right:0px;
+}
+.spinnerCt .loadingIndicator {
+display: inline;
+font-size: 135%;
+font-weight: bold;
+float: left
+}
+
+.mask {
+width: 100%;
+height: 100%;
+background-color: rgb(0, 0, 0);
+opacity: 0.45;
+filter: alpha(opacity =     45);
+position: absolute;
+z-index: 1000;
+top: 0pt;
+left: 0pt;
+}
+
+
+.custPopup {
+background-color : white;
+border-width : 5px;
+border-style: groove;
+border-color: black;
+border-width: thin;
+left : 50%;
+padding : 10px;
+position : fixed;
+width : 400px;
+margin-left : -150px;
+height : 100px;
+top : 225px;
+z-index: 1050;
+font-family : FF-META-WEB-PRO, "MYRIAD PRO", "SEGOE UI", ARIAL, SANS-SERIF;
+}
+
+.popupBackground {
+background-color : grey;
+-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+filter: alpha(opacity=50);
+opacity: .5;
+position : absolute;
+width : 100%;
+height : 100%;
+top : 0;
+left : 0;
+z-index: 1000;
+}
+
+</style>
+</head>
+
+<body>
+<apex:form id="MainPage" rendered="{!IF((displayMainPage==true && showEditErrorPage==false ),true,false)}">
+
+<apex:sectionHeader title="" subtitle="Customer Onboarding Request"/>
+<apex:actionStatus id="counterStatus">
+    <apex:facet name="start">
+        <div class="spinnerMask" id="spinnerMask">
+            <div class="spinnerCt">
+                <img src="/img/analytics/reportbuilder/icons/spinner32.gif" alt="Loading..." width="32" height="32" class="spinner" title="Loading..." />
+                <div class="loadingIndicator">Loading...</div>
+            </div>
+            <div class="mask"></div>
+        </div>
+    </apex:facet>
+</apex:actionStatus>
+<apex:outputPanel id="errorpage"> <apex:pagemessages /> </apex:outputPanel>
+<apex:pageblock id="pb" rendered="{!IF(((ProfileName=='Credit Analyst' || ProfileName =='Credit Process Managers' || ProfileName=='Data Analyst' || ProfileName=='System Administrator' || ProfileName == 'DMS Process Managers')),true,false)}">
+
+    <apex:outputPanel style="visibility:hidden;font-color:#F8F8F8 !important;display:none;font-weigth:0px;">
+    <apex:inputField value="{!OnboardingReq.SF_Region__c}" style="visibility:hidden;font-color:#F8F8F8 !important;display:none;font-weigth:0px;"/>
+    <apex:inputField value="{!OnboardingReq.Company_Code__c}" style="visibility:hidden"/>
+    </apex:outputPanel>  
+  
+
+<apex:pageBlockSection Id="Pb1" Title="Request Details" columns="2">
+<apex:outputField value="{!OnboardingReq.Name}" id="cdrname"/>
+    <apex:outputText />
+    <apex:outputField value="{!OnboardingReq.Requestor_Name__c}"  />
+    <apex:outputField value="{!OnboardingReq.Requestor_Phone_Number__c}"  />
+    <apex:outputField value="{!OnboardingReq.Requestor_Email__c}"  />
+    <apex:outputText ></apex:outputText>
+    <apex:outputField value="{!OnboardingReq.Request_Description__c}"   style="width: 300px; height: 100px;"/>
+    <apex:outputText ></apex:outputText>
+    <apex:outputText value="{!RecordTypeName}" label="Type of Request"></apex:outputText>
+    <apex:outputField value="{!OnboardingReq.Priority__c}"/>
+    <apex:outputField value="{!OnboardingReq.Request_Status__c}"/>
+    <apex:outputText ></apex:outputText>
+    <apex:outputText value="{!OnboardingReq.Customer_Number__c}" label="SAP Customer Number"></apex:outputText>
+    <apex:outputField value="{!OnboardingReq.Sales_Organization__c}"  />
+    <apex:outputField value="{!OnboardingReq.Distribution_Channel__c}"  />
+    <apex:outputField value="{!OnboardingReq.Division__c}"  />
+    <apex:outputText />
+    <apex:outputField value="{!OnboardingReq.Account_Group__c}"   />
+    <apex:outputField value="{!OnboardingReq.SF_Region__c}"  /> 
+    <!-- Fix for dependent picklist starts -->
+    <apex:outputField id="CompanyCode" value="{!OnboardingReq.Company_Code__c}" />
+    <apex:outputField value="{!OnboardingReq.SBU__c}"  />
+    <apex:outputField value="{!OnboardingReq.Sub_Business__c}"  />
+    <apex:outputField id="GKey" value="{!OnboardingReq.Group_Key__c}" />
+    <apex:outputField id="othergroupkey" value="{!OnboardingReq.Other_Group_Key__c}" />        
+    </apex:pageBlockSection> 
+
+
+    <apex:pageBlockSection Id="PbOutExisting" Title="Customer Information" columns="2">
+    <apex:outputText ></apex:outputText>
+    <apex:outputField value="{!OnboardingReq.Account_Group__c}"/>
+    <apex:outputField value="{!OnboardingReq.Customer_Name__c}"/>
+    <apex:outputField value="{!OnboardingReq.Existing_Office_House_Number__c}"/>
+    <apex:outputField value="{!OnboardingReq.Customer_Name_2__c}"/>
+    <apex:outputField value="{!OnboardingReq.House_Supplement__c}"/>
+    <apex:outputField value="{!OnboardingReq.Customer_Name_3__c}"/>
+    <apex:outputField value="{!OnboardingReq.Existing_Street__c}"/>
+    <apex:outputField value="{!OnboardingReq.Customer_Name_4__c}"/>
+    <apex:outputField value="{!OnboardingReq.Existing_City__c}"/>
+    <apex:outputText ></apex:outputText>
+    <apex:outputField value="{!OnboardingReq.Existing_State_Province__c}"/>
+    <apex:outputText ></apex:outputText>
+    <apex:outputField value="{!OnboardingReq.Existing_Country__c}"/>
+    <apex:outputText ></apex:outputText>
+    <apex:outputField value="{!OnboardingReq.Existing_Region__c}"/>
+    <apex:outputText ></apex:outputText>
+    <apex:outputField value="{!OnboardingReq.Existing_District__c}"/>
+    <apex:outputText ></apex:outputText>
+    <apex:outputField value="{!OnboardingReq.Existing_Postal_Code__c}"/>
+    <apex:outputText ></apex:outputText>
+    <apex:outputField value="{!OnboardingReq.Existing_Telephone__c}"/>
+    <apex:outputText ></apex:outputText>
+    <apex:outputField value="{!OnboardingReq.Existing_Fax_Number__c}" />
+    <apex:outputText ></apex:outputText>
+    <apex:outputField value="{!OnboardingReq.Existng_Email__c}"/>
+    <apex:outputText />
+    <apex:outputField value="{!OnboardingReq.P_O_Box__c}"/>
+    <apex:outputText />
+    <apex:outputField value="{!OnboardingReq.P_O_Box_City__c}"/>
+    <apex:outputText ></apex:outputText>
+    <apex:outputField value="{!OnboardingReq.Customer_language__c}"/>
+<!--<Nishant 20151012>Adding Local Version Functionality for Extend Existing as part of R02 Enhancement-->
+    <apex:outputText ></apex:outputText>
+    <apex:outputField id="LocalVersion" label="Local Version" value="{!OnboardingReq.Local_Version__c}"/> 
+    <apex:outputField id="CustName1" value="{!OnboardingReq.Local_Customer_Name_1__c}"/>
+    <apex:outputField id="HNo2" value="{!OnboardingReq.Local_Language_Office_House_Number__c}"/>
+    <apex:outputField id="CustName2" value="{!OnboardingReq.Local_Customer_Name_2__c}"/>
+    <apex:outputField id="localhousesppl" value="{!OnboardingReq.Local_Language_House_Supplement__c}"/>
+    <apex:outputField id="CustName3" value="{!OnboardingReq.Local_Customer_Name_3__c}"/>
+    <apex:outputField id="Street" value="{!OnboardingReq.Local_Language_Street__c}"/>
+    <apex:outputField id="CustName4" value="{!OnboardingReq.Local_Customer_Name_4__c}"/>
+    <apex:outputField id="City" value="{!OnboardingReq.Local_Language_City__c}"/>
+    <apex:outputField id="SearchTerms" value="{!OnboardingReq.Local_language_Search_Terms__c}"/>
+    <apex:outputField id="State" value="{!OnboardingReq.Local_Language_State_Province__c}"/>
+    <apex:outputText ></apex:outputText>
+    <apex:outputField id="LocalCountry" value="{!OnboardingReq.Local_Language_Country__c}"/>
+    <apex:outputText ></apex:outputText>                
+    <apex:outputField id="LocalRegion" value="{!OnboardingReq.Local_Language_Region__c}"/>
+    <apex:outputText ></apex:outputText> 
+    <apex:outputField id="District" value="{!OnboardingReq.Local_Language_District__c}"/>
+    <apex:outputText ></apex:outputText> 
+    <apex:outputField id="LocalPostal" value="{!OnboardingReq.Local_Language_Postal_Code__c}"/>
+        
+    <apex:outputField value="{!OnboardingReq.Vat_Number__c}"/>
+    <apex:outputField value="{!OnboardingReq.Tax_Code_1__c}"/>
+    <apex:outputField value="{!OnboardingReq.Existing_Tax_Classification__c}"/>
+    <apex:outputField value="{!OnboardingReq.Tax_Code_2__c}"/>
+    <apex:outputField value="{!OnboardingReq.Existing_Tax_Category__c}"/>
+    <apex:outputField value="{!OnboardingReq.Tax_Code_3__c}"/>
+    <apex:outputText ></apex:outputText>
+    <apex:outputField value="{!OnboardingReq.Tax_Code_4__c}"/>
+    <apex:outputField value="{!OnboardingReq.Existing_Approved_Terms_of_Payment__c}"/>
+    <apex:outputField value="{!OnboardingReq.Existing_Approved_Credit_limit__c}"/>
+    <apex:outputField value="{!OnboardingReq.Payment_Method__c}"/>
+    <apex:outputField value="{!OnboardingReq.Existing_Appr_Credit_Lmt_Currency_Code__c}"/>
+    <apex:outputText ></apex:outputText>
+    <apex:outputField value="{!OnboardingReq.Existing_Approved_Credit_Term_Type__c}"/>
+    <apex:outputField value="{!OnboardingReq.DUNS_Number__c}"/>
+    <apex:outputText ></apex:outputText>
+    <apex:outputField value="{!OnboardingReq.Existing_Incoterms_1__c}"/>
+    <apex:outputField value="{!OnboardingReq.Customer_Type__c}"/>
+    <apex:outputField value="{!OnboardingReq.Existing_Incoterms_2__c}"/>
+    <apex:outputField value="{!OnboardingReq.Customer_Segment__c}"/>
+    <apex:outputField value="{!OnboardingReq.Existing_Shipping_Conditions__c}"/>
+    <apex:outputText ></apex:outputText>
+    <apex:outputField value="{!OnboardingReq.Existing_Delivery_Plant__c}"/>
+    <apex:outputField value="{!OnboardingReq.Existing_Sales_Office__c}"/>
+    <apex:outputField value="{!OnboardingReq.Existing_Company_Code__c}"/>
+    <apex:outputField value="{!OnboardingReq.Existing_Sales_district__c}"/>
+    <apex:outputField value="{!OnboardingReq.Existing_Sales_Organization__c}"/>
+    <apex:outputField value="{!OnboardingReq.Business_partner_ID_grouping__c}"/>
+    <apex:outputField value="{!OnboardingReq.CSR_Comments__c}" />
+  </apex:pageBlockSection>
+  
+    <apex:pageBlockSection Id="PbInExistingCSR" Title="Sales Extension" columns="2" rendered="{!IF((RecordTypeName == 'Extend Existing Customer' && OnboardingReq.Account_Group__c!='Z004 (Bill-to party)'),true,false)}">
+  <apex:outputText ></apex:outputText>
+            <apex:outputField value="{!OnboardingReq.On_By_Indicator__c}"/>
+            <apex:outputField value="{!OnboardingReq.Customer_Statistics_Group__c}"/>
+            <apex:outputField value="{!OnboardingReq.Customer_group_1__c}"/>
+            <apex:outputField value="{!OnboardingReq.Account_at_customer__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputText rendered="{!!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputField value="{!OnboardingReq.Customer_Group_2__c}"/>
+            <apex:outputText ></apex:outputText>
+            <apex:outputField value="{!OnboardingReq.Customer_Group_3__c}"/>
+            <apex:outputText ></apex:outputText>
+            <apex:outputField value="{!OnboardingReq.Customer_group_4__c}"/>
+            <apex:outputText ></apex:outputText>
+            <apex:outputField value="{!OnboardingReq.Customer_group_5__c}"/>
+            <apex:outputField value="{!OnboardingReq.Customer_Contact_Name__c}" rendered="{!if((OnboardingReq.Sold_to_Country__c== 'SG - Singapore' || OnboardingReq.Sold_to_Country__c== 'MY - Malaysia' || OnboardingReq.Sold_to_Country__c== 'PH - Philippines' || OnboardingReq.Sold_to_Country__c== 'VN - Vietnam'),true,false)}" /> <!-- Bhargavi 20160919 added ASEAN condition-->
+            <apex:outputText rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"></apex:outputText>
+            <!-- apex:inputField value="{!OnboardingReq.Customer_Currency__c}" required="true" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/-->
+            <apex:outputField value="{!OnboardingReq.Exchange_Rate_type__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputField value="{!OnboardingReq.Account_Assignment_Group__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputField value="{!OnboardingReq.Order_Combination__c}"/>
+            <apex:outputField value="{!OnboardingReq.Rebates__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputField value="{!OnboardingReq.Order_Probability__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputField value="{!OnboardingReq.Copy_of_Booking_Message__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputText ></apex:outputText>
+            <apex:outputField value="{!OnboardingReq.Sales_District__c}" />
+            <apex:outputField value="{!OnboardingReq.Sales_Office__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputField value="{!OnboardingReq.Authorization_group__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputField value="{!OnboardingReq.Sales_Group__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputText rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"></apex:outputText>
+            <apex:outputField value="{!OnboardingReq.Customer_Price_Procedure__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputField value="{!OnboardingReq.Price_Group__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputField value="{!OnboardingReq.Price_Determination__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputField value="{!OnboardingReq.Price_List_Type__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputField value="{!OnboardingReq.Credit_Control_Area__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputText rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"></apex:outputText>
+            <apex:outputField value="{!OnboardingReq.Complete_Delivery_Required_by_Law__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputText rendered="{!!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputField value="{!OnboardingReq.Underdelivery_Tolerance__c}"/>
+            <apex:outputField value="{!OnboardingReq.Delivery_priority__c}"/>
+            <apex:outputField value="{!OnboardingReq.Overdelivery_Tolerance__c}"/>
+            <apex:outputField value="{!OnboardingReq.Data_Type_on_Delivery__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputText rendered="{!!IF(OnboardingReq.Account_Group__c!='Z002 ( Ship-to party )',true,false)}"/>
+            <apex:outputField value="{!OnboardingReq.Maximum_Partial_Deliveries__c}"/>
+            <apex:outputField value="{!OnboardingReq.Partial_Delivery_per_Item__c}"/>
+            <apex:outputField value="{!OnboardingReq.Default_Shipping_Conditions__c}"/>
+            <apex:outputField value="{!OnboardingReq.Delivery_plant__c}" />
+            <!-- Fix for dependent picklist starts -->
+            <apex:outputField value="{!OnboardingReq.Default_Incoterms_1__c}"/> 
+          
+            <apex:outputText ></apex:outputText>
+            <apex:outputField value="{!OnboardingReq.Default_Incoterms_2__c}"/>
+            <apex:outputField value="{!OnboardingReq.Tax_Classification__c}"/>
+            <apex:outputText ></apex:outputText>
+            <apex:outputField value="{!OnboardingReq.Invoicing_Dates__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}" style="width:200px;"/>
+            <apex:outputField value="{!OnboardingReq.Subs_Invoice_Processing__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputField value="{!OnboardingReq.Invoicing_List_Dates__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}" style="width:200px;" />
+            <!--<apex:outputField value="{!OnboardingReq.Switch_Off_Rounding__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>-->
+            <apex:outputField value="{!OnboardingReq.Payment_Guarantee_Procedure__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputField id="POD2" value="{!OnboardingReq.Relevant_for_POD__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputText rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"></apex:outputText>
+            <apex:outputField value="{!OnboardingReq.Number_of_Copies_of_Bills_of_Lading__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputField value="{!OnboardingReq.Number_of_Org_Bills_of_Lading__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputField value="{!OnboardingReq.Receiving_Storage_Location__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputText rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"></apex:outputText>
+            <apex:outputField value="{!OnboardingReq.Item_Proposal__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputField value="{!OnboardingReq.Product_Proposal_for_Customer_Procedure__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputField value="{!OnboardingReq.Relevant_for_Agency_Business__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputField value="{!OnboardingReq.Unlimited_Tolerance__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputField value="{!OnboardingReq.Units_Group__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputText rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"></apex:outputText>
+            <!--<apex:inputField value="{!OnboardingReq.Delete_Indicator__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>-->
+            <apex:outputField value="{!OnboardingReq.Duty_Indicator__c}" rendered="{!IF(OnboardingReq.Account_Group__c!='Z002 (Ship-to party)',true,false)}"/>
+            <apex:outputField value="{!OnboardingReq.CSR_Comments__c}" style="width: 300px; height: 100px;" rendered="{!IF(OnboardingReq.Account_Group__c =='Z002 (Ship-to party)',true,false)}"/>
+        
+       
+    </apex:pageBlockSection>  
+    
+    
+    <apex:pageBlockSection Id="PbProp" Title="Proposed Credit Data" columns="2" rendered="{!IF(((RecordTypeName == 'New Customer Creation' || RecordTypeName == 'Extend Existing Customer' ) && (ProfileName!='Data Analyst' && (ProfileName != 'DMS Process Managers'))),true,false) }">
+    <apex:outputField value="{!OnboardingReq.Proposed_Cash_Management_Group__c}"/>
+    <apex:outputField value="{!OnboardingReq.Proposed_Payment_Index__c}"/>
+    <apex:outputField value="{!OnboardingReq.Proposed_Terms_of_Payment__c}"/>
+    <apex:outputField value="{!OnboardingReq.Proposed_Rating__c}"/>
+    <apex:outputField value="{!OnboardingReq.Proposed_Non_Standard_Terms_of_Payment__c}"/>
+    <apex:outputField value="{!OnboardingReq.Proposed_credit_information_number__c}"/>
+    <apex:outputField value="{!OnboardingReq.Proposed_Credit_Term_Type__c}"/>
+    <apex:outputField value="{!OnboardingReq.Proposed_Customer_Group__c}"/>
+    <apex:outputField value="{!OnboardingReq.Proposed_Credit_Limit__c}"/>
+    <apex:outputField label="Preferred Bank Name" value="{!OnboardingReq.Preferred_Bank_Name__c}"/>
+    <apex:outputField value="{!OnboardingReq.Proposed_Credit_Limit_Currency_Code__c}"/>
+    <apex:outputText ></apex:outputText>
+    <apex:outputField value="{!OnboardingReq.Proposed_Risk_Category__c}"/>
+    <apex:outputField value="{!OnboardingReq.Alternative_Preferred_Bank_Name__c}"/>
+    <apex:outputField value="{!OnboardingReq.Proposed_Cred_rep_grp__c}"/>
+    <apex:outputField value="{!OnboardingReq.Estimated_Average_Monthly_Purchases__c}"/>
+    <apex:outputField value="{!OnboardingReq.Proposed_Customer_credit_group__c}"/>
+    <apex:outputField value="{!OnboardingReq.Estimated_Number_of_Orders_per_Month__c}"/>
+    <apex:outputField value="{!OnboardingReq.Proposed_Reference_date__c}"/>
+    <apex:outputText ></apex:outputText>
+    <apex:outputField value="{!OnboardingReq.CSR_Comments__c}" style="width: 300px; height: 100px;"/>
+    </apex:pageBlockSection>    
+
+    <!-- For Credit Analyst -->
+    
+    <apex:pageBlockSection Id="PbOut4" Title="Destination Credit Data" columns="2" rendered="{!IF(((RecordTypeName == 'New Customer Creation' || RecordTypeName == 'Extend Existing Customer') && (ProfileName=='Credit Analyst' || ProfileName =='Credit Process Managers') && OnboardingReq.Request_Status__c=='Awaiting Credit Approval'),true,false)}">
+    <apex:outputField value="{!OnboardingReq.Destination_Terms_of_Payment__c}"/>
+    <apex:outputField value="{!OnboardingReq.Dest_Non_Standard_Terms_of_Payment__c}"/>
+    <apex:outputField value="{!OnboardingReq.Destination_credit_term_type__c}"/>
+    <apex:outputField value="{!OnboardingReq.Destination_Credit_limit__c}"/>
+    <apex:outputText ></apex:outputText>
+    <apex:outputField value="{!OnboardingReq.Destination_Credit_Limit_Currency_code__c}"/>
+    <apex:outputText ></apex:outputText>
+    <apex:outputField value="{!OnboardingReq.Destination_risk_category__c}"/>
+    <apex:outputField value="{!OnboardingReq.Destination_Credit_Comments__c}" style="width: 300px; height: 100px;"/>
+    </apex:pageBlockSection>
+        
+    <apex:pageBlockSection Id="PbOut5" Title="Approved Credit Data" columns="2" rendered="{!IF(((RecordTypeName == 'New Customer Creation' || RecordTypeName == 'Extend Existing Customer') && (ProfileName=='Credit Analyst' || ProfileName =='Credit Process Managers') && (OnboardingReq.Request_Status__c=='Awaiting Credit Approval' || OnboardingReq.Request_Status__c=='Awaiting DOA approval')),true,false)}">
+    <apex:PageBlockSectionItem ><apex:outputLabel value="Copy Proposed Credit Data" style="font-weight:bold;color:#4a4a56;font-size: 11px;margin-left:14px"/><apex:actionRegion ><apex:inputField id="copyprop" value="{!OnboardingReq.Copy_Proposed_Credit_Data__c}"><apex:actionSupport event="onchange" action="{!CopyProposedCreditData}" reRender="PbOut5,AppNonStdPay" status="counterStatus" immediate="true" onComplete="RemoveApprNone();ApprRiskNone();"/></apex:inputField></apex:actionRegion></apex:PageBlockSectionItem>
+    <apex:outputText />
+    <apex:inputField value="{!OnboardingReq.Approved_Cash_Management_Group__c}"/>
+    <apex:inputField value="{!OnboardingReq.Approved_Payment_Index__c}"/>
+    <apex:PageBlockSectionItem ><apex:outputLabel value="Approved Terms of Payment" style="font-weight:bold;color:#4a4a56;font-size: 11px;margin-left:14px"/><apex:actionRegion ><apex:inputField value="{!OnboardingReq.Approved_Terms_of_Payment__c}" required="true" style="margin-left:2px;width:165px"><apex:actionSupport event="onchange" action="{!PrepopulateCreditLimit}" reRender="apprlimit,apprtermtype,prpNonPayBlc,PrpNonPayTerm1,PrpNonPayTerm" status="counterStatus" oncomplete="RemoveApprNone();"></apex:actionSupport></apex:inputField></apex:actionRegion></apex:PageBlockSectionItem>
+    <apex:inputField value="{!OnboardingReq.Approved_Rating__c}"/>
+    <apex:pageBlockSection id="prpNonPayBlc" columns="2">
+         <apex:pageBlockSectionItem rendered="{!if((OnboardingReq.Approved_Terms_of_Payment__c =='Other'),true,false)}">
+         <apex:outputLabel value="Approved Non Standard Terms of Payment" style="font-weight:bold;color:#4a4a56;font-size: 11px;margin-left:124px;padding-right:0px" />
+         <apex:outputPanel >
+        <!-- <apex:inputField id="PrpNonPayTerm1" value="{!OnboardingReq.Approved_Non_Standard_Terms_of_Payment__c}"  rendered="{!if((OnboardingReq.Approved_Terms_of_Payment__c =='Other'),false,true)}" /> -->
+        <div class="requiredInput">
+        <div class="requiredBlock"></div>
+        <apex:inputField id="PrpNonPayTerm" value="{!OnboardingReq.Approved_Non_Standard_Terms_of_Payment__c}" rendered="{!if((OnboardingReq.Approved_Terms_of_Payment__c =='Other'),true,false)}" required="{!if((OnboardingReq.Approved_Terms_of_Payment__c =='Other'),true,false)}"  />
+        </div>
+        
+        </apex:outputPanel>
+       </apex:pageBlockSectionItem>
+   </apex:pageBlockSection>
+    
+    <apex:inputField value="{!OnboardingReq.Approved_credit_information_number__c}"/>
+    <apex:inputField id="apprtermtype" value="{!OnboardingReq.Approved_Credit_Term_Type__c}" required="true"></apex:inputfield>
+    <apex:inputField value="{!OnboardingReq.Last_Internal_Review__c}" required="true"/>
+    <apex:inputField id="apprlimit" value="{!OnboardingReq.Approved_Credit_Limit__c}" required="true"/>
+    <apex:inputField value="{!OnboardingReq.Next_Internal_Review__c}" required="true"/>
+    <apex:inputField value="{!OnboardingReq.Approved_Credit_Limit_Currency_Code__c}" required="true"/>
+    <apex:inputField value="{!OnboardingReq.Last_External_Review__c}" required="true"/>
+    <apex:inputField id="apprrisk" value="{!OnboardingReq.Approved_Risk_Category__c}" required="true"/>
+    <apex:inputField value="{!OnboardingReq.Approved_Customer_Group__c}" required="{!if((OnboardingReq.Sold_to_Country__c== 'SG - Singapore' || OnboardingReq.Sold_to_Country__c== 'MY - Malaysia' || OnboardingReq.Sold_to_Country__c== 'PH - Philippines' || OnboardingReq.Sold_to_Country__c== 'VN - Vietnam'),true,false)}" /> <!-- Bhargavi 20160919 added ASEAN condition-->
+    <apex:inputField id="credrep" value="{!OnboardingReq.Approved_Cred_rep_grp__c}" required="true"/>
+    <apex:inputField id="avgmonthpur" value="{!OnboardingReq.Approved_Average_Monthly_Purchases__c}"/>
+    <!--<apex:inputField id="avgmonthpur" value="{!OnboardingReq.Approved_Average_Monthly_Purchases__c}" required="true"/>-->
+    <apex:inputField value="{!OnboardingReq.Approved_Customer_credit_group__c}"/>
+    <apex:inputField id="avgnoofpur" value="{!OnboardingReq.Approved_Number_of_Orders_per_Month__c}"/>
+    <!--<apex:inputField id="avgnoofpur" value="{!OnboardingReq.Approved_Number_of_Orders_per_Month__c}" required="true"/>-->
+    <apex:inputField value="{!OnboardingReq.Approved_Reference_date__c}" required="{!if((OnboardingReq.Sold_to_Country__c== 'SG - Singapore' || OnboardingReq.Sold_to_Country__c== 'MY - Malaysia' || OnboardingReq.Sold_to_Country__c== 'PH - Philippines' || OnboardingReq.Sold_to_Country__c== 'VN - Vietnam'),true,false)}" /> <!-- Bhargavi 20160919 added ASEAN condition-->
+    <apex:outputText ></apex:outputText>
+    <apex:inputField value="{!OnboardingReq.Country_Credit_Comments__c}" style="width: 300px; height: 100px;" required="true" rendered="{!IF ((OnboardingReq.Request_Status__c=='Awaiting Credit Approval'),true,false)}"/>
+    <apex:inputField value="{!OnboardingReq.Escalated_Approver_Comments__c}" style="width: 300px; height: 100px;" required="true" rendered="{!IF ((OnboardingReq.Request_Status__c=='Awaiting DOA approval'),true,false)}"/>
+    <apex:inputField value="{!OnboardingReq.IsCreditApproved__c}"/>
+    </apex:pageBlockSection>
+    
+    <!-- For DCA -->
+    <apex:pageBlockSection Id="PbOut41" Title="Destination Credit Data" columns="2" rendered="{!IF(((RecordTypeName == 'New Customer Creation' || RecordTypeName == 'Extend Existing Customer') && (ProfileName=='Credit Analyst' || ProfileName =='Credit Process Managers') && OnboardingReq.Request_Status__c=='Awaiting Destination Credit Approval'),true,false)}">
+    <apex:PageBlockSectionItem ><apex:outputLabel value="Copy Proposed Credit Data" style="font-weight:bold;color:#4a4a56;font-size: 11px;margin-left:14px"/><apex:actionRegion ><apex:inputField id="copydest" value="{!OnboardingReq.Copy_Proposed_Data__c}"><apex:actionSupport event="onchange" action="{!CopyProposedToDestinationCreditData}" reRender="PbOut41" status="counterStatus" immediate="true" onComplete="RemoveDestNone();DestRiskNone();"/></apex:inputField></apex:actionRegion></apex:PageBlockSectionItem>
+    <apex:PageBlockSectionItem ><apex:outputLabel value="Destination Terms of Payment" style="font-weight:bold;color:#4a4a56;font-size: 11px;margin-left:14px"/><apex:actionRegion ><apex:inputField value="{!OnboardingReq.Destination_Terms_of_Payment__c}" required="true" style="margin-left:2px;width:165px"><apex:actionSupport event="onchange" action="{!PrepopulateCreditLimit}" reRender="destlimit,prpNonPayBlc6" status="counterStatus" oncomplete="RemoveDestNone();"></apex:actionSupport></apex:inputField></apex:actionRegion></apex:PageBlockSectionItem>
+    
+    
+    <apex:pageBlockSection id="prpNonPayBlc6" columns="2">
+     <apex:pageBlockSectionItem rendered="{!if((OnboardingReq.Destination_Terms_of_Payment__c =='Other'),true,false)}">
+     <apex:outputLabel value="Destination Non Standard Terms of Payment" style="font-weight:bold;color:#4a4a56;font-size: 11px;margin-left:124px;padding-right:0px" />
+     <apex:outputPanel >
+    <!-- <apex:inputField id="PrpNonPayTerm6" value="{!OnboardingReq.Dest_Non_Standard_Terms_of_Payment__c}"  rendered="{!if((OnboardingReq.Destination_Terms_of_Payment__c =='Other'),false,true)}" /> -->
+    <div class="requiredInput">
+    <div class="requiredBlock"></div>
+    <apex:inputField id="PrpNonPayTerm7" value="{!OnboardingReq.Dest_Non_Standard_Terms_of_Payment__c}" rendered="{!if((OnboardingReq.Destination_Terms_of_Payment__c =='Other'),true,false)}" required="{!if((OnboardingReq.Destination_Terms_of_Payment__c =='Other'),true,false)}"  />
+    </div>
+    
+    </apex:outputPanel>
+   </apex:pageBlockSectionItem>
+</apex:pageBlockSection>
+
+    
+    <!--apex:inputField value="{!OnboardingReq.Dest_Non_Standard_Terms_of_Payment__c}"/-->
+    <apex:inputField id="desttermtype" value="{!OnboardingReq.Destination_credit_term_type__c}" required="true"/>
+    <apex:inputField id="destlimit" value="{!OnboardingReq.Destination_Credit_limit__c}" required="true"/>
+    <apex:outputText ></apex:outputText>
+    <apex:inputField value="{!OnboardingReq.Destination_Credit_Limit_Currency_code__c}" required="true"/>
+    <apex:outputText ></apex:outputText>
+    <!--<apex:inputField id="destrisk" value="{!OnboardingReq.Destination_risk_category__c}" required="true"/>-->
+    <apex:inputField value="{!OnboardingReq.Destination_Credit_Comments__c}" style="width: 300px; height: 100px;"  required="true"/>
+    </apex:pageBlockSection>    
+    
+    <apex:pageBlockSection Id="PbOut51" Title="Approved Credit Data" columns="2" rendered="{!IF(((((ProfileName=='Credit Analyst' || ProfileName =='Credit Process Managers') && OnboardingReq.Request_Status__c=='Awaiting Destination Credit Approval') || (ProfileName=='Data Analyst' || (ProfileName == 'DMS Process Managers')))),true,false)}">
+    <apex:outputField value="{!OnboardingReq.Approved_Cash_Management_Group__c}"/>
+    <apex:outputField value="{!OnboardingReq.Approved_Payment_Index__c}"/>
+    <apex:outputField value="{!OnboardingReq.Approved_Terms_of_Payment__c}"/>
+    <apex:outputField value="{!OnboardingReq.Approved_Rating__c}"/>
+    <apex:outputField value="{!OnboardingReq.Approved_Non_Standard_Terms_of_Payment__c}"/>
+    <apex:outputField value="{!OnboardingReq.Approved_credit_information_number__c}"/>
+    <apex:outputField value="{!OnboardingReq.Approved_Credit_Term_Type__c}"/>
+    <apex:outputField value="{!OnboardingReq.Last_Internal_Review__c}"/>
+    <apex:outputField value="{!OnboardingReq.Approved_Credit_Limit__c}"/>
+    <apex:outputField value="{!OnboardingReq.Next_Internal_Review__c}"/>
+    <apex:outputField value="{!OnboardingReq.Approved_Credit_Limit_Currency_Code__c}"/>
+    <apex:outputField value="{!OnboardingReq.Last_External_Review__c}"/>
+    <apex:outputField value="{!OnboardingReq.Approved_Risk_Category__c}"/>
+    <apex:outputField value="{!OnboardingReq.Approved_Customer_Group__c}" />
+    <apex:outputField value="{!OnboardingReq.Approved_Cred_rep_grp__c}"/>
+    <apex:outputText ></apex:outputText>
+    <apex:outputField value="{!OnboardingReq.Approved_Customer_credit_group__c}"/>
+    <apex:outputText ></apex:outputText>
+    <apex:outputField value="{!OnboardingReq.Approved_Reference_date__c}" />
+    <apex:outputText ></apex:outputText>
+    <apex:outputField value="{!OnboardingReq.Country_Credit_Comments__c}" style="width: 300px; height: 100px;"/>
+    </apex:pageBlockSection>
+    
+        <apex:pageBlockSection Id="Pb11" Title="Data Analyst Comments" columns="2" rendered="{!IF((ProfileName != 'Data Analyst'  && (ProfileName != 'DMS Process Managers')) ,true,false)}">
+        <apex:outputField value="{!OnboardingReq.Sold_To_Customer_Number__c}"/>
+        <apex:outputField value="{!OnboardingReq.Customer_Number__c}" rendered="{!IF(RecordTypeName=='New Customer Creation',false,true)}"/>
+        <apex:outputText rendered="{!IF(RecordTypeName=='New Customer Creation',false,true)}" ></apex:outputText>
+        <apex:outputField value="{!OnboardingReq.Extended_Account_Group__c}" rendered="{!IF(RecordTypeName=='New Customer Creation',false,true)}"/>
+        <apex:outputField value="{!OnboardingReq.Data_Analyst_Comments__c}" style="width: 300px; height: 100px;"/>
+        </apex:pageBlockSection>
+        
+        
+        <apex:pageBlockSection Id="Pb111" Title="Data Analyst Comments" columns="2" rendered="{!IF((ProfileName == 'Data Analyst' || (ProfileName == 'DMS Process Managers')) ,true,false)}">
+        <apex:inputField value="{!OnboardingReq.Sold_To_Customer_Number__c}" Required="true" rendered="{!IF(RecordTypeName=='New Customer Creation',True,False)}"/>
+        <apex:outputField value="{!OnboardingReq.Sold_To_Customer_Number__c}" rendered="{!IF(RecordTypeName=='New Customer Creation',false,true)}"/>
+        <apex:inputField value="{!OnboardingReq.Source_Cluster__c}" Required="true" rendered="{!IF(RecordTypeName=='New Customer Creation',true,false)}"/>
+        <apex:outputField value="{!OnboardingReq.Source_Cluster__c}" rendered="{!IF((RecordTypeName=='Extend Existing Customer' && OnboardingReq.Account_Group__c=='Z002 ( Ship-to party )'),true,false)}"/>
+        <apex:outputField value="{!OnboardingReq.Customer_Number__c}" rendered="{!IF(RecordTypeName=='New Customer Creation',false,true)}"/>
+        <apex:outputText rendered="{!IF(RecordTypeName=='New Customer Creation',false,true)}" ></apex:outputText>
+        <apex:outputField value="{!OnboardingReq.Extended_Account_Group__c}" rendered="{!IF(RecordTypeName=='New Customer Creation',false,true)}"/>
+        <apex:outputText rendered="{!IF((RecordTypeName=='Extend Existing Customer' && OnboardingReq.Account_Group__c=='Z002 ( Ship-to party )'),true,false)}"/>
+        <apex:inputField value="{!OnboardingReq.Data_Analyst_Comments__c}" style="width: 300px; height: 100px;"/>
+        </apex:pageBlockSection>        
+    
+    <apex:pageBlockButtons location="both">
+    <b><apex:commandLink value="    Save    " action="{!SaveAndSubmit}" styleClass="btn" rerender="pb,errorpage" style="text-decoration:none;" status="counterStatus"><apex:param id="param1" name="IsSaveOrSubmit1" assignTo="{!IsSaveOrSubmit}" value="Save"/><apex:param id="param11" name="FlagSaveDirectly" assignTo="{!FlagSaveDirectly}" value="true"/> </apex:commandLink>
+    <apex:commandLink value="    Cancel    "  action="{!Cancel}" styleClass="btn" style="text-decoration:none;" immediate="true" status="counterStatus"></apex:commandLink>     
+    <apex:commandLink value="    Save & Submit    " action="{!SaveAndSubmit}" rerender="pb,errorpage" styleClass="btn" style="text-decoration:none;" status="counterStatus" rendered="{!IF((ProfileName=='Data Analyst' || (ProfileName == 'DMS Process Managers')), False,True)}"><apex:param name="IsSaveOrSubmit" id="param2" assignTo="{!IsSaveOrSubmit}" value="Submit"/><apex:param id="param12" name="FlagSaveDirectly" assignTo="{!FlagSaveDirectly}" value="true"/></apex:commandLink>
+    <apex:commandLink value="    Send for CA Review    " immediate="true" action="{!SendforReviewComments}" rerender="pb" styleClass="btn" style="text-decoration:none;" status="counterStatus" rendered="{!IF(((ProfileName=='Data Analyst' || (ProfileName == 'DMS Process Managers')) && sendToCA==true), True,False)}"><apex:param name="IsSaveOrSubmit13" id="param13" assignTo="{!IsSaveOrSubmit}" value="Submit"/><apex:param name="CAReview" id="CAReview" assignTo="{!CAReview}" value="True"/><apex:param id="buttonClickedCA" name="buttonClickedCA" assignTo="{!SubCtrlButtonClicked}" value="CA"></apex:param></apex:commandLink>
+    <!--apex:commandLink value="    Send for CA Review    " immediate="true" action="{!SendforReviewComments}" rerender="pb" styleClass="btn" style="text-decoration:none;" status="counterStatus" rendered="{!IF((ProfileName=='Data Analyst' || (ProfileName == 'DMS Process Managers')), True,False)}"><apex:param name="IsSaveOrSubmit13" id="param13" assignTo="{!IsSaveOrSubmit}" value="Submit"/><apex:param name="CAReview" id="CAReview" assignTo="{!CAReview}" value="True"/></apex:commandLink-->
+    <apex:commandLink value="    Send for CSR Review  " immediate="true" action="{!SendforReviewComments}" rerender="pb" styleClass="btn" style="text-decoration:none;" status="counterStatus" rendered="{!IF(((ProfileName=='Data Analyst') || (ProfileName == 'DMS Process Managers') || (ProfileName=='Credit Analyst' || ProfileName =='Credit Process Managers')), True,False)}"><apex:param name="IsSaveOrSubmit14" id="param14" assignTo="{!IsSaveOrSubmit}" value="Submit"/><apex:param name="CSRReview" id="CSRReview" assignTo="{!CSRReview}" value="True"/><apex:param id="buttonClickedCSR" name="buttonClickedCSR" assignTo="{!SubCtrlButtonClicked}" value="CSR"></apex:param></apex:commandLink>
+    <apex:commandLink value="    Complete    " action="{!SaveAndSubmit}" rerender="pb" styleClass="btn" style="text-decoration:none;" status="counterStatus" rendered="{!IF((ProfileName=='Data Analyst'|| (ProfileName == 'DMS Process Managers')), True,False)}"><apex:param name="IsSaveOrSubmit3" id="param3" assignTo="{!IsSaveOrSubmit}" value="Submit"/><apex:param name="IsComplete" id="param5" assignTo="{!isComplete}" value="True"/><apex:param id="param131" name="FlagSaveDirectly" assignTo="{!FlagSaveDirectly}" value="true"/></apex:commandLink>
+    <!--<apex:commandLink value="    Reject    "  immediate="true" action="{!SaveAndSubmit}" rerender="pb" styleClass="btn" style="text-decoration:none;" status="counterStatus" rendered="{!IF((ProfileName=='Data Analyst'|| (ProfileName == 'DMS Process Managers')), True,False)}"><apex:param name="IsSaveOrSubmit4" id="param4" assignTo="{!IsSaveOrSubmit}" value="Submit"/><apex:param name="IsReject" id="param6" assignTo="{!isReject}" value="True"/></apex:commandLink>-->
+    <apex:commandLink value="    Reject    " immediate="true" action="{!SendforReviewComments}" rendered="{!IF(((ProfileName=='Credit Analyst' || ProfileName =='Credit Process Managers' || ProfileName=='Data Analyst'|| ProfileName == 'DMS Process Managers')),true,false)}" styleClass="btn" style="text-decoration:none;"><apex:param id="buttonClickedReject" name="buttonClickedReject" assignTo="{!SubCtrlButtonClicked}" value="REJ"></apex:param></apex:commandLink> </b>
+    <!--<apex:commandLink value="    Reject    " immediate="true" action="{!CancelAndClose}" onclick="return confirm('Please confirm to Reject the request.');" rendered="{!IF(((ProfileName=='Credit Analyst' || ProfileName =='Credit Process Managers')),true,false)}" styleClass="btn" style="text-decoration:none;"></apex:commandLink> </b> -->
+</apex:pageBlockButtons>
+</apex:pageblock>
+</apex:form>
+
+<!-- Show Edit Error Page -->
+
+<apex:form id="EditErrorPage" rendered="{!showEditErrorPage}" >
+<b><apex:pageMessage summary="You cannot Edit this record now as it is locked." severity="error" strength="1" ></apex:pageMessage></b>
+</apex:form>
+
+</body>
+</apex:page>

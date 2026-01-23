@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>53.0</apiVersion>
+    <available>true</available>
+    <description>An Email sent to PA Support team for implementing mass import</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Mass Import Email</name>
+    <style>none</style>
+    <subject>SFDC PA Notification – New Mass Import Request</subject>
+    <type>visualforce</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>DPP_Global_Kalrez</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>DPP Global Kalrez</label>
+        <sharedTo>
+            <group>DPPGlobalKalrez</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>BU__c</field>
+            <operation>equals</operation>
+            <value>DPP Global Kalrez</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>B9I3,B9B9,B9G3,B987,B911,B9J9,C3I3,C311</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>Pricing_Request_Share_for_ACST_Global</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Pricing Request Share for ACST Global</label>
+        <sharedTo>
+            <group>ACSTGlobal</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>BU__c</field>
+            <operation>equals</operation>
+            <value>ACST Global</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Sales_Org_Code__c</field>
+            <operation>equals</operation>
+            <value>F427,F418,F43B,F4B9,F4B1,F4B0,F470</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+</SharingRules>

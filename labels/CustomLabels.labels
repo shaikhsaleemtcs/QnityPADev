@@ -1,0 +1,2598 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Abandon_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Abandon Button</shortDescription>
+        <value>Abandon</value>
+    </labels>
+    <labels>
+        <fullName>Abandon_Request_Confirmation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Abandon Request Confirmation</shortDescription>
+        <value>Are you sure you want to Abandon the Request?</value>
+    </labels>
+    <labels>
+        <fullName>Absolute_Change_Not_Applicable_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Absolute Change Not Applicable Error</shortDescription>
+        <value>Absolute change not applicable as there is no Rate on which this change has to be applied</value>
+    </labels>
+    <labels>
+        <fullName>ActivePricesReportLink</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Active prices report link</shortDescription>
+        <value>https://qnitypa.my.salesforce.com/00OVy0000042OLi</value>
+    </labels>
+    <labels>
+        <fullName>Add_Materials_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Add Materials Button</shortDescription>
+        <value>Add Materials</value>
+    </labels>
+    <labels>
+        <fullName>Add_Prices_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Add Prices Button</shortDescription>
+        <value>Add Prices</value>
+    </labels>
+    <labels>
+        <fullName>Add_Project_Materials_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Add Project Materials Button</shortDescription>
+        <value>Add Project Materials</value>
+    </labels>
+    <labels>
+        <fullName>Add_Project_Request</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Name_Add_Project_Request</shortDescription>
+        <value>Project Request Screen</value>
+    </labels>
+    <labels>
+        <fullName>Add_Req_Item</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Name_Add Req Item</shortDescription>
+        <value>Add Price Records</value>
+    </labels>
+    <labels>
+        <fullName>Add_Selected_To_Request_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Add Selected To Request Button</shortDescription>
+        <value>Add Selected To Request</value>
+    </labels>
+    <labels>
+        <fullName>Advance_Due_Date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Advance Due Date</shortDescription>
+        <value>Please Enter Due Date with minimum one month in advance from Today.</value>
+    </labels>
+    <labels>
+        <fullName>Approval_Set_Up</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Name_Approval_Set-Up</shortDescription>
+        <value>Approval Set-Up</value>
+    </labels>
+    <labels>
+        <fullName>Approval_Setup_Already_exist_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Approval Setup Already exist Error</shortDescription>
+        <value>Approval setup already exists for the selected combination. Please select a different combination to maintain approval setup</value>
+    </labels>
+    <labels>
+        <fullName>Approval_Setup_Escalation_Time_limit</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Approval Setup Escalation Time limit</shortDescription>
+        <value>Approval Setup Escalation Time should be in the range of 1 to 5.</value>
+    </labels>
+    <labels>
+        <fullName>Approval_Setup_Escalation_Time_mandatory_field</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Approval Setup Escalation Time mandatory field</shortDescription>
+        <value>Please enter value for mandatory field &apos;Approval Escalation - Pricing Requests&apos; in Default Values section</value>
+    </labels>
+    <labels>
+        <fullName>Approve_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Approve Button</shortDescription>
+        <value>Approve</value>
+    </labels>
+    <labels>
+        <fullName>Approve_Button_Permission_Warning_Message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Approve Button Permission Warning Message</shortDescription>
+        <value>You do not have permission to approve the selected request.</value>
+    </labels>
+    <labels>
+        <fullName>Approver_Details_Modified_Confirmation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Approver Details Modified Confirmation</shortDescription>
+        <value>Approver Details will be modified. Do you want to proceed?</value>
+    </labels>
+    <labels>
+        <fullName>Assigned_To_Select_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Assigned To</shortDescription>
+        <value>Please select a value for &apos;Assigned To&apos;</value>
+    </labels>
+    <labels>
+        <fullName>BU_Admin_Home_Page</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Name_BU_Admin_Home_Page</shortDescription>
+        <value>BU Admin Home Page</value>
+    </labels>
+    <labels>
+        <fullName>BU_Admin_Profile_Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BU Admin Profile Name</shortDescription>
+        <value>Price Approval-BU Admin</value>
+    </labels>
+    <labels>
+        <fullName>BU_ID</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BU_ID</shortDescription>
+        <value>a0C1300001PsCodEAF</value>
+    </labels>
+    <labels>
+        <fullName>BU_Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BU Name</shortDescription>
+        <value>DPP Polymers EMEA</value>
+    </labels>
+    <labels>
+        <fullName>Back_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Back_Button</shortDescription>
+        <value>Back</value>
+    </labels>
+    <labels>
+        <fullName>Bulk_Approval</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Bulk Approval</shortDescription>
+        <value>Please select only 5 requests at a time for bulk approval</value>
+    </labels>
+    <labels>
+        <fullName>BusinessSpecific_Material</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>BusinessSpecific_Material</shortDescription>
+        <value>F423GT,F423WR,F423DU</value>
+    </labels>
+    <labels>
+        <fullName>CPG_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CPG Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;CPG&apos;</value>
+    </labels>
+    <labels>
+        <fullName>CPG_not_configured_for_the_Sales_Area</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CPG not configured for the Sales Area</shortDescription>
+        <value>CPG not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>CPG_not_configured_for_the_Sales_Area_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CPG not configured for the Sales Area Error</shortDescription>
+        <value>CPG not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>CSR_Instruction_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CSR Instruction Error</shortDescription>
+        <value>Please enter a value for CSR Instruction</value>
+    </labels>
+    <labels>
+        <fullName>Calculate_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Calculate Button</shortDescription>
+        <value>Calculate</value>
+    </labels>
+    <labels>
+        <fullName>Cancel_Admin_Configuration_Confirmation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Cancel Admin Configuration Confirmation</shortDescription>
+        <value>Changes will not be saved. Do you want to proceed?</value>
+    </labels>
+    <labels>
+        <fullName>Cancel_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Cancel Button</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>Cancel_Task_Due_Date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Cancel Task Due Date</shortDescription>
+        <value>Task past the Due Date. Cannot be cancelled</value>
+    </labels>
+    <labels>
+        <fullName>Cancel_Task_for_CSR_Confirmation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Cancel Task for CSR Confirmation</shortDescription>
+        <value>Do you want to Proceed?</value>
+    </labels>
+    <labels>
+        <fullName>Change_Will_Result_In_Gaps_The_Pricing_Timeline_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Change Will Result In Gaps The Pricing Timeline Error</shortDescription>
+        <value>Gap records will be created. Do you want to proceed?</value>
+    </labels>
+    <labels>
+        <fullName>Choose_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Choose Button</shortDescription>
+        <value>Choose</value>
+    </labels>
+    <labels>
+        <fullName>Client_Certificate_Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Client_Certificate_Name</shortDescription>
+        <value>SpecPA_SAPCPI_CASignedCertificate_2024</value>
+    </labels>
+    <labels>
+        <fullName>Clone_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Clone Button</shortDescription>
+        <value>Clone</value>
+    </labels>
+    <labels>
+        <fullName>Column_headings_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Column headings Error</shortDescription>
+        <value>Column headings</value>
+    </labels>
+    <labels>
+        <fullName>Column_headings_not_found_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Column headings not found Error</shortDescription>
+        <value>Column headings not found</value>
+    </labels>
+    <labels>
+        <fullName>ComPartner_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ComPartner Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;ComPartner&apos;</value>
+    </labels>
+    <labels>
+        <fullName>ComPartner_not_configured_for_the_Sales_Area</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ComPartner not configured for the Sales Area</shortDescription>
+        <value>ComPartner not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>Continue_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Continue Button</shortDescription>
+        <value>Continue</value>
+    </labels>
+    <labels>
+        <fullName>Contract_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Contract Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;Contract&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Country_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Country Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;Country&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Country_not_configured_for_the_Sales_Area_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Country not configured for the Sales Area Error</shortDescription>
+        <value>Country not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>Create_New_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Create New Button</shortDescription>
+        <value>Create New</value>
+    </labels>
+    <labels>
+        <fullName>Currency_mandatory_field</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Currency mandatory field</shortDescription>
+        <value>Please select value for mandatory field &apos;Currency&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Currency_not_configured_for_the_Sales_Area_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Currency not configured for the Sales Area Error</shortDescription>
+        <value>Currency not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>Current_Prices</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Name_Current Prices</shortDescription>
+        <value>Price Record List</value>
+    </labels>
+    <labels>
+        <fullName>Customer_Contact_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Customer Contact Error</shortDescription>
+        <value>Please enter a value in Customer Contact. It cannot be blank</value>
+    </labels>
+    <labels>
+        <fullName>Customer_Details</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Name_Customer Details</shortDescription>
+        <value>Customer List</value>
+    </labels>
+    <labels>
+        <fullName>Customer_Hierarchy_Code_not_Configured_for_the_Sales_Area_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Customer Hierarchy Code not Configured for the Sales Area Error</shortDescription>
+        <value>Customer Hierarchy Code not Configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>Customer_Hierarchy_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Customer Hierarchy Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;Customer Hierarchy&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Customer_Marked_as_Freq_Info</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Customer Marked as Freq Info</shortDescription>
+        <value>Selected Customers have been marked as Frequent</value>
+    </labels>
+    <labels>
+        <fullName>Customer_Payment_Terms_Mandatory</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Customer Payment Terms Mandatory</shortDescription>
+        <value>Please select value for mandatory field &apos;Payment Terms&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Customer_Requests</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Name_Customer_Requests</shortDescription>
+        <value>Customer Request List</value>
+    </labels>
+    <labels>
+        <fullName>Customer_contact</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Customer_contact</shortDescription>
+        <value>Please Enter customer contact</value>
+    </labels>
+    <labels>
+        <fullName>Date_format_import_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Date format import Error</shortDescription>
+        <value>should be in YYYYMMDD format</value>
+    </labels>
+    <labels>
+        <fullName>Days</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Days</shortDescription>
+        <value>Days</value>
+    </labels>
+    <labels>
+        <fullName>Default_Discount_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Default Discount Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;Default Discount&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Default_Valid_To_Less_Than_Default_Valid_From_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Default Valid To Less Than Default Valid From Error</shortDescription>
+        <value>&apos;Default Valid To&apos; must always be greater than &apos;Default Valid From&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Delegate_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Delegate Button</shortDescription>
+        <value>Delegate</value>
+    </labels>
+    <labels>
+        <fullName>Delete_Approval_Setup_Confirmation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Delete Approval Setup Confirmation</shortDescription>
+        <value>Action will delete the approval setup details. Do you want to proceed?</value>
+    </labels>
+    <labels>
+        <fullName>Delete_Approvers_Confirmation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Delete Approvers Confirmation</shortDescription>
+        <value>Action will delete the approvers. Do you want to proceed?</value>
+    </labels>
+    <labels>
+        <fullName>Delete_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Delete_Button</shortDescription>
+        <value>Delete</value>
+    </labels>
+    <labels>
+        <fullName>Delete_Selected_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Delete Selected Button</shortDescription>
+        <value>Delete Selected</value>
+    </labels>
+    <labels>
+        <fullName>Delete_Selected_Request_Items_Confirmation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Delete Selected Request Items Confirmation</shortDescription>
+        <value>Are you sure you want to delete selected Request Items?</value>
+    </labels>
+    <labels>
+        <fullName>Destination_Country_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Destination Country Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;Destination Country&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Destination_Country_not_configured_for_the_Sales_Area</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Destination Country not configured for the Sales Area</shortDescription>
+        <value>Destination Country not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>DiagnosticsGlobalExpiryNotification</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DiagnosticsGlobal Expire Notification</shortDescription>
+        <value>kathleen.a.eichholz@dupont.com.invalid,neoccahia.mcnair@dupont.com.invalid</value>
+    </labels>
+    <labels>
+        <fullName>Done_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Done Button</shortDescription>
+        <value>Done</value>
+    </labels>
+    <labels>
+        <fullName>DppGlobalKnV11BuNotifyEmail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DPP Global Kalrez and Vespel BU Admin Email Div 11</shortDescription>
+        <value>yuriko.nishino@dupont.com.invalid,robin.l.russell@dupont.com.invalid</value>
+    </labels>
+    <labels>
+        <fullName>DppGlobalKnV13BuNotifyEmail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DPP Global Kalrez and Vespel BU Admin Email Div 13</shortDescription>
+        <value>elke.mesdagh@dupont.com.invalid,
+kathleen.guyot@dupont.com.invalid,
+john.roelants@dupont.com.invalid</value>
+    </labels>
+    <labels>
+        <fullName>Due_Date_Enter_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Due Date Enter Error</shortDescription>
+        <value>Please enter a value for &apos;Due Date&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Due_Date_Invalid_error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Due Date Invalid error</shortDescription>
+        <value>Due Date cannot be in the past</value>
+    </labels>
+    <labels>
+        <fullName>Dummy_Approver_ID</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Dummy Approver ID</shortDescription>
+        <value>0051300000Basdf</value>
+    </labels>
+    <labels>
+        <fullName>Earliest_VF_limit</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Earliest VF limit</shortDescription>
+        <value>Earliest Valid From Offset cannot be greater than</value>
+    </labels>
+    <labels>
+        <fullName>Earliest_Valid_From_Offset_mandatory_field</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Earliest Valid From Offset mandatory field</shortDescription>
+        <value>Please enter value for mandatory field &apos;Earliest Valid From Offset&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Edit_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Edit_Button</shortDescription>
+        <value>Edit</value>
+    </labels>
+    <labels>
+        <fullName>Edit_Header_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Edit Header Button</shortDescription>
+        <value>Edit Header</value>
+    </labels>
+    <labels>
+        <fullName>Edit_Req_Item</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Name_Edit Req Item</shortDescription>
+        <value>New Record Creation</value>
+    </labels>
+    <labels>
+        <fullName>End_Use_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>End Use Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;End Use&apos;</value>
+    </labels>
+    <labels>
+        <fullName>End_Use_not_configured_for_the_Sales_Area_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>End Use not configured for the Sales Area Error</shortDescription>
+        <value>End Use not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>End_User_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>End User Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;End User&apos;</value>
+    </labels>
+    <labels>
+        <fullName>End_User_not_configured_for_the_Sales_Area_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>End User not configured for the Sales Area Error</shortDescription>
+        <value>End User not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>End_User_not_configured_for_the_Sold_To_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>End User not configured for the Sold To Error</shortDescription>
+        <value>End User not configured for the Sold To</value>
+    </labels>
+    <labels>
+        <fullName>Enter_All_Other_Values_Approver_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Enter All Other Values Approver Error</shortDescription>
+        <value>Please enter All Other Values Approver.</value>
+    </labels>
+    <labels>
+        <fullName>Enter_Description</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Enter Description</shortDescription>
+        <value>Please provide file description</value>
+    </labels>
+    <labels>
+        <fullName>Enter_Mixed_Value_Approver_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Enter Mixed Value Approver Error</shortDescription>
+        <value>Please enter Mixed Values Approver.</value>
+    </labels>
+    <labels>
+        <fullName>Enter_Rejection_Comments_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Enter Rejection Comments Error</shortDescription>
+        <value>Please Provide Rejection Comments.</value>
+    </labels>
+    <labels>
+        <fullName>Enter_a_value_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Enter a value Error</shortDescription>
+        <value>Please enter a value</value>
+    </labels>
+    <labels>
+        <fullName>Existing_Request</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Name_Existing_Request</shortDescription>
+        <value>Import Prices</value>
+    </labels>
+    <labels>
+        <fullName>Expire_Future_Prices_Confirmation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Expire Future Prices Confirmation</shortDescription>
+        <value>Are you sure?</value>
+    </labels>
+    <labels>
+        <fullName>Expiring_By_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Expiring By Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;Expiring By&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Export_Prices</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Name_Export_Prices</shortDescription>
+        <value>Export Prices</value>
+    </labels>
+    <labels>
+        <fullName>External_Matl_Grp_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>External Matl Grp Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field Ext Matl Grp</value>
+    </labels>
+    <labels>
+        <fullName>External_Matl_Grp_not_configured_for_the_Sales_Area</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>External Matl Grp not configured for the Sales Area</shortDescription>
+        <value>Ext Matl Grp not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>Fetch_Records_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Fetch Records Button</shortDescription>
+        <value>Fetch Records</value>
+    </labels>
+    <labels>
+        <fullName>Fixed_Date_Past_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Fixed Date Past Error</shortDescription>
+        <value>Fixed date cannot be past date</value>
+    </labels>
+    <labels>
+        <fullName>Fixed_Date_Payment_Terms_Mandatory</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Fixed Date Payment Terms Mandatory</shortDescription>
+        <value>Please enter value for mandatory field &apos;Fixed Date&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Floor_Reference_Price_View_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>View Floor Price</shortDescription>
+        <value>View Floor Pricing</value>
+    </labels>
+    <labels>
+        <fullName>Frequent_Customer_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Frequent Customer Error</shortDescription>
+        <value>Please select a Customer to mark as frequent</value>
+    </labels>
+    <labels>
+        <fullName>Frequent_Sales_Rep_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Frequent Sales Rep Error</shortDescription>
+        <value>Please select a Sales Rep to mark as frequent</value>
+    </labels>
+    <labels>
+        <fullName>Gap_In_Pricing_Timeline_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Gap In Pricing Timeline Error</shortDescription>
+        <value>Please review pricing timeline and adjust pricing dates</value>
+    </labels>
+    <labels>
+        <fullName>Gap_in_pricing_Record_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Gap in pricing Record Error</shortDescription>
+        <value>Gap in pricing timeline</value>
+    </labels>
+    <labels>
+        <fullName>Global_Config</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Name_Global_Config</shortDescription>
+        <value>Global Configuration</value>
+    </labels>
+    <labels>
+        <fullName>Gross_Price_is_Missing</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Gross Price is Missing</shortDescription>
+        <value>Gross Price is Missing</value>
+    </labels>
+    <labels>
+        <fullName>HideFlrBu</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Not showing Floor and Ref Section to these BU</shortDescription>
+        <value>BI AP Surfaces</value>
+    </labels>
+    <labels>
+        <fullName>Import_Req_Items</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Name_Import_Req_Items</shortDescription>
+        <value>Import Prices</value>
+    </labels>
+    <labels>
+        <fullName>Import_is_not_allowed_for_Project_Price_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Import is not allowed for Project Price Error</shortDescription>
+        <value>Import is not allowed for Project Price</value>
+    </labels>
+    <labels>
+        <fullName>Incoterm_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Incoterm Error</shortDescription>
+        <value>Please enter a value for &apos;Incoterms&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Incoterms_Code_not_Configured_for_the_Sales_Area_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Incoterms Code not Configured for the Sales Area Error</shortDescription>
+        <value>Incoterms Code not Configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>Incoterms_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Incoterms Mandatory Error</shortDescription>
+        <value>Please select a value for Incoterms</value>
+    </labels>
+    <labels>
+        <fullName>IntegrationLoginCredentials_Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>IntegrationLoginCredentials_Name</shortDescription>
+        <value>spec.specpa@dupont.com.esu</value>
+    </labels>
+    <labels>
+        <fullName>Invalid_Currency_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid Currency Error</shortDescription>
+        <value>Conversion Factor not defined for the requested currency</value>
+    </labels>
+    <labels>
+        <fullName>Invalid_OnBehalfOf_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid OnBehalfOf Error</shortDescription>
+        <value>Invalid &apos;On Behalf Of&apos;. Please select a value using the lookup</value>
+    </labels>
+    <labels>
+        <fullName>Invalid_Pricing_Values_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid Pricing Values Error</shortDescription>
+        <value>Please change pricing values or remove item from request</value>
+    </labels>
+    <labels>
+        <fullName>Invalid_Product_Hierarchy_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid Product Hierarchy Error</shortDescription>
+        <value>Invalid Product Hierarchy</value>
+    </labels>
+    <labels>
+        <fullName>Invalid_Quantity_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid Quantity Error</shortDescription>
+        <value>Invalid Quantity</value>
+    </labels>
+    <labels>
+        <fullName>Invalid_Rate_Change_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid Rate Change Error</shortDescription>
+        <value>Invalid Rate Change</value>
+    </labels>
+    <labels>
+        <fullName>Invalid_Rate_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid Rate Error</shortDescription>
+        <value>Invalid Rate</value>
+    </labels>
+    <labels>
+        <fullName>Invalid_ScaleRate_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid Scale Rate Error</shortDescription>
+        <value>Invalid Scale Rate</value>
+    </labels>
+    <labels>
+        <fullName>Invalid_Scale_Quantity_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid Scale Quantity Error</shortDescription>
+        <value>Invalid Scale Quantity</value>
+    </labels>
+    <labels>
+        <fullName>Invalid_Unit_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid Unit Error</shortDescription>
+        <value>Invalid Unit</value>
+    </labels>
+    <labels>
+        <fullName>Invalid_sid_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid sid Error</shortDescription>
+        <value>Invalid sid</value>
+    </labels>
+    <labels>
+        <fullName>Key_Combination_Code_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Key Combination Code Error</shortDescription>
+        <value>Key Combination Code</value>
+    </labels>
+    <labels>
+        <fullName>Key_Combination_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Key Combination Error</shortDescription>
+        <value>Please select a Key Combination to fetch records</value>
+    </labels>
+    <labels>
+        <fullName>Key_Combination_not_in_Pricing_Condition_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Key Combination not in Pricing Condition Error</shortDescription>
+        <value>Key Combination not mapped for Pricing Condition</value>
+    </labels>
+    <labels>
+        <fullName>Key_Field_Approver_Combination_Duplicate_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Key Field Approver Combination Duplicate Error</shortDescription>
+        <value>Please select a different key field id and approver id.</value>
+    </labels>
+    <labels>
+        <fullName>Latest_VF_NonCuslimit</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Latest_VF_Non_CustomerPrice_limit</shortDescription>
+        <value>Latest Valid From Offset Non Customer Prices should be in the range of 1 to 180.</value>
+    </labels>
+    <labels>
+        <fullName>Latest_VF_limit</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Latest VF limit</shortDescription>
+        <value>Latest Valid From Offset should be in the range of 1 to 90.</value>
+    </labels>
+    <labels>
+        <fullName>Latest_VT_Non_Customer_Price_limit</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Latest VT Non Customer Price limit</shortDescription>
+        <value>Latest Valid To Offset Non Customer Prices should be in the range of 1 to 600.</value>
+    </labels>
+    <labels>
+        <fullName>Latest_VT_limit</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Latest VT limit</shortDescription>
+        <value>Latest Valid To Offset should be in the range of 1 to 24.</value>
+    </labels>
+    <labels>
+        <fullName>Latest_Valid_From_Offset_mandatory_field</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Latest Valid From Offset mandatory field</shortDescription>
+        <value>Please enter value for mandatory field &apos;Latest Valid From Offset&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Latest_Valid_To_Offset_mandatory_field</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Latest Valid To Offset mandatory field</shortDescription>
+        <value>Please enter value for mandatory field &apos;Latest Valid To Offset&apos;</value>
+    </labels>
+    <labels>
+        <fullName>License_Tracking_Admin_Email_List</fullName>
+        <categories>Admins</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>License Tracking  Admin Email List</shortDescription>
+        <value>Abhinav.bhatnagar@dupont.com.invalid,raji.jayakumar@dupont.com.invalid,Lisa.McShane@dupont.com.invalid,Patricia.P.Grant@dupont.com.invalid,Mohnish.Madhukar@dupont.com.invalid,vanessa.i.morris@dupont.com.invalid</value>
+    </labels>
+    <labels>
+        <fullName>MG5_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MG5 Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field Material Group 5 Key</value>
+    </labels>
+    <labels>
+        <fullName>MPG_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MPG Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;MPG&apos;</value>
+    </labels>
+    <labels>
+        <fullName>MPG_not_configured_for_the_Sales_Area</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MPG not configured for the Sales Area</shortDescription>
+        <value>MPG not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>MPG_not_configured_for_the_Sales_Area_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MPG not configured for the Sales Area Error</shortDescription>
+        <value>MPG not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>Manage_Approver</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Name_Manage_Approver</shortDescription>
+        <value>Manage Approver</value>
+    </labels>
+    <labels>
+        <fullName>Mandatory_import</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Mandatory import</shortDescription>
+        <value>Please enter a value for</value>
+    </labels>
+    <labels>
+        <fullName>Market_Segment_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Market Segment Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;Market Segment&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Market_Segment_not_configured_for_the_Sales_Area_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Market Segment not configured for the Sales Area Error</shortDescription>
+        <value>Market Segment not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>Mass_AssignedTo_Update</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Mass AssignedTo Update</shortDescription>
+        <value>Mass Assigned To Update</value>
+    </labels>
+    <labels>
+        <fullName>Mass_Status_Update</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Mass Status Update</shortDescription>
+        <value>Mass Status Update</value>
+    </labels>
+    <labels>
+        <fullName>Mass_Update_notification</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Mass Update notification</shortDescription>
+        <value>This will perform updates to the selected records</value>
+    </labels>
+    <labels>
+        <fullName>Master_Record_Type_ID</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Master Record Type ID</shortDescription>
+        <value>012000000000000AAA</value>
+    </labels>
+    <labels>
+        <fullName>Material_Code_Invalid</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Material Code Invalid</shortDescription>
+        <value>Entered Material Code  does not match with any of the existing  material codes</value>
+    </labels>
+    <labels>
+        <fullName>Material_Code_Select</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Material Code Select</shortDescription>
+        <value>Please select a value for &apos;Material Code&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Material_Group_2_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Material Group 2 Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;Material Group 2&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Material_Group_2_not_configured_for_the_Sales_Area</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Material Group 2 not configured for the Sales Area</shortDescription>
+        <value>Material Group 2 not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>Material_Group_5_Key_not_configured_for_the_Sales_Area</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Material Group 5 Key not configured for the Sales Area</shortDescription>
+        <value>Material Group 5 Key not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>Material_Select</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Material Select</shortDescription>
+        <value>Please enter value for mandatory field &apos;Material&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Material_not_configured_for_the_Sales_Area_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Material not configured for the Sales Area Error</shortDescription>
+        <value>Material not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>Months</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Months</shortDescription>
+        <value>Months</value>
+    </labels>
+    <labels>
+        <fullName>More_Than_1000_Pricing_Records_Warning</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>More Than 900 Pricing Records Warning</shortDescription>
+        <value>More than 900 records match the filter criteria. Please narrow your search</value>
+    </labels>
+    <labels>
+        <fullName>Multiple_Materail_Code</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Multiple Materail Code</shortDescription>
+        <value>Multiple records  for entered Material Code. Please select Material using &apos; Fetch Records&apos; button.</value>
+    </labels>
+    <labels>
+        <fullName>Net_Price_Not_Applicable</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Net Price Not Applicable</shortDescription>
+        <value>Net Pricing Not Applicable</value>
+    </labels>
+    <labels>
+        <fullName>Net_Pricing_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Net Pricing Button</shortDescription>
+        <value>Run Net Pricing</value>
+    </labels>
+    <labels>
+        <fullName>New_Material_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>New Material Button</shortDescription>
+        <value>New Material</value>
+    </labels>
+    <labels>
+        <fullName>New_Price_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>New Price Button</shortDescription>
+        <value>New Price</value>
+    </labels>
+    <labels>
+        <fullName>New_Request</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Name_New Request</shortDescription>
+        <value>Price Request Header</value>
+    </labels>
+    <labels>
+        <fullName>Next_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Next Button</shortDescription>
+        <value>Next</value>
+    </labels>
+    <labels>
+        <fullName>No_Approval_Setup_Record_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Approval Setup Record Error</shortDescription>
+        <value>Approval setup not defined for the given combination.</value>
+    </labels>
+    <labels>
+        <fullName>No_Approver_Id_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Approver Id Error</shortDescription>
+        <value>Please enter an approver id.</value>
+    </labels>
+    <labels>
+        <fullName>No_Approver_Role_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Approver Role Error</shortDescription>
+        <value>Please select a value for Approver Role at Approval Level</value>
+    </labels>
+    <labels>
+        <fullName>No_Business_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Business Error</shortDescription>
+        <value>No Business for this user</value>
+    </labels>
+    <labels>
+        <fullName>No_Business_selected_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Business Selected Error</shortDescription>
+        <value>Please select a value for the Business</value>
+    </labels>
+    <labels>
+        <fullName>No_Customer_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Customer Error</shortDescription>
+        <value>Please select &apos;Sold To&apos; to proceed</value>
+    </labels>
+    <labels>
+        <fullName>No_Key_Field_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Key Field Error</shortDescription>
+        <value>Please select a value for Key Field at Approval Level</value>
+    </labels>
+    <labels>
+        <fullName>No_Key_Field_ID_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Key Field ID Error</shortDescription>
+        <value>Please enter a key field id.</value>
+    </labels>
+    <labels>
+        <fullName>No_Material_Found</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Material Found</shortDescription>
+        <value>Material determination not possible So, NPC is not Applicable</value>
+    </labels>
+    <labels>
+        <fullName>No_Price_Category_selected_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Price Category selected Error</shortDescription>
+        <value>Please select a value for Price Category.</value>
+    </labels>
+    <labels>
+        <fullName>No_Pricing_Records_Warning</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Pricing Records Warning</shortDescription>
+        <value>Zero records match the filter criteria</value>
+    </labels>
+    <labels>
+        <fullName>No_Record_Selected_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Record Selected Error</shortDescription>
+        <value>No record selected</value>
+    </labels>
+    <labels>
+        <fullName>No_Records_to_PCL_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Records to PCL Error</shortDescription>
+        <value>No Records to PCL Error</value>
+    </labels>
+    <labels>
+        <fullName>No_Records_to_import_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Records to import Error</shortDescription>
+        <value>No Records to import</value>
+    </labels>
+    <labels>
+        <fullName>No_Request_Class_Selected_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Request Class Selected Error</shortDescription>
+        <value>Please select a value for &apos;Request Class&apos;</value>
+    </labels>
+    <labels>
+        <fullName>No_Request_Items_On_Submit_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Request Items On Submit Error</shortDescription>
+        <value>Please add at least one price record before submiting for approval</value>
+    </labels>
+    <labels>
+        <fullName>No_Sales_Area_selected_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Sales Area selected Error</shortDescription>
+        <value>Please select the Sales Org.</value>
+    </labels>
+    <labels>
+        <fullName>No_Spot_Type_selected_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Spot Type selected Error</shortDescription>
+        <value>Please select a value for Pricing Task Type.</value>
+    </labels>
+    <labels>
+        <fullName>No_Unchanged_Request_Items_On_Submit_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Unchanged Request Items On Submit Error</shortDescription>
+        <value>Please verify the below items on the request: 
+1. If any unchanged records are present 
+2. If net pricing isn’t run for any records 
+3. If the Volume / Payment Terms aren’t entered</value>
+    </labels>
+    <labels>
+        <fullName>No_Unedited_Records_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Unedited Records Error</shortDescription>
+        <value>There are no unedited records</value>
+    </labels>
+    <labels>
+        <fullName>No_View_Prices_records</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No View Prices records</shortDescription>
+        <value>No Pricing Records found</value>
+    </labels>
+    <labels>
+        <fullName>No_floor_pricing_is_done</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No floor pricing is done</shortDescription>
+        <value>Please validate the floor price by clicking on floor price button before submitting the request.</value>
+    </labels>
+    <labels>
+        <fullName>No_routing_parameter_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No routing parameter Error</shortDescription>
+        <value>Please select a value for Routing Parameter.</value>
+    </labels>
+    <labels>
+        <fullName>Non_Edited_Records_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Non Edited Records Error</shortDescription>
+        <value>Values entered exactly match current Pricing Record</value>
+    </labels>
+    <labels>
+        <fullName>Non_Positive_Per_Value_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Non-Positive Per Value Error</shortDescription>
+        <value>Please enter Positive whole numbers only</value>
+    </labels>
+    <labels>
+        <fullName>Non_Standard_Incoterm_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Non-Standard Incoterm Error</shortDescription>
+        <value>Please enter a value for &apos;Non-Standard Incoterms&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Non_Standard_Payment_Term_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Non-Standard Payment Term Error</shortDescription>
+        <value>Please enter a value for &apos;Non-Standard Payment Terms&apos;</value>
+    </labels>
+    <labels>
+        <fullName>OK_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OK Button</shortDescription>
+        <value>OK</value>
+    </labels>
+    <labels>
+        <fullName>OnBehalfOf_not_authorized</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OnBehalfOf not authorized</shortDescription>
+        <value>Requester is not authorized to create requests for</value>
+    </labels>
+    <labels>
+        <fullName>On_Behalf_Of</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Name_ On Behalf of</shortDescription>
+        <value>Sales Representative List</value>
+    </labels>
+    <labels>
+        <fullName>Only_one_Key_Combination_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Only one Key Combination Error</shortDescription>
+        <value>Only one Key Combination value allowed per import</value>
+    </labels>
+    <labels>
+        <fullName>Only_one_Pricing_Condition_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Only one Pricing Condition Error</shortDescription>
+        <value>Only one Pricing Condition value allowed per import</value>
+    </labels>
+    <labels>
+        <fullName>Overlapping_Request_item_in_the_same_request_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Overlapping Request item in the same request Error</shortDescription>
+        <value>Overlapping Request item in the same request</value>
+    </labels>
+    <labels>
+        <fullName>PA_Administrator_Username</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PA Administrator Username</shortDescription>
+        <value>spec.specpa@dupont.com</value>
+    </labels>
+    <labels>
+        <fullName>PA_Reassign_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PA_Reassign_URL</shortDescription>
+        <value>https://specutil.my.salesforce.com/services/Soap/class/PAReassign</value>
+    </labels>
+    <labels>
+        <fullName>PCL_Success_Message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PCL Success Message</shortDescription>
+        <value>PCL is successfully generated and sent to your email id.</value>
+    </labels>
+    <labels>
+        <fullName>PCL_Valid_On_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PCL Valid On Error</shortDescription>
+        <value>Please enter a value for valid On Date</value>
+    </labels>
+    <labels>
+        <fullName>PCL_search_returns_more_than_1000_records_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PCL search returns more than 1000 records Error</shortDescription>
+        <value>PCL search returns more than 1000 records Error</value>
+    </labels>
+    <labels>
+        <fullName>PH1_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PH1 Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;PH1&apos;</value>
+    </labels>
+    <labels>
+        <fullName>PH_Code_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PH Code Error</shortDescription>
+        <value>Product Hierarchy Code should not contain &apos;#&apos; in between.</value>
+    </labels>
+    <labels>
+        <fullName>PH_Select</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PH Select</shortDescription>
+        <value>Please enter value for mandatory field &apos;Product Hierarchy&apos;</value>
+    </labels>
+    <labels>
+        <fullName>PH_values_not_configured_for_the_BU_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PH values not configured for the BU Error</shortDescription>
+        <value>PH values not configured for the BU</value>
+    </labels>
+    <labels>
+        <fullName>Payment_Term_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Payment Term Error</shortDescription>
+        <value>Please select a value for &apos;Payment Terms&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Payment_Terms_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Payment Terms Button</shortDescription>
+        <value>Payment Terms</value>
+    </labels>
+    <labels>
+        <fullName>Payment_Terms_not_configured_for_the_Sales_Area_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Payment Terms not configured for the Sales Area Error</shortDescription>
+        <value>Payment Terms not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>Per_Cannot_Be_Decimal_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Per Cannot Be Decimal Error</shortDescription>
+        <value>Per cannot be a decimal value</value>
+    </labels>
+    <labels>
+        <fullName>Per_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Per Mandatory Error</shortDescription>
+        <value>Please enter value for  mandatory field &apos;Per&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Per_negative</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Per negative</shortDescription>
+        <value>Per cannot be less than 1</value>
+    </labels>
+    <labels>
+        <fullName>Percentage_Change_Not_Applicable_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Percentage Change Not Applicable Error</shortDescription>
+        <value>Percentage change not applicable as there is no Rate on which this change has to be applied</value>
+    </labels>
+    <labels>
+        <fullName>Plant_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Plant Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;Plant&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Plant_not_configured_for_the_Sales_Area</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Plant not configured for the Sales Area</shortDescription>
+        <value>Plant not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>Please_Enter_Request_Name_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please Enter Request Name Error</shortDescription>
+        <value>Please enter a value in Request Name</value>
+    </labels>
+    <labels>
+        <fullName>Please_select_a_valid_file_type_to_Upload_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Please select a valid file type to Upload Error</shortDescription>
+        <value>Please select a valid file type to Upload</value>
+    </labels>
+    <labels>
+        <fullName>Positive_value_in_Per_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Positive value in Per Error</shortDescription>
+        <value>Please enter a positive value in Per</value>
+    </labels>
+    <labels>
+        <fullName>Positive_value_in_Quantity_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Positive value in Quantity Error</shortDescription>
+        <value>Please enter a positive value in Quantity</value>
+    </labels>
+    <labels>
+        <fullName>Positive_value_in_Rate_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Positive value in Rate Error</shortDescription>
+        <value>Please enter a positive value in Rate</value>
+    </labels>
+    <labels>
+        <fullName>PriceHolder_Id_for_batch</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PriceHolder_Id_for_batch</shortDescription>
+        <value>a0NVy00000RJgVR</value>
+    </labels>
+    <labels>
+        <fullName>PriceListType_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PriceListType Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;Price List Type&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Price_List_Type_not_configured_for_the_Sales_Area_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Price List Type not configured for the Sales Area Error</shortDescription>
+        <value>Price List Type not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>Price_Record_List</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Price Record List</shortDescription>
+        <value>Price Record List</value>
+    </labels>
+    <labels>
+        <fullName>Price_Ref_Partner_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Price Ref Partner Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;Price Ref. Partner&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Price_Reference_Partner_not_Configured_for_the_Sales_Area_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Price Reference Partner not Configured for the Sales Area Error</shortDescription>
+        <value>Price Reference Partner not Configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>Price_Request</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Name_Price Request</shortDescription>
+        <value>Price Requests</value>
+    </labels>
+    <labels>
+        <fullName>Price_Zone_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Price Zone Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field Price Zone</value>
+    </labels>
+    <labels>
+        <fullName>Price_Zone_not_configured_for_the_Sales_Area</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Price Zone not configured for the Sales Area</shortDescription>
+        <value>Price Zone not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>Price_request_clone</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Price request clone</shortDescription>
+        <value>Price Request Clone</value>
+    </labels>
+    <labels>
+        <fullName>Pricing_Condition_Code_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Pricing Condition Code Error</shortDescription>
+        <value>Pricing Condition Code</value>
+    </labels>
+    <labels>
+        <fullName>Pricing_Condition_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Pricing Condition Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;Pricing Condition&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Pricing_Condition_not_defined_in_Pricing_Procedure_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Pricing Condition not defined in Pricing Procedure Error</shortDescription>
+        <value>Pricing Condition not defined in the Pricing Procedure</value>
+    </labels>
+    <labels>
+        <fullName>Pricing_Items_dates_overlapping_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Pricing Items dates overlapping Error</shortDescription>
+        <value>Pricing Items are not valid.</value>
+    </labels>
+    <labels>
+        <fullName>Pricing_Task_NPC_Mandate_Businesses</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Pricing Task NPC Mandate Businesses</shortDescription>
+        <value>DPT</value>
+    </labels>
+    <labels>
+        <fullName>Pricing_Task_Type_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Pricing Task Type Error</shortDescription>
+        <value>Please select a value for &apos;Pricing Task Type&apos;</value>
+    </labels>
+    <labels>
+        <fullName>ProfitCenter_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ProfitCenter_Mandatory_Error</shortDescription>
+        <value>Please Select Profit Center Value From Drop Down.</value>
+    </labels>
+    <labels>
+        <fullName>ProjectDesc_Business</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ProjectDesc_Business</shortDescription>
+        <value>BI AP Envelopes,BI AP Surfaces,BI EMEA Envelopes,BI EMEA Surfaces,DPT EMEA</value>
+    </labels>
+    <labels>
+        <fullName>Project_Description_Max_Length</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Project Description Max Length</shortDescription>
+        <value>Project Description exceeds 32000 characters</value>
+    </labels>
+    <labels>
+        <fullName>Project_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Project Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field Project</value>
+    </labels>
+    <labels>
+        <fullName>Project_Name_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Project Name Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;Project Name&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Project_Volume_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Project Volume Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;Project Volume&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Quantity_Cannot_Be_Negative_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Quantity Cannot Be Negative Error</shortDescription>
+        <value>Scale Quantity/Value cannot be Negative</value>
+    </labels>
+    <labels>
+        <fullName>Quantity_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Quantity Mandatory Error</shortDescription>
+        <value>Please enter value for  mandatory field &apos;Quantity&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Quantity_Value_Ascending_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Quantity/Value Ascending Error</shortDescription>
+        <value>Please enter Scale Quantities/Values in ascending order</value>
+    </labels>
+    <labels>
+        <fullName>Quit_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Quit_Button</shortDescription>
+        <value>Quit</value>
+    </labels>
+    <labels>
+        <fullName>Quit_Request_Confirmation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Quit Request Confirmation</shortDescription>
+        <value>Are you sure you want to Quit?</value>
+    </labels>
+    <labels>
+        <fullName>RPQ_Valid_From_Error</fullName>
+        <categories>RPQ</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RPQ Valid From Error</shortDescription>
+        <value>RPQ Request Valid From Cannot be a Past Date</value>
+    </labels>
+    <labels>
+        <fullName>Rate_Change_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Rate Change Mandatory Error</shortDescription>
+        <value>Please enter Rate Change to proceed</value>
+    </labels>
+    <labels>
+        <fullName>Rate_Change_Not_Applicable_For_Scale_Records_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Rate Change Not Applicable For Scale Records Error</shortDescription>
+        <value>Rate Change is not allowed for Scaled records. Changes are applied for non-scale records.</value>
+    </labels>
+    <labels>
+        <fullName>Rate_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Rate Mandatory Error</shortDescription>
+        <value>Please enter value for  mandatory field &apos;Rate&apos;</value>
+    </labels>
+    <labels>
+        <fullName>ReImport_Confirmation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ReImport Confirmation</shortDescription>
+        <value>Are you sure you want to Re-Import?</value>
+    </labels>
+    <labels>
+        <fullName>Reassign_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Reassign Button</shortDescription>
+        <value>Reassign</value>
+    </labels>
+    <labels>
+        <fullName>Recall_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Recall Button</shortDescription>
+        <value>Recall</value>
+    </labels>
+    <labels>
+        <fullName>Recall_Request_Confirmation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Recall Request Confirmation</shortDescription>
+        <value>Are you sure you want to recall the request?</value>
+    </labels>
+    <labels>
+        <fullName>Records_count_exceeded_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Records count exceeded Error</shortDescription>
+        <value>Limit of 300 Records is exceeded</value>
+    </labels>
+    <labels>
+        <fullName>Reject_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Reject Button</shortDescription>
+        <value>Reject</value>
+    </labels>
+    <labels>
+        <fullName>Request_Approval_Confirmation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Request Approval Confirmation</shortDescription>
+        <value>Are you sure you want to send  the request for approval?</value>
+    </labels>
+    <labels>
+        <fullName>Request_Class_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Request Class Mandatory Error</shortDescription>
+        <value>Please select a value for &apos;Request Class&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Request_Contains_Unedited_Prices_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Request Contains Unedited Prices Error</shortDescription>
+        <value>Please modify or remove unedited records</value>
+    </labels>
+    <labels>
+        <fullName>Request_Item_Already_Submitted_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Request Item Already Submitted Error</shortDescription>
+        <value>A request to add this price has already been submitted or saved by</value>
+    </labels>
+    <labels>
+        <fullName>Request_Item_Overlaps_With_Holder_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Request Item Overlaps With Holder Error</shortDescription>
+        <value>Price already exists for that period, Are you sure you want to create a new record?</value>
+    </labels>
+    <labels>
+        <fullName>Request_Item_Price_Tail</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Request Item Price Tail</shortDescription>
+        <value>Warning: The Valid To Date for the price entered ends sooner than the current Valid to Date. This will cause the existing price to get reactivated after the expiration date of this new price.
+
+Options:
+1. Update the valid to date for the new price submitted to match (or go farther out) than the valid to date on the existing price.
+
+2. Expire the current price, wait until approved, and then submit new pricing with desired valid to date.</value>
+    </labels>
+    <labels>
+        <fullName>Request_Name_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Request Name Mandatory Error</shortDescription>
+        <value>Please enter a value for  &apos;Request Name&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Request_Overview_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Request Overview Button</shortDescription>
+        <value>Request Overview</value>
+    </labels>
+    <labels>
+        <fullName>Request_Reason_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Request Reason Mandatory Error</shortDescription>
+        <value>Please enter a value for  &apos;Request Reason&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Request_Status_Changed</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Request Status Changed Error</shortDescription>
+        <value>Request status has been changed.</value>
+    </labels>
+    <labels>
+        <fullName>Request_already_added_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Request already added Error</shortDescription>
+        <value>A request to add this price has already been submitted or saved</value>
+    </labels>
+    <labels>
+        <fullName>Request_item_indicator_error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Request item indicator error</shortDescription>
+        <value>Please Edit/Delete the request Item with Red/Yellow Indicator.</value>
+    </labels>
+    <labels>
+        <fullName>Requested_Price_Same_As_Current_Price_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Requested Price Same As Current Price Error</shortDescription>
+        <value>Please change pricing values or remove item from Request</value>
+    </labels>
+    <labels>
+        <fullName>Requester_not_authorized</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Requester not authorized</shortDescription>
+        <value>You are not authorized to create requests for</value>
+    </labels>
+    <labels>
+        <fullName>Restrict_update_price</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Hide for price requester check in ERP access sequence</shortDescription>
+        <value>Your price request includes one of the prices associated with the discount or surcharge, please remove it, then submit the PR for approval</value>
+    </labels>
+    <labels>
+        <fullName>Review_Pricing_Timeline_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Review Pricing Timeline Error</shortDescription>
+        <value>Please review pricing timeline and adjust pricing dates</value>
+    </labels>
+    <labels>
+        <fullName>SAP_CPI_Endpoint</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SAP_CPI_Endpoint</shortDescription>
+        <value>https://dup-enterprise-is-prod-soc8jbf6.it-cpi013-rt.cfapps.us21.hana.ondemand.com/cxf/CPI/ElectronicsSpec/NetPriceCalculationSync</value>
+    </labels>
+    <labels>
+        <fullName>SAP_CPI_Endpoint_Async</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SAP_CPI_Endpoint_Async</shortDescription>
+        <value>https://dup-enterprise-is-prod-soc8jbf6.it-cpi013-rt.cfapps.us21.hana.ondemand.com/cxf/CPI/ElectronicsSpec/NetPriceCalculationAsync</value>
+    </labels>
+    <labels>
+        <fullName>SF2SF_PA_Connection</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SF2SF_PA_Connection</shortDescription>
+        <value>One-DuPont</value>
+    </labels>
+    <labels>
+        <fullName>SalesOffice_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SalesOffice Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;Sales Office&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Sales_Area_different_from_Import_selection_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sales Area different from Import selection Error</shortDescription>
+        <value>Sales Area does not match Import selection</value>
+    </labels>
+    <labels>
+        <fullName>Sales_Office_not_configured_for_the_Sales_Area_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sales Office not configured for the Sales Area Error</shortDescription>
+        <value>Sales Office not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>Sales_Order_Item_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sales Order Item Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;Sales Order Item&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Sales_Order_Item_not_configured_for_the_Sales_Area</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sales Order Item not configured for the Sales Area</shortDescription>
+        <value>Sales Order Item not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>Sales_Order_Type_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sales Order Type Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;Sales Order Type&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Sales_Order_Type_not_configured_for_the_Sales_Area</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sales Order Type not configured for the Sales Area</shortDescription>
+        <value>Sales Order Type not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>Sales_Rep_Marked_as_Freq_Info</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sales Rep Marked as Freq Info</shortDescription>
+        <value>Selected Sales Reps have been marked as Frequent</value>
+    </labels>
+    <labels>
+        <fullName>Sales_Type_Code_not_Configured_for_the_Sales_Area_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sales Type Code not Configured for the Sales Area Error</shortDescription>
+        <value>Sales Type Code not Configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>Sales_Type_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sales Type Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;Sales Type&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Sales_volume_button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sales volume button</shortDescription>
+        <value>Sales Volume</value>
+    </labels>
+    <labels>
+        <fullName>Save_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Save Button</shortDescription>
+        <value>Save</value>
+    </labels>
+    <labels>
+        <fullName>Save_and_Close</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Save and Close</shortDescription>
+        <value>Save and Close</value>
+    </labels>
+    <labels>
+        <fullName>Save_and_Continue</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Save and Continue</shortDescription>
+        <value>Save and Continue</value>
+    </labels>
+    <labels>
+        <fullName>Scale_Quantity_Not_In_Order_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Scale Quantity Not In Order Error</shortDescription>
+        <value>Please match quantity sequence to scale</value>
+    </labels>
+    <labels>
+        <fullName>Scale_Quantity_Value_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Scale Quantity/Value Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;Scale Quantity/Value&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Scale_Quantity_incorrect_order_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Scale Quantity incorrect order Error</shortDescription>
+        <value>Scale Quantity in incorrect order</value>
+    </labels>
+    <labels>
+        <fullName>Scale_Rate_incorrect_order_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Scale Rate incorrect order Error</shortDescription>
+        <value>Scale Rate incorrect order</value>
+    </labels>
+    <labels>
+        <fullName>Scale_Rates_Ascending_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Scale Rates Ascending Error</shortDescription>
+        <value>Please enter Scale Rates in ascending order</value>
+    </labels>
+    <labels>
+        <fullName>Scale_Rates_Descending_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Scale Rates Descending Error</shortDescription>
+        <value>Please enter Scale Rates in descending order</value>
+    </labels>
+    <labels>
+        <fullName>Scale_Unit_UoM_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Scale Unit/UoM Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;Scale Unit/UoM&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Search_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Search Button</shortDescription>
+        <value>Search</value>
+    </labels>
+    <labels>
+        <fullName>Select_Pricing_Records_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select Pricing Records Mandatory Error</shortDescription>
+        <value>Please select at least one record to add to the Request</value>
+    </labels>
+    <labels>
+        <fullName>Select_Record</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select Record</shortDescription>
+        <value>Please select at least one record to generate a Price confermation Letter</value>
+    </labels>
+    <labels>
+        <fullName>Select_Sales_Area_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select Sales Area Error</shortDescription>
+        <value>Please select &apos;Sales Area&apos; for the customer</value>
+    </labels>
+    <labels>
+        <fullName>Select_Unedited_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select Unedited Button</shortDescription>
+        <value>Select Unedited</value>
+    </labels>
+    <labels>
+        <fullName>Select_a_value_in_Request_Reason_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select a value in Request Reason Error</shortDescription>
+        <value>Please select a value in Request Reason</value>
+    </labels>
+    <labels>
+        <fullName>Select_a_value_in_Sales_Org_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select a value in Sales Org Error</shortDescription>
+        <value>Please select a value in Sales Org</value>
+    </labels>
+    <labels>
+        <fullName>Select_template</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Select_template</shortDescription>
+        <value>Please select a email template</value>
+    </labels>
+    <labels>
+        <fullName>Selected_Records_Added_Info</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Selected Records Added Info</shortDescription>
+        <value>Selected Records have been added to the Request</value>
+    </labels>
+    <labels>
+        <fullName>Sequential_Quantity_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sequential Quantity Error</shortDescription>
+        <value>Please enter Scale Quantities/Values sequentially</value>
+    </labels>
+    <labels>
+        <fullName>Sequential_Rate_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sequential Rate Error</shortDescription>
+        <value>Please enter Scale Rates sequentially</value>
+    </labels>
+    <labels>
+        <fullName>Setup_Details_Modified_Confirmation</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Setup Details Modified Confirmation</shortDescription>
+        <value>Setup Details will be modified. Do you want to proceed.</value>
+    </labels>
+    <labels>
+        <fullName>ShipTo_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ShipTo Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;ShipTo&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Ship_To_not_configured_for_the_Sales_Area_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Ship To not configured for the Sales Area Error</shortDescription>
+        <value>Ship To not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>Ship_To_not_configured_for_the_Sold_To_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Ship To not configured for the Sold To Error</shortDescription>
+        <value>Ship To not configured for the Sold To</value>
+    </labels>
+    <labels>
+        <fullName>Shipping_Condition_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Shipping Condition Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;Shipping Condition&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Shipping_Condition_not_configured_for_the_SalesArea</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Shipping Condition not configured for the Sales Area</shortDescription>
+        <value>Shipping Condition not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>Shipping_Condition_not_configured_for_the_Sales_Area</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Shipping Condition not configured for the Sales Area</shortDescription>
+        <value>Shipping Condition not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>SoldTo_code_is_not_mapped_for_on_behalf_of_error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SoldTo code not mapped for on behalf of error</shortDescription>
+        <value>Soldto code is not mapped for the On behalf of selected</value>
+    </labels>
+    <labels>
+        <fullName>Sold_To_Code_is_marked_for_deletion_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sold To Code is marked for deletion Error</shortDescription>
+        <value>Sold To Code is marked for deletion.</value>
+    </labels>
+    <labels>
+        <fullName>Sold_To_Code_not_configured_for_the_Sales_Area_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sold To Code not configured for the Sales Area Error</shortDescription>
+        <value>Sold To Code not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>SourceClusterCheckP80</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SourceClusterCheckP80</shortDescription>
+        <value>P80</value>
+    </labels>
+    <labels>
+        <fullName>Status</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Page Name_Status</shortDescription>
+        <value>Request List</value>
+    </labels>
+    <labels>
+        <fullName>Submit_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Submit Button</shortDescription>
+        <value>Submit</value>
+    </labels>
+    <labels>
+        <fullName>Switch_for_Timeline_Code</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Switch for Timeline Code</shortDescription>
+        <value>True</value>
+    </labels>
+    <labels>
+        <fullName>Task_Completed</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Task Completed</shortDescription>
+        <value>Task Completed. Cannot be cancelled</value>
+    </labels>
+    <labels>
+        <fullName>Task_Due_Date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Task Due Date</shortDescription>
+        <value>Task past the Due Date. Cannot be cancelled</value>
+    </labels>
+    <labels>
+        <fullName>Task_Subject_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Task Subject Error</shortDescription>
+        <value>Please enter a value for &apos;Task Subject&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Type_of_Rate_Change_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Type of Rate Change Mandatory Error</shortDescription>
+        <value>Please enter the type of Rate Change to proceed</value>
+    </labels>
+    <labels>
+        <fullName>Unique_Project_Name</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Unique Project Name</shortDescription>
+        <value>Please enter unique Project Name</value>
+    </labels>
+    <labels>
+        <fullName>Unit_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Unit Mandatory Error</shortDescription>
+        <value>Please enter value for  mandatory field &apos;Unit&apos;</value>
+    </labels>
+    <labels>
+        <fullName>UoM_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UoM Mandatory Error</shortDescription>
+        <value>Please enter value for  mandatory field &apos;UoM&apos;</value>
+    </labels>
+    <labels>
+        <fullName>UoM_not_applicable_for_the_Material_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UoM not applicable for the Material Error</shortDescription>
+        <value>UoM not applicable for the Material</value>
+    </labels>
+    <labels>
+        <fullName>UoM_not_configured_for_the_Sales_Area_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UoM not configured for the Sales Area Error</shortDescription>
+        <value>UoM not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>UoM_not_valid_error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UoM not valid error</shortDescription>
+        <value>UoM is not valid. Please give correct UoM</value>
+    </labels>
+    <labels>
+        <fullName>Use_Sold_To_Lookup_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Use Sold To Lookup Error</shortDescription>
+        <value>Please enter valid Sold To. Please select a customer using the lookup.</value>
+    </labels>
+    <labels>
+        <fullName>Use_Template_Lookup_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Use Template Lookup Error</shortDescription>
+        <value>Please enter valid PCL Template. Please select a template using the lookup.</value>
+    </labels>
+    <labels>
+        <fullName>Valid_From_Date_Out_Of_Range_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Valid From Date Out Of Range Error</shortDescription>
+        <value>Please adjust Valid From Date</value>
+    </labels>
+    <labels>
+        <fullName>Valid_From_Date_can_not_be_modified</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Valid From Date can not be modified</shortDescription>
+        <value>Valid From Date can not be modified for the The project</value>
+    </labels>
+    <labels>
+        <fullName>Valid_From_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Valid From Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;Valid From&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Valid_From_Valid_To_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Valid From Valid To Mandatory Error</shortDescription>
+        <value>Please enter Valid From and Valid To</value>
+    </labels>
+    <labels>
+        <fullName>Valid_From_date_out_of_range_Import_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Valid From date out of range Import Error</shortDescription>
+        <value>Valid From date out of range</value>
+    </labels>
+    <labels>
+        <fullName>Valid_On_Date_Out_Of_Range_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Valid On Date Out Of Range Error</shortDescription>
+        <value>Valid On date out of range: Please Adjust Valid On Date</value>
+    </labels>
+    <labels>
+        <fullName>Valid_On_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Valid On Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;Valid On&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Valid_On_Must_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Valid On Must Error</shortDescription>
+        <value>Please enter a value for Valid On</value>
+    </labels>
+    <labels>
+        <fullName>Valid_To_Date_Out_Of_Range_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Valid To Date Out Of Range Error</shortDescription>
+        <value>Please adjust Valid To Date</value>
+    </labels>
+    <labels>
+        <fullName>Valid_To_Invalid_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Valid To Invalid Error</shortDescription>
+        <value>Valid To date cannot be in the past</value>
+    </labels>
+    <labels>
+        <fullName>Valid_To_Less_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Valid To Less Error</shortDescription>
+        <value>Valid To date must be greater than the Valid From date</value>
+    </labels>
+    <labels>
+        <fullName>Valid_To_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Valid To Mandatory Error</shortDescription>
+        <value>Please enter value for  mandatory field &apos;Valid To&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Valid_To_date_out_of_range_Import_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Valid To date out of range Import Error</shortDescription>
+        <value>Valid To date out of range</value>
+    </labels>
+    <labels>
+        <fullName>Valid_to_past_date_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Valid to past date Error</shortDescription>
+        <value>Valid To cannot be a past date</value>
+    </labels>
+    <labels>
+        <fullName>Validate_Floor_Price_Button</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Validate Floor Price Button</shortDescription>
+        <value>Validate Floor Price</value>
+    </labels>
+    <labels>
+        <fullName>Validity_Dates_Modification_in_Apply_Changes_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Validity Dates Modification in Apply Changes Error</shortDescription>
+        <value>Please modify the Validity dates for :</value>
+    </labels>
+    <labels>
+        <fullName>Value_Center_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Value Center Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field Value Center</value>
+    </labels>
+    <labels>
+        <fullName>Value_Center_not_configured_for_the_Sales_Area</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Value Center not configured for the Sales Area</shortDescription>
+        <value>Value Center not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>Variant_Mandatory_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Variant Mandatory Error</shortDescription>
+        <value>Please enter value for mandatory field &apos;Variant&apos;</value>
+    </labels>
+    <labels>
+        <fullName>Variant_not_configured_for_the_Sales_Area</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Variant not configured for the Sales Area</shortDescription>
+        <value>Variant not configured for the Sales Area</value>
+    </labels>
+    <labels>
+        <fullName>View_Customer_Prices</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>View Customer Prices</shortDescription>
+        <value>View Prices</value>
+    </labels>
+    <labels>
+        <fullName>Wrong_Values_in_PH_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wrong Values in PH Error</shortDescription>
+        <value>Wrong Values in PH</value>
+    </labels>
+    <labels>
+        <fullName>You_are_not_allowed_to_create_requests_for_Customer_Specific_Prices_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>You are not allowed to create requests for Customer Specific Prices Error</shortDescription>
+        <value>You are not allowed to create requests for Customer Specific Prices</value>
+    </labels>
+    <labels>
+        <fullName>You_are_not_authorized_to_create_requests_for_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>You are not authorized to create requests for Error</shortDescription>
+        <value>You are not authorized to create requests for</value>
+    </labels>
+    <labels>
+        <fullName>You_can_add_maximum_180_prices_to_a_single_Massive_Change_Request</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>You can add maximum 180 prices to a single Massive Change Request</shortDescription>
+        <value>You can add maximum 180 prices to a single Massive Change Request</value>
+    </labels>
+    <labels>
+        <fullName>not_found_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>not found Error</shortDescription>
+        <value>not found</value>
+    </labels>
+    <labels>
+        <fullName>not_matching_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>not matching Error</shortDescription>
+        <value>entered is not matching with any Records</value>
+    </labels>
+    <labels>
+        <fullName>salesOrgCodes1</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>salesOrgCodes1</shortDescription>
+        <value>D600,D603,D618,D629,D63B,D642,D643,D64A,D655,D66D,D674,D680,D691,D67D,D671,D673</value>
+    </labels>
+    <labels>
+        <fullName>select_file</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>select file</shortDescription>
+        <value>Please select a file to upload</value>
+    </labels>
+    <labels>
+        <fullName>select_items_to_delete_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>select items to delete Error</shortDescription>
+        <value>Please select items to delete</value>
+    </labels>
+    <labels>
+        <fullName>select_proper_template</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>select_proper_template</shortDescription>
+        <value>Please Select a Proper Template</value>
+    </labels>
+    <labels>
+        <fullName>valid_on</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>valid_on</shortDescription>
+        <value>Please a value for Valid On</value>
+    </labels>
+    <labels>
+        <fullName>valid_to_less_than_valid_from_Error</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>valid to less than valid from Error</shortDescription>
+        <value>Valid To date out of range.</value>
+    </labels>
+</CustomLabels>

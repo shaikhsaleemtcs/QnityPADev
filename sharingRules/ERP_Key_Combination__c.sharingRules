@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sharingCriteriaRules>
+        <fullName>Floor_and_Reference_Sharing</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>Floor and Reference Sharing</label>
+        <sharedTo>
+            <roleAndSubordinatesInternal>DuPontCorporate797661</roleAndSubordinatesInternal>
+        </sharedTo>
+        <criteriaItems>
+            <field>Key_Combination_Type_Text__c</field>
+            <operation>contains</operation>
+            <value>Floor,Reference,Spot,Standard</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>PA_Key_Combination_CKC</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>PA Key Combination CKC</label>
+        <sharedTo>
+            <group>Price_Approval_CPR</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Customer_Specific__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
+        <fullName>PA_Key_Combination_NCKC</fullName>
+        <accessLevel>Read</accessLevel>
+        <label>PA Key Combination NCKC</label>
+        <sharedTo>
+            <group>Price_Approval_NCPR</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>Customer_Specific__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>false</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+</SharingRules>

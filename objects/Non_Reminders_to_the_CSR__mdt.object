@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>BU_for_Non_reminders_for_CSR__c</fullName>
+        <externalId>false</externalId>
+        <fieldManageability>DeveloperControlled</fieldManageability>
+        <label>BU for Non reminders for CSR</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Non-Reminders to the CSR</label>
+    <pluralLabel>Non-Reminders to the CSRS</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>This is to activate the daily notification for the mentioned business</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Daily_Notification__c</fullName>
+        <defaultValue>false</defaultValue>
+        <label>Daily Notification</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>PABusinessToNotify</label>
+    <visibility>Public</visibility>
+</CustomObject>

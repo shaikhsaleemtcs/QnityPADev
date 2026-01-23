@@ -1,0 +1,14 @@
+<apex:page standardController="Project_Price__c">
+  <script>
+        var appid = '{!$CurrentPage.parameters.id}';
+        window.location.href='/apex/PAPricingRequest?id='+appid;
+        //window.focus();
+  </script>
+  <style>
+  .noTableFooter
+      {
+      margin:0px!important;
+      }
+  </style>
+  
+</apex:page>

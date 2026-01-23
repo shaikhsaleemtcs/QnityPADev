@@ -1,0 +1,75 @@
+<apex:page controller="CtrlCOBUtilCustomerOnboardingRequest" tabstyle="Customer_Data_Request__c" id="pageId" sidebar="false">
+<style>
+.buttons a.btn{width:70px;height:200px;}
+.spinnerCt {
+    left: 50%;
+    top: 35%;
+    position: fixed;
+    z-index: 1050;
+    padding: 20px 40px;
+    box-shadow: 0pt 2px 5px rgb(172, 172, 172);
+    border-radius: 1em 1em 1em 1em;
+    border: 1px solid rgb(206, 236, 255);
+    background-color: rgb(206, 236, 255);
+    background-style: solid;
+}
+
+.spinner {
+    padding: 10px 15px 10px 0pt;
+    vertical-align: middle;
+    float: left
+}
+
+.spinnerCt .loadingIndicator {
+    display: inline;
+    font-size: 135%;
+    font-weight: bold;
+    float: left
+}
+
+.mask {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    opacity: 0.45;
+    filter: alpha(opacity =     45);
+    position: absolute;
+    z-index: 1000;
+    top: 0pt;
+    left: 0pt;
+}
+
+</style>
+  <apex:form >
+  <apex:actionStatus id="counterStatus">
+        <apex:facet name="start">
+            <div class="spinnerMask" id="spinnerMask">
+                <div class="spinnerCt">
+                    <img src="/img/analytics/reportbuilder/icons/spinner32.gif" alt="Loading..." width="32" height="32" class="spinner" title="Loading..." />
+                    <div class="loadingIndicator">Loading...</div>
+                </div>
+                <div class="mask"></div>
+            </div>
+        </apex:facet>
+    </apex:actionStatus>
+  <apex:pageBlock id="pb">
+  <apex:pageBlockSection >
+        <apex:outputLabel ><b>  Please Provide Your Comments </b></apex:outputLabel>
+        <div>
+            <apex:inputField id="DMSCommentsId" value="{!OnboardingReq.Data_Analyst_Comments__c}"  style="height: 100px;width: 500Px;"   required="true" rendered="{!IF((ProfileName=='Data Analyst' || ProfileName == 'DMS Process Managers'), true,false)}"/>
+            <apex:inputField Id="CACommentsId" value="{!OnboardingReq.Country_Credit_Comments__c}" style="height: 100px;width: 500Px;" required="true" rendered="{!IF(AND(OnboardingReq.Request_Status__c == 'Awaiting Credit Approval', (ProfileName=='Credit Process Managers' || ProfileName == 'Credit Analyst')), True,False)}"/>
+            <apex:inputField Id="DCACommentsId" value="{!OnboardingReq.Destination_Credit_Comments__c}" style="height: 100px;width: 500Px;" required="true" rendered="{!IF(AND(OnboardingReq.Request_Status__c == 'Awaiting Destination Credit Approval', (ProfileName=='Credit Process Managers' || ProfileName == 'Credit Analyst')), True,False)}"/>
+        </div>
+    <apex:outputPanel style="padding-left: 400px;">
+                <!-- apex:commandLink value="    Save & Submit    " action="{!SaveAndSubmit}" rerender="pb" styleClass="btn" style="text-decoration:none;" status="counterStatus">
+               <apex:param name="IsSaveOrSubmit" id="param2" assignTo="{!IsSaveOrSubmit}" value="Submit"/> </apex:commandLink-->
+               <apex:commandLink value="    Send for CSR Review  " action="{!SaveAndSubmit}" rerender="pb" styleClass="btn" style="text-decoration:none;" status="counterStatus" rendered="{!IF(((ProfileName=='Data Analyst' || ProfileName == 'DMS Process Managers' || ProfileName=='Credit Analyst' || ProfileName =='Credit Process Managers') && SubCtrlButtonClicked == 'CSR' ), True,False)}"><apex:param name="IsSaveOrSubmit14" id="param14" assignTo="{!IsSaveOrSubmit}" value="Submit"/><apex:param name="CSRReview" id="CSRReview" assignTo="{!CSRReview}" value="True"/></apex:commandLink>
+               <apex:commandLink value="    Send for CA Review    " action="{!SaveAndSubmit}" rerender="pb" styleClass="btn" style="text-decoration:none;" status="counterStatus" rendered="{!IF(((ProfileName=='Data Analyst' || ProfileName == 'DMS Process Managers') && SubCtrlButtonClicked == 'CA'), True,False)}"><apex:param name="IsSaveOrSubmit13" id="param13" assignTo="{!IsSaveOrSubmit}" value="Submit"/><apex:param name="CAReview" id="CAReview" assignTo="{!CAReview}" value="True"/></apex:commandLink>
+               <apex:commandButton value="    Reject    " action="{!CancelAndClose}" rerender="pb" styleClass="btn" style="text-decoration:none;" status="counterStatus" rendered="{!IF(((ProfileName=='Credit Analyst' || ProfileName == 'DMS Process Managers' || ProfileName == 'Data Analyst' || ProfileName =='Credit Process Managers') && SubCtrlButtonClicked == 'REJ'),true,false)}" />       
+               <apex:commandLink value="    Cancel    "  action="{!Cancel}" styleClass="btn" style="text-decoration:none;" immediate="true" status="counterStatus"></apex:commandLink>
+               
+    </apex:outputPanel>
+      </apex:pageBlockSection>
+   </apex:pageBlock>
+  </apex:form>
+</apex:page>

@@ -1,0 +1,88 @@
+<!--    HL20140923      Hema Latha          Created to export Approval Set details                                                  None          -->
+
+<apex:page standardStylesheets="false" cache="true" contentType="txt/xml#Approval_Setup_Report.xls" 
+controller="ctrlPAMain" showHeader="false" tabStyle="Price_Approval__tab">
+
+<xml>
+    <Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+              xmlns:o="urn:schemas-microsoft-com:office:office"
+              xmlns:x="urn:schemas-microsoft-com:office:excel"
+              xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+              xmlns:html="http://www.w3.org/TR/REC-html40">
+        <Styles>
+            <Style ss:ID="Default" ss:Name="Normal">
+                <Alignment ss:Vertical="Bottom"/>
+                <Borders/>
+                <Font/>
+                <Interior/>
+                <NumberFormat/>
+                <Protection/>
+            </Style>
+            <Style ss:ID="s23">
+                <Font x:Family="Swiss" ss:Bold="1"/>
+            </Style>
+            <Style ss:ID="s22">
+                <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+            </Style>
+        </Styles>
+        <Worksheet ss:Name="Approval Setup Report">
+            <Table ss:ExpandedColumnCount="14">
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                <Column ss:Width="100"/>
+                
+               
+               
+               <Row ss:StyleID="s23">
+                    <Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="Admin Master Id"/></Data></Cell>
+                    <Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="BU"/></Data></Cell>
+                <Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="Sales Organisation"/></Data></Cell>  
+                  <Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="Request Class"/></Data></Cell>   
+                <Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="Request Type"/></Data></Cell>   
+                    <Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="Price Category"/></Data></Cell>   
+                     <Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="Pricing Task Type"/></Data></Cell>   
+                     <Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="Country"/></Data></Cell>   
+                     <Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="Distribution Channel"/></Data></Cell>  
+                     <Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="Division"/></Data></Cell> 
+                  <Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="Approval Level"/></Data></Cell>  
+                     <Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="Routing Parameter"/></Data></Cell>  
+                    <Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="Key Field"/></Data></Cell> 
+                   <Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="Approver Role"/></Data></Cell>  
+                </Row>
+               <apex:repeat value="{!service.PAServicestate.approvalSetup.relatedWrappersList}" var="wrapper">
+                
+                 <apex:repeat value="{!wrapper.wrapperList}" var="v">
+                  <Row ss:StyleID="s23">                   
+                <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText escape="false" value="{!v.sObjectRecord['PA_BU_Admin_Master__r.Name']}" /></Data></Cell>  
+                <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText escape="false" value="{!v.sObjectRecord['PA_BU_Admin_Master__r.BU__c']}" /></Data></Cell>
+                <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText escape="false" value="{!v.sObjectRecord['PA_BU_Admin_Master__r.Sales_Organisation__c']}" /></Data></Cell>    
+                <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText escape="false" value="{!v.sObjectRecord['PA_BU_Admin_Master__r.Request_Class__c']}" /></Data></Cell>  
+               <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText escape="false" value="{!v.sObjectRecord['PA_BU_Admin_Master__r.Request_Type__c']}" /></Data></Cell>      
+                 <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText escape="false" value="{!v.sObjectRecord['PA_BU_Admin_Master__r.Price_Category__c']}" /></Data></Cell>  
+                 <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText escape="false" value="{!v.sObjectRecord['PA_BU_Admin_Master__r.Pricing_Task_Type__c']}" /></Data></Cell>  
+                <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText escape="false" value="{!v.sObjectRecord['PA_BU_Admin_Master__r.Country__c']}" /></Data></Cell> 
+                <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText escape="false" value="{!v.sObjectRecord['PA_BU_Admin_Master__r.Distribution_Channel__c']}" /></Data></Cell>    
+                 <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText escape="false" value="{!v.sObjectRecord['PA_BU_Admin_Master__r.Division__c']}" /></Data></Cell> 
+                 <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText escape="false" value="{!v.sObjectRecord['Approval_Level__c']}" /></Data></Cell> 
+              <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText escape="false" value="{!v.sObjectRecord['Routing_Parameter__c']}" /></Data></Cell>   
+                 <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText escape="false" value="{!v.sObjectRecord['Key_Field__c']}" /></Data></Cell>   
+                <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText escape="false" value="{!v.sObjectRecord['Approver_Role__c']}" /></Data></Cell>   
+                 </Row>  
+                </apex:repeat>                               
+               </apex:repeat> 
+            </Table>
+        </Worksheet>
+    </Workbook>
+</xml>
+</apex:page>

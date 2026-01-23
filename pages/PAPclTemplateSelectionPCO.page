@@ -1,0 +1,336 @@
+<apex:page controller="ctrlPAMain" tabstyle="Price_Approval__tab" sidebar="false" showHeader="true" id="currentPage" cache="true"
+    action="{!onLoadCall}">
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.js')}" />
+<c:loadingComponent />
+    <apex:pageMessages escape="false" id="errorMessage"/> 
+    <!-- 1.1.0 added reload -- Sanjib  21-02-13 -->
+    <!-- 1.2.3 modified the cancel function line 210-->
+    <!-- 2.0                Priyanka            Change in architecture                                              None    -->
+     <!-- 2.1                Brundha            UI                                              None    -->
+<style>
+        .navFlow{font-size:13px;font-style:oblique;margin-bottom:3px;}
+        .customerLink{font-size:15px;height:20px;margin-bottom:1px;padding:5px;border:solid 1px;border-color:#6E96B2; background-color:#E5F3FC;font-weight:bold;text-align:left;}
+        .soldTo .details .pbSubheader{margin-bottom:0px;}
+        .soldTo .details .detailList{border:1px solid #E2E3E4;}
+        .soldTo .details .detailList .dataCol{color:#000000;}
+        //.soldTo .details .detailList .headerRow th{text-align:center;}
+        .soldTo .details .detailList tr th{border-bottom:none;}
+        .soldTo .details .detailList tr td{border-bottom:none;padding-left:0px;}
+        //.bPageBlock .requiredInput .requiredBlock{top:0px;bottom:1px;}
+        //.details .tablePop .bPageBlock .detailList .list tr th{color: white;padding: 0px;border: 0px;}
+        //.details .tablePop .bPageBlock .detailList .list tr td{color: white;padding: 0px;border: 0px;}
+         .details .tablePop .detailList{border:none;}
+        
+         .soldTo .bPageBlock{float:left;width:100%;}
+         .soldTo .details .dataCol{padding-left:0px;}
+         .soldTo .details .pbSubheader{margin-bottom:0px;}
+         .details .tablePop .detailList tr th{border-bottom:none;}
+         .details .tablePop .detailList tr td{border-bottom:none;}
+         //body .pbBody table.list tr.headerRow th:first-child, body .pbBody table.list tr.dataRow td:first-child{border:none;} 
+         body .pbBody table.list tr.dataRow th, body .pbBody table.list tr.dataRow td {border:none;}
+    </style>    
+
+    <style type="text/css">
+    .FrontPage {
+            background-color: white;
+            //border-width: 2px;
+            //border-style: solid;
+            border: 2px solid #63A4C5;
+            z-index: 9999;
+            left: 18%;
+            right: ;
+            padding: 10px;
+            position: absolute;
+            top: 10%; //
+            margin-left: -600px;
+            width: 800px;
+           
+    }
+    
+    .BackPage {
+            background-color: #696969;
+            opacity: 0.5;
+            filter: alpha(opacity =   50);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 9998;
+    }
+    .noTableFooter
+            {
+            margin:0px!important;
+            }
+    /*.TableTitle {
+            font-weight: normal;
+            border-width: 2px;
+            border-style: solid;
+            width:50%;
+            color: #0079C1;
+            background-color: white;
+            text-align: left;
+            font-size: 12px;
+    }*/
+    </style>
+    
+    <apex:actionstatus id="stat">
+            <apex:facet name="start">
+                <div class="waitingSearchDiv" id="el_loading"
+                    style="background-color: #fbfbfb; height: 100%; opacity: 0.65; width: 100%;">
+                <div class="waitingHolder" style="top: 74.2px; width: 91px;">
+                <img class="waitingImage" src="{!$Resource.Loading}"
+                    title="Please Wait..." /> <span class="waitingDescription">Loading...</span>
+                </div>
+                </div>
+            </apex:facet>
+     </apex:actionstatus>        
+            
+      <apex:form id="myForm">
+     <!-- <TJ20140505> Added Landing Page Link -->
+        <div align="left" class="navFlow">
+            <apex:commandLink id="link0" value="Landing Page" action="{!businessComponentAction}" target="_self" style="color:blue;">
+            <apex:param name="desiredAction" value="landingpage" assignTo="{!businessaction}" />
+            <apex:param name="newPageLabel" value="PAHome" assignTo="{!newPageLabel}" />
+            </apex:commandLink>
+        <!-- <TJ20140509> Added Navigation Flow Text-->
+            <apex:outputText value="{!if(NOT(ISNULL(navigationText)),'>>','')} "/>
+            <apex:outputText value="{!navigationText}"/>
+            <apex:outputText value=">>  Price Confirmation Letter Screen"/>
+        </div>
+     
+
+     
+      
+        <div class="customerLink">
+            Price Confirmation Letter Screen
+        </div>
+      
+      <div class="soldTo">
+        <apex:pageBlock >   
+            <div class="details">       
+            <!-- Sold To Customer Detail Section -->
+            <apex:pageBlockSection title="Customer Information">
+                <!-- <TJ20140515> -->
+                    <apex:pageblocksectionitem >
+                        <apex:outputlabel value="Business"/>
+                        <apex:outputText value="{!BUName}"/>
+                    </apex:pageblocksectionitem>
+                        
+                    <apex:pageBlockSectionItem rendered="{!OR(service.paServiceState.ogItems.isBUAdmin, service.paServiceState.ogItems.salesAdminPermissionSetFlag, service.paServiceState.ogItems.isRequester) && NOT(CONTAINS(service.PAServicestate.erpCustomer.currentPrices,'ExpOnly'))}">
+                    <!--<MS20140609> Added on behalf of for Sales Rep -->
+                        <apex:outputlabel value="On Behalf Of"/>
+                        <apex:outputtext value="{!IF(service.paServiceState.ogItems.isBUAdmin || service.paServiceState.ogItems.salesAdminPermissionSetFlag,service.paServiceState.ogItems.userName, IF(service.paServiceState.ogItems.isRequester && service.PAServicestate.currentRequest.pricingRequest.Id==null,service.paServiceState.ogItems.loggedInUserName,IF(service.PAServicestate.currentRequest.pricingRequest.Id!=null,service.PAServicestate.currentRequest.pricingRequest.Owner.Name,'')))}"/>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem rendered="{!CONTAINS(service.PAServicestate.erpCustomer.currentPrices,'ExpOnly')}"/>   
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value="Sold To Code" />
+
+                    <apex:outputText value="{!service.PAServicestate.currentRequest.customer.paERPCustomer.Customer_Code__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value="Sold To" />
+                    <apex:outputText escape="false"
+                        value="{!service.PAServicestate.erpCustomer.paERPCustomer.name}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value="Sales Area" />
+                    <apex:outputText escape="false"
+                        value="{!service.PAServicestate.currentRequest.customer.SalesArea}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value="Location" />
+                    <apex:outputText escape="false"
+                        value="{!service.PAServicestate.erpCustomer.paERPCustomer.Street__c}
+                        <br> {!service.PAServicestate.erpCustomer.paERPCustomer.City__c} <br> {!service.PAServicestate.erpCustomer.paERPCustomer.State_Province__c} <br> 
+                    {!service.PAServicestate.erpCustomer.paERPCustomer.Country__c} <br> {!service.PAServicestate.erpCustomer.paERPCustomer.Zip_Postal_Code__c}"/> 
+                
+                
+                </apex:pageBlockSectionItem>
+<!--                     <TJ20140602>-->
+                        <apex:pageBlockSectionItem rendered="{!OR(CONTAINS(businessAction,'Customer Price'),CONTAINS(businessAction,'Next'),
+                                    CONTAINS(businessAction,'Pricing Task'),service.PAServicestate.currentRequest.PricingRequest.Request_Type__c='Customer Specific')}">
+                        <apex:outputText value="Payment Terms"/>
+                        <apex:outputText value="{!service.PAServicestate.currentRequest.customer.paERPcustomer.Terms_of_Payment_Code__c} - {!service.PAServicestate.currentRequest.customer.paERPcustomer.Terms_of_Payment__c}"/>
+                        </apex:pageBlockSectionItem>
+<!--                        <TJ20140602>
+                            <MS20140611> Added incoterms place-->
+                        <apex:pageBlockSectionItem rendered="{!OR(CONTAINS(businessAction,'Customer Price'),CONTAINS(businessAction,'Next'),
+                                    CONTAINS(businessAction,'Pricing Task'),service.PAServicestate.currentRequest.PricingRequest.Request_Type__c='Customer Specific')}">
+                            <apex:outputText value="Incoterms"/>
+                            <apex:outputText value="{!service.PAServicestate.currentRequest.customer.paERPcustomer.Incoterms_1_Code__c}({!service.PAServicestate.currentRequest.customer.paERPcustomer.Incoterms_1__c})-{!service.PAServicestate.currentRequest.customer.paERPcustomer.Incoterms_2__c}"/>
+                        </apex:pageBlockSectionItem>
+
+                        <!-- BB20140508 Capital Project Added Customer Order Block section  START-->
+                        <apex:pageBlockSectionItem rendered="{!service.PAServicestate.currentrequest.customer.paERPcustomer.Customer_Order_Block_Code__c != null}">
+                             <apex:outputText value="Customer Order Block" />
+                             <apex:outputText escape="false"  value="{!service.PAServicestate.currentrequest.customer.paERPcustomer.Customer_Order_Block_Code__c}-{!service.PAServicestate.currentrequest.customer.paERPcustomer.Customer_Order_Block__c}"/>  
+                        </apex:pageBlockSectionItem>
+                        <!-- BB20140508 END -->
+                            
+                </apex:pageBlockSection>
+                <apex:pageBlockSection title="Letter Header">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputText value="Customer Contact">
+                        </apex:outputText>
+                        <apex:outputPanel style="float:left;" >
+                            <div class="requiredInput" style="float:left;">
+                            <div class="requiredBlock" style="float:left;"></div>
+                             <apex:inputText value="{!service.paServiceState.currentRequest.customerContact}"  style="float:left;margin: 0px;" maxlength="80"/> 
+                            
+                            </div>
+                        </apex:outputPanel>
+                     </apex:pageBlockSectionItem>
+                       
+                        <apex:pageBlockSectionItem >    
+                     <!-- MS20140929 Adding logic to display options on click of lookup -->
+                     <apex:outputText value="PCL Template"></apex:outputText>
+                        <apex:outputPanel style="float:left;" >
+                            <div class="requiredInput" style="float:left;">
+                            <div class="requiredBlock" style="float:left;"></div>
+                            <apex:inputText style="float:left;margin: 0px;" value="{!service.paServiceState.currentRequest.pclDisplayPopUp}"/>
+                             <apex:commandLink action="{!businessComponentAction}"  >
+                                <apex:param name="desiredAction" value="selectTemplate" assignTo="{!businessaction}" />
+                                <apex:image id="theImage" url="{!$Resource.LookUpImage}" />                                             
+                                <apex:param name="PCLDisplay" value="" assignTo="{!service.paServiceState.currentRequest.pclDisplayPopUp}"/>                                   
+                                <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                                <apex:param name="newPageLabel" value="PAPclTemplateSelectionPCO" assignTo="{!newPageLabel}"/>                                             
+                             </apex:commandLink>&nbsp;&nbsp;
+                             </div>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem > 
+                    <apex:outputText value="Valid On"></apex:outputText> 
+                    <apex:outputPanel style="float:left;" >
+                        <div class="requiredInput" style="float:left;">
+                        <div class="requiredBlock" style="float:left;"></div>
+                        <apex:inputfield style="float:left;margin: 0px;" value="{!service.PAServicestate.currentRequest.pricingRequest.Due_Date__c}" />
+                        </div>
+                    </apex:outputPanel>
+                    
+                    </apex:pageBlockSectionItem> 
+                </apex:pageBlockSection>
+                <apex:pageBlockSection title="Pricing Detail">
+                   <apex:pageBlockSectionItem >
+                                    <apex:outputText value="Pricing Condition"></apex:outputText>
+                                    <apex:selectList size="6" value="{!service.paServiceState.currentRequest.pricingCondition.PCLselectedPricingCondition}" multiselect="true" style="width:200px;">
+                                        <apex:actionSupport event="onchange" status="stat" >
+                                         <apex:param name="labelNew" value="PAPclTemplateSelectionPCO" assignTo="{!newPageLabel}"/>
+                                         <apex:param name="pageName" value="stay" assignTo="{!pageName}"/>
+                                         </apex:actionSupport>
+                                        
+                                        <apex:selectOptions value="{!service.PAServicestate.currentRequest.pricingCondition.ListOptions}"></apex:selectOptions>
+                                    </apex:selectList>
+                                </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                    <apex:outputText value="Key Combination"></apex:outputText>
+                    <apex:selectList size="6" value="{!service.paServiceState.currentRequest.keyCombination.PCLselectedKeyCombination}" multiselect="true" style="width:550px;">
+                       
+                        <apex:selectOptions value="{!service.PAServicestate.currentRequest.keyCombination.ListOptions}"></apex:selectOptions>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+                
+              
+                
+             <div style="float:left;text-align:center;padding:10px 0px 10px 0px;width:100%;"> 
+                <apex:commandLink value="Fetch Selected Records"
+                    action="{!BusinessComponentAction}" status="stat" styleClass="btn" style="text-decoration:none">
+                    <apex:param name="desiredAction" value="PCLfetch" assignTo="{!businessaction}"/>
+                    <apex:param name="newPageLabel" value="PAPCLGenerationPage" assignTo="{!newPageLabel}" />
+                    <apex:param name="pageName" value="{!IF(CONTAINS(navigationText,'PCL Generation'),'PCL Generation','Price Confirmation Letter Screen')}" assignTo="{!pageName}"/>
+                </apex:commandLink>
+                 
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                 
+                 <apex:commandLink value="Fetch All Records" action="{!businessComponentAction}"   status="stat" styleClass="btn" style="text-decoration:none;" >
+                    <apex:param name="desiredAction" value="PCLfetch" assignTo="{!businessaction}"/>
+                    <apex:param name="newPageLabel" value="PAPCLGenerationPage" assignTo="{!newPageLabel}" /> 
+                    <apex:param name="pageName" value="{!IF(CONTAINS(navigationText,'PCL Generation'),'PCL Generation','Price Confirmation Letter Screen')}" assignTo="{!pageName}"/>
+                    </apex:commandLink>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <apex:commandLink value="Cancel" action="{!businessComponentAction}" styleClass="btn" style="text-decoration:none">
+        <apex:param name="desiredAction" value="PCLcancelTemplateselection" assignTo="{!businessaction}" />
+         <apex:param name="newPageLabel" value="PACustomerDetail" assignTo="{!newPageLabel}" />
+         <apex:param name="pageName" value="{!IF(CONTAINS(navigationText,$Label.Customer_Details),$Label.Customer_Details,'Price Confirmation Letter Screen')}" assignTo="{!pageName}"/>                      
+        </apex:commandLink>
+                    
+                    
+            </div>
+            </div>  
+            </apex:pageBlock>
+
+   
+     <apex:outputPanel id="backPage" rendered="{!service.paServiceState.currentRequest.pclShowSelectionTable}" styleClass="BackPage"></apex:outputPanel>
+                        <apex:outputPanel id="popUPwindow" rendered="{!service.paServiceState.currentRequest.pclShowSelectionTable}"   styleClass="FrontPage">
+                        <apex:commandLink action="{!businessComponentAction}" >
+                                        <apex:image url="{!$Resource.closeButton}" width="10" height="10" style="float:right;" />
+                                         <apex:param name="desiredAction" value="Closewindow" assignTo="{!businessaction}" /> 
+                                        
+                                </apex:commandLink>
+                                <apex:pageblock >
+                                  <div class="details"> 
+                                    <apex:pageblocksection title="Template Selection Screen" >
+                                      <!--   <apex:pageblockSectionItem >
+                                           <apex:outputText value="Type"></apex:outputText>
+                                           <apex:inputText value="{!service.paServiceState.currentRequest.email['Type']}" />
+                                        </apex:pageblockSectionItem> --> 
+                                       
+                                        <apex:pageblockSectionItem >
+                                            <apex:outputText value="Language"></apex:outputText>
+                                            <apex:selectList size="1" value="{!service.paServiceState.currentRequest.email['Language']}" onchange="pclSearch()">
+                                                    <apex:actionsupport event="onchange" status="stat" reRender="backPage">
+                                                    </apex:actionsupport>
+                                                    <apex:selectOption itemValue="--Select--"></apex:selectOption>
+                                                    <apex:selectOptions value="{!service.paServiceState.currentRequest.ListOptions}">
+                                                    </apex:selectOptions>
+                                            </apex:selectList>
+                                        </apex:pageblockSectionItem>
+                                     <!-- <apex:pageblockSectionItem >
+                                        <apex:outputText value="Description"></apex:outputText>
+                                        <apex:inputText value="{!service.paServiceState.currentRequest.email['Description']}" maxlength="40" />
+                                       </apex:pageblockSectionItem>  -->   
+                                       </apex:pageblocksection>
+                                       
+                                      <apex:actionFunction name="pclSearch" action="{!businessComponentAction}">
+                                       		<apex:param name="desiredAction" value="PCLSEARCH" assignTo="{!businessaction}" />
+                                       </apex:actionFunction>
+                                       
+                                  <!--  <div style="float:left;text-align:center;padding:10px 0px 20px 0px;width:100%;"> 
+                                          <apex:commandLink value="Search" action="{!businessComponentAction}" styleClass="btn" style="text-decoration:none">
+                                            <apex:param name="desiredAction" value="PCLSEARCH" assignTo="{!businessaction}" />
+                                          </apex:commandLink>
+                                      </div>   -->  
+                               
+                             <br/>
+                              <div class="tablePop">    
+                                 <apex:pageBlockTable id="templateId" value="{!service.PAServiceState.currentRequest.templateWrapper}" var="temp" columns="4" style="float:left;width:100%"  
+                                 rendered="{!service.paServiceState.currentRequest.csvString=='renderTable'}">
+                                 
+                                   <apex:column headerValue="Template" >
+                                          
+                                           <apex:commandLink value="{!temp.stringMap['Template']}" action="{!businessComponentAction}">
+                                                  <!-- MS20140929 Adding param to close popup -->
+                                                  <apex:param name="desiredAction" value="{!temp.stringMap['Template']}" assignTo="{!service.paServiceState.currentRequest.pclDisplayPopUp}" />
+                                                  <apex:param name="desiredAction" value="false" assignTo="{!service.paServiceState.currentRequest.pclShowSelectionTable}" />
+                                                  
+                                                         
+                                          </apex:commandLink>
+                                  </apex:column>
+                                   <apex:column headerValue="Type" >
+                                          <apex:outputText value="{!temp.stringMap['Type']}"></apex:outputText>
+                                  </apex:column>
+                                   <apex:column headerValue="Language" >
+                                          <apex:outputText value="{!temp.stringMap['Language']}"></apex:outputText>
+                                  </apex:column>
+                                  
+                                
+                                </apex:pageBlockTable>
+                               </div> 
+                                </div>
+                            </apex:pageblock>                                 
+                        </apex:outputPanel>                                     
+            
+    </div> 
+    </apex:form>
+    
+</apex:page>

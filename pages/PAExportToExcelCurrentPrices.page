@@ -1,0 +1,150 @@
+<apex:page standardStylesheets="false" cache="true" contentType="txt/xml#Record_List.xls" 
+controller="ctrlPAMain" showHeader="false" tabStyle="Price_Approval__tab">
+
+<!--    Version            Developer               Changes                                                                                                                          Dependencies    -->
+<!--    1.1             Rajesh Barda        Modified the code to include Sales Area, Sold To information and changed the ordering of Scale Rate, Scale Quantity columns.                            -->
+<!--    1.2             Sapneet Hora        IS SC-00105625 <SH20221130> -->
+<xml>
+    <Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+              xmlns:o="urn:schemas-microsoft-com:office:office"
+              xmlns:x="urn:schemas-microsoft-com:office:excel"
+              xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+              xmlns:html="http://www.w3.org/TR/REC-html40">
+        <Styles>
+            <Style ss:ID="Default" ss:Name="Normal">
+                <Alignment ss:Vertical="Bottom"/>
+                <Font/>
+                <Interior/>
+                <NumberFormat/>
+                <Protection/>
+            </Style>
+            <Style ss:ID="s23">
+              <Font x:Family="Swiss" ss:Bold="1"/>
+                            
+            </Style>
+            <Style ss:ID="s22">
+              <Alignment ss:Vertical="Bottom" ss:WrapText="1"/>
+                               
+            </Style>
+            <Style ss:ID="s21">
+              <Alignment ss:Horizontal="Center" ss:Vertical="Bottom"/>
+              <Font x:Family="Swiss" ss:Bold="1"/>            
+            </Style>
+            <Style ss:ID="s20">
+                <Interior ss:Color="white" ss:Pattern="Solid"/>
+                </Style>
+        </Styles>
+            <Worksheet ss:Name="Price Record List">
+                <Table>
+                    <Column ss:Width="100"/>
+                    <Column ss:Width="100"/>
+                    <Column ss:Width="100"/>
+                    <Column ss:Width="100"/>
+                    <Column ss:Width="100"/>
+                    <Column ss:Width="100"/>
+                    <Column ss:Width="100"/>
+                    <Column ss:Width="100"/>
+                    <Column ss:Width="100"/>
+                    <Column ss:Width="100"/>
+                                       
+                    <apex:repeat value="{!service.PAServicestate.currentRequest.salesPriceSAP.relatedWrappersList}" var="wrapper">
+                    
+                    <Row>
+                    <Cell ss:MergeAcross="9" ss:StyleID="s21" ><Data ss:Type="String"><apex:outputText escape="false" value="{!wrapper.priceType}"/></Data></Cell>
+                    <Cell ss:MergeAcross="9" ss:StyleID="s21" ><Data ss:Type="String"><apex:outputfield rendered="false"/></Data></Cell>
+                    </Row>
+                    <Row ss:StyleID="s23">
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">Sales Org Code</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">Distribution Channel Code</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">Division Code</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">Sold To Code</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">Sold To</Data></Cell>
+                        <apex:repeat value="{!wrapper.keyCombinationColumns}" var="r">
+                            <Cell ss:StyleID="s23" ><Data ss:Type="String"><apex:outputText escape="false" value="{!r.Label}"/></Data></Cell>
+                        </apex:repeat>
+                        
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">Valid From</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">Valid To</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,'Scale UoM/Scale Unit','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,'ScaleQuantity/ScaleValue1','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,'ScaleRate1','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,'ScaleQuantity/ScaleValue2','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,'ScaleRate2','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,'ScaleQuantity/ScaleValue3','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,'ScaleRate3','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,'ScaleQuantity/ScaleValue4','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,'ScaleRate4','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,'ScaleQuantity/ScaleValue5','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,'ScaleRate5','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,'ScaleQuantity/ScaleValue6','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,'ScaleRate6','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,'ScaleQuantity/ScaleValue7','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,'ScaleRate7','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,'ScaleQuantity/ScaleValue8','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,'ScaleRate8','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,'ScaleQuantity/ScaleValue9','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,'ScaleRate9','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,'ScaleQuantity/ScaleValue10','')}</Data></Cell>
+                        <Cell ss:StyleID="s23" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,'ScaleRate10','')}</Data></Cell>
+   
+                    </Row>
+                    <apex:repeat value="{!wrapper.wrapperList}" var="v">
+                        <Row ss:StyleID="s22">
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText value="{!v.sObjectRecord['Sales_Org_Code__c']}"/></Data></Cell>
+                            <!--<Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText value="{!v.sObjectRecord['Distribution_Channel_Code__c']}"/></Data></Cell>--> <!-- <SH20221130> -->
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText value="{!IF((v.IsERPPrice),v.sObjectRecord['Distribution_Channel_Code__c'],v.sObjectRecord['Dist_Channel_Code__c'])}"/></Data></Cell>  <!-- <SH20221130> -->
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText value="{!v.sObjectRecord['Division_Code__c']}"/></Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText value="{!IF(ISNULL(v.sObjectRecord['Sold_To_Code__c']),v.sObjectRecord['Pricing_Request__r.SoldTo_Code__c'],v.sObjectRecord['Sold_To_Code__c'])}"/></Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText value="{!IF(ISNULL(v.sObjectRecord['Sold_To__c']),v.sObjectRecord['Pricing_Request__r.Sold_To__c'],v.sObjectRecord['Sold_To__c'])}"/></Data></Cell>
+                            <apex:repeat value="{!wrapper.keyCombinationColumns}" var="r">
+                                <Cell ss:StyleID="s22" ><Data ss:Type="String"><apex:outputText value="{!v.sObjectRecord[r]}"/></Data></Cell>
+                            </apex:repeat>
+                            
+                            <Cell ss:StyleID="s22" >
+                                <Data ss:Type="String">
+                                    <apex:outputText escape="false" value="{0,date,yyyyMMdd}">
+                                        <apex:param value="{!v.sObjectRecord['Valid_From__c']}" />
+                                    </apex:outputText>
+                                </Data>
+                            </Cell>
+                            <Cell ss:StyleID="s22" >
+                                <Data ss:Type="String">
+                                    <apex:outputText escape="false" value="{0,date,yyyyMMdd}">
+                                        <apex:param value="{!v.sObjectRecord['Valid_To__c']}" />
+                                    </apex:outputText>
+                                </Data>
+                            </Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,v.sObjectRecord['Scale_UoM_Scale_Unit__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,v.sObjectRecord['Scale_Quantity_Scale_Value1__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,v.sObjectRecord['ScaleRate1__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,v.sObjectRecord['Scale_Quantity_Scale_Value2__c'],'')}</Data></Cell>
+
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,v.sObjectRecord['ScaleRate2__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,v.sObjectRecord['Scale_Quantity_Scale_Value3__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,v.sObjectRecord['ScaleRate3__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,v.sObjectRecord['Scale_Quantity_Scale_Value4__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,v.sObjectRecord['ScaleRate4__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,v.sObjectRecord['Scale_Quantity_Scale_Value5__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,v.sObjectRecord['ScaleRate5__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,v.sObjectRecord['Scale_Quantity_Scale_Value6__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,v.sObjectRecord['ScaleRate6__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,v.sObjectRecord['Scale_Quantity_Scale_Value7__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,v.sObjectRecord['ScaleRate7__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,v.sObjectRecord['Scale_Quantity_Scale_Value8__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,v.sObjectRecord['ScaleRate8__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,v.sObjectRecord['Scale_Quantity_Scale_Value9__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,v.sObjectRecord['ScaleRate9__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,v.sObjectRecord['Scale_Quantity_Scale_Value10__c'],'')}</Data></Cell>
+                            <Cell ss:StyleID="s22" ><Data ss:Type="String">{!IF(wrapper.hasScaledRecordFlag,v.sObjectRecord['ScaleRate10__c'],'')}</Data></Cell>  
+                        </Row>
+                    </apex:repeat>
+                    <Row/>
+                    <Row ss:StyleID="s20"/>
+                    <Row/>
+                </apex:repeat>
+                </Table>
+            </WorkSheet>
+     
+    </Workbook>
+</xml>
+</apex:page>

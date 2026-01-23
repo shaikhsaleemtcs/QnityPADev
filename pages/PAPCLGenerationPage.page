@@ -1,0 +1,204 @@
+<!--    Ver.            Developer           Changes                                                             Dependencies    -->
+<!--    1.1             Priyanka        Changed table component to 'PAERPPricesRelatedList'                                     -->
+<!--                                    from PARelatedList                                                          None        -->
+<!--    1.2             Priyanka            Change in architecture                                              None    -->
+<!--    1.3             Brundha            Ui                                              None    -->
+<apex:page controller="ctrlPAMain" tabstyle="Price_Approval__tab" sidebar="false" id="currentPage" cache="true"
+    action="{!onLoadCall}">
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.min.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.js')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/css/jquery.dataTables.css')}" />  
+    <c:loadingComponent />
+
+    <style>
+    .navFlow{font-size:13px;font-style:oblique;margin-bottom:3px;}
+.customerLink {
+    font-size: 15px;
+    height: 20px;
+    margin-bottom: 1px;
+    padding: 5px;
+    border: solid 1px;
+    border-color: #6E96B2;
+    background-color: #E5F3FC;
+    font-weight: bold;
+    text-align: left;
+}
+
+//
+#repeatValues .detailList {
+    border: none;
+}
+
+.apexp .detailList .list td,.apexp .detailList .list th,.apexp .editPage .bPageBlock .detailList .list tr td,.apexp .editPage .bPageBlock .detailList .list tr th
+    {
+    padding: 0px 2px 4px 5px;
+    color: #333;
+    border-bottom: none;
+}
+.noTableFooter
+{
+    margin:0px!important;
+}
+body .pbBody table.list tr th{color:black;}
+body .pbBody table.list tr td{border-bottom: none;}     
+body .pbBody table.list{border:1px solid #e0e3e5;background-color:#fff;width: 100%;}
+body .pbBody table.list tr:first-child th{color:white;background-color:#63A4C5;}
+body .pbBody table.list tr:nth-child(2) th{color:black;background-color:#f8f8f8;border:1px solid #E2E3E4;}
+</style>
+<script>
+var j$=jQuery.noConflict();
+j$(document).ready(function(){
+datatable();
+});
+function datatable(){   
+    var tab1=j$('.list').dataTable({
+            "bLengthChange":false,
+            "aLengthMenu": [100,200],
+            "iDisplayLength" : 100,
+            sPaginationType: "full_numbers",
+            sPlaceHolder : "foot:before",
+    });
+    j$('.list'+'_filter').after('<br /><br />');
+    j$('.list').after('<br />');
+}
+</script>
+    <apex:form >
+    <apex:actionStatus id="stat">
+        <apex:facet name="start">
+            <div class="spinnerMask" id="spinnerMask">
+            <div class="spinnerCt"><img
+                src="/img/analytics/reportbuilder/icons/spinner32.gif"
+                alt="Loading..." width="32" height="32" align="center"
+                class="spinner" title="Loading..." />
+            <div class="loadingIndicator">Loading...</div>
+            </div>
+            <div class="mask"></div>
+            </div>
+        </apex:facet>
+    </apex:actionStatus>
+    <!-- <TJ20140505> Added Landing Page Link -->
+        <div align="left" class="navFlow">
+            <apex:commandLink id="link0" value="Landing Page" action="{!businessComponentAction}" target="_self" style="color:blue;">
+            <apex:param name="desiredAction" value="landingpage" assignTo="{!businessaction}" />
+            <apex:param name="newPageLabel" value="PAHome" assignTo="{!newPageLabel}" />
+            </apex:commandLink>
+        <!-- <TJ20140509> Added Navigation Flow Text-->
+            <apex:outputText value="{!if(NOT(ISNULL(navigationText)),'>>','')} "/>
+            <apex:outputText value="{!navigationText}"/>
+            <apex:outputText value=">>  PCL Generation"/>
+        </div>
+    <apex:pageMessages escape="false" id="errorMessage"/> 
+
+        <div class="customerLink">PCL Generation</div>
+
+        <div id="repeatValues"><apex:pageblock >
+
+            <center>
+            <div style="text-align: center; padding: 10px 0px 10px 0px;">
+            <apex:commandLink value="Generate PCL"
+                    action="{!businessComponentAction}" styleClass="btn" 
+                    style="text-decoration:none">
+                    <apex:param name="desiredAction" value="PCLGeneration"
+                        assignTo="{!businessaction}" />                
+                </apex:commandLink>
+            <apex:commandLink value="Cancel"
+                    action="{!businessComponentAction}" styleClass="btn"
+                    style="text-decoration:none">
+                    <apex:param name="desiredAction" value="cancelGeneration"
+                        assignTo="{!businessaction}" />
+                    <apex:param name="newPageLabel" value="PAPclTemplateSelectionPCO"
+                        assignTo="{!newPageLabel}" />
+                    <apex:param name="pageName" value="{!IF(CONTAINS(navigationText,'Price Confirmation Letter Screen'),'Price Confirmation Letter Screen','PCL Generation')}" assignTo="{!pageName}"/>
+            </apex:commandLink>
+            </div>
+            </center>
+            <apex:pageBlockSection columns="1">
+            <div class="tablelist">
+                <apex:outputPanel id="pcKctables">
+
+                    <apex:repeat value="{!service.PAServicestate.currentRequest.salesPriceSAP.relatedWrappersList}"
+                        var="wrapper">
+                        <!-- Ver 1.1 START -->
+                        <c:PAERPPricesRelatedList WrapperRecordsDisp="{!wrapper.wrapperList}"
+                            columnsDisp="{!wrapper.keyCombinationcolumns}"
+                            viewMode="{!currentPageLabel}"
+                            selected="{!service.PAServicestate.currentRequest.pricingRequestId}"
+                            actionAtr="{!businessaction}"
+                            typeOfRequest="{!wrapper.priceType}" showEditLink="false"
+                            showDeleteLink="false" showNewLink="false" showExpireLink="false"
+                            typeOfSObjectList="{!wrapper.sObjectTypeName}"
+                            showAddToRequest="false" showCheckBox="true"
+                            pricingRecordColumns="{!wrapper.commonColumns}"
+                            pricingRecordSoldToColumns="{!wrapper.soldToColumns}">
+                        </c:PAERPPricesRelatedList>
+                        <!-- Ver 1.1 END -->
+                    </apex:repeat>
+
+                </apex:outputPanel>
+                </div>
+                </apex:pageblocksection>
+
+
+                
+                <div
+                    style="text-align: center; padding: 10px 0px 10px 0px;">
+                
+                
+                <apex:commandLink value="Generate PCL"
+                    action="{!businessComponentAction}" styleClass="btn" 
+                    style="text-decoration:none">
+                    <apex:param name="desiredAction" value="PCLGeneration"
+                        assignTo="{!businessaction}" />                
+                </apex:commandLink>
+               
+                 <apex:commandLink value="Cancel"
+                    action="{!businessComponentAction}" styleClass="btn"
+                    style="text-decoration:none">
+                    <apex:param name="desiredAction" value="cancelGeneration"
+                        assignTo="{!businessaction}" />
+                    <apex:param name="newPageLabel" value="PAPclTemplateSelectionPCO"
+                        assignTo="{!newPageLabel}" />
+                    <apex:param name="pageName" value="{!IF(CONTAINS(navigationText,'Price Confirmation Letter Screen'),'Price Confirmation Letter Screen','PCL Generation')}" assignTo="{!pageName}"/>
+                </apex:commandLink></div>
+                
+        </apex:pageblock></div>
+    </apex:form>
+<style>
+.spinnerCt {
+    left: 50%;
+    top: 35%;
+    position: absolute;
+    z-index: 50;
+    padding: 20px 40px;
+    box-shadow: 0pt 2px 5px rgb(172, 172, 172);
+    border-radius: 1em 1em 1em 1em;
+    border: 1px solid rgb(206, 236, 255);
+    background-color: rgb(206, 236, 255);
+    background-style: solid;
+}
+
+.spinner {
+    padding: 10px 15px 10px 0pt;
+    vertical-align: middle;
+}
+
+.spinnerCt .loadingIndicator {
+    display: inline;
+    font-size: 135%;
+    font-weight: bold;
+}
+
+.mask {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    opacity: 0.45;
+    filter: alpha(opacity =         45);
+    position: absolute;
+    z-index: 45;
+    top: 0pt;
+    left: 0pt;
+}
+</style>
+</apex:page>

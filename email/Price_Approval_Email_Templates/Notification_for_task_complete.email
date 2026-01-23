@@ -1,0 +1,40 @@
+<messaging:emailTemplate subject="Notification to Requester on Task Completion (Pricing Task) for customer - {!relatedTo.Sold_To__c}:" recipientType="User" relatedToType="Pricing_Request__c">
+    <messaging:htmlEmailBody > 
+    
+    Subject: SFDC PA Notification –{!relatedTo.Spot_Type__c} Task Completed <br/><br/>
+    Dear &nbsp;<apex:outputText value="{!relatedTo.CreatedBy.name}">  </apex:outputText>,
+<br/> <br/>   Confidential
+  <br/><br/>
+  The following {!relatedTo.Spot_Type__c} task has been Completed by &nbsp; <apex:outputtext value="{!relatedTo.Assigned_To__r.name}"/> For the customer:<br/>
+ <apex:outputText value="{!relatedTo.Sold_To__c}">  </apex:outputText><br/>
+<apex:outputText value="{!relatedTo.City__c}, {!relatedTo.Country__c}  ,{!relatedTo.Zip_PostalCode__c}">  </apex:outputText>
+<apex:outputText value="Customer Order Block:" rendered="{!relatedTo.Customer_Order_Block_Code__c!=null}"/><apex:outputText value="{!relatedTo.Customer_Order_Block_Code__c}">  </apex:outputText>
+<apex:outputText value="{!relatedTo.Customer_Order_Block__c}">  </apex:outputText>
+<br/><!-- <br/> comented by hema -->
+Request ID &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<apex:outputText value="{!relatedTo.name}"></apex:outputText><br/>
+
+<apex:outputText value="Business"></apex:outputText>&nbsp;&nbsp;&nbsp;:<apex:outputText value="{!relatedTo.BU__c}"></apex:outputText><br/>
+<apex:outputText value="Request"></apex:outputText>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<apex:outputText value="{!relatedTo.Request_Name__c}"></apex:outputText><br/>
+
+Task Subject &nbsp;&nbsp;&nbsp;&nbsp;:<apex:outputtext value="{!relatedTo.Task_Subject__c}"/><br/>
+
+Due Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : <apex:outputText value="{0,date,yyyy-MMM-dd }">
+       <apex:param value="{!relatedTo.Due_Date__c}" />
+   </apex:outputText><br/><br/>
+Task Completion Comments :
+<c:PAPricingTaskComplete PricingRequestId="{!relatedto.id}"></c:PAPricingTaskComplete><br/>
+To view the request details and comments, 
+click this link <br/>
+<p>
+{!LEFT($Api.Partner_Server_URL_140, FIND(".com/",$Api.Partner_Server_URL_140)+3)}/{!relatedTo.id}
+
+
+</p>
+<apex:outputtext value="Thank you"/>,<br/>
+           <apex:outputtext value=" Salesforce.com Price Approval"/><br/><br/>
+Confidential 
+
+
+
+ </messaging:htmlEmailBody>
+</messaging:emailTemplate>

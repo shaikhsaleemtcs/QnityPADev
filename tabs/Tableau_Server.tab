@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>This tab presents the Tableau Server UI as a tab within SFDC.
+Note:  The Splash Page is used to inform the user that the need to be on the DuPont network to use the tab</description>
+    <frameHeight>600</frameHeight>
+    <hasSidebar>false</hasSidebar>
+    <label>Tableau Server</label>
+    <motif>Custom42: Treasure chest</motif>
+    <splashPageLink>Tableau_Server_Splash</splashPageLink>
+    <url>https://analyticserverdev.dupontnet.net/</url>
+    <urlEncodingKey>UTF-8</urlEncodingKey>
+</CustomTab>

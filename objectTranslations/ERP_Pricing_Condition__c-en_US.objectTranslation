@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>ERP Pricing Condition</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>ERP Pricing Conditions</value>
+    </caseValues>
+    <fields>
+        <label><!-- Calculation Type Code --></label>
+        <name>Calculation_Type_Code__c</name>
+        <picklistValues>
+            <masterLabel>A</masterLabel>
+            <translation><!-- A --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B</masterLabel>
+            <translation><!-- B --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>C</masterLabel>
+            <translation><!-- C --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Calculation Type --></label>
+        <name>Calculation_Type__c</name>
+        <picklistValues>
+            <masterLabel>Fixed Amount</masterLabel>
+            <translation><!-- Fixed Amount --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Percentage</masterLabel>
+            <translation><!-- Percentage --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Quantity</masterLabel>
+            <translation><!-- Quantity --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Check Scale Code --></label>
+        <name>Check_Scale_Code__c</name>
+        <picklistValues>
+            <masterLabel>A</masterLabel>
+            <translation><!-- A --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B</masterLabel>
+            <translation><!-- B --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Check Scale --></label>
+        <name>Check_Scale__c</name>
+        <picklistValues>
+            <masterLabel>Ascending</masterLabel>
+            <translation><!-- Ascending --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Descending</masterLabel>
+            <translation><!-- Descending --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Condition Class Code --></label>
+        <name>Condition_Class_Code__c</name>
+        <picklistValues>
+            <masterLabel>A</masterLabel>
+            <translation><!-- A --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B</masterLabel>
+            <translation><!-- B --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>C</masterLabel>
+            <translation><!-- C --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Condition Class --></label>
+        <name>Condition_Class__c</name>
+        <picklistValues>
+            <masterLabel>Discount</masterLabel>
+            <translation><!-- Discount --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Discount or Surcharge</masterLabel>
+            <translation><!-- Discount or Surcharge --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Expense reimbursement</masterLabel>
+            <translation><!-- Expense reimbursement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Freight</masterLabel>
+            <translation><!-- Freight --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Price</masterLabel>
+            <translation><!-- Price --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rebate</masterLabel>
+            <translation><!-- Rebate --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Surcharge</masterLabel>
+            <translation><!-- Surcharge --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- This is the pre-split original 18 digit Salesforce ID of this record that came from the original One Dupont Salesforce instance before the business units were separated. Its is case insensitive and unique. --></help>
+        <label><!-- Legacy Pricing Util SFID --></label>
+        <name>Legacy_Pricing_Util_SFID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Novus External Id --></label>
+        <name>Novus_External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Plus/Minus Code --></label>
+        <name>Plus_Minus_Code__c</name>
+        <picklistValues>
+            <masterLabel>A</masterLabel>
+            <translation><!-- A --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>X</masterLabel>
+            <translation><!-- X --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Plus/Minus --></label>
+        <name>Plus_Minus__c</name>
+        <picklistValues>
+            <masterLabel>Negative</masterLabel>
+            <translation><!-- Negative --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Positive</masterLabel>
+            <translation><!-- Positive --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Price Types --></label>
+        <name>Price_Types__c</name>
+        <picklistValues>
+            <masterLabel>Floor</masterLabel>
+            <translation><!-- Floor --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Item Terms of Payment</masterLabel>
+            <translation><!-- Item Terms of Payment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Net Floor</masterLabel>
+            <translation><!-- Net Floor --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Net Price</masterLabel>
+            <translation><!-- Net Price --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Net Reference</masterLabel>
+            <translation><!-- Net Reference --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pricing Task-Display</masterLabel>
+            <translation><!-- Pricing Task-Display --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pricing Task-FOC</masterLabel>
+            <translation><!-- Pricing Task-FOC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pricing Task-Spot</masterLabel>
+            <translation><!-- Pricing Task-Spot --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Project</masterLabel>
+            <translation><!-- Project --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Reference</masterLabel>
+            <translation><!-- Reference --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Standard</masterLabel>
+            <translation><!-- Standard --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sub Total</masterLabel>
+            <translation><!-- Sub Total --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Pricing Condition Code --></label>
+        <name>Pricing_Condition_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pricing Condition Description --></label>
+        <name>Pricing_Condition_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pricing Condition --></label>
+        <name>Pricing_Condition__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Application Id --></label>
+        <name>SAP_Application_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Client Id --></label>
+        <name>SAP_Client_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Cluster --></label>
+        <name>SAP_Cluster__c</name>
+    </fields>
+    <fields>
+        <label><!-- SAP Condition Type --></label>
+        <name>SAP_Condition_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Scale Base --></label>
+        <name>Scale_Base__c</name>
+        <picklistValues>
+            <masterLabel>Quantity Scale</masterLabel>
+            <translation><!-- Quantity Scale --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rate Scale</masterLabel>
+            <translation><!-- Rate Scale --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value Scale</masterLabel>
+            <translation><!-- Value Scale --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Scale Basis Code --></label>
+        <name>Scale_Basis_Code__c</name>
+        <picklistValues>
+            <masterLabel>B</masterLabel>
+            <translation><!-- B --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>C</masterLabel>
+            <translation><!-- C --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Scale Type Code --></label>
+        <name>Scale_Type_Code__c</name>
+        <picklistValues>
+            <masterLabel>A</masterLabel>
+            <translation><!-- A --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>B</masterLabel>
+            <translation><!-- B --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Scale Type --></label>
+        <name>Scale_Type__c</name>
+        <picklistValues>
+            <masterLabel>Base Scale</masterLabel>
+            <translation><!-- Base Scale --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>From</masterLabel>
+            <translation><!-- From --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>To</masterLabel>
+            <translation><!-- To --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>To Scale</masterLabel>
+            <translation><!-- To Scale --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Used to define the Security Access of this Pricing Condition and is used in the Sharing Setting to share to Price Approval User community --></help>
+        <label><!-- Security Access --></label>
+        <name>Security_Access__c</name>
+        <picklistValues>
+            <masterLabel>General</masterLabel>
+            <translation><!-- General --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Restrict</masterLabel>
+            <translation><!-- Restrict --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Inactive</masterLabel>
+            <translation><!-- Inactive --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

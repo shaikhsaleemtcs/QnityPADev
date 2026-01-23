@@ -1,0 +1,126 @@
+<!-- **************************************************************************************************************
+ ***********************************************Modification Log***********************************************
+
+Last Modified By    :   Nadeem S
+Last Modified Date  :   3/28/2017
+Description         :   PCL template is added for PG NA as it is missing in PA system 'IS ID-00080897'
+
+Last Modified By    :   Nadeem S
+Last Modified Date  :   3/29/2017
+Description         :   Template is updated with new address in the PCL and BU names are changed 'IS ID-00081005'
+
+
+Last Modified By    :   Nadeem S
+Last Modified Date  :   3/31/2017
+Description         :   Updated spacing and replaced GMC with GMC code 'IS ID-00081048'                                 
+ **************************************************************************************************************** -->
+ 
+ <apex:component access="global" controller="PAPCLComponent">
+<apex:stylesheet value="{!$Resource.PDFDocumentStyle}"/>
+  <apex:attribute name="targetObject" type="String" assignTo="{!listofids}" description="The context of the outer page email templates"/>
+     
+  <apex:outputPanel >
+    <apex:image value="{!$Resource.New_DuPont_Logo_2024}" height="50" width="138"/>
+        <apex:outputText value="Cyrel® Flexographic Solutions<br/>Chestnut Run Plaza, Bldg 702<br/>974 Centre Road<br/>Wilmington, DE 19805" escape="false" style="font-family: Arial Narrow, Arial, sans-serif; font-size: small; font-weight: normal; color: #B2B2B2; float:right;"/>
+        <br/><br/><br/><br/>
+         <apex:outputText ></apex:outputText>
+        <apex:outputText value="{0, date, MMMM d','  yyyy}" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: medium; font-weight: normal;float:right;">
+            <apex:param value="{!TODAY()}" />
+        </apex:outputText>
+  </apex:outputPanel>
+  <br/><br/><br/>
+  
+  <apex:repeat value="{!listrequestdetils[0]}" var="b">
+    <table style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: medium; font-weight: normal;">
+  
+        <tr>
+        <td>{!b.Sold_To__c}</td>
+        </tr>
+    
+        <tr>
+        <td>{!b.Street__c}</td>
+        </tr>
+  
+        <tr>
+        <td>{!b.City__c}</td>
+        </tr>
+  
+        <tr>
+        <td style="text-transform:uppercase;">{!b.Country__c}</td>
+        </tr>
+  
+    </table>
+   </apex:repeat>
+   
+   <br/>
+   <apex:outputtext value="Contact:" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: medium; font-weight: normal;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<apex:outputtext value="{!listofCustomerContacts[0]}" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: medium; font-weight: normal;"/>
+   <br/><br/>
+   <apex:outputText value="Dear Customer," style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: medium; font-weight: normal;"/>
+   <br/><br/><br/>
+   <apex:outputText value="Please find herewith the current terms and conditions/prices agreed by Cyrel® Flexographic Solutions. Thank you for choosing our products and services."
+      style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: medium; font-weight: normal;"/>
+      
+   <br/><br/>
+   
+   <apex:repeat value="{!listrequestdetils[0]}" var="b1">
+        <table width="500px" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: medium; font-weight: normal;">
+            <tr>
+              <td width="200px">Payment terms:</td>
+              <td width="300px">{!b1.Terms_Of_Payment__c}</td>
+            </tr>
+            <tr>
+              <td>Incoterm:</td>
+              <td>{!b1.Incoterm__c}</td>
+            </tr>
+            <tr>
+                <td>General remarks:</td>
+                <td>Sales and Payment conditions as per DuPont Price List</td>
+            </tr>
+        </table>
+   </apex:repeat>
+   
+   <br/>
+   
+   <apex:dataTable value="{!listofwrappertables}" var="mList" border="1" cellpadding="4" style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: medium; font-weight: normal;">
+   
+             
+        <apex:column headerValue="GMC">
+            <apex:outputText value="{!mList.sobjectRecord['Material_Code__c']}"/>
+        </apex:column>
+        
+        <apex:column headerValue="Product Description">
+            <apex:outputText value="{!IF(mList.sobjectRecord['Material__c'] != NULL, mList.sobjectRecord['Material__c'],'')} {!IF(mList.sobjectRecord['Product_Hierarchy__c']!=NULL,mList.sobjectRecord['Product_Hierarchy__c'],'')}"/>
+        </apex:column>
+        
+        <apex:column headerValue="Price">
+            <apex:outputText value="{!mList.sobjectRecord['Rate__c']}"/>
+        </apex:column>
+        
+        <apex:column headerValue="Currency">
+            <apex:outputText value="{!mList.sobjectRecord['Unit__c']}"/>
+        </apex:column>
+        
+        <apex:column headerValue="UoM">
+            <apex:outputText value="{!mList.sobjectRecord['UoM__c']}" />
+        </apex:column>
+        
+        <apex:column headerValue="Valid to Date" width="110px" > 
+            <apex:outputText value="{0,date,MMM dd yyyy}">
+                <apex:param value="{!mList.sobjectRecord['Valid_To__c']}"/>
+            </apex:outputText> 
+        </apex:column>
+        
+    </apex:dataTable>
+    <br/><br/>
+    
+    <apex:outputpanel style="font-family: Calibri, Candara, Segoe, Optima, Arial, sans-serif; font-size: medium; font-weight: normal;">
+        <br/><br/><br/>
+        <apex:outputtext value="Issued By"/>
+        <br/><br/>
+        <apex:outputText rendered="{!onBehalfOfUser == null}" value="{!$User.FirstName} {!$User.LastName}"/>
+        <apex:outputText rendered="{!onBehalfOfUser != null}" value="{!onBehalfOfUser}"/>
+    </apex:outputpanel>
+     
+    <c:PDFHeaderFooter type="footer" position="center"><hr width="90%"></hr></c:PDFHeaderFooter>
+   
+  </apex:component>

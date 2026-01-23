@@ -1,0 +1,169 @@
+<!--    Ver.            Developer           Changes                                                             Dependencies    -->
+<!--    TJ20140505      Tarun               Added the landing page link                                             None     -->
+<!--    TJ20140509      Tarun               Added Navigation Flow Text                                              None    -->
+<apex:page controller="ctrlPAMain" tabstyle="Price_Approval__tab" sidebar="false" showHeader="true" id="currentPage" cache="true"
+    action="{!onLoadCall}">
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.min.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/js/jquery.dataTables.js')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.DataTable, 'DataTables-1.9.4/media/css/jquery.dataTables.css')}" />
+    <c:loadingComponent />
+    <apex:pageMessages escape="false" id="errorMessage"/>
+    <style>
+        .navFlow{font-size:13px;font-style:oblique;margin-bottom:3px;}
+        .contactTable {display:none}
+        .customerLink{font-size:15px;height:20px;margin-bottom:1px;padding:5px;border:solid 1px;border-color:#6E96B2; background-color:#E5F3FC;font-weight:bold;text-align:left;}
+        .replist {border:1px solid #E2E3E4;}
+        .replist .list tr th{border-bottom:none;}
+        .replist  .list tr td{border-bottom:none;}
+        .replist .list tr th{color:black;}
+        body .pbBody table .list tr td{border-bottom: none;}
+        body .pbBody table .list {border:1px solid #e0e3e5;background-color:#fff;}
+        .replist table.list tr:first-child th{color:white;background-color:#63A4C5;}
+        .replist table.list tr:nth-child(2) th{color:black;background-color:#f8f8f8;border:1px solid #E2E3E4;}
+    </style>
+    <script type="text/javascript">
+    var j$ = jQuery.noConflict();
+    j$(document).ready(function(){                                      //<TJ20140401> - added javascript to generate HTML Table with additional functionalities
+    
+        var tab = j$('#contactTable').dataTable({
+                    "iDisplayLength" : 200,
+                    sPaginationType: "full_numbers",
+                    "aoColumnDefs" : [{"bVisible": false, "aTargets":[1]}],
+                    sPlaceHolder : "foot:before",
+                    "fnDrawCallback":function(){
+                        j$(this).show();
+                    },
+                    "fnInitComplete": function(oSettings, oData) {
+                    	localStorage.removeItem( 'DataTables', JSON.stringify(oData) );
+                    }
+                    });
+
+        j$('#contactTable'+'_filter').after('<br /><br />');
+        j$('#contactTable').after('<br />');
+        j$("div[id~=contactTable_length]").css("display","none");
+    });
+    function getHtmlId(cid){
+        return "#"+cid.replace(/(:)/g,'\\\\$1');
+    }
+    </script>
+    <apex:pageBlock >
+    <apex:form id="formid">
+        <!-- <TJ20140505> Added Landing Page Link -->
+        <div align="left" class="navFlow">
+            <apex:outputPanel >
+                <apex:commandLink id="link0" value="Landing Page" action="{!businessComponentAction}" target="_self" style="color:blue;">
+                    <apex:param name="desiredAction" value="landingpage" assignTo="{!businessaction}" />
+                    <apex:param name="newPageLabel" value="PAHome" assignTo="{!newPageLabel}" />
+                </apex:commandLink>
+            <!-- <TJ20140509> Added Navigation Flow Text-->
+                <apex:outputText value="{!if(NOT(ISNULL(navigationText)),'>>',' ')} "/>
+                <apex:outputText value="{!navigationText}"/>
+                <apex:outputText value=">>  {!$Label.On_Behalf_Of}"/>
+            </apex:outputPanel>
+        </div>
+<!--        <TJ20140417>   Changed Page Label-->        
+        <div class="customerLink">
+            {!$Label.On_Behalf_Of}
+        </div>
+<!--        <TJ20140513> Help Link-->       
+        <apex:commandLink value="Help" action="{!helpLink}" style="float:right;" target="_blank">
+            <apex:param name="Help" value="Sales Representative List" assignTo="{!label}"/>
+        </apex:commandLink>
+        <br/>
+        <apex:pageblocksection title="Business Information" collapsible="false">
+            <apex:pageblocksectionitem >
+            <!-- <TJ20140515> -->
+                <apex:outputlabel value="Business"/>
+                <apex:outputText value="{!BUName}"/>
+            </apex:pageblocksectionitem>
+        </apex:pageblocksection>
+        
+        <apex:pageblocksection title="On Behalf Of" columns="1" collapsible="false"></apex:pageblocksection>
+        <br/>
+        <div style="float:left;text-align:center;">
+            <apex:commandLink action="{!businessComponentAction}" style="text-decoration:none; color:#484848" styleClass="btn" 
+                value="Save Frequent Sales Rep">
+                <apex:param value="PAOnBehalfOf" name="passMode" assignTo="{!newPageLabel}" />
+                <apex:param value="markSalesRepFreq" name="sendAction1" assignTo="{!businessaction}" />
+            </apex:commandLink>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <apex:commandLink action="{!businessComponentAction}" style="text-decoration:none; color:#484848" styleClass="btn" 
+                value="Cancel">
+                <apex:param value="{!IF(CONTAINS(businessaction,'soldtoChange'),'PANewRequest','PAHome')}" name="passMode" assignTo="{!newPageLabel}" />
+                <apex:param value="CancelBack{!IF(CONTAINS(businessaction,'soldtoChange')||CONTAINS(businessaction,'PCL'),businessaction,'')}" name="sendAction" assignTo="{!businessaction}" />
+            </apex:commandLink>
+        </div>
+        <br/><br/>
+        <div class="replist">
+
+        <table id="contactTable" class="list" border="0" cellSpacing="0" cellPadding="0" style="width:1000px;">
+            <colgroup span="6" />
+            <thead class="rich-table-thead">
+<!--                <tr role="row"> -->
+<!--                    <th rowSpan="1" colSpan="30" scope="colgroup">On Behalf Of Results</th> -->
+<!--                </tr> -->
+                <tr>
+                    <th class="headerRow" colSpan="1" scope="col" width="1%"> Frequent </th> 
+                    <th class="headerRow" colSpan="1" scope="col" >  </th>
+                    <th class="headerRow" colSpan="1" scope="col" > Name </th>
+                    <th class="headerRow" colSpan="1" scope="col" > Email </th>
+                    <th class="headerRow" colSpan="1" scope="col" > Country </th>                       
+                </tr>
+            </thead>
+            <apex:repeat value="{!service.paServiceState.erpCustomer.allSalesRepsWrapList}" var="salesRep">
+                <tr class="dataRow even first last">
+                    <td clas="dataCell" colSpan="1" width="1%">
+                        <apex:inputCheckBox value="{!salesRep.isSelected}" id="sel" />
+                    </td>
+                    <td class="dataCell" colSpan="1" width="10%">{!salesRep.sObjectRecord['Name']}</td>
+                    <td class="dataCell" colSpan="1" width="10%">
+                    <!-- AV20140408 cocatenating 'soldtoChange' with buisnessaction when going to onbehalfof page from newreq page on changing soldto in clone -->
+					<!-- TJ20140923 -->
+                        <apex:commandLink id="link1" value="{!salesRep.sObjectRecord['Name']}" action="{!businessComponentAction}" target="_self">
+                            <apex:param name="desiredAction" value="{!IF(Contains(businessAction,'massive'),'Massive','onBehalfOf'+IF(OR(CONTAINS(businessaction,'soldtoChange'),CONTAINS(businessaction,'PCL')),businessaction,''))}" assignTo="{!businessaction}" />
+                            <apex:param name="newPageLabel" value="{!IF(Contains(businessAction,'massive'),'PAAddReqItem','PACustomerDetail')}" assignTo="{!newPageLabel}" />
+                            <apex:param name="salesRepId" value="{!salesRep.sObjectRecord['Id']}" assignTo="{!service.paServiceState.ogItems.selectedUser}" />
+                            <apex:param name="salesRepName" value="{!salesRep.sObjectRecord['Name']}" assignTo="{!service.paServiceState.ogItems.userName}" />
+                            <!-- <TJ20140509> Passing Label to Display Navigation Flow Text-->
+                            <apex:param name="pageName" value="{!$Label.On_Behalf_Of}" assignTo="{!pageName}"/>
+                            <apex:param name="backflow" value="false" assignTo="{!backflow}"/>
+                        </apex:commandLink>
+                    </td>
+                    <td class="dataCell" colSpan="1" width="10%"> {!salesRep.sObjectRecord['Email']} </td>
+                    <td class="dataCell" colSpan="1" width="10%"> {!salesRep.sObjectRecord['User_Country__c']} </td>
+                </tr>
+            </apex:repeat>
+        </table>
+        <br/><br/>
+        </div>
+        <br/>
+        <div style="float:left;text-align:center;">
+            <apex:commandLink action="{!businessComponentAction}" style="text-decoration:none; color:#484848" styleClass="btn" 
+                value="Save Frequent Sales Rep">
+                <apex:param value="PAOnBehalfOf" name="passMode" assignTo="{!newPageLabel}" />
+                <apex:param value="markSalesRepFreq" name="sendAction1" assignTo="{!businessaction}" />
+            </apex:commandLink>
+        </div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <apex:commandLink action="{!businessComponentAction}" style="text-decoration:none; color:#484848" styleClass="btn" 
+                value="Cancel">
+                <apex:param value="{!IF(CONTAINS(businessaction,'soldtoChange'),'PANewRequest','PAHome')}" name="passMode" assignTo="{!newPageLabel}" />
+                <apex:param value="CancelBack{!IF(CONTAINS(businessaction,'soldtoChange')||CONTAINS(businessaction,'PCL'),businessaction,'')}" name="sendAction" assignTo="{!businessaction}" />
+            </apex:commandLink>
+        
+        <br/>
+        
+    </apex:form>
+    </apex:pageBlock>
+</apex:page>

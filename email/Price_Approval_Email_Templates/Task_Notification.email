@@ -1,0 +1,37 @@
+<messaging:emailTemplate subject="SFDC PA Notification – Task assigned to you for customer - {!relatedTo.Sold_To__c}" recipientType="User" relatedToType="Pricing_Request__c">
+ <messaging:htmlEmailBody > 
+<apex:outputtext value="Subject: SFDC PA Notification – Task assigned to you for Pricing Task"/><br/><br/>
+ <apex:outputtext value="Dear"/>&nbsp;<apex:outputtext value="{!relatedTo.Assigned_To__r.name}"/>,<br/><br/>
+      <apex:outputtext value="Confidential "/>
+<br/>
+<p>
+A pricing task has been assigned to you for the customer:</P>
+
+<apex:outputText value="{!relatedTo.Sold_To__c}">  </apex:outputText><br/>
+<apex:outputText value="{!relatedTo.City__c}, {!relatedTo.Country__c}">  </apex:outputText><br/><br/>
+
+<apex:outputPanel rendered="{!relatedTo.Request_Type__c=='Customer Specific' && (relatedTo.Pricing_Request_Type__c=='Pricing Task')}">
+<apex:outputText value="Pricing Task Type"></apex:outputText>&nbsp;&nbsp;&nbsp;:<apex:outputText value="{!relatedTo.Spot_Type__c}"></apex:outputText>
+<br/></apex:outputPanel>
+
+<apex:outputText value="Business"></apex:outputText>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<apex:outputText value="{!relatedTo.BU__c}"></apex:outputText><br/>
+Request ID &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<apex:outputText value="{!relatedTo.name}"></apex:outputText><br/>
+<apex:outputText value="Reason"></apex:outputText>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<apex:outputText value="{!relatedTo.Request_Reason__c}"></apex:outputText><br/>
+Task Subject &nbsp;&nbsp;&nbsp;&nbsp;:<apex:outputtext value="{!relatedTo.Task_Subject__c}"/><br/>
+
+Due Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : <apex:outputText value="{0,date,yyyy-MMM-dd }">
+       <apex:param value="{!relatedTo.Due_Date__c}" />
+   </apex:outputText>
+<br/>
+<p>
+To view the request details and comments, </p>
+<p>
+{!LEFT($Api.Partner_Server_URL_140, FIND(".com/",$Api.Partner_Server_URL_140)+3)}/{!relatedTo.id}
+</p>
+
+<apex:outputtext value="Thank you"/>,<br/>
+           <apex:outputtext value=" Salesforce.com Price Approval"/><br/><br/>
+Confidential 
+
+ </messaging:htmlEmailBody> 
+</messaging:emailTemplate>
