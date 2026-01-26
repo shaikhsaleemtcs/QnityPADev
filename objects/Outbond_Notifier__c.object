@@ -312,13 +312,8 @@
         <filterScope>Everything</filterScope>
         <filters>
             <field>CREATED_DATE</field>
-            <operation>equals</operation>
-            <value>12/22/2025 12:00 AM</value>
-        </filters>
-        <filters>
-            <field>CREATEDBY_USER</field>
-            <operation>equals</operation>
-            <value>Karen Sin</value>
+            <operation>greaterOrEqual</operation>
+            <value>1/25/2026 12:00 AM</value>
         </filters>
         <label>All</label>
     </listViews>
