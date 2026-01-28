@@ -3,7 +3,7 @@
     <contactEmail>sumida.l@tcs.com</contactEmail>
     <label>Spec Util ERPCa</label>
     <oauthConfig>
-        <callbackUrl>https://login.salesforce.com/services/oauth2/callback</callbackUrl>
+        <callbackUrl>https://test.salesforce.com/services/oauth2/callback</callbackUrl>
         <consumerKey>3MVG9bstvfBpPhZWBLiNt0yugHrdxyCiE7a9VFNDGCkRdjY3nRDadA22zr3oNiSzEYAFIjQM41voqp9257xxB</consumerKey>
         <isAdminApproved>true</isAdminApproved>
         <isClientCredentialEnabled>false</isClientCredentialEnabled>

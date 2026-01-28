@@ -3,7 +3,7 @@
     <contactEmail>aniket.dangi@tcs.com</contactEmail>
     <label>Novus PA CPI Connect</label>
     <oauthConfig>
-        <callbackUrl>https://qnitypa.lightning.force.com/services/oauth2/callback</callbackUrl>
+        <callbackUrl>https://test.salesforce.com/services/oauth2/callback</callbackUrl>
         <consumerKey>3MVG9bstvfBpPhZWBLiNt0yugHrdxyCiE7a9VDa3CikxiEv27UP3v723AiIWl4wSBfiu_mvDjilIoHJQ4QfEs</consumerKey>
         <isAdminApproved>false</isAdminApproved>
         <isClientCredentialEnabled>false</isClientCredentialEnabled>
