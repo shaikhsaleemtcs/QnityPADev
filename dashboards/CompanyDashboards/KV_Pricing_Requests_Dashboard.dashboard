@@ -17,32 +17,28 @@
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
             <groupingSortProperties/>
+            <header>ICS Price Requests CY</header>
             <legendPosition>Bottom</legendPosition>
-            <report>Parts_NA_Dashboards/Vespel_Price_Request_Totals</report>
+            <report>Parts_NA_Dashboards/ICS_Price_Requests_by_User</report>
             <showPercentage>false</showPercentage>
             <showValues>true</showValues>
             <sortBy>RowLabelAscending</sortBy>
             <sortLegendValues>false</sortLegendValues>
-            <title>Vespel Price Requests CY</title>
+            <title>ICS Price Requests CY</title>
             <useReportChart>false</useReportChart>
         </components>
         <components>
-            <autoselectColumnsFromReport>false</autoselectColumnsFromReport>
+            <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
             <chartAxisRange>Auto</chartAxisRange>
-            <chartSummary>
-                <axisBinding>y</axisBinding>
-                <column>RowCount</column>
-            </chartSummary>
             <componentType>Column</componentType>
             <displayUnits>Integer</displayUnits>
             <drillEnabled>false</drillEnabled>
             <drillToDetailEnabled>false</drillToDetailEnabled>
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
-            <groupingColumn>Pricing_Request__c$Created_By__c</groupingColumn>
             <groupingSortProperties/>
             <legendPosition>Bottom</legendPosition>
-            <report>Parts_NA_Dashboards/Kalrez_Price_Requests_by_User1</report>
+            <report>Parts_NA_Dashboards/Kalrez_Price_Requests_by_User_CY_Qnity</report>
             <showPercentage>false</showPercentage>
             <showValues>true</showValues>
             <sortBy>RowLabelAscending</sortBy>
@@ -63,13 +59,14 @@
             <enableHover>false</enableHover>
             <expandOthers>false</expandOthers>
             <groupingSortProperties/>
+            <header>ICS Price Requests PY</header>
             <legendPosition>Bottom</legendPosition>
-            <report>Parts_NA_Dashboards/Vespel_Price_Request_Totals_PY</report>
+            <report>Parts_NA_Dashboards/ICS_Price_Requests_by_User_PY</report>
             <showPercentage>false</showPercentage>
             <showValues>true</showValues>
             <sortBy>RowLabelAscending</sortBy>
             <sortLegendValues>false</sortLegendValues>
-            <title>Vespel Price Requests PY</title>
+            <title>ICS Price Requests PY</title>
             <useReportChart>false</useReportChart>
         </components>
         <components>
@@ -83,7 +80,7 @@
             <expandOthers>false</expandOthers>
             <groupingSortProperties/>
             <legendPosition>Bottom</legendPosition>
-            <report>Parts_NA_Dashboards/Kalrez_Price_Requests_CY_vs_PY</report>
+            <report>Parts_NA_Dashboards/Kalrez_Price_Requests_by_User_PY_Qnity</report>
             <showPercentage>false</showPercentage>
             <showValues>true</showValues>
             <sortBy>RowLabelAscending</sortBy>
@@ -95,25 +92,10 @@
     <owner>robin.russell.specpa@dupont.com.esu</owner>
     <rightSection>
         <columnSize>Medium</columnSize>
-        <components>
-            <autoselectColumnsFromReport>true</autoselectColumnsFromReport>
-            <componentType>Table</componentType>
-            <displayUnits>Auto</displayUnits>
-            <drillEnabled>false</drillEnabled>
-            <drillToDetailEnabled>false</drillToDetailEnabled>
-            <groupingSortProperties/>
-            <indicatorHighColor>#54C254</indicatorHighColor>
-            <indicatorLowColor>#C25454</indicatorLowColor>
-            <indicatorMiddleColor>#C2C254</indicatorMiddleColor>
-            <report>DPP_Global_Kalrez_Vespel/Vespel_Surcharge_Exceptions_A710</report>
-            <showPicturesOnTables>true</showPicturesOnTables>
-            <sortBy>RowLabelAscending</sortBy>
-            <title>Vespel Surcharge Exceptions</title>
-        </components>
     </rightSection>
     <runningUser>robin.russell.specpa@dupont.com.esu</runningUser>
     <textColor>#000000</textColor>
-    <title>KV Pricing Requests Dashboard</title>
+    <title>Kalrez and ICS Pricing Requests Dashboard</title>
     <titleColor>#000000</titleColor>
     <titleSize>12</titleSize>
 </Dashboard>
