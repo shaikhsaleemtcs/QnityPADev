@@ -33,7 +33,7 @@
             <name>sent_Price</name>
             <type>OutboundMessage</type>
         </actions>
-        <active>false</active>
+        <active>true</active>
         <criteriaItems>
             <field>Outbond_Notifier__c.Mw_status__c</field>
             <operation>equals</operation>

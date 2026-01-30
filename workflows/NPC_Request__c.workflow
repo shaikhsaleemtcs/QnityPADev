@@ -59,7 +59,7 @@
             <name>To_send_requests_to_BAPI_for_NPC</name>
             <type>OutboundMessage</type>
         </actions>
-        <active>false</active>
+        <active>true</active>
         <criteriaItems>
             <field>NPC_Request__c.isSynchronous__c</field>
             <operation>equals</operation>
