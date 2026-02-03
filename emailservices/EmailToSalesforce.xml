@@ -25,6 +25,20 @@
         <localPart>emailtosalesforce</localPart>
         <runAsUser>mitsue.motohashi.specpa@dupont.com.esu</runAsUser>
     </emailServicesAddresses>
+    <emailServicesAddresses>
+        <authorizedSenders>cindy.bleeckx@dupont.com</authorizedSenders>
+        <developerName>emailtosalesforce3</developerName>
+        <isActive>true</isActive>
+        <localPart>emailtosalesforce</localPart>
+        <runAsUser>cindy.bleeckx.specpa@dupont.com.esu</runAsUser>
+    </emailServicesAddresses>
+    <emailServicesAddresses>
+        <authorizedSenders>michelle.greenham@dupont.com</authorizedSenders>
+        <developerName>emailtosalesforce4</developerName>
+        <isActive>true</isActive>
+        <localPart>emailtosalesforce</localPart>
+        <runAsUser>michelle.greenham.specpa@dupont.com.esu</runAsUser>
+    </emailServicesAddresses>
     <functionInactiveAction>Bounce</functionInactiveAction>
     <functionName>EmailToSalesforce</functionName>
     <isActive>true</isActive>
