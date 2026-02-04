@@ -315,9 +315,9 @@
         <columns>CREATEDBY_USER.ALIAS</columns>
         <filterScope>Everything</filterScope>
         <filters>
-            <field>Object_ID__c</field>
+            <field>CREATED_DATE</field>
             <operation>equals</operation>
-            <value>a0Ndo000003QcZPEA0</value>
+            <value>THIS_WEEK</value>
         </filters>
         <label>All</label>
     </listViews>
