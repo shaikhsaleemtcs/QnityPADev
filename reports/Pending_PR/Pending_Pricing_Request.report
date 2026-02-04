@@ -17,9 +17,6 @@
         <field>Pricing_Request__c.Current_Approver__c</field>
     </columns>
     <columns>
-        <field>Pricing_Request_Item__c.New_Rate__c</field>
-    </columns>
-    <columns>
         <field>Pricing_Request__c.BU__c</field>
     </columns>
     <columns>
@@ -41,16 +38,7 @@
         <field>Pricing_Request_Item__c.Material__c</field>
     </columns>
     <columns>
-        <field>Pricing_Request_Item__c.Pricing_Condition_Code__c</field>
-    </columns>
-    <columns>
-        <field>Pricing_Request_Item__c.Key_Combination_Code__c</field>
-    </columns>
-    <columns>
-        <field>Pricing_Request_Item__c.Product_Hierarchy_Code__c</field>
-    </columns>
-    <columns>
-        <field>Pricing_Request_Item__c.Product_Hierarchy__c</field>
+        <field>Pricing_Request_Item__c.New_Rate__c</field>
     </columns>
     <columns>
         <field>Pricing_Request_Item__c.Per__c</field>
@@ -75,6 +63,18 @@
     </columns>
     <columns>
         <field>Pricing_Request__c.Assigned_To__c</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request_Item__c.Product_Hierarchy_Code__c</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request_Item__c.Product_Hierarchy__c</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request_Item__c.Pricing_Condition_Code__c</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request_Item__c.Key_Combination_Code__c</field>
     </columns>
     <columns>
         <field>CHILD_NAME</field>
