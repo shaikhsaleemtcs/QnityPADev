@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Certificate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caSigned>true</caSigned>
+    <encryptedWithPlatformEncryption>false</encryptedWithPlatformEncryption>
+    <expirationDate>2027-02-04T23:59:59.000Z</expirationDate>
+    <keySize>2048</keySize>
+    <masterLabel>elecpa_qa_sapcpi_casignedcertificate_2026</masterLabel>
+    <privateKeyExportable>true</privateKeyExportable>
+</Certificate>
