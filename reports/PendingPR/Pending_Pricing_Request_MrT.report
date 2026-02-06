@@ -77,6 +77,18 @@
     <columns>
         <field>CHILD_NAME</field>
     </columns>
+    <columns>
+        <field>Pricing_Request_Item__c.New_Rate__c</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request_Item__c.F_Product_Hierarchy_Code__c</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request_Item__c.Pricing_Condition__c</field>
+    </columns>
+    <columns>
+        <field>Pricing_Request_Item__c.Key_Combination__c</field>
+    </columns>
     <currency>USD</currency>
     <customDetailFormulas>
         <calculatedFormula>Now()-Pricing_Request__c.Submitted_On__c</calculatedFormula>

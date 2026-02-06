@@ -405,7 +405,7 @@
         <columns>Pricing_Key_Combination__c</columns>
         <columns>Sales_Pricing_Procedure__c</columns>
         <columns>Cost_Pricing_Condition__c</columns>
-        <columns>Cost_Key_Combination__c</columns>
+        <columns>isNPCApplicable__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>

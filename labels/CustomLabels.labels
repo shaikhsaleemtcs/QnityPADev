@@ -264,7 +264,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Client_Certificate_Name</shortDescription>
-        <value>SpecPA_SAPCPI_CASignedCertificate_2024</value>
+        <value>elecpa_sapcpi_casignedcertificate_2026</value>
     </labels>
     <labels>
         <fullName>Clone_Button</fullName>
